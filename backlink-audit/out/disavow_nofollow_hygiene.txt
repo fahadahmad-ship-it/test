@@ -1,5 +1,5 @@
 # Performance Lab - disavow addendum (nofollow only - optional)
-# Domains: 350 | Backlinks: 2,672
+# Domains: 321 | Backlinks: 2,301
 # Every sampled link on these domains is nofollow, so none of them
 # passes equity and disavowing them changes nothing measurable.
 # Filed only if you want the profile clean on paper. Most are hacked-site
@@ -19,8 +19,8 @@ domain:linkwebdirectory.com
 domain:911auto.it
 domain:a1housingservicesltd.co.uk
 domain:aaniver.com
+domain:academia.edu.gt
 domain:acelb.co
-domain:alazharcilacap.sch.id
 domain:alwaha.ly
 domain:anakarolinapsicologa.com
 domain:arparquets.it
@@ -34,31 +34,36 @@ domain:berlin-immobilien-verkaufen.de
 domain:bluecantera.com
 domain:bnksp.org
 domain:botrond.com
-domain:capetownthing.co.za
-domain:cecar.edu.co
 domain:charteredstudies.in
 domain:chuihanghin.com
 domain:cidadetoda.com.br
+domain:consultoriojuridicovirtual.cecar.edu.co
+domain:cttbeats.capetownthing.co.za
 domain:dcoutesnjacob.com
 domain:dgsac.com.pe
-domain:digitalatto.io
 domain:diyprinting.shop
 domain:docarnettefoundation.org
 domain:dryamroka.com
+domain:elibrary-smpia15.alazharcilacap.sch.id
 domain:entuev.com
+domain:equipetrol.com.ec
 domain:farratgesdolcet.com
 domain:filmhouse.co.il
 domain:fusioncreations.co.uk
 domain:ggpartnersconsortium.com
+domain:gwc.spottedcow.media
 domain:harian24.com
 domain:hormigoneracavalsa.com.ar
 domain:hwnerds.com
+domain:icylv5.azurewebsites.net
 domain:idealnet.com.hk
 domain:imagingtrade.com.np
 domain:instantelhydraulics.com
 domain:irantbs.com
 domain:jomtien-realty.com
 domain:joyrney.com
+domain:kanma-marketing.com
+domain:kelas.seomuda.id
 domain:lakefrontmarine.ca
 domain:lasantanera.com
 domain:lebazzar-demadous.site
@@ -73,10 +78,12 @@ domain:nuekin.com
 domain:olimposs.com
 domain:olivare.com.ar
 domain:osadazbojecka.pl
+domain:packages.digitalatto.io
 domain:portlandlandscapepros.com
 domain:presale-vancouver.ca
 domain:proplayersports.com
 domain:qualitypoint.com.do
+domain:quantitativemarxism.economicas.uba.ar
 domain:rbexcellentairportservicesinc.ca
 domain:resonancelabjo.com
 domain:revan-me.com
@@ -182,7 +189,6 @@ domain:seo-anomaly-snippet.site
 domain:seo-anomaly-snippet.space
 domain:seo-anomaly-snippet.website
 domain:seo-anomaly-teacher.site
-domain:seomuda.id
 domain:septicsol.net
 domain:simedia.co.th
 domain:simplygaurav.com
@@ -192,11 +198,9 @@ domain:smartcabsnorwich.co.uk
 domain:smartparentresources.org
 domain:solizer.org
 domain:sportsbikeparts.pk
-domain:spottedcow.media
 domain:stablegeeksstaffing.com
 domain:technewsmail.com
 domain:thetarotalk.com
-domain:uba.ar
 domain:vilagrad.com
 domain:vivaesthetique.com
 domain:zerowastemaldives.com
@@ -231,7 +235,6 @@ domain:campingtours.in
 domain:constitute.net
 domain:cricketinfo.co.in
 domain:cricketlive.co.in
-domain:cro.media
 domain:directory4websites.com
 domain:domainnamesbook.com
 domain:domainnameshub.com
@@ -311,56 +314,24 @@ domain:wondomain.com
 domain:zhygg.com
 
 # --- Link Farm / Outbound-Link Bloat ---
-domain:academia.edu.gt
 domain:algolinkers.com
 domain:analyticshaven.top
-domain:anchorurl.cloud
 domain:atomizelink.icu
 domain:australianwebdirectory.info
-domain:blinks.monster
-domain:blinks.sbs
 domain:blogsphere.top
 domain:blueinblue.com
-domain:businessvocal.com
-domain:buzzshrink.website
 domain:bye.fyi
 domain:byteshort.xyz
 domain:creativeposts.top
-domain:csponarlikex.blogspot.com
-domain:daadvn.blogspot.com
 domain:dailymusings.top
 domain:drjack.world
-domain:dsspkjk.blogspot.com
-domain:equipetrol.com.ec
 domain:example3.com
-domain:factmags.com
-domain:jake.eu
-domain:kanma-marketing.com
-domain:keshpakcxz.blogspot.com
-domain:kimssaulikesd.blogspot.com
-domain:knows.monster
-domain:knows.sbs
-domain:lreeswcqcxz.blogspot.com
 domain:metamagic.top
 domain:optimizeflow.top
-domain:pkbtembnm.blogspot.com
 domain:quero.party
 domain:ready.pro
 domain:screenshots.wiki
-domain:seodomains.website
-domain:seol.store
-domain:shortenurls.eu
-domain:skylinkseo.site
-domain:takes.homes
-domain:takes.sbs
-domain:thecloudherald.com
-domain:tntcode.com
-domain:urls-shortener.eu
-domain:wants.cfd
 domain:websitescrawl.com
-domain:wmsonlines.blogspot.com
-domain:worldofgamingk.blogspot.com
-domain:wwwhollywoodk.blogspot.com
 
 # --- Sitewide Link Injection (Templated Anchor) ---
 domain:bloatatt.blogspot.com

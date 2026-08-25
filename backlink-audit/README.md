@@ -305,3 +305,80 @@ sample, which would give anchor, placement and outbound-link signal for the
   page-body content — non-English sources are under-detected.
 - The URL drill-down caps at 250 rows per domain for templated footprints;
   the cap is disclosed in `SUMMARY.md`, never silent.
+
+## Critical review pass (2026-08-25)
+
+A full adversarial re-read of every rule against the raw data. Seven defects
+found and fixed; one rule withdrawn.
+
+**1. Hacked institutional hosts were disavowed at the root.** `uba.ar` is the
+University of Buenos Aires at authority 68 and the injection sits on
+`quantitativemarxism.economicas.uba.ar` alone. A `domain:uba.ar` line would
+discard every future academic citation. Now scoped to the compromised host —
+also `cecar.edu.co`, `alazharcilacap.sch.id`, `spottedcow.media`,
+`digitalatto.io`, `capetownthing.co.za`, `seomuda.id`.
+
+**2. The affiliate guard was shielding the directory-spam network.** The
+protection added for `ebylife.com` retained 196 directory domains as "Tracked
+Affiliate Partner"; the Directory Submission Spam Network collapsed from 274
+condemned to 14. A structural override now lets a name-based spam signature
+outrank a link-level affiliate label. I had claimed this guard could not shield
+structural spam — that claim was wrong.
+
+**3. Outbound-link volume was condemning on its own, for the third time.**
+After `benchchem.com` (a bibliography) and `sitelike.org` (an aggregator), it
+caught `duckduckgo.github.io` — DuckDuckGo's Tracker Radar Wiki, a privacy
+research dataset that lists every site embedding a given tracker —
+`smolecule.com` (numbered citations in a product reference list),
+`whoacceptsamex.co.uk` (a factual merchant directory) and two personal
+"favourite sites" pages. The discriminator was in the data all along: the
+genuine dumps have machine-generated paths (`/list-<hash>`, `/report/49117`,
+`/domain-list-456`, `-links-list`) and the false positives have human ones
+(`/favorite-sites/`, `/companies/performance-lab/14323/`, `/products/s541135`).
+High OBL now requires `autogen_page_share >= 0.50`; without it the domain goes
+to review, not to the disavow file.
+
+**4. A shared link-template rule was missing.** 52 domains link from the
+byte-identical path `/domain-list-456` with ~1,000 outbound links each, and 100
+from `/czechia_farm-13-08-2025/seo-anomaly-czechia_farm-10`. Identical paths
+across unrelated domains are one operator's script. Excluded: paths naming the
+client's products (29 domains publish `/performance-lab-mind` independently)
+and on-niche topical slugs (`/review/best-vitamin-d-supplements` is shared by
+15 domains, one of them `bbcgoodfood.com`).
+
+**5. Nine shared hosting platforms were missing from `PLATFORM_HOSTS`.**
+`icylv5.azurewebsites.net` keyed to `azurewebsites.net`, merging every Azure
+app into one row until four link-vendor advertisement anchors were diluted
+into a retain. Same defect as the original `blogspot.com` keying, on
+`pages.dev`, `workers.dev`, `web.app`, `firebaseapp.com`, `glitch.me`,
+`repl.co`, `onrender.com`, `surge.sh` and `000webhostapp.com`.
+
+**6. The link-vendor anchor regex missed a whole vendor.** `@SEO_CARTEL IN
+TELEGRAM – SEO BACKLINKS, BULK LINK POSTING` was not matched, so
+`academia.edu.gt` and `equipetrol.com.ec` fell through to the outbound-volume
+rule and never reached the hacked-host scoping. Broadened; 8 distinct vendor
+anchors over 1,022 links now match, with no false positives in the corpus.
+
+**7. A backlink-sales page was retained.** `rankvanceauthority.info` served
+2,008 follow links from `/order-quality-backlinks-online-with-rankvance-
+today-251/` and sat in the negligible-exposure tier. A path advertising
+backlink sales is self-declaring and is now read as one.
+
+**Withdrawn: the generated-doorway-URL rule.** 19 `*.pages.dev` subdomains link
+from URLs like `/rhbiu-top-nootropics-2025-fwnbr` — no publisher writes those
+by hand. But two implementations each misclassified higher-authority domains
+than they caught: letter-shape scoring flagged
+`health-is-wealth-...-health` and `alpha-lipoic-acid-...-research`, because
+ordinary English words contain three-consonant runs; corpus document frequency
+fixed those and then flagged `trendencias.com` (authority 59), `gymbeam.it`,
+`healthview.gr` and `dr-muscu.fr`, because Spanish, Italian, Greek and French
+words are rare in an English corpus. Rare is not generated. The pattern governs
+28 backlinks out of 1,362,105, so it is reported in `SUMMARY.md` under
+"Observed but not automated" for a human to act on, and those domains resolve
+on exposure like any other single-link authority-2 referrer.
+
+Also fixed: the `Disavow Entry` column showed `domain:uba.ar` while the file
+correctly narrowed to the subdomain — the sheet is what the client reads.
+
+Net effect: DISAVOW 961 -> 1,081, REVIEW 139 -> 88. Both moves are evidence,
+not threshold changes.

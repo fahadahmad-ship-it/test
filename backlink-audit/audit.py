@@ -44,6 +44,16 @@ PLATFORM_HOSTS = {
     "myshopify.com", "bigcartel.com", "tripod.com", "angelfire.com",
     "sites.google.com", "groups.google.com", "wordpress.org",
     "substack.app", "beehiiv.com", "mystrikingly.com", "yolasite.com",
+    # Added after icylv5.azurewebsites.net -- four link-vendor advertisement
+    # anchors -- keyed to "azurewebsites.net", merging every Azure app into
+    # one row and diluting the evidence until the exposure triage retained
+    # it. Same defect as the blogspot.com keying, on nine more platforms.
+    "azurewebsites.net", "pages.dev", "workers.dev", "web.app",
+    "firebaseapp.com", "glitch.me", "repl.co", "replit.app",
+    "onrender.com", "surge.sh", "000webhostapp.com", "pythonanywhere.com",
+    "readthedocs.io", "cloudfront.net", "amazonaws.com", "translate.goog",
+    "neocities.org", "carrd.co", "framer.website", "webflow.io",
+    "canva.site", "durable.co", "godaddysites.com", "bubbleapps.io",
 }
 # Platform roots that are themselves two labels under a ccTLD, e.g.
 # blogspot.co.uk, blogspot.com.au — matched by suffix below.
@@ -162,6 +172,9 @@ SCRAPER_AGGREGATOR = {
     "urlrate.com", "websiteoutlook.com", "hypestat.com", "worthofweb.com",
     "sitelike.com", "alternativeto.net", "webstatsdomain.org",
     "site-stats.org", "rank2traffic.com", "expireddomains.net",
+    # Site-profile aggregator: /site/<domain> pages, 100% nofollow. Was
+    # labelled "Topically Relevant Editorial" -- right verdict, wrong reason.
+    "instya.com",
 }
 
 # Search engines / AI answer engines. Not editorial links; no equity, and
@@ -278,9 +291,17 @@ MONEY_ANCHOR_RE2 = re.compile(
 
 # Hacked-site / link-vendor injection. These anchors are advertisements
 # placed by the intruder, not by a publisher.
+# Anchors that advertise a link-selling service. These are intrusions on a
+# compromised host, never editorial. Broadened after academia.edu.gt and
+# equipetrol.com.ec -- both carrying "@SEO_CARTEL IN TELEGRAM - SEO BACKLINKS,
+# BULK LINK POSTING" -- fell through to the outbound-volume rule instead,
+# which meant the hacked-host disavow scoping never ran on them.
 HACKED_INJECTION_RE = re.compile(
-    r"(tg\s*@|@links_dealer|effective seo links|seo links for|"
-    r"telegram\s*@|t\.me/|buy backlinks|xrumer|gsa ser|"
+    r"(tg\s*@|@links_dealer|@seo[_ ]|seo[_ ]cartel|"
+    r"effective seo links|seo links for|in telegram|telegram\s*@|t\.me/|"
+    r"buy backlinks|backlinks? for sale|bulk link|link posting|"
+    r"mass links|boost seo|black hat seo|seo services|pbn links|"
+    r"ranking service|xrumer|gsa ser|"
     r"\bсео\b|ссылк|прогон)",
     re.I,
 )
@@ -340,6 +361,112 @@ REDIRECT_PATH_RE = re.compile(
 ARCHIVE_URL_RE = re.compile(
     r"/page/\d+|[?&]pag(e|ed)=\d+|/category/|/categories/|/tag/|/tags/|"
     r"/author/|/archives?/|/posts?/page|/blog/page|/feed/",
+    re.I,
+)
+
+# A page with thousands of outbound links is only evidence of a link scheme
+# when the page itself was machine-produced. Three findings forced this split:
+# duckduckgo.github.io (a privacy-research dataset), smolecule.com (a product
+# reference list, the benchchem.com case again) and whoacceptsamex.co.uk (a
+# factual merchant directory) were all condemned on outbound volume alone,
+# while the genuine dumps all carry a generated path -- sergechel.info
+# /list-<hash>, domain.com.lc /page-<hash>.html, bye.fyi /report/49117,
+# agendacover.com /agendacover-links-list/.
+AUTOGEN_PATH_RE = re.compile(
+    r"/(list|page|post|item|entry|id|p)[-_/][0-9a-f]{12,}|"   # hash-named page
+    r"/[0-9a-f]{24,}|"                                        # bare hash segment
+    r"/(report|reports|listing|listings|record|records)/\d+|" # numeric record id
+    r"/[a-z]*[-_]?list[-_]\d+|"                               # /domain-list-456
+    r"/(domain|website|site|host|whois|rank|ranks|stats|"      # stats-farm routes
+    r"analytics|traffic|worth|value|review-site)/[^/]+/?$",
+    re.I,
+)
+
+# Generated doorway URLs. The 19 *.pages.dev subdomains that look like a
+# single operator's batch could not be separated from legitimate framework
+# demo apps by host, IP, name shape or first-seen date -- but their URLs
+# settle it: /rhbiu-top-nootropics-2025-fwnbr,
+# /ssueqmr-top-nootropics-2025-photos-znjutlv. A real slug wrapped in an
+# opaque token at each end is a generator's cache-busting scheme, and it is
+# evidence about the placement rather than about the host it sits on.
+# doorway_slug() is retained as a diagnostic only -- nothing in classify()
+# calls it. Two implementations both false-positived on their first contact
+# with real data, each in a different way, and each time on domains with
+# MORE authority than the true positives:
+#
+#   1. Letter-shape scoring (consonant runs, name shape) flagged 3 of its
+#      first 17 hits wrongly -- "health-is-wealth-...-health",
+#      "simple-ways-...-naturally", "alpha-lipoic-acid-...-research" -- for
+#      the plain reason that ordinary English words contain three-consonant
+#      runs.
+#   2. Corpus document frequency fixed those and then flagged
+#      trendencias.com (authority 59), gymbeam.it (41), healthview.gr and
+#      dr-muscu.fr, because Spanish, Italian, Greek and French words are
+#      rare in an English-dominated corpus. Rare is not generated.
+#
+# What it was meant to catch is real: 11 *.pages.dev subdomains link from
+# /rhbiu-top-nootropics-2025-fwnbr and /ssueqmr-top-nootropics-2025-photos-
+# znjutlv, which no publisher writes by hand. But 11 backlinks out of
+# 1,362,105 do not buy a rule that misclassifies authority-59 publishers,
+# so the pattern is reported for manual review and those domains resolve on
+# exposure like any other single-link, authority-2 referrer.
+#
+# Opacity is decided by the corpus, not by letter shape. A first attempt
+# scored the tokens on consonant runs and name shape and looked clean on a
+# hand-built test set, then false-positived on 3 of its first 17 real hits:
+# "health-is-wealth-...-health", "simple-ways-...-naturally" and
+# "alpha-lipoic-acid-...-research" all have three-consonant runs, because
+# ordinary English words do. The 55,563 linking URLs already answer the
+# question directly -- a real word recurs across referring domains
+# (health 634, nootropics 81, research 8) and a generator's token does not
+# (rhbiu, fwnbr, znjutlv, ltngxwo, uozmuyx: 1 each).
+TOKEN_DF: dict = {}
+
+
+def build_token_index(rows) -> None:
+    """Document frequency of each slug token, counted in referring domains."""
+    seen = defaultdict(set)
+    for r in rows:
+        u = r.get("Source url") or ""
+        seg = urlsplit(u).path.rstrip("/").rsplit("/", 1)[-1]
+        host = host_of(u)
+        for t in seg.split("-"):
+            if t.isalpha():
+                seen[t.lower()].add(host)
+    TOKEN_DF.clear()
+    TOKEN_DF.update({t: len(v) for t, v in seen.items()})
+
+
+def _opaque_token(t: str) -> bool:
+    if not (5 <= len(t) <= 9 and t.isalpha() and t.islower()):
+        return False
+    # No index yet (unit tests, ad-hoc calls) means no claim either way.
+    return bool(TOKEN_DF) and TOKEN_DF.get(t.lower(), 0) <= 1
+
+
+def doorway_slug(url: str) -> bool:
+    """True when the final path segment is a real slug wrapped in opaque
+    tokens at both ends. Requires four or more hyphen parts so ordinary
+    two- and three-word slugs can never reach the token test."""
+    seg = urlsplit(url).path.rstrip("/").rsplit("/", 1)[-1]
+    parts = seg.split("-")
+    return (len(parts) >= 4 and _opaque_token(parts[0])
+            and _opaque_token(parts[-1]))
+
+
+# Pages that announce themselves as link dumps.
+LINKDUMP_PATH_RE = re.compile(
+    r"link[s]?[-_]?(list|dump|page|directory|exchange|partners?)|"
+    r"(list|dump|directory)[-_]?of[-_]?links|"
+    r"[-_/](blog[-_])?data/?$|/all[-_]?(sites|links|domains)|"
+    r"/add[-_]?url|/submit[-_]?(site|url|link)|"
+    # A path that advertises backlink sales is self-declaring. Found via
+    # rankvanceauthority.info, which was retained on negligible exposure
+    # while serving 2,008 follow links from
+    # /order-quality-backlinks-online-with-rankvance-today-251/.
+    r"(buy|order|cheap|quality|purchase|get)[-_](quality[-_])?backlinks?|"
+    r"backlinks?[-_](for[-_]sale|package|service|seller|shop|store|cheap)|"
+    r"(seo|link)[-_]?(building|selling)[-_]?(service|package)",
     re.I,
 )
 
@@ -472,6 +599,14 @@ class DomainProfile:
             and (self.affiliate_target_share >= 0.25
                  or self.redirect_path_share >= 0.50)
         )
+
+        # Share of linking pages whose URL is machine-produced or a
+        # self-declared link dump. Gates every outbound-volume condemnation.
+        gen = [p for p in self.pages
+               if AUTOGEN_PATH_RE.search(p) or LINKDUMP_PATH_RE.search(p)]
+        self.autogen_page_share = len(gen) / self.n_pages if self.n_pages else 0.0
+        door = [p for p in self.pages if doorway_slug(p)]
+        self.doorway_share = len(door) / self.n_pages if self.n_pages else 0.0
 
         self.archive_pages = {p for p in self.pages if ARCHIVE_URL_RE.search(p)}
         self.content_pages = self.pages - self.archive_pages
@@ -715,6 +850,12 @@ def classify(p: DomainProfile):
                 "Not disavowable on the pattern alone; check for follow links "
                 "or a shared footprint.")
 
+    # A "generated doorway URL" rule used to sit here and has been removed.
+    # See doorway_slug() for why: the pattern is real but not separable from
+    # ordinary URLs with the signals available, and the 11 links it governs
+    # do not justify the false positives. The domains it caught are listed
+    # in SUMMARY.md as a manual-review item instead.
+
     if DIRECTORY_SPAM_RE.search(d):
         return (DISAVOW, "Directory / Link-Scheme Spam Footprint", "High",
                 "Domain name matches a link-scheme or paid-directory pattern.")
@@ -739,10 +880,16 @@ def classify(p: DomainProfile):
                 f"{p.n_content_pages} content pages (archive and pagination "
                 "URLs excluded) — paid sitewide insertion signature.")
 
-    # Extreme outbound-link farms.
-    if p.avg_external >= 1500:
+    # Extreme outbound-link farms. Volume alone is not the finding -- the
+    # page has to have been machine-produced. Without that signature this
+    # falls through to the branded-anchor brake and the REVIEW rule below,
+    # which is what keeps research corpora, product reference lists and
+    # factual directories out of the disavow file.
+    if p.avg_external >= 1500 and p.autogen_page_share >= 0.50:
         return (DISAVOW, "Link Farm / Outbound-Link Bloat", "High",
-                f"Average {p.avg_external:.0f} external links per source page.")
+                f"Average {p.avg_external:.0f} external links per source page "
+                f"across machine-generated URLs "
+                f"({p.autogen_page_share:.0%} of linking pages).")
 
     # -- Safety brake -------------------------------------------------------
     # A profile that is overwhelmingly branded or bare-URL anchors cannot be
@@ -761,20 +908,23 @@ def classify(p: DomainProfile):
         # the branded brake must not reach it. Ten domains carrying
         # bare-domain anchors on 1,000-10,000-outlink pages were being held
         # in review as "branded" profiles.
-        if p.avg_external >= 500 and p.branded_share >= 0.80:
+        if (p.avg_external >= 500 and p.branded_share >= 0.80
+                and p.autogen_page_share >= 0.50):
             return (DISAVOW, "Link Farm / Bare-Domain Listing", "High",
                     f"Average {p.avg_external:.0f} outbound links per page "
-                    "with bare-domain anchors — a directory listing, not a "
-                    "citation.")
-        if branded_safe:
-            return (REVIEW, "High-OBL Page, Branded Anchor Profile", "Low",
+                    "with bare-domain anchors on machine-generated URLs — a "
+                    "directory listing, not a citation.")
+        if branded_safe or p.autogen_page_share < 0.50:
+            return (REVIEW, "High-OBL Page, Human-Authored URL", "Low",
                     f"Pages average {p.avg_external:.0f} outbound links, but "
-                    f"{p.branded_share:.0%} of anchors are brand/URL mentions. "
-                    "Verify the placement is a directory listing before acting.")
+                    f"the linking URLs are not machine-generated "
+                    f"({p.branded_share:.0%} brand/URL anchors). Read the page "
+                    "before acting — a reference list, a personal links page "
+                    "and a link dump all look like this in aggregate.")
         return (DISAVOW, "Link Farm / Outbound-Link Bloat", "High"
                 if p.n_links >= 3 else "Medium",
                 f"Average {p.avg_external:.0f} external links per source page "
-                f"across {p.n_pages} linking page(s).")
+                f"across {p.n_pages} machine-generated linking page(s).")
 
     # Exact-match anchor abuse at scale — exempted when anchor diversity is
     # high enough to be editorial rather than templated.
@@ -904,6 +1054,8 @@ def main(src, outdir):
 
     with open(src, encoding="utf-8", errors="replace", newline="") as fh:
         rows = list(csv.DictReader(fh))
+
+    build_token_index(rows)
 
     profiles = defaultdict(lambda: None)
     buckets = defaultdict(DomainProfile.__new__)
@@ -1126,6 +1278,33 @@ def main(src, outdir):
                 p = profiles[d]
                 w(f"| {d} | {p.n_links:,} | {p.n_follow:,} | "
                   f"{verdicts[d][1].replace(' [below disavow confidence bar]','')} |\n")
+            w("\n")
+
+        # Patterns observed but deliberately not automated. Reported so a
+        # human can act on them; not folded into any verdict.
+        dw = sorted(d for d, pr in profiles.items()
+                    if pr.doorway_share >= 0.50 and pr.n_pages >= 1)
+        if dw:
+            w("\n## Observed but not automated: generated doorway URLs\n\n")
+            w(f"{len(dw)} domain(s) link from a URL that wraps a readable "
+              "slug in tokens appearing nowhere else in the corpus, e.g. "
+              "`/rhbiu-top-nootropics-2025-fwnbr` and "
+              "`/ssueqmr-top-nootropics-2025-photos-znjutlv`. No publisher "
+              "writes those by hand.\n\n")
+            w("They are **not** disavowed. Two attempts to turn this into a "
+              "rule each misclassified higher-authority domains than the ones "
+              "it caught — English consonant clusters in the first, "
+              "non-English vocabulary in the second (trendencias.com, "
+              "authority 59) — and the whole pattern accounts for "
+              f"{sum(profiles[d].n_links for d in dw)} backlinks out of "
+              "1,362,105. See `doorway_slug()` in `audit.py`. Worth a manual "
+              "look; not worth a classifier.\n\n")
+            w("| Domain | Backlinks | Follow | Example URL |\n|---|---:|---:|---|\n")
+            for d in dw:
+                pr = profiles[d]
+                ex = sorted(x for x in pr.pages if doorway_slug(x))[0]
+                w(f"| {d} | {pr.n_links:,} | {pr.n_follow:,} | "
+                  f"`{urlsplit(ex).path[:60]}` |\n")
             w("\n")
 
         w("\n## Risk factor breakdown\n\n")

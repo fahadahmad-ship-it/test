@@ -16,6 +16,7 @@ import re
 import sys
 import statistics
 from collections import Counter, defaultdict
+from urllib.parse import urlsplit
 
 from nameshape import name_shape
 from audit import (
@@ -25,7 +26,8 @@ from audit import (
     host_of, audit_key, _registrable, BRAND_OWNED, AFFILIATE_NETWORKS,
     SCRAPER_AGGREGATOR, SPAM_BLOG_NETWORK, SEARCH_AI_SURFACES,
     DIRECTORY_SPAM_RE, NICHE_RE, TRACKER_HOST_RE, COUPON_AGGREGATOR_RE,
-    FAKE_OFFER_DOMAIN_RE, DISAVOW, KEEP, REVIEW,
+    FAKE_OFFER_DOMAIN_RE, AUTOGEN_PATH_RE, LINKDUMP_PATH_RE,
+    DISAVOW, KEEP, REVIEW,
 )
 
 # --------------------------------------------------------------------------
@@ -246,11 +248,29 @@ def classify_domain(r, ctx):
                 "submission is a link scheme and these are auto-generated; "
                 "278 such domains link to the site.")
 
+    # Sitting on a free host is not evidence. This rule used to disavow 37
+    # subdomains outright, then a "deployment cohort" variant disavowed 29;
+    # both were wrong. The 19 *.pages.dev domains that look like a single
+    # operator's batch (aabigaildedman, sareeyharriett, loneeykimberli) have
+    # first-seen dates spread over 18 months, one backlink each, and IPs in
+    # 172.66.44-47 -- which is Cloudflare Pages' shared anycast range, so
+    # every pages.dev site resolves there. The "cohort" was therefore just
+    # "hosted on Cloudflare Pages", the same mistake as condemning
+    # futurefood.website for sharing a Google IP with Blogspot spam.
+    #
+    # What is actually left is a name-shape judgment, and name shape is not
+    # allowed to disavow anywhere else in this audit. So these fall through
+    # to the ordinary rules: a free-host subdomain with link-level spam
+    # evidence is still condemned on that evidence, and one without it lands
+    # in the exposure triage, which is the honest answer for 1 backlink at
+    # authority 2.
     if d.endswith(FREE_HOST_SUFFIXES) and asc <= 5:
         host = next(s for s in FREE_HOST_SUFFIXES if d.endswith(s))
-        return (DISAVOW, "Throwaway Free-Host Subdomain", "High",
-                f"Disposable {host.lstrip('.')} subdomain at authority score "
-                f"{asc} — no editorial publisher behind it.")
+        return (REVIEW, "Disposable Host, No Independent Evidence", "Low",
+                f"{host.lstrip('.')} subdomain at authority {asc}. The host "
+                "tells you nothing on its own — framework demo apps and "
+                "throwaway doorways share it — and no spam signal was "
+                "observed on the placement itself.")
 
     if EMD_STUFFING_RE.match(reg.rsplit(".", 1)[0]) and asc <= 3:
         return (DISAVOW, "Keyword-Stuffed Exact-Match Domain", "High",
@@ -493,8 +513,36 @@ def main(backlinks_csv, refdomains_csv, outdir):
         cb = cblock(ip)
         host = SHARED_PLATFORM_CBLOCK.get(cb, "Cloudflare (shared CDN)"
                                           if is_cloudflare(ip) else "")
+        # A structural, name-based signature outranks a link-level affiliate
+        # KEEP. Affiliate tracking says who is paid, not whether the
+        # placement is legitimate: the brief's own exception is "a spam
+        # network masquerading as an affiliate". The guard added to stop
+        # anchor rules condemning tracked partners was shielding 196
+        # directory-spam domains as "Tracked Affiliate Partner", collapsing
+        # the Directory Submission Spam Network from 274 condemned to 14 --
+        # all of them the same rogue affiliate account seen earlier.
+        NAME_BASED_SPAM = (
+            "Directory Submission Spam Network",
+            "Link-Selling / SEO Vendor Domain",
+            "Auto-Generated Domain-Flipping / Stats Farm",
+            "Numbered Sibling Domain Network (PBN)",
+            "Vendor Blog Network (Spun-Content PBN)",
+            "Synthetic Affiliate Doorway Domain",
+            "Directory / Link-Scheme Spam Footprint",
+            "Keyword-Stuffed Exact-Match Domain",
+            "Throwaway Free-Host Subdomain",
+        )
+        _dv = classify_domain(r, ctx)
+        structural = _dv[0] == DISAVOW and _dv[1] in NAME_BASED_SPAM
+
         lv = link.get(d)
-        if lv:
+        if lv and structural and "Affiliate Partner" in lv["Primary Risk Factor"]:
+            # Domain-level structural verdict wins.
+            action, risk, conf, why = _dv
+            evid = "Link-level, overridden by structural signature"
+            counts[action] += 1
+            lv = None
+        elif lv:
             action = lv["Action Recommendation"]
             risk, conf = lv["Primary Risk Factor"], lv["Confidence Score"]
             why, evid = lv["Rationale"], "Link-level (in 50k sample)"
@@ -520,8 +568,8 @@ def main(backlinks_csv, refdomains_csv, outdir):
                        "appsrankings.com templated-injection profile; held for "
                        "the same client decision.")
                 evid = "Link-level sample too thin (<1% of domain)"
-        else:
-            action, risk, conf, why = classify_domain(r, ctx)
+        elif not lv:
+            action, risk, conf, why = _dv
             evid = "Domain-level only (outside sample)"
 
         # An authoritative source citing the brand is a good link even when
@@ -711,6 +759,55 @@ def main(backlinks_csv, refdomains_csv, outdir):
                  "established publishers. A lifted commerce table at "
                  f"authority {o['Domain ascore']}, not original content.")
 
+    # 3b. Shared link-template footprint. When five or more referring
+    #     domains link from the byte-identical URL path, they are running one
+    #     operator's script -- 96 domains served /domain-list-456 with ~1,000
+    #     outbound links each, and 100 served
+    #     /czechia_farm-13-08-2025/seo-anomaly-czechia_farm-10.
+    #
+    #     Two exclusions keep this off legitimate publishers. A path naming
+    #     the client's own products is a natural slug that independent
+    #     reviewers converge on (29 domains publish /performance-lab-mind),
+    #     and an on-niche topical path is the same story
+    #     (/review/best-vitamin-d-supplements is shared by 15 domains, one of
+    #     them bbcgoodfood.com). So a readable on-niche slug is excluded
+    #     unless the path is itself machine-generated; what survives is
+    #     off-niche syndicated filler and generated identifiers.
+    BRAND_PATH_TOKEN = re.compile(
+        r"performance[-_ ]?lab|mind[-_ ]?lab|opti[-_ ]?nutra|nutropic|"
+        r"testo[-_ ]?lab|burn[-_ ]?lab|pre[-_ ]?lab|prelab", re.I)
+
+    path_owners = defaultdict(set)
+    for _lr in link_rows:
+        _p = urlsplit(_lr["Source url"]).path.rstrip("/")
+        if len(_p) >= 8:
+            path_owners[_p].add(audit_key(host_of(_lr["Source url"])))
+
+    template_domains = {}
+    for _p, _ds in path_owners.items():
+        if len(_ds) < 5 or BRAND_PATH_TOKEN.search(_p):
+            continue
+        generated = bool(AUTOGEN_PATH_RE.search(_p)
+                         or LINKDUMP_PATH_RE.search(_p))
+        if not generated and NICHE_RE.search(re.sub(r"[-_/]+", " ", _p)):
+            continue
+        for _d in _ds:
+            prev = template_domains.get(_d)
+            if not prev or len(_ds) > len(path_owners[prev]):
+                template_domains[_d] = _p
+
+    n_tmpl = 0
+    for o in out:
+        _p = template_domains.get(o["Referring Domain"])
+        if _p and o["Action Recommendation"] != DISAVOW:
+            n_tmpl += 1
+            _set(o, DISAVOW, "Shared Link-Template Footprint (Same Operator)",
+                 "High",
+                 f"Links from the path {_p[:52]!r}, served byte-identically by "
+                 f"{len(path_owners[_p])} other referring domains. One "
+                 "operator's script deployed across many hosts, not "
+                 "independent editorial placements.")
+
     # 4. Verdict propagation inside a concentrated hosting footprint. Only
     #    where the cluster is already overwhelmingly condemned on evidence
     #    independent of hosting, and never on a shared platform.
@@ -742,7 +839,8 @@ def main(backlinks_csv, refdomains_csv, outdir):
                          "co-location indicates the same operator.")
 
     log = {"cross_tld_siblings": n_sib, "identical_cohorts": n_cohort,
-           "scraped_clones": n_clone, "cluster_propagation": n_prop}
+           "scraped_clones": n_clone, "shared_link_templates": n_tmpl,
+           "cluster_propagation": n_prop}
 
     # The resolution pass rewrites verdicts after the per-domain counter was
     # incremented, so recount from the final rows rather than trusting it.
@@ -751,31 +849,10 @@ def main(backlinks_csv, refdomains_csv, outdir):
     out.sort(key=lambda x: (order[x["Action Recommendation"]],
                             -x["Backlinks (true)"]))
 
-    with open(f"{outdir}/full_refdomain_audit.csv", "w", newline="",
-              encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=COLS, extrasaction="ignore")
-        w.writeheader()
-        w.writerows(out)
-
-    dis = sorted(x["Referring Domain"] for x in out
-                 if x["Action Recommendation"] == DISAVOW)
-    by_risk = defaultdict(list)
-    for x in out:
-        if x["Action Recommendation"] == DISAVOW:
-            by_risk[x["Primary Risk Factor"]].append(x["Referring Domain"])
+    dis = [x for x in out if x["Action Recommendation"] == DISAVOW]
     total_bl = sum(x["Backlinks (true)"] for x in out)
-    dis_bl = sum(x["Backlinks (true)"] for x in out
-                 if x["Action Recommendation"] == DISAVOW)
-    with open(f"{outdir}/disavow_full.txt", "w", encoding="utf-8") as fh:
-        fh.write("# Performance Lab (performancelab.com) - disavow file (FULL profile)\n")
-        fh.write(f"# Referring domains evaluated: {len(out):,}\n")
-        fh.write(f"# Total backlinks represented: {total_bl:,}\n")
-        fh.write(f"# Domains disavowed: {len(dis):,} ({dis_bl:,} backlinks)\n")
-        fh.write("# Search/AI surfaces and affiliate infrastructure excluded by design.\n#\n")
-        for risk in sorted(by_risk):
-            fh.write(f"\n# --- {risk} ---\n")
-            for d in sorted(by_risk[risk]):
-                fh.write(f"domain:{d}\n")
+    dis_bl = sum(x["Backlinks (true)"] for x in dis)
+
 
     # Split the disavow file by whether the links can actually pass equity.
     # A nofollow-only footprint passes none, so filing it changes nothing --
@@ -787,10 +864,46 @@ def main(backlinks_csv, refdomains_csv, outdir):
     hygiene = [x for x in out if x["Action Recommendation"] == DISAVOW
                and x["Remediation Priority"].startswith("P3")]
 
+    # A hacked site is a victim, not a bad actor: its other pages are
+    # legitimate and may link again. Where the compromised page sits on a
+    # subdomain, disavow that subdomain rather than the registrable root --
+    # uba.ar is the University of Buenos Aires at authority 68, and the
+    # injection is on quantitativemarxism.economicas.uba.ar alone. A
+    # domain:uba.ar line would discard every future academic citation.
+    hacked_hosts = defaultdict(set)
+    for _lr in link_rows:
+        _h = host_of(_lr["Source url"])
+        hacked_hosts[audit_key(_h)].add(_h)
+
+    def _scope(x):
+        """The narrowest disavow scope that still covers the placement."""
+        d = x["Referring Domain"]
+        if "Hacked Site" not in x["Primary Risk Factor"]:
+            return [f"domain:{d}"]
+        hosts = sorted(hacked_hosts.get(d, {d}))
+        # Only narrow when every compromised host is a subdomain; if the root
+        # itself is hit there is no narrower domain: scope available.
+        if hosts and all(h != d for h in hosts):
+            return [f"domain:{h}" for h in hosts]
+        return [f"domain:{d}"]
+
+    # The sheet's Disavow Entry column must say exactly what the submitted
+    # file says. It was showing "domain:uba.ar" while the file correctly
+    # narrowed to the compromised subdomain -- the client reads the sheet.
+    for x in out:
+        if x["Action Recommendation"] == DISAVOW:
+            x["Disavow Entry"] = " ".join(_scope(x))
+
+    with open(f"{outdir}/full_refdomain_audit.csv", "w", newline="",
+              encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=COLS, extrasaction="ignore")
+        w.writeheader()
+        w.writerows(out)
+
     def _write_disavow(path, rows_, title, note):
         by = defaultdict(list)
         for x in rows_:
-            by[x["Primary Risk Factor"]].append(x["Referring Domain"])
+            by[x["Primary Risk Factor"]].append(x)
         with open(path, "w", encoding="utf-8") as fh:
             fh.write(f"# Performance Lab - {title}\n")
             fh.write(f"# Domains: {len(rows_):,} | "
@@ -800,9 +913,20 @@ def main(backlinks_csv, refdomains_csv, outdir):
             fh.write("#\n")
             for risk in sorted(by):
                 fh.write(f"\n# --- {risk} ---\n")
-                for d in sorted(by[risk]):
-                    fh.write(f"domain:{d}\n")
+                for line in sorted({s for x in by[risk] for s in _scope(x)}):
+                    fh.write(f"{line}\n")
 
+    _write_disavow(
+        f"{outdir}/disavow_full.txt", dis,
+        "disavow file (FULL profile)",
+        [f"Referring domains evaluated: {len(out):,}",
+         f"Total backlinks represented: {total_bl:,}",
+         f"Disavowed backlinks: {dis_bl:,}",
+         "Includes nofollow-only domains per client decision; see",
+         "disavow_core.txt for the equity-passing subset alone.",
+         "Search/AI surfaces and affiliate infrastructure excluded by design.",
+         "Hacked sites are scoped to the compromised host, not the",
+         "institution's root domain."])
     _write_disavow(
         f"{outdir}/disavow_core.txt", core,
         "disavow file (equity-passing)",
@@ -825,14 +949,19 @@ def main(backlinks_csv, refdomains_csv, outdir):
     print(f"  domain-level only         : {ev['Domain-level only (outside sample)']:,}")
     print()
     print(f"{'ACTION':<24}{'DOMAINS':>9}{'BACKLINKS':>14}{'% LINKS':>10}")
+    final = Counter(x["Action Recommendation"] for x in out)
     for a in (DISAVOW, REVIEW, KEEP):
         b = sum(x["Backlinks (true)"] for x in out
                 if x["Action Recommendation"] == a)
-        print(f"{a:<24}{counts[a]:>9,}{b:>14,}{b/total_bl:>9.1%}")
+        print(f"{a:<24}{final[a]:>9,}{b:>14,}{b/total_bl:>9.1%}")
     print()
     print("Disavow risk factors:")
-    for k, v in sorted(by_risk.items(), key=lambda kv: -len(kv[1])):
-        print(f"  {len(v):>4}  {k}")
+    # Recomputed from the final rows, not from a counter kept during
+    # classification: the resolution pass rewrites verdicts after the fact.
+    by_risk = Counter(x["Primary Risk Factor"] for x in out
+                      if x["Action Recommendation"] == DISAVOW)
+    for k, v in by_risk.most_common():
+        print(f"  {v:>4}  {k}")
     print()
     print()
     print("Resolution pass:")
