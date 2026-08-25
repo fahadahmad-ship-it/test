@@ -1,9 +1,20 @@
 # Performance Lab (performancelab.com) - disavow file (FULL profile)
 # Referring domains evaluated: 2,928
 # Total backlinks represented: 1,362,105
-# Domains disavowed: 804 (10,387 backlinks)
+# Domains disavowed: 821 (10,715 backlinks)
 # Search/AI surfaces and affiliate infrastructure excluded by design.
 #
+
+# --- Cross-TLD Sibling Network (Generated Domains) ---
+domain:apexelements.monster
+domain:apexelements.site
+domain:blinks.monster
+domain:blinks.sbs
+domain:dailyrestora.click
+domain:dailyrestora.online
+domain:knows.monster
+domain:somacraft.online
+domain:somacraft.shop
 
 # --- Directory / Link-Scheme Spam Footprint ---
 domain:securelinksdirectory.com
@@ -291,6 +302,11 @@ domain:retiredbrains.com
 domain:cecar.edu.co
 domain:sante.gov.mg
 domain:uba.ar
+
+# --- Identical-Footprint Cohort (Same Operator) ---
+domain:cognitionprime.bio
+domain:coherence.today
+domain:neurohub.bio
 
 # --- Link Farm / Outbound-Link Bloat ---
 domain:benchchem.com
@@ -611,6 +627,13 @@ domain:seo-cartel-9w.xyz
 # --- PBN / Templated Mass Footprint (Irrelevant Niche) ---
 domain:aihcp.net
 domain:bittersweetblog.com
+
+# --- PBN Hosting Footprint (Cluster Propagation) ---
+domain:cricketinfo.co.in
+domain:futurefood.website
+domain:hansika.co.in
+domain:mandakini.co.in
+domain:touristpoints.in
 
 # --- PBN Hosting Footprint (Shared C-Block) ---
 domain:1000.co.in

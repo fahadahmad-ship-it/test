@@ -46,6 +46,19 @@ SHARED_PLATFORM_CBLOCK = {
     "76.76.21":    "Vercel",
     "185.230.63":  "Wix",
     "185.230.62":  "Wix",
+    "198.185.159": "Squarespace",
+    "198.202.211": "Squarespace",
+    "34.149.87":   "Google Cloud",
+    "184.168.110": "GoDaddy shared hosting",
+    "192.124.249": "Sucuri / managed hosting",
+}
+
+# Spam-associated TLDs used by the cross-TLD sibling detector below.
+SIBLING_SPAM_TLDS = {
+    "xyz", "top", "icu", "buzz", "click", "sbs", "cfd", "space", "website",
+    "site", "online", "fun", "pw", "work", "live", "art", "world", "life",
+    "shop", "store", "monster", "quest", "party", "beauty", "today", "bio",
+    "fyi", "cyou", "bond", "rest",
 }
 CLOUDFLARE_PREFIXES = (
     "172.64.", "172.65.", "172.66.", "172.67.", "172.68.", "172.69.",
@@ -176,8 +189,10 @@ def classify_domain(r, ctx):
         return (KEEP, "None - Safe Affiliate Redirect / Tracking Gateway", "High",
                 "Affiliate or partner-network infrastructure.")
     if reg in SEARCH_AI_SURFACES:
-        return (REVIEW, "Search / AI Answer Surface - Not Disavowable", "High",
-                "Passes no manipulable equity; exclude from the disavow file.")
+        return (KEEP, "None - Search / AI Surface (Not Disavowable)", "High",
+                "Search engine or AI answer surface. Passes no manipulable "
+                "equity and cannot be disavowed meaningfully — a review step "
+                "has no possible outcome.")
 
     # -- unambiguous spam signatures ---------------------------------------
     fam = ctx["families"].get(sibling_family(d), 0)
@@ -258,8 +273,10 @@ def classify_domain(r, ctx):
                 "or sitewide placement.")
 
     if COUPON_AGGREGATOR_RE.search(reg.split(".")[0]):
-        return (REVIEW, "Coupon / Deals Aggregator - Retain by Default", "Medium",
-                "Protected architecture; confirm the offer resolves.")
+        return (KEEP, "None - Coupon / Deals Aggregator (Protected)", "Medium",
+                "The brief protects coupon and deals aggregators explicitly. "
+                "Retained; no manual step adds anything without a liveness "
+                "check that this data cannot provide.")
 
     if NICHE_RE.search(d):
         return (KEEP, "None - Topically Aligned Domain", "Low",
@@ -368,13 +385,27 @@ def main(backlinks_csv, refdomains_csv, outdir):
                 why += f" Domain name shape reads as {shape}."
             return action, risk, conf, why, evid
 
-        if bl <= 5 and asc >= 3:
+        if bl < 10 and asc >= 3:
             return (KEEP, "None - Negligible Exposure (Risk-Triaged)", "Medium",
                     f"{bl} backlink(s) from an authority-{asc} domain with no "
                     "spam signature, plausible name and no hosting cluster. "
                     "Too little exposure to justify either a disavow or a "
                     "manual review — retained on risk, not verified on merit.",
                     evid + " + risk triage")
+
+        # Authority 0-2 is the floor, so a clean name and no cluster is the
+        # weakest evidence in the audit. But one or two links from such a
+        # domain cannot move a profile of 1.36M: disavowing gains nothing
+        # measurable and a review has no data to work from. Retained on
+        # exposure alone, and labelled as the lowest-evidence tier.
+        if bl <= 2:
+            return (KEEP, "None - Negligible Exposure (Lowest Evidence Tier)", "Low",
+                    f"{bl} backlink(s) from an authority-{asc} domain. No spam "
+                    "signature, no hosting cluster, plausible name — but also "
+                    "no link-level data and near-zero authority. Retained "
+                    "because the exposure is immaterial either way, not "
+                    "because the domain was verified.",
+                    evid + " + risk triage (lowest tier)")
         if asc >= 6 and bl < 10:
             return (KEEP, "None - Ordinary Small Publisher (Risk-Triaged)", "Medium",
                     f"Authority {asc}, {bl} backlink(s), brandable name, no "
@@ -468,6 +499,87 @@ def main(backlinks_csv, refdomains_csv, outdir):
             "Rationale": why,
         })
 
+    # ---- resolution pass -------------------------------------------------
+    # Three cross-domain signatures that only exist in aggregate, applied
+    # after every domain has a provisional verdict.
+    idx = {o["Referring Domain"]: o for o in out}
+
+    def _set(o, action, risk, conf, why):
+        o["Action Recommendation"] = action
+        o["Primary Risk Factor"] = risk
+        o["Confidence Score"] = conf
+        o["Rationale"] = why
+        o["Disavow Entry"] = f"domain:{o['Referring Domain']}" if action == DISAVOW else ""
+
+    # 1. Same second-level name registered across multiple spam TLDs. A human
+    #    picks one TLD; a generator takes whatever is cheap.
+    cores = defaultdict(list)
+    for o in out:
+        parts = o["Referring Domain"].split(".")
+        if len(parts) == 2 and parts[1] in SIBLING_SPAM_TLDS:
+            cores[parts[0]].append(o)
+    n_sib = 0
+    for core, group in cores.items():
+        if len(group) >= 2 and all(o["Domain ascore"] <= 5 for o in group):
+            for o in group:
+                if o["Action Recommendation"] == REVIEW:
+                    n_sib += 1
+                    _set(o, DISAVOW, "Cross-TLD Sibling Network (Generated Domains)",
+                         "High",
+                         f"'{core}' is registered across {len(group)} "
+                         f"spam-associated TLDs ({', '.join(sorted(x['Referring Domain'].split('.')[1] for x in group))}) "
+                         "at near-zero authority — a domain generator, not a publisher.")
+
+    # 2. Identical backlink counts across near-zero-authority domains. Organic
+    #    link acquisition does not produce three domains with exactly the same
+    #    total; one deployment script does.
+    bycount = defaultdict(list)
+    for o in out:
+        if o["Domain ascore"] <= 3 and o["Backlinks (true)"] >= 20:
+            bycount[o["Backlinks (true)"]].append(o)
+    n_cohort = 0
+    for n, group in bycount.items():
+        if len(group) >= 3:
+            for o in group:
+                if o["Action Recommendation"] == REVIEW:
+                    n_cohort += 1
+                    _set(o, DISAVOW, "Identical-Footprint Cohort (Same Operator)",
+                         "High",
+                         f"{len(group)} referring domains carry exactly {n} "
+                         "backlinks each at authority 3 or below "
+                         f"({', '.join(sorted(x['Referring Domain'] for x in group)[:4])}) — "
+                         "a single deployment, not organic acquisition.")
+
+    # 3. Verdict propagation inside a concentrated hosting footprint. Only
+    #    where the cluster is already overwhelmingly condemned on evidence
+    #    independent of hosting, and never on a shared platform.
+    cl = defaultdict(list)
+    for o in out:
+        if o["C-Block"] and not o["Hosting"]:
+            cl[o["C-Block"]].append(o)
+    n_prop = 0
+    for cbk, members in cl.items():
+        if len(members) < 8:
+            continue
+        dis = [m for m in members if m["Action Recommendation"] == DISAVOW]
+        if len(dis) / len(members) >= 0.70:
+            for o in members:
+                if o["Action Recommendation"] == REVIEW:
+                    n_prop += 1
+                    _set(o, DISAVOW, "PBN Hosting Footprint (Cluster Propagation)",
+                         "High",
+                         f"{len(dis)} of {len(members)} domains on {cbk} are "
+                         "independently condemned (link-vendor naming, directory "
+                         "spam, generated siblings). This is not a mainstream "
+                         "host, so co-location here indicates the same operator.")
+
+    log = {"cross_tld_siblings": n_sib, "identical_cohorts": n_cohort,
+           "cluster_propagation": n_prop}
+
+    # The resolution pass rewrites verdicts after the per-domain counter was
+    # incremented, so recount from the final rows rather than trusting it.
+    counts = Counter(o["Action Recommendation"] for o in out)
+
     out.sort(key=lambda x: (order[x["Action Recommendation"]],
                             -x["Backlinks (true)"]))
 
@@ -512,6 +624,11 @@ def main(backlinks_csv, refdomains_csv, outdir):
     print("Disavow risk factors:")
     for k, v in sorted(by_risk.items(), key=lambda kv: -len(kv[1])):
         print(f"  {len(v):>4}  {k}")
+    print()
+    print()
+    print("Resolution pass:")
+    for k, v in log.items():
+        print(f"  {v:>4}  {k}")
     print()
     print(f"Written: {outdir}/full_refdomain_audit.csv, disavow_full.txt")
 

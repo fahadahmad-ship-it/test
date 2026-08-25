@@ -466,9 +466,10 @@ def classify(p: DomainProfile):
                 "co-marketing architecture, not manipulation.")
 
     if p.registrable in SEARCH_AI_SURFACES:
-        return (REVIEW, "Search / AI Answer Surface - Not Disavowable", "High",
+        return (KEEP, "None - Search / AI Surface (Not Disavowable)", "High",
                 "Search engine or AI answer surface. Passes no manipulable "
-                "equity; exclude from the disavow file.")
+                "equity and cannot be disavowed meaningfully — a review step "
+                "has no possible outcome.")
 
     # -- Tier 2: unambiguous spam (fires regardless of anchor profile) -------
     if p.hacked:
