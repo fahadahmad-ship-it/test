@@ -1,2 +1,7 @@
 __pycache__/
 *.pyc
+
+# Decompressed working copy of data/performancelab_backlinks_50k.csv.gz.
+# The gzipped original is tracked; this is regenerated on demand with
+#   gunzip -kf data/performancelab_backlinks_50k.csv.gz
+data/performancelab_backlinks_50k.csv
