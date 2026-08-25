@@ -405,8 +405,19 @@ class DomainProfile:
         # Topical relevance: domain name OR a meaningful share of page titles
         # must intersect the health / performance lexicon.
         self.domain_relevant = bool(NICHE_RE.search(self.domain))
-        matched = sum(1 for t in self.titles if NICHE_RE.search(t))
-        self.title_relevance = matched / self.n_links
+
+        # Judge relevance on the pages that actually carry the placement.
+        # Archive titles are "Mom Life Archives - Page 16 of 35", which match
+        # nothing, so including them buried whipperberry.com's one real post
+        # ("...Strong Upper Body Workout...") at 1-in-10 and read the domain
+        # as off-topic. Same pagination artefact as the footprint count, in a
+        # different metric.
+        content_rows = [r for r in rows
+                        if not ARCHIVE_URL_RE.search(r["Source url"])]
+        judged = content_rows or rows
+        judged_titles = [r["Source title"] or "" for r in judged]
+        matched = sum(1 for t in judged_titles if NICHE_RE.search(t))
+        self.title_relevance = matched / len(judged_titles)
         self.relevant = self.domain_relevant or self.title_relevance >= 0.35
 
         # Templating: near-identical page titles across a large page count is
