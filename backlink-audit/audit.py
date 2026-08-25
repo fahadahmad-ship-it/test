@@ -482,6 +482,14 @@ DISAVOW, KEEP, REVIEW = "DISAVOW", "KEEP_AFFILIATE_RETAIN", "REVIEW_MANUALLY"
 # every rule. Each records who decided and why, so a later pass does not
 # quietly re-flag the domain.
 CLIENT_OVERRIDES = {
+    "leafysouls.com": (
+        KEEP,
+        "None - Client Decision (Retain)",
+        "Client instruction, 2026-08-25. No link-level sample exists (286 "
+        "backlinks, none in the 50k export), so the audit had it as "
+        "unverified rather than judged. Authority 13, no spam signature, no "
+        "hosting cluster.",
+    ),
     "eastbayexpress.com": (
         KEEP,
         "None - Client Decision (Retain)",
