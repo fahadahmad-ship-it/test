@@ -495,6 +495,14 @@ DISAVOW, KEEP, REVIEW = "DISAVOW", "KEEP_AFFILIATE_RETAIN", "REVIEW_MANUALLY"
 # every rule. Each records who decided and why, so a later pass does not
 # quietly re-flag the domain.
 CLIENT_OVERRIDES = {
+    "thecompleteportal.com": (
+        KEEP,
+        "None - Client Decision (Retain)",
+        "Client instruction, 2026-08-25. No link-level sample exists (183 "
+        "backlinks, none in the 50k export). It was flagged only for link "
+        "volume against authority 2, which is a suspicion the data cannot "
+        "resolve either way without anchors or targets.",
+    ),
     "leafysouls.com": (
         KEEP,
         "None - Client Decision (Retain)",
