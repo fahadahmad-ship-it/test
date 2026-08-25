@@ -1,7 +1,7 @@
 # Performance Lab (performancelab.com) - disavow file (FULL profile)
 # Referring domains evaluated: 2,928
 # Total backlinks represented: 1,362,105
-# Domains disavowed: 838 (10,483 backlinks)
+# Domains disavowed: 839 (11,393 backlinks)
 # Search/AI surfaces and affiliate infrastructure excluded by design.
 #
 
@@ -24,6 +24,9 @@ domain:pagesearch.net
 domain:searchalldomains.com
 domain:websiterace.com
 domain:wondomain.com
+
+# --- Client Decision (Disavow) - Auto-Generated App Listing ---
+domain:appsupports.co
 
 # --- Cross-TLD Sibling Network (Generated Domains) ---
 domain:apexelements.monster

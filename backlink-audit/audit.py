@@ -482,6 +482,14 @@ DISAVOW, KEEP, REVIEW = "DISAVOW", "KEEP_AFFILIATE_RETAIN", "REVIEW_MANUALLY"
 # every rule. Each records who decided and why, so a later pass does not
 # quietly re-flag the domain.
 CLIENT_OVERRIDES = {
+    "appsupports.co": (
+        DISAVOW,
+        "Client Decision (Disavow) - Auto-Generated App Listing",
+        "Client instruction, 2026-08-25. No link-level sample exists for this "
+        "domain (910 backlinks, none in the 50k export), so the audit had it "
+        "as unverified rather than condemned. Authority 5, first seen "
+        "2025-08-23, Cloudflare-fronted auto-generated app-listing site.",
+    ),
     "benchchem.com": (
         KEEP,
         "None - Client Decision (Retain)",
