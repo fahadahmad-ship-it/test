@@ -1,5 +1,5 @@
 # Performance Lab - disavow addendum (nofollow only - optional)
-# Domains: 338 | Backlinks: 2,546
+# Domains: 364 | Backlinks: 2,679
 # Every sampled link on these domains is nofollow, so none of them
 # passes equity and disavowing them changes nothing measurable.
 # Filed only if you want the profile clean on paper. Most are hacked-site
@@ -9,6 +9,12 @@
 
 # --- Client Decision (Disavow) - Auto-Generated App Listing ---
 domain:appsupports.co
+
+# --- Cross-TLD Sibling Network (Generated Domains) ---
+domain:blinks.monster
+domain:blinks.sbs
+domain:knows.monster
+domain:knows.sbs
 
 # --- Directory / Link-Scheme Spam Footprint ---
 domain:directorylinkservice.com
@@ -356,5 +362,33 @@ domain:ready.pro
 domain:screenshots.wiki
 domain:websitescrawl.com
 
+# --- PBN Hosting Footprint (Cluster Propagation) ---
+domain:anchorurl.cloud
+domain:buzzshrink.website
+domain:factmags.com
+domain:jake.eu
+domain:list.show
+domain:shortenurls.eu
+domain:urls-shortener.eu
+
+# --- Shared Link-Template Footprint (Same Operator) ---
+domain:businessvocal.com
+domain:cashbackdeals.in
+domain:seol.store
+domain:takes.homes
+domain:takes.sbs
+domain:thecloudherald.com
+domain:wants.cfd
+
 # --- Throwaway Auto-Generated Host ---
 domain:cctvss1004.com
+
+# --- Verbatim Scraped-Content Clone ---
+domain:namepromo.online
+domain:premworld.online
+domain:summercenter.store
+domain:summersworl.online
+domain:worldboxe.online
+domain:yellos.online
+domain:yourboxe.online
+domain:yourcenter.online

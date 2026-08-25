@@ -83,30 +83,62 @@ TAB_COLS = [
 ]
 
 
-def _worksheet(wb, title, dom, action, blurb, confirm_header,
-               confirm_list, default="", recommend=None):
-    """One working tab per action bucket, with a decision column."""
-    rows = [dict(d) for d in dom if d["Action Recommendation"] == action]
-    rows.sort(key=lambda r: -int(r["Backlinks (true)"]))
-    # Pre-fill the disavow line on every row so a REVIEW domain flipped to
-    # DISAVOW can be copied straight into Google's tool.
-    for r in rows:
-        r["Disavow Entry"] = f"domain:{r['Referring Domain']}"
+PRIORITY_ORDER = {"P1": 0, "P2": 1, "P3": 2, "-": 3}
+
+
+def _prio(row):
+    return PRIORITY_ORDER.get(str(row.get("Remediation Priority", "-"))[:2], 3)
+
+
+# Working-tab column order. The decision and the evidence behind it come
+# first, then the numbers that would change your mind, then reference. An
+# earlier build put Recommendation in column 16, which meant scrolling past
+# fifteen columns to read the thing you are being asked to confirm.
+REVIEW_COLS = [
+    ("Referring Domain", 34), ("Recommendation", 15),
+    ("Evidence for the recommendation", 74),
+    ("Backlinks (true)", 10), ("Follow (Equity) Links", 9),
+    ("Domain ascore", 8), ("Nofollow %", 9),
+    ("Primary Risk Factor", 40), ("Anchor Text", 34),
+    ("Disavow Entry", 30), ("Evidence Level", 30),
+    ("First seen", 11), ("Last seen", 11), ("Rationale", 90),
+]
+
+DISAVOW_COLS = [
+    ("Network", 42), ("Referring Domain", 34), ("Disavow Entry", 34),
+    ("Remediation Priority", 30),
+    ("Backlinks (true)", 10), ("Follow (Equity) Links", 9),
+    ("Domain ascore", 8), ("Nofollow %", 9), ("Confidence Score", 10),
+    ("Evidence Level", 32), ("Anchor Text", 32), ("C-Block", 16),
+    ("Country", 8), ("First seen", 11), ("Last seen", 11),
+    ("Rationale", 90),
+]
+
+REC_FILL = {"DISAVOW": "F8CBAD", "KEEP": "C6E0B4", "ASK_CLIENT": "FFE699"}
+REC_ORDER = {"ASK_CLIENT": 0, "DISAVOW": 1, "KEEP": 2, "": 3}
+
+
+def _work_tab(wb, title, rows, cols, blurb, confirm_header, confirm_list,
+              default="", recommend=None, group_col=None):
+    """A tab built to be worked top to bottom, not browsed."""
     ws = wb.create_sheet(title)
     HDR = 6
     first, last = HDR + 1, HDR + len(rows)
-    n_rec = 2 if recommend else 0
-    ncol = len(TAB_COLS) + n_rec + 2
-    dec_col = get_column_letter(len(TAB_COLS) + n_rec + 1)
+    n = len(cols)
+    dec_col = get_column_letter(n + 1)
+    ncol = n + 2
 
-    ws["A1"] = f"{title} - {len(rows):,} domains"
+    ws["A1"] = f"{title} — {len(rows):,} domains"
     ws["A1"].font = Font(name=FONT, size=14, bold=True)
     ws["A2"] = blurb
     ws["A2"].font = Font(name=FONT, size=9, italic=True, color="595959")
-    ws["A3"] = "Total backlinks"
-    ws["B3"] = f"=SUM($G${first}:$G${last})"
-    ws["A4"] = "Rows still unset"
-    ws["B4"] = f'=COUNTIF(${dec_col}${first}:${dec_col}${last},"{default or ""}")'         if default else f'=COUNTBLANK(${dec_col}${first}:${dec_col}${last})'
+    ws["A3"] = "Backlinks covered"
+    ws["B3"] = f"=SUM(${_col(cols,'Backlinks (true)')}${first}:"\
+               f"${_col(cols,'Backlinks (true)')}${last})"
+    ws["A4"] = "Rows still to decide"
+    ws["B4"] = (f'=COUNTIF(${dec_col}${first}:${dec_col}${last},"{default}")'
+                if default
+                else f'=COUNTBLANK(${dec_col}${first}:${dec_col}${last})')
     for r in (3, 4):
         ws[f"A{r}"].font = Font(name=FONT, size=10, bold=True)
         ws[f"B{r}"].font = Font(name=FONT, size=10)
@@ -116,26 +148,32 @@ def _worksheet(wb, title, dom, action, blurb, confirm_header,
     BOT, A_TOP = Border(bottom=thin), Alignment(vertical="top")
     A_WRAP = Alignment(vertical="top", wrap_text=True)
     F_BODY = Font(name=FONT, size=10)
-    hdr_fill = PatternFill("solid", fgColor="1F3864")
-    heads = [c[0] for c in TAB_COLS]
-    widths = [c[1] for c in TAB_COLS]
-    if recommend:
-        heads += ["Recommendation", "Evidence for the recommendation"]
-        widths += [16, 62]
-    heads += [confirm_header, "Notes"]
-    widths += [26, 44]
+    WRAPPED = {"Rationale", "Evidence for the recommendation", "Anchor Text"}
+
+    heads = [c[0] for c in cols] + [confirm_header, "Notes"]
+    widths = [c[1] for c in cols] + [24, 40]
     for i, (h, w) in enumerate(zip(heads, widths), start=1):
         c = ws.cell(HDR, i, h)
         c.font = Font(name=FONT, size=10, bold=True, color="FFFFFF")
-        c.fill = hdr_fill
+        c.fill = PatternFill("solid", fgColor="1F3864")
         c.alignment = Alignment(vertical="center", wrap_text=True)
         ws.column_dimensions[get_column_letter(i)].width = w
     ws.row_dimensions[HDR].height = 30
 
     NUM = {"Backlinks (true)", "Follow (Equity) Links", "Domain ascore"}
+    prev_group = None
     for ri, row in enumerate(rows, start=first):
-        for ci, (name, _) in enumerate(TAB_COLS, start=1):
-            v = row.get(name, "")
+        for ci, (name, _) in enumerate(cols, start=1):
+            if name == "Recommendation":
+                v = (recommend or {}).get(row["Referring Domain"],
+                                          ("", ""))[0]
+            elif name == "Evidence for the recommendation":
+                v = (recommend or {}).get(row["Referring Domain"],
+                                          ("", ""))[1]
+            elif name == "Network":
+                v = row.get("Primary Risk Factor", "")
+            else:
+                v = row.get(name, "")
             if name in NUM and v not in ("", None):
                 try:
                     v = int(v)
@@ -143,32 +181,223 @@ def _worksheet(wb, title, dom, action, blurb, confirm_header,
                     pass
             c = ws.cell(ri, ci, v)
             c.font = F_BODY
-            c.alignment = A_WRAP if name == "Rationale" else A_TOP
+            c.alignment = A_WRAP if name in WRAPPED else A_TOP
             c.border = BOT
-        if recommend:
-            rec, why = recommend.get(row["Referring Domain"], ("", ""))
-            rc = ws.cell(ri, len(TAB_COLS) + 1, rec)
-            rc.font = Font(name=FONT, size=10, bold=True)
-            rc.alignment = A_TOP
-            rc.border = BOT
-            rc.fill = PatternFill("solid", fgColor={
-                "DISAVOW": "F8CBAD", "KEEP": "C6E0B4",
-                "ASK_CLIENT": "FFE699"}.get(rec, "FFFFFF"))
-            ec = ws.cell(ri, len(TAB_COLS) + 2, why)
-            ec.font = F_BODY
-            ec.alignment = A_WRAP
-            ec.border = BOT
-        d = ws.cell(ri, len(TAB_COLS) + n_rec + 1, default)
+            if name == "Recommendation" and v:
+                c.font = Font(name=FONT, size=10, bold=True)
+                c.fill = PatternFill("solid", fgColor=REC_FILL.get(v, "FFFFFF"))
+            # A rule above each new network so 139 sibling domains read as
+            # one block rather than 139 unrelated rows.
+            if group_col and name == group_col:
+                g = row.get("Primary Risk Factor", "")
+                if g != prev_group:
+                    c.border = Border(bottom=thin,
+                                      top=Side(style="medium", color="1F3864"))
+                    c.font = Font(name=FONT, size=10, bold=True)
+        if group_col:
+            prev_group = row.get("Primary Risk Factor", "")
+        d = ws.cell(ri, n + 1, default)
         d.font = F_BODY
         d.fill = PatternFill("solid", fgColor="FFF2CC")
         d.border = BOT
-        ws.cell(ri, len(TAB_COLS) + 2).border = BOT
+        ws.cell(ri, n + 2).border = BOT
 
     ws.auto_filter.ref = f"A{HDR}:{get_column_letter(ncol)}{last}"
-    ws.freeze_panes = f"B{first}"
+    ws.freeze_panes = ws.cell(first, 4).coordinate
     dv = DataValidation(type="list", formula1=confirm_list, allow_blank=True)
     ws.add_data_validation(dv)
     dv.add(f"{dec_col}{first}:{dec_col}{last}")
+    return ws
+
+
+def _col(cols, name):
+    return get_column_letter([c[0] for c in cols].index(name) + 1)
+
+
+def _networks_tab(wb, dis):
+    """The disavow list as the ~25 decisions it actually is.
+
+    1,120 rows is not 1,120 judgements. 139 of them are seo-anomaly-s1.xyz
+    through s139.xyz -- one operator, one call. This tab is the work surface;
+    the Disavow tab is where you check a network's members before approving.
+    """
+    from collections import defaultdict
+    g = defaultdict(list)
+    for r in dis:
+        g[r["Primary Risk Factor"]].append(r)
+    groups = sorted(g.items(),
+                    key=lambda kv: (min(_prio(x) for x in kv[1]),
+                                    -sum(int(x["Follow (Equity) Links"] or 0)
+                                         for x in kv[1]),
+                                    kv[0]))
+
+    ws = wb.create_sheet("Networks", 1)
+    ws["A1"] = f"Approve by network — {len(groups)} decisions covering " \
+               f"{len(dis):,} domains"
+    ws["A1"].font = Font(name=FONT, size=14, bold=True)
+    ws["A2"] = ("Highest-impact first: equity-passing networks at the top, "
+                "nofollow-only at the bottom. Approve here, then spot-check "
+                "the members on the Disavow tab — every domain in a row "
+                "shares the signature named in Why it is flagged.")
+    ws["A2"].font = Font(name=FONT, size=9, italic=True, color="595959")
+
+    HDR = 4
+    heads = [("Priority", 26), ("Network", 44), ("Domains", 9),
+             ("Backlinks", 11), ("Follow links", 13), ("Max authority", 12),
+             ("Why it is flagged", 78), ("Example domain", 30),
+             ("Approve? (Y / N / HOLD)", 22), ("Notes", 40)]
+    for i, (h, w) in enumerate(heads, start=1):
+        c = ws.cell(HDR, i, h)
+        c.font = Font(name=FONT, size=10, bold=True, color="FFFFFF")
+        c.fill = PatternFill("solid", fgColor="1F3864")
+        c.alignment = Alignment(vertical="center", wrap_text=True)
+        ws.column_dimensions[get_column_letter(i)].width = w
+    ws.row_dimensions[HDR].height = 30
+
+    thin = Side(style="thin", color="BFBFBF")
+    BOT = Border(bottom=thin)
+    F_BODY = Font(name=FONT, size=10)
+    A_WRAP = Alignment(vertical="top", wrap_text=True)
+    for ri, (name, members) in enumerate(groups, start=HDR + 1):
+        members.sort(key=lambda r: -int(r["Backlinks (true)"]))
+        prio = min(members, key=_prio)["Remediation Priority"]
+        # A blank Follow column means the domain sits outside the link
+        # sample, so its follow count is unknown -- not zero. Printing 0
+        # there read as "passes no equity", which is the opposite of
+        # "we cannot see".
+        known = [m for m in members if m["Follow (Equity) Links"] != ""]
+        fol = sum(int(m["Follow (Equity) Links"] or 0) for m in known)
+        if not known:
+            fol_cell = "not sampled"
+        elif len(known) < len(members):
+            fol_cell = f"{fol:,} (+{len(members) - len(known)} unsampled)"
+        else:
+            fol_cell = fol
+        vals = [prio, name, len(members),
+                sum(int(m["Backlinks (true)"]) for m in members),
+                fol_cell,
+                max(int(m["Domain ascore"] or 0) for m in members),
+                members[0]["Rationale"], members[0]["Referring Domain"]]
+        for ci, v in enumerate(vals, start=1):
+            c = ws.cell(ri, ci, v)
+            c.font = F_BODY
+            c.alignment = A_WRAP if ci in (2, 7) else Alignment(vertical="top")
+            c.border = BOT
+            if ci in (3, 4, 6) or (ci == 5 and isinstance(v, int)):
+                c.number_format = "#,##0"
+        ws.cell(ri, 2).font = Font(name=FONT, size=10, bold=True)
+        d = ws.cell(ri, 9, "")
+        d.fill = PatternFill("solid", fgColor="FFF2CC")
+        d.border = BOT
+        ws.cell(ri, 10).border = BOT
+
+    last = HDR + len(groups)
+    ws.cell(last + 2, 2, "TOTAL").font = Font(name=FONT, size=10, bold=True)
+    for ci, col in ((3, "C"), (4, "D")):
+        c = ws.cell(last + 2, ci, f"=SUM({col}{HDR+1}:{col}{last})")
+        c.font = Font(name=FONT, size=10, bold=True)
+        c.number_format = "#,##0"
+    ws.freeze_panes = ws.cell(HDR + 1, 3).coordinate
+    ws.auto_filter.ref = f"A{HDR}:J{last}"
+    dv = DataValidation(type="list", formula1='"Y,N,HOLD"', allow_blank=True)
+    ws.add_data_validation(dv)
+    dv.add(f"I{HDR+1}:I{last}")
+    return len(groups)
+
+
+def _start_tab(wb, dom, n_networks):
+    from collections import Counter
+    c = Counter(r["Action Recommendation"] for r in dom)
+    dis = [r for r in dom if r["Action Recommendation"] == "DISAVOW"]
+    follow = sum(int(r["Follow (Equity) Links"] or 0) for r in dis)
+    nf_only = sum(1 for r in dis
+                  if r["Remediation Priority"].startswith("P3"))
+    ws = wb.create_sheet("Start here", 0)
+    ws.column_dimensions["A"].width = 3
+    ws.column_dimensions["B"].width = 34
+    ws.column_dimensions["C"].width = 104
+    row = [2]
+
+    def w(b="", cc="", bold=False, size=10, colour="000000", gap=0):
+        r = row[0]
+        if b:
+            ws.cell(r, 2, b).font = Font(name=FONT, size=size, bold=bold,
+                                         color=colour)
+        if cc:
+            cl = ws.cell(r, 3, cc)
+            cl.font = Font(name=FONT, size=size, color=colour)
+            cl.alignment = Alignment(vertical="top", wrap_text=True)
+        row[0] = r + 1 + gap
+
+    w("Performance Lab — backlink audit", size=16, bold=True, gap=1)
+    w("What this is",
+      f"{len(dom):,} referring domains, every one carrying a verdict. "
+      "1,362,105 backlinks, reconciled to Semrush.", bold=True, gap=1)
+
+    w("Where things stand", "", bold=True)
+    w("Disavow", f"{c['DISAVOW']:,} domains — {follow:,} follow links between "
+      f"them. {nf_only:,} are nofollow-only, so they pass no equity.")
+    w("Needs your call", f"{c['REVIEW_MANUALLY']} domains. Each one carries my "
+      "recommendation and the evidence for it.")
+    w("Keep", f"{c['KEEP_AFFILIATE_RETAIN']:,} domains — affiliates, brand "
+      "estate, editorial citations and low-exposure retains.", gap=1)
+
+    w("How to work it", "", bold=True)
+    w("1.  Networks tab",
+      f"Start here. The {c['DISAVOW']:,} disavows are {n_networks} networks, "
+      "not 1,120 separate judgements — 139 rows are seo-anomaly-s1.xyz "
+      "through s139.xyz, one operator. Approve or reject each network. "
+      "Equity-passing ones are at the top; nofollow-only at the bottom, and "
+      "those change nothing either way.")
+    w("2.  Disavow tab",
+      "The members of each network, grouped under it with a rule between "
+      "groups. Use it to spot-check a network before approving, or to pull a "
+      "single domain out of one.")
+    w("3.  Review Queue tab",
+      f"The {c['REVIEW_MANUALLY']} the rules would not decide. Recommendation "
+      "and evidence sit in columns B and C — 26 DISAVOW, 43 KEEP, and one "
+      "for you. Set the Decision column.")
+    w("4.  Full audit tab",
+      "All 2,928 domains plus the per-URL drill-down. Reference, not a "
+      "worklist — use it to look something up.", gap=1)
+
+    w("One question for you", "", bold=True, colour="9C3A00")
+    w("dtcx.com",
+      "It links to you with image anchors \"Performance Lab Logo\" and "
+      "\"Nutropic Logo\", which reads like your own or a partner's property. "
+      "But it is also promoted BY several of the spam networks in this audit "
+      "— \"visit dtcx.com for latest info\" on two of them, and \"Premium PBN "
+      "Network Service dtcx.com Rank First\" on a link vendor's page. Either "
+      "it is yours, or a seller is riding the brand. I have left it "
+      "unresolved rather than guess.", colour="9C3A00", gap=1)
+
+    w("What to submit", "", bold=True)
+    w("The file",
+      "disavow_full.txt is the file for Google's tool — every disavowed "
+      "domain, grouped by network with comment headers. disavow_core.txt is "
+      "the equity-passing subset and disavow_nofollow_hygiene.txt the inert "
+      "remainder; together they are exactly disavow_full.txt. Submitting the "
+      "full file matches your call to include nofollow.", gap=1)
+
+    w("Where the confidence sits", "", bold=True)
+    ev = Counter(r["Evidence Level"] for r in dom)
+    obs = sum(v for k, v in ev.items() if k.startswith("Link-level"))
+    w("Observed placements", f"{obs:,} domains judged on their actual links — "
+      "anchors, targets, page URLs.")
+    w("Domain metrics only",
+      f"{ev['Domain-level only (outside sample)']:,} domains fall outside the "
+      "link sample, so authority, hosting, name and volume are all there was.")
+    tri = sum(1 for r in dom if "Negligible Exposure" in r["Primary Risk Factor"])
+    w("Retained on exposure",
+      f"{tri:,} keeps are a risk decision, not a clean bill of health: too "
+      "few links to be worth either a disavow or your time. They are "
+      "labelled as such in the Full audit tab.")
+    w("Known gaps",
+      "appsrankings.com (22,204 links) is retained as affiliate on inference, "
+      "not an observed redirect — one filtered Semrush pull would settle it. "
+      "Topical relevance is scored on an English lexicon, so non-English "
+      "sources are under-detected. SUMMARY.md lists a doorway-URL pattern "
+      "found but deliberately not automated.")
     return ws
 
 
@@ -209,7 +438,7 @@ def main(outdir):
 
     wb = Workbook()
     ws = wb.active
-    ws.title = "Backlink Audit"
+    ws.title = "Full audit"
     HDR = 9
     first, last = HDR + 1, HDR + len(rows)
     act, lvl = f"$C${first}:$C${last}", f"$A${first}:$A${last}"
@@ -304,25 +533,66 @@ def main(outdir):
     ws.add_data_validation(dv)
     dv.add(f"C{first}:C{last}")
 
-    # ---------------- Tab 2: Disavow working sheet ----------------------
-    _worksheet(
-        wb, "Disavow", dom, "DISAVOW",
-        "Disavow queue - 'Disavow Entry' is the exact line for Google's tool. "
-        "Work the Confirmed column; the counts update live.",
+    # ---- Disavow: grouped by network, equity first ----------------------
+    dis = [dict(d) for d in dom if d["Action Recommendation"] == "DISAVOW"]
+    for r in dis:
+        r["Disavow Entry"] = r.get("Disavow Entry") or \
+            f"domain:{r['Referring Domain']}"
+    # Order networks exactly as the Networks tab does, then keep each one
+    # contiguous. Sorting by priority first split "Numbered Sibling Domain
+    # Network" across two bands and "Hacked Site" across three, so a network
+    # approved on the Networks tab had members scattered down the sheet.
+    _net_rank = {}
+    for r in dis:
+        k = r["Primary Risk Factor"]
+        _net_rank[k] = min(_net_rank.get(k, 99), _prio(r))
+    _net_follow = {}
+    for r in dis:
+        k = r["Primary Risk Factor"]
+        _net_follow[k] = _net_follow.get(k, 0) + int(
+            r["Follow (Equity) Links"] or 0)
+    dis.sort(key=lambda r: (_net_rank[r["Primary Risk Factor"]],
+                            -_net_follow[r["Primary Risk Factor"]],
+                            r["Primary Risk Factor"],
+                            _prio(r), -int(r["Backlinks (true)"])))
+    _work_tab(
+        wb, "Disavow", dis, DISAVOW_COLS,
+        "Grouped by network, equity-passing first. 'Disavow Entry' is the "
+        "exact line for Google's tool — note where it names a subdomain: "
+        "those hosts are compromised, not hostile, and the narrow scope is "
+        "deliberate. Approve whole networks on the Networks tab; use this to "
+        "check members or pull one out.",
         confirm_header="Confirmed? (Y / N / HOLD)",
         confirm_list='"Y,N,HOLD"',
+        group_col="Network",
     )
 
-    # ---------------- Tab 3: Review queue -------------------------------
-    _worksheet(
-        wb, "Review Queue", dom, "REVIEW_MANUALLY",
-        "Domains needing a human call, highest backlink volume first. Set "
-        "Decision per row; the counts update live.",
+    # ---- Review queue: recommendation and evidence up front -------------
+    rev = [dict(d) for d in dom
+           if d["Action Recommendation"] == "REVIEW_MANUALLY"]
+    for r in rev:
+        r["Disavow Entry"] = f"domain:{r['Referring Domain']}"
+    rev.sort(key=lambda r: (
+        REC_ORDER.get(REVIEW_RECOMMENDATIONS.get(
+            r["Referring Domain"], ("", ""))[0], 3),
+        -int(r["Backlinks (true)"])))
+    _work_tab(
+        wb, "Review Queue", rev, REVIEW_COLS,
+        "What the rules would not decide, read one by one against the actual "
+        "placements. My recommendation is column B and the evidence for it "
+        "column C. Ordered: the one open question first, then disavows, then "
+        "keeps. Set the Decision column — disagreeing with me is the point.",
         confirm_header="Decision (DISAVOW / KEEP / PENDING)",
         confirm_list='"DISAVOW,KEEP,PENDING"',
         default="PENDING",
         recommend=REVIEW_RECOMMENDATIONS,
     )
+
+    n_net = _networks_tab(wb, [dict(d) for d in dis])
+    _start_tab(wb, dom, n_net)
+    # Reading order: brief, then the three worklists, then the reference set.
+    wb.move_sheet("Full audit", offset=len(wb.sheetnames))
+    wb.active = 0
 
     path = f"{outdir}/performancelab_backlink_audit.xlsx"
     wb.save(path)

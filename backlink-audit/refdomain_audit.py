@@ -400,6 +400,28 @@ COLS = [
 ]
 
 
+def remediation_priority(action, bl_true, fol, known):
+    """Work order for a verdict. Follow links first, nofollow last.
+
+    Kept as a function because the resolution pass rewrites verdicts after
+    this has already run: _set() was flipping a row to DISAVOW and leaving
+    the priority at "-", which put 92 domains -- one network with 158 follow
+    links among them -- below the nofollow-only work in the sheet.
+    """
+    if action == REVIEW and bl_true >= 1000:
+        return "P1 - Review first (dominates the profile)"
+    if action != DISAVOW:
+        return "-"
+    if known and fol == 0:
+        return "P3 - Nofollow only (no equity passed)"
+    if known and fol >= 25:
+        return "P1 - Follow links at volume"
+    if known:
+        return "P2 - Follow links, low volume"
+    return ("P1 - Follow status unknown, high volume" if bl_true >= 100
+            else "P2 - Follow status unknown")
+
+
 def main(backlinks_csv, refdomains_csv, outdir):
     import os
     os.makedirs(outdir, exist_ok=True)
@@ -616,19 +638,7 @@ def main(backlinks_csv, refdomains_csv, outdir):
 
         bl_true = _i(r["Backlinks"])
         fol = _i(lv["Follow (Equity) Links"]) if lv else ""
-        if action == REVIEW and bl_true >= 1000:
-            pri = "P1 - Review first (dominates the profile)"
-        elif action != DISAVOW:
-            pri = "-"
-        elif lv and fol == 0:
-            pri = "P3 - Nofollow only (no equity passed)"
-        elif lv and fol >= 25:
-            pri = "P1 - Follow links at volume"
-        elif lv:
-            pri = "P2 - Follow links, low volume"
-        else:
-            pri = ("P1 - Follow status unknown, high volume" if bl_true >= 100
-                   else "P2 - Follow status unknown")
+        pri = remediation_priority(action, bl_true, fol, known=lv is not None)
 
         out.append({
             "Referring Domain": d,
@@ -672,6 +682,9 @@ def main(backlinks_csv, refdomains_csv, outdir):
         o["Confidence Score"] = conf
         o["Rationale"] = why
         o["Disavow Entry"] = f"domain:{o['Referring Domain']}" if action == DISAVOW else ""
+        o["Remediation Priority"] = remediation_priority(
+            action, o["Backlinks (true)"], o["Follow (Equity) Links"],
+            known=o["Follow (Equity) Links"] != "")
 
     # 1. Same second-level name registered across multiple spam TLDs. A human
     #    picks one TLD; a generator takes whatever is cheap.

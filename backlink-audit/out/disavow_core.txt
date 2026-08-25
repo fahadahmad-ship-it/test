@@ -1,5 +1,5 @@
 # Performance Lab - disavow file (equity-passing)
-# Domains: 782 | Backlinks: 10,777
+# Domains: 756 | Backlinks: 10,644
 # These domains carry follow links, or their follow status is unknown.
 # This is the file to submit.
 # Search/AI surfaces and affiliate infrastructure are excluded by design.
@@ -21,12 +21,8 @@ domain:cloudaicrypto.com
 # --- Cross-TLD Sibling Network (Generated Domains) ---
 domain:apexelements.monster
 domain:apexelements.site
-domain:blinks.monster
-domain:blinks.sbs
 domain:dailyrestora.click
 domain:dailyrestora.online
-domain:knows.monster
-domain:knows.sbs
 domain:somacraft.online
 domain:somacraft.shop
 
@@ -578,13 +574,6 @@ domain:seo-cartel-8w.xyz
 domain:seo-cartel-9w.xyz
 
 # --- PBN Hosting Footprint (Cluster Propagation) ---
-domain:anchorurl.cloud
-domain:buzzshrink.website
-domain:factmags.com
-domain:jake.eu
-domain:list.show
-domain:shortenurls.eu
-domain:urls-shortener.eu
 domain:websites.freemyip.com
 domain:youthinforex.online
 
@@ -621,8 +610,6 @@ domain:bestarticleworld.com
 domain:bilalarticles.com
 domain:blacksonwhites.com
 domain:businessnewses.com
-domain:businessvocal.com
-domain:cashbackdeals.in
 domain:developmentmi.com
 domain:globalecommerce.org
 domain:globalproseo.com
@@ -637,20 +624,15 @@ domain:ranksarticle.com
 domain:read.org.in
 domain:runningwebsites.net
 domain:sbyme.com
-domain:seol.store
 domain:sitesnewses.com
 domain:softranks.com
 domain:starcourts.com
 domain:starsarticle.com
-domain:takes.homes
-domain:takes.sbs
 domain:thearticletime.com
-domain:thecloudherald.com
 domain:topacted.com
 domain:toplinksites.com
 domain:tunca.org
 domain:wallpapers.pro
-domain:wants.cfd
 domain:way2check.cv
 domain:webhubsites.com
 domain:webranksite.com
@@ -816,19 +798,11 @@ domain:kurahorizon.sbs
 domain:kurapulse.space
 domain:lynn-hughes.co.uk
 domain:moduspax.website
-domain:namepromo.online
 domain:pattern-aegis.live
-domain:premworld.online
 domain:prismcrafts.xyz
 domain:quik-news.com
-domain:summercenter.store
-domain:summersworl.online
 domain:vedaflow.online
 domain:vividlypulse.lifestyle
 domain:vividlypulse.living
 domain:vividlypulse.xyz
-domain:worldboxe.online
-domain:yellos.online
-domain:yourboxe.online
-domain:yourcenter.online
 domain:zenoppa.site

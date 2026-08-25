@@ -456,3 +456,48 @@ dtcx.com Rank First"). Either it is yours, or a link seller is riding the
 brand. That needs an answer before any action.
 
 DISAVOW 1,081 -> 1,120, REVIEW 88 -> 70.
+
+## Workbook reorganised for working (2026-08-25)
+
+The sheet held the right data in the wrong shape: it opened on a 7,904-row
+reference table with no indication of where to start, and the Review Queue put
+my recommendation in column 16, so you scrolled past fifteen columns to reach
+the thing you were being asked to confirm.
+
+Five tabs now, in the order you work them.
+
+**Start here** — what the audit found, how to work the other tabs, the one
+question I could not settle, and where the confidence actually sits (2,354
+domains judged on observed placements, 362 on domain metrics alone, 352 keeps
+retained on negligible exposure rather than verified merit).
+
+**Networks** — the work surface. 1,120 disavowed domains are **25 decisions**,
+not 1,120 judgements: 139 of those rows are `seo-anomaly-s1.xyz` through
+`s139.xyz`, one operator, one call. Each row gives the network, its domain and
+backlink counts, its follow links, its highest-authority member, why it is
+flagged and an example domain, with one Approve dropdown. Ordered by impact:
+equity-passing networks first, nofollow-only last.
+
+**Disavow** — the members of each network, grouped contiguously under it with a
+rule between groups and in the same order as the Networks tab. Use it to
+spot-check before approving, or to pull one domain out of a network. Where a
+`Disavow Entry` names a subdomain, that is deliberate: the host is compromised
+rather than hostile, and `domain:quantitativemarxism.economicas.uba.ar` keeps
+the University of Buenos Aires' other 4 million pages out of the file.
+
+**Review Queue** — recommendation in column B, the evidence for it in column C,
+sorted so the open question comes first, then the 26 disavows, then the 43
+keeps.
+
+**Full audit** — all 2,928 domains and the per-URL drill-down, moved to last.
+Reference, not a worklist.
+
+Two defects found while rebuilding it. The resolution pass rewrites verdicts
+after `Remediation Priority` has already been computed, so 92 domains that
+`_set()` flipped to DISAVOW kept the `"-"` priority they had as keeps — which
+sorted a network carrying 158 follow links *below* the nofollow-only work.
+Priority is now a function both paths call. And a blank Follow column means the
+domain sits outside the link sample, so the count is unknown, not zero;
+totalling it printed `0` against 139 domains, which reads as "passes no equity"
+when it means "we cannot see". Those cells now say `not sampled` or
+`593 (+4 unsampled)`.
