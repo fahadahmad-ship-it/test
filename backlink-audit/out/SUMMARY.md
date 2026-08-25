@@ -8,20 +8,19 @@
 
 | Action | Domains | Backlinks | % of links |
 |---|---:|---:|---:|
-| DISAVOW | 53 | 344 | 0.7% |
+| DISAVOW | 52 | 299 | 0.6% |
 | REVIEW_MANUALLY | 80 | 1,161 | 2.3% |
-| KEEP_AFFILIATE_RETAIN | 482 | 48,495 | 97.0% |
+| KEEP_AFFILIATE_RETAIN | 483 | 48,540 | 97.1% |
 
 ## Equity exposure
 
-Of **344** disavow-flagged backlinks, only **298 (86.6%)** are follow links that pass equity. The remaining **46** are nofollow and pass none.
+Of **299** disavow-flagged backlinks, only **253 (84.6%)** are follow links that pass equity. The remaining **46** are nofollow and pass none.
 
 ### Priority remediation targets (follow links only)
 
 | Domain | Follow links | Risk factor |
 |---|---:|---|
 | benchchem.com | 98 | Link Farm / Outbound-Link Bloat |
-| bittersweetblog.com | 45 | PBN / Templated Mass Footprint (Irrelevant Niche) |
 | aihcp.net | 33 | PBN / Templated Mass Footprint (Irrelevant Niche) |
 | retiredbrains.com | 28 | Exact-Match Anchor Abuse (Sitewide Injection) |
 | bloggazza.com | 18 | Vendor Blog Network (Spun-Content PBN) |
@@ -80,9 +79,9 @@ Excluded from the disavow file pending your call. Each carries the evidence that
 | Link Farm / Outbound-Link Bloat | 15 |
 | Synthetic Affiliate Doorway Domain | 5 |
 | Hacked Site / Injected Link-Vendor Spam | 3 |
-| PBN / Templated Mass Footprint (Irrelevant Niche) | 2 |
 | Directory / Link-Scheme Spam Footprint | 1 |
 | Scraped Aggregator / Stats-Site Profile | 1 |
+| PBN / Templated Mass Footprint (Irrelevant Niche) | 1 |
 | Sitewide Link Injection (Templated Anchor) | 1 |
 | Exact-Match Anchor Abuse (Sitewide Injection) | 1 |
 

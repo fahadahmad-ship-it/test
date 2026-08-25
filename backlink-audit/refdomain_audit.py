@@ -19,7 +19,8 @@ from collections import Counter, defaultdict
 
 from nameshape import name_shape
 from audit import (
-    AFFILIATE_REDIRECT_SOURCES, CONFIRMED_AFFILIATE_REDIRECTS,
+    AFFILIATE_REDIRECT_SOURCES, CLIENT_OVERRIDES,
+    CONFIRMED_AFFILIATE_REDIRECTS,
     host_of, audit_key, _registrable, BRAND_OWNED, AFFILIATE_NETWORKS,
     SCRAPER_AGGREGATOR, SPAM_BLOG_NETWORK, SEARCH_AI_SURFACES,
     DIRECTORY_SPAM_RE, NICHE_RE, TRACKER_HOST_RE, COUPON_AGGREGATOR_RE,
@@ -181,6 +182,11 @@ def classify_domain(r, ctx):
     ip = (r["IP Address"] or "").strip()
     cb = cblock(ip)
     tld = d.rsplit(".", 1)[-1].lower()
+
+    # -- client overrides ---------------------------------------------------
+    if d in CLIENT_OVERRIDES or reg in CLIENT_OVERRIDES:
+        act, rf, why = CLIENT_OVERRIDES.get(d) or CLIENT_OVERRIDES[reg]
+        return (act, rf, "High", why)
 
     # -- protected ---------------------------------------------------------
     if d in CONFIRMED_AFFILIATE_REDIRECTS or reg in CONFIRMED_AFFILIATE_REDIRECTS:
@@ -531,6 +537,8 @@ def main(backlinks_csv, refdomains_csv, outdir):
     idx = {o["Referring Domain"]: o for o in out}
 
     def _set(o, action, risk, conf, why):
+        if o["Referring Domain"] in CLIENT_OVERRIDES:
+            return  # a client decision is not overturned by a later signature
         o["Action Recommendation"] = action
         o["Primary Risk Factor"] = risk
         o["Confidence Score"] = conf

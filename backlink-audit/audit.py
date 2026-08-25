@@ -399,6 +399,22 @@ DISAVOW, KEEP, REVIEW = "DISAVOW", "KEEP_AFFILIATE_RETAIN", "REVIEW_MANUALLY"
 
 # Domains held back from the disavow file for an explicit client decision,
 # with the evidence that makes the call a judgement rather than a rule.
+# Client decisions that override the audit's verdict. These are commercial
+# or relationship facts the data cannot show, so they take precedence over
+# every rule. Each records who decided and why, so a later pass does not
+# quietly re-flag the domain.
+CLIENT_OVERRIDES = {
+    "bittersweetblog.com": (
+        KEEP,
+        "None - Client Decision (Retain)",
+        "Client instruction, 2026-08-25. Supported by the data: the 45 links "
+        "are one sidebar placement replicated across the blog's own archive "
+        "pagination (/author/.../page/58/, /category/baking-cooking/page/39/), "
+        "not 45 separate placements. Authority 38 on WordPress.com, and 26 of "
+        "the 45 are already lost.",
+    ),
+}
+
 MANUAL_REVIEW_OVERRIDE = {
     "eastbayexpress.com":
         "HELD FOR CLIENT DECISION - established news outlet, but 667 FOLLOW "
@@ -418,6 +434,13 @@ def classify(p: DomainProfile):
     disavowing a domain whose links are overwhelmingly brand mentions.
     """
     d = p.domain
+
+    # -- Client overrides ---------------------------------------------------
+    # Ahead of everything, including the affiliate rules: a commercial fact
+    # the client states is not something the data can overturn.
+    if d in CLIENT_OVERRIDES or p.registrable in CLIENT_OVERRIDES:
+        act, rf, why = CLIENT_OVERRIDES.get(d) or CLIENT_OVERRIDES[p.registrable]
+        return (act, rf, "High", why)
 
     # -- Tier 1: protected assets -------------------------------------------
     # Must precede every spam rule: these domains carry templated footprints
