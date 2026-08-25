@@ -4,6 +4,7 @@ smartlivingseniors.com,393,0%,,,DIRECT,0%,"0:199, 200:194",4,Mind Lab Pro is the
 fitnessclone.com,374,0%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:374,109,Check Price,0%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 mindlabpro.com,275,0%,,,DIRECT,0%,200:275,150,Shop Now,0%,"Direct link, no redirect hop."
 leafysouls.com,258,0%,,,DIRECT,14%,"200:223, 404:35",90,Learn More,35%,"Direct link, no redirect hop."
+eurekster.com,240,3%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:240,48,https://www.performancelab.com/blogs/multi/best-multivitamin-for-men,0%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 eastbayexpress.com,235,100%,fitliving.org,go/nootropics-perfomancelabmind-productpage-general-all,ROUTED_OTHER,0%,200:235,5,>>Check the best deals for Performance Lab Mind here,0%,Links route through fitliving.org/go/nootropics-perfomancelabmind-productpage-general-all.
 human-memory.net,227,0%,,,DIRECT,0%,200:227,40,,78%,"Direct link, no redirect hop."
 supplementreviewsuk.com,206,6%,nutropic.com,,ROUTED_OTHER,0%,200:206,130,Visit Performance Lab’s Website here,0%,Links route through nutropic.com/.
@@ -12,45 +13,57 @@ healthandwellnessreviews.co.uk,186,2%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,"20
 generationiron.com,186,4%,testolabpro.com,products/testo-lab-pro,ROUTED_BRAND_OWNED,0%,200:186,72,Shop Performance Lab,61%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 ultimatestrengths.com,184,0%,,,DIRECT,1%,"200:180, 301:2, 403:2",5,Performance Lab Vision is the best vision supplement,1%,"Direct link, no redirect hop."
 appsupports.co,177,100%,drect.net,performancelab,ROUTED_CAMPAIGN,5%,"200:168, 403:8, 521:1",1,Upgrade Yourself!,100%,"All links route through drect.net/performancelab — a single brand-named campaign path. This is link-management or affiliate infrastructure, and the brief protects it: a redirect is not itself a toxicity signal."
+valentinosnaturals.com,160,35%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:160,59,Testo Lab Pro Review and Results: How Effective is this New T-Booster?,32%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 cloudaicrypto.com,154,0%,,,DIRECT,0%,200:154,24,MindLabPro,26%,"Direct link, no redirect hop."
 currencyconverts.com,150,100%,drect.net,performancelab,ROUTED_CAMPAIGN,2%,"200:147, 500:3",1,Buy Now!,100%,"All links route through drect.net/performancelab — a single brand-named campaign path. This is link-management or affiliate infrastructure, and the brief protects it: a redirect is not itself a toxicity signal."
+e360tv.com,143,0%,,,DIRECT,8%,"200:132, 403:11",3,https://www.performancelab.com/produc...,0%,"Direct link, no redirect hop."
 brainmadesimple.com,142,0%,,,DIRECT,0%,200:142,14,Creative Stall Check Latest Price,100%,"Direct link, no redirect hop."
 thecompleteportal.com,133,0%,,,DIRECT,0%,"0:79, 200:54",44,End of Season Sale!,84%,"Direct link, no redirect hop."
 thesportwriter.com,124,12%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,"0:107, 200:15, 301:2",86,,12%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 syktohealth.com,118,0%,,,DIRECT,0%,200:118,84,CHECK THE LATEST PRICE HERE,80%,"Direct link, no redirect hop."
 supermindhacker.com,109,0%,,,DIRECT,0%,"200:82, 0:27",81,Cognizen (Citicoline) – We Recommend “Mind”,0%,"Direct link, no redirect hop."
 testolabpro.com,108,0%,,,DIRECT,0%,301:108,1,,0%,"Direct link, no redirect hop."
+thekeytoglutenfree.com,107,2%,nutropic.com,,ROUTED_OTHER,0%,"0:94, 301:7, 200:6",32,,4%,Links route through nutropic.com/.
+naxttiihealth.com,107,0%,,,DIRECT,96%,"403:103, 200:4",58,Phytodroitin,2%,"Direct link, no redirect hop."
 nootropicgeek.com,105,2%,nutropic.com,,ROUTED_OTHER,0%,200:105,56,performancelab.com,100%,Links route through nutropic.com/.
 bebrainfit.com,98,0%,,,DIRECT,85%,"404:80, 200:10, 0:5, 403:3",9,Mind Lab Pro is the best nootropic supplement,0%,"Direct link, no redirect hop."
 benchchem.com,98,0%,,,DIRECT,0%,200:98,40,Link,0%,"Direct link, no redirect hop."
 neurohub.bio,93,0%,,,DIRECT,0%,"200:92, 307:1",2,Mind Lab Pro is the best nootropic supplement,0%,"Direct link, no redirect hop."
 cognitionprime.bio,93,0%,,,DIRECT,0%,"200:77, 0:16",7,Mind Lab Pro is the best nootropic supplement Mind Lab Pro is the best nootropic supplement,0%,"Direct link, no redirect hop."
-eurekster.com,91,4%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:91,36,Best Caffeine Pills of 2020: Performance-Enhanced Stim ...,0%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
-drywearapparel.com,91,1%,nutropic.com,,ROUTED_OTHER,0%,"200:85, 0:6",4,,0%,Links route through nutropic.com/.
+drywearapparel.com,92,1%,nutropic.com,,ROUTED_OTHER,0%,"200:86, 0:6",4,,0%,Links route through nutropic.com/.
 prelabpro.com,84,0%,,,DIRECT,0%,"301:82, 200:2",3,,0%,"Direct link, no redirect hop."
-valentinosnaturals.com,78,36%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:78,57,Testo Lab Pro Review and Results: How Effective is this New T-Booster?,33%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
+mylandingpages.co,78,0%,,,DIRECT,0%,200:78,76,up to 1500 mg daily,3%,"Direct link, no redirect hop."
 noderunners.network,72,0%,,,DIRECT,0%,200:72,13,https://www.performancelab.com/breedlove,0%,"Direct link, no redirect hop."
 enhancingbrain.com,69,0%,,,DIRECT,0%,200:69,44,Omega-3,22%,"Direct link, no redirect hop."
 yahoo.com,69,0%,,,DIRECT,0%,200:69,47,www.performancelab.com › multi › vitamin-d-for-seniors-dosage How Much Vitamin D Should Seniors Take? | Performance Lab®,1%,"Direct link, no redirect hop."
 vaga.org,68,0%,,,DIRECT,32%,"200:34, 404:22, 0:12",31,PerformanceLab.com,0%,"Direct link, no redirect hop."
+gossiphealth.com,67,76%,chronotherapeutics.org,performancelabmind,ROUTED_OTHER,0%,200:67,4,Performance Lab Mind,100%,Links route through chronotherapeutics.org/performancelabmind.
 setriaglutathione.com,64,0%,,,DIRECT,12%,"200:56, 404:8",2,Performance Lab PL-Immune Performance Lab PL-Immune,0%,"Direct link, no redirect hop."
 nutropic.com,63,0%,,,DIRECT,0%,301:63,1,,0%,"Direct link, no redirect hop."
 musclechemistry.com,58,9%,testolabpro.com,,ROUTED_BRAND_OWNED,60%,"404:35, 200:23",35,,100%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 nutritional-supplements-directory.com,58,0%,,,DIRECT,0%,200:58,20,Image of the Performance Lab magnesium supplement,100%,"Direct link, no redirect hop."
+adventurerz.com,56,0%,,,DIRECT,0%,200:56,7,Verdict:,100%,"Direct link, no redirect hop."
 ranktracker.com,55,0%,,,DIRECT,0%,200:55,18,performancelab.com,0%,"Direct link, no redirect hop."
-thekeytoglutenfree.com,52,2%,nutropic.com,,ROUTED_OTHER,0%,"0:47, 200:3, 301:2",32,,4%,Links route through nutropic.com/.
 bestmusclesupps.com,51,0%,,,DIRECT,0%,200:51,9,Go To Official Performance Lab Website,0%,"Direct link, no redirect hop."
 kimssaulikesd.blogspot.com,51,100%,testolabpro.com,,ROUTED_BRAND_OWNED,100%,404:51,1,https://testolabpro.com/,100%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
-naxttiihealth.com,48,0%,,,DIRECT,100%,403:48,47,Phytodroitin,0%,"Direct link, no redirect hop."
+cataglow.com,50,0%,,,DIRECT,0%,200:50,26,Vitamin D,0%,"Direct link, no redirect hop."
+storedetect.com,50,100%,nutropic.com,,ROUTED_OTHER,0%,200:50,1,All Products | Performance Lab®,0%,Links route through nutropic.com/.
+internetresearchunit.com,47,0%,,,DIRECT,0%,200:47,8,View Product,100%,"Direct link, no redirect hop."
 veganfoundry.com,45,4%,associates.ubernet.com,scripts/efcval,ROUTED_OTHER,0%,200:45,17,Check Price,7%,Links route through associates.ubernet.com/scripts/efcval.
+baskidunyasi.net,45,0%,,,DIRECT,0%,200:45,1,TG @LINKS_DEALER | EFFECTIVE SEO LINKS FOR WWW.PERFORMANCELAB.COM,100%,"Direct link, no redirect hop."
 mindbodydad.com,44,0%,,,DIRECT,0%,200:44,27,Get It Here,0%,"Direct link, no redirect hop."
 revgear.com,43,0%,,,DIRECT,0%,200:43,28,Performance Lab NutriGenesis® Multi,84%,"Direct link, no redirect hop."
 phactual.com,43,0%,,,DIRECT,0%,0:43,37,Visit PerformanceLab.com,0%,"Direct link, no redirect hop."
 bodynutrition.org,43,0%,,,DIRECT,0%,200:43,18,Click here for the lowest price,21%,"Direct link, no redirect hop."
+thetastefullife.com,42,0%,,,DIRECT,0%,307:42,1,,0%,"Direct link, no redirect hop."
 stepstostayhealthy.com,41,12%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,"200:40, 301:1",23,Get It Now,17%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 nootrimens.com,41,0%,,,DIRECT,0%,200:41,29,aquí,5%,"Direct link, no redirect hop."
-e360tv.com,37,0%,,,DIRECT,0%,200:37,3,https://www.performancelab.com/produc...,0%,"Direct link, no redirect hop."
+thebitsignal.com,37,0%,,,DIRECT,0%,200:37,19,https://www.performancelab.com/breedlove,0%,"Direct link, no redirect hop."
+fatlotofgood.com.au,35,0%,,,DIRECT,0%,"307:19, 200:16",4,,0%,"Direct link, no redirect hop."
 thehumanfuture.org,35,0%,,,DIRECT,0%,200:35,3,,0%,"Direct link, no redirect hop."
+ecomscout.com,35,0%,,,DIRECT,0%,200:35,23,Calcium # 6 Calcium $148.00,0%,"Direct link, no redirect hop."
+blogdosaga.com,34,18%,nutropic.com,,ROUTED_OTHER,0%,200:34,11,more info,0%,Links route through nutropic.com/.
+vitad.org,33,0%,,,DIRECT,0%,200:33,5,performancelab,0%,"Direct link, no redirect hop."
 pages.dev,32,9%,nutropic.com,,ROUTED_OTHER,0%,200:32,8,www.performancelab.com,44%,Links route through nutropic.com/.
 syktohealth.substack.com,32,0%,,,DIRECT,0%,200:32,25,HERE,0%,"Direct link, no redirect hop."
 active.com,32,100%,securelinksdirectory.com,go/active-com/testolabpro_best-testosterone-booster,ROUTED_CAMPAIGN,0%,200:32,25,CHECK PRICE,100%,"All links route through securelinksdirectory.com/go/active-com/testolabpro_best-testosterone-booster — a single brand-named campaign path. This is link-management or affiliate infrastructure, and the brief protects it: a redirect is not itself a toxicity signal."
@@ -62,19 +75,28 @@ alibaba.com,31,0%,,,DIRECT,6%,"200:29, 404:2",7,1,0%,"Direct link, no redirect h
 securelinksdirectory.com,30,0%,,,DIRECT,0%,302:30,1,,0%,"Direct link, no redirect hop."
 microdoseman.com,30,0%,,,DIRECT,0%,200:30,7,Performance Lab Mind,70%,"Direct link, no redirect hop."
 openhealthtools.org,29,0%,,,DIRECT,0%,"200:28, 301:1",19,PerformanceLab.com,0%,"Direct link, no redirect hop."
+aidevi.com,29,0%,,,DIRECT,10%,"200:26, 403:3",5,30 - 200,0%,"Direct link, no redirect hop."
+blogsvirals.com,29,24%,nutropic.com,,ROUTED_OTHER,0%,200:29,13,check here,0%,Links route through nutropic.com/.
 retiredbrains.com,27,0%,,,DIRECT,0%,200:27,1,choose the best joint supplement,0%,"Direct link, no redirect hop."
 ubernet.com,27,0%,,,DIRECT,0%,"200:26, 301:1",6,Performance Lab,0%,"Direct link, no redirect hop."
 alexfergus.com,26,96%,aferg.co,testo-web,ROUTED_OTHER,0%,200:26,19,Learn More HERE,0%,Links route through aferg.co/testo-web.
 narcolepsylifeacademy.com,26,0%,,,DIRECT,0%,200:26,14,Learn more,0%,"Direct link, no redirect hop."
+educationalimpactblog.com,26,12%,nutropic.com,,ROUTED_OTHER,0%,200:26,9,check here,0%,Links route through nutropic.com/.
 sandiegohealth.org,25,0%,,,DIRECT,0%,200:25,8,PerformanceLab.com,0%,"Direct link, no redirect hop."
 bestfornutrition.com,25,8%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:25,15,Buy on Official Site,88%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 spotmebro.com,25,40%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:25,21,Buy now,0%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 naturalweightloss24.com,25,0%,,,DIRECT,0%,200:25,2,https://www.performancelab.com/blogs/fat-loss/does-zinc-help-with-weight-loss,0%,"Direct link, no redirect hop."
 instantelhydraulics.com,25,0%,,,DIRECT,0%,200:25,1,🍪 TELEGRAM @SALESOVEN | ACCESS TO HACKED SITES FOR SEO | HTTPS://T.ME/SALESOVEN 🔥,100%,"Direct link, no redirect hop."
+bluecantera.com,25,48%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:25,1,JOIN OUR TELEGRAM https://t.me/s/darksidelinks,100%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 enutritionreads.com,24,4%,nutropic.com,,ROUTED_OTHER,0%,"0:14, 301:6, 200:4",9,,0%,Links route through nutropic.com/.
 colorfuleatsnutrition.com,24,0%,,,DIRECT,0%,200:24,16,Check out this product here,0%,"Direct link, no redirect hop."
 burnlabpro.com,24,4%,testolabpro.com,products/testo-lab-pro,ROUTED_BRAND_OWNED,0%,200:24,21,Get the best price on Performance Lab Pre here,0%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
+anchor-blog.com,24,21%,nutropic.com,,ROUTED_OTHER,0%,200:24,9,click here,0%,Links route through nutropic.com/.
+bluxeblog.com,24,25%,nutropic.com,,ROUTED_OTHER,0%,200:24,10,daily multivitamin,0%,Links route through nutropic.com/.
 wowtrk.com,24,0%,,,DIRECT,0%,200:24,2,Preview,100%,"Direct link, no redirect hop."
+le-meilleur-complement.fr,24,0%,,,DIRECT,0%,200:24,15,Voir le site,83%,"Direct link, no redirect hop."
+newdirect.net,23,0%,,,DIRECT,0%,307:23,1,,0%,"Direct link, no redirect hop."
+read.org.in,23,74%,nutropic.com,,ROUTED_OTHER,0%,200:23,4,nutropic.com,0%,Links route through nutropic.com/.
 armfighter.com,22,27%,nutropic.com,,ROUTED_OTHER,0%,200:22,8,,0%,Links route through nutropic.com/.
 prnewslink.net,22,0%,,,DIRECT,0%,200:22,6,Link,100%,"Direct link, no redirect hop."
 fitliving.org,22,0%,,,DIRECT,0%,302:22,1,,0%,"Direct link, no redirect hop."
@@ -82,17 +104,20 @@ onesmablog.com,22,27%,nutropic.com,,ROUTED_OTHER,0%,200:22,15,more info,0%,Links
 gymbeam.dev,22,0%,,,DIRECT,0%,200:22,1,https://www.performancelab.com/blogs/stim/caffeine-cycling,0%,"Direct link, no redirect hop."
 musicareview.com,21,100%,drect.net,performancelab,ROUTED_CAMPAIGN,0%,0:21,1,Buy Now!,100%,"All links route through drect.net/performancelab — a single brand-named campaign path. This is link-management or affiliate infrastructure, and the brief protects it: a redirect is not itself a toxicity signal."
 bittersweetblog.com,21,0%,,,DIRECT,10%,"200:18, 429:2, 0:1",1,check out these brain and body supplements,0%,"Direct link, no redirect hop."
-vitad.org,21,0%,,,DIRECT,0%,200:21,5,performancelab,0%,"Direct link, no redirect hop."
 pointblog.net,21,19%,nutropic.com,,ROUTED_OTHER,0%,200:21,11,get more info,0%,Links route through nutropic.com/.
+way2check.cv,21,76%,nutropic.com,,ROUTED_OTHER,0%,200:21,4,nutropic.com,0%,Links route through nutropic.com/.
+eastphoenixau.com,20,0%,,,DIRECT,0%,200:20,5,Coffee vs Caffeine Pills - Performance Lab®,100%,"Direct link, no redirect hop."
+zenithwithin.com,20,0%,,,DIRECT,0%,200:20,15,🛒 This is the supplement I personally use and recommend,0%,"Direct link, no redirect hop."
 full-design.com,20,20%,nutropic.com,,ROUTED_OTHER,0%,200:20,11,website,0%,Links route through nutropic.com/.
-thetastefullife.com,19,0%,,,DIRECT,0%,307:19,1,,0%,"Direct link, no redirect hop."
-aidevi.com,19,0%,,,DIRECT,11%,"200:17, 403:2",5,30 - 200,0%,"Direct link, no redirect hop."
+wants.cfd,20,80%,dtcx.com,,ROUTED_OTHER,0%,200:20,4,dtcx.com,100%,Links route through dtcx.com/.
 pages10.com,19,26%,nutropic.com,,ROUTED_OTHER,0%,200:19,11,click here,0%,Links route through nutropic.com/.
-cataglow.com,19,0%,,,DIRECT,0%,200:19,17,Vitamin D,0%,"Direct link, no redirect hop."
+27.be,19,100%,dtcx.com,,ROUTED_OTHER,0%,200:19,1,.com,0%,Links route through dtcx.com/.
+yourinception.com,18,0%,,,DIRECT,6%,"302:13, 200:4, 403:1",3,,0%,"Direct link, no redirect hop."
 duckduckgo.github.io,18,0%,,,DIRECT,0%,200:18,2,performancelab.com,0%,"Direct link, no redirect hop."
 meghanbell.com,18,0%,,,DIRECT,0%,"200:17, 0:1",1,involved in,0%,"Direct link, no redirect hop."
 theaffiliateslist.com,18,0%,,,DIRECT,0%,200:18,18,Laboratorio de rendimiento,100%,"Direct link, no redirect hop."
 cleanlabelproject.org,18,0%,,,DIRECT,0%,200:18,14,Link,0%,"Direct link, no redirect hop."
+top10supps.com,18,33%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:18,3,Shop Performancelab.com,67%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 triggeryourtrip.com,18,0%,,,DIRECT,0%,200:18,3,NutriGenesis Multivitamin,0%,"Direct link, no redirect hop."
 ampblogs.com,18,22%,nutropic.com,,ROUTED_OTHER,0%,200:18,10,website,0%,Links route through nutropic.com/.
 fitnell.com,18,22%,nutropic.com,,ROUTED_OTHER,0%,200:18,11,more info,0%,Links route through nutropic.com/.
@@ -124,12 +149,11 @@ popup-blog.com,18,22%,nutropic.com,,ROUTED_OTHER,0%,200:18,12,more info,0%,Links
 blogsidea.com,18,22%,nutropic.com,,ROUTED_OTHER,0%,200:18,13,check here,0%,Links route through nutropic.com/.
 develop-blog.com,18,22%,nutropic.com,,ROUTED_OTHER,0%,200:18,8,website,0%,Links route through nutropic.com/.
 vitamindwiki.com,18,0%,,,DIRECT,0%,200:18,5,performancelab,0%,"Direct link, no redirect hop."
+lockinfuel.com,18,0%,,,DIRECT,0%,200:18,5,magnesium glycinate,0%,"Direct link, no redirect hop."
+nhdtlogs.com,18,0%,,,DIRECT,0%,200:18,1,TG @LINKS_DEALER | EFFECTIVE SEO LINKS FOR WWW.PERFORMANCELAB.COM,100%,"Direct link, no redirect hop."
 bestweight-loss.com,17,0%,,,DIRECT,35%,"200:10, 403:4, 404:2, 0:1",1,https://www.performancelab.com/blogs/fat-loss/does-zinc-help-with-weight-loss,0%,"Direct link, no redirect hop."
-fatlotofgood.com.au,17,0%,,,DIRECT,0%,"307:9, 200:8",4,,0%,"Direct link, no redirect hop."
-internetresearchunit.com,17,0%,,,DIRECT,0%,200:17,8,View Product,100%,"Direct link, no redirect hop."
 dryeyeandme.co.uk,17,0%,,,DIRECT,0%,200:17,2,"PerformanceLab, ‘ Vitamin C and Dry Eyes’, 13/01/21, Accessed June 2022",0%,"Direct link, no redirect hop."
 instya.com,17,0%,,,DIRECT,0%,200:17,2,performancelab.com,100%,"Direct link, no redirect hop."
-zenithwithin.com,17,0%,,,DIRECT,0%,200:17,15,🛒 This is the supplement I personally use and recommend,0%,"Direct link, no redirect hop."
 spintheblog.com,17,24%,nutropic.com,,ROUTED_OTHER,0%,200:17,10,click here,0%,Links route through nutropic.com/.
 blogolize.com,17,24%,nutropic.com,,ROUTED_OTHER,0%,200:17,9,check here,0%,Links route through nutropic.com/.
 madmouseblog.com,17,18%,nutropic.com,,ROUTED_OTHER,0%,200:17,9,read more,0%,Links route through nutropic.com/.
@@ -141,15 +165,13 @@ blogunok.com,17,24%,nutropic.com,,ROUTED_OTHER,0%,200:17,9,website,0%,Links rout
 blogsmine.com,17,18%,nutropic.com,,ROUTED_OTHER,0%,200:17,10,read more,0%,Links route through nutropic.com/.
 blogitright.com,17,18%,nutropic.com,,ROUTED_OTHER,0%,200:17,10,get more info,0%,Links route through nutropic.com/.
 newbigblog.com,17,24%,nutropic.com,,ROUTED_OTHER,0%,200:17,12,here,0%,Links route through nutropic.com/.
-blogdosaga.com,17,18%,nutropic.com,,ROUTED_OTHER,0%,200:17,11,more info,0%,Links route through nutropic.com/.
 fare-blog.com,17,24%,nutropic.com,,ROUTED_OTHER,0%,200:17,9,get more info,0%,Links route through nutropic.com/.
+booksreadr.org,17,76%,nutropic.com,,ROUTED_OTHER,0%,200:17,4,nutropic.com,0%,Links route through nutropic.com/.
 whatismoneypodcast.com,17,0%,,,DIRECT,0%,200:17,10,https://www.performancelab.com/breedlove,0%,"Direct link, no redirect hop."
 nootropiceromania.com,16,0%,,,DIRECT,50%,"404:8, 200:8",7,Comanda Online,56%,"Direct link, no redirect hop."
-yourinception.com,16,0%,,,DIRECT,6%,"302:13, 200:2, 403:1",3,,0%,"Direct link, no redirect hop."
 letsvisitasia.com,16,0%,,,DIRECT,0%,"200:9, 301:7",10,,56%,"Direct link, no redirect hop."
 fitgirlsdiary.com,16,0%,,,DIRECT,0%,200:16,16,Performance Lab ® Mind,0%,"Direct link, no redirect hop."
 biohackstars.com,16,0%,,,DIRECT,0%,"0:9, 200:7",4,Check Price & Availability,81%,"Direct link, no redirect hop."
-storedetect.com,16,100%,nutropic.com,,ROUTED_OTHER,0%,200:16,1,All Products | Performance Lab®,0%,Links route through nutropic.com/.
 blogpostie.com,16,19%,nutropic.com,,ROUTED_OTHER,0%,200:16,10,more info,0%,Links route through nutropic.com/.
 theobloggers.com,16,25%,nutropic.com,,ROUTED_OTHER,0%,200:16,9,here,0%,Links route through nutropic.com/.
 myparisblog.com,16,25%,nutropic.com,,ROUTED_OTHER,0%,200:16,9,read more,0%,Links route through nutropic.com/.
@@ -158,6 +180,7 @@ bloggerswise.com,16,19%,nutropic.com,,ROUTED_OTHER,0%,200:16,9,check here,0%,Lin
 wssblogs.com,16,25%,nutropic.com,,ROUTED_OTHER,0%,200:16,8,website,0%,Links route through nutropic.com/.
 blog-gold.com,16,25%,nutropic.com,,ROUTED_OTHER,0%,200:16,10,get more info,0%,Links route through nutropic.com/.
 blogrelation.com,16,25%,nutropic.com,,ROUTED_OTHER,0%,200:16,9,read more,0%,Links route through nutropic.com/.
+ssnblog.com,16,31%,nutropic.com,,ROUTED_OTHER,0%,200:16,12,website,0%,Links route through nutropic.com/.
 nootropicblend.com,15,0%,,,DIRECT,0%,"200:14, 307:1",13,Click For Best Price,87%,"Direct link, no redirect hop."
 geriatricacademy.com,15,7%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,301:15,9,here,0%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 healthynaturlremedy.com,15,0%,,,DIRECT,0%,200:15,3,Performance Lab Vision is the best vision supplement Performance Lab Vision is the best vision supplement,0%,"Direct link, no redirect hop."
@@ -165,15 +188,21 @@ bing.com,15,0%,,,DIRECT,0%,200:15,4,performancelab.com,0%,"Direct link, no redir
 musclesportmag.com,15,0%,,,DIRECT,0%,200:15,15,Performance Lab’s Whole-Food multivitamin,0%,"Direct link, no redirect hop."
 ttblogs.com,15,13%,nutropic.com,,ROUTED_OTHER,0%,200:15,9,here,0%,Links route through nutropic.com/.
 blogginaway.com,15,27%,nutropic.com,,ROUTED_OTHER,0%,200:15,10,check here,0%,Links route through nutropic.com/.
+iyublog.com,15,7%,nutropic.com,,ROUTED_OTHER,0%,200:15,6,website,0%,Links route through nutropic.com/.
 globalecommerce.org,15,80%,nutropic.com,,ROUTED_OTHER,0%,200:15,4,nutropic.com,0%,Links route through nutropic.com/.
+goodpainrelief.com,15,0%,,,DIRECT,0%,200:15,11,https://www.performancelab.com/blogs/joint-support/can-glucosamine-cause-joint-pain,100%,"Direct link, no redirect hop."
+takeroon.com,15,0%,,,DIRECT,0%,200:15,10,Performance Lab notes,0%,"Direct link, no redirect hop."
 premierinjuries.com,14,0%,,,DIRECT,0%,200:14,11,published on the Performance Lab website,0%,"Direct link, no redirect hop."
 skinnyyoked.com,14,0%,,,DIRECT,0%,200:14,13,Performance Lab,86%,"Direct link, no redirect hop."
-adventurerz.com,14,0%,,,DIRECT,0%,200:14,7,Verdict:,100%,"Direct link, no redirect hop."
 healthtrends.com,14,0%,,,DIRECT,0%,"200:12, 0:2",3,Check the lowest price,0%,"Direct link, no redirect hop."
 cro.media,14,0%,,,DIRECT,0%,200:14,2,eu.performancelab.com,100%,"Direct link, no redirect hop."
 dailyblogzz.com,14,21%,nutropic.com,,ROUTED_OTHER,0%,200:14,12,nootropics review,0%,Links route through nutropic.com/.
 getwebsiteworth.com,14,86%,nutropic.com,,ROUTED_OTHER,0%,200:14,4,nutropic.com,0%,Links route through nutropic.com/.
 snipd.com,14,0%,,,DIRECT,0%,200:14,3,https://www.performancelab.com/breedlove,0%,"Direct link, no redirect hop."
+pudhe.com,14,79%,nutropic.com,,ROUTED_OTHER,0%,200:14,4,nutropic.com,0%,Links route through nutropic.com/.
+thekatyblog.com,14,21%,nutropic.com,,ROUTED_OTHER,0%,200:14,9,get more info,0%,Links route through nutropic.com/.
+arparquets.it,14,0%,,,DIRECT,0%,200:14,1,TG @LINKS_DEALER | EFFECTIVE SEO LINKS FOR WWW.PERFORMANCELAB.COM,100%,"Direct link, no redirect hop."
+reneebovet.co,14,0%,,,DIRECT,0%,200:14,8,,0%,"Direct link, no redirect hop."
 rics-foundation.org,13,0%,,,DIRECT,38%,"200:8, 403:5",9,Zinc,0%,"Direct link, no redirect hop."
 supplementusa.com,13,0%,,,DIRECT,0%,307:13,1,,0%,"Direct link, no redirect hop."
 braintropic.com,13,0%,,,DIRECT,0%,200:13,11,PerformanceLab.com,0%,"Direct link, no redirect hop."
@@ -185,32 +214,32 @@ articlesblogger.com,13,23%,nutropic.com,,ROUTED_OTHER,0%,200:13,8,read more,0%,L
 60andover.net,13,0%,,,DIRECT,0%,200:13,9,Performance Lab Sleep Dietary Supplement product,46%,"Direct link, no redirect hop."
 wallpapers.pro,13,77%,nutropic.com,,ROUTED_OTHER,0%,200:13,4,nutropic.com,0%,Links route through nutropic.com/.
 factually.co,13,0%,,,DIRECT,0%,200:13,10,[2],0%,"Direct link, no redirect hop."
+affiliatedataset.com,13,0%,,,DIRECT,0%,200:13,13,up to 30% · Pay-per-Sale View attached source,0%,"Direct link, no redirect hop."
 mymmanews.com,12,0%,,,DIRECT,100%,403:12,8,www.performancelab.com,0%,"Direct link, no redirect hop."
 ultimateforceschallenge.com,12,0%,,,DIRECT,0%,200:12,8,BUY NOW,0%,"Direct link, no redirect hop."
 verybigbrain.com,12,0%,,,DIRECT,0%,302:12,1,,0%,"Direct link, no redirect hop."
 performancelabs.com,12,0%,,,DIRECT,0%,302:12,1,,0%,"Direct link, no redirect hop."
+scentses4d.wordpress.com,12,0%,,,DIRECT,0%,200:12,1,https://www.performancelab.com/blogs/multi/how-long-do-vitamins-stay-in-your-system,67%,"Direct link, no redirect hop."
 955x.com,12,0%,,,DIRECT,42%,"0:7, 404:5",1,performancelab.com,100%,"Direct link, no redirect hop."
 athleticinsight.com,12,0%,,,DIRECT,0%,200:12,8,===>Check Latest Performance Lab NutriGenesis Deals<===,33%,"Direct link, no redirect hop."
 worldvegan.co.uk,12,0%,,,DIRECT,0%,200:12,10,Performance Lab Omega 3,0%,"Direct link, no redirect hop."
 tunca.org,12,75%,nutropic.com,,ROUTED_OTHER,0%,200:12,4,nutropic.com,0%,Links route through nutropic.com/.
 greatestphysiques.com,12,33%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:12,12,Best Fat Burner Supplements #5. Burn Lab Pro ® Fat Burner,33%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
+ready.pro,12,83%,nutropic.com,,ROUTED_OTHER,0%,200:12,4,nutropic.com,100%,Links route through nutropic.com/.
 bellevuereporter.com,12,100%,amoresplendidlife.com,performance-lab-vision,ROUTED_OTHER,0%,200:12,3,Performance Lab Vision,67%,Links route through amoresplendidlife.com/performance-lab-vision.
-ecomscout.com,12,0%,,,DIRECT,0%,200:12,12,Calcium # 6 Calcium $148.00,0%,"Direct link, no redirect hop."
+newsblogsports.site,12,8%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:12,1,Best Pinterest Tool SiteToSocial.com to Grow Your Website Traffic Fully Automated,0%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 womenhealthhub.com,11,0%,,,DIRECT,0%,200:11,8,Affiliate Partner,0%,"Direct link, no redirect hop."
-gossiphealth.com,11,82%,chronotherapeutics.org,performancelabmind,ROUTED_OTHER,0%,200:11,4,Performance Lab Mind,100%,Links route through chronotherapeutics.org/performancelabmind.
 sproutnews.com,11,100%,pr.report,bq9tdszc,ROUTED_OTHER,0%,200:11,3,Performance Lab Sleep​,0%,Links route through pr.report/bq9tdszc.
 allgoodhealth.net,11,0%,,,DIRECT,0%,"0:7, 302:4",1,,0%,"Direct link, no redirect hop."
 entrenamientoseguro.com,11,0%,,,DIRECT,18%,"200:9, 403:2",8,,0%,"Direct link, no redirect hop."
 marylandreporter.com,11,100%,bluechewreview.org,performance-lab,ROUTED_CAMPAIGN,0%,200:11,11,(SPECIAL OFFER) Buy Performance Lab Supplements For an Unbelievable Low Price Today!,0%,"All links route through bluechewreview.org/performance-lab — a single brand-named campaign path. This is link-management or affiliate infrastructure, and the brief protects it: a redirect is not itself a toxicity signal."
 payitforwardfertility.org,11,18%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:11,9,BUY HERE,0%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 dgbloggers.com,11,27%,nutropic.com,,ROUTED_OTHER,0%,200:11,9,website,0%,Links route through nutropic.com/.
-bluxeblog.com,11,27%,nutropic.com,,ROUTED_OTHER,0%,200:11,9,daily multivitamin,0%,Links route through nutropic.com/.
-blogsvirals.com,11,27%,nutropic.com,,ROUTED_OTHER,0%,200:11,8,more info,0%,Links route through nutropic.com/.
 aihcp.net,11,0%,,,DIRECT,0%,200:11,1,benefits of taking multivitamins for men,0%,"Direct link, no redirect hop."
-educationalimpactblog.com,11,9%,nutropic.com,,ROUTED_OTHER,0%,200:11,8,check here,0%,Links route through nutropic.com/.
+ivasdesign.com,11,18%,nutropic.com,,ROUTED_OTHER,0%,200:11,8,get more info,0%,Links route through nutropic.com/.
+no1gevity.com,11,0%,,,DIRECT,0%,200:11,6,Visit brand site →,0%,"Direct link, no redirect hop."
 kellyfriesen.ca,10,0%,,,DIRECT,0%,200:10,10,SHOP ALL PRODUCTS,0%,"Direct link, no redirect hop."
 nootropicscoach.com,10,0%,,,DIRECT,0%,"301:6, 200:4",8,Performance Lab Mind Review - 4 Bottles of Performance Lab Mind,10%,"Direct link, no redirect hop."
-newdirect.net,10,0%,,,DIRECT,0%,307:10,1,,0%,"Direct link, no redirect hop."
 interestingfacts.org,10,100%,chronotherapeutics.org,performance-lab-mind-discover,ROUTED_OTHER,0%,200:10,7,Click Here To Get The Lowest Price on Performance Lab Mind,0%,Links route through chronotherapeutics.org/performance-lab-mind-discover.
 orlandomagazine.com,10,40%,meritagepress.com,performance-lab-mind,ROUTED_OTHER,0%,200:10,9,Performance Lab Mind,0%,Links route through meritagepress.com/performance-lab-mind.
 nourishfit.net,10,0%,,,DIRECT,0%,200:10,6,Check Lowest Price,0%,"Direct link, no redirect hop."
@@ -225,7 +254,6 @@ aboutyoublog.com,10,20%,nutropic.com,,ROUTED_OTHER,0%,200:10,9,read more,0%,Link
 blogdomago.com,10,30%,nutropic.com,,ROUTED_OTHER,0%,200:10,8,check here,0%,Links route through nutropic.com/.
 thezenweb.com,10,10%,nutropic.com,,ROUTED_OTHER,0%,200:10,5,more info,0%,Links route through nutropic.com/.
 websiterace.com,10,80%,nutropic.com,,ROUTED_OTHER,0%,200:10,4,nutropic.com,0%,Links route through nutropic.com/.
-read.org.in,10,70%,nutropic.com,,ROUTED_OTHER,0%,200:10,4,nutropic.com,0%,Links route through nutropic.com/.
 wonvision.com,10,80%,nutropic.com,,ROUTED_OTHER,0%,200:10,4,nutropic.com,0%,Links route through nutropic.com/.
 musweb.org,10,80%,nutropic.com,,ROUTED_OTHER,0%,200:10,4,nutropic.com,0%,Links route through nutropic.com/.
 egyptiandirectory.com,10,80%,nutropic.com,,ROUTED_OTHER,0%,200:10,4,nutropic.com,0%,Links route through nutropic.com/.
@@ -234,6 +262,7 @@ australianwebdirectory.shop,10,80%,nutropic.com,,ROUTED_OTHER,0%,200:10,4,nutrop
 bloatatt.blogspot.com,10,100%,testolabpro.com,,ROUTED_BRAND_OWNED,90%,"404:9, 200:1",1,testolabpro.com,100%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 fagfrogs1.blogspot.com,10,100%,testolabpro.com,,ROUTED_BRAND_OWNED,90%,"404:9, 200:1",1,testolabpro.com,100%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 supplementworldcanada.com,10,0%,,,DIRECT,0%,200:10,7,performancelab +2,0%,"Direct link, no redirect hop."
+altgng.com,10,0%,,,DIRECT,0%,200:10,1,https://www. performancelab.com/blogs/nutrition/inositol-f or-men,0%,"Direct link, no redirect hop."
 stamic.it,9,100%,nutropic.com,,ROUTED_OTHER,0%,200:9,9,,78%,Links route through nutropic.com/.
 wellnesswarrior.org,9,0%,,,DIRECT,0%,"302:7, 200:2",3,,22%,"Direct link, no redirect hop."
 xcfnyzte.com,9,0%,,,DIRECT,0%,200:9,8,Try Performance Lab Mind Today!,0%,"Direct link, no redirect hop."
@@ -243,7 +272,6 @@ fuelstackr.com,9,0%,,,DIRECT,0%,"0:5, 200:4",7,[Affiliate Link],0%,"Direct link,
 veganfitguide.com,9,0%,,,DIRECT,0%,200:9,7,Performance Lab,0%,"Direct link, no redirect hop."
 cctvss1004.com,9,0%,,,DIRECT,0%,"301:8, 200:1",1,class=,100%,"Direct link, no redirect hop."
 bloguerosa.com,9,22%,nutropic.com,,ROUTED_OTHER,0%,200:9,7,here,0%,Links route through nutropic.com/.
-anchor-blog.com,9,22%,nutropic.com,,ROUTED_OTHER,0%,200:9,7,read more,0%,Links route through nutropic.com/.
 muscleandbrawn.com,9,0%,,,DIRECT,22%,"200:7, 403:2",9,Buy Now,0%,"Direct link, no redirect hop."
 talkingrugbyunion.co.uk,9,0%,,,DIRECT,0%,200:9,9,multivitamins,0%,"Direct link, no redirect hop."
 takes.sbs,9,89%,dtcx.com,,ROUTED_OTHER,0%,200:9,4,dtcx.com,100%,Links route through dtcx.com/.
@@ -252,9 +280,10 @@ blog2news.com,9,11%,nutropic.com,,ROUTED_OTHER,0%,200:9,8,get more info,0%,Links
 vitafithub.com,9,0%,,,DIRECT,0%,200:9,9,Get NOW!,0%,"Direct link, no redirect hop."
 thirty.co.in,9,89%,dtcx.com,,ROUTED_MIXED,0%,200:9,5,dtcx.com,0%,Links route through 4 different redirect hosts — inconsistent with a single managed campaign.
 medicastore.com,9,0%,,,DIRECT,0%,200:9,3,,0%,"Direct link, no redirect hop."
+ectobulk.com,9,0%,,,DIRECT,0%,200:9,9,https://www.performancelab.com/blogs/fitness/best-bcaa-for-fasted-cardio,100%,"Direct link, no redirect hop."
+shopiscout.com,9,0%,,,DIRECT,0%,200:9,9,Magnesium Magnesium Performance Lab®,0%,"Direct link, no redirect hop."
 aferg.co,8,0%,,,DIRECT,0%,301:8,1,,0%,"Direct link, no redirect hop."
 bestnootropicsnow.com,8,0%,,,DIRECT,0%,0:8,6,here,88%,"Direct link, no redirect hop."
-eastphoenixau.com,8,0%,,,DIRECT,0%,200:8,5,Coffee vs Caffeine Pills - Performance Lab®,100%,"Direct link, no redirect hop."
 intouchrugby.com,8,0%,,,DIRECT,12%,"200:7, 403:1",8,pre-workout amino acid blend,0%,"Direct link, no redirect hop."
 fitbay.net,8,0%,,,DIRECT,75%,"404:6, 200:2",4,Performance Lab SPORT T-Booster,0%,"Direct link, no redirect hop."
 torokhtiy.com,8,0%,,,DIRECT,0%,200:8,8,allergic reactions,0%,"Direct link, no redirect hop."
@@ -269,14 +298,15 @@ simplygaurav.com,8,0%,,,DIRECT,0%,200:8,2,TG @LINKS_DEALER | EFFECTIVE SEO LINKS
 theideasblog.com,8,12%,nutropic.com,,ROUTED_OTHER,0%,200:8,5,read more,0%,Links route through nutropic.com/.
 ycm.info,8,88%,nutropic.com,,ROUTED_OTHER,0%,200:8,4,nutropic.com,0%,Links route through nutropic.com/.
 linksnatcher.com,8,75%,nutropic.com,,ROUTED_OTHER,0%,200:8,4,nutropic.com,0%,Links route through nutropic.com/.
-way2check.cv,8,75%,nutropic.com,,ROUTED_OTHER,0%,200:8,4,nutropic.com,0%,Links route through nutropic.com/.
 morerss.com,8,0%,,,DIRECT,0%,200:8,2,Performance Lab,0%,"Direct link, no redirect hop."
 way2check.art,8,88%,nutropic.com,,ROUTED_MIXED,0%,200:8,5,nutropic.com,0%,Links route through 4 different redirect hosts — inconsistent with a single managed campaign.
 karlsformula.com,8,0%,,,DIRECT,0%,200:8,5,Performance Lab: How Long Does Vitamin K2 Stay In The Body?,38%,"Direct link, no redirect hop."
 charteredstudies.in,8,0%,,,DIRECT,0%,200:8,1,🍪 TELEGRAM @SALESOVEN | ACCESS TO HACKED SITES FOR SEO | HTTPS://T.ME/SALESOVEN 🔥,100%,"Direct link, no redirect hop."
 septicsol.net,8,0%,,,DIRECT,0%,200:8,1,🍪 TELEGRAM @SALESOVEN | ACCESS TO HACKED SITES FOR SEO | HTTPS://T.ME/SALESOVEN 🔥,100%,"Direct link, no redirect hop."
 mainpg88.com,8,0%,,,DIRECT,0%,200:8,1,🍪 TELEGRAM @SALESOVEN | ACCESS TO HACKED SITES FOR SEO | HTTPS://T.ME/SALESOVEN 🔥,100%,"Direct link, no redirect hop."
-bluecantera.com,8,50%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:8,1,JOIN OUR TELEGRAM https://t.me/s/darksidelinks,100%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
+radianthealthbliss.com,8,0%,,,DIRECT,0%,200:8,7,Magnesium,0%,"Direct link, no redirect hop."
+metabengsci.com,8,0%,,,DIRECT,0%,200:8,2,[74],0%,"Direct link, no redirect hop."
+btcpods.xyz,8,0%,,,DIRECT,0%,200:8,1,mindlabpro.com/breedlove,0%,"Direct link, no redirect hop."
 magnesiumsleep.uk,7,14%,prelabpro.com,blogs/nutrition/vitamin-d-and-potassium,ROUTED_BRAND_OWNED,0%,200:7,7,https://www.performancelab.com/blogs/multi/can-you-take-iron-and-magnesium-together,86%,"Links route through prelabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 farrinstitute.org,7,57%,fitliving.org,go/nootropics-perfomancelabmind-productpage-general-all,ROUTED_OTHER,0%,"200:4, 302:2, 301:1",4,,57%,Links route through fitliving.org/go/nootropics-perfomancelabmind-productpage-general-all.
 evolutionofbodybuilding.net,7,0%,,,DIRECT,0%,"200:6, 0:1",7,T+ T+,14%,"Direct link, no redirect hop."
@@ -296,7 +326,6 @@ blogzet.com,7,14%,nutropic.com,,ROUTED_OTHER,0%,200:7,5,here,0%,Links route thro
 suppleroo.com,7,0%,,,DIRECT,57%,"404:4, 0:3",1,www.performancelab.com,100%,"Direct link, no redirect hop."
 isblog.net,7,14%,nutropic.com,,ROUTED_OTHER,0%,200:7,5,get more info,0%,Links route through nutropic.com/.
 suomiblog.com,7,14%,nutropic.com,,ROUTED_OTHER,0%,200:7,6,immune support supplements,0%,Links route through nutropic.com/.
-booksreadr.org,7,71%,nutropic.com,,ROUTED_OTHER,0%,200:7,4,nutropic.com,0%,Links route through nutropic.com/.
 optimisedwebsites.com,7,86%,nutropic.com,,ROUTED_OTHER,0%,200:7,4,nutropic.com,0%,Links route through nutropic.com/.
 runningwebsites.net,7,57%,dtcx.com,,ROUTED_OTHER,0%,200:7,4,performancelab.com,0%,Links route through dtcx.com/.
 alljobs.info,7,86%,nutropic.com,,ROUTED_OTHER,0%,200:7,4,nutropic.com,0%,Links route through nutropic.com/.
@@ -316,12 +345,14 @@ cytopore.blogspot.com,7,100%,testolabpro.com,,ROUTED_BRAND_OWNED,71%,"404:5, 200
 emegabiza.blogspot.com,7,100%,testolabpro.com,,ROUTED_BRAND_OWNED,86%,"404:6, 200:1",1,testolabpro.com,100%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 idealnet.com.hk,7,0%,,,DIRECT,0%,200:7,1,🍪 TELEGRAM @SALESOVEN | ACCESS TO HACKED SITES FOR SEO | HTTPS://T.ME/SALESOVEN 🔥,100%,"Direct link, no redirect hop."
 ggpartnersconsortium.com,7,0%,,,DIRECT,0%,200:7,1,🍪 TELEGRAM @SALESOVEN | ACCESS TO HACKED SITES FOR SEO | HTTPS://T.ME/SALESOVEN 🔥,100%,"Direct link, no redirect hop."
+byteshort.xyz,7,71%,dtcx.com,,ROUTED_OTHER,0%,200:7,4,dtcx.com,100%,Links route through dtcx.com/.
+datadrivenpick.com,7,0%,,,DIRECT,0%,200:7,7,The Ultimate Guide to the Best Tart Cherry Supplement: Benefits and Uses | Performance Lab®,0%,"Direct link, no redirect hop."
+hypecheck.io,7,0%,,,DIRECT,0%,200:7,7,https://performancelab.com/products/b-complex,100%,"Direct link, no redirect hop."
 performixhouse.com,6,67%,wlghconferences.org,performancelab-maintain,ROUTED_OTHER,0%,200:6,4,Performance Lab SPORT Maintain,100%,Links route through wlghconferences.org/performancelab-maintain.
 ndtv.com,6,100%,top7sites.org,meh7,ROUTED_OTHER,0%,200:6,6,Click Here To Buy From Official Website,100%,Links route through top7sites.org/meh7.
 abc-directory.com,6,100%,performancelabs.com,,ROUTED_OTHER,0%,200:6,1,http://www.performancelabs.com/,100%,Links route through performancelabs.com/.
 fitnessdonkey.com,6,50%,supplementsjar.com,performancelabmind,ROUTED_OTHER,0%,"307:3, 200:3",3,,0%,Links route through supplementsjar.com/performancelabmind.
 healthtips.blog,6,0%,,,DIRECT,0%,200:6,5,Order Now for – $50.00,67%,"Direct link, no redirect hop."
-top10supps.com,6,33%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:6,2,Shop Performancelab.com,100%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 salaosot.com,6,0%,,,DIRECT,0%,200:6,1,https://www.performancelab.com/blogs/vision/bilberry-extract-benefits-for-eyes-health-and-optimal-dosage,0%,"Direct link, no redirect hop."
 qolhealthperformance.com,6,0%,,,DIRECT,0%,200:6,1,Training for Aesthetics v Training for Athletics | Performance Lab®,0%,"Direct link, no redirect hop."
 planyourvitamins.com,6,0%,,,DIRECT,0%,200:6,4,https://www.performancelab.com/blogs/immune/glutathione-and-vitamin-c,100%,"Direct link, no redirect hop."
@@ -454,6 +485,10 @@ cidadetoda.com.br,6,0%,,,DIRECT,0%,200:6,1,🍪 TELEGRAM @SALESOVEN | ACCESS TO 
 filmhouse.co.il,6,0%,,,DIRECT,0%,200:6,1,🍪 TELEGRAM @SALESOVEN | ACCESS TO HACKED SITES FOR SEO | HTTPS://T.ME/SALESOVEN 🔥,100%,"Direct link, no redirect hop."
 digitalthriveai.com,6,0%,,,DIRECT,0%,200:6,1,Performance Lab - JavaScript Date Library Benchmarks 2025,0%,"Direct link, no redirect hop."
 tonyhuge.is,6,0%,,,DIRECT,83%,"403:5, 200:1",1,BUY NOW,0%,"Direct link, no redirect hop."
+premworld.online,6,0%,,,DIRECT,0%,200:6,3,"UK Approved(Esquire,Red,HB,GH,Country Living,Prima) Nutrigenesis Multi for Women (4 month supply)",100%,"Direct link, no redirect hop."
+cogniscore.co.uk,6,0%,,,DIRECT,0%,200:6,1,See current price,0%,"Direct link, no redirect hop."
+onlyboosts.social,6,0%,,,DIRECT,0%,200:6,5,https://www.performancelab.com/breedlove,0%,"Direct link, no redirect hop."
+thetarotalk.com,6,33%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:6,1,JOIN OUR TELEGRAM https://t.me/s/darksidelinks,100%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 drugsbanks.com,5,0%,,,DIRECT,0%,0:5,3,Performance Lab Flex,40%,"Direct link, no redirect hop."
 slimmingandyou.com,5,0%,,,DIRECT,0%,301:5,1,,0%,"Direct link, no redirect hop."
 bacchusgamma.org,5,0%,,,DIRECT,0%,200:5,2,https://www.performancelab.com/blogs/nutrition/does-magnesium-glycinate-make-you-poop,0%,"Direct link, no redirect hop."
@@ -498,11 +533,9 @@ alltdesign.com,5,20%,nutropic.com,,ROUTED_OTHER,0%,200:5,5,website,0%,Links rout
 farmaciacanfora.com,5,0%,,,DIRECT,0%,200:5,2,Performance Lab,100%,"Direct link, no redirect hop."
 ng.se,5,60%,fitliving.org,go/supplements-performancelab-prelabpro-gen-all,ROUTED_OTHER,0%,200:5,5,>>Check the best prices for Performance Lab Pre Lab Pro,0%,Links route through fitliving.org/go/supplements-performancelab-prelabpro-gen-all.
 canariblogs.com,5,20%,nutropic.com,,ROUTED_OTHER,0%,200:5,3,here,0%,Links route through nutropic.com/.
-iyublog.com,5,0%,,,DIRECT,0%,200:5,5,click here,0%,"Direct link, no redirect hop."
 shotblogs.com,5,0%,,,DIRECT,0%,200:5,5,here,0%,"Direct link, no redirect hop."
 tribunablog.com,5,20%,nutropic.com,,ROUTED_OTHER,0%,200:5,5,Nutropic vs Alpha Brain,0%,Links route through nutropic.com/.
 blogminds.com,5,20%,nutropic.com,,ROUTED_OTHER,0%,200:5,5,daily multivitamin,0%,Links route through nutropic.com/.
-wants.cfd,5,80%,dtcx.com,,ROUTED_OTHER,0%,200:5,4,dtcx.com,100%,Links route through dtcx.com/.
 knows.sbs,5,80%,dtcx.com,,ROUTED_OTHER,0%,200:5,3,dtcx.com,100%,Links route through dtcx.com/.
 5913231.cc,5,80%,nutropic.com,,ROUTED_OTHER,0%,200:5,4,nutropic.com,0%,Links route through nutropic.com/.
 simplewebdirectory.com,5,80%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:5,4,testolabpro.com,0%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
@@ -524,6 +557,10 @@ dgsac.com.pe,5,0%,,,DIRECT,0%,200:5,1,🍪 TELEGRAM @SALESOVEN | ACCESS TO HACKE
 domain.com.lc,5,100%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:5,3,testolabpro.com,0%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 daadvn.blogspot.com,5,100%,testolabpro.com,,ROUTED_BRAND_OWNED,80%,"404:4, 200:1",1,testolabpro.com,100%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 ecommercebenchmarking.com,5,80%,nutropic.com,,ROUTED_OTHER,0%,200:5,4,nutropic.com,0%,Links route through nutropic.com/.
+decoupage-paper.com,5,0%,,,DIRECT,0%,200:5,1,Source,100%,"Direct link, no redirect hop."
+grindhousemhttn.com,5,0%,,,DIRECT,0%,200:5,1,improving your mood,100%,"Direct link, no redirect hop."
+pennywisestudent.com,5,0%,,,DIRECT,0%,"200:3, 0:2",3,comprehensive prebiotic supplement,0%,"Direct link, no redirect hop."
+skipthefish.com,5,0%,,,DIRECT,0%,"302:2, 301:2, 200:1",2,,0%,"Direct link, no redirect hop."
 dhrupurohit.com,4,0%,,,DIRECT,0%,200:4,2,Performance Lab Omega-3,0%,"Direct link, no redirect hop."
 usanutritionist.com,4,0%,,,DIRECT,0%,307:4,1,,0%,"Direct link, no redirect hop."
 homebusinesswiz.com,4,0%,,,DIRECT,0%,0:4,1,prebiotics can help restore balance,0%,"Direct link, no redirect hop."
@@ -599,7 +636,6 @@ stablegeeksstaffing.com,4,0%,,,DIRECT,0%,200:4,2,TG @LINKS_DEALER | EFFECTIVE SE
 uba.ar,4,0%,,,DIRECT,0%,200:4,2,TG @LINKS_DEALER | EFFECTIVE SEO LINKS FOR WWW.PERFORMANCELAB.COM,100%,"Direct link, no redirect hop."
 websitesea.com,4,75%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:4,4,testolabpro.com,0%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 seodomains.website,4,100%,nutropic.com,,ROUTED_OTHER,0%,200:4,3,nutropic.com,100%,Links route through nutropic.com/.
-pudhe.com,4,75%,nutropic.com,,ROUTED_OTHER,0%,200:4,3,nutropic.com,0%,Links route through nutropic.com/.
 allwebsitesdirectory.com,4,75%,nutropic.com,,ROUTED_OTHER,0%,200:4,4,performancelab.com,0%,Links route through nutropic.com/.
 disturbmenot.co,4,0%,,,DIRECT,0%,200:4,2,Get Deal,100%,"Direct link, no redirect hop."
 samikshaharmony.com,4,0%,,,DIRECT,0%,200:4,2,TG @LINKS_DEALER | EFFECTIVE SEO LINKS FOR WWW.PERFORMANCELAB.COM,100%,"Direct link, no redirect hop."
@@ -628,6 +664,15 @@ blogadvize.com,4,25%,nutropic.com,,ROUTED_OTHER,0%,200:4,4,Nutropic vs Alpha Bra
 joyrney.com,4,0%,,,DIRECT,0%,200:4,1,🍪 TELEGRAM @SALESOVEN | ACCESS TO HACKED SITES FOR SEO | HTTPS://T.ME/SALESOVEN 🔥,100%,"Direct link, no redirect hop."
 dsspkjk.blogspot.com,4,0%,,,DIRECT,75%,"404:3, 200:1",1,performancelab.com,100%,"Direct link, no redirect hop."
 mindfulnessdojo.com,4,0%,,,DIRECT,0%,200:4,4,www.performancelab.com,25%,"Direct link, no redirect hop."
+pattern-aegis.live,4,0%,,,DIRECT,0%,200:4,2,Performance Lab (£19),0%,"Direct link, no redirect hop."
+anchorurl.cloud,4,75%,dtcx.com,,ROUTED_OTHER,0%,200:4,3,dtcx.com,100%,Links route through dtcx.com/.
+dapago.net,4,0%,,,DIRECT,0%,200:4,1,Source,100%,"Direct link, no redirect hop."
+eu.com,4,75%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:4,4,testolabpro.com,0%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
+gb.net,4,75%,nutropic.com,,ROUTED_OTHER,0%,200:4,4,performancelab.com,0%,Links route through nutropic.com/.
+it.com,4,75%,nutropic.com,,ROUTED_OTHER,0%,200:4,4,performancelab.com,0%,Links route through nutropic.com/.
+screenshots.wiki,4,50%,nutropic.com,,ROUTED_OTHER,0%,200:4,2,nutropic.com,100%,Links route through nutropic.com/.
+supermushrooms.co.uk,4,0%,,,DIRECT,0%,200:4,4,Buy Women's Formula,0%,"Direct link, no redirect hop."
+tetrapod.beauty,4,0%,,,DIRECT,0%,200:4,2,https://www.performancelab.com/blogs/multi/vitamin-k2-for-skin,0%,"Direct link, no redirect hop."
 academicsongs.com,3,33%,testolabpro.com,,ROUTED_BRAND_OWNED,33%,"0:2, 410:1",2,Buy performance lab From Official Website,0%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 grapheffect.com,3,67%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,"200:2, 0:1",3,Save 10% OFF,67%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
 top-dealshub.com,3,100%,breakingmuscle.com,go/performance-lab-sleep,ROUTED_CAMPAIGN,0%,200:3,3,Check Price,100%,"All links route through breakingmuscle.com/go/performance-lab-sleep — a single brand-named campaign path. This is link-management or affiliate infrastructure, and the brief protects it: a redirect is not itself a toxicity signal."
@@ -734,6 +779,30 @@ pureminerals.uk,3,0%,,,DIRECT,0%,200:3,3,MSM provides proactive support,0%,"Dire
 targetblogs.com,3,33%,nutropic.com,,ROUTED_OTHER,0%,200:3,2,check here,0%,Links route through nutropic.com/.
 olimposs.com,3,0%,,,DIRECT,0%,200:3,1,🍪 TELEGRAM @SALESOVEN | ACCESS TO HACKED SITES FOR SEO | HTTPS://T.ME/SALESOVEN 🔥,100%,"Direct link, no redirect hop."
 lunoo.com,3,0%,,,DIRECT,100%,404:3,1,Visit,0%,"Direct link, no redirect hop."
+hlhw.fun,3,100%,l.securelinksdirectory.com,intermediary/5/nutropic-black-friday,ROUTED_OTHER,0%,200:3,1,Click here...,0%,Links route through l.securelinksdirectory.com/intermediary/5/nutropic-black-friday.
+a1housingservicesltd.co.uk,3,0%,,,DIRECT,0%,200:3,1,TG @LINKS_DEALER | EFFECTIVE SEO LINKS FOR WWW.PERFORMANCELAB.COM,100%,"Direct link, no redirect hop."
+aevascience.pics,3,33%,nutropic.com,products/taster-pack,ROUTED_OTHER,100%,404:3,3,Taster box – 4 bars (£8.99),0%,Links route through nutropic.com/products/taster-pack.
+axisholistic.rest,3,33%,nutropic.com,products/taster-pack,ROUTED_OTHER,0%,200:3,3,Taster box – 4 bars (£8.99),0%,Links route through nutropic.com/products/taster-pack.
+bodybalancequest.com,3,0%,,,DIRECT,0%,"0:2, 200:1",1,Performance Lab,0%,"Direct link, no redirect hop."
+dailyrestora.study,3,33%,nutropic.com,products/taster-pack,ROUTED_OTHER,0%,200:3,3,Taster box – 4 bars (£8.99),0%,Links route through nutropic.com/products/taster-pack.
+elegantfreelancers.com,3,33%,nutropic.com,products/taster-pack,ROUTED_OTHER,0%,200:3,3,Taster box – 4 bars (£8.99),0%,Links route through nutropic.com/products/taster-pack.
+elevationtrekker.com,3,0%,,,DIRECT,100%,404:3,1,www.PerformanceLab.com,0%,"Direct link, no redirect hop."
+fatburnerranked.com,3,0%,,,DIRECT,0%,200:3,3,See Pricing →,100%,"Direct link, no redirect hop."
+kurahorizon.sbs,3,33%,nutropic.com,products/taster-pack,ROUTED_OTHER,100%,404:3,3,Taster box – 4 bars (£8.99),0%,Links route through nutropic.com/products/taster-pack.
+kurapulse.space,3,33%,nutropic.com,products/taster-pack,ROUTED_OTHER,0%,200:3,3,Taster box – 4 bars (£8.99),0%,Links route through nutropic.com/products/taster-pack.
+lenz.io,3,0%,,,DIRECT,0%,200:3,1,Performance Lab,100%,"Direct link, no redirect hop."
+moduspax.website,3,33%,nutropic.com,products/taster-pack,ROUTED_OTHER,0%,200:3,3,Taster box – 4 bars (£8.99),0%,Links route through nutropic.com/products/taster-pack.
+prismcrafts.xyz,3,33%,nutropic.com,products/taster-pack,ROUTED_OTHER,0%,200:3,3,Taster box – 4 bars (£8.99),0%,Links route through nutropic.com/products/taster-pack.
+shortenurls.eu,3,67%,nutropic.com,,ROUTED_OTHER,0%,200:3,3,nutropic.com,100%,Links route through nutropic.com/.
+steadythroughchange.com,3,0%,,,DIRECT,0%,302:3,1,,0%,"Direct link, no redirect hop."
+summercenter.store,3,0%,,,DIRECT,0%,200:3,3,£44 at performancelab.com,100%,"Direct link, no redirect hop."
+summersworl.online,3,0%,,,DIRECT,0%,200:3,3,"UK Approved(Esquire,Red,HB,GH,Country Living,Prima) Nutrigenesis Multi for Women (4 month supply)",100%,"Direct link, no redirect hop."
+vedaflow.online,3,33%,nutropic.com,products/taster-pack,ROUTED_OTHER,0%,200:3,3,Taster box – 4 bars (£8.99),0%,Links route through nutropic.com/products/taster-pack.
+vividlypulse.lifestyle,3,33%,nutropic.com,products/taster-pack,ROUTED_OTHER,0%,200:3,3,Taster box – 4 bars (£8.99),0%,Links route through nutropic.com/products/taster-pack.
+vividlypulse.living,3,33%,nutropic.com,products/taster-pack,ROUTED_OTHER,0%,200:3,3,Taster box – 4 bars (£8.99),0%,Links route through nutropic.com/products/taster-pack.
+vividlypulse.xyz,3,33%,nutropic.com,products/taster-pack,ROUTED_OTHER,0%,200:3,3,Taster box – 4 bars (£8.99),0%,Links route through nutropic.com/products/taster-pack.
+yellos.online,3,0%,,,DIRECT,0%,200:3,3,£132 at performancelab.com,100%,"Direct link, no redirect hop."
+zenoppa.site,3,33%,nutropic.com,products/taster-pack,ROUTED_OTHER,0%,200:3,3,Taster box – 4 bars (£8.99),0%,Links route through nutropic.com/products/taster-pack.
 trendy-daddy.fr,2,0%,,,DIRECT,100%,403:2,2,Performance Lab Oméga,0%,"Direct link, no redirect hop."
 evidencebasedpractices.org,2,0%,,,DIRECT,0%,307:2,1,,0%,"Direct link, no redirect hop."
 updatedkart.com,2,0%,,,DIRECT,0%,301:2,1,,0%,"Direct link, no redirect hop."
@@ -829,7 +898,6 @@ meh.com,2,0%,,,DIRECT,0%,200:2,1,performancelab.com,0%,"Direct link, no redirect
 phinin.com,2,0%,,,DIRECT,0%,200:2,1,performancelab.com,100%,"Direct link, no redirect hop."
 postgradoune.edu.pe,2,0%,,,DIRECT,0%,302:2,2,10 Effective Tips to Prevent Tossing and Turning at Night Performance,0%,"Direct link, no redirect hop."
 credihealth.com,2,0%,,,DIRECT,0%,200:2,2,Performance Lab® Omega-3,0%,"Direct link, no redirect hop."
-scentses4d.wordpress.com,2,0%,,,DIRECT,0%,200:2,1,https://www.performancelab.com/blogs/multi/how-long-do-vitamins-stay-in-your-system,100%,"Direct link, no redirect hop."
 supplementmag.com,2,0%,,,DIRECT,0%,200:2,2,4,0%,"Direct link, no redirect hop."
 lc-plasma.com,2,0%,,,DIRECT,0%,200:2,2,PerformanceLab.com,0%,"Direct link, no redirect hop."
 yourhealthandmine.net,2,0%,,,DIRECT,0%,307:2,1,,0%,"Direct link, no redirect hop."
@@ -1037,7 +1105,6 @@ herbsmedicine.net,2,0%,,,DIRECT,0%,200:2,1,https://www.performancelab.com/produc
 articlement.com,2,0%,,,DIRECT,0%,200:2,1,performancelab,0%,"Direct link, no redirect hop."
 lamze.co,2,0%,,,DIRECT,0%,200:2,2,oefoy,0%,"Direct link, no redirect hop."
 richlandswcd.net,2,0%,,,DIRECT,0%,200:2,2,8nb7hv,0%,"Direct link, no redirect hop."
-ready.pro,2,100%,dtcx.com,,ROUTED_OTHER,0%,200:2,2,dtcx.com,100%,Links route through dtcx.com/.
 tomorrow.services,2,0%,,,DIRECT,0%,200:2,2,oxqk6,0%,"Direct link, no redirect hop."
 userp.io,2,0%,,,DIRECT,0%,200:2,2,Source,0%,"Direct link, no redirect hop."
 muzcle.com,2,0%,,,DIRECT,0%,200:2,2,3,100%,"Direct link, no redirect hop."
@@ -1222,6 +1289,16 @@ fruitandgarden.com,2,0%,,,DIRECT,0%,200:2,2,[3],100%,"Direct link, no redirect h
 solega.co,2,0%,,,DIRECT,0%,0:2,2,Performance Lab,0%,"Direct link, no redirect hop."
 nebula-directory.com,2,0%,,,DIRECT,0%,200:2,1,https://www.performancelab.com/?a_aid=68990cbe508aa&a_bid=a2ad38c1,0%,"Direct link, no redirect hop."
 directoryindexer.com,2,0%,,,DIRECT,0%,200:2,1,https://www.performancelab.com/?a_aid=68990cbe508aa&a_bid=a2ad38c1,0%,"Direct link, no redirect hop."
+southfwb.com,2,100%,dtcx.com,,ROUTED_OTHER,0%,200:2,1,High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service dtcx.com Rank First Page Google Fast SEO Link Building Buy Backlinks Online Cheap,0%,Links route through dtcx.com/.
+chordmp3.net,2,100%,dtcx.com,,ROUTED_OTHER,0%,200:2,1,High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service dtcx.com Rank First Page Google Fast SEO Link Building Buy Backlinks Online Cheap,0%,Links route through dtcx.com/.
+agelessstride.com,2,0%,,,DIRECT,0%,302:2,1,,0%,"Direct link, no redirect hop."
+fletcherrld.com,2,100%,dtcx.com,,ROUTED_OTHER,0%,200:2,1,High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service dtcx.com Rank First Page Google Fast SEO Link Building Buy Backlinks Online Cheap,0%,Links route through dtcx.com/.
+hwnerds.com,2,50%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:2,1,JOIN OUR TELEGRAM https://t.me/s/darksidelinks,100%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
+seomuda.id,2,50%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:2,1,OUR TELEGRAM CHANEL https://t.me/s/quarterlinks25,100%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
+namepromo.online,2,0%,,,DIRECT,100%,522:2,2,"UK Approved(Esquire,Red,HB,GH,Country Living,Prima) Nutrigenesis Multi for Women (4 month supply)",100%,"Direct link, no redirect hop."
+worldboxe.online,2,0%,,,DIRECT,0%,200:2,2,"UK Approved(Esquire,Red,HB,GH,Country Living,Prima) Nutrigenesis Multi for Women (4 month supply)",100%,"Direct link, no redirect hop."
+yourboxe.online,2,0%,,,DIRECT,0%,200:2,2,"UK Approved(Esquire,Red,HB,GH,Country Living,Prima) Nutrigenesis Multi for Women (4 month supply)",100%,"Direct link, no redirect hop."
+yourcenter.online,2,0%,,,DIRECT,100%,522:2,2,"UK Approved(Esquire,Red,HB,GH,Country Living,Prima) Nutrigenesis Multi for Women (4 month supply)",100%,"Direct link, no redirect hop."
 eluxemagazine.com,1,0%,,,DIRECT,0%,200:1,1,Montmorency Tart cherry,0%,"Direct link, no redirect hop."
 kidneyurology.org,1,0%,,,DIRECT,100%,404:1,1,,0%,"Direct link, no redirect hop."
 xcode.life,1,0%,,,DIRECT,0%,200:1,1,water retention,0%,"Direct link, no redirect hop."
@@ -2161,3 +2238,17 @@ futurefood.website,1,0%,,,DIRECT,0%,200:1,1,What Is Inulin-FOS? - 4 Surprising B
 boostpatches.com,1,0%,,,DIRECT,0%,200:1,1,scientific studies,0%,"Direct link, no redirect hop."
 mycvcreator.com,1,0%,,,DIRECT,0%,200:1,1,pre-workout guide for women,0%,"Direct link, no redirect hop."
 thursd.com,1,0%,,,DIRECT,0%,200:1,1,performancelab,0%,"Direct link, no redirect hop."
+hau.xyz,1,0%,,,DIRECT,0%,200:1,1,Visit Program,0%,"Direct link, no redirect hop."
+alphapowershop.online,1,0%,,,DIRECT,0%,200:1,1,[17],0%,"Direct link, no redirect hop."
+berlin-immobilien-verkaufen.de,1,100%,testolabpro.com,,ROUTED_BRAND_OWNED,0%,200:1,1,JOIN OUR TELEGRAM https://t.me/s/darksidelinks,100%,"Links route through testolabpro.com, which is in the client's own brand estate (BRAND_OWNED). This is first-party link management, not a third-party redirect layer."
+blkgrn.mom,1,0%,,,DIRECT,0%,200:1,1,how to recover wgen you're tired after working out,0%,"Direct link, no redirect hop."
+buzzshrink.website,1,0%,,,DIRECT,0%,200:1,1,performancelab.com,100%,"Direct link, no redirect hop."
+dlar.online,1,0%,,,DIRECT,0%,200:1,1,View the product,100%,"Direct link, no redirect hop."
+zephrcf.com,1,0%,,,DIRECT,0%,200:1,1,Pre Lab Pro Pre-Workout,100%,"Direct link, no redirect hop."
+kitchprep.com,1,0%,,,DIRECT,0%,200:1,1,"“Salt in Pre-Workout: Benefits, Risks & Dosage.”",0%,"Direct link, no redirect hop."
+promptmetrics.xyz,1,0%,,,DIRECT,0%,200:1,1,performancelab.com,100%,"Direct link, no redirect hop."
+urls-shortener.eu,1,0%,,,DIRECT,0%,200:1,1,performancelab.com,100%,"Direct link, no redirect hop."
+3alamalafkar.online,1,0%,,,DIRECT,0%,200:1,1,Performance Lab®,0%,"Direct link, no redirect hop."
+9363.in,1,0%,,,DIRECT,0%,200:1,1,performancelab.com,100%,"Direct link, no redirect hop."
+fuelcell101.com,1,0%,,,DIRECT,0%,200:1,1,Vitamin C and Omega-3 Together: Benefits & Is It Safe ... - Performance ...,0%,"Direct link, no redirect hop."
+unlimited.pw,1,0%,,,DIRECT,0%,200:1,1,performancelab.com,100%,"Direct link, no redirect hop."
