@@ -167,6 +167,11 @@ def _i(v, d=0):
 # Domain-level classifier (used where no link-level sample exists)
 # --------------------------------------------------------------------------
 
+# Domains first seen on or after this date are "new" for velocity purposes.
+# Set from the export's own latest-seen date (2026-08-24) minus ~3 months.
+NEW_DOMAIN_CUTOFF = "2026-06-01"
+
+
 def classify_domain(r, ctx):
     """Verdict from referring-domain metrics alone.
 
@@ -311,6 +316,20 @@ def classify_domain(r, ctx):
         return (REVIEW, "Hosting Cluster - Verify Ownership", "Medium",
                 f"{cl['n']} referring domains share {cb}.0/24 (median AS "
                 f"{cl['median_as']:g}). Could be one owner or a niche host.")
+
+    # Link velocity, which the brief asked for and nothing implemented until
+    # now. A domain first seen weeks ago at near-zero authority did not earn
+    # a hundred links editorially. This only downgrades to review: velocity
+    # is a reason to look, not a signature, and a genuinely new publisher
+    # exists. It deliberately outranks the name-based relevance KEEP below,
+    # which was retaining brand-new zero-authority domains purely because
+    # their names contained niche words.
+    if (r["First seen"] >= NEW_DOMAIN_CUTOFF and asc <= 3 and bl >= 20):
+        return (REVIEW, "Newly-Seen Domain, Aggressive Link Velocity", "Medium",
+                f"First seen {r['First seen']} at authority {asc}, already "
+                f"carrying {bl} backlinks. Acquiring that volume that fast is "
+                "not editorial; needs a look before it is retained on a "
+                "niche-sounding name.")
 
     if tld in SPAM_TLDS and asc <= 5:
         return (REVIEW, "Spam-Associated TLD, Near-Zero Authority", "Medium",

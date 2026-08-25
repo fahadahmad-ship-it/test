@@ -488,6 +488,10 @@ class DomainProfile:
 
 DISAVOW, KEEP, REVIEW = "DISAVOW", "KEEP_AFFILIATE_RETAIN", "REVIEW_MANUALLY"
 
+# Domains first seen on or after this date count as new for velocity
+# purposes: the export's latest-seen date is 2026-08-24, so this is ~3 months.
+NEW_DOMAIN_CUTOFF = "2026-06-01"
+
 # Domains held back from the disavow file for an explicit client decision,
 # with the evidence that makes the call a judgement rather than a rule.
 # Client decisions that override the audit's verdict. These are commercial
@@ -519,6 +523,14 @@ CLIENT_OVERRIDES = {
         "placement is one article at /best-nootropics/. Five links carry the "
         "programme's a_aid/a_bid parameters, so it is at least partly an "
         "affiliate placement rather than organic editorial. Authority 44.",
+    ),
+    "illuminatelabv.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - New Domain, Aggressive Velocity",
+        "Client instruction, 2026-08-25. No link-level sample exists (116 "
+        "backlinks, none in the 50k export). Authority 0, first seen "
+        "2026-08-09 -- roughly two weeks before this audit, so 116 links were "
+        "acquired almost immediately.",
     ),
     "cloudaicrypto.com": (
         DISAVOW,
@@ -790,6 +802,18 @@ def classify(p: DomainProfile):
                 "affiliate. Commercial anchors are expected of an affiliate "
                 "and the brief protects the placement; no structural spam "
                 "signature fired.")
+
+    # Velocity only matters where equity moves. A new zero-authority domain
+    # acquiring links fast is a flag, but if every one is nofollow it passes
+    # nothing and there is nothing to act on -- hsupplements.com and
+    # 10bestsupplements.com are both 100% nofollow comparison sites.
+    if (p.first_seen >= NEW_DOMAIN_CUTOFF and p.median_ascore <= 3
+            and p.n_links >= 20 and p.n_follow > 0):
+        return (REVIEW, "Newly-Seen Domain, Aggressive Link Velocity", "Medium",
+                f"First seen {p.first_seen} at authority "
+                f"{p.median_ascore:g}, already carrying {p.n_links} links of "
+                f"which {p.n_follow} are follow. That volume is not editorial "
+                "at this age.")
 
     if p.exact_share >= 0.30 and p.n_links >= 3 and not branded_safe:
         return (REVIEW, "Elevated Exact-Match Anchor Ratio", "Medium",

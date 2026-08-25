@@ -1,7 +1,7 @@
 # Performance Lab (performancelab.com) - disavow file (FULL profile)
 # Referring domains evaluated: 2,928
 # Total backlinks represented: 1,362,105
-# Domains disavowed: 840 (11,547 backlinks)
+# Domains disavowed: 841 (11,663 backlinks)
 # Search/AI surfaces and affiliate infrastructure excluded by design.
 #
 
@@ -27,6 +27,9 @@ domain:wondomain.com
 
 # --- Client Decision (Disavow) - Auto-Generated App Listing ---
 domain:appsupports.co
+
+# --- Client Decision (Disavow) - New Domain, Aggressive Velocity ---
+domain:illuminatelabv.com
 
 # --- Client Decision (Disavow) - Off-Niche High-Volume Placement ---
 domain:cloudaicrypto.com
