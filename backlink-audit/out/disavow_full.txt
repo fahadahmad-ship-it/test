@@ -1,9 +1,29 @@
 # Performance Lab (performancelab.com) - disavow file (FULL profile)
 # Referring domains evaluated: 2,928
 # Total backlinks represented: 1,362,105
-# Domains disavowed: 839 (10,500 backlinks)
+# Domains disavowed: 838 (10,483 backlinks)
 # Search/AI surfaces and affiliate infrastructure excluded by design.
 #
+
+# --- Auto-Generated Domain-Flipping / Stats Farm ---
+domain:achievedomains.com
+domain:advertiseyourdomain.com
+domain:all-aged-domains.com
+domain:allwebsites.net
+domain:bestwebstats.com
+domain:domain.com.lc
+domain:domainanalysis.org
+domain:domains.com.bz
+domain:domainsc.com
+domain:getwebsiteworth.com
+domain:indexaward.com
+domain:listmydomain.com
+domain:mydomaininfo.com
+domain:onemilliondomains.com
+domain:pagesearch.net
+domain:searchalldomains.com
+domain:websiterace.com
+domain:wondomain.com
 
 # --- Cross-TLD Sibling Network (Generated Domains) ---
 domain:apexelements.monster
@@ -729,29 +749,6 @@ domain:ycm.info
 domain:yesdomains.space
 domain:youthinforex.online
 domain:youtoo.in
-
-# --- Scraped Aggregator / Auto-Generated Directory ---
-domain:achievedomains.com
-domain:advertiseyourdomain.com
-domain:all-aged-domains.com
-domain:allwebsites.net
-domain:bestwebstats.com
-domain:domain.com.lc
-domain:domainanalysis.org
-domain:domains.com.bz
-domain:domainsc.com
-domain:getwebsiteworth.com
-domain:indexaward.com
-domain:listmydomain.com
-domain:mydomaininfo.com
-domain:onemilliondomains.com
-domain:pagesearch.net
-domain:searchalldomains.com
-domain:websiterace.com
-domain:wondomain.com
-
-# --- Scraped Aggregator / Stats-Site Profile ---
-domain:sitelike.org
 
 # --- Synthetic Affiliate Doorway Domain ---
 domain:en-en-prozenith.us

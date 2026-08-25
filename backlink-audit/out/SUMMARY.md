@@ -8,24 +8,21 @@
 
 | Action | Domains | Backlinks | % of links |
 |---|---:|---:|---:|
-| DISAVOW | 51 | 201 | 0.4% |
-| REVIEW_MANUALLY | 79 | 1,143 | 2.3% |
-| KEEP_AFFILIATE_RETAIN | 485 | 48,656 | 97.3% |
+| DISAVOW | 47 | 136 | 0.3% |
+| REVIEW_MANUALLY | 78 | 1,172 | 2.3% |
+| KEEP_AFFILIATE_RETAIN | 490 | 48,692 | 97.4% |
 
 ## Equity exposure
 
-Of **201** disavow-flagged backlinks, only **155 (77.1%)** are follow links that pass equity. The remaining **46** are nofollow and pass none.
+Of **136** disavow-flagged backlinks, only **104 (76.5%)** are follow links that pass equity. The remaining **32** are nofollow and pass none.
 
 ### Priority remediation targets (follow links only)
 
 | Domain | Follow links | Risk factor |
 |---|---:|---|
-| aihcp.net | 33 | PBN / Templated Mass Footprint (Irrelevant Niche) |
 | retiredbrains.com | 28 | Exact-Match Anchor Abuse (Sitewide Injection) |
 | bloggazza.com | 18 | Vendor Blog Network (Spun-Content PBN) |
 | activosblog.com | 18 | Vendor Blog Network (Spun-Content PBN) |
-| whipperberry.com | 10 | Sitewide Link Injection (Templated Anchor) |
-| securelinksdirectory.com | 8 | Directory / Link-Scheme Spam Footprint |
 | activoblog.com | 5 | Vendor Blog Network (Spun-Content PBN) |
 | diowebhost.com | 4 | Vendor Blog Network (Spun-Content PBN) |
 | bligblogging.com | 3 | Vendor Blog Network (Spun-Content PBN) |
@@ -61,14 +58,6 @@ Excluded from the disavow file pending your call. Each carries the evidence that
 
 **`eastbayexpress.com`** — 667 backlinks (667 follow). HELD FOR CLIENT DECISION - established news outlet, but 667 FOLLOW links replicated across paginated archives carry the exact-match anchor 'best nootropics for improving physical performance'. This is the single largest equity exposure in the profile; confirm whether the placement was bought before filing.
 
-## Below the disavow confidence bar
-
-1 domain(s) matched a spam rule at Medium or Low confidence and were routed to review rather than disavowed.
-
-| Domain | Backlinks | Follow | Risk factor |
-|---|---:|---:|---|
-| girlcooksworld.com | 4 | 4 | Irrelevant Niche Spam (No Topical Overlap) |
-
 
 ## Risk factor breakdown
 
@@ -78,10 +67,6 @@ Excluded from the disavow file pending your call. Each carries the evidence that
 | Link Farm / Outbound-Link Bloat | 14 |
 | Synthetic Affiliate Doorway Domain | 5 |
 | Hacked Site / Injected Link-Vendor Spam | 3 |
-| Directory / Link-Scheme Spam Footprint | 1 |
-| Scraped Aggregator / Stats-Site Profile | 1 |
-| PBN / Templated Mass Footprint (Irrelevant Niche) | 1 |
-| Sitewide Link Injection (Templated Anchor) | 1 |
 | Exact-Match Anchor Abuse (Sitewide Injection) | 1 |
 
 ## Sampling disclosure

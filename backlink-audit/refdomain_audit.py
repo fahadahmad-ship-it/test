@@ -259,9 +259,20 @@ def classify_domain(r, ctx):
         return (DISAVOW, "Vendor Blog Network (Spun-Content PBN)", "High",
                 "Free-blog host used exclusively by link vendors.")
 
-    if reg in SCRAPER_AGGREGATOR or STATS_DIRECTORY_NAME_RE.search(d):
-        return (DISAVOW, "Scraped Aggregator / Auto-Generated Directory", "High",
-                "Auto-generated site-profile or directory scraper.")
+    if reg in SCRAPER_AGGREGATOR:
+        if asc >= 15:
+            return (KEEP, "None - Site-Profile Aggregator (No Equity Passed)", "High",
+                    f"Established profile-listing service at authority {asc}. "
+                    "An auto-generated profile is an incidental citation, not "
+                    "a placed link.")
+        return (REVIEW, "Site-Profile Aggregator - Low Authority", "Low",
+                "Auto-generated profile listing; not disavowable on the "
+                "pattern alone.")
+
+    if STATS_DIRECTORY_NAME_RE.search(d):
+        return (DISAVOW, "Auto-Generated Domain-Flipping / Stats Farm", "High",
+                "Domain-parking or bulk-stats marketplace page, "
+                f"authority {asc} — generated inventory, not a publisher.")
 
     if DIRECTORY_SPAM_RE.search(d):
         return (DISAVOW, "Directory / Link-Scheme Spam Footprint", "High",

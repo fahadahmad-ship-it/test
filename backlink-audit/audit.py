@@ -618,9 +618,21 @@ def classify(p: DomainProfile):
                 "Randomly generated account subdomain — disposable link-vendor "
                 "infrastructure.")
 
+    # An auto-generated site profile is an incidental citation, not a placed
+    # link: nobody built it to move rankings. Where it passes no equity there
+    # is nothing to disavow, so the pattern alone cannot condemn a domain --
+    # only independent evidence can (spam C-block, vendor naming, follow
+    # links at volume). sitelike.org is 100% nofollow at authority 43.
     if p.registrable in SCRAPER_AGGREGATOR:
-        return (DISAVOW, "Scraped Aggregator / Stats-Site Profile", "High",
-                "Auto-generated site-profile scraper; no editorial intent.")
+        if p.nofollow_rate >= 0.90 or p.max_ascore >= 15:
+            return (KEEP, "None - Site-Profile Aggregator (No Equity Passed)", "High",
+                    f"Auto-generated profile listing, {p.nofollow_rate:.0%} "
+                    f"nofollow across {p.n_links} links. Incidental citation "
+                    "rather than a placed link; a disavow would change nothing.")
+        return (REVIEW, "Site-Profile Aggregator - Low Authority", "Low",
+                "Auto-generated profile listing on a low-authority domain. "
+                "Not disavowable on the pattern alone; check for follow links "
+                "or a shared footprint.")
 
     if DIRECTORY_SPAM_RE.search(d):
         return (DISAVOW, "Directory / Link-Scheme Spam Footprint", "High",
