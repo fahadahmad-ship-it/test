@@ -777,6 +777,47 @@ def main(backlinks_csv, refdomains_csv, outdir):
             for d in sorted(by_risk[risk]):
                 fh.write(f"domain:{d}\n")
 
+    # Split the disavow file by whether the links can actually pass equity.
+    # A nofollow-only footprint passes none, so filing it changes nothing --
+    # it is hygiene, and mixing it into the main file inflates the list and
+    # buries the domains that matter. Kept as a separate addendum so the
+    # decision to file it is explicit rather than implied.
+    core = [x for x in out if x["Action Recommendation"] == DISAVOW
+            and not x["Remediation Priority"].startswith("P3")]
+    hygiene = [x for x in out if x["Action Recommendation"] == DISAVOW
+               and x["Remediation Priority"].startswith("P3")]
+
+    def _write_disavow(path, rows_, title, note):
+        by = defaultdict(list)
+        for x in rows_:
+            by[x["Primary Risk Factor"]].append(x["Referring Domain"])
+        with open(path, "w", encoding="utf-8") as fh:
+            fh.write(f"# Performance Lab - {title}\n")
+            fh.write(f"# Domains: {len(rows_):,} | "
+                     f"Backlinks: {sum(x['Backlinks (true)'] for x in rows_):,}\n")
+            for line in note:
+                fh.write(f"# {line}\n")
+            fh.write("#\n")
+            for risk in sorted(by):
+                fh.write(f"\n# --- {risk} ---\n")
+                for d in sorted(by[risk]):
+                    fh.write(f"domain:{d}\n")
+
+    _write_disavow(
+        f"{outdir}/disavow_core.txt", core,
+        "disavow file (equity-passing)",
+        ["These domains carry follow links, or their follow status is unknown.",
+         "This is the file to submit.",
+         "Search/AI surfaces and affiliate infrastructure are excluded by design."])
+    _write_disavow(
+        f"{outdir}/disavow_nofollow_hygiene.txt", hygiene,
+        "disavow addendum (nofollow only - optional)",
+        ["Every sampled link on these domains is nofollow, so none of them",
+         "passes equity and disavowing them changes nothing measurable.",
+         "Filed only if you want the profile clean on paper. Most are hacked-site",
+         "injections and link-farm listings, which are worth knowing about even",
+         "though they are inert."])
+
     ev = Counter(x["Evidence Level"] for x in out)
     print(f"Referring domains evaluated : {len(out):,}")
     print(f"Total backlinks represented : {total_bl:,}")

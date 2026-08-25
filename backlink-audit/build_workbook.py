@@ -15,21 +15,47 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.datavalidation import DataValidation
 
-COLS = [
-    ("Level", 9), ("Referring Domain / URL", 46), ("Target URL", 42),
-    ("Anchor Text", 38), ("Anchor Type", 15), ("Action Recommendation", 23),
-    ("Primary Risk Factor", 44), ("Confidence Score", 11),
-    ("Evidence Level", 30), ("Remediation Priority", 30),
-    ("Disavow Entry", 30),
-    ("Backlinks (true)", 12), ("Backlinks (in sample)", 12),
-    ("Follow (Equity) Links", 12), ("Domain ascore", 11),
-    ("IP Address", 16), ("C-Block", 17), ("Hosting", 26), ("Country", 9),
-    ("Unique Anchors", 11), ("Exact-Match Anchor %", 12),
-    ("Branded/URL Anchor %", 12), ("Avg External Links", 11),
-    ("Nofollow %", 10), ("Sponsored", 10), ("Sitewide", 9), ("Lost Link", 9),
-    ("Topically Relevant", 11),
-    ("First seen", 12), ("Last seen", 12), ("Rationale", 95),
+# Columns in reading order: what it is, what to do, why, then the evidence,
+# then volume, hosting and dates. Decision fields sit left so they stay
+# visible while scrolling the evidence; the long Rationale goes last.
+COL_GROUPS = [
+    ("Identity", "Level", 9),
+    ("Identity", "Referring Domain / URL", 42),
+    ("Decision", "Action Recommendation", 23),
+    ("Decision", "Remediation Priority", 30),
+    ("Decision", "Confidence Score", 11),
+    ("Decision", "Disavow Entry", 30),
+    ("Why", "Primary Risk Factor", 42),
+    ("Why", "Evidence Level", 30),
+    ("Volume", "Backlinks (true)", 12),
+    ("Volume", "Backlinks (in sample)", 12),
+    ("Volume", "Follow (Equity) Links", 12),
+    ("Volume", "Domain ascore", 11),
+    ("Link evidence", "Anchor Text", 38),
+    ("Link evidence", "Anchor Type", 14),
+    ("Link evidence", "Target URL", 40),
+    ("Link evidence", "Unique Anchors", 11),
+    ("Link evidence", "Exact-Match Anchor %", 12),
+    ("Link evidence", "Branded/URL Anchor %", 12),
+    ("Link evidence", "Nofollow %", 10),
+    ("Link evidence", "Avg External Links", 11),
+    ("Link evidence", "Sponsored", 10),
+    ("Link evidence", "Sitewide", 9),
+    ("Link evidence", "Lost Link", 9),
+    ("Link evidence", "Topically Relevant", 11),
+    ("Hosting", "IP Address", 15),
+    ("Hosting", "C-Block", 16),
+    ("Hosting", "Hosting", 24),
+    ("Hosting", "Country", 8),
+    ("Dates", "First seen", 11),
+    ("Dates", "Last seen", 11),
+    ("Rationale", "Rationale", 95),
 ]
+COLS = [(n, w) for _, n, w in COL_GROUPS]
+GROUP_FILL = {"Identity": "1F3864", "Decision": "2E5A2E", "Why": "7B3F00",
+              "Volume": "1F4E5F", "Link evidence": "4A3B6B",
+              "Hosting": "5A5A5A", "Dates": "5A5A5A", "Rationale": "3F3F3F"}
+
 FONT = "Arial"
 ACTION_FILL = {
     "DISAVOW":               PatternFill("solid", fgColor="F8CBAD"),
@@ -162,8 +188,8 @@ def main(outdir):
     ws.title = "Backlink Audit"
     HDR = 9
     first, last = HDR + 1, HDR + len(rows)
-    act, lvl = f"$F${first}:$F${last}", f"$A${first}:$A${last}"
-    bl, fol = f"$L${first}:$L${last}", f"$N${first}:$N${last}"
+    act, lvl = f"$C${first}:$C${last}", f"$A${first}:$A${last}"
+    bl, fol = f"$I${first}:$I${last}", f"$K${first}:$K${last}"
 
     ws["A1"] = "Performance Lab - Backlink Disavow Audit"
     ws["A1"].font = Font(name=FONT, size=15, bold=True)
@@ -202,13 +228,31 @@ def main(outdir):
     A_WRAP = Alignment(vertical="top", wrap_text=True)
     WRAPPED = {"Rationale", "Primary Risk Factor"}
     DOM_FILL = PatternFill("solid", fgColor="D9E1F2")
-    hdr_fill = PatternFill("solid", fgColor="1F3864")
+    # Group band one row above the names, merged per group, so 31 columns
+    # read as six sections rather than an undifferentiated wall.
+    _gi = 1
+    while _gi <= len(COL_GROUPS):
+        _grp = COL_GROUPS[_gi - 1][0]
+        _span = 1
+        while (_gi + _span <= len(COL_GROUPS)
+               and COL_GROUPS[_gi + _span - 1][0] == _grp):
+            _span += 1
+        if _span > 1:
+            ws.merge_cells(start_row=HDR - 1, start_column=_gi,
+                           end_row=HDR - 1, end_column=_gi + _span - 1)
+        _gc = ws.cell(row=HDR - 1, column=_gi, value=_grp.upper())
+        _gc.font = Font(name=FONT, size=9, bold=True, color="FFFFFF")
+        _gc.fill = PatternFill("solid", fgColor=GROUP_FILL[_grp])
+        _gc.alignment = Alignment(horizontal="center", vertical="center")
+        _gi += _span
+
     for i, (name, width) in enumerate(COLS, start=1):
         c = ws.cell(row=HDR, column=i, value=name)
         c.font = Font(name=FONT, size=10, bold=True, color="FFFFFF")
-        c.fill = hdr_fill
+        c.fill = PatternFill("solid", fgColor=GROUP_FILL[COL_GROUPS[i - 1][0]])
         c.alignment = Alignment(vertical="center", wrap_text=True)
         ws.column_dimensions[get_column_letter(i)].width = width
+    ws.row_dimensions[HDR - 1].height = 16
     ws.row_dimensions[HDR].height = 30
 
     for ri, row in enumerate(rows, start=first):
@@ -224,7 +268,7 @@ def main(outdir):
             c.font = F_DOM if is_dom else F_URL
             c.alignment = A_WRAP if name in WRAPPED else A_TOP
             c.border = BOT
-        ws.cell(row=ri, column=6).fill = ACTION_FILL[row["Action Recommendation"]]
+        ws.cell(row=ri, column=3).fill = ACTION_FILL[row["Action Recommendation"]]
         if is_dom:
             ws.cell(row=ri, column=1).fill = DOM_FILL
 
@@ -234,7 +278,7 @@ def main(outdir):
                         formula1='"DISAVOW,REVIEW_MANUALLY,KEEP_AFFILIATE_RETAIN"',
                         allow_blank=False)
     ws.add_data_validation(dv)
-    dv.add(f"F{first}:F{last}")
+    dv.add(f"C{first}:C{last}")
 
     # ---------------- Tab 2: Disavow working sheet ----------------------
     _worksheet(
