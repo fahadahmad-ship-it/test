@@ -1,7 +1,7 @@
 # Performance Lab (performancelab.com) - disavow file (FULL profile)
 # Referring domains evaluated: 2,928
 # Total backlinks represented: 1,362,105
-# Domains disavowed: 821 (10,715 backlinks)
+# Domains disavowed: 844 (10,748 backlinks)
 # Search/AI surfaces and affiliate infrastructure excluded by design.
 #
 
@@ -308,6 +308,10 @@ domain:cognitionprime.bio
 domain:coherence.today
 domain:neurohub.bio
 
+# --- Keyword-Stuffed Exact-Match Domain ---
+domain:general-health-spectrum.com
+domain:health-supplements-review.com
+
 # --- Link Farm / Outbound-Link Bloat ---
 domain:benchchem.com
 domain:bloatatt.blogspot.com
@@ -329,6 +333,8 @@ domain:wwwhollywoodk.blogspot.com
 domain:99backlinksbuy.com
 domain:99ranks.com
 domain:a2zseoarticles.com
+domain:addurl.pro
+domain:addurl.pw
 domain:atozbacklinks.com
 domain:backlink.asia
 domain:backlink.business
@@ -343,6 +349,7 @@ domain:backlinks.sbs
 domain:backlinksbank.com
 domain:backlinkshouse.com
 domain:backlinkstree.com
+domain:best-value-seo-service.com
 domain:bestrankbacklinks.com
 domain:bestseobacklinkforsite.com
 domain:bestsitesbacklinks.com
@@ -360,18 +367,26 @@ domain:booastrankingwithbacklinks.com
 domain:buy-backlinks-ranking-power.com
 domain:buyfairbacklinks.com
 domain:buyrankbacklinks.com
+domain:buyseolinks.site
 domain:buytopqualitybacklinks.com
 domain:clicktobuybacklinks.com
 domain:clicktohigh.com
+domain:digitalseotool.com
 domain:eliteseobacklinks.com
 domain:friendlybacklinksbuy.com
 domain:globalseoarticles.com
+domain:hostseolinks.com
 domain:linksnatcher.art
 domain:linksnatcher.com
 domain:livebacklinks.com
 domain:on-demand-seo-backlinks.com
 domain:proseoarticles.com
+domain:quickseolinks.com
+domain:rankvance.website
+domain:rankvanceauthority.info
+domain:rankvanceseo.info
 domain:rarebacklinks.com
+domain:seo-analysis-s1.xyz
 domain:seo-anomaly-alttext.online
 domain:seo-anomaly-alttext.site
 domain:seo-anomaly-alttext.space
@@ -472,11 +487,18 @@ domain:seo-anomaly-snippet.site
 domain:seo-anomaly-snippet.space
 domain:seo-anomaly-snippet.website
 domain:seo-anomaly-teacher.site
+domain:seo-expert-service.com
 domain:seoarticletime.com
+domain:seodomains.website
+domain:seotech2.com
 domain:superbqualitybacklinks.com
+domain:top-seo-service-high-rated.com
 domain:topratedbacklinks.com
 domain:ultimate-backlink-solution.com
+domain:ultimate-seo-packet.com
+domain:urgent-seo-ranking-help.com
 domain:viralbacklinks.com
+domain:wayseolinks.com
 domain:webbacklinkskbuy.com
 domain:webrankingsolutionbacklinks.com
 domain:welinkbacklinks.com
@@ -629,18 +651,26 @@ domain:aihcp.net
 domain:bittersweetblog.com
 
 # --- PBN Hosting Footprint (Cluster Propagation) ---
+domain:99w.im
+domain:adzbusiness.com
+domain:bilalarticles.com
+domain:businessnewses.com
 domain:cricketinfo.co.in
-domain:futurefood.website
+domain:globalproseo.com
 domain:hansika.co.in
+domain:linkanews.com
+domain:linksnewses.com
 domain:mandakini.co.in
+domain:postonseo.com
+domain:sitesnewses.com
 domain:touristpoints.in
+domain:websitesnewses.com
 
 # --- PBN Hosting Footprint (Shared C-Block) ---
 domain:1000.co.in
 domain:allbaclinks.com
 domain:alljobs.info
 domain:alltopleveldomains.space
-domain:best-value-seo-service.com
 domain:blacksonwhites.com
 domain:campingtours.in
 domain:carplz.com
@@ -677,26 +707,21 @@ domain:pratibha.pw
 domain:preparation.co.in
 domain:procycling.org
 domain:queries.co.in
-domain:quickseolinks.com
 domain:region.co.in
 domain:restsuite.com
 domain:runningwebsites.net
 domain:savetheweb.org
-domain:seo-expert-service.com
 domain:summary.co.in
 domain:taxies.biz
 domain:techpark.org
 domain:theface.in
 domain:themumbai.in
 domain:thirty.co.in
-domain:top-seo-service-high-rated.com
 domain:topleveldomains.space
 domain:trafficboosterlinkseo.com
 domain:tunca.org
 domain:tyre.pro
 domain:tyres.pro
-domain:ultimate-seo-packet.com
-domain:urgent-seo-ranking-help.com
 domain:wallpapers.pro
 domain:way2check.art
 domain:web-ranking-boosters.com

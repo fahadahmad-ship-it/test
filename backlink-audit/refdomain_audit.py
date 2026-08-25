@@ -51,6 +51,13 @@ SHARED_PLATFORM_CBLOCK = {
     "34.149.87":   "Google Cloud",
     "184.168.110": "GoDaddy shared hosting",
     "192.124.249": "Sucuri / managed hosting",
+    # Google ranges host Blogspot/Blogger tenants. Co-location here means
+    # Google, not a shared owner.
+    "64.233.180":  "Google / Blogger",
+    "142.251.111": "Google / Blogger",
+    "192.178.155": "Google / Blogger",
+    "172.217.14":  "Google / Blogger",
+    "216.58.194":  "Google / Blogger",
 }
 
 # Spam-associated TLDs used by the cross-TLD sibling detector below.
@@ -87,7 +94,20 @@ LINK_VENDOR_NAME_RE = re.compile(
     r"seoarticle|seobacklink|linkexchange|articlesubmit|guestpost|"
     r"pbn|linkwheel|seocartel|seo-anomaly|seoanomaly|rankbooster|"
     r"boostrank|highpr|dofollow|linkjuice|seosubmit|submitlink|"
-    r"a2zseo|99ranks|clicktohigh|[-.]links?[-.]|^links?[-.]",
+    r"a2zseo|99ranks|clicktohigh|[-.]links?[-.]|^links?[-.]|"
+    # Bare 'seo' only at a token boundary: houseofcoco.net contains the
+    # letters s-e-o and is a magazine, not a link vendor.
+    r"(^|[-.])seo([-.]|tool|space|domain|link|tech|analysis|\d)|"
+    r"seo(link|tool|domain|submit)|(digital|new|blogger?)seo|"
+    r"^addurl|(^|[-.])rankvance|buyseo",
+    re.I,
+)
+
+# Exact-match-domain keyword stuffing: several niche terms welded together
+# with hyphens on a near-zero-authority domain.
+EMD_STUFFING_RE = re.compile(
+    r"^(?=(?:[a-z]+-){2,})(?=.*(supplement|nootropic|health|vitamin|fitness|"
+    r"weightloss|testosterone|wellness|nutrition|protein))[a-z-]+$",
     re.I,
 )
 
@@ -212,6 +232,12 @@ def classify_domain(r, ctx):
         return (DISAVOW, "Throwaway Free-Host Subdomain", "High",
                 f"Disposable {host.lstrip('.')} subdomain at authority score "
                 f"{asc} — no editorial publisher behind it.")
+
+    if EMD_STUFFING_RE.match(reg.rsplit(".", 1)[0]) and asc <= 3:
+        return (DISAVOW, "Keyword-Stuffed Exact-Match Domain", "High",
+                "Several niche terms hyphenated together on a domain scoring "
+                f"{asc} — an exact-match domain registered for the anchor, "
+                "not a publisher.")
 
     if LINK_VENDOR_NAME_RE.search(d):
         return (DISAVOW, "Link-Selling / SEO Vendor Domain", "High",
@@ -562,16 +588,23 @@ def main(backlinks_csv, refdomains_csv, outdir):
         if len(members) < 8:
             continue
         dis = [m for m in members if m["Action Recommendation"] == DISAVOW]
-        if len(dis) / len(members) >= 0.70:
+        # Count only condemnations that do NOT themselves derive from
+        # hosting, otherwise the cluster justifies itself in a loop.
+        independent = [m for m in dis
+                       if "Hosting Footprint" not in m["Primary Risk Factor"]]
+        if (len(dis) / len(members) >= 0.70
+                or (len(dis) / len(members) >= 0.50
+                    and len(independent) / len(members) >= 0.30)):
             for o in members:
                 if o["Action Recommendation"] == REVIEW:
                     n_prop += 1
                     _set(o, DISAVOW, "PBN Hosting Footprint (Cluster Propagation)",
                          "High",
                          f"{len(dis)} of {len(members)} domains on {cbk} are "
-                         "independently condemned (link-vendor naming, directory "
-                         "spam, generated siblings). This is not a mainstream "
-                         "host, so co-location here indicates the same operator.")
+                         f"condemned, {len(independent)} of them on evidence "
+                         "independent of hosting (link-vendor naming, directory "
+                         "spam, generated siblings). Not a mainstream host, so "
+                         "co-location indicates the same operator.")
 
     log = {"cross_tld_siblings": n_sib, "identical_cohorts": n_cohort,
            "cluster_propagation": n_prop}
