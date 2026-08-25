@@ -64,6 +64,16 @@ def classify_redirect(prof, brand_tokens=("performancelab", "mindlabpro",
     branded_path = any(t in path.replace("-", "").replace("_", "")
                        for t in brand_tokens)
     single_host = len(prof["hosts"]) == 1
+    # A hop through a domain in the client's own brand estate is the client's
+    # own infrastructure, whatever the path. The original rule keyed only on a
+    # brand-named *path*, so the live data — where these hops land on the bare
+    # root ("testolabpro.com/") — fell through to ROUTED_OTHER and read as a
+    # third-party cloak. Host ownership is the stronger signal; check it first.
+    if _registrable(host) in BRAND_OWNED:
+        return ("ROUTED_BRAND_OWNED", host, path,
+                f"Links route through {host}, which is in the client's own "
+                "brand estate (BRAND_OWNED). This is first-party link "
+                "management, not a third-party redirect layer.")
     if branded_path and single_host and prof["share"] >= 0.9:
         return ("ROUTED_CAMPAIGN", host, path,
                 f"All links route through {host}/{path} — a single "

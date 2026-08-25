@@ -1,9 +1,30 @@
 # Performance Lab — Backlink Audit: Handoff
 
-**Status:** audit complete on available data; blocked on one API pull.
+**Status:** superseded in part — the §4 pull below has been RUN.
 **Branch:** `claude/performancelab-backlink-audit-avlvtz` (repo `fahadahmad-ship-it/test`)
 **Working directory:** `backlink-audit/`
 **Date:** 2026-08-25
+
+> **Read `FINDINGS-connector-pass.md` first.** A later thread
+> (`claude/perf-lab-backlink-audit-zdkg4x`) had working Semrush and Ahrefs
+> connectors and executed §4a, §4b and §4c. Do not re-run those pulls.
+>
+> Still outstanding from this document:
+> - **§4d** — the full chain re-run. Blocked on the two original CSV exports,
+>   which are not in the repo; only derived outputs are. Re-supply them.
+> - **§2 / §7.1** — `drect.net` ownership. Unchanged; live resolution is
+>   blocked by network policy.
+> - **§7.2** — `eastbayexpress.com`: the *mechanism* is resolved (all 235
+>   sampled links route through one `/go/` affiliate path on `fitliving.org`).
+>   The commercial decision now turns on who owns `fitliving.org`.
+> - **§7.3** — filing scope for the 804.
+>
+> Corrections to this document, established from live data:
+> - `display_limit` caps at **1,000**, not 10,000 (§4a).
+> - Ahrefs costs **15–19 units/row**, not 30, and its referring-domains
+>   endpoint caps at **250 rows/call** (§4b).
+> - The redirect layer is **44 hosts**, not just `drect.net`; 125 domains hop
+>   through the client's own `testolabpro.com` (§2).
 
 ---
 
