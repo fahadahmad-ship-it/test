@@ -382,3 +382,77 @@ correctly narrowed to the subdomain — the sheet is what the client reads.
 
 Net effect: DISAVOW 961 -> 1,081, REVIEW 139 -> 88. Both moves are evidence,
 not threshold changes.
+
+## Review-queue pass (2026-08-25)
+
+Every domain in the review queue read individually against its actual
+placements, not its domain metrics. This surfaced a large injected-spam
+network I had been *retaining*, which is the more expensive kind of error.
+
+**The injected-doorway network — 15 domains, 19 of them previously KEEP.**
+Working the queue by hand turned up two URL signatures with no benign
+reading:
+
+- A root URL whose whole query is one letter and a long id:
+  `porras.ch/?p=89451313`, `politicsofsport.com/?p=89451313`,
+  `pro-one-trans.com/?p=89451313`, `jvnps.com/?j=83596013`,
+  `saintsebastianelitecollege.com/?s=83596013`. **The ids repeat across
+  unrelated domains** — 89451313 on three, 83596013 on two, and
+  `csir-sari.org`/`thejeera.com` one digit apart carrying the same anchor.
+  Fifteen domains span seven different single-letter parameters (b, c, d, j,
+  p, s, t); no CMS uses seven conventions. Anchors are e-commerce modifiers
+  machine-dropped into health phrases: "Best omega 3 hotsell supplement for
+  dogs", "Crunching sound in cheap knee", "Belly fat deals burner without
+  exercise".
+- A content page served from a CMS admin directory:
+  `robo.dev.nologostudio.ru/bitrix/admin/tzut/the-star-newspaper-obituaries.html`
+  and `avtoburo-bitrix.sk-its.ru/bitrix/admin/hqfyj1m/burthey-funeral-home-durham-obituaries.html`,
+  anchors "wlces" and "kjwjx". Nobody links out from `/bitrix/admin/`.
+
+`servicio-online.net` (authority 30) and `csir-sari.org` (21) are compromised
+hosts, not bad actors, so the disavow narrows to the injected subdomain where
+one exists. An anchor-based version of this rule was tried and dropped twice:
+keying on the commerce wording caught the client's own `mindlabpro.com`
+("Shop Performance Lab® Omega-3") and every real affiliate, and requiring the
+anchor to omit the brand let two through, because these injections often
+carry a scraped article title that names it. The URL carries the signature
+alone.
+
+**Five other rules the queue produced.** A 6-domain template network found via
+mixed-case opaque paths — `/10/EmzwpDHARN` on both `businessvocal.com` and
+`thecloudherald.com`, `/01/arnVoAQycp` on `global-rank.pages.dev` and
+`top-websites-directory.pages.dev`. Only 35 such paths exist in the corpus, so
+two owners is decisive where two owners of a readable slug would not be — and
+it finally gave real placement evidence for three `pages.dev` domains an
+earlier pass could not separate. Klaviyo's click wrapper
+(`ctrk.klclick2.com`) was being read as an affiliate gateway with link-farm
+traits; it is the brand's own newsletter. Seven blogspot hosts averaging
+13,500 outbound links a page with URLs like `/1u58.vip%20rel=nofollow` are
+scraped templates, not blogs. A vendor's three domains
+(`rankvance.website`, `rankvanceseo.info`, `rankvanceauthority.info`) phrase
+their sales path three ways, so the backlink-sales pattern now allows
+intervening words. And a name-based structural signature now breaks an
+unresolved REVIEW tie, not just an affiliate mislabel — while still never
+overruling a KEEP earned on an observed redirect or affiliate parameter.
+
+**Two bugs found while wiring those up.** `_registrable()` collapses every
+blogspot subdomain to `blogspot.com`, so a `.endswith(".blogspot.com")` test
+silently never matched — the blogspot rule is keyed on the full hostname
+instead. And an `/(?:[a-z]+-)*list[-_]?\d+` path pattern first written as
+`[a-z-]*list` matched any word ending in "list", which would have flagged
+`checklist-2024` and `playlist-99`.
+
+**The remaining 70 are each hand-decided.** `review_decisions.py` carries a
+recommendation and the evidence behind it for every row — 26 DISAVOW, 43 KEEP,
+1 for the client to settle. They render as two colour-coded columns in the
+sheet's Review Queue tab next to the decision dropdown, so the call is made
+with the evidence in view rather than from the metrics.
+
+`dtcx.com` is the one I cannot settle: it links with image anchors
+"Performance Lab Logo" and "Nutropic Logo", which reads like an owned or
+partner property, but it is also promoted *by* several of the spam networks in
+this audit ("visit dtcx.com for latest info", "Premium PBN Network Service
+dtcx.com Rank First"). Either it is yours, or a link seller is riding the
+brand. That needs an answer before any action.
+
+DISAVOW 1,081 -> 1,120, REVIEW 88 -> 70.

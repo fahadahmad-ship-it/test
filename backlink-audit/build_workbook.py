@@ -13,6 +13,11 @@ import sys
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
+
+try:
+    from review_decisions import DECISIONS as REVIEW_RECOMMENDATIONS
+except ImportError:          # the sheet still builds without the hand pass
+    REVIEW_RECOMMENDATIONS = {}
 from openpyxl.worksheet.datavalidation import DataValidation
 
 # Columns in reading order: what it is, what to do, why, then the evidence,
@@ -79,7 +84,7 @@ TAB_COLS = [
 
 
 def _worksheet(wb, title, dom, action, blurb, confirm_header,
-               confirm_list, default=""):
+               confirm_list, default="", recommend=None):
     """One working tab per action bucket, with a decision column."""
     rows = [dict(d) for d in dom if d["Action Recommendation"] == action]
     rows.sort(key=lambda r: -int(r["Backlinks (true)"]))
@@ -90,8 +95,9 @@ def _worksheet(wb, title, dom, action, blurb, confirm_header,
     ws = wb.create_sheet(title)
     HDR = 6
     first, last = HDR + 1, HDR + len(rows)
-    ncol = len(TAB_COLS) + 2
-    dec_col = get_column_letter(len(TAB_COLS) + 1)
+    n_rec = 2 if recommend else 0
+    ncol = len(TAB_COLS) + n_rec + 2
+    dec_col = get_column_letter(len(TAB_COLS) + n_rec + 1)
 
     ws["A1"] = f"{title} - {len(rows):,} domains"
     ws["A1"].font = Font(name=FONT, size=14, bold=True)
@@ -111,8 +117,13 @@ def _worksheet(wb, title, dom, action, blurb, confirm_header,
     A_WRAP = Alignment(vertical="top", wrap_text=True)
     F_BODY = Font(name=FONT, size=10)
     hdr_fill = PatternFill("solid", fgColor="1F3864")
-    heads = [c[0] for c in TAB_COLS] + [confirm_header, "Notes"]
-    widths = [c[1] for c in TAB_COLS] + [26, 44]
+    heads = [c[0] for c in TAB_COLS]
+    widths = [c[1] for c in TAB_COLS]
+    if recommend:
+        heads += ["Recommendation", "Evidence for the recommendation"]
+        widths += [16, 62]
+    heads += [confirm_header, "Notes"]
+    widths += [26, 44]
     for i, (h, w) in enumerate(zip(heads, widths), start=1):
         c = ws.cell(HDR, i, h)
         c.font = Font(name=FONT, size=10, bold=True, color="FFFFFF")
@@ -134,7 +145,20 @@ def _worksheet(wb, title, dom, action, blurb, confirm_header,
             c.font = F_BODY
             c.alignment = A_WRAP if name == "Rationale" else A_TOP
             c.border = BOT
-        d = ws.cell(ri, len(TAB_COLS) + 1, default)
+        if recommend:
+            rec, why = recommend.get(row["Referring Domain"], ("", ""))
+            rc = ws.cell(ri, len(TAB_COLS) + 1, rec)
+            rc.font = Font(name=FONT, size=10, bold=True)
+            rc.alignment = A_TOP
+            rc.border = BOT
+            rc.fill = PatternFill("solid", fgColor={
+                "DISAVOW": "F8CBAD", "KEEP": "C6E0B4",
+                "ASK_CLIENT": "FFE699"}.get(rec, "FFFFFF"))
+            ec = ws.cell(ri, len(TAB_COLS) + 2, why)
+            ec.font = F_BODY
+            ec.alignment = A_WRAP
+            ec.border = BOT
+        d = ws.cell(ri, len(TAB_COLS) + n_rec + 1, default)
         d.font = F_BODY
         d.fill = PatternFill("solid", fgColor="FFF2CC")
         d.border = BOT
@@ -297,6 +321,7 @@ def main(outdir):
         confirm_header="Decision (DISAVOW / KEEP / PENDING)",
         confirm_list='"DISAVOW,KEEP,PENDING"',
         default="PENDING",
+        recommend=REVIEW_RECOMMENDATIONS,
     )
 
     path = f"{outdir}/performancelab_backlink_audit.xlsx"

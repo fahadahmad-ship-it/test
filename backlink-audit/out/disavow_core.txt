@@ -1,13 +1,16 @@
 # Performance Lab - disavow file (equity-passing)
-# Domains: 760 | Backlinks: 10,745
+# Domains: 782 | Backlinks: 10,777
 # These domains carry follow links, or their follow status is unknown.
 # This is the file to submit.
 # Search/AI surfaces and affiliate infrastructure are excluded by design.
 #
 
 # --- Auto-Generated Domain-Flipping / Stats Farm ---
+domain:domains.com.bz
 domain:domainsc.com
+domain:getwebsiteworth.com
 domain:indexaward.com
+domain:websiterace.com
 
 # --- Client Decision (Disavow) - New Domain, Aggressive Velocity ---
 domain:illuminatelabv.com
@@ -71,12 +74,15 @@ domain:afundirectory.com
 domain:aglocodirectory.com
 domain:ajax-directory.com
 domain:arcade-directory.com
+domain:australianwebdirectory.com
+domain:australianwebdirectory.shop
 domain:az-directory.com
 domain:bailoutdirectory.com
 domain:bamboo-directory.com
 domain:base-directory.com
 domain:begindirectory.com
 domain:bentdirectory.com
+domain:bestdirectorysite.com
 domain:bigboxdirectory.com
 domain:bizdirectoryinfo.com
 domain:bomadirectory.com
@@ -111,6 +117,7 @@ domain:directory4web.com
 domain:directoryalbum.com
 domain:directoryark.com
 domain:directoryarmy.com
+domain:directorycell.com
 domain:directorydepo.com
 domain:directoryecho.com
 domain:directoryethics.com
@@ -142,6 +149,7 @@ domain:dotcom-directory.com
 domain:e-directory2u.com
 domain:e-web-directory.com
 domain:ebiz-directory.com
+domain:egyptiandirectory.com
 domain:emeralddirectory.com
 domain:en-web-directory.com
 domain:exceeddirectory.com
@@ -204,6 +212,9 @@ domain:princedirectory.com
 domain:problogdirectory.com
 domain:prxdirectory.com
 domain:pulsardirectory.com
+domain:rankdirectorysite.com
+domain:rankerdirectory.com
+domain:ranksdirectory.com
 domain:real-directory.com
 domain:sectordirectory.com
 domain:seek-directory.com
@@ -214,6 +225,7 @@ domain:seo-webdirectory.com
 domain:serpsdirectory.com
 domain:shopwebdirectory.com
 domain:simbadirectory.com
+domain:simplewebdirectory.com
 domain:sjbdirectory.com
 domain:slimdirectory.com
 domain:snoopydirectory.com
@@ -234,6 +246,7 @@ domain:tools-directory.com
 domain:topazdirectory.com
 domain:topdirectory1.com
 domain:tops-directory.com
+domain:topupdirectory.com
 domain:triplexdirectory.com
 domain:ukdirectorylist.com
 domain:ukdirectoryof.com
@@ -243,6 +256,7 @@ domain:victorydirectory.com
 domain:vietbizdirectory.com
 domain:viewsdirectory.com
 domain:vip-directory.com
+domain:virtualsdirectory.com
 domain:vital-directory.com
 domain:web-directory4.com
 domain:weballdirectorys.com
@@ -272,9 +286,25 @@ domain:retiredbrains.com
 domain:eurekster.com
 
 # --- Hacked Site / Injected Link-Vendor Spam ---
+domain:40217761.servicio-online.net
+domain:avtoburo-bitrix.sk-its.ru
+domain:brizbot.com
+domain:changingfaceshousing.com
 domain:chordmp3.net
+domain:couriertrackk.com
+domain:csir-sari.org
+domain:dotignite.com
 domain:fletcherrld.com
+domain:jvnps.com
+domain:moscowtimes.top
+domain:politicsofsport.com
+domain:porras.ch
+domain:pro-one-trans.com
+domain:robo.dev.nologostudio.ru
+domain:saintsebastianelitecollege.com
+domain:slpharma.com.br
 domain:southfwb.com
+domain:thejeera.com
 domain:violationfunding.com
 
 # --- Identical-Footprint Cohort (Same Operator) ---
@@ -283,17 +313,17 @@ domain:coherence.today
 # --- Keyword-Stuffed Exact-Match Domain ---
 domain:health-supplements-review.com
 
+# --- Link Farm / Bare-Domain Listing ---
+domain:topbilliondirectory.com
+
 # --- Link Farm / Outbound-Link Bloat ---
-domain:2x9.co
 domain:5913231.cc
 domain:agendacover.com
 domain:all-aged-domains.com
 domain:alljobs.info
 domain:alltopleveldomains.space
 domain:allwebsitesdirectory.com
-domain:australianwebdirectory.shop
 domain:bestwebstats.com
-domain:blacksonwhites.com
 domain:booksreadr.org
 domain:carplz.com
 domain:corrector.in
@@ -302,11 +332,8 @@ domain:domainanalysis.org
 domain:domaineye.com
 domain:domainwork.space
 domain:ecommercebenchmarking.com
-domain:egyptiandirectory.com
 domain:findinfo.in
 domain:getonline.co.in
-domain:getwebsiteworth.com
-domain:globalecommerce.org
 domain:hebagh.cv
 domain:homefinance.co.in
 domain:indians.cc
@@ -314,7 +341,6 @@ domain:jobsapp.info
 domain:linksnatcher.art
 domain:linksnatcher.com
 domain:mp3fresh.net
-domain:musweb.org
 domain:nettools.guru
 domain:optimisedwebsites.com
 domain:pagesearch.net
@@ -326,23 +352,17 @@ domain:pudhe.com
 domain:qhtycw.com
 domain:queries.co.in
 domain:rankvanceauthority.info
-domain:read.org.in
-domain:runningwebsites.net
+domain:rankvanceseo.info
 domain:sergechel.info
-domain:simplewebdirectory.com
 domain:sitescooponline.com
 domain:taxies.biz
 domain:thirty.co.in
 domain:topleveldomains.space
-domain:tunca.org
 domain:tyre.pro
 domain:uaewebdirectory.info
-domain:wallpapers.pro
 domain:washingtonsblog.com
 domain:way2check.art
-domain:way2check.cv
 domain:webrankindia.com
-domain:websiterace.com
 domain:websitescrawl.art
 domain:websitesea.com
 domain:webworthchecker.cv
@@ -353,6 +373,8 @@ domain:youtoo.in
 
 # --- Link-Selling / SEO Vendor Domain ---
 domain:99backlinksbuy.com
+domain:99ranks.com
+domain:a2zseoarticles.com
 domain:atozbacklinks.com
 domain:backlinkhouse.com
 domain:backlinkon.com
@@ -381,17 +403,24 @@ domain:buyrankbacklinks.com
 domain:buyseolinks.site
 domain:buytopqualitybacklinks.com
 domain:clicktobuybacklinks.com
+domain:clicktohigh.com
 domain:digitalseotool.com
 domain:domraider.eu.com
 domain:domraider.gb.net
 domain:domraider.it.com
 domain:eliteseobacklinks.com
 domain:friendlybacklinksbuy.com
+domain:globalseoarticles.com
+domain:hostseolinks.com
 domain:on-demand-seo-backlinks.com
+domain:proseoarticles.com
 domain:quickseolinks.com
+domain:rankvance.website
 domain:rarebacklinks.com
 domain:seo-analysis-s1.xyz
 domain:seo-expert-service.com
+domain:seoarticletime.com
+domain:seodomains.website
 domain:seotech2.com
 domain:superbqualitybacklinks.com
 domain:top-seo-service-high-rated.com
@@ -400,6 +429,7 @@ domain:ultimate-backlink-solution.com
 domain:ultimate-seo-packet.com
 domain:urgent-seo-ranking-help.com
 domain:viralbacklinks.com
+domain:wayseolinks.com
 domain:webbacklinkskbuy.com
 domain:webrankingsolutionbacklinks.com
 domain:welinkbacklinks.com
@@ -549,10 +579,10 @@ domain:seo-cartel-9w.xyz
 
 # --- PBN Hosting Footprint (Cluster Propagation) ---
 domain:anchorurl.cloud
-domain:australianwebdirectory.com
 domain:buzzshrink.website
 domain:factmags.com
 domain:jake.eu
+domain:list.show
 domain:shortenurls.eu
 domain:urls-shortener.eu
 domain:websites.freemyip.com
@@ -583,36 +613,30 @@ domain:web-ranking-gain-fast.com
 domain:x.nom.co
 
 # --- Shared Link-Template Footprint (Same Operator) ---
+domain:2x9.co
 domain:99bestsite.com
-domain:99ranks.com
 domain:99w.im
-domain:a2zseoarticles.com
 domain:adzbusiness.com
 domain:bestarticleworld.com
-domain:bestdirectorysite.com
 domain:bilalarticles.com
+domain:blacksonwhites.com
 domain:businessnewses.com
+domain:businessvocal.com
 domain:cashbackdeals.in
-domain:clicktohigh.com
 domain:developmentmi.com
-domain:directorycell.com
+domain:globalecommerce.org
 domain:globalproseo.com
-domain:globalseoarticles.com
-domain:hostseolinks.com
 domain:linkanews.com
 domain:linksnewses.com
 domain:multiranks.com
+domain:musweb.org
 domain:pirdu.com
 domain:postonseo.com
 domain:prepostlink.com
-domain:proseoarticles.com
-domain:rankdirectorysite.com
-domain:rankerdirectory.com
 domain:ranksarticle.com
-domain:ranksdirectory.com
+domain:read.org.in
+domain:runningwebsites.net
 domain:sbyme.com
-domain:seoarticletime.com
-domain:seodomains.website
 domain:seol.store
 domain:sitesnewses.com
 domain:softranks.com
@@ -621,19 +645,19 @@ domain:starsarticle.com
 domain:takes.homes
 domain:takes.sbs
 domain:thearticletime.com
+domain:thecloudherald.com
 domain:topacted.com
 domain:toplinksites.com
-domain:topupdirectory.com
-domain:virtualsdirectory.com
+domain:tunca.org
+domain:wallpapers.pro
 domain:wants.cfd
-domain:wayseolinks.com
+domain:way2check.cv
 domain:webhubsites.com
 domain:webranksite.com
 domain:websitehubs.com
 domain:websitesnewses.com
 domain:worldlinksites.com
 domain:worldwideranks.com
-domain:wwwhollywoodk.blogspot.com
 
 # --- Sitewide Link Injection (Templated Anchor) ---
 domain:biohackstars.com

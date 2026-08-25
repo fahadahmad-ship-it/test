@@ -1,8 +1,8 @@
 # Performance Lab - disavow file (FULL profile)
-# Domains: 1,081 | Backlinks: 13,046
+# Domains: 1,120 | Backlinks: 13,323
 # Referring domains evaluated: 2,928
 # Total backlinks represented: 1,362,105
-# Disavowed backlinks: 13,046
+# Disavowed backlinks: 13,323
 # Includes nofollow-only domains per client decision; see
 # disavow_core.txt for the equity-passing subset alone.
 # Search/AI surfaces and affiliate infrastructure excluded by design.
@@ -11,8 +11,11 @@
 #
 
 # --- Auto-Generated Domain-Flipping / Stats Farm ---
+domain:domains.com.bz
 domain:domainsc.com
+domain:getwebsiteworth.com
 domain:indexaward.com
+domain:websiterace.com
 
 # --- Client Decision (Disavow) - Auto-Generated App Listing ---
 domain:appsupports.co
@@ -82,12 +85,15 @@ domain:afundirectory.com
 domain:aglocodirectory.com
 domain:ajax-directory.com
 domain:arcade-directory.com
+domain:australianwebdirectory.com
+domain:australianwebdirectory.shop
 domain:az-directory.com
 domain:bailoutdirectory.com
 domain:bamboo-directory.com
 domain:base-directory.com
 domain:begindirectory.com
 domain:bentdirectory.com
+domain:bestdirectorysite.com
 domain:bigboxdirectory.com
 domain:bizdirectoryinfo.com
 domain:bomadirectory.com
@@ -122,6 +128,7 @@ domain:directory4web.com
 domain:directoryalbum.com
 domain:directoryark.com
 domain:directoryarmy.com
+domain:directorycell.com
 domain:directorydepo.com
 domain:directoryecho.com
 domain:directoryethics.com
@@ -153,6 +160,7 @@ domain:dotcom-directory.com
 domain:e-directory2u.com
 domain:e-web-directory.com
 domain:ebiz-directory.com
+domain:egyptiandirectory.com
 domain:emeralddirectory.com
 domain:en-web-directory.com
 domain:exceeddirectory.com
@@ -215,6 +223,9 @@ domain:princedirectory.com
 domain:problogdirectory.com
 domain:prxdirectory.com
 domain:pulsardirectory.com
+domain:rankdirectorysite.com
+domain:rankerdirectory.com
+domain:ranksdirectory.com
 domain:real-directory.com
 domain:sectordirectory.com
 domain:seek-directory.com
@@ -225,6 +236,7 @@ domain:seo-webdirectory.com
 domain:serpsdirectory.com
 domain:shopwebdirectory.com
 domain:simbadirectory.com
+domain:simplewebdirectory.com
 domain:sjbdirectory.com
 domain:slimdirectory.com
 domain:snoopydirectory.com
@@ -245,6 +257,7 @@ domain:tools-directory.com
 domain:topazdirectory.com
 domain:topdirectory1.com
 domain:tops-directory.com
+domain:topupdirectory.com
 domain:triplexdirectory.com
 domain:ukdirectorylist.com
 domain:ukdirectoryof.com
@@ -254,6 +267,7 @@ domain:victorydirectory.com
 domain:vietbizdirectory.com
 domain:viewsdirectory.com
 domain:vip-directory.com
+domain:virtualsdirectory.com
 domain:vital-directory.com
 domain:web-directory4.com
 domain:weballdirectorys.com
@@ -282,7 +296,32 @@ domain:retiredbrains.com
 # --- Exact-Match Anchor Abuse (Syndicated Placement) ---
 domain:eurekster.com
 
+# --- Free-Host Blog Serving a Link Dump ---
+domain:bloatatt.blogspot.com
+domain:centralc.pages.dev
+domain:csponarlikex.blogspot.com
+domain:cytopore.blogspot.com
+domain:daadvn.blogspot.com
+domain:daisye.pages.dev
+domain:dsspkjk.blogspot.com
+domain:emegabiza.blogspot.com
+domain:fagfrogs1.blogspot.com
+domain:flamingos.pages.dev
+domain:global-rank.pages.dev
+domain:global-ranks.pages.dev
+domain:keshpakcxz.blogspot.com
+domain:kimssaulikesd.blogspot.com
+domain:lreeswcqcxz.blogspot.com
+domain:pkbtembnm.blogspot.com
+domain:qilins.pages.dev
+domain:top-websites-directory.pages.dev
+domain:webbys.pages.dev
+domain:wmsonlines.blogspot.com
+domain:worldofgamingk.blogspot.com
+domain:wwwhollywoodk.blogspot.com
+
 # --- Hacked Site / Injected Link-Vendor Spam ---
+domain:40217761.servicio-online.net
 domain:911auto.it
 domain:a1housingservicesltd.co.uk
 domain:aaniver.com
@@ -295,22 +334,28 @@ domain:arteza.fr
 domain:ateliereleaurorei.ro
 domain:automaned.com
 domain:avareno.ca
+domain:avtoburo-bitrix.sk-its.ru
 domain:baskidunyasi.net
 domain:batizens.vn
 domain:berlin-immobilien-verkaufen.de
 domain:bluecantera.com
 domain:bnksp.org
 domain:botrond.com
+domain:brizbot.com
+domain:changingfaceshousing.com
 domain:charteredstudies.in
 domain:chordmp3.net
 domain:chuihanghin.com
 domain:cidadetoda.com.br
 domain:consultoriojuridicovirtual.cecar.edu.co
+domain:couriertrackk.com
+domain:csir-sari.org
 domain:cttbeats.capetownthing.co.za
 domain:dcoutesnjacob.com
 domain:dgsac.com.pe
 domain:diyprinting.shop
 domain:docarnettefoundation.org
+domain:dotignite.com
 domain:dryamroka.com
 domain:elibrary-smpia15.alazharcilacap.sch.id
 domain:entuev.com
@@ -331,6 +376,7 @@ domain:instantelhydraulics.com
 domain:irantbs.com
 domain:jomtien-realty.com
 domain:joyrney.com
+domain:jvnps.com
 domain:kanma-marketing.com
 domain:kelas.seomuda.id
 domain:lakefrontmarine.ca
@@ -340,6 +386,7 @@ domain:lukang-audio.com
 domain:luxehub.com
 domain:mainpg88.com
 domain:modernatucasa.com
+domain:moscowtimes.top
 domain:msimasters.com
 domain:nanochem.com.vn
 domain:nhdtlogs.com
@@ -348,14 +395,19 @@ domain:olimposs.com
 domain:olivare.com.ar
 domain:osadazbojecka.pl
 domain:packages.digitalatto.io
+domain:politicsofsport.com
+domain:porras.ch
 domain:portlandlandscapepros.com
 domain:presale-vancouver.ca
+domain:pro-one-trans.com
 domain:proplayersports.com
 domain:qualitypoint.com.do
 domain:quantitativemarxism.economicas.uba.ar
 domain:rbexcellentairportservicesinc.ca
 domain:resonancelabjo.com
 domain:revan-me.com
+domain:robo.dev.nologostudio.ru
+domain:saintsebastianelitecollege.com
 domain:samikshaharmony.com
 domain:sante.gov.mg
 domain:seo-anomaly-alttext.online
@@ -463,6 +515,7 @@ domain:simedia.co.th
 domain:simplygaurav.com
 domain:sisgroup.lk
 domain:slapshady.com
+domain:slpharma.com.br
 domain:smartcabsnorwich.co.uk
 domain:smartparentresources.org
 domain:solizer.org
@@ -470,6 +523,7 @@ domain:southfwb.com
 domain:sportsbikeparts.pk
 domain:stablegeeksstaffing.com
 domain:technewsmail.com
+domain:thejeera.com
 domain:thetarotalk.com
 domain:vilagrad.com
 domain:violationfunding.com
@@ -538,7 +592,6 @@ domain:ketaki.co.in
 domain:lifesblog.com
 domain:linkdonation.com
 domain:linkscrawl.com
-domain:list.show
 domain:listmydomain.com
 domain:listrecord.com
 domain:livebacklinks.com
@@ -573,6 +626,7 @@ domain:summary.co.in
 domain:surekha.co.in
 domain:sushila.co.in
 domain:techpark.org
+domain:topbilliondirectory.com
 domain:topdir.net
 domain:topdirectory.co.in
 domain:topdirectory.in
@@ -591,7 +645,6 @@ domain:wondomain.com
 domain:zhygg.com
 
 # --- Link Farm / Outbound-Link Bloat ---
-domain:2x9.co
 domain:5913231.cc
 domain:agendacover.com
 domain:algolinkers.com
@@ -602,9 +655,7 @@ domain:allwebsitesdirectory.com
 domain:analyticshaven.top
 domain:atomizelink.icu
 domain:australianwebdirectory.info
-domain:australianwebdirectory.shop
 domain:bestwebstats.com
-domain:blacksonwhites.com
 domain:blogsphere.top
 domain:blueinblue.com
 domain:booksreadr.org
@@ -620,12 +671,9 @@ domain:domaineye.com
 domain:domainwork.space
 domain:drjack.world
 domain:ecommercebenchmarking.com
-domain:egyptiandirectory.com
 domain:example3.com
 domain:findinfo.in
 domain:getonline.co.in
-domain:getwebsiteworth.com
-domain:globalecommerce.org
 domain:hebagh.cv
 domain:homefinance.co.in
 domain:indians.cc
@@ -634,7 +682,6 @@ domain:linksnatcher.art
 domain:linksnatcher.com
 domain:metamagic.top
 domain:mp3fresh.net
-domain:musweb.org
 domain:nettools.guru
 domain:optimisedwebsites.com
 domain:optimizeflow.top
@@ -648,25 +695,19 @@ domain:qhtycw.com
 domain:queries.co.in
 domain:quero.party
 domain:rankvanceauthority.info
-domain:read.org.in
+domain:rankvanceseo.info
 domain:ready.pro
-domain:runningwebsites.net
 domain:screenshots.wiki
 domain:sergechel.info
-domain:simplewebdirectory.com
 domain:sitescooponline.com
 domain:taxies.biz
 domain:thirty.co.in
 domain:topleveldomains.space
-domain:tunca.org
 domain:tyre.pro
 domain:uaewebdirectory.info
-domain:wallpapers.pro
 domain:washingtonsblog.com
 domain:way2check.art
-domain:way2check.cv
 domain:webrankindia.com
-domain:websiterace.com
 domain:websitescrawl.art
 domain:websitescrawl.com
 domain:websitesea.com
@@ -678,6 +719,8 @@ domain:youtoo.in
 
 # --- Link-Selling / SEO Vendor Domain ---
 domain:99backlinksbuy.com
+domain:99ranks.com
+domain:a2zseoarticles.com
 domain:atozbacklinks.com
 domain:backlinkhouse.com
 domain:backlinkon.com
@@ -706,17 +749,24 @@ domain:buyrankbacklinks.com
 domain:buyseolinks.site
 domain:buytopqualitybacklinks.com
 domain:clicktobuybacklinks.com
+domain:clicktohigh.com
 domain:digitalseotool.com
 domain:domraider.eu.com
 domain:domraider.gb.net
 domain:domraider.it.com
 domain:eliteseobacklinks.com
 domain:friendlybacklinksbuy.com
+domain:globalseoarticles.com
+domain:hostseolinks.com
 domain:on-demand-seo-backlinks.com
+domain:proseoarticles.com
 domain:quickseolinks.com
+domain:rankvance.website
 domain:rarebacklinks.com
 domain:seo-analysis-s1.xyz
 domain:seo-expert-service.com
+domain:seoarticletime.com
+domain:seodomains.website
 domain:seotech2.com
 domain:superbqualitybacklinks.com
 domain:top-seo-service-high-rated.com
@@ -725,6 +775,7 @@ domain:ultimate-backlink-solution.com
 domain:ultimate-seo-packet.com
 domain:urgent-seo-ranking-help.com
 domain:viralbacklinks.com
+domain:wayseolinks.com
 domain:webbacklinkskbuy.com
 domain:webrankingsolutionbacklinks.com
 domain:welinkbacklinks.com
@@ -874,10 +925,10 @@ domain:seo-cartel-9w.xyz
 
 # --- PBN Hosting Footprint (Cluster Propagation) ---
 domain:anchorurl.cloud
-domain:australianwebdirectory.com
 domain:buzzshrink.website
 domain:factmags.com
 domain:jake.eu
+domain:list.show
 domain:shortenurls.eu
 domain:urls-shortener.eu
 domain:websites.freemyip.com
@@ -908,36 +959,30 @@ domain:web-ranking-gain-fast.com
 domain:x.nom.co
 
 # --- Shared Link-Template Footprint (Same Operator) ---
+domain:2x9.co
 domain:99bestsite.com
-domain:99ranks.com
 domain:99w.im
-domain:a2zseoarticles.com
 domain:adzbusiness.com
 domain:bestarticleworld.com
-domain:bestdirectorysite.com
 domain:bilalarticles.com
+domain:blacksonwhites.com
 domain:businessnewses.com
+domain:businessvocal.com
 domain:cashbackdeals.in
-domain:clicktohigh.com
 domain:developmentmi.com
-domain:directorycell.com
+domain:globalecommerce.org
 domain:globalproseo.com
-domain:globalseoarticles.com
-domain:hostseolinks.com
 domain:linkanews.com
 domain:linksnewses.com
 domain:multiranks.com
+domain:musweb.org
 domain:pirdu.com
 domain:postonseo.com
 domain:prepostlink.com
-domain:proseoarticles.com
-domain:rankdirectorysite.com
-domain:rankerdirectory.com
 domain:ranksarticle.com
-domain:ranksdirectory.com
+domain:read.org.in
+domain:runningwebsites.net
 domain:sbyme.com
-domain:seoarticletime.com
-domain:seodomains.website
 domain:seol.store
 domain:sitesnewses.com
 domain:softranks.com
@@ -946,26 +991,22 @@ domain:starsarticle.com
 domain:takes.homes
 domain:takes.sbs
 domain:thearticletime.com
+domain:thecloudherald.com
 domain:topacted.com
 domain:toplinksites.com
-domain:topupdirectory.com
-domain:virtualsdirectory.com
+domain:tunca.org
+domain:wallpapers.pro
 domain:wants.cfd
-domain:wayseolinks.com
+domain:way2check.cv
 domain:webhubsites.com
 domain:webranksite.com
 domain:websitehubs.com
 domain:websitesnewses.com
 domain:worldlinksites.com
 domain:worldwideranks.com
-domain:wwwhollywoodk.blogspot.com
 
 # --- Sitewide Link Injection (Templated Anchor) ---
 domain:biohackstars.com
-domain:bloatatt.blogspot.com
-domain:cytopore.blogspot.com
-domain:emegabiza.blogspot.com
-domain:fagfrogs1.blogspot.com
 domain:newsblogsports.site
 
 # --- Synthetic Affiliate Doorway Domain ---

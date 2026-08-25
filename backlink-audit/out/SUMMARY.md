@@ -8,13 +8,13 @@
 
 | Action | Domains | Backlinks | % of links |
 |---|---:|---:|---:|
-| DISAVOW | 553 | 3,822 | 6.1% |
-| REVIEW_MANUALLY | 391 | 1,163 | 1.9% |
-| KEEP_AFFILIATE_RETAIN | 1,432 | 57,225 | 92.0% |
+| DISAVOW | 574 | 3,766 | 6.1% |
+| REVIEW_MANUALLY | 373 | 1,222 | 2.0% |
+| KEEP_AFFILIATE_RETAIN | 1,429 | 57,222 | 92.0% |
 
 ## Equity exposure
 
-Of **3,822** disavow-flagged backlinks, only **2,364 (61.9%)** are follow links that pass equity. The remaining **1,458** are nofollow and pass none.
+Of **3,766** disavow-flagged backlinks, only **2,221 (59.0%)** are follow links that pass equity. The remaining **1,545** are nofollow and pass none.
 
 ### Priority remediation targets (follow links only)
 
@@ -28,10 +28,8 @@ Of **3,822** disavow-flagged backlinks, only **2,364 (61.9%)** are follow links 
 | educationalimpactblog.com | 26 | Throwaway Auto-Generated Host |
 | anchor-blog.com | 24 | Throwaway Auto-Generated Host |
 | bluxeblog.com | 24 | Throwaway Auto-Generated Host |
-| read.org.in | 23 | Link Farm / Outbound-Link Bloat |
 | onesmablog.com | 22 | Vendor Blog Network (Spun-Content PBN) |
 | pointblog.net | 21 | Vendor Blog Network (Spun-Content PBN) |
-| way2check.cv | 21 | Link Farm / Outbound-Link Bloat |
 | full-design.com | 20 | Vendor Blog Network (Spun-Content PBN) |
 | pages10.com | 19 | Throwaway Auto-Generated Host |
 | bloggazza.com | 18 | Vendor Blog Network (Spun-Content PBN) |
@@ -88,15 +86,11 @@ Of **3,822** disavow-flagged backlinks, only **2,364 (61.9%)** are follow links 
 | ttblogs.com | 15 | Throwaway Auto-Generated Host |
 | blogginaway.com | 15 | Throwaway Auto-Generated Host |
 | iyublog.com | 15 | Throwaway Auto-Generated Host |
-| globalecommerce.org | 15 | Link Farm / Outbound-Link Bloat |
 | dailyblogzz.com | 14 | Vendor Blog Network (Spun-Content PBN) |
-| getwebsiteworth.com | 14 | Link Farm / Outbound-Link Bloat |
 | pudhe.com | 14 | Link Farm / Outbound-Link Bloat |
 | thekatyblog.com | 14 | Throwaway Auto-Generated Host |
 | liberty-blog.com | 13 | Vendor Blog Network (Spun-Content PBN) |
 | articlesblogger.com | 13 | Vendor Blog Network (Spun-Content PBN) |
-| wallpapers.pro | 13 | Link Farm / Outbound-Link Bloat |
-| tunca.org | 12 | Link Farm / Outbound-Link Bloat |
 | newsblogsports.site | 12 | Sitewide Link Injection (Templated Anchor) |
 | dgbloggers.com | 11 | Throwaway Auto-Generated Host |
 | ivasdesign.com | 11 | Throwaway Auto-Generated Host |
@@ -106,17 +100,12 @@ Of **3,822** disavow-flagged backlinks, only **2,364 (61.9%)** are follow links 
 | aboutyoublog.com | 10 | Throwaway Auto-Generated Host |
 | blogdomago.com | 10 | Throwaway Auto-Generated Host |
 | thezenweb.com | 10 | Vendor Blog Network (Spun-Content PBN) |
-| websiterace.com | 10 | Link Farm / Outbound-Link Bloat |
 | wonvision.com | 10 | Link Farm / Outbound-Link Bloat |
-| musweb.org | 10 | Link Farm / Outbound-Link Bloat |
-| egyptiandirectory.com | 10 | Link Farm / Outbound-Link Bloat |
 | uaewebdirectory.info | 10 | Link Farm / Outbound-Link Bloat |
-| australianwebdirectory.shop | 10 | Link Farm / Outbound-Link Bloat |
 | bloguerosa.com | 9 | Throwaway Auto-Generated Host |
 | pagesearch.net | 9 | Link Farm / Outbound-Link Bloat |
 | blog2news.com | 9 | Throwaway Auto-Generated Host |
 | thirty.co.in | 9 | Link Farm / Outbound-Link Bloat |
-| 2x9.co | 8 | Link Farm / Outbound-Link Bloat |
 | theideasblog.com | 8 | Throwaway Auto-Generated Host |
 | ycm.info | 8 | Link Farm / Outbound-Link Bloat |
 | linksnatcher.com | 8 | Link Farm / Outbound-Link Bloat |
@@ -126,7 +115,6 @@ Of **3,822** disavow-flagged backlinks, only **2,364 (61.9%)** are follow links 
 | isblog.net | 7 | Vendor Blog Network (Spun-Content PBN) |
 | suomiblog.com | 7 | Vendor Blog Network (Spun-Content PBN) |
 | optimisedwebsites.com | 7 | Link Farm / Outbound-Link Bloat |
-| runningwebsites.net | 7 | Link Farm / Outbound-Link Bloat |
 | alljobs.info | 7 | Link Farm / Outbound-Link Bloat |
 | domainanalysis.org | 7 | Link Farm / Outbound-Link Bloat |
 | hebagh.cv | 7 | Link Farm / Outbound-Link Bloat |
@@ -138,7 +126,6 @@ Of **3,822** disavow-flagged backlinks, only **2,364 (61.9%)** are follow links 
 | mybjjblog.com | 6 | Vendor Blog Network (Spun-Content PBN) |
 | izrablog.com | 6 | Vendor Blog Network (Spun-Content PBN) |
 | luwebs.com | 6 | Throwaway Auto-Generated Host |
-| blacksonwhites.com | 6 | Link Farm / Outbound-Link Bloat |
 | designertoblog.com | 6 | Vendor Blog Network (Spun-Content PBN) |
 | blogpayz.com | 6 | Vendor Blog Network (Spun-Content PBN) |
 | getonline.co.in | 6 | Link Farm / Outbound-Link Bloat |
@@ -152,7 +139,6 @@ Of **3,822** disavow-flagged backlinks, only **2,364 (61.9%)** are follow links 
 | tribunablog.com | 5 | Vendor Blog Network (Spun-Content PBN) |
 | blogminds.com | 5 | Vendor Blog Network (Spun-Content PBN) |
 | 5913231.cc | 5 | Link Farm / Outbound-Link Bloat |
-| simplewebdirectory.com | 5 | Link Farm / Outbound-Link Bloat |
 | indians.cc | 5 | Link Farm / Outbound-Link Bloat |
 | preparation.co.in | 5 | Link Farm / Outbound-Link Bloat |
 | websitescrawl.art | 5 | Link Farm / Outbound-Link Bloat |
@@ -188,6 +174,7 @@ Of **3,822** disavow-flagged backlinks, only **2,364 (61.9%)** are follow links 
 | mybuzzblog.com | 3 | Vendor Blog Network (Spun-Content PBN) |
 | blogacep.com | 3 | Throwaway Auto-Generated Host |
 | bloggerbags.com | 3 | Vendor Blog Network (Spun-Content PBN) |
+| sk-its.ru | 3 | Hacked Site / Injected Link-Vendor Spam |
 | corrector.in | 3 | Link Farm / Outbound-Link Bloat |
 | carplz.com | 3 | Link Farm / Outbound-Link Bloat |
 | youtoo.in | 3 | Link Farm / Outbound-Link Bloat |
@@ -195,6 +182,7 @@ Of **3,822** disavow-flagged backlinks, only **2,364 (61.9%)** are follow links 
 | tyre.pro | 3 | Link Farm / Outbound-Link Bloat |
 | targetblogs.com | 3 | Throwaway Auto-Generated Host |
 | toparticlesdirectory.com | 2 | Directory / Link-Scheme Spam Footprint |
+| rankvanceseo.info | 2 | Link Farm / Outbound-Link Bloat |
 | blogdon.net | 2 | Throwaway Auto-Generated Host |
 | bizlinkdirectory.com | 2 | Directory / Link-Scheme Spam Footprint |
 | seozdirectory.com | 2 | Directory / Link-Scheme Spam Footprint |
@@ -226,23 +214,39 @@ Of **3,822** disavow-flagged backlinks, only **2,364 (61.9%)** are follow links 
 | en-en-prozenith.us | 1 | Synthetic Affiliate Doorway Domain |
 | sharebyblog.com | 1 | Vendor Blog Network (Spun-Content PBN) |
 | seodirectorysite.com | 1 | Directory / Link-Scheme Spam Footprint |
+| saintsebastianelitecollege.com | 1 | Hacked Site / Injected Link-Vendor Spam |
+| brizbot.com | 1 | Hacked Site / Injected Link-Vendor Spam |
+| porras.ch | 1 | Hacked Site / Injected Link-Vendor Spam |
 | directoryoflink.com | 1 | Directory / Link-Scheme Spam Footprint |
+| csir-sari.org | 1 | Hacked Site / Injected Link-Vendor Spam |
+| politicsofsport.com | 1 | Hacked Site / Injected Link-Vendor Spam |
 | linkodirectory.com | 1 | Directory / Link-Scheme Spam Footprint |
 | wayseodirectory.com | 1 | Directory / Link-Scheme Spam Footprint |
+| servicio-online.net | 1 | Hacked Site / Injected Link-Vendor Spam |
+| changingfaceshousing.com | 1 | Hacked Site / Injected Link-Vendor Spam |
 | elbloglibre.com | 1 | Vendor Blog Network (Spun-Content PBN) |
 | rankvanceauthority.info | 1 | Link Farm / Outbound-Link Bloat |
 | thelateblog.com | 1 | Throwaway Auto-Generated Host |
+| pro-one-trans.com | 1 | Hacked Site / Injected Link-Vendor Spam |
+| thejeera.com | 1 | Hacked Site / Injected Link-Vendor Spam |
+| jvnps.com | 1 | Hacked Site / Injected Link-Vendor Spam |
+| slpharma.com.br | 1 | Hacked Site / Injected Link-Vendor Spam |
 | prolinksdirectory.com | 1 | Directory / Link-Scheme Spam Footprint |
 | proseolinksdirectory.com | 1 | Directory / Link-Scheme Spam Footprint |
 | globalseodirectory.com | 1 | Directory / Link-Scheme Spam Footprint |
 | ziblogs.com | 1 | Throwaway Auto-Generated Host |
+| couriertrackk.com | 1 | Hacked Site / Injected Link-Vendor Spam |
 | agendacover.com | 1 | Link Farm / Outbound-Link Bloat |
+| dotignite.com | 1 | Hacked Site / Injected Link-Vendor Spam |
 | gynoblog.com | 1 | Throwaway Auto-Generated Host |
 | sitescooponline.com | 1 | Link Farm / Outbound-Link Bloat |
 | blogspothub.com | 1 | Vendor Blog Network (Spun-Content PBN) |
+| topbilliondirectory.com | 1 | Link Farm / Bare-Domain Listing |
 | parentingvista.com | 1 | Link Farm / Outbound-Link Bloat |
 | toplinksdirectory.com | 1 | Directory / Link-Scheme Spam Footprint |
 | webseodirectory.com | 1 | Directory / Link-Scheme Spam Footprint |
+| nologostudio.ru | 1 | Hacked Site / Injected Link-Vendor Spam |
+| moscowtimes.top | 1 | Hacked Site / Injected Link-Vendor Spam |
 | webrankindia.com | 1 | Link Farm / Outbound-Link Bloat |
 | seohubdirectory.com | 1 | Directory / Link-Scheme Spam Footprint |
 | nettools.guru | 1 | Link Farm / Outbound-Link Bloat |
@@ -307,14 +311,15 @@ They are **not** disavowed. Two attempts to turn this into a rule each misclassi
 
 | Risk factor | Domains |
 |---|---:|
-| Hacked Site / Injected Link-Vendor Spam | 193 |
+| Hacked Site / Injected Link-Vendor Spam | 209 |
 | Link Farm / Bare-Domain Listing | 106 |
-| Link Farm / Outbound-Link Bloat | 84 |
+| Link Farm / Outbound-Link Bloat | 71 |
 | Throwaway Auto-Generated Host | 71 |
 | Vendor Blog Network (Spun-Content PBN) | 56 |
 | Directory / Link-Scheme Spam Footprint | 28 |
-| Sitewide Link Injection (Templated Anchor) | 6 |
+| Free-Host Blog Serving a Link Dump | 22 |
 | Synthetic Affiliate Doorway Domain | 5 |
+| Sitewide Link Injection (Templated Anchor) | 2 |
 | Exact-Match Anchor Abuse (Sitewide Injection) | 1 |
 | Exact-Match Anchor Abuse (Syndicated Placement) | 1 |
 | Client Decision (Disavow) - Off-Niche High-Volume Placement | 1 |

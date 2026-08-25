@@ -160,7 +160,19 @@ AFFILIATE_REDIRECT_SOURCES = {
 
 # Tracker / redirect subdomain patterns seen on partner infrastructure.
 TRACKER_HOST_RE = re.compile(
-    r"^(go|track|click|offers?|link|links|r|t|c|aff|partner|promo|out|ref)\."
+    r"^(go|track|click|offers?|link|links|r|t|c|aff|partner|promo|out|ref|"
+    r"ctrk|clicks|email|em|mail|list)\."
+)
+
+# Email-service-provider click wrappers. ctrk.klclick2.com is Klaviyo, which
+# the client's own store runs -- a link through it is the client's newsletter,
+# not a third-party placement. Found in the review queue at authority 6.
+ESP_TRACKER_SUFFIXES = (
+    "klclick.com", "klclick2.com", "klclick3.com", "klaviyomail.com",
+    "list-manage.com", "mailchimpapp.com", "sendgrid.net", "sparkpostmail.com",
+    "hubspotlinks.com", "mandrillapp.com", "rs6.net", "cmail19.com",
+    "createsend.com", "sendinblue.com", "mailerlite.com", "activehosted.com",
+    "postmarkapp.com", "customeriomail.com", "braze.eu", "exct.net",
 )
 
 # --------------------------------------------------------------------------
@@ -302,6 +314,9 @@ HACKED_INJECTION_RE = re.compile(
     r"buy backlinks|backlinks? for sale|bulk link|link posting|"
     r"mass links|boost seo|black hat seo|seo services|pbn links|"
     r"ranking service|xrumer|gsa ser|"
+    # Account-selling and traffic spam injected on compromised news hosts:
+    # moscowtimes.top carries an anchor advertising acc6.top in Cyrillic.
+    r"acc\d*\.(top|xyz|site|online)|получить|аккаунт|купить|"
     r"\bсео\b|ссылк|прогон)",
     re.I,
 )
@@ -376,7 +391,9 @@ AUTOGEN_PATH_RE = re.compile(
     r"/(list|page|post|item|entry|id|p)[-_/][0-9a-f]{12,}|"   # hash-named page
     r"/[0-9a-f]{24,}|"                                        # bare hash segment
     r"/(report|reports|listing|listings|record|records)/\d+|" # numeric record id
-    r"/[a-z]*[-_]?list[-_]\d+|"                               # /domain-list-456
+    # "list" must start a segment or follow a hyphen, so checklist-2024 and
+    # playlist-99 -- ordinary slugs -- do not match.
+    r"/(?:[a-z]+-)*list[-_]?\d+|"       # /domain-list-456, /website-new-list633
     r"/(domain|website|site|host|whois|rank|ranks|stats|"      # stats-farm routes
     r"analytics|traffic|worth|value|review-site)/[^/]+/?$",
     re.I,
@@ -454,6 +471,64 @@ def doorway_slug(url: str) -> bool:
             and _opaque_token(parts[-1]))
 
 
+# Injected doorway pages on compromised hosts. Two URL signatures, both
+# with no benign reading, found by working the review queue by hand:
+#
+#   A root URL with a single-letter query parameter and a long numeric id --
+#   porras.ch/?p=89451313, politicsofsport.com/?p=89451313,
+#   pro-one-trans.com/?p=89451313, jvnps.com/?j=83596013,
+#   saintsebastianelitecollege.com/?s=83596013. The ids repeat across
+#   unrelated domains, which is the proof: one operator, many compromised
+#   hosts. The anchors are e-commerce modifiers machine-dropped into health
+#   phrases ("Best omega 3 hotsell supplement for dogs", "Crunching sound in
+#   cheap knee", "Belly fat deals burner without exercise").
+#
+#   A content page served out of a CMS admin directory --
+#   robo.dev.nologostudio.ru/bitrix/admin/tzut/the-star-newspaper-
+#   obituaries.html and avtoburo-bitrix.sk-its.ru/bitrix/admin/hqfyj1m/
+#   burthey-funeral-home-durham-obituaries.html, anchors "wlces" and "kjwjx".
+#   No publisher links out from /bitrix/admin/.
+#
+# The anchor is deliberately NOT part of the test. An anchor rule was tried
+# and dropped twice over: keying on the commerce wording caught the client's
+# own mindlabpro.com ("Shop Performance Lab Omega-3") and every real
+# affiliate, and requiring the anchor to omit the brand let csir-sari.org and
+# thejeera.com through, because these injections often carry a scraped
+# article title that happens to name it.
+#
+# The URL carries the whole signature and needs no help: fifteen domains
+# match, across seven different single-letter parameters (b, c, d, j, p, s,
+# t). No CMS uses seven conventions -- and the ids repeat, 89451313 on three
+# domains and 83596013 on two, with csir-sari.org and thejeera.com one digit
+# apart on the same anchor. That is one generator, not fifteen publishers.
+INJECTED_QUERY_DOORWAY = re.compile(r"^[a-z]=\d{7,}$", re.I)
+CMS_ADMIN_PATH = re.compile(r"/(bitrix/admin|wp-admin|administrator)/", re.I)
+
+
+def injected_doorway(url: str, anchor: str = "") -> bool:
+    """A doorway page on a compromised host, judged on the URL alone."""
+    s = urlsplit(url)
+    if CMS_ADMIN_PATH.search(s.path):
+        return True
+    return bool(s.query and s.path in ("", "/")
+                and INJECTED_QUERY_DOORWAY.match(s.query))
+
+
+# A path segment that mixes upper and lower case with no separator is not a
+# slug any CMS emits. Shared byte-identically across unrelated domains it
+# identifies one generator: /10/EmzwpDHARN and /04/lpoZKOHNYW appear on both
+# businessvocal.com and thecloudherald.com, /01/arnVoAQycp on
+# global-rank.pages.dev and top-websites-directory.pages.dev, /54/jZzUbmvOYU
+# on global-ranks.pages.dev and webbys.pages.dev -- six domains, one scheme.
+# Only 35 such paths exist in the whole corpus, so two owners is already
+# decisive here where two owners of a readable slug would not be.
+OPAQUE_SEGMENT_RE = re.compile(r"^(?=.*[a-z])(?=.*[A-Z])[A-Za-z0-9]{8,14}$")
+
+
+def has_opaque_segment(path: str) -> bool:
+    return any(OPAQUE_SEGMENT_RE.match(s) for s in path.split("/") if s)
+
+
 # Pages that announce themselves as link dumps.
 LINKDUMP_PATH_RE = re.compile(
     r"link[s]?[-_]?(list|dump|page|directory|exchange|partners?)|"
@@ -464,9 +539,16 @@ LINKDUMP_PATH_RE = re.compile(
     # rankvanceauthority.info, which was retained on negligible exposure
     # while serving 2,008 follow links from
     # /order-quality-backlinks-online-with-rankvance-today-251/.
-    r"(buy|order|cheap|quality|purchase|get)[-_](quality[-_])?backlinks?|"
-    r"backlinks?[-_](for[-_]sale|package|service|seller|shop|store|cheap)|"
-    r"(seo|link)[-_]?(building|selling)[-_]?(service|package)",
+    # Allows intervening words: rankvanceauthority.info uses
+    # /order-quality-backlinks-online-..., rankvanceseo.info
+    # /buy-premium-seo-backlinks-from-..., rankvance.website
+    # /explore-wikipedia-backlink-services-with-... -- one vendor, three
+    # domains, three phrasings.
+    r"\b(buy|order|cheap|purchase|sell|explore)([-_][a-z]+){0,3}[-_]backlinks?\b|"
+    r"\bbacklinks?([-_][a-z]+){0,2}[-_](for[-_]sale|package|service|seller|"
+    r"shop|store|cheap|pricing)\b|"
+    r"\b(backlink|link)[-_]?(services?|packages?)\b|"
+    r"\b(seo|link)[-_]?(building|selling)[-_]?(service|package)",
     re.I,
 )
 
@@ -620,7 +702,11 @@ class DomainProfile:
         self.anchor_diversity = self.n_unique_anchors / self.n_links
 
         # Hacked / link-vendor injection anywhere in the anchor set.
-        self.hacked = any(HACKED_INJECTION_RE.search(a) for a in self.anchor_counts)
+        self.hacked = (
+            any(HACKED_INJECTION_RE.search(a) for a in self.anchor_counts)
+            or any(injected_doorway(r["Source url"], r.get("Anchor") or "")
+                   for r in rows)
+        )
 
         # Bespoke partner landing path, when every link shares one target.
         self.single_target_path = (target_path_head(top_target_url)
@@ -777,6 +863,31 @@ def classify(p: DomainProfile):
                 f"Shares the {host} network footprint but its redirect was "
                 "not pulled. Retained by inference; confirm via the API "
                 "redirect_url column.")
+
+    # The client's own email service provider. A link through Klaviyo's click
+    # wrapper is the brand's own newsletter traffic, not a third-party
+    # placement. Sits with the protected tiers because a later rule was
+    # reading ctrk.klclick2.com as an affiliate gateway with link-farm traits.
+    if p.domain.endswith(ESP_TRACKER_SUFFIXES):
+        return (KEEP, "None - Email Service Provider Click Tracker", "High",
+                f"{p.domain} is an ESP click-tracking host. The link is the "
+                "brand's own campaign traffic; there is no third-party "
+                "placement to evaluate.")
+
+    # A free-blog subdomain averaging thousands of outbound links per page is
+    # not a blog. Seven blogspot hosts sat in review at ~13,500 links a page
+    # with URLs like /1u58.vip%20rel=nofollow -- a scraped or compromised
+    # template, whatever the blog once was. Real blogs on these hosts sit in
+    # the tens. Keyed on p.dom, not p.registrable: _registrable() collapses
+    # every blogspot subdomain to "blogspot.com", so the suffix test silently
+    # never matched.
+    if (p.domain.endswith((".blogspot.com", ".wordpress.com", ".weebly.com",
+                        ".pages.dev", ".wixsite.com"))
+            and p.avg_external >= 5000):
+        return (DISAVOW, "Free-Host Blog Serving a Link Dump", "High",
+                f"Averages {p.avg_external:,.0f} outbound links per page on a "
+                "free blog host — a scraped or compromised template, not a "
+                "publisher.")
 
     if p.registrable in BRAND_OWNED:
         return (KEEP, "None - Brand-Owned Estate (Opti-Nutra network)", "High",

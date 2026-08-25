@@ -1,5 +1,5 @@
 # Performance Lab - disavow addendum (nofollow only - optional)
-# Domains: 321 | Backlinks: 2,301
+# Domains: 338 | Backlinks: 2,546
 # Every sampled link on these domains is nofollow, so none of them
 # passes equity and disavowing them changes nothing measurable.
 # Filed only if you want the profile clean on paper. Most are hacked-site
@@ -14,6 +14,30 @@ domain:appsupports.co
 domain:directorylinkservice.com
 domain:globallinkdirectory.com
 domain:linkwebdirectory.com
+
+# --- Free-Host Blog Serving a Link Dump ---
+domain:bloatatt.blogspot.com
+domain:centralc.pages.dev
+domain:csponarlikex.blogspot.com
+domain:cytopore.blogspot.com
+domain:daadvn.blogspot.com
+domain:daisye.pages.dev
+domain:dsspkjk.blogspot.com
+domain:emegabiza.blogspot.com
+domain:fagfrogs1.blogspot.com
+domain:flamingos.pages.dev
+domain:global-rank.pages.dev
+domain:global-ranks.pages.dev
+domain:keshpakcxz.blogspot.com
+domain:kimssaulikesd.blogspot.com
+domain:lreeswcqcxz.blogspot.com
+domain:pkbtembnm.blogspot.com
+domain:qilins.pages.dev
+domain:top-websites-directory.pages.dev
+domain:webbys.pages.dev
+domain:wmsonlines.blogspot.com
+domain:worldofgamingk.blogspot.com
+domain:wwwhollywoodk.blogspot.com
 
 # --- Hacked Site / Injected Link-Vendor Spam ---
 domain:911auto.it
@@ -261,7 +285,6 @@ domain:ketaki.co.in
 domain:lifesblog.com
 domain:linkdonation.com
 domain:linkscrawl.com
-domain:list.show
 domain:listmydomain.com
 domain:listrecord.com
 domain:livebacklinks.com
@@ -332,12 +355,6 @@ domain:quero.party
 domain:ready.pro
 domain:screenshots.wiki
 domain:websitescrawl.com
-
-# --- Sitewide Link Injection (Templated Anchor) ---
-domain:bloatatt.blogspot.com
-domain:cytopore.blogspot.com
-domain:emegabiza.blogspot.com
-domain:fagfrogs1.blogspot.com
 
 # --- Throwaway Auto-Generated Host ---
 domain:cctvss1004.com

@@ -27,6 +27,7 @@ from audit import (
     SCRAPER_AGGREGATOR, SPAM_BLOG_NETWORK, SEARCH_AI_SURFACES,
     DIRECTORY_SPAM_RE, NICHE_RE, TRACKER_HOST_RE, COUPON_AGGREGATOR_RE,
     FAKE_OFFER_DOMAIN_RE, AUTOGEN_PATH_RE, LINKDUMP_PATH_RE,
+    has_opaque_segment,
     DISAVOW, KEEP, REVIEW,
 )
 
@@ -536,8 +537,20 @@ def main(backlinks_csv, refdomains_csv, outdir):
         structural = _dv[0] == DISAVOW and _dv[1] in NAME_BASED_SPAM
 
         lv = link.get(d)
-        if lv and structural and "Affiliate Partner" in lv["Primary Risk Factor"]:
-            # Domain-level structural verdict wins.
+        # A name-based structural signature outranks two link-level readings:
+        # an affiliate label it should never have earned (196 directory
+        # domains were retained as "Tracked Affiliate Partner"), and an
+        # unresolved REVIEW. kingranks.com, wayranks.com and skylinkseo.site
+        # sat in review on outbound volume the research-corpus guard rightly
+        # blocks, while their names -- "ranks", "seo", "link" -- are the SEO
+        # vendor signature the domain-level pass already recognises. Breaking
+        # a tie is not the same as overruling positive behavioural evidence,
+        # so a KEEP earned on an observed redirect or affiliate parameter is
+        # left alone.
+        _override = lv is not None and structural and (
+            "Affiliate Partner" in lv["Primary Risk Factor"]
+            or lv["Action Recommendation"] == REVIEW)
+        if _override:
             action, risk, conf, why = _dv
             evid = "Link-level, overridden by structural signature"
             counts[action] += 1
@@ -785,11 +798,18 @@ def main(backlinks_csv, refdomains_csv, outdir):
 
     template_domains = {}
     for _p, _ds in path_owners.items():
-        if len(_ds) < 5 or BRAND_PATH_TOKEN.search(_p):
+        if BRAND_PATH_TOKEN.search(_p):
             continue
         generated = bool(AUTOGEN_PATH_RE.search(_p)
                          or LINKDUMP_PATH_RE.search(_p))
-        if not generated and NICHE_RE.search(re.sub(r"[-_/]+", " ", _p)):
+        # An opaque mixed-case segment is decisive at two owners; a readable
+        # path needs five, because independent publishers do converge on the
+        # same slug.
+        floor = 2 if has_opaque_segment(_p) else 5
+        if len(_ds) < floor:
+            continue
+        if not generated and not has_opaque_segment(_p) \
+                and NICHE_RE.search(re.sub(r"[-_/]+", " ", _p)):
             continue
         for _d in _ds:
             prev = template_domains.get(_d)
