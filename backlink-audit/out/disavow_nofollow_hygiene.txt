@@ -1,5 +1,5 @@
 # Performance Lab - disavow addendum (nofollow only - optional)
-# Domains: 364 | Backlinks: 2,679
+# Domains: 380 | Backlinks: 2,779
 # Every sampled link on these domains is nofollow, so none of them
 # passes equity and disavowing them changes nothing measurable.
 # Filed only if you want the profile clean on paper. Most are hacked-site
@@ -9,6 +9,24 @@
 
 # --- Client Decision (Disavow) - Auto-Generated App Listing ---
 domain:appsupports.co
+
+# --- Client Decision (Disavow) - Review Queue Cleared ---
+domain:955x.com
+domain:cro.media
+domain:dapago.net
+domain:decoupage-paper.com
+domain:fatburnerranked.com
+domain:gutandbody.com
+domain:luftsi.info
+domain:musicareview.com
+domain:muzcle.com
+domain:omegahealthsystems.com
+domain:producthubspot.com
+domain:revaliew.com
+domain:skylinkseo.site
+domain:top-dealshub.com
+domain:whatisglutathione.net
+domain:worldworthliving.com
 
 # --- Cross-TLD Sibling Network (Generated Domains) ---
 domain:blinks.monster

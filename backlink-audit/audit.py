@@ -799,6 +799,363 @@ CLIENT_OVERRIDES = {
         "not 45 separate placements. Authority 38 on WordPress.com, and 26 of "
         "the 45 are already lost.",
     ),
+
+    # ---------------------------------------------------------------------
+    # Client review of the 70-domain queue, 2026-08-25. Seven retained by
+    # name; the rest of the queue disavowed as a block. Where the client's
+    # call and mine differ, the note records both -- the audit's own
+    # recommendation stays visible rather than being rewritten to agree.
+    # ---------------------------------------------------------------------
+    "duckduckgo.github.io": (
+        KEEP,
+        "None - Client Decision (Retain)",
+        "Client instruction, 2026-08-25: retain. Matches the audit's recommendation. DuckDuckGo's Tracker Radar Wiki, a privacy research dataset. performancelab.com is listed because the store embeds DoubleClick, Shopify, Klaviyo and Typekit. A citation in open data.",
+    ),
+    "eastphoenixau.com": (
+        KEEP,
+        "None - Client Decision (Retain)",
+        "Client instruction, 2026-08-25: retain. The audit had recommended DISAVOW. /c-pages/cafeine-anhydrous.html -- scraped caffeine articles on an unrelated domain. Nofollow.",
+    ),
+    "geriatricacademy.com": (
+        KEEP,
+        "None - Client Decision (Retain)",
+        "Client instruction, 2026-08-25: retain. Matches the audit's recommendation. Authority 15, 15 follow links, anchors 'MCT Energy Oil' and 'Men's Multivitamins and Minerals' in drug-interaction articles. Health publisher; the relevance lexicon missed it.",
+    ),
+    "knowyourbrain2.weebly.com": (
+        KEEP,
+        "None - Client Decision (Retain)",
+        "Client instruction, 2026-08-25: retain. Matches the audit's recommendation. Anchors 'Performance Lab® Mind', 'Performance Lab® Omega-3', 'Performance Lab® Sleep'. Nofollow review site.",
+    ),
+    "meghanbell.com": (
+        KEEP,
+        "None - Client Decision (Retain)",
+        "Client instruction, 2026-08-25: retain. Matches the audit's recommendation. Personal blog; the 247-link average is tag and author archives, and the anchor is editorial prose.",
+    ),
+    "scentses4d.wordpress.com": (
+        KEEP,
+        "None - Client Decision (Retain)",
+        "Client instruction, 2026-08-25: retain. Matches the audit's recommendation. /2020/10/27/vitamin-c/ citing a Performance Lab blog post by full URL.",
+    ),
+    "theaffiliateslist.com": (
+        KEEP,
+        "None - Client Decision (Retain)",
+        "Client instruction, 2026-08-25: retain. Matches the audit's recommendation. An affiliate-programme directory, multilingual ('Laboratoire de performance', 'Laboratorio de rendimiento'). Nofollow.",
+    ),
+    "27.be": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Auto-generated domain-auction feed (/live-domain-auction-feed/nl?page=102), anchor '.com'. 19 follow links from listing rows, no editorial intent.",
+    ),
+    "955x.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Random directory injection: /islatulk883267/3384solicitor-news/wiki/The-Director-Of-Fat-Loss. Nofollow, so inert, but not an editorial placement.",
+    ),
+    "academicsongs.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. A domain named for academic songs publishing eye-vitamin and pre-workout reviews with 'Buy performance lab From Official Website' anchors. Repurposed domain, exact-match commercial CTAs.",
+    ),
+    "aferg.co": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. /energy-yt and /multim-web -- a creator's link shortener with per-channel campaign suffixes. Tracking infrastructure, not a placement.",
+    ),
+    "alphapowershop.online": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Links from /blog-admin, a page that should not be public, anchor '[17]'.",
+    ),
+    "altgng.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Link-aggregator post citing a Performance Lab blog URL. Incidental.",
+    ),
+    "armfighter.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Arm-wrestling publisher at authority 22 with a supplements section ('CHECK OUT THE FULL LINE OF SUPPLEMENTS'). Off-lexicon, not off-topic.",
+    ),
+    "ashthdhatu.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Slug ends '-bodynutrition': the article was lifted from bodynutrition.org with the source's name still in the URL.",
+    ),
+    "astro-solid-hn-edge.netlify.app": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Astro/Solid framework demo rendering the live Hacker News feed. Same as the other HN clone demos.",
+    ),
+    "caffeine-alternatives.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Anchors 'Performance Lab Caffeine 2' and 'Performance Lab® B-Complex'. On topic.",
+    ),
+    "cfshelp.info": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. 'Best Nootropics for Traumatic Brain Injury' citing Omega-3s. On topic, editorial.",
+    ),
+    "chin-thai-restaurant-brackenheim.de": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. German nutrition article citing brain-energy research. One follow link, authority 9. Odd subject for a restaurant site and worth a look, but the placement itself reads editorial and there is no second signal.",
+    ),
+    "crazypeople.online": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. old.crazypeople.online/post/416022 -- scraped forum content.",
+    ),
+    "cro.media": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Shopify-store directory, 100% nofollow across 20 links. No equity passes, so nothing to disavow.",
+    ),
+    "dapago.net": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Recipe scraper, same 'Source' anchor pattern as decoupage-paper.com. Nofollow, inert.",
+    ),
+    "decoupage-paper.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Recipe scraper (/best-hash-brown-egg-bake-recipes) with anchor 'Source'. Nofollow, inert.",
+    ),
+    "drugs-forum.org": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Forum Q&A ('are tart cherry pills as effective as the juice'), editorial anchors.",
+    ),
+    "dtcx.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block, and this was not named among the retained seven. The audit had raised it as an open question, not a finding. Links to the brand with image anchors 'Performance Lab Logo' and 'Nutropic Logo' -- which reads like an owned or partner property. But dtcx.com is also promoted BY several of the spam networks in this audit: 'visit dtcx.com for latest info' on businessvocal.com and thecloudherald.com, and 'Premium PBN Network Service dtcx.com Rank First' on a link-vendor page. Either it is yours, or a link seller is riding the brand. Please confirm before any action.",
+    ),
+    "ecortelyou.github.io": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Personal project blog citing a Performance Lab article by URL.",
+    ),
+    "fatburnerranked.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. 'See Performance Lab Pricing' -- affiliate review, nofollow.",
+    ),
+    "fi38.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Links from /test-post-new/ with anchor 'BUY NOW'.",
+    ),
+    "french-styles.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Random directory injection: /fduuc5/does-magnesium-make-urine-yellow on a domain about French style. Same shape as jeffjsnider.com and walshskitchen.com -- one operator.",
+    ),
+    "fuelcell101.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Anchor 'Vitamin C and Omega-3 Together: Benefits' -- an article citation.",
+    ),
+    "gaidot.net": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Hacker News mirror (hnpaper-labs.gaidot.net/u/...). Renders whatever the feed carries.",
+    ),
+    "gutandbody.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. 'Check Price →' affiliate review site, on topic, nofollow.",
+    ),
+    "hlhw.fun": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. /index-191.html with anchor 'Click here...'. Doorway page, no content.",
+    ),
+    "hmscicomms.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Science-communications consultancy blog.",
+    ),
+    "hyroxy.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. HYROX racing site, 'Pre Lab Pro is the best pre workout supplement'. Fitness affiliate.",
+    ),
+    "jeffjsnider.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Random directory injection: /2p90a/when-is-the-best-time-to-take-caltrate.",
+    ),
+    "jsrproductions.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Anchor '[Source]' -- a citation.",
+    ),
+    "kiladeals.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Coupon aggregator, on topic. Protected by brief.",
+    ),
+    "kingranks.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. 2,448 outbound links per page on SEO/marketing filler ('The Relationship Between SEO And Social Networking'), bare-domain anchor. Sibling of wayranks.com -- same template, same anchor style.",
+    ),
+    "leebell.co.uk": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. /published-articles/ listing 'The Dangers of Overtraining', 'Velocity-Based Training'. A coach's portfolio.",
+    ),
+    "lifttilyadie.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. /how-much-creatine-per-day/, anchor 'caffeine'. Editorial.",
+    ),
+    "losmejoressuplementos.es": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Spanish supplement reviews, 'Comprar ahora'. The relevance lexicon is English.",
+    ),
+    "luftsi.info": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. /index-110.html with anchor 'Click For Best Price'. Same generator as hlhw.fun.",
+    ),
+    "lunoo.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Affiliate-programme index (/tag/high-commission-rates), anchor 'Visit'.",
+    ),
+    "manufacturerusa.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. /california/Performance-Labs-Inc-l2666.html -- a factual business-directory listing of the company itself.",
+    ),
+    "metabengsci.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Anchors '[74]' and '74. Best Energy Pills...' -- numbered references in a technical article. Same as the benchchem.com and smolecule.com bibliographies.",
+    ),
+    "morerss.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. RSS reader rendering a feed that cited the brand. Incidental, not placed.",
+    ),
+    "musicareview.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Album database (/album/1362930042/fitness-single-lizzo) carrying 'Buy Now!' supplement links. Nofollow, inert.",
+    ),
+    "muzcle.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. /creatine-vs-bcaa/ with numbered citation '3'.",
+    ),
+    "myfastingbuddy.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Fasting article, anchor '50 calories'. Editorial citation.",
+    ),
+    "narcolepsylifeacademy.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. /lifestyle-essentials recommending 'Mind Lab Pro. Designed to boost your...' and 'Performance Lab B-Complex'. Genuine niche recommendation page.",
+    ),
+    "natuhealthblog.blogspot.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Three backlinks, authority 0, no link-level data.",
+    ),
+    "naturalhealthwriter.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. A health copywriter's portfolio; the 'exact-match' anchors are her article titles.",
+    ),
+    "omegahealthsystems.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. /the-14-finest-multivitamins-for-girls-2024-information/ against worldworthliving.com's /the-14-best-multivitamins-for-women-2024-guide/ -- finest/best, girls/women, information/guide. Spun from one source, anchors spun too.",
+    ),
+    "onlyboosts.social": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. Podcast episode linking the /breedlove partner landing page. Same class as whatismoneypodcast.com.",
+    ),
+    "praxisdrmedpschierer-vilsbiburg.de": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. German medical practice publishing a nutrition article on Montmorency cherries and melatonin. On topic for a practice; one follow link.",
+    ),
+    "producthubspot.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Serves /blog/the-9-best-multivitamins-for-men-according-to-a-registered-dietitian-2023/ -- byte-identical to top-dealshub.com. A scraped publisher article on two domains at authority 2.",
+    ),
+    "pureminerals.uk": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. /msm/ with 'joint health' and 'cartilage health'. On topic.",
+    ),
+    "reneebovet.co": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. /product-affiliate-links/ with 'Brain Health Support' and 'Immune Support'. An affiliate link page: protected architecture.",
+    ),
+    "revaliew.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. /businesses/testolabpro.com -- auto-generated site profile. Nofollow, so a disavow changes nothing; filed for a clean profile only.",
+    ),
+    "rlrhmember.blogspot.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. One backlink, authority 2, no link-level data. Not enough to act on either way.",
+    ),
+    "rugbynewsbeast.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Anchors 'ar', 'kr', 'mnv', 'mq' on an archive page averaging 1,501 outbound links. Injected, not editorial.",
+    ),
+    "skylinkseo.site": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. 2,504 outbound links per page across unrelated subjects -- budget travel, career guidance, summer outfits -- all linking to supplement brands. No publisher has that subject range.",
+    ),
+    "smatdeals.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. /coupon/performance-lab-discount-code.html. Coupon aggregator, protected by brief.",
+    ),
+    "top-dealshub.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Same scraped article path as producthubspot.com. Nofollow, so inert.",
+    ),
+    "walshskitchen.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Random directory injection: /wwx25fv/index.php?topic6771=funeral-homes-rice-lake-wi, anchor 'jvic'. Compromised host.",
+    ),
+    "wayranks.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. 2,592 outbound links per page, same filler template and anchor style as kingranks.com.",
+    ),
+    "web-tau-bice-50.vercel.app": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. The audit had recommended KEEP. One backlink, authority 2, no link-level data.",
+    ),
+    "whatisglutathione.net": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Keyword doorway: /whatisglutathione.php?Action=1&PageID=613044&k=best-glutathione-supplement. The keyword is in the query string.",
+    ),
+    "worldworthliving.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Review Queue Cleared",
+        "Client instruction, 2026-08-25: the review queue was cleared to disavow as a block. Matches the audit's recommendation. Spun pair with omegahealthsystems.com.",
+    ),
 }
 
 MANUAL_REVIEW_OVERRIDE = {

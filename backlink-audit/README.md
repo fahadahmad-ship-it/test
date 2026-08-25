@@ -501,3 +501,51 @@ domain sits outside the link sample, so the count is unknown, not zero;
 totalling it printed `0` against 139 domains, which reads as "passes no equity"
 when it means "we cannot see". Those cells now say `not sampled` or
 `593 (+4 unsampled)`.
+
+## Client review-queue decision (2026-08-25)
+
+The 70-domain review queue cleared on client instruction: seven retained by
+name, the remaining 63 disavowed as a block. Recorded through
+`CLIENT_OVERRIDES`, which sits ahead of every rule, so re-running the audit
+cannot overturn it.
+
+Retained: `duckduckgo.github.io`, `meghanbell.com`, `theaffiliateslist.com`,
+`geriatricacademy.com`, `eastphoenixau.com`, `scentses4d.wordpress.com`,
+`knowyourbrain2.weebly.com`. Six match the audit's recommendation;
+`eastphoenixau.com` overrides a DISAVOW.
+
+**The audit's recommendation is kept next to the applied decision rather than
+rewritten to agree.** On 38 of the 70 the two differ — 37 the audit had as
+KEEP, plus `dtcx.com`, which it had raised as an open question rather than a
+finding. The new **Decisions taken** tab shows both with an Agree column
+flagging the disagreements, because that is a fact about the file someone will
+want later. Reversing any row is one line out of `disavow_full.txt`.
+
+Worth knowing what is in the disavowed 63, since some of it is protected
+architecture under the brief's own affiliate rule: `aferg.co` (a creator's
+link shortener with per-channel campaign suffixes), `reneebovet.co`
+(`/product-affiliate-links/`), `kiladeals.com` and `smatdeals.com` (coupon
+aggregators), `lunoo.com`, `onlyboosts.social` (the `/breedlove` partner
+landing page), and `narcolepsylifeacademy.com` and `armfighter.com` — 48 follow
+links between them from genuine niche publishers. Also `metabengsci.com`, whose
+anchors are numbered bibliography references, the same pattern the client
+retained `benchchem.com` for.
+
+`dtcx.com` remains the one to confirm. It links in with "Performance Lab Logo"
+and "Nutropic Logo" image anchors, which is how an owned or partner property
+behaves, while also being promoted *by* several of the spam networks in this
+audit. It is disavowed with the rest of the queue; if it is a brand property,
+delete that line before submitting.
+
+**On wiki links, asked in the same message: none were in review.**
+`wikipedia.org` (authority 100), `wikiwand.com` (65), `handwiki.org` (48),
+`vitamindwiki.com` (22) and `wikimili.com` are all KEEP and always were. The
+only wiki-looking thing in the queue was `955x.com`, whose path
+`/islatulk883267/3384solicitor-news/wiki/The-Director-Of-Fat-Loss` puts
+`/wiki/` after a random-token directory on a compromised host — a spoofed wiki,
+not a wiki. `screenshots.wiki` is a `.wiki`-TLD link farm. Real wiki links are
+nofollow so they pass no equity, but they are trust signals and are never
+disavow candidates.
+
+Final: DISAVOW 1,183 across 26 networks (803 equity-passing, 380
+nofollow-only) · KEEP 1,745 · review queue empty.

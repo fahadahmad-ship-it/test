@@ -1,5 +1,5 @@
 # Performance Lab - disavow file (equity-passing)
-# Domains: 756 | Backlinks: 10,644
+# Domains: 803 | Backlinks: 10,892
 # These domains carry follow links, or their follow status is unknown.
 # This is the file to submit.
 # Search/AI surfaces and affiliate infrastructure are excluded by design.
@@ -17,6 +17,55 @@ domain:illuminatelabv.com
 
 # --- Client Decision (Disavow) - Off-Niche High-Volume Placement ---
 domain:cloudaicrypto.com
+
+# --- Client Decision (Disavow) - Review Queue Cleared ---
+domain:27.be
+domain:academicsongs.com
+domain:aferg.co
+domain:alphapowershop.online
+domain:altgng.com
+domain:armfighter.com
+domain:ashthdhatu.com
+domain:astro-solid-hn-edge.netlify.app
+domain:caffeine-alternatives.com
+domain:cfshelp.info
+domain:chin-thai-restaurant-brackenheim.de
+domain:crazypeople.online
+domain:drugs-forum.org
+domain:dtcx.com
+domain:ecortelyou.github.io
+domain:fi38.com
+domain:french-styles.com
+domain:fuelcell101.com
+domain:gaidot.net
+domain:hlhw.fun
+domain:hmscicomms.com
+domain:hyroxy.com
+domain:jeffjsnider.com
+domain:jsrproductions.com
+domain:kiladeals.com
+domain:kingranks.com
+domain:leebell.co.uk
+domain:lifttilyadie.com
+domain:losmejoressuplementos.es
+domain:lunoo.com
+domain:manufacturerusa.com
+domain:metabengsci.com
+domain:morerss.com
+domain:myfastingbuddy.com
+domain:narcolepsylifeacademy.com
+domain:natuhealthblog.blogspot.com
+domain:naturalhealthwriter.com
+domain:onlyboosts.social
+domain:praxisdrmedpschierer-vilsbiburg.de
+domain:pureminerals.uk
+domain:reneebovet.co
+domain:rlrhmember.blogspot.com
+domain:rugbynewsbeast.com
+domain:smatdeals.com
+domain:walshskitchen.com
+domain:wayranks.com
+domain:web-tau-bice-50.vercel.app
 
 # --- Cross-TLD Sibling Network (Generated Domains) ---
 domain:apexelements.monster

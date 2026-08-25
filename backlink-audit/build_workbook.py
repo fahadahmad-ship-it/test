@@ -305,6 +305,83 @@ def _networks_tab(wb, dis):
     return len(groups)
 
 
+def _decisions_tab(wb, dom):
+    """Audit trail for the queue once the client has cleared it.
+
+    Worth its own tab because on 37 of these the client's call and the
+    audit's recommendation differ, and that disagreement is a fact about the
+    file someone will want to see later -- not something to quietly overwrite
+    so the two agree.
+    """
+    try:
+        from review_decisions import DECISIONS
+    except ImportError:
+        DECISIONS = {}
+    rows = [r for r in dom
+            if "Client Decision" in r["Primary Risk Factor"]
+            or "Client Decision" in r["Rationale"][:40]]
+    rows = [r for r in dom if r["Referring Domain"] in DECISIONS]
+    order = {"DISAVOW": 0, "KEEP_AFFILIATE_RETAIN": 1}
+    rows.sort(key=lambda r: (order.get(r["Action Recommendation"], 2),
+                             -int(r["Follow (Equity) Links"] or 0),
+                             r["Referring Domain"]))
+    ws = wb.create_sheet("Decisions taken", 3)
+    ws["A1"] = f"Decisions taken — {len(rows)} domains from the review queue"
+    ws["A1"].font = Font(name=FONT, size=14, bold=True)
+    ws["A2"] = ("The review queue, resolved. 'Audit said' is what this audit "
+                "recommended and 'Applied' is the decision in the file, so "
+                "where the two differ it stays on the record. Reversing any "
+                "row means deleting one line from disavow_full.txt.")
+    ws["A2"].font = Font(name=FONT, size=9, italic=True, color="595959")
+
+    HDR = 4
+    heads = [("Referring Domain", 34), ("Applied", 24), ("Audit said", 13),
+             ("Agree?", 9), ("Backlinks", 10), ("Follow links", 11),
+             ("Authority", 10), ("Nofollow %", 10),
+             ("Why the audit said that", 84), ("Notes", 36)]
+    for i, (h, w) in enumerate(heads, start=1):
+        c = ws.cell(HDR, i, h)
+        c.font = Font(name=FONT, size=10, bold=True, color="FFFFFF")
+        c.fill = PatternFill("solid", fgColor="1F3864")
+        c.alignment = Alignment(vertical="center", wrap_text=True)
+        ws.column_dimensions[get_column_letter(i)].width = w
+    ws.row_dimensions[HDR].height = 30
+
+    thin = Side(style="thin", color="BFBFBF")
+    BOT = Border(bottom=thin)
+    F_BODY = Font(name=FONT, size=10)
+    A_WRAP = Alignment(vertical="top", wrap_text=True)
+    for ri, r in enumerate(rows, start=HDR + 1):
+        mine = DECISIONS.get(r["Referring Domain"], ("", ""))[0]
+        why = DECISIONS.get(r["Referring Domain"], ("", ""))[1]
+        applied = ("DISAVOW" if r["Action Recommendation"] == "DISAVOW"
+                   else "KEEP")
+        agree = "" if not mine else ("yes" if mine == applied else "NO")
+        vals = [r["Referring Domain"], r["Primary Risk Factor"], mine, agree,
+                int(r["Backlinks (true)"]),
+                int(r["Follow (Equity) Links"] or 0)
+                if r["Follow (Equity) Links"] != "" else "not sampled",
+                int(r["Domain ascore"] or 0), r["Nofollow %"], why]
+        for ci, v in enumerate(vals, start=1):
+            c = ws.cell(ri, ci, v)
+            c.font = F_BODY
+            c.alignment = A_WRAP if ci in (2, 9) else Alignment(vertical="top")
+            c.border = BOT
+            if ci in (5, 6, 7) and isinstance(v, int):
+                c.number_format = "#,##0"
+        ws.cell(ri, 2).fill = PatternFill(
+            "solid", fgColor="F8CBAD" if applied == "DISAVOW" else "C6E0B4")
+        a = ws.cell(ri, 4)
+        if agree == "NO":
+            a.font = Font(name=FONT, size=10, bold=True, color="9C0006")
+            a.fill = PatternFill("solid", fgColor="FFC7CE")
+        ws.cell(ri, 10).border = BOT
+    last = HDR + len(rows)
+    ws.freeze_panes = ws.cell(HDR + 1, 2).coordinate
+    ws.auto_filter.ref = f"A{HDR}:J{last}"
+    return ws
+
+
 def _start_tab(wb, dom, n_networks):
     from collections import Counter
     c = Counter(r["Action Recommendation"] for r in dom)
@@ -337,39 +414,62 @@ def _start_tab(wb, dom, n_networks):
     w("Where things stand", "", bold=True)
     w("Disavow", f"{c['DISAVOW']:,} domains — {follow:,} follow links between "
       f"them. {nf_only:,} are nofollow-only, so they pass no equity.")
-    w("Needs your call", f"{c['REVIEW_MANUALLY']} domains. Each one carries my "
-      "recommendation and the evidence for it.")
+    if c["REVIEW_MANUALLY"]:
+        w("Needs your call",
+          f"{c['REVIEW_MANUALLY']} domains. Each one carries my "
+          "recommendation and the evidence for it.")
+    else:
+        w("Needs your call",
+          "Nothing outstanding — the review queue is cleared. See "
+          "'Decisions taken' for what was decided and where it differs from "
+          "what this audit recommended.")
     w("Keep", f"{c['KEEP_AFFILIATE_RETAIN']:,} domains — affiliates, brand "
       "estate, editorial citations and low-exposure retains.", gap=1)
 
     w("How to work it", "", bold=True)
     w("1.  Networks tab",
       f"Start here. The {c['DISAVOW']:,} disavows are {n_networks} networks, "
-      "not 1,120 separate judgements — 139 rows are seo-anomaly-s1.xyz "
-      "through s139.xyz, one operator. Approve or reject each network. "
+      f"not {c['DISAVOW']:,} separate judgements — 139 rows are "
+      "seo-anomaly-s1.xyz through s139.xyz, one operator. Approve or reject "
+      "each network. "
       "Equity-passing ones are at the top; nofollow-only at the bottom, and "
       "those change nothing either way.")
     w("2.  Disavow tab",
       "The members of each network, grouped under it with a rule between "
       "groups. Use it to spot-check a network before approving, or to pull a "
       "single domain out of one.")
-    w("3.  Review Queue tab",
-      f"The {c['REVIEW_MANUALLY']} the rules would not decide. Recommendation "
-      "and evidence sit in columns B and C — 26 DISAVOW, 43 KEEP, and one "
-      "for you. Set the Decision column.")
+    if c["REVIEW_MANUALLY"]:
+        w("3.  Review Queue tab",
+          f"The {c['REVIEW_MANUALLY']} the rules would not decide. "
+          "Recommendation and evidence sit in columns B and C. Set the "
+          "Decision column.")
+    else:
+        w("3.  Decisions taken tab",
+          "The review queue after your call: 7 retained by name, the other "
+          "63 disavowed as a block. 'Audit said' keeps this audit's own "
+          "recommendation next to what was applied, and the Agree column "
+          "flags the 38 rows where the two differ. Reversing any of them is "
+          "one line out of disavow_full.txt.")
     w("4.  Full audit tab",
       "All 2,928 domains plus the per-URL drill-down. Reference, not a "
       "worklist — use it to look something up.", gap=1)
 
-    w("One question for you", "", bold=True, colour="9C3A00")
+    dtcx = next((r for r in dom if r["Referring Domain"] == "dtcx.com"), None)
+    decided = bool(dtcx) and dtcx["Action Recommendation"] == "DISAVOW"
+    w("Still worth confirming" if decided else "One question for you",
+      "", bold=True, colour="9C3A00")
     w("dtcx.com",
       "It links to you with image anchors \"Performance Lab Logo\" and "
       "\"Nutropic Logo\", which reads like your own or a partner's property. "
       "But it is also promoted BY several of the spam networks in this audit "
       "— \"visit dtcx.com for latest info\" on two of them, and \"Premium PBN "
       "Network Service dtcx.com Rank First\" on a link vendor's page. Either "
-      "it is yours, or a seller is riding the brand. I have left it "
-      "unresolved rather than guess.", colour="9C3A00", gap=1)
+      "it is yours, or a seller is riding the brand."
+      + (" It is now disavowed with the rest of the queue; if it turns out to "
+         "be yours, delete \"domain:dtcx.com\" from the file before you "
+         "submit." if decided else
+         " I have left it unresolved rather than guess."),
+      colour="9C3A00", gap=1)
 
     w("What to submit", "", bold=True)
     w("The file",
@@ -576,17 +676,20 @@ def main(outdir):
         REC_ORDER.get(REVIEW_RECOMMENDATIONS.get(
             r["Referring Domain"], ("", ""))[0], 3),
         -int(r["Backlinks (true)"])))
-    _work_tab(
-        wb, "Review Queue", rev, REVIEW_COLS,
+    if not rev:
+        _decisions_tab(wb, dom)
+    else:
+        _work_tab(
+            wb, "Review Queue", rev, REVIEW_COLS,
         "What the rules would not decide, read one by one against the actual "
         "placements. My recommendation is column B and the evidence for it "
         "column C. Ordered: the one open question first, then disavows, then "
         "keeps. Set the Decision column — disagreeing with me is the point.",
-        confirm_header="Decision (DISAVOW / KEEP / PENDING)",
-        confirm_list='"DISAVOW,KEEP,PENDING"',
-        default="PENDING",
-        recommend=REVIEW_RECOMMENDATIONS,
-    )
+            confirm_header="Decision (DISAVOW / KEEP / PENDING)",
+            confirm_list='"DISAVOW,KEEP,PENDING"',
+            default="PENDING",
+            recommend=REVIEW_RECOMMENDATIONS,
+        )
 
     n_net = _networks_tab(wb, [dict(d) for d in dis])
     _start_tab(wb, dom, n_net)

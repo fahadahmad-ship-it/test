@@ -8,13 +8,13 @@
 
 | Action | Domains | Backlinks | % of links |
 |---|---:|---:|---:|
-| DISAVOW | 574 | 3,766 | 6.1% |
-| REVIEW_MANUALLY | 373 | 1,222 | 2.0% |
-| KEEP_AFFILIATE_RETAIN | 1,429 | 57,222 | 92.0% |
+| DISAVOW | 634 | 4,075 | 6.6% |
+| REVIEW_MANUALLY | 306 | 805 | 1.3% |
+| KEEP_AFFILIATE_RETAIN | 1,436 | 57,330 | 92.2% |
 
 ## Equity exposure
 
-Of **3,766** disavow-flagged backlinks, only **2,221 (59.0%)** are follow links that pass equity. The remaining **1,545** are nofollow and pass none.
+Of **4,075** disavow-flagged backlinks, only **2,431 (59.7%)** are follow links that pass equity. The remaining **1,644** are nofollow and pass none.
 
 ### Priority remediation targets (follow links only)
 
@@ -25,13 +25,16 @@ Of **3,766** disavow-flagged backlinks, only **2,221 (59.0%)** are follow links 
 | blogdosaga.com | 34 | Throwaway Auto-Generated Host |
 | blogsvirals.com | 29 | Throwaway Auto-Generated Host |
 | retiredbrains.com | 28 | Exact-Match Anchor Abuse (Sitewide Injection) |
+| narcolepsylifeacademy.com | 26 | Client Decision (Disavow) - Review Queue Cleared |
 | educationalimpactblog.com | 26 | Throwaway Auto-Generated Host |
 | anchor-blog.com | 24 | Throwaway Auto-Generated Host |
 | bluxeblog.com | 24 | Throwaway Auto-Generated Host |
+| armfighter.com | 22 | Client Decision (Disavow) - Review Queue Cleared |
 | onesmablog.com | 22 | Vendor Blog Network (Spun-Content PBN) |
 | pointblog.net | 21 | Vendor Blog Network (Spun-Content PBN) |
 | full-design.com | 20 | Vendor Blog Network (Spun-Content PBN) |
 | pages10.com | 19 | Throwaway Auto-Generated Host |
+| 27.be | 19 | Client Decision (Disavow) - Review Queue Cleared |
 | bloggazza.com | 18 | Vendor Blog Network (Spun-Content PBN) |
 | activosblog.com | 18 | Vendor Blog Network (Spun-Content PBN) |
 | activoblog.com | 18 | Vendor Blog Network (Spun-Content PBN) |
@@ -89,6 +92,7 @@ Of **3,766** disavow-flagged backlinks, only **2,221 (59.0%)** are follow links 
 | dailyblogzz.com | 14 | Vendor Blog Network (Spun-Content PBN) |
 | pudhe.com | 14 | Link Farm / Outbound-Link Bloat |
 | thekatyblog.com | 14 | Throwaway Auto-Generated Host |
+| reneebovet.co | 14 | Client Decision (Disavow) - Review Queue Cleared |
 | liberty-blog.com | 13 | Vendor Blog Network (Spun-Content PBN) |
 | articlesblogger.com | 13 | Vendor Blog Network (Spun-Content PBN) |
 | newsblogsports.site | 12 | Sitewide Link Injection (Templated Anchor) |
@@ -102,14 +106,19 @@ Of **3,766** disavow-flagged backlinks, only **2,221 (59.0%)** are follow links 
 | thezenweb.com | 10 | Vendor Blog Network (Spun-Content PBN) |
 | wonvision.com | 10 | Link Farm / Outbound-Link Bloat |
 | uaewebdirectory.info | 10 | Link Farm / Outbound-Link Bloat |
+| altgng.com | 10 | Client Decision (Disavow) - Review Queue Cleared |
 | bloguerosa.com | 9 | Throwaway Auto-Generated Host |
 | pagesearch.net | 9 | Link Farm / Outbound-Link Bloat |
 | blog2news.com | 9 | Throwaway Auto-Generated Host |
 | thirty.co.in | 9 | Link Farm / Outbound-Link Bloat |
+| aferg.co | 8 | Client Decision (Disavow) - Review Queue Cleared |
 | theideasblog.com | 8 | Throwaway Auto-Generated Host |
 | ycm.info | 8 | Link Farm / Outbound-Link Bloat |
 | linksnatcher.com | 8 | Link Farm / Outbound-Link Bloat |
+| morerss.com | 8 | Client Decision (Disavow) - Review Queue Cleared |
 | way2check.art | 8 | Link Farm / Outbound-Link Bloat |
+| metabengsci.com | 8 | Client Decision (Disavow) - Review Queue Cleared |
+| dtcx.com | 7 | Client Decision (Disavow) - Review Queue Cleared |
 | tblogz.com | 7 | Throwaway Auto-Generated Host |
 | blogzet.com | 7 | Vendor Blog Network (Spun-Content PBN) |
 | isblog.net | 7 | Vendor Blog Network (Spun-Content PBN) |
@@ -123,16 +132,20 @@ Of **3,766** disavow-flagged backlinks, only **2,221 (59.0%)** are follow links 
 | topleveldomains.space | 7 | Link Farm / Outbound-Link Bloat |
 | bestwebstats.com | 7 | Link Farm / Outbound-Link Bloat |
 | amoblog.com | 6 | Vendor Blog Network (Spun-Content PBN) |
+| drugs-forum.org | 6 | Client Decision (Disavow) - Review Queue Cleared |
 | mybjjblog.com | 6 | Vendor Blog Network (Spun-Content PBN) |
 | izrablog.com | 6 | Vendor Blog Network (Spun-Content PBN) |
 | luwebs.com | 6 | Throwaway Auto-Generated Host |
 | designertoblog.com | 6 | Vendor Blog Network (Spun-Content PBN) |
 | blogpayz.com | 6 | Vendor Blog Network (Spun-Content PBN) |
 | getonline.co.in | 6 | Link Farm / Outbound-Link Bloat |
+| onlyboosts.social | 6 | Client Decision (Disavow) - Review Queue Cleared |
 | blog4youth.com | 5 | Vendor Blog Network (Spun-Content PBN) |
+| manufacturerusa.com | 5 | Client Decision (Disavow) - Review Queue Cleared |
 | all-aged-domains.com | 5 | Link Farm / Outbound-Link Bloat |
 | sergechel.info | 5 | Link Farm / Outbound-Link Bloat |
 | jobsapp.info | 5 | Link Farm / Outbound-Link Bloat |
+| losmejoressuplementos.es | 5 | Client Decision (Disavow) - Review Queue Cleared |
 | alltdesign.com | 5 | Throwaway Auto-Generated Host |
 | canariblogs.com | 5 | Vendor Blog Network (Spun-Content PBN) |
 | shotblogs.com | 5 | Vendor Blog Network (Spun-Content PBN) |
@@ -140,6 +153,7 @@ Of **3,766** disavow-flagged backlinks, only **2,221 (59.0%)** are follow links 
 | blogminds.com | 5 | Vendor Blog Network (Spun-Content PBN) |
 | 5913231.cc | 5 | Link Farm / Outbound-Link Bloat |
 | indians.cc | 5 | Link Farm / Outbound-Link Bloat |
+| rugbynewsbeast.com | 5 | Client Decision (Disavow) - Review Queue Cleared |
 | preparation.co.in | 5 | Link Farm / Outbound-Link Bloat |
 | websitescrawl.art | 5 | Link Farm / Outbound-Link Bloat |
 | domainwork.space | 5 | Link Farm / Outbound-Link Bloat |
@@ -151,6 +165,9 @@ Of **3,766** disavow-flagged backlinks, only **2,221 (59.0%)** are follow links 
 | ecommercebenchmarking.com | 5 | Link Farm / Outbound-Link Bloat |
 | blogkoo.com | 4 | Vendor Blog Network (Spun-Content PBN) |
 | blogadvize.com | 4 | Vendor Blog Network (Spun-Content PBN) |
+| naturalhealthwriter.com | 4 | Client Decision (Disavow) - Review Queue Cleared |
+| kingranks.com | 4 | Client Decision (Disavow) - Review Queue Cleared |
+| fi38.com | 4 | Client Decision (Disavow) - Review Queue Cleared |
 | azzablog.com | 4 | Throwaway Auto-Generated Host |
 | total-blog.com | 4 | Throwaway Auto-Generated Host |
 | uzblog.net | 4 | Throwaway Auto-Generated Host |
@@ -170,19 +187,30 @@ Of **3,766** disavow-flagged backlinks, only **2,221 (59.0%)** are follow links 
 | verybigblog.com | 4 | Throwaway Auto-Generated Host |
 | blog5.net | 4 | Throwaway Auto-Generated Host |
 | bligblogging.com | 3 | Vendor Blog Network (Spun-Content PBN) |
+| academicsongs.com | 3 | Client Decision (Disavow) - Review Queue Cleared |
 | biohackstars.com | 3 | Sitewide Link Injection (Templated Anchor) |
+| leebell.co.uk | 3 | Client Decision (Disavow) - Review Queue Cleared |
+| caffeine-alternatives.com | 3 | Client Decision (Disavow) - Review Queue Cleared |
+| french-styles.com | 3 | Client Decision (Disavow) - Review Queue Cleared |
 | mybuzzblog.com | 3 | Vendor Blog Network (Spun-Content PBN) |
 | blogacep.com | 3 | Throwaway Auto-Generated Host |
 | bloggerbags.com | 3 | Vendor Blog Network (Spun-Content PBN) |
+| ecortelyou.github.io | 3 | Client Decision (Disavow) - Review Queue Cleared |
 | sk-its.ru | 3 | Hacked Site / Injected Link-Vendor Spam |
 | corrector.in | 3 | Link Farm / Outbound-Link Bloat |
 | carplz.com | 3 | Link Farm / Outbound-Link Bloat |
 | youtoo.in | 3 | Link Farm / Outbound-Link Bloat |
 | procycling.org | 3 | Link Farm / Outbound-Link Bloat |
 | tyre.pro | 3 | Link Farm / Outbound-Link Bloat |
+| pureminerals.uk | 3 | Client Decision (Disavow) - Review Queue Cleared |
 | targetblogs.com | 3 | Throwaway Auto-Generated Host |
+| lunoo.com | 3 | Client Decision (Disavow) - Review Queue Cleared |
+| hlhw.fun | 3 | Client Decision (Disavow) - Review Queue Cleared |
+| kiladeals.com | 2 | Client Decision (Disavow) - Review Queue Cleared |
 | toparticlesdirectory.com | 2 | Directory / Link-Scheme Spam Footprint |
+| wayranks.com | 2 | Client Decision (Disavow) - Review Queue Cleared |
 | rankvanceseo.info | 2 | Link Farm / Outbound-Link Bloat |
+| smatdeals.com | 2 | Client Decision (Disavow) - Review Queue Cleared |
 | blogdon.net | 2 | Throwaway Auto-Generated Host |
 | bizlinkdirectory.com | 2 | Directory / Link-Scheme Spam Footprint |
 | seozdirectory.com | 2 | Directory / Link-Scheme Spam Footprint |
@@ -190,9 +218,11 @@ Of **3,766** disavow-flagged backlinks, only **2,221 (59.0%)** are follow links 
 | weblogco.com | 2 | Throwaway Auto-Generated Host |
 | bloggosite.com | 2 | Vendor Blog Network (Spun-Content PBN) |
 | linkdirectory724.com | 2 | Directory / Link-Scheme Spam Footprint |
+| jsrproductions.com | 2 | Client Decision (Disavow) - Review Queue Cleared |
 | golinkdirectory.com | 2 | Directory / Link-Scheme Spam Footprint |
 | domaineye.com | 2 | Link Farm / Outbound-Link Bloat |
 | findinfo.in | 2 | Link Farm / Outbound-Link Bloat |
+| gaidot.net | 2 | Client Decision (Disavow) - Review Queue Cleared |
 | adirectorysubmit.com | 2 | Directory / Link-Scheme Spam Footprint |
 | arlinkdirectory.com | 2 | Directory / Link-Scheme Spam Footprint |
 | directorylinks2u.com | 2 | Directory / Link-Scheme Spam Footprint |
@@ -200,6 +230,7 @@ Of **3,766** disavow-flagged backlinks, only **2,221 (59.0%)** are follow links 
 | 1stlinkdirectory.com | 2 | Directory / Link-Scheme Spam Footprint |
 | seodirectoryseek.com | 2 | Directory / Link-Scheme Spam Footprint |
 | linkdirectorynet.com | 2 | Directory / Link-Scheme Spam Footprint |
+| hmscicomms.com | 2 | Client Decision (Disavow) - Review Queue Cleared |
 | southfwb.com | 2 | Hacked Site / Injected Link-Vendor Spam |
 | chordmp3.net | 2 | Hacked Site / Injected Link-Vendor Spam |
 | fletcherrld.com | 2 | Hacked Site / Injected Link-Vendor Spam |
@@ -215,7 +246,11 @@ Of **3,766** disavow-flagged backlinks, only **2,221 (59.0%)** are follow links 
 | sharebyblog.com | 1 | Vendor Blog Network (Spun-Content PBN) |
 | seodirectorysite.com | 1 | Directory / Link-Scheme Spam Footprint |
 | saintsebastianelitecollege.com | 1 | Hacked Site / Injected Link-Vendor Spam |
+| ashthdhatu.com | 1 | Client Decision (Disavow) - Review Queue Cleared |
+| hyroxy.com | 1 | Client Decision (Disavow) - Review Queue Cleared |
 | brizbot.com | 1 | Hacked Site / Injected Link-Vendor Spam |
+| astro-solid-hn-edge.netlify.app | 1 | Client Decision (Disavow) - Review Queue Cleared |
+| cfshelp.info | 1 | Client Decision (Disavow) - Review Queue Cleared |
 | porras.ch | 1 | Hacked Site / Injected Link-Vendor Spam |
 | directoryoflink.com | 1 | Directory / Link-Scheme Spam Footprint |
 | csir-sari.org | 1 | Hacked Site / Injected Link-Vendor Spam |
@@ -235,43 +270,45 @@ Of **3,766** disavow-flagged backlinks, only **2,221 (59.0%)** are follow links 
 | proseolinksdirectory.com | 1 | Directory / Link-Scheme Spam Footprint |
 | globalseodirectory.com | 1 | Directory / Link-Scheme Spam Footprint |
 | ziblogs.com | 1 | Throwaway Auto-Generated Host |
+| lifttilyadie.com | 1 | Client Decision (Disavow) - Review Queue Cleared |
 | couriertrackk.com | 1 | Hacked Site / Injected Link-Vendor Spam |
 | agendacover.com | 1 | Link Farm / Outbound-Link Bloat |
+| myfastingbuddy.com | 1 | Client Decision (Disavow) - Review Queue Cleared |
 | dotignite.com | 1 | Hacked Site / Injected Link-Vendor Spam |
 | gynoblog.com | 1 | Throwaway Auto-Generated Host |
 | sitescooponline.com | 1 | Link Farm / Outbound-Link Bloat |
+| praxisdrmedpschierer-vilsbiburg.de | 1 | Client Decision (Disavow) - Review Queue Cleared |
 | blogspothub.com | 1 | Vendor Blog Network (Spun-Content PBN) |
 | topbilliondirectory.com | 1 | Link Farm / Bare-Domain Listing |
 | parentingvista.com | 1 | Link Farm / Outbound-Link Bloat |
+| chin-thai-restaurant-brackenheim.de | 1 | Client Decision (Disavow) - Review Queue Cleared |
 | toplinksdirectory.com | 1 | Directory / Link-Scheme Spam Footprint |
 | webseodirectory.com | 1 | Directory / Link-Scheme Spam Footprint |
 | nologostudio.ru | 1 | Hacked Site / Injected Link-Vendor Spam |
 | moscowtimes.top | 1 | Hacked Site / Injected Link-Vendor Spam |
+| walshskitchen.com | 1 | Client Decision (Disavow) - Review Queue Cleared |
 | webrankindia.com | 1 | Link Farm / Outbound-Link Bloat |
 | seohubdirectory.com | 1 | Directory / Link-Scheme Spam Footprint |
 | nettools.guru | 1 | Link Farm / Outbound-Link Bloat |
+| jeffjsnider.com | 1 | Client Decision (Disavow) - Review Queue Cleared |
 | qhtycw.com | 1 | Link Farm / Outbound-Link Bloat |
 | idblogmaker.com | 1 | Throwaway Auto-Generated Host |
+| crazypeople.online | 1 | Client Decision (Disavow) - Review Queue Cleared |
 | blogunteer.com | 1 | Vendor Blog Network (Spun-Content PBN) |
 | seodirectory4u.com | 1 | Directory / Link-Scheme Spam Footprint |
 | linkdirectory101.com | 1 | Directory / Link-Scheme Spam Footprint |
+| alphapowershop.online | 1 | Client Decision (Disavow) - Review Queue Cleared |
+| fuelcell101.com | 1 | Client Decision (Disavow) - Review Queue Cleared |
 ## Below the disavow confidence bar
 
-13 domain(s) matched a spam rule at Medium or Low confidence and were routed to review rather than disavowed.
+6 domain(s) matched a spam rule at Medium or Low confidence and were routed to review rather than disavowed.
 
 | Domain | Backlinks | Follow | Risk factor |
 |---|---:|---:|---|
-| armfighter.com | 22 | 22 | Irrelevant Niche Spam (No Topical Overlap) |
-| musicareview.com | 21 | 0 | Irrelevant Niche Spam (No Topical Overlap) |
-| aferg.co | 8 | 8 | Irrelevant Niche Spam (No Topical Overlap) |
-| dtcx.com | 7 | 7 | Irrelevant Niche Spam (No Topical Overlap) |
-| drugs-forum.org | 6 | 6 | Irrelevant Niche Spam (No Topical Overlap) |
 | geni.us | 6 | 6 | Irrelevant Niche Spam (No Topical Overlap) |
 | pr.report | 5 | 5 | Irrelevant Niche Spam (No Topical Overlap) |
-| losmejoressuplementos.es | 5 | 5 | Irrelevant Niche Spam (No Topical Overlap) |
 | jsr-productions.com | 4 | 4 | Irrelevant Niche Spam (No Topical Overlap) |
 | gcorp.cc | 4 | 4 | Irrelevant Niche Spam (No Topical Overlap) |
-| hlhw.fun | 3 | 3 | Irrelevant Niche Spam (No Topical Overlap) |
 | australianwebdirectory.com | 2 | 0 | Link Farm / Outbound-Link Bloat |
 | rankvance.website | 1 | 1 | Link Farm / Outbound-Link Bloat |
 
@@ -315,6 +352,7 @@ They are **not** disavowed. Two attempts to turn this into a rule each misclassi
 | Link Farm / Bare-Domain Listing | 106 |
 | Link Farm / Outbound-Link Bloat | 71 |
 | Throwaway Auto-Generated Host | 71 |
+| Client Decision (Disavow) - Review Queue Cleared | 60 |
 | Vendor Blog Network (Spun-Content PBN) | 56 |
 | Directory / Link-Scheme Spam Footprint | 28 |
 | Free-Host Blog Serving a Link Dump | 22 |
