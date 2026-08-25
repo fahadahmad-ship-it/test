@@ -1,7 +1,7 @@
 # Performance Lab (performancelab.com) - disavow file (FULL profile)
 # Referring domains evaluated: 2,928
 # Total backlinks represented: 1,362,105
-# Domains disavowed: 843 (10,703 backlinks)
+# Domains disavowed: 842 (10,574 backlinks)
 # Search/AI surfaces and affiliate infrastructure excluded by design.
 #
 
@@ -313,7 +313,6 @@ domain:general-health-spectrum.com
 domain:health-supplements-review.com
 
 # --- Link Farm / Outbound-Link Bloat ---
-domain:benchchem.com
 domain:bloatatt.blogspot.com
 domain:cytopore.blogspot.com
 domain:daadvn.blogspot.com

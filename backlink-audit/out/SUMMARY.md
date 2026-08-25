@@ -8,19 +8,18 @@
 
 | Action | Domains | Backlinks | % of links |
 |---|---:|---:|---:|
-| DISAVOW | 52 | 299 | 0.6% |
+| DISAVOW | 51 | 201 | 0.4% |
 | REVIEW_MANUALLY | 80 | 1,161 | 2.3% |
-| KEEP_AFFILIATE_RETAIN | 483 | 48,540 | 97.1% |
+| KEEP_AFFILIATE_RETAIN | 484 | 48,638 | 97.3% |
 
 ## Equity exposure
 
-Of **299** disavow-flagged backlinks, only **253 (84.6%)** are follow links that pass equity. The remaining **46** are nofollow and pass none.
+Of **201** disavow-flagged backlinks, only **155 (77.1%)** are follow links that pass equity. The remaining **46** are nofollow and pass none.
 
 ### Priority remediation targets (follow links only)
 
 | Domain | Follow links | Risk factor |
 |---|---:|---|
-| benchchem.com | 98 | Link Farm / Outbound-Link Bloat |
 | aihcp.net | 33 | PBN / Templated Mass Footprint (Irrelevant Niche) |
 | retiredbrains.com | 28 | Exact-Match Anchor Abuse (Sitewide Injection) |
 | bloggazza.com | 18 | Vendor Blog Network (Spun-Content PBN) |
@@ -76,7 +75,7 @@ Excluded from the disavow file pending your call. Each carries the evidence that
 | Risk factor | Domains |
 |---|---:|
 | Vendor Blog Network (Spun-Content PBN) | 24 |
-| Link Farm / Outbound-Link Bloat | 15 |
+| Link Farm / Outbound-Link Bloat | 14 |
 | Synthetic Affiliate Doorway Domain | 5 |
 | Hacked Site / Injected Link-Vendor Spam | 3 |
 | Directory / Link-Scheme Spam Footprint | 1 |

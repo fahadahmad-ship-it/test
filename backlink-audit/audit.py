@@ -404,6 +404,17 @@ DISAVOW, KEEP, REVIEW = "DISAVOW", "KEEP_AFFILIATE_RETAIN", "REVIEW_MANUALLY"
 # every rule. Each records who decided and why, so a later pass does not
 # quietly re-flag the domain.
 CLIENT_OVERRIDES = {
+    "benchchem.com": (
+        KEEP,
+        "None - Client Decision (Retain)",
+        "Client instruction, 2026-08-25. Supported by the data: chemical "
+        "catalogue product pages citing Performance Lab blog articles as "
+        "scientific references. Anchors are numbered citations ('1. "
+        "performancelab.com', '5', 'Link') and targets are deep editorial "
+        "posts on L-tryptophan, R-lipoic acid and L-tyrosine. The 900-2100 "
+        "outbound links per page are bibliographies, which the OBL rule "
+        "counted without regard to why they exist.",
+    ),
     "bittersweetblog.com": (
         KEEP,
         "None - Client Decision (Retain)",
