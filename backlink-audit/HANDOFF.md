@@ -220,9 +220,15 @@ multi-host case.
 
 ### 4d. Then re-run the full chain
 
+**UNBLOCKED.** Both source exports are now committed under `data/`, so any
+thread can run the chain without re-supplying them:
+
 ```bash
-python3 audit.py           <backlinks.csv> out
-python3 refdomain_audit.py <backlinks.csv> <refdomains.csv> out
+cd backlink-audit
+gunzip -kf data/performancelab_backlinks_50k.csv.gz
+python3 audit.py           data/performancelab_backlinks_50k.csv out
+python3 refdomain_audit.py data/performancelab_backlinks_50k.csv \
+                           data/performancelab_refdomains.csv out
 python3 build_workbook.py  out
 ```
 
@@ -284,3 +290,15 @@ are literals and unaffected.
    exposure after the held three. Was it a bought placement?
 3. **Filing scope** — file the 804 now, or wait for the §4 pull to complete
    first? The 804 are all High confidence and independent of the pull.
+4. **Affiliate `68990cbe508aa`** — 61 tracked links across 24 spun-content
+   PBN domains, 100% of its footprint. Terminate or require removal? See
+   `FINDINGS-affiliate-attribution.md`.
+
+## 8. `fitliving.org` — resolved, no client input needed
+
+It is affiliate infrastructure: `/go/` cloaked redirects with structured
+campaign slugs (`{vertical}-{brand}-{product}-{audience}-{geo}`) and
+tracking parameters. Current `KEEP` verdict is correct. It does not gate
+anything — it carries 27 backlinks and links to the sister brands too.
+`drect.net` remains the only unidentified redirect host, and only
+`hexcolor.co` / `currencyconverts.com` route through it.
