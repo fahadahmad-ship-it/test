@@ -38,7 +38,37 @@ rows than the limit.
 **Page the output to disk as it arrives.** The rows come back through the
 conversation, so holding 27k of them in context will exhaust it.
 
-## What to send back
+## Handing the result back — use the branch, not chat
+
+Both threads have this repo. The other thread can commit the pull output
+straight to the branch, and this one can fetch it — no uploading 27k rows
+through a conversation.
+
+In the thread that ran the pull:
+
+```bash
+cd backlink-audit
+# write the pull output to data/semrush_backlinks_filtered.csv, then:
+git add data/semrush_backlinks_filtered.csv
+git commit -m "Add Semrush link-level pull for the 334 unsampled domains"
+git push origin claude/performancelab-backlink-audit-avlvtz
+```
+
+Then say so here and I will run:
+
+```bash
+git pull origin claude/performancelab-backlink-audit-avlvtz
+python3 semrush_ingest.py data/semrush_backlinks_filtered.csv out
+python3 audit.py           data/semrush_backlinks_filtered.csv out
+python3 refdomain_audit.py data/semrush_backlinks_filtered.csv \
+                           data/performancelab_refdomains.csv out
+python3 build_workbook.py  out
+```
+
+That thread does not need to interpret anything — it only needs to fetch
+and commit. All the classification logic lives here.
+
+## Alternatively, send it back
 
 Save the semicolon-delimited output (one header line, then rows) as
 `semrush_backlinks_filtered.csv` and upload it. Then:
