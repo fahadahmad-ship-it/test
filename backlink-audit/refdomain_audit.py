@@ -72,7 +72,7 @@ LINK_VENDOR_NAME_RE = re.compile(
     r"seoarticle|seobacklink|linkexchange|articlesubmit|guestpost|"
     r"pbn|linkwheel|seocartel|seo-anomaly|seoanomaly|rankbooster|"
     r"boostrank|highpr|dofollow|linkjuice|seosubmit|submitlink|"
-    r"a2zseo|99ranks|clicktohigh",
+    r"a2zseo|99ranks|clicktohigh|[-.]links?[-.]|^links?[-.]",
     re.I,
 )
 
@@ -94,9 +94,30 @@ SPAM_TLDS = {
 }
 
 
+# Generic web directories. Directory submission is a textbook link scheme and
+# these are near-uniformly auto-generated; a real niche directory carries
+# authority, so the score gate protects those.
+GENERIC_DIRECTORY_RE = re.compile(r"director(y|ies)", re.I)
+
+# Free throwaway app/page hosting. Legitimate projects use these too, so this
+# only fires alongside near-zero authority.
+FREE_HOST_SUFFIXES = (
+    ".pages.dev", ".workers.dev", ".netlify.app", ".vercel.app", ".web.app",
+    ".firebaseapp.com", ".github.io", ".glitch.me", ".repl.co",
+    ".onrender.com", ".surge.sh", ".herokuapp.com", ".gitbook.io",
+    ".blogspot.com", ".weebly.com", ".wixsite.com", ".000webhostapp.com",
+)
+
+
 def sibling_family(domain):
-    """Collapse numbered siblings: seo-anomaly-top-7.xyz -> seo-anomaly-top-#.xyz"""
-    return re.sub(r"\d+", "#", domain)
+    """Collapse generated siblings into one family key.
+
+    Handles both numeric sequences (seo-anomaly-top-7.xyz) and short trailing
+    geo/letter codes (bhs-links-fr.xyz, bhs-links-gb.xyz), which are the same
+    generator with a different suffix scheme.
+    """
+    d = re.sub(r"\d+", "#", domain)
+    return re.sub(r"-[a-z]{2}(?=\.)", "-@@", d)
 
 
 def _i(v, d=0):
@@ -143,6 +164,18 @@ def classify_domain(r, ctx):
         return (DISAVOW, "Numbered Sibling Domain Network (PBN)", "High",
                 f"One of {fam} numerically-sequenced sibling domains "
                 f"({sibling_family(d)}) — machine-generated network.")
+
+    if GENERIC_DIRECTORY_RE.search(d) and asc <= 8:
+        return (DISAVOW, "Directory Submission Spam Network", "High",
+                f"Generic web directory at authority score {asc}. Directory "
+                "submission is a link scheme and these are auto-generated; "
+                "278 such domains link to the site.")
+
+    if d.endswith(FREE_HOST_SUFFIXES) and asc <= 5:
+        host = next(s for s in FREE_HOST_SUFFIXES if d.endswith(s))
+        return (DISAVOW, "Throwaway Free-Host Subdomain", "High",
+                f"Disposable {host.lstrip('.')} subdomain at authority score "
+                f"{asc} — no editorial publisher behind it.")
 
     if LINK_VENDOR_NAME_RE.search(d):
         return (DISAVOW, "Link-Selling / SEO Vendor Domain", "High",

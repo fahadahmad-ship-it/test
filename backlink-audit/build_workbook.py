@@ -41,6 +41,87 @@ NUMERIC = {"Backlinks (true)", "Backlinks (in sample)",
            "Avg External Links"}
 
 
+TAB_COLS = [
+    ("Referring Domain", 44), ("Disavow Entry", 30),
+    ("Primary Risk Factor", 44), ("Confidence Score", 11),
+    ("Evidence Level", 32), ("Remediation Priority", 32),
+    ("Backlinks (true)", 13), ("Follow (Equity) Links", 13),
+    ("Domain ascore", 11), ("C-Block", 17), ("Hosting", 24),
+    ("Anchor Text", 36), ("First seen", 12), ("Last seen", 12),
+    ("Rationale", 100),
+]
+
+
+def _worksheet(wb, title, dom, action, blurb, confirm_header,
+               confirm_list, default=""):
+    """One working tab per action bucket, with a decision column."""
+    rows = [dict(d) for d in dom if d["Action Recommendation"] == action]
+    rows.sort(key=lambda r: -int(r["Backlinks (true)"]))
+    # Pre-fill the disavow line on every row so a REVIEW domain flipped to
+    # DISAVOW can be copied straight into Google's tool.
+    for r in rows:
+        r["Disavow Entry"] = f"domain:{r['Referring Domain']}"
+    ws = wb.create_sheet(title)
+    HDR = 6
+    first, last = HDR + 1, HDR + len(rows)
+    ncol = len(TAB_COLS) + 2
+    dec_col = get_column_letter(len(TAB_COLS) + 1)
+
+    ws["A1"] = f"{title} - {len(rows):,} domains"
+    ws["A1"].font = Font(name=FONT, size=14, bold=True)
+    ws["A2"] = blurb
+    ws["A2"].font = Font(name=FONT, size=9, italic=True, color="595959")
+    ws["A3"] = "Total backlinks"
+    ws["B3"] = f"=SUM($G${first}:$G${last})"
+    ws["A4"] = "Rows still unset"
+    ws["B4"] = f'=COUNTIF(${dec_col}${first}:${dec_col}${last},"{default or ""}")'         if default else f'=COUNTBLANK(${dec_col}${first}:${dec_col}${last})'
+    for r in (3, 4):
+        ws[f"A{r}"].font = Font(name=FONT, size=10, bold=True)
+        ws[f"B{r}"].font = Font(name=FONT, size=10)
+        ws[f"B{r}"].number_format = "#,##0"
+
+    thin = Side(style="thin", color="BFBFBF")
+    BOT, A_TOP = Border(bottom=thin), Alignment(vertical="top")
+    A_WRAP = Alignment(vertical="top", wrap_text=True)
+    F_BODY = Font(name=FONT, size=10)
+    hdr_fill = PatternFill("solid", fgColor="1F3864")
+    heads = [c[0] for c in TAB_COLS] + [confirm_header, "Notes"]
+    widths = [c[1] for c in TAB_COLS] + [26, 44]
+    for i, (h, w) in enumerate(zip(heads, widths), start=1):
+        c = ws.cell(HDR, i, h)
+        c.font = Font(name=FONT, size=10, bold=True, color="FFFFFF")
+        c.fill = hdr_fill
+        c.alignment = Alignment(vertical="center", wrap_text=True)
+        ws.column_dimensions[get_column_letter(i)].width = w
+    ws.row_dimensions[HDR].height = 30
+
+    NUM = {"Backlinks (true)", "Follow (Equity) Links", "Domain ascore"}
+    for ri, row in enumerate(rows, start=first):
+        for ci, (name, _) in enumerate(TAB_COLS, start=1):
+            v = row.get(name, "")
+            if name in NUM and v not in ("", None):
+                try:
+                    v = int(v)
+                except ValueError:
+                    pass
+            c = ws.cell(ri, ci, v)
+            c.font = F_BODY
+            c.alignment = A_WRAP if name == "Rationale" else A_TOP
+            c.border = BOT
+        d = ws.cell(ri, len(TAB_COLS) + 1, default)
+        d.font = F_BODY
+        d.fill = PatternFill("solid", fgColor="FFF2CC")
+        d.border = BOT
+        ws.cell(ri, len(TAB_COLS) + 2).border = BOT
+
+    ws.auto_filter.ref = f"A{HDR}:{get_column_letter(ncol)}{last}"
+    ws.freeze_panes = f"B{first}"
+    dv = DataValidation(type="list", formula1=confirm_list, allow_blank=True)
+    ws.add_data_validation(dv)
+    dv.add(f"{dec_col}{first}:{dec_col}{last}")
+    return ws
+
+
 def main(outdir):
     dom = list(csv.DictReader(open(f"{outdir}/full_refdomain_audit.csv", encoding="utf-8")))
     url = list(csv.DictReader(open(f"{outdir}/url_drilldown.csv", encoding="utf-8")))
@@ -154,6 +235,25 @@ def main(outdir):
                         allow_blank=False)
     ws.add_data_validation(dv)
     dv.add(f"F{first}:F{last}")
+
+    # ---------------- Tab 2: Disavow working sheet ----------------------
+    _worksheet(
+        wb, "Disavow", dom, "DISAVOW",
+        "Disavow queue - 'Disavow Entry' is the exact line for Google's tool. "
+        "Work the Confirmed column; the counts update live.",
+        confirm_header="Confirmed? (Y / N / HOLD)",
+        confirm_list='"Y,N,HOLD"',
+    )
+
+    # ---------------- Tab 3: Review queue -------------------------------
+    _worksheet(
+        wb, "Review Queue", dom, "REVIEW_MANUALLY",
+        "Domains needing a human call, highest backlink volume first. Set "
+        "Decision per row; the counts update live.",
+        confirm_header="Decision (DISAVOW / KEEP / PENDING)",
+        confirm_list='"DISAVOW,KEEP,PENDING"',
+        default="PENDING",
+    )
 
     path = f"{outdir}/performancelab_backlink_audit.xlsx"
     wb.save(path)

@@ -229,6 +229,51 @@ anything relying on cached values (`pandas`, `load_workbook(data_only=True)`,
 some previewers). Excel and LibreOffice compute them on open. The 2,145 data
 rows are literal values and are unaffected.
 
+## Coverage and residual risk
+
+All 2,928 referring domains carry a verdict. "Audited" is not the same as
+"settled", so the honest position:
+
+| | Domains | Basis |
+|---|---:|---|
+| `DISAVOW` | 804 | High confidence only; every rule is a signature that cannot plausibly be innocent. |
+| `REVIEW_MANUALLY` | 1,241 | Needs a human call. |
+| `KEEP` | 883 | 395 High (link-level), 69 Medium, **419 Low**. |
+
+**The review queue is not 1,241 units of work.** It concentrates almost
+entirely in three domains:
+
+| Tier | Domains | Backlinks |
+|---|---:|---:|
+| ≥1,000 backlinks | 3 | 1,334,482 |
+| 100–999 | 11 | 3,105 |
+| 10–99 | 123 | 2,867 |
+| <10 | 1,104 | 2,536 |
+
+Deciding `hexcolor.co`, `wete.co` and `appsrankings.com` settles **98.7% of
+the entire link profile**. The 1,104-domain tail carries 2,536 links between
+them and can be worked opportunistically or left.
+
+### Where false negatives most likely remain
+
+**419 Low-confidence KEEPs** — 291 retained because the domain name matches
+the health/performance lexicon, 128 because authority score ≥20. Both are
+thin: a PBN can register a niche-sounding domain, and authority score is not
+editorial quality. These sit outside the 50k sample, so no anchor or
+placement signal exists to test them against. This is the most likely home
+of anything still missed.
+
+Successive review passes each found real spam in exactly this bucket — a
+24-domain spun-content blog network, then 274 directory-submission domains,
+then 52 throwaway free-host subdomains — every one previously protected by
+niche relevance or authority score. The pattern is that generated networks
+adopt legitimate-looking surface features; only cross-domain evidence
+(shared titles, shared C-blocks, shared naming generators) exposes them.
+
+**What would close the gap:** a full backlinks export rather than a 50k
+sample, which would give anchor, placement and outbound-link signal for the
+2,325 domains currently judged on domain metrics alone.
+
 ## Known limitations
 
 - No liveness check on redirects or affiliate gateways (no `HTTP Status`).
