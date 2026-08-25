@@ -746,6 +746,16 @@ def classify(p: DomainProfile):
                 "confirm the offer resolves before considering any action.")
 
     if p.avg_external >= 200:
+        # Above this, the page is a directory or link dump: a bare-domain
+        # anchor there is a listing row, not an editorial brand mention, so
+        # the branded brake must not reach it. Ten domains carrying
+        # bare-domain anchors on 1,000-10,000-outlink pages were being held
+        # in review as "branded" profiles.
+        if p.avg_external >= 500 and p.branded_share >= 0.80:
+            return (DISAVOW, "Link Farm / Bare-Domain Listing", "High",
+                    f"Average {p.avg_external:.0f} outbound links per page "
+                    "with bare-domain anchors — a directory listing, not a "
+                    "citation.")
         if branded_safe:
             return (REVIEW, "High-OBL Page, Branded Anchor Profile", "Low",
                     f"Pages average {p.avg_external:.0f} outbound links, but "

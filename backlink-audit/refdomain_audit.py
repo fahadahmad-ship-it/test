@@ -20,6 +20,7 @@ from collections import Counter, defaultdict
 from nameshape import name_shape
 from audit import (
     AFFILIATE_REDIRECT_SOURCES, BRAND_REDIRECT_HOSTS, CLIENT_OVERRIDES,
+    anchor_type,
     CONFIRMED_AFFILIATE_REDIRECTS,
     host_of, audit_key, _registrable, BRAND_OWNED, AFFILIATE_NETWORKS,
     SCRAPER_AGGREGATOR, SPAM_BLOG_NETWORK, SEARCH_AI_SURFACES,
@@ -100,7 +101,8 @@ LINK_VENDOR_NAME_RE = re.compile(
     # letters s-e-o and is a magazine, not a link vendor.
     r"(^|[-.])seo([-.]|tool|space|domain|link|tech|analysis|\d)|"
     r"seo(link|tool|domain|submit)|(digital|new|blogger?)seo|"
-    r"^addurl|(^|[-.])rankvance|buyseo",
+    r"^addurl|(^|[-.])rankvance|buyseo|"
+    r"dom(ain)?raider|links?crawl|crawl(er)?links?|scrapeb?o?x",
     re.I,
 )
 
@@ -382,6 +384,10 @@ def main(backlinks_csv, refdomains_csv, outdir):
     os.makedirs(outdir, exist_ok=True)
 
     rd = list(csv.DictReader(open(refdomains_csv, encoding="utf-8", errors="replace")))
+    # Raw link rows: the resolution pass needs every anchor, not just each
+    # domain's most frequent one.
+    with open(backlinks_csv, encoding="utf-8", errors="replace", newline="") as _fh:
+        link_rows = list(csv.DictReader(_fh))
 
     # Link-level verdicts already computed by audit.py
     link = {}
@@ -645,7 +651,67 @@ def main(backlinks_csv, refdomains_csv, outdir):
                          f"({', '.join(sorted(x['Referring Domain'] for x in group)[:4])}) — "
                          "a single deployment, not organic acquisition.")
 
-    # 3. Verdict propagation inside a concentrated hosting footprint. Only
+    # 3. Verbatim scraped-content clones. A commerce comparison table lifted
+    #    from a real publisher carries its price cells across as anchor text,
+    #    so the clones share exact anchor strings like "Taster box - 4 bars
+    #    (£8.99)" or "£132 at performancelab.com". The originals share them
+    #    too, which is why the authority gate is essential: bbcgoodfood.com
+    #    scores 87 and goodhousekeeping.com is the source, while every clone
+    #    sits at 2. This footprint is invisible to the outbound-link and
+    #    anchor rules -- the anchors read as branded and OBL is only ~72.
+    # Built from raw link rows, not per-domain top anchors. Two earlier
+    # attempts failed here: keying on the summary column flagged 451 domains
+    # (driven by "performancelab.com", "Performance Lab" and the literal
+    # placeholder "(empty/image)"), and after tightening it flagged 0 --
+    # because the index was built on cleaned anchors while the match still
+    # used the raw column with its "(+N more)" suffix, so nothing ever
+    # matched. The raw rows avoid both problems.
+    #
+    # A lifted price cell is recognisable: a currency amount or a unit count,
+    # and never a branded or bare-URL anchor.
+    PRICE_CELL_RE = re.compile(
+        r"[\u00a3$\u20ac]\s?\d|\(\s*[\u00a3$\u20ac]?\d"
+        r"|\d+\s*(bars?|pack|caps?|servings?|tabs?)\b", re.I)
+
+    def _distinctive(a):
+        a = (a or "").strip()
+        if len(a) < 10:
+            return None
+        # The price test comes FIRST: "\u00a3132 at performancelab.com" is typed
+        # Branded because it names the brand, but it is a price cell lifted
+        # from a table. Checking the type first excluded seven clones.
+        if PRICE_CELL_RE.search(a):
+            return a
+        return None
+
+    anchor_owners = defaultdict(set)
+    domain_anchors = defaultdict(set)
+    for _lr in link_rows:
+        _a = _distinctive(_lr.get("Anchor"))
+        if _a:
+            _d = audit_key(host_of(_lr["Source url"]))
+            anchor_owners[_a].add(_d)
+            domain_anchors[_d].add(_a)
+    shared = {a for a, ds in anchor_owners.items() if len(ds) >= 4}
+
+    n_clone = 0
+    for o in out:
+        # Fires on KEEP as well as REVIEW: the branded-anchor brake reads
+        # "\u00a3132 at performancelab.com" as a brand mention when it is a price
+        # cell carried over with the rest of the table. At authority 5 or
+        # below, sharing a publisher's exact price cell is conclusive.
+        _hit = sorted(domain_anchors.get(o["Referring Domain"], set()) & shared)
+        if (_hit and o["Action Recommendation"] != DISAVOW
+                and o["Domain ascore"] <= 5):
+            a = _hit[0]
+            n_clone += 1
+            _set(o, DISAVOW, "Verbatim Scraped-Content Clone", "High",
+                 f"Carries the verbatim anchor {a[:44]!r}, which appears on "
+                 f"{len(anchor_owners[a])} other referring domains including "
+                 "established publishers. A lifted commerce table at "
+                 f"authority {o['Domain ascore']}, not original content.")
+
+    # 4. Verdict propagation inside a concentrated hosting footprint. Only
     #    where the cluster is already overwhelmingly condemned on evidence
     #    independent of hosting, and never on a shared platform.
     cl = defaultdict(list)
@@ -676,7 +742,7 @@ def main(backlinks_csv, refdomains_csv, outdir):
                          "co-location indicates the same operator.")
 
     log = {"cross_tld_siblings": n_sib, "identical_cohorts": n_cohort,
-           "cluster_propagation": n_prop}
+           "scraped_clones": n_clone, "cluster_propagation": n_prop}
 
     # The resolution pass rewrites verdicts after the per-domain counter was
     # incremented, so recount from the final rows rather than trusting it.
