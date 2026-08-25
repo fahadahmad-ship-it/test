@@ -149,6 +149,28 @@ This matters here: 98.1% of disavow-flagged backlinks in this export are
 nofollow. Sequencing by priority prevents a headline row count from setting
 the workload.
 
+## Workbook formula validation
+
+`recalc.py` could not be used in this environment: LibreOffice headless
+hangs here even on a four-cell workbook, so both attempts timed out without
+recalculating anything. The formulas were therefore validated directly
+instead:
+
+- every range spans exactly the data rows (`10:2154`), checked programmatically;
+- the referenced columns resolve to the intended headers (`A`=Level,
+  `F`=Action Recommendation, `K`=Backlinks, `L`=Follow (Equity) Links);
+- expected results were computed independently from `domain_audit.csv`, and
+  the TOTAL row reconciles to the raw export — 615 domains, 50,000
+  backlinks, 3,431 follow links;
+- only `COUNTIFS`, `SUMIFS` and `SUM` are used: all Excel-2007-era, so no
+  `_xlfn.` prefix is needed and no spilling-array metadata is involved.
+
+One consequence remains. openpyxl writes formulas with no cached values, and
+nothing recalculated them, so those twelve summary cells read as empty to
+anything relying on cached values (`pandas`, `load_workbook(data_only=True)`,
+some previewers). Excel and LibreOffice compute them on open. The 2,145 data
+rows are literal values and are unaffected.
+
 ## Known limitations
 
 - No liveness check on redirects or affiliate gateways (no `HTTP Status`).
