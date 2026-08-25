@@ -245,7 +245,7 @@ directories → 52 free-host subdomains).
 |---|---|
 | `out/performancelab_backlink_audit.xlsx` | **Main deliverable.** 3 tabs: full audit (2,928 domains + 1,521 URLs), Disavow (804, copy-ready `domain:` lines + Confirmed dropdown), Review Queue (682, volume-sorted + Decision dropdown). Live `COUNTIFS`/`SUMIFS`. |
 | `out/full_refdomain_audit.csv` | All 2,928 domains, 26 columns |
-| `out/disavow_full.txt` | Google-format, grouped by risk factor |
+| `out/disavow.txt` | Google-format, grouped by risk factor |
 | `out/url_drilldown.csv` | Per-URL rows for flagged domains |
 | `out/SUMMARY.md` | Executive summary |
 | `README.md` | Full methodology, rule order, limitations |

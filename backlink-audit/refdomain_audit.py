@@ -953,24 +953,24 @@ def main(backlinks_csv, refdomains_csv, outdir):
         w.writerows(out)
 
     def _write_disavow(path, rows_, title, note):
-        by = defaultdict(list)
-        for x in rows_:
-            by[x["Primary Risk Factor"]].append(x)
+        """Entries only -- no comment headers, no grouping, no blank lines.
+
+        Google ignores comment lines, so they only ever served a human
+        reading the file, and the client does not want them. The grouping
+        and the reasoning live in the workbook and in
+        full_refdomain_audit.csv, which is where they belong: the submitted
+        file should contain exactly what is being submitted and nothing
+        else. `title` and `note` are kept in the signature because the
+        callers still describe each file, and those descriptions are what
+        the README documents.
+        """
         with open(path, "w", encoding="utf-8") as fh:
-            fh.write(f"# Performance Lab - {title}\n")
-            fh.write(f"# Domains: {len(rows_):,} | "
-                     f"Backlinks: {sum(x['Backlinks (true)'] for x in rows_):,}\n")
-            for line in note:
-                fh.write(f"# {line}\n")
-            fh.write("#\n")
-            for risk in sorted(by):
-                fh.write(f"\n# --- {risk} ---\n")
-                for line in sorted({s for x in by[risk] for s in _scope(x)}):
-                    fh.write(f"{line}\n")
+            for line in sorted({s for x in rows_ for s in _scope(x)}):
+                fh.write(f"{line}\n")
 
     _write_disavow(
-        f"{outdir}/disavow_full.txt", dis,
-        "disavow file (FULL profile)",
+        f"{outdir}/disavow.txt", dis,
+        "disavow file - THE ONE TO SUBMIT (full profile)",
         [f"Referring domains evaluated: {len(out):,}",
          f"Total backlinks represented: {total_bl:,}",
          f"Disavowed backlinks: {dis_bl:,}",
@@ -983,7 +983,8 @@ def main(backlinks_csv, refdomains_csv, outdir):
         f"{outdir}/disavow_core.txt", core,
         "disavow file (equity-passing)",
         ["These domains carry follow links, or their follow status is unknown.",
-         "This is the file to submit.",
+         "A subset of disavow.txt, not a replacement for it -- kept so the",
+         "equity-passing share of the list is visible.",
          "Search/AI surfaces and affiliate infrastructure are excluded by design."])
     _write_disavow(
         f"{outdir}/disavow_nofollow_hygiene.txt", hygiene,
@@ -1020,7 +1021,9 @@ def main(backlinks_csv, refdomains_csv, outdir):
     for k, v in log.items():
         print(f"  {v:>4}  {k}")
     print()
-    print(f"Written: {outdir}/full_refdomain_audit.csv, disavow_full.txt")
+    print(f"Written: {outdir}/full_refdomain_audit.csv, disavow.txt "
+          f"(the file to submit), disavow_core.txt, "
+          f"disavow_nofollow_hygiene.txt")
 
 
 if __name__ == "__main__":

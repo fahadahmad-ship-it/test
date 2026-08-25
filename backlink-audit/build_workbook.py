@@ -340,7 +340,7 @@ def _decisions_tab(wb, dom):
     ws["A2"] = ("The review queue, resolved. 'Audit said' is what this audit "
                 "recommended and 'Applied' is the decision in the file, so "
                 "where the two differ it stays on the record. Reversing any "
-                "row means deleting one line from disavow_full.txt.")
+                "row means deleting one line from disavow.txt.")
     ws["A2"].font = Font(name=FONT, size=9, italic=True, color="595959")
 
     HDR = 4
@@ -435,13 +435,14 @@ def _start_tab(wb, dom, n_networks):
       "dtcx.com — see below. Everything else is settled: 1,183 domains "
       "disavowed, 1,745 kept, nothing pending.")
     w("Then submit",
-      "disavow_full.txt, as it stands, in Google Search Console's disavow "
-      "tool — every disavowed domain, grouped by network with comment "
-      "headers. Nothing in this workbook needs filling in first. "
+      "disavow.txt, as it stands, in Google Search Console's disavow tool. "
+      "It is 1,183 plain domain: lines, nothing else — no comments, no "
+      "grouping. Nothing in this workbook needs filling in first. "
       "disavow_core.txt (the 803 that pass equity) and "
       "disavow_nofollow_hygiene.txt (the 380 inert ones) are the same list "
-      "split in two, so you can see the composition; submitting the full "
-      "file matches your call to include nofollow.", gap=1)
+      "split in two so the composition is visible; they are subsets, not "
+      "alternatives. Submitting the whole file matches your call to include "
+      "nofollow.", gap=1)
 
     w("The tabs", "", bold=True)
     w("How to read them",
@@ -676,7 +677,7 @@ def main(outdir):
                             _prio(r), -int(r["Backlinks (true)"])))
     _work_tab(
         wb, "Disavow list", dis, DISAVOW_COLS,
-        "REFERENCE — the contents of disavow_full.txt, one row per domain, "
+        "REFERENCE — the contents of disavow.txt, one row per domain, "
         "grouped by network. 'Disavow Entry' is the exact line in the file; "
         "where it names a subdomain that is deliberate, because the host is "
         "compromised rather than hostile and the narrow scope protects the "

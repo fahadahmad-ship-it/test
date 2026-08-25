@@ -19,7 +19,7 @@ python3 build_workbook.py  <outdir>                                  # single sh
 | `disavow.txt` | Google-format disavow file, grouped and commented by risk factor. |
 | `SUMMARY.md` | Executive summary, equity exposure, priority targets, held-for-decision items. |
 | `full_refdomain_audit.csv` | **All 2,928 referring domains** — the primary deliverable. |
-| `disavow_full.txt` | Google-format disavow file for the full profile. |
+| `disavow.txt` | Google-format disavow file for the full profile. |
 | `performancelab_backlink_audit.xlsx` | **Consolidated single-sheet workbook** — all 2,928 domains and every drill-down URL on one surface, built by `build_workbook.py`. |
 
 ```bash
@@ -519,7 +519,7 @@ rewritten to agree.** On 38 of the 70 the two differ — 37 the audit had as
 KEEP, plus `dtcx.com`, which it had raised as an open question rather than a
 finding. The new **Decisions taken** tab shows both with an Agree column
 flagging the disagreements, because that is a fact about the file someone will
-want later. Reversing any row is one line out of `disavow_full.txt`.
+want later. Reversing any row is one line out of `disavow.txt`.
 
 Worth knowing what is in the disavowed 63, since some of it is protected
 architecture under the brief's own affiliate rule: `aferg.co` (a creator's
@@ -604,7 +604,7 @@ PENDING dropdowns are gone — the only remaining input is an optional "leave th
 one out" marker, for pulling a network or a domain if you decide to.
 
 What is actually outstanding is one thing: `dtcx.com`. Then submit
-`disavow_full.txt` as it stands.
+`disavow.txt` as it stands.
 
 ## Final pre-submission validation (2026-08-25)
 
@@ -643,3 +643,34 @@ Everything else came back clean:
 
 21/21. Good to submit, with `dtcx.com` the one judgement call left in the
 client's hands.
+
+## Disavow output simplified (2026-08-25)
+
+Comments removed at the client's request, and the file renamed to
+`disavow.txt`.
+
+Google ignores comment lines, so the headers and per-network groupings only
+ever served a human reading the file — and the reasoning already lives in the
+workbook and in `full_refdomain_audit.csv`, which is where it belongs. The
+submitted file should contain exactly what is being submitted and nothing else.
+It is now 1,183 plain `domain:` lines, sorted, no comments, no blanks, no
+grouping.
+
+Also removed a real hazard while renaming: `audit.py` was writing its own
+`disavow.txt` from the link-level pass alone — **634 domains against the
+authoritative 1,183** — to the same filename someone would reach for. Two files
+with the same name, one of them silently missing half the list. `audit.py` no
+longer writes a disavow file at all; `refdomain_audit.py` owns that output.
+The stale `disavow_addendum_needing_data.txt` from an earlier connector pull is
+deleted too.
+
+Three files remain, and the two split ones are subsets rather than
+alternatives:
+
+| File | Lines | What it is |
+|---|---|---|
+| **`disavow.txt`** | 1,183 | **Submit this.** |
+| `disavow_core.txt` | 803 | The equity-passing subset |
+| `disavow_nofollow_hygiene.txt` | 380 | The nofollow-only remainder |
+
+18/18 checks pass.
