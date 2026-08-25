@@ -15,7 +15,19 @@ python3 audit.py <backlinks.csv> <outdir>
 | `domain_audit.csv` | One row per referring domain — the primary deliverable. |
 | `url_drilldown.csv` | Per-URL rows for every `DISAVOW` / `REVIEW_MANUALLY` domain. |
 | `disavow.txt` | Google-format disavow file, grouped and commented by risk factor. |
-| `SUMMARY.md` | Executive summary, equity exposure, priority targets. |
+| `SUMMARY.md` | Executive summary, equity exposure, priority targets, held-for-decision items. |
+| `performancelab_backlink_audit.xlsx` | **Consolidated single-sheet workbook** — every domain and drill-down URL on one surface, built by `build_workbook.py`. |
+
+```bash
+python3 build_workbook.py <outdir>          # after audit.py
+```
+
+The workbook puts domain rows (`Level=DOMAIN`) and their per-URL drill-down
+(`Level=URL`) on one sheet, colour-coded by action, with an autofilter and a
+dropdown on every Action cell. The summary block at the top uses live
+`COUNTIFS`/`SUMIFS`, so as an analyst resolves `REVIEW_MANUALLY` rows to
+`DISAVOW` or `KEEP` in place, the domain, backlink and follow-link totals
+update with them.
 
 ## Input reality vs. brief
 
@@ -74,10 +86,33 @@ Protected assets resolve **before** any spam rule can fire.
 **Tier 2 — spam (fires regardless of anchor profile)**
 
 5. Hacked-site / link-vendor injection (anchor advertises a link vendor).
-6. Scraped aggregators, directory/link-scheme domains.
-7. PBN / templated mass footprint — ≥20 auto-generated pages, ≤2 distinct anchors, no niche overlap.
-8. Sitewide injection — one non-branded anchor on ≥80% of ≥8 pages.
-9. Extreme outbound-link farms (≥1,500 avg external links).
+6. Vendor blog networks — free-blog hosts used only by link sellers.
+7. Spun-content networks — the same article, near-verbatim, on 3+ other referring domains.
+8. Synthetic affiliate doorway domains (geo-prefixed / doubled-hyphen patterns).
+9. Throwaway auto-generated account subdomains.
+10. Scraped aggregators, directory/link-scheme domains.
+11. PBN / templated mass footprint — ≥20 auto-generated pages, ≤2 distinct anchors, no niche overlap.
+12. Sitewide injection — one non-branded anchor on ≥80% of ≥8 pages.
+13. Extreme outbound-link farms (≥1,500 avg external links).
+
+### Cross-domain network detection
+
+Rules 6–9 exist because per-domain analysis is structurally blind to
+networks. A single link from `tkzblog.com` looks like an ordinary low-value
+blog link; the pattern is only visible in aggregate. Before classification
+the audit therefore builds a global index of normalised page titles and
+flags any domain running an article that appears on **three or more other
+referring domains**.
+
+This caught 24 domains — carrying **follow** links — that per-domain rules
+had cleared as topically relevant, because their spun articles were about
+fish oil and nootropics and so passed the niche-relevance test. Relevance
+had become the thing protecting them.
+
+The counter-check matters as much: one publisher syndicating its own
+article across international editions (`thesun.co.uk` / `the-sun.com` /
+`thesun.ie`) is not a network. Domains are collapsed to a brand core before
+the count, so a single brand cannot trip the rule.
 
 **Safety brake.** Past this point a profile that is ≥80% branded or bare-URL
 anchors can only be downgraded to `REVIEW_MANUALLY`, never disavowed.
@@ -88,6 +123,18 @@ variety is the opposite of a templated placement.
 
 **Tier 3–4** — borderline signals route to `REVIEW_MANUALLY`; topically
 relevant and brand-mention profiles are retained.
+
+## Confidence gate
+
+`DISAVOW` requires **High** confidence. Anything below it is routed to
+`REVIEW_MANUALLY` instead, and the risk factor is suffixed
+`[below disavow confidence bar]`. A filed disavow is slow and awkward to
+unwind; a review queue is not.
+
+Three domains are additionally held back by name in `MANUAL_REVIEW_OVERRIDE`
+for an explicit client decision, each carrying the evidence that makes the
+call a judgement rather than a rule — `hexcolor.co`, `currencyconverts.com`,
+and `eastbayexpress.com`. See the summary for the reasoning.
 
 ## Remediation priority
 

@@ -134,6 +134,45 @@ SEARCH_AI_SURFACES = {
     "you.com", "kagi.com", "brave.com",
 }
 
+# Free-blog-hosting platforms used almost exclusively by cheap link vendors.
+# No legitimate publisher operates on these, so the registrable domain is the
+# correct disavow unit — it also catches future placements from the network.
+SPAM_BLOG_NETWORK = {
+    "tkzblog.com", "bligblogging.com", "blog4youth.com", "mpeblog.com",
+    "blogkoo.com", "ampblogs.com", "diowebhost.com", "pointblog.net",
+    "amoblog.com", "getblogs.net", "full-design.com", "fitnell.com",
+    "activoblog.com", "activosblog.com", "bloggazza.com", "blog-gold.com",
+    "blogadvize.com", "blogprodesign.com", "dailyblogzz.com", "idblogz.com",
+    "livebloggs.com", "worldblogged.com", "liberty-blog.com",
+    "sharebyblog.com", "blogolize.com", "onesmablog.com", "shotblogs.com",
+    "tribunablog.com", "blogzet.com", "blogminds.com", "suomiblog.com",
+    "affiliatblogger.com", "designertoblog.com", "bloginwi.com",
+    "ezblogz.com", "blogdigy.com", "mybjjblog.com", "articlesblogger.com",
+    "arwebo.com", "blogerus.com", "bloggerbags.com", "bloggerswise.com",
+    "bloggosite.com", "blogpayz.com", "blogrelation.com", "blogrenanda.com",
+    "blogsidea.com", "blogthisbiz.com", "blogunteer.com", "blogvivi.com",
+    "atualblog.com", "blogaritma.com", "canariblogs.com", "qowap.com",
+    "jaiblogs.com", "izrablog.com", "aioblogs.com", "look4blog.com",
+    "ka-blogs.com", "blogofoto.com", "timeblog.net", "mybloglicious.com",
+    "isblog.net", "post-blogs.com", "thezenweb.com", "tinyblogging.com",
+    "widblog.com", "dbblog.net", "ampedpages.com", "myparisblog.com",
+    "imblogs.net", "bcbloggers.com", "blogscribble.com", "elbloglibre.com",
+    "loginblogin.com", "mdkblog.com", "mybuzzblog.com", "theobloggers.com",
+    "topbloghub.com", "vblogetin.com", "win-blog.com", "blogspothub.com",
+}
+
+# Random auto-generated account subdomain, e.g. flynnbkwh412420.tkzblog.com
+THROWAWAY_SUBDOMAIN_RE = re.compile(r"^[a-z]{4,14}[a-z0-9]*\d{4,8}\.")
+
+# Synthetic affiliate doorway domains: geo-prefixed and/or doubled hyphens,
+# e.g. us-en--prozenith.com, en-en-prozenith.us, us-us--reduburn.com
+FAKE_OFFER_DOMAIN_RE = re.compile(
+    r"^((us|uk|en|de|fr|es|it|ca|au|nl|pt|jp)-){2,}"
+    r"|--"
+    r"|^(us|uk|en|de|fr|es|it)-[a-z-]+-(us|uk|en|de|fr|es|it)\.",
+    re.I,
+)
+
 DIRECTORY_SPAM_RE = re.compile(
     r"(link|seo|backlink|submit|article|guest|press|bookmark)"
     r"[a-z]*(directory|list|dir|submission|exchange|building)"
@@ -340,6 +379,28 @@ class DomainProfile:
 
 DISAVOW, KEEP, REVIEW = "DISAVOW", "KEEP_AFFILIATE_RETAIN", "REVIEW_MANUALLY"
 
+# Domains held back from the disavow file for an explicit client decision,
+# with the evidence that makes the call a judgement rather than a rule.
+MANUAL_REVIEW_OVERRIDE = {
+    "hexcolor.co":
+        "HELD FOR CLIENT DECISION - possible paid placement. Evidence "
+        "against affiliate attribution: all 45,412 links resolve to the bare "
+        "homepage with ZERO query parameters (no affiliate ID, subid, ref or "
+        "utm), so no commission can be attributed; rel is nofollow, not "
+        "sponsored. Note a disavow does not remove the link or stop referral "
+        "traffic, so it is safe to file even if this is a paid placement.",
+    "currencyconverts.com":
+        "HELD FOR CLIENT DECISION - identical 'Buy Now!' footprint and bare "
+        "homepage target as hexcolor.co; same network, so treated "
+        "consistently with it.",
+    "eastbayexpress.com":
+        "HELD FOR CLIENT DECISION - established news outlet, but 667 FOLLOW "
+        "links replicated across paginated archives carry the exact-match "
+        "anchor 'best nootropics for improving physical performance'. This is "
+        "the single largest equity exposure in the profile; confirm whether "
+        "the placement was bought before filing.",
+}
+
 
 def classify(p: DomainProfile):
     """Return (action, risk_factor, confidence, rationale).
@@ -385,6 +446,27 @@ def classify(p: DomainProfile):
         return (DISAVOW, "Hacked Site / Injected Link-Vendor Spam", "High",
                 "Anchor carries a link-vendor advertisement — the placement "
                 "is an intrusion on a compromised host, not an editorial link.")
+
+    if p.registrable in SPAM_BLOG_NETWORK:
+        return (DISAVOW, "Vendor Blog Network (Spun-Content PBN)", "High",
+                "Free-blog-host domain used exclusively by link vendors; "
+                f"{p.n_links} link(s) on throwaway auto-generated accounts.")
+
+    if p.network_titles >= 1 and p.median_ascore <= 25:
+        return (DISAVOW, "Spun-Content Network (Duplicate Article Footprint)", "High",
+                f"Runs {p.network_titles} article(s) that appear near-verbatim "
+                "on 3+ other referring domains — syndicated spun content, not "
+                "original editorial.")
+
+    if FAKE_OFFER_DOMAIN_RE.search(p.registrable):
+        return (DISAVOW, "Synthetic Affiliate Doorway Domain", "High",
+                "Geo-prefixed / doubled-hyphen domain pattern characteristic "
+                "of throwaway affiliate offer pages for unrelated products.")
+
+    if any(THROWAWAY_SUBDOMAIN_RE.match(h) for h in p.hosts) and p.median_ascore <= 25:
+        return (DISAVOW, "Throwaway Auto-Generated Host", "High",
+                "Randomly generated account subdomain — disposable link-vendor "
+                "infrastructure.")
 
     if p.registrable in SCRAPER_AGGREGATOR:
         return (DISAVOW, "Scraped Aggregator / Stats-Site Profile", "High",
@@ -558,7 +640,49 @@ def main(src, outdir):
         p.finalise()
         profiles[dom] = p
 
+    # ---- cross-domain spun-content network detection --------------------
+    # A vendor blog network reuses one spun article across many throwaway
+    # domains. Any single domain looks harmless; the network is obvious only
+    # in aggregate, so membership is computed globally before classification.
+    def _norm_title(t):
+        t = re.sub(r"[^a-z0-9 ]", "", (t or "").lower())
+        return re.sub(r"\s+", " ", t).strip()[:70]
+
+    title_domains = defaultdict(set)
+    for dom, p in profiles.items():
+        for t in p.titles:
+            n = _norm_title(t)
+            if len(n) >= 25:
+                title_domains[n].add(dom)
+
+    # One publisher syndicating its own article across its international
+    # editions (thesun.co.uk / the-sun.com / thesun.ie) is not a network.
+    # Collapse domains to a brand core and require genuinely distinct brands.
+    def _brand_core(dom):
+        core = dom.split(".")[0]
+        return re.sub(r"[^a-z0-9]", "", core.lower())
+
+    network_members = defaultdict(set)
+    for n, doms in title_domains.items():
+        if len({_brand_core(x) for x in doms}) >= 3:
+            for dom in doms:
+                network_members[dom].add(n)
+    for dom, p in profiles.items():
+        p.network_titles = len(network_members.get(dom, ()))
+
     verdicts = {d: classify(p) for d, p in profiles.items()}
+
+    # ---- confidence gate + explicit manual-review overrides -------------
+    # Anything short of High confidence is routed to manual review rather
+    # than disavowed. A disavow is irreversible in practice; a review is not.
+    for d, (a, rf, conf, why) in list(verdicts.items()):
+        if d in MANUAL_REVIEW_OVERRIDE:
+            verdicts[d] = (REVIEW, rf + " [flagged for client decision]",
+                           conf, why + " " + MANUAL_REVIEW_OVERRIDE[d])
+        elif a == DISAVOW and conf != "High":
+            verdicts[d] = (REVIEW, rf + " [below disavow confidence bar]",
+                           conf, why + " Confidence is not High; routed to "
+                           "manual review rather than disavowed.")
 
     # ---- domain-level report ------------------------------------------
     dom_out = []
@@ -702,6 +826,30 @@ def main(src, outdir):
         w("| Domain | Follow links | Risk factor |\n|---|---:|---|\n")
         for d, p in p1:
             w(f"| {d} | {p.n_follow:,} | {verdicts[d][1]} |\n")
+        held = [d for d in profiles if d in MANUAL_REVIEW_OVERRIDE]
+        if held:
+            w("\n## Held for client decision\n\n")
+            w("Excluded from the disavow file pending your call. Each carries "
+              "the evidence that makes it a judgement rather than a rule.\n\n")
+            for d in sorted(held, key=lambda x: -profiles[x].n_links):
+                p = profiles[d]
+                w(f"**`{d}`** — {p.n_links:,} backlinks "
+                  f"({p.n_follow:,} follow). {MANUAL_REVIEW_OVERRIDE[d]}\n\n")
+
+        below = [d for d in profiles
+                 if verdicts[d][0] == REVIEW
+                 and "below disavow confidence bar" in verdicts[d][1]]
+        if below:
+            w("## Below the disavow confidence bar\n\n")
+            w(f"{len(below)} domain(s) matched a spam rule at Medium or Low "
+              "confidence and were routed to review rather than disavowed.\n\n")
+            w("| Domain | Backlinks | Follow | Risk factor |\n|---|---:|---:|---|\n")
+            for d in sorted(below, key=lambda x: -profiles[x].n_links):
+                p = profiles[d]
+                w(f"| {d} | {p.n_links:,} | {p.n_follow:,} | "
+                  f"{verdicts[d][1].replace(' [below disavow confidence bar]','')} |\n")
+            w("\n")
+
         w("\n## Risk factor breakdown\n\n")
         w("| Risk factor | Domains |\n|---|---:|\n")
         for k, n in rf.most_common():
