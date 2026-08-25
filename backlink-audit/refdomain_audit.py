@@ -518,6 +518,31 @@ def main(backlinks_csv, refdomains_csv, outdir):
             action, risk, conf, why = classify_domain(r, ctx)
             evid = "Domain-level only (outside sample)"
 
+        # An authoritative source citing the brand is a good link even when
+        # its own subject is something else: a marketing blog illustrating a
+        # point with an e-commerce example, an SEO tool using the site as a
+        # case study, a genetics site linking a creatine article. The
+        # link-level pass cannot judge this -- it sees only PAGE authority,
+        # which is low on a deep blog post even at ranktracker.com's domain
+        # authority of 42. Domain authority exists only here.
+        OFF_NICHE_REVIEWS = (
+            "Off-Topic Source, Branded Anchor Profile",
+            "High-OBL Page, Branded Anchor Profile",
+            "Low-Authority / Off-Topic Single Placement",
+            "Unclassified - Insufficient Signal",
+            "Off-Topic Source, Editorial Anchor Diversity",
+        )
+        if (action == REVIEW and risk in OFF_NICHE_REVIEWS
+                and _i(r["Domain ascore"]) >= 20):
+            action = KEEP
+            risk = "None - Authoritative Off-Niche Citation"
+            conf = "Medium"
+            why = (f"Domain authority {_i(r['Domain ascore'])} source outside "
+                   "the health niche, no exact-match anchor abuse and no spam "
+                   "signature. Reads as an editorial citation; the niche "
+                   "lexicon does not cover the source's own subject, and the "
+                   "link-level pass saw only low page-level authority.")
+
         action, risk, conf, why, evid = residual_triage(
             r, action, risk, conf, why, evid)
         counts[action] += 1
