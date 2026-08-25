@@ -420,9 +420,19 @@ class DomainProfile:
         content_rows = [r for r in rows
                         if not ARCHIVE_URL_RE.search(r["Source url"])]
         judged = content_rows or rows
-        judged_titles = [r["Source title"] or "" for r in judged]
-        matched = sum(1 for t in judged_titles if NICHE_RE.search(t))
-        self.title_relevance = matched / len(judged_titles)
+        # Score the title AND the URL slug together. The API's backlinks
+        # report does not return source_title at all, so 134 of the domains
+        # it supplied had no title to score and fell back to the domain name
+        # alone -- reading real niche sites as off-topic. The slug carries
+        # the same words: leanbulking.com/best-testosterone-boosters-for-women
+        # is topical evidence whether or not a title came with it.
+        def _topic_text(r):
+            slug = re.sub(r"[-_/]+", " ", urlsplit(r["Source url"]).path)
+            return f"{r['Source title'] or ''} {slug}"
+
+        judged_text = [_topic_text(r) for r in judged]
+        matched = sum(1 for t in judged_text if NICHE_RE.search(t))
+        self.title_relevance = matched / len(judged_text)
         self.relevant = self.domain_relevant or self.title_relevance >= 0.35
 
         # Templating: near-identical page titles across a large page count is

@@ -9,8 +9,8 @@
 | Action | Domains | Backlinks | % of links |
 |---|---:|---:|---:|
 | DISAVOW | 661 | 4,225 | 6.8% |
-| REVIEW_MANUALLY | 522 | 2,826 | 4.5% |
-| KEEP_AFFILIATE_RETAIN | 1,167 | 55,159 | 88.7% |
+| REVIEW_MANUALLY | 275 | 777 | 1.2% |
+| KEEP_AFFILIATE_RETAIN | 1,414 | 57,208 | 92.0% |
 
 ## Equity exposure
 
@@ -330,42 +330,20 @@ Of **4,225** disavow-flagged backlinks, only **2,564 (60.7%)** are follow links 
 | linkdirectory101.com | 1 | Directory / Link-Scheme Spam Footprint |
 ## Below the disavow confidence bar
 
-38 domain(s) matched a spam rule at Medium or Low confidence and were routed to review rather than disavowed.
+16 domain(s) matched a spam rule at Medium or Low confidence and were routed to review rather than disavowed.
 
 | Domain | Backlinks | Follow | Risk factor |
 |---|---:|---:|---|
-| drywearapparel.com | 92 | 92 | Irrelevant Niche Spam (No Topical Overlap) |
-| cataglow.com | 50 | 50 | Irrelevant Niche Spam (No Topical Overlap) |
-| internetresearchunit.com | 47 | 0 | Irrelevant Niche Spam (No Topical Overlap) |
-| thetastefullife.com | 42 | 42 | Irrelevant Niche Spam (No Topical Overlap) |
-| fatlotofgood.com.au | 35 | 35 | Irrelevant Niche Spam (No Topical Overlap) |
-| aidevi.com | 29 | 29 | Irrelevant Niche Spam (No Topical Overlap) |
-| newdirect.net | 23 | 23 | Irrelevant Niche Spam (No Topical Overlap) |
 | armfighter.com | 22 | 22 | Irrelevant Niche Spam (No Topical Overlap) |
 | musicareview.com | 21 | 0 | Irrelevant Niche Spam (No Topical Overlap) |
-| yourinception.com | 18 | 18 | Irrelevant Niche Spam (No Topical Overlap) |
-| lockinfuel.com | 18 | 18 | Irrelevant Niche Spam (No Topical Overlap) |
-| no1gevity.com | 11 | 11 | Irrelevant Niche Spam (No Topical Overlap) |
 | aferg.co | 8 | 8 | Irrelevant Niche Spam (No Topical Overlap) |
-| farrinstitute.org | 7 | 3 | Irrelevant Niche Spam (No Topical Overlap) |
 | dtcx.com | 7 | 7 | Irrelevant Niche Spam (No Topical Overlap) |
 | drugs-forum.org | 6 | 6 | Irrelevant Niche Spam (No Topical Overlap) |
 | geni.us | 6 | 6 | Irrelevant Niche Spam (No Topical Overlap) |
-| tonyhuge.is | 6 | 6 | Irrelevant Niche Spam (No Topical Overlap) |
-| cogniscore.co.uk | 6 | 6 | Irrelevant Niche Spam (No Topical Overlap) |
-| slimmingandyou.com | 5 | 5 | Irrelevant Niche Spam (No Topical Overlap) |
-| cleverjournal.net | 5 | 5 | Irrelevant Niche Spam (No Topical Overlap) |
-| outliyr.com | 5 | 5 | Irrelevant Niche Spam (No Topical Overlap) |
 | pr.report | 5 | 5 | Irrelevant Niche Spam (No Topical Overlap) |
 | losmejoressuplementos.es | 5 | 5 | Irrelevant Niche Spam (No Topical Overlap) |
-| decoupage-paper.com | 5 | 0 | Irrelevant Niche Spam (No Topical Overlap) |
-| skipthefish.com | 5 | 5 | Irrelevant Niche Spam (No Topical Overlap) |
-| wellife.org | 4 | 4 | Irrelevant Niche Spam (No Topical Overlap) |
 | jsr-productions.com | 4 | 4 | Irrelevant Niche Spam (No Topical Overlap) |
 | gcorp.cc | 4 | 4 | Irrelevant Niche Spam (No Topical Overlap) |
-| dapago.net | 4 | 0 | Irrelevant Niche Spam (No Topical Overlap) |
-| recent-science.com | 3 | 3 | Irrelevant Niche Spam (No Topical Overlap) |
-| scienceonestop.com | 3 | 3 | Irrelevant Niche Spam (No Topical Overlap) |
 | hlhw.fun | 3 | 3 | Irrelevant Niche Spam (No Topical Overlap) |
 | australianwebdirectory.com | 2 | 0 | Link Farm / Outbound-Link Bloat |
 | nomoz.org | 2 | 2 | Link Farm / Outbound-Link Bloat |
