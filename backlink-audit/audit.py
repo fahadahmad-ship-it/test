@@ -482,6 +482,15 @@ DISAVOW, KEEP, REVIEW = "DISAVOW", "KEEP_AFFILIATE_RETAIN", "REVIEW_MANUALLY"
 # every rule. Each records who decided and why, so a later pass does not
 # quietly re-flag the domain.
 CLIENT_OVERRIDES = {
+    "eastbayexpress.com": (
+        KEEP,
+        "None - Client Decision (Retain)",
+        "Client instruction, 2026-08-25. Supported by the data: 662 of its "
+        "667 links are /BestOf/page/N/?award=... archive echoes; the actual "
+        "placement is one article at /best-nootropics/. Five links carry the "
+        "programme's a_aid/a_bid parameters, so it is at least partly an "
+        "affiliate placement rather than organic editorial. Authority 44.",
+    ),
     "appsupports.co": (
         DISAVOW,
         "Client Decision (Disavow) - Auto-Generated App Listing",
@@ -513,12 +522,6 @@ CLIENT_OVERRIDES = {
 }
 
 MANUAL_REVIEW_OVERRIDE = {
-    "eastbayexpress.com":
-        "HELD FOR CLIENT DECISION - established news outlet, but 667 FOLLOW "
-        "links replicated across paginated archives carry the exact-match "
-        "anchor 'best nootropics for improving physical performance'. This is "
-        "the single largest equity exposure in the profile; confirm whether "
-        "the placement was bought before filing.",
 }
 
 

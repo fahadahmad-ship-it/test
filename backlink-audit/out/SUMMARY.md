@@ -9,8 +9,8 @@
 | Action | Domains | Backlinks | % of links |
 |---|---:|---:|---:|
 | DISAVOW | 47 | 136 | 0.3% |
-| REVIEW_MANUALLY | 75 | 1,113 | 2.2% |
-| KEEP_AFFILIATE_RETAIN | 493 | 48,751 | 97.5% |
+| REVIEW_MANUALLY | 74 | 446 | 0.9% |
+| KEEP_AFFILIATE_RETAIN | 494 | 49,418 | 98.8% |
 
 ## Equity exposure
 
@@ -52,13 +52,6 @@ Of **136** disavow-flagged backlinks, only **104 (76.5%)** are follow links that
 | blogadvize.com | 1 | Vendor Blog Network (Spun-Content PBN) |
 | liberty-blog.com | 1 | Vendor Blog Network (Spun-Content PBN) |
 
-## Held for client decision
-
-Excluded from the disavow file pending your call. Each carries the evidence that makes it a judgement rather than a rule.
-
-**`eastbayexpress.com`** — 667 backlinks (667 follow). HELD FOR CLIENT DECISION - established news outlet, but 667 FOLLOW links replicated across paginated archives carry the exact-match anchor 'best nootropics for improving physical performance'. This is the single largest equity exposure in the profile; confirm whether the placement was bought before filing.
-
-
 ## Risk factor breakdown
 
 | Risk factor | Domains |
@@ -68,7 +61,3 @@ Excluded from the disavow file pending your call. Each carries the evidence that
 | Synthetic Affiliate Doorway Domain | 5 |
 | Hacked Site / Injected Link-Vendor Spam | 3 |
 | Exact-Match Anchor Abuse (Sitewide Injection) | 1 |
-
-## Sampling disclosure
-
-- `eastbayexpress.com`: 667 backlinks, 250 sampled into the URL drill-down. The domain-level verdict governs all rows.
