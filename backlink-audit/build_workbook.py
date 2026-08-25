@@ -19,15 +19,16 @@ COLS = [
     ("Level", 9), ("Referring Domain / URL", 46), ("Target URL", 42),
     ("Anchor Text", 38), ("Anchor Type", 15), ("Action Recommendation", 23),
     ("Primary Risk Factor", 44), ("Confidence Score", 11),
-    ("Remediation Priority", 26), ("Disavow Entry", 30),
-    ("Backlinks", 10), ("Follow (Equity) Links", 12), ("Linking Pages", 11),
-    ("Unique Anchors", 11), ("Top Anchor Share", 11),
-    ("Exact-Match Anchor %", 12), ("Branded/URL Anchor %", 12),
-    ("Median Page AScore", 11), ("Max Page AScore", 11),
-    ("Avg External Links", 11), ("Nofollow %", 10), ("Sponsored", 10),
-    ("Sitewide", 9), ("Lost Link", 9), ("Topically Relevant", 11),
-    ("Distinct Targets", 11), ("Lost %", 9),
-    ("First Seen", 12), ("Last Seen", 12), ("Rationale", 90),
+    ("Evidence Level", 30), ("Remediation Priority", 30),
+    ("Disavow Entry", 30),
+    ("Backlinks (true)", 12), ("Backlinks (in sample)", 12),
+    ("Follow (Equity) Links", 12), ("Domain ascore", 11),
+    ("IP Address", 16), ("C-Block", 17), ("Hosting", 26), ("Country", 9),
+    ("Unique Anchors", 11), ("Exact-Match Anchor %", 12),
+    ("Branded/URL Anchor %", 12), ("Avg External Links", 11),
+    ("Nofollow %", 10), ("Sponsored", 10), ("Sitewide", 9), ("Lost Link", 9),
+    ("Topically Relevant", 11),
+    ("First seen", 12), ("Last seen", 12), ("Rationale", 95),
 ]
 FONT = "Arial"
 ACTION_FILL = {
@@ -35,16 +36,17 @@ ACTION_FILL = {
     "REVIEW_MANUALLY":       PatternFill("solid", fgColor="FFE699"),
     "KEEP_AFFILIATE_RETAIN": PatternFill("solid", fgColor="C6E0B4"),
 }
-NUMERIC = {"Backlinks", "Follow (Equity) Links", "Linking Pages",
-           "Unique Anchors", "Max Page AScore", "Median Page AScore",
-           "Avg External Links", "Distinct Targets"}
+NUMERIC = {"Backlinks (true)", "Backlinks (in sample)",
+           "Follow (Equity) Links", "Domain ascore", "Unique Anchors",
+           "Avg External Links"}
 
 
 def main(outdir):
-    dom = list(csv.DictReader(open(f"{outdir}/domain_audit.csv", encoding="utf-8")))
+    dom = list(csv.DictReader(open(f"{outdir}/full_refdomain_audit.csv", encoding="utf-8")))
     url = list(csv.DictReader(open(f"{outdir}/url_drilldown.csv", encoding="utf-8")))
     order = {"DISAVOW": 0, "REVIEW_MANUALLY": 1, "KEEP_AFFILIATE_RETAIN": 2}
-    dom.sort(key=lambda r: (order[r["Action Recommendation"]], -int(r["Backlinks"])))
+    dom.sort(key=lambda r: (order[r["Action Recommendation"]],
+                            -int(r["Backlinks (true)"])))
 
     by_domain = {}
     for r in url:
@@ -52,11 +54,11 @@ def main(outdir):
 
     rows = []
     for d in dom:
-        key = d["Referring Domain / URL"]
-        rows.append({**d, "Level": "DOMAIN", "Anchor Type": "",
-                     "Sitewide": "", "Lost Link": "",
-                     "Disavow Entry": (f"domain:{key}"
-                                       if d["Action Recommendation"] == "DISAVOW" else "")})
+        key = d["Referring Domain"]
+        rows.append({**d, "Level": "DOMAIN",
+                     "Referring Domain / URL": key,
+                     "Anchor Type": "", "Sponsored": "",
+                     "Sitewide": "", "Lost Link": ""})
         for u in by_domain.get(key, []):
             rows.append({
                 "Level": "URL",
@@ -66,12 +68,12 @@ def main(outdir):
                 "Action Recommendation": u["Action Recommendation"],
                 "Primary Risk Factor": u["Primary Risk Factor"],
                 "Confidence Score": u["Confidence Score"],
-                "Median Page AScore": u["Page AScore"],
+                "Domain ascore": u["Page AScore"],
                 "Avg External Links": u["External Links"],
                 "Nofollow %": "100%" if u["Nofollow"] == "true" else "0%",
                 "Sponsored": u["Sponsored"], "Sitewide": u["Sitewide"],
-                "Lost Link": u["Lost Link"], "First Seen": u["First Seen"],
-                "Last Seen": u["Last Seen"],
+                "Lost Link": u["Lost Link"], "First seen": u["First Seen"],
+                "Last seen": u["Last Seen"],
             })
 
     wb = Workbook()
@@ -80,16 +82,18 @@ def main(outdir):
     HDR = 9
     first, last = HDR + 1, HDR + len(rows)
     act, lvl = f"$F${first}:$F${last}", f"$A${first}:$A${last}"
-    bl, fol = f"$K${first}:$K${last}", f"$L${first}:$L${last}"
+    bl, fol = f"$L${first}:$L${last}", f"$N${first}:$N${last}"
 
     ws["A1"] = "Performance Lab - Backlink Disavow Audit"
     ws["A1"].font = Font(name=FONT, size=15, bold=True)
-    ws["A2"] = ("One row per referring domain (Level=DOMAIN), plus the per-URL drill-down "
-                "for every flagged domain (Level=URL). Action cells are dropdowns; the "
-                "counts below are live formulas and update as you resolve REVIEW rows.")
+    ws["A2"] = ("All 2,928 referring domains (Level=DOMAIN) plus the per-URL drill-down "
+                "where the 50k backlink sample covers them (Level=URL). Check Evidence "
+                "Level: 602 domains were judged on link-level data, the rest on domain "
+                "metrics only. Action cells are dropdowns; counts below are live formulas.")
     ws["A2"].font = Font(name=FONT, size=9, italic=True, color="595959")
 
-    for col, head in zip("ABCD", ["Action", "Domains", "Backlinks", "Follow (equity) links"]):
+    for col, head in zip("ABCD", ["Action", "Domains", "Backlinks (true)",
+                                  "Follow links (sampled)"]):
         ws[f"{col}4"] = head
     for i, a in enumerate(["DISAVOW", "REVIEW_MANUALLY", "KEEP_AFFILIATE_RETAIN"]):
         r = 5 + i

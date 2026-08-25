@@ -5,7 +5,9 @@ No third-party toxicity score is consumed or trusted; every verdict is
 derived from raw metrics in the export and is reproducible from source.
 
 ```bash
-python3 audit.py <backlinks.csv> <outdir>
+python3 audit.py           <backlinks.csv> <outdir>                 # link-level pass
+python3 refdomain_audit.py <backlinks.csv> <refdomains.csv> <outdir> # full profile
+python3 build_workbook.py  <outdir>                                  # single sheet
 ```
 
 ## Outputs
@@ -16,7 +18,9 @@ python3 audit.py <backlinks.csv> <outdir>
 | `url_drilldown.csv` | Per-URL rows for every `DISAVOW` / `REVIEW_MANUALLY` domain. |
 | `disavow.txt` | Google-format disavow file, grouped and commented by risk factor. |
 | `SUMMARY.md` | Executive summary, equity exposure, priority targets, held-for-decision items. |
-| `performancelab_backlink_audit.xlsx` | **Consolidated single-sheet workbook** — every domain and drill-down URL on one surface, built by `build_workbook.py`. |
+| `full_refdomain_audit.csv` | **All 2,928 referring domains** — the primary deliverable. |
+| `disavow_full.txt` | Google-format disavow file for the full profile. |
+| `performancelab_backlink_audit.xlsx` | **Consolidated single-sheet workbook** — all 2,928 domains and every drill-down URL on one surface, built by `build_workbook.py`. |
 
 ```bash
 python3 build_workbook.py <outdir>          # after audit.py
@@ -28,6 +32,60 @@ dropdown on every Action cell. The summary block at the top uses live
 `COUNTIFS`/`SUMIFS`, so as an analyst resolves `REVIEW_MANUALLY` rows to
 `DISAVOW` or `KEEP` in place, the domain, backlink and follow-link totals
 update with them.
+
+## Coverage: why two exports are required
+
+**The backlinks export alone cannot audit this profile.** It is capped at
+50,000 rows — 3.67% of the 1,362,105-link profile — and it is *not* a random
+sample: one domain (`hexcolor.co`) occupies 90.8% of it. Auditing it in
+isolation reaches only **603 of 2,928 referring domains (20.6%)**, and misses
+`wete.co` entirely — the second-largest referring domain at 209,306
+backlinks.
+
+The referring-domain export closes that gap. `refdomain_audit.py` evaluates
+all 2,928 domains and merges in the richer link-level verdicts wherever the
+sample covers them, so totals reconcile to Semrush exactly:
+
+| | Semrush | This audit |
+|---|---:|---:|
+| Referring domains | 2,928 | 2,928 |
+| Total backlinks | 1,362,105 | 1,362,105 |
+
+Every row carries an **Evidence Level** naming what the verdict rests on:
+
+- `Link-level (in 50k sample)` — 602 domains, full anchor/placement/OBL signal.
+- `Link-level sample too thin (<1% of domain)` — the sample covers under 1%
+  of the domain's real volume, so the thin verdict is replaced by the
+  domain-level reading.
+- `Domain-level only (outside sample)` — 2,325 domains judged on authority
+  score, backlink volume, IP/C-block, TLD and naming alone. Thinner signal,
+  so `DISAVOW` here requires a signature that cannot plausibly be innocent.
+
+### What the domain-level pass caught
+
+The referring-domain export carries `IP Address`, which makes the C-block
+footprint analysis the brief asked for possible for the first time. Findings
+absent from the sample entirely:
+
+- **286 domains from one `seo-anomaly-*` / `seo-cartel-*` operation** —
+  `seo-anomaly-top-1..89.xyz`, `seo-anomaly-{anchor,backlink,authority,…}`
+  across `.online/.site/.space/.website`. The same operation whose Telegram
+  handle appears in the anchors injected into three hacked institutional
+  hosts, so this is a coordinated campaign, not organic spam.
+- **89 domains on four concentrated C-blocks** (`118.139.181.0/24`,
+  `203.161.54.0/24`, `68.178.238.0/24`, `118.139.176.0/24`) — near-zero
+  authority clusters under single ownership.
+- **147 link-vendor domains** named for what they sell (`backlinkhouse.com`,
+  `bestseobacklinkforsite.com`, `a2zseoarticles.com`).
+
+### C-block analysis requires a shared-hosting exclusion list
+
+Co-location is only a footprint signal off shared platforms. Half the
+profile (49.2%) sits behind Cloudflare, and the largest single C-block —
+`23.227.38.0/24`, 81 domains — is **Shopify**, which hosts the client's own
+brand estate. `192.0.78.0/24` is WordPress.com. A naive "many domains, one
+C-block" rule would disavow Shopify and Automattic wholesale. Those ranges
+are excluded by name in `SHARED_PLATFORM_CBLOCK`.
 
 ## Input reality vs. brief
 

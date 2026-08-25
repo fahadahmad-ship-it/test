@@ -9,8 +9,8 @@
 | Action | Domains | Backlinks | % of links |
 |---|---:|---:|---:|
 | DISAVOW | 53 | 344 | 0.7% |
-| REVIEW_MANUALLY | 88 | 46,765 | 93.5% |
-| KEEP_AFFILIATE_RETAIN | 474 | 2,891 | 5.8% |
+| REVIEW_MANUALLY | 87 | 46,759 | 93.5% |
+| KEEP_AFFILIATE_RETAIN | 475 | 2,897 | 5.8% |
 
 ## Equity exposure
 

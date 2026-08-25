@@ -93,7 +93,7 @@ def root_domain(hostname: str) -> str:
 # and must never be disavowed.
 BRAND_OWNED = {
     "performancelab.com", "mindlabpro.com", "testolabpro.com",
-    "prelabpro.com", "opti-nutra.com", "optinutra.com",
+    "prelabpro.com", "burnlabpro.com", "opti-nutra.com", "optinutra.com",
 }
 
 # Affiliate / tracking / publisher-network infrastructure. Redirects and
