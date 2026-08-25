@@ -605,3 +605,41 @@ one out" marker, for pulling a network or a domain if you decide to.
 
 What is actually outstanding is one thing: `dtcx.com`. Then submit
 `disavow_full.txt` as it stands.
+
+## Final pre-submission validation (2026-08-25)
+
+An adversarial pass over the artefacts rather than a re-run of the same checks,
+since twice in this audit my own checks passed while a real problem existed.
+Validated the disavow file as Google will parse it, not as the code intends it.
+
+**One defect found and fixed: an internationalised domain written in Unicode.**
+`domain:한국사이버신학대학교.kr` — a compromised Korean university carrying the
+`TG @LINKS_DEALER` anchor, so the verdict was right, but Google's tool takes
+ASCII and a Unicode line is at best ignored. It now reads
+`domain:xn--9d0b4b70vnol89ezvdmykd32abaw.kr`, round-trips back to the original,
+and the sheet keeps the readable name in `Referring Domain` while
+`Disavow Entry` shows the ASCII form the file uses. One other non-ASCII domain
+exists in the profile (`mökki-myynnissä.fi`) and is a KEEP, so it was never
+affected — but the same bug would have bitten it on any future run.
+
+Everything else came back clean:
+
+- **File format** — 1,183 entries, all `domain:<valid hostname>`; no duplicates,
+  no entry already covered by a listed parent, no URLs or ports where domains
+  belong, no BOM, no CRLF, 32 KB against Google's 2 MB limit.
+- **Scope safety** — no TLD or public-suffix line (`co.uk`, `com.br`, `edu.co`
+  and friends), nothing from the brand estate or affiliate infrastructure, and
+  no well-known publisher. The five highest-authority entries are all evidenced
+  and three are narrowed to a compromised subdomain.
+- **Grouping** — 26 group headers, every one matching both its member count and
+  a risk factor in the CSV; no orphan lines outside a group.
+- **Consistency** — the three files partition exactly; the sheet's entries match
+  the file line for line; all 78 client overrides hold; every URL row inherits
+  its domain's verdict; no cell anywhere reads REVIEW_MANUALLY or PENDING.
+- **Keep set** — no retained domain carries a link-vendor anchor; the wiki set
+  including `wikipedia.org` is intact.
+- **Reproducibility** — a clean re-run of both passes is byte-identical across
+  all six output files.
+
+21/21. Good to submit, with `dtcx.com` the one judgement call left in the
+client's hands.

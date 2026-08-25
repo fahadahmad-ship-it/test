@@ -908,17 +908,36 @@ def main(backlinks_csv, refdomains_csv, outdir):
         _h = host_of(_lr["Source url"])
         hacked_hosts[audit_key(_h)].add(_h)
 
+    def _ascii_host(h):
+        """Punycode an internationalised host for the disavow file.
+
+        Google's tool takes ASCII; a Unicode line is at best ignored. One
+        entry hit this -- a compromised Korean university,
+        한국사이버신학대학교.kr, which has to be written
+        xn--9d0b4b70vnol89ezvdmykd32abaw.kr to have any effect. The audit
+        keeps the readable form everywhere else, because that is the name a
+        human recognises.
+        """
+        if all(ord(c) < 128 for c in h):
+            return h
+        try:
+            return h.encode("idna").decode("ascii")
+        except UnicodeError:
+            # Better a line that cannot work than a silently wrong domain.
+            return h
+
     def _scope(x):
         """The narrowest disavow scope that still covers the placement."""
         d = x["Referring Domain"]
         if "Hacked Site" not in x["Primary Risk Factor"]:
-            return [f"domain:{d}"]
-        hosts = sorted(hacked_hosts.get(d, {d}))
-        # Only narrow when every compromised host is a subdomain; if the root
-        # itself is hit there is no narrower domain: scope available.
-        if hosts and all(h != d for h in hosts):
-            return [f"domain:{h}" for h in hosts]
-        return [f"domain:{d}"]
+            hosts = [d]
+        else:
+            hosts = sorted(hacked_hosts.get(d, {d}))
+            # Only narrow when every compromised host is a subdomain; if the
+            # root itself is hit there is no narrower scope available.
+            if not (hosts and all(h != d for h in hosts)):
+                hosts = [d]
+        return [f"domain:{_ascii_host(h)}" for h in hosts]
 
     # The sheet's Disavow Entry column must say exactly what the submitted
     # file says. It was showing "domain:uba.ar" while the file correctly

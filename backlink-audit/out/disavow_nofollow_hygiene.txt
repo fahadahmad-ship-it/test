@@ -251,8 +251,8 @@ domain:technewsmail.com
 domain:thetarotalk.com
 domain:vilagrad.com
 domain:vivaesthetique.com
+domain:xn--9d0b4b70vnol89ezvdmykd32abaw.kr
 domain:zerowastemaldives.com
-domain:한국사이버신학대학교.kr
 
 # --- Link Farm / Bare-Domain Listing ---
 domain:9363.in
