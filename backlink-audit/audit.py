@@ -317,6 +317,18 @@ def anchor_type(anchor: str) -> str:
     return "Phrasing"
 
 
+# Archive, pagination, category, tag and author-listing URLs. A single
+# editorial link in one post is echoed onto every archive page that renders
+# an excerpt of it, so counting linking pages massively overstates the number
+# of actual placements. Three domains were flagged as sitewide injections on
+# this artefact alone before it was caught.
+ARCHIVE_URL_RE = re.compile(
+    r"/page/\d+|[?&]pag(e|ed)=\d+|/category/|/categories/|/tag/|/tags/|"
+    r"/author/|/archives?/|/posts?/page|/blog/page|/feed/",
+    re.I,
+)
+
+
 def _b(v: str) -> bool:
     return str(v).strip().lower() == "true"
 
@@ -392,6 +404,15 @@ class DomainProfile:
         self.title_diversity = self.n_unique_titles / self.n_pages if self.n_pages else 1.0
 
         self.hosts = {host_of(r["Source url"]) for r in rows}
+
+        # Placements, not pages. An archive/pagination URL is an echo of a
+        # link that lives somewhere else, so it must not inflate the
+        # footprint count that the templated-injection rules key on.
+        self.archive_pages = {p for p in self.pages if ARCHIVE_URL_RE.search(p)}
+        self.content_pages = self.pages - self.archive_pages
+        self.n_content_pages = len(self.content_pages)
+        self.archive_share = (len(self.archive_pages) / self.n_pages
+                              if self.n_pages else 0.0)
         self.registrable = _registrable(next(iter(self.hosts)))
 
         # Anchor diversity: distinct anchors per backlink. High values mean
@@ -565,21 +586,23 @@ def classify(p: DomainProfile):
 
     # Programmatic mass footprint: many auto-generated pages carrying one
     # identical templated link, on a domain with no topical overlap.
-    if (p.n_pages >= 20 and p.n_unique_anchors <= 2
+    if (p.n_content_pages >= 20 and p.n_unique_anchors <= 2
             and p.title_diversity > 0.8 and not p.relevant):
         return (DISAVOW, "PBN / Templated Mass Footprint (Irrelevant Niche)", "High",
-                f"{p.n_pages:,} auto-generated pages carrying an identical "
-                f"templated anchor ({p.top_anchor!r}) with zero niche overlap.")
+                f"{p.n_content_pages:,} auto-generated content pages carrying "
+                f"an identical templated anchor ({p.top_anchor!r}) with zero "
+                "niche overlap.")
 
     # Sitewide paid-insertion signature: one non-branded anchor on ~every page.
-    if (p.n_pages >= 8 and p.top_anchor_share >= 0.80
+    if (p.n_content_pages >= 8 and p.top_anchor_share >= 0.80
             and p.top_anchor_type in ("Exact/Commercial", "Phrasing")):
         rf = ("Exact-Match Anchor Abuse (Sitewide Injection)"
               if p.top_anchor_type == "Exact/Commercial"
               else "Sitewide Link Injection (Templated Anchor)")
         return (DISAVOW, rf, "High",
                 f"Single non-branded anchor {p.top_anchor!r} repeated across "
-                f"{p.n_pages} pages — paid sitewide insertion signature.")
+                f"{p.n_content_pages} content pages (archive and pagination "
+                "URLs excluded) — paid sitewide insertion signature.")
 
     # Extreme outbound-link farms.
     if p.avg_external >= 1500:
@@ -610,15 +633,17 @@ def classify(p: DomainProfile):
 
     # Exact-match anchor abuse at scale — exempted when anchor diversity is
     # high enough to be editorial rather than templated.
-    if (p.n_pages >= 15 and p.exact_share >= 0.15 and p.median_ascore <= 20
+    if (p.n_content_pages >= 15 and p.exact_share >= 0.15
+            and p.median_ascore <= 20
             and p.anchor_diversity < 0.50 and not branded_safe):
         return (DISAVOW, "Exact-Match Anchor Abuse (Syndicated Placement)", "High",
                 f"{p.exact_share:.0%} exact-match commercial anchors across "
-                f"{p.n_pages} low-authority pages (median AS {p.median_ascore:g}) "
-                f"with only {p.n_unique_anchors} distinct anchors.")
+                f"{p.n_content_pages} low-authority content pages (median AS "
+                f"{p.median_ascore:g}) with only {p.n_unique_anchors} distinct "
+                "anchors.")
 
     # Irrelevant niche at volume.
-    if not p.relevant and p.n_pages >= 3 and p.median_ascore <= 10:
+    if not p.relevant and p.n_content_pages >= 3 and p.median_ascore <= 10:
         if p.branded_share >= 0.40:
             return (REVIEW, "Off-Topic Source, Branded Anchor Profile", "Low",
                     f"No topical overlap, but {p.branded_share:.0%} of anchors "

@@ -1,7 +1,7 @@
 # Performance Lab (performancelab.com) - disavow file (FULL profile)
 # Referring domains evaluated: 2,928
 # Total backlinks represented: 1,362,105
-# Domains disavowed: 842 (10,574 backlinks)
+# Domains disavowed: 840 (10,530 backlinks)
 # Search/AI surfaces and affiliate infrastructure excluded by design.
 #
 
@@ -645,9 +645,6 @@ domain:seo-cartel-7w.xyz
 domain:seo-cartel-8w.xyz
 domain:seo-cartel-9w.xyz
 
-# --- PBN / Templated Mass Footprint (Irrelevant Niche) ---
-domain:aihcp.net
-
 # --- PBN Hosting Footprint (Cluster Propagation) ---
 domain:99w.im
 domain:adzbusiness.com
@@ -758,9 +755,6 @@ domain:wondomain.com
 
 # --- Scraped Aggregator / Stats-Site Profile ---
 domain:sitelike.org
-
-# --- Sitewide Link Injection (Templated Anchor) ---
-domain:whipperberry.com
 
 # --- Synthetic Affiliate Doorway Domain ---
 domain:en-en-prozenith.us
