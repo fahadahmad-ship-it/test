@@ -240,18 +240,40 @@ All 2,928 referring domains carry a verdict. "Audited" is not the same as
 | `REVIEW_MANUALLY` | 1,241 | Needs a human call. |
 | `KEEP` | 883 | 395 High (link-level), 69 Medium, **419 Low**. |
 
-**The review queue is not 1,241 units of work.** It concentrates almost
-entirely in three domains:
+### Residual triage
+
+Parking 1,241 domains in a review queue is not an audit result, it is
+deferred work. For the 957 domains outside the sample there is genuinely no
+anchor, target or placement data — the export does not contain their links —
+but exposure, authority, hosting and name shape remain. A domain with a
+couple of links, ordinary authority and no spam marker does not merit a
+human hour: disavowing gains nothing, retaining costs nothing.
+
+`residual_triage()` resolves those, cutting the queue **1,241 → 682**. Rows
+it moves are labelled `(Risk-Triaged)` and their evidence level is suffixed
+`+ risk triage`, because this is a risk decision rather than a verification.
+It fires only when every marker is absent: no hosting cluster, no spam TLD,
+plausible name shape, under 25 backlinks, not held for a client decision.
+
+Name shape is scored statistically (`nameshape.py` — vowel ratio, consonant
+runs, digit and hyphen density, keyword stuffing), validated at **12/16 spam
+caught with 0/18 false flags** on known-good domains. It is deliberately
+**not** allowed to disavow on its own: it misreads initialisms
+(`jsrproductions`, `hmscicomms`) as machine-generated, and the domains it
+would have caught carry negligible exposure anyway.
+
+**The remaining queue is not 682 units of work either:**
 
 | Tier | Domains | Backlinks |
 |---|---:|---:|
 | ≥1,000 backlinks | 3 | 1,334,482 |
 | 100–999 | 11 | 3,105 |
-| 10–99 | 123 | 2,867 |
-| <10 | 1,104 | 2,536 |
+| 25–99 | 25 | 1,373 |
+| 10–24 | 98 | 1,494 |
+| <10 | 545 | 1,302 |
 
-Deciding `hexcolor.co`, `wete.co` and `appsrankings.com` settles **98.7% of
-the entire link profile**. The 1,104-domain tail carries 2,536 links between
+Deciding `hexcolor.co`, `wete.co` and `appsrankings.com` settles **98.5% of
+the entire link profile**. The 545-domain tail carries 1,302 links between
 them and can be worked opportunistically or left.
 
 ### Where false negatives most likely remain

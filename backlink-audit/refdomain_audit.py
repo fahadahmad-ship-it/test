@@ -17,6 +17,7 @@ import sys
 import statistics
 from collections import Counter, defaultdict
 
+from nameshape import name_shape
 from audit import (
     host_of, audit_key, _registrable, BRAND_OWNED, AFFILIATE_NETWORKS,
     SCRAPER_AGGREGATOR, SPAM_BLOG_NETWORK, SEARCH_AI_SURFACES,
@@ -301,6 +302,66 @@ def main(backlinks_csv, refdomains_csv, outdir):
 
     order = {DISAVOW: 0, REVIEW: 1, KEEP: 2}
     out, counts = [], Counter()
+
+    def residual_triage(r, action, risk, conf, why, evid, ctx=ctx):
+        """Resolve low-exposure review rows instead of parking them.
+
+        For the 957 domains outside the sample there is no anchor, target or
+        placement signal — that data simply is not in the export. What is
+        left is exposure, authority, hosting and name shape. A domain with a
+        couple of links, ordinary authority and no spam marker is not worth a
+        human hour: disavowing it gains nothing and keeping it costs nothing.
+        That is a risk decision, not a quality endorsement, and the risk
+        factor says so.
+
+        Name shape is deliberately NOT allowed to disavow on its own. It
+        misreads initialisms (jsrproductions, hmscicomms) as generated, and
+        the domains it would catch carry negligible exposure anyway.
+        """
+        if action != REVIEW:
+            return action, risk, conf, why, evid
+        d = r["Domain"]
+        asc, bl = _i(r["Domain ascore"]), _i(r["Backlinks"])
+        tld = d.rsplit(".", 1)[-1].lower()
+        shape = name_shape(d)[0]
+        held = "client decision" in risk or "Held with" in risk
+
+        # Check cluster membership against the real C-block index rather than
+        # the risk-factor string: a domain that arrived via the link-level
+        # path never carries the "Hosting Cluster" label even when it sits in
+        # one.
+        cb_here = cblock(r["IP Address"])
+        in_cluster = (cb_here and cb_here not in SHARED_PLATFORM_CBLOCK
+                      and not is_cloudflare(r["IP Address"] or "")
+                      and ctx["cblocks"].get(cb_here, {}).get("n", 0) >= 8)
+
+        marker = (held
+                  or in_cluster
+                  or risk.startswith("Hosting Cluster")
+                  or "Search / AI" in risk
+                  or tld in SPAM_TLDS
+                  or shape != "plausible"
+                  or bl >= 25
+                  or (bl >= 10 and asc <= 5))
+        if marker:
+            if shape != "plausible" and not held and "shape" not in why:
+                why += f" Domain name shape reads as {shape}."
+            return action, risk, conf, why, evid
+
+        if bl <= 5 and asc >= 3:
+            return (KEEP, "None - Negligible Exposure (Risk-Triaged)", "Medium",
+                    f"{bl} backlink(s) from an authority-{asc} domain with no "
+                    "spam signature, plausible name and no hosting cluster. "
+                    "Too little exposure to justify either a disavow or a "
+                    "manual review — retained on risk, not verified on merit.",
+                    evid + " + risk triage")
+        if asc >= 6 and bl < 10:
+            return (KEEP, "None - Ordinary Small Publisher (Risk-Triaged)", "Medium",
+                    f"Authority {asc}, {bl} backlink(s), brandable name, no "
+                    "spam marker. Reads as an ordinary small site; retained "
+                    "on risk without link-level verification.",
+                    evid + " + risk triage")
+        return action, risk, conf, why, evid
     for r in rd:
         d = r["Domain"]
         ip = (r["IP Address"] or "").strip()
@@ -333,6 +394,9 @@ def main(backlinks_csv, refdomains_csv, outdir):
         else:
             action, risk, conf, why = classify_domain(r, ctx)
             evid = "Domain-level only (outside sample)"
+
+        action, risk, conf, why, evid = residual_triage(
+            r, action, risk, conf, why, evid)
         counts[action] += 1
 
         bl_true = _i(r["Backlinks"])
