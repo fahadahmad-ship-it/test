@@ -140,6 +140,11 @@ CONFIRMED_AFFILIATE_REDIRECTS |= BRAND_REDIRECT_HOSTS
 AFFILIATE_REDIRECT_SOURCES = {
     "hexcolor.co":          "verified",
     "currencyconverts.com": "verified",
+    # Client-confirmed as drect.net affiliate traffic, 2026-08-25. No
+    # link-level sample exists for wete.co (209,306 backlinks, none in the
+    # 50k export), so this rests on the client's knowledge of their own
+    # programme rather than on observed redirect_url data.
+    "wete.co":              "verified",
     "appsrankings.com":     "inferred",
 }
 
