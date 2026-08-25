@@ -93,7 +93,8 @@ def root_domain(hostname: str) -> str:
 # and must never be disavowed.
 BRAND_OWNED = {
     "performancelab.com", "mindlabpro.com", "testolabpro.com",
-    "prelabpro.com", "burnlabpro.com", "opti-nutra.com", "optinutra.com",
+    "prelabpro.com", "burnlabpro.com", "nutropic.com",
+    "opti-nutra.com", "optinutra.com",
 }
 
 # Affiliate / tracking / publisher-network infrastructure. Redirects and
@@ -114,6 +115,20 @@ AFFILIATE_NETWORKS = {
 # A link routing through one of these is a paid/affiliate placement, and the
 # brief protects it: a redirect is never itself a toxicity signal.
 CONFIRMED_AFFILIATE_REDIRECTS = {"drect.net"}
+
+# Brand-owned redirect / tracking shells rather than content sites. Their
+# signature in the export is unmistakable: zero external links, empty
+# anchors (the link is the redirect itself, not editorial text), and source
+# URLs carrying the programme's own a_aid/a_bid parameters. They are both
+# brand estate and redirect infrastructure, so they belong in
+# CONFIRMED_AFFILIATE_REDIRECTS as well: anything routing through one is a
+# tracked placement, not an organic citation.
+BRAND_REDIRECT_HOSTS = {
+    "testolabpro.com",   # client-confirmed redirect, 2026-08-25
+    "prelabpro.com",
+    "nutropic.com",
+}
+CONFIRMED_AFFILIATE_REDIRECTS |= BRAND_REDIRECT_HOSTS
 
 # Referring domains observed routing through a confirmed affiliate redirect.
 # hexcolor.co and currencyconverts.com were verified directly from the
@@ -459,8 +474,16 @@ def classify(p: DomainProfile):
     # through client-confirmed affiliate infrastructure.
     if (p.registrable in CONFIRMED_AFFILIATE_REDIRECTS
             or d in CONFIRMED_AFFILIATE_REDIRECTS):
-        return (KEEP, "None - Confirmed Affiliate Redirect Infrastructure", "High",
-                "Client-confirmed affiliate redirect host.")
+        brand = (p.registrable in BRAND_REDIRECT_HOSTS
+                 or d in BRAND_REDIRECT_HOSTS)
+        return (KEEP,
+                "None - Brand Redirect / Tracking Host" if brand
+                else "None - Confirmed Affiliate Redirect Infrastructure",
+                "High",
+                "Brand-owned redirect shell: zero external links, empty "
+                "anchors, and source URLs carrying the programme's own "
+                "affiliate parameters." if brand
+                else "Client-confirmed affiliate redirect host.")
 
     if d in AFFILIATE_REDIRECT_SOURCES or p.registrable in AFFILIATE_REDIRECT_SOURCES:
         key = d if d in AFFILIATE_REDIRECT_SOURCES else p.registrable

@@ -19,7 +19,7 @@ from collections import Counter, defaultdict
 
 from nameshape import name_shape
 from audit import (
-    AFFILIATE_REDIRECT_SOURCES, CLIENT_OVERRIDES,
+    AFFILIATE_REDIRECT_SOURCES, BRAND_REDIRECT_HOSTS, CLIENT_OVERRIDES,
     CONFIRMED_AFFILIATE_REDIRECTS,
     host_of, audit_key, _registrable, BRAND_OWNED, AFFILIATE_NETWORKS,
     SCRAPER_AGGREGATOR, SPAM_BLOG_NETWORK, SEARCH_AI_SURFACES,
@@ -190,8 +190,14 @@ def classify_domain(r, ctx):
 
     # -- protected ---------------------------------------------------------
     if d in CONFIRMED_AFFILIATE_REDIRECTS or reg in CONFIRMED_AFFILIATE_REDIRECTS:
-        return (KEEP, "None - Confirmed Affiliate Redirect Infrastructure", "High",
-                "Client-confirmed affiliate redirect host.")
+        brand = d in BRAND_REDIRECT_HOSTS or reg in BRAND_REDIRECT_HOSTS
+        return (KEEP,
+                "None - Brand Redirect / Tracking Host" if brand
+                else "None - Confirmed Affiliate Redirect Infrastructure",
+                "High",
+                "Brand-owned redirect shell carrying the programme's own "
+                "affiliate parameters." if brand
+                else "Client-confirmed affiliate redirect host.")
 
     if d in AFFILIATE_REDIRECT_SOURCES:
         how = AFFILIATE_REDIRECT_SOURCES[d]
