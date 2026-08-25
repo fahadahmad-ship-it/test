@@ -19,6 +19,7 @@ from collections import Counter, defaultdict
 
 from nameshape import name_shape
 from audit import (
+    AFFILIATE_REDIRECT_SOURCES, CONFIRMED_AFFILIATE_REDIRECTS,
     host_of, audit_key, _registrable, BRAND_OWNED, AFFILIATE_NETWORKS,
     SCRAPER_AGGREGATOR, SPAM_BLOG_NETWORK, SEARCH_AI_SURFACES,
     DIRECTORY_SPAM_RE, NICHE_RE, TRACKER_HOST_RE, COUPON_AGGREGATOR_RE,
@@ -149,6 +150,25 @@ def classify_domain(r, ctx):
     tld = d.rsplit(".", 1)[-1].lower()
 
     # -- protected ---------------------------------------------------------
+    if d in CONFIRMED_AFFILIATE_REDIRECTS or reg in CONFIRMED_AFFILIATE_REDIRECTS:
+        return (KEEP, "None - Confirmed Affiliate Redirect Infrastructure", "High",
+                "Client-confirmed affiliate redirect host.")
+
+    if d in AFFILIATE_REDIRECT_SOURCES:
+        how = AFFILIATE_REDIRECT_SOURCES[d]
+        host = sorted(CONFIRMED_AFFILIATE_REDIRECTS)[0]
+        if how == "verified":
+            return (KEEP, "None - Affiliate Placement (Verified Redirect)", "High",
+                    f"Every link routes through {host}, client-confirmed "
+                    "affiliate infrastructure. A templated placement is a "
+                    "commercial decision, not a toxicity signal, and the "
+                    "brief protects affiliate redirects explicitly.")
+        return (KEEP, "None - Affiliate Placement (Inferred Same Network)", "Medium",
+                f"Shares the full {host} network footprint -- auto-generated "
+                "utility pages, templated commerce CTA, bare homepage target, "
+                "nofollow -- but its redirect was not pulled. Retained by "
+                "inference; confirm via the API redirect_url column.")
+
     if reg in BRAND_OWNED or d in BRAND_OWNED:
         return (KEEP, "None - Brand-Owned Estate (Opti-Nutra network)", "High",
                 "First-party brand property.")
@@ -378,8 +398,12 @@ def main(backlinks_csv, refdomains_csv, outdir):
             # domain's real volume, the thin link-level verdict is replaced by
             # the mass-footprint reading and the evidence level says so.
             n_s = _i(lv["Backlinks"])
+            # A protected-affiliate verdict is evidence about the placement
+            # itself, not an artefact of a thin sample, so it is not
+            # displaced by volume.
+            protected = "Affiliate" in risk or "Brand-Owned" in risk
             if (_i(r["Backlinks"]) >= 1000 and n_s / max(_i(r["Backlinks"]), 1) < 0.01
-                    and action != DISAVOW):
+                    and action != DISAVOW and not protected):
                 action = REVIEW
                 risk = "Mass Templated Footprint (Held with hexcolor.co)"
                 conf = "High"

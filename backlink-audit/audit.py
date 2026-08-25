@@ -110,6 +110,24 @@ AFFILIATE_NETWORKS = {
     "tapfiliate.com", "trackdesk.com", "affilibox.com",
 }
 
+# Redirect hosts confirmed by the client as their affiliate infrastructure.
+# A link routing through one of these is a paid/affiliate placement, and the
+# brief protects it: a redirect is never itself a toxicity signal.
+CONFIRMED_AFFILIATE_REDIRECTS = {"drect.net"}
+
+# Referring domains observed routing through a confirmed affiliate redirect.
+# hexcolor.co and currencyconverts.com were verified directly from the
+# Semrush API `redirect_url` column (drect.net/performancelab on every row).
+# appsrankings.com shares the whole footprint -- auto-generated utility
+# pages, a templated commerce CTA ("Satin Al!" = "Buy Now!"), bare homepage
+# target, nofollow -- but its redirect was never pulled, so it is retained
+# by inference rather than verification.
+AFFILIATE_REDIRECT_SOURCES = {
+    "hexcolor.co":          "verified",
+    "currencyconverts.com": "verified",
+    "appsrankings.com":     "inferred",
+}
+
 # Tracker / redirect subdomain patterns seen on partner infrastructure.
 TRACKER_HOST_RE = re.compile(
     r"^(go|track|click|offers?|link|links|r|t|c|aff|partner|promo|out|ref)\."
@@ -382,17 +400,6 @@ DISAVOW, KEEP, REVIEW = "DISAVOW", "KEEP_AFFILIATE_RETAIN", "REVIEW_MANUALLY"
 # Domains held back from the disavow file for an explicit client decision,
 # with the evidence that makes the call a judgement rather than a rule.
 MANUAL_REVIEW_OVERRIDE = {
-    "hexcolor.co":
-        "HELD FOR CLIENT DECISION - possible paid placement. Evidence "
-        "against affiliate attribution: all 45,412 links resolve to the bare "
-        "homepage with ZERO query parameters (no affiliate ID, subid, ref or "
-        "utm), so no commission can be attributed; rel is nofollow, not "
-        "sponsored. Note a disavow does not remove the link or stop referral "
-        "traffic, so it is safe to file even if this is a paid placement.",
-    "currencyconverts.com":
-        "HELD FOR CLIENT DECISION - identical 'Buy Now!' footprint and bare "
-        "homepage target as hexcolor.co; same network, so treated "
-        "consistently with it.",
     "eastbayexpress.com":
         "HELD FOR CLIENT DECISION - established news outlet, but 667 FOLLOW "
         "links replicated across paginated archives carry the exact-match "
@@ -413,6 +420,28 @@ def classify(p: DomainProfile):
     d = p.domain
 
     # -- Tier 1: protected assets -------------------------------------------
+    # Must precede every spam rule: these domains carry templated footprints
+    # that would otherwise trip the PBN rules, but the placement routes
+    # through client-confirmed affiliate infrastructure.
+    if (p.registrable in CONFIRMED_AFFILIATE_REDIRECTS
+            or d in CONFIRMED_AFFILIATE_REDIRECTS):
+        return (KEEP, "None - Confirmed Affiliate Redirect Infrastructure", "High",
+                "Client-confirmed affiliate redirect host.")
+
+    if d in AFFILIATE_REDIRECT_SOURCES or p.registrable in AFFILIATE_REDIRECT_SOURCES:
+        key = d if d in AFFILIATE_REDIRECT_SOURCES else p.registrable
+        host = sorted(CONFIRMED_AFFILIATE_REDIRECTS)[0]
+        if AFFILIATE_REDIRECT_SOURCES[key] == "verified":
+            return (KEEP, "None - Affiliate Placement (Verified Redirect)", "High",
+                    f"All {p.n_links:,} sampled links route through {host}, "
+                    "client-confirmed affiliate infrastructure. A templated "
+                    "placement is a commercial decision, not a toxicity "
+                    "signal; the brief protects affiliate redirects.")
+        return (KEEP, "None - Affiliate Placement (Inferred Same Network)", "Medium",
+                f"Shares the {host} network footprint but its redirect was "
+                "not pulled. Retained by inference; confirm via the API "
+                "redirect_url column.")
+
     if p.registrable in BRAND_OWNED:
         return (KEEP, "None - Brand-Owned Estate (Opti-Nutra network)", "High",
                 "First-party brand property; cross-brand linking is expected.")

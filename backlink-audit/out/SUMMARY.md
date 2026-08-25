@@ -9,8 +9,8 @@
 | Action | Domains | Backlinks | % of links |
 |---|---:|---:|---:|
 | DISAVOW | 53 | 344 | 0.7% |
-| REVIEW_MANUALLY | 87 | 46,759 | 93.5% |
-| KEEP_AFFILIATE_RETAIN | 475 | 2,897 | 5.8% |
+| REVIEW_MANUALLY | 84 | 1,194 | 2.4% |
+| KEEP_AFFILIATE_RETAIN | 478 | 48,462 | 96.9% |
 
 ## Equity exposure
 
@@ -61,11 +61,7 @@ Of **344** disavow-flagged backlinks, only **298 (86.6%)** are follow links that
 
 Excluded from the disavow file pending your call. Each carries the evidence that makes it a judgement rather than a rule.
 
-**`hexcolor.co`** — 45,412 backlinks (0 follow). HELD FOR CLIENT DECISION - possible paid placement. Evidence against affiliate attribution: all 45,412 links resolve to the bare homepage with ZERO query parameters (no affiliate ID, subid, ref or utm), so no commission can be attributed; rel is nofollow, not sponsored. Note a disavow does not remove the link or stop referral traffic, so it is safe to file even if this is a paid placement.
-
 **`eastbayexpress.com`** — 667 backlinks (667 follow). HELD FOR CLIENT DECISION - established news outlet, but 667 FOLLOW links replicated across paginated archives carry the exact-match anchor 'best nootropics for improving physical performance'. This is the single largest equity exposure in the profile; confirm whether the placement was bought before filing.
-
-**`currencyconverts.com`** — 152 backlinks (0 follow). HELD FOR CLIENT DECISION - identical 'Buy Now!' footprint and bare homepage target as hexcolor.co; same network, so treated consistently with it.
 
 ## Below the disavow confidence bar
 
@@ -92,5 +88,4 @@ Excluded from the disavow file pending your call. Each carries the evidence that
 
 ## Sampling disclosure
 
-- `hexcolor.co`: 45,412 backlinks, 250 sampled into the URL drill-down. The domain-level verdict governs all rows.
 - `eastbayexpress.com`: 667 backlinks, 250 sampled into the URL drill-down. The domain-level verdict governs all rows.
