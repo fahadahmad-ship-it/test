@@ -549,3 +549,33 @@ disavow candidates.
 
 Final: DISAVOW 1,183 across 26 networks (803 equity-passing, 380
 nofollow-only) · KEEP 1,745 · review queue empty.
+
+## URL rows were showing a stale verdict (2026-08-25)
+
+The client reported still seeing rows to review after the queue was cleared,
+and they were right — my check had only counted `Level=DOMAIN`. **785 URL rows
+still read REVIEW_MANUALLY.**
+
+Cause: the workbook took each URL row's verdict from `url_drilldown.csv`, which
+is `audit.py`'s link-level classifier — an earlier stage. The authoritative
+verdict comes from the domain pass in `refdomain_audit.py`, and it is the one
+in the disavow file. So a domain could be settled while its own URL rows still
+showed the intermediate reading. A URL row now inherits its domain's final
+verdict: one verdict per domain, and the domain pass owns it.
+
+Also removed: the summary block wrote a live `REVIEW_MANUALLY` COUNTIFS row
+even at zero, which was the one thing on the sheet that looked like outstanding
+work when there was none.
+
+## Tabs renamed so the workflow is obvious
+
+Numbered tabs are the workflow, unnumbered ones are reference, and each tab's
+first cell now says which it is.
+
+| Tab | What it is |
+|---|---|
+| **1 Start here** | Where things stand, what to do, what to submit, where the confidence sits |
+| **2 Approve networks** | 26 rows. The work — 1,183 disavows are 26 operators |
+| **3 Disavow list** | The 1,183 domains, grouped under their network |
+| Decisions log | Reference: the 70-domain queue, your call beside the audit's, disagreements flagged |
+| All domains | Reference: all 2,928 domains with sampled backlinks beneath each. Filter `Level=DOMAIN` for the verdict list |

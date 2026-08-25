@@ -130,6 +130,7 @@ def _work_tab(wb, title, rows, cols, blurb, confirm_header, confirm_list,
 
     ws["A1"] = f"{title} — {len(rows):,} domains"
     ws["A1"].font = Font(name=FONT, size=14, bold=True)
+    ws["A1"].fill = PatternFill("solid", fgColor="DDEBF7")
     ws["A2"] = blurb
     ws["A2"].font = Font(name=FONT, size=9, italic=True, color="595959")
     ws["A3"] = "Backlinks covered"
@@ -231,10 +232,11 @@ def _networks_tab(wb, dis):
                                          for x in kv[1]),
                                     kv[0]))
 
-    ws = wb.create_sheet("Networks", 1)
+    ws = wb.create_sheet("2 Approve networks", 1)
     ws["A1"] = f"Approve by network — {len(groups)} decisions covering " \
                f"{len(dis):,} domains"
     ws["A1"].font = Font(name=FONT, size=14, bold=True)
+    ws["A1"].fill = PatternFill("solid", fgColor="DDEBF7")
     ws["A2"] = ("Highest-impact first: equity-passing networks at the top, "
                 "nofollow-only at the bottom. Approve here, then spot-check "
                 "the members on the Disavow tab — every domain in a row "
@@ -325,9 +327,11 @@ def _decisions_tab(wb, dom):
     rows.sort(key=lambda r: (order.get(r["Action Recommendation"], 2),
                              -int(r["Follow (Equity) Links"] or 0),
                              r["Referring Domain"]))
-    ws = wb.create_sheet("Decisions taken", 3)
-    ws["A1"] = f"Decisions taken — {len(rows)} domains from the review queue"
+    ws = wb.create_sheet("Decisions log", 3)
+    ws["A1"] = ("REFERENCE — decisions log: "
+                f"{len(rows)} domains from the review queue")
     ws["A1"].font = Font(name=FONT, size=14, bold=True)
+    ws["A1"].fill = PatternFill("solid", fgColor="EDEDED")
     ws["A2"] = ("The review queue, resolved. 'Audit said' is what this audit "
                 "recommended and 'Applied' is the decision in the file, so "
                 "where the two differ it stays on the record. Reversing any "
@@ -389,7 +393,7 @@ def _start_tab(wb, dom, n_networks):
     follow = sum(int(r["Follow (Equity) Links"] or 0) for r in dis)
     nf_only = sum(1 for r in dis
                   if r["Remediation Priority"].startswith("P3"))
-    ws = wb.create_sheet("Start here", 0)
+    ws = wb.create_sheet("1 Start here", 0)
     ws.column_dimensions["A"].width = 3
     ws.column_dimensions["B"].width = 34
     ws.column_dimensions["C"].width = 104
@@ -420,39 +424,43 @@ def _start_tab(wb, dom, n_networks):
           "recommendation and the evidence for it.")
     else:
         w("Needs your call",
-          "Nothing outstanding — the review queue is cleared. See "
-          "'Decisions taken' for what was decided and where it differs from "
-          "what this audit recommended.")
+          "Nothing outstanding — the review queue is cleared. The "
+          "Decisions log tab records what was decided and where it differs "
+          "from what this audit recommended.")
     w("Keep", f"{c['KEEP_AFFILIATE_RETAIN']:,} domains — affiliates, brand "
       "estate, editorial citations and low-exposure retains.", gap=1)
 
-    w("How to work it", "", bold=True)
-    w("1.  Networks tab",
+    w("The tabs", "", bold=True)
+    w("How to read them",
+      "Numbered tabs are the workflow, in order. The two unnumbered tabs are "
+      "reference — nothing in them needs a decision.")
+    w("2 Approve networks",
       f"Start here. The {c['DISAVOW']:,} disavows are {n_networks} networks, "
       f"not {c['DISAVOW']:,} separate judgements — 139 rows are "
       "seo-anomaly-s1.xyz through s139.xyz, one operator. Approve or reject "
       "each network. "
       "Equity-passing ones are at the top; nofollow-only at the bottom, and "
       "those change nothing either way.")
-    w("2.  Disavow tab",
+    w("3 Disavow list",
       "The members of each network, grouped under it with a rule between "
       "groups. Use it to spot-check a network before approving, or to pull a "
       "single domain out of one.")
     if c["REVIEW_MANUALLY"]:
-        w("3.  Review Queue tab",
+        w("3b Review queue",
           f"The {c['REVIEW_MANUALLY']} the rules would not decide. "
           "Recommendation and evidence sit in columns B and C. Set the "
           "Decision column.")
     else:
-        w("3.  Decisions taken tab",
+        w("Decisions log  (reference)",
           "The review queue after your call: 7 retained by name, the other "
           "63 disavowed as a block. 'Audit said' keeps this audit's own "
           "recommendation next to what was applied, and the Agree column "
           "flags the 38 rows where the two differ. Reversing any of them is "
           "one line out of disavow_full.txt.")
-    w("4.  Full audit tab",
-      "All 2,928 domains plus the per-URL drill-down. Reference, not a "
-      "worklist — use it to look something up.", gap=1)
+    w("All domains  (reference)",
+      f"Every one of the {len(dom):,} domains, with each sampled backlink "
+      "listed under its domain. Filter Level=DOMAIN for the verdict list. "
+      "Nothing to action.", gap=1)
 
     dtcx = next((r for r in dom if r["Referring Domain"] == "dtcx.com"), None)
     decided = bool(dtcx) and dtcx["Action Recommendation"] == "DISAVOW"
@@ -525,7 +533,12 @@ def main(outdir):
                 "Referring Domain / URL": u["Referring Domain / URL"],
                 "Target URL": u["Target URL"], "Anchor Text": u["Anchor Text"],
                 "Anchor Type": u["Anchor Type"],
-                "Action Recommendation": u["Action Recommendation"],
+                # A URL inherits its domain's final verdict. It used to
+                # carry the link-level classifier's own reading, which is an
+                # earlier stage: 785 URL rows still said REVIEW_MANUALLY
+                # after the domain pass and the client had resolved every
+                # domain. One verdict per domain, and the domain pass owns it.
+                "Action Recommendation": d["Action Recommendation"],
                 "Primary Risk Factor": u["Primary Risk Factor"],
                 "Confidence Score": u["Confidence Score"],
                 "Domain ascore": u["Page AScore"],
@@ -538,34 +551,45 @@ def main(outdir):
 
     wb = Workbook()
     ws = wb.active
-    ws.title = "Full audit"
+    ws.title = "All domains"
     HDR = 9
     first, last = HDR + 1, HDR + len(rows)
     act, lvl = f"$C${first}:$C${last}", f"$A${first}:$A${last}"
     bl, fol = f"$I${first}:$I${last}", f"$K${first}:$K${last}"
 
-    ws["A1"] = "Performance Lab - Backlink Disavow Audit"
+    ws["A1"] = ("REFERENCE — every domain and every sampled URL. "
+                "Nothing to action here; use it to look something up.")
     ws["A1"].font = Font(name=FONT, size=15, bold=True)
-    ws["A2"] = ("All 2,928 referring domains (Level=DOMAIN) plus the per-URL drill-down "
-                "where the 50k backlink sample covers them (Level=URL). Check Evidence "
-                "Level: 602 domains were judged on link-level data, the rest on domain "
-                "metrics only. Action cells are dropdowns; counts below are live formulas.")
+    ws["A2"] = (
+        "One row per referring domain (Level=DOMAIN), plus a row per sampled "
+        "backlink underneath it (Level=URL). A URL row shows the same verdict "
+        "as its domain — the domain is the unit of decision, so filtering "
+        "Level=DOMAIN gives you the verdict list with no double counting. "
+        "Evidence Level says whether the call rests on observed placements or "
+        "on domain metrics alone.")
     ws["A2"].font = Font(name=FONT, size=9, italic=True, color="595959")
 
     for col, head in zip("ABCD", ["Action", "Domains", "Backlinks (true)",
                                   "Follow links (sampled)"]):
         ws[f"{col}4"] = head
-    for i, a in enumerate(["DISAVOW", "REVIEW_MANUALLY", "KEEP_AFFILIATE_RETAIN"]):
+    # Only the verdicts actually present. Once the review queue is cleared a
+    # REVIEW_MANUALLY row is a live formula reading zero, which is the one
+    # thing on the sheet that looks like outstanding work when there is none.
+    present = [a for a in ("DISAVOW", "REVIEW_MANUALLY",
+                           "KEEP_AFFILIATE_RETAIN")
+               if any(x["Action Recommendation"] == a for x in dom)]
+    for i, a in enumerate(present):
         r = 5 + i
         ws[f"A{r}"] = a
         ws[f"B{r}"] = f'=COUNTIFS({act},$A{r},{lvl},"DOMAIN")'
         ws[f"C{r}"] = f'=SUMIFS({bl},{act},$A{r},{lvl},"DOMAIN")'
         ws[f"D{r}"] = f'=SUMIFS({fol},{act},$A{r},{lvl},"DOMAIN")'
         ws[f"A{r}"].fill = ACTION_FILL[a]
-    ws["A8"] = "TOTAL"
+    tot = 5 + len(present)
+    ws[f"A{tot}"] = "TOTAL"
     for col in "BCD":
-        ws[f"{col}8"] = f"=SUM({col}5:{col}7)"
-    for r in range(4, 9):
+        ws[f"{col}{tot}"] = f"=SUM({col}5:{col}{tot - 1})"
+    for r in range(4, tot + 1):
         for c in "ABCD":
             cell = ws[f"{c}{r}"]
             cell.font = Font(name=FONT, size=10, bold=(r in (4, 8)))
@@ -656,7 +680,7 @@ def main(outdir):
                             r["Primary Risk Factor"],
                             _prio(r), -int(r["Backlinks (true)"])))
     _work_tab(
-        wb, "Disavow", dis, DISAVOW_COLS,
+        wb, "3 Disavow list", dis, DISAVOW_COLS,
         "Grouped by network, equity-passing first. 'Disavow Entry' is the "
         "exact line for Google's tool — note where it names a subdomain: "
         "those hosts are compromised, not hostile, and the narrow scope is "
@@ -680,7 +704,7 @@ def main(outdir):
         _decisions_tab(wb, dom)
     else:
         _work_tab(
-            wb, "Review Queue", rev, REVIEW_COLS,
+            wb, "3b Review queue", rev, REVIEW_COLS,
         "What the rules would not decide, read one by one against the actual "
         "placements. My recommendation is column B and the evidence for it "
         "column C. Ordered: the one open question first, then disavows, then "
@@ -694,7 +718,7 @@ def main(outdir):
     n_net = _networks_tab(wb, [dict(d) for d in dis])
     _start_tab(wb, dom, n_net)
     # Reading order: brief, then the three worklists, then the reference set.
-    wb.move_sheet("Full audit", offset=len(wb.sheetnames))
+    wb.move_sheet("All domains", offset=len(wb.sheetnames))
     wb.active = 0
 
     path = f"{outdir}/performancelab_backlink_audit.xlsx"
