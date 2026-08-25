@@ -520,6 +520,14 @@ CLIENT_OVERRIDES = {
         "programme's a_aid/a_bid parameters, so it is at least partly an "
         "affiliate placement rather than organic editorial. Authority 44.",
     ),
+    "cloudaicrypto.com": (
+        DISAVOW,
+        "Client Decision (Disavow) - Off-Niche High-Volume Placement",
+        "Client instruction, 2026-08-25. No link-level sample exists (154 "
+        "backlinks, none in the 50k export). Authority 2, first seen "
+        "2025-01-05, Cloudflare-fronted. A crypto/AI-themed domain carrying "
+        "volume into a supplement brand with no topical basis.",
+    ),
     "appsupports.co": (
         DISAVOW,
         "Client Decision (Disavow) - Auto-Generated App Listing",
