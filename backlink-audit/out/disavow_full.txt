@@ -1,7 +1,7 @@
 # Performance Lab (performancelab.com) - disavow file (FULL profile)
 # Referring domains evaluated: 2,928
 # Total backlinks represented: 1,362,105
-# Domains disavowed: 840 (10,530 backlinks)
+# Domains disavowed: 839 (10,500 backlinks)
 # Search/AI surfaces and affiliate infrastructure excluded by design.
 #
 
@@ -15,9 +15,6 @@ domain:dailyrestora.online
 domain:knows.monster
 domain:somacraft.online
 domain:somacraft.shop
-
-# --- Directory / Link-Scheme Spam Footprint ---
-domain:securelinksdirectory.com
 
 # --- Directory Submission Spam Network ---
 domain:1-webdirectory.com

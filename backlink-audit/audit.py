@@ -322,6 +322,16 @@ def anchor_type(anchor: str) -> str:
 # an excerpt of it, so counting linking pages massively overstates the number
 # of actual placements. Three domains were flagged as sitewide injections on
 # this artefact alone before it was caught.
+# Post Affiliate Pro parameters on the destination URL.
+AFFILIATE_PARAM_RE = re.compile(r"[?&](a_aid|a_bid)=", re.I)
+
+# Redirect / link-management path shapes: /go/, /intermediary/, /out/,
+# /recommends/, /link/, /r/, /ref/ followed by a campaign slug.
+REDIRECT_PATH_RE = re.compile(
+    r"/(go|intermediary|out|recommends?|ref|redirect|link|goto|visit|r)/[^/?]+",
+    re.I,
+)
+
 ARCHIVE_URL_RE = re.compile(
     r"/page/\d+|[?&]pag(e|ed)=\d+|/category/|/categories/|/tag/|/tags/|"
     r"/author/|/archives?/|/posts?/page|/blog/page|/feed/",
@@ -408,6 +418,27 @@ class DomainProfile:
         # Placements, not pages. An archive/pagination URL is an echo of a
         # link that lives somewhere else, so it must not inflate the
         # footprint count that the templated-injection rules key on.
+        # Redirect-shell signature, independent of the domain's name:
+        # no outbound links of its own, no anchor text (the link IS the
+        # redirect), and the destination carries the programme's affiliate
+        # parameters. securelinksdirectory.com looks like link spam by name
+        # and is in fact campaign tracking, so the signature has to win.
+        self.affiliate_target_share = sum(
+            1 for r in rows if AFFILIATE_PARAM_RE.search(r["Target url"])
+        ) / self.n_links
+        self.empty_anchor_share = sum(
+            1 for a_ in (r["Anchor"] for r in rows) if not (a_ or "").strip()
+        ) / self.n_links
+        self.redirect_path_share = sum(
+            1 for r in rows if REDIRECT_PATH_RE.search(r["Source url"])
+        ) / self.n_links
+        self.is_redirect_shell = (
+            self.avg_external == 0
+            and self.empty_anchor_share >= 0.80
+            and (self.affiliate_target_share >= 0.25
+                 or self.redirect_path_share >= 0.50)
+        )
+
         self.archive_pages = {p for p in self.pages if ARCHIVE_URL_RE.search(p)}
         self.content_pages = self.pages - self.archive_pages
         self.n_content_pages = len(self.content_pages)
@@ -488,6 +519,17 @@ def classify(p: DomainProfile):
     if d in CLIENT_OVERRIDES or p.registrable in CLIENT_OVERRIDES:
         act, rf, why = CLIENT_OVERRIDES.get(d) or CLIENT_OVERRIDES[p.registrable]
         return (act, rf, "High", why)
+
+    # Redirect infrastructure detected from behaviour rather than a list.
+    # This must outrank the name-based spam rules: a tracking host can be
+    # called anything, and securelinksdirectory.com was condemned purely for
+    # having "links" and "directory" in its name.
+    if p.is_redirect_shell:
+        return (KEEP, "None - Redirect / Tracking Host (Behavioural Match)", "High",
+                f"No outbound links of its own, {p.empty_anchor_share:.0%} empty "
+                f"anchors, and {p.affiliate_target_share:.0%} of destinations "
+                "carry the programme's affiliate parameters. This is link "
+                "tracking, whatever the domain is called.")
 
     # -- Tier 1: protected assets -------------------------------------------
     # Must precede every spam rule: these domains carry templated footprints
