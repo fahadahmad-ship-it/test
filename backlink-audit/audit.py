@@ -443,6 +443,14 @@ class DomainProfile:
         self.redirect_path_share = sum(
             1 for r in rows if REDIRECT_PATH_RE.search(r["Source url"])
         ) / self.n_links
+        # A domain whose destinations carry the programme's own affiliate
+        # parameters is a tracked partner. Commercial anchors are what
+        # affiliates are for, so anchor-ratio rules must not condemn them --
+        # the brief protects affiliate placements explicitly. Structural
+        # rules (spun-content networks, link farms) still apply and fire
+        # earlier, so this cannot shield the rogue affiliate's PBN.
+        self.confirmed_affiliate = self.affiliate_target_share >= 0.05
+
         self.is_redirect_shell = (
             self.avg_external == 0
             and self.empty_anchor_share >= 0.80
@@ -719,7 +727,8 @@ def classify(p: DomainProfile):
     # high enough to be editorial rather than templated.
     if (p.n_content_pages >= 15 and p.exact_share >= 0.15
             and p.median_ascore <= 20
-            and p.anchor_diversity < 0.50 and not branded_safe):
+            and p.anchor_diversity < 0.50 and not branded_safe
+            and not p.confirmed_affiliate):
         return (DISAVOW, "Exact-Match Anchor Abuse (Syndicated Placement)", "High",
                 f"{p.exact_share:.0%} exact-match commercial anchors across "
                 f"{p.n_content_pages} low-authority content pages (median AS "
@@ -752,6 +761,14 @@ def classify(p: DomainProfile):
         return (REVIEW, "Elevated OBL on Low-Authority Pages", "Low",
                 f"Average {p.avg_external:.0f} outbound links on low-authority "
                 "pages; check for guest-post-network traits.")
+
+    if p.confirmed_affiliate:
+        return (KEEP, "None - Tracked Affiliate Partner", "High",
+                f"{p.affiliate_target_share:.0%} of destinations carry the "
+                "programme's a_aid/a_bid parameters, so this is a tracked "
+                "affiliate. Commercial anchors are expected of an affiliate "
+                "and the brief protects the placement; no structural spam "
+                "signature fired.")
 
     if p.exact_share >= 0.30 and p.n_links >= 3 and not branded_safe:
         return (REVIEW, "Elevated Exact-Match Anchor Ratio", "Medium",
