@@ -128,9 +128,12 @@ def _work_tab(wb, title, rows, cols, blurb, confirm_header, confirm_list,
     dec_col = get_column_letter(n + 1)
     ncol = n + 2
 
-    ws["A1"] = f"{title} — {len(rows):,} domains"
+    work = title[0].isdigit()
+    ws["A1"] = (f"{title} — {len(rows):,} domains" if work
+                else f"REFERENCE — {title.lower()}: {len(rows):,} domains")
     ws["A1"].font = Font(name=FONT, size=14, bold=True)
-    ws["A1"].fill = PatternFill("solid", fgColor="DDEBF7")
+    ws["A1"].fill = PatternFill("solid",
+                                fgColor="DDEBF7" if work else "EDEDED")
     ws["A2"] = blurb
     ws["A2"].font = Font(name=FONT, size=9, italic=True, color="595959")
     ws["A3"] = "Backlinks covered"
@@ -232,22 +235,24 @@ def _networks_tab(wb, dis):
                                          for x in kv[1]),
                                     kv[0]))
 
-    ws = wb.create_sheet("2 Approve networks", 1)
-    ws["A1"] = f"Approve by network — {len(groups)} decisions covering " \
-               f"{len(dis):,} domains"
+    ws = wb.create_sheet("Networks summary", 1)
+    ws["A1"] = (f"REFERENCE — what is in the disavow file, summarised as the "
+                f"{len(groups)} operators behind its {len(dis):,} domains")
     ws["A1"].font = Font(name=FONT, size=14, bold=True)
     ws["A1"].fill = PatternFill("solid", fgColor="DDEBF7")
-    ws["A2"] = ("Highest-impact first: equity-passing networks at the top, "
-                "nofollow-only at the bottom. Approve here, then spot-check "
-                "the members on the Disavow tab — every domain in a row "
-                "shares the signature named in Why it is flagged.")
+    ws["A2"] = ("Nothing to action. The file is final — this is here so you "
+                "can see what you are submitting without reading "
+                f"{len(dis):,} rows. Highest-impact first: equity-passing "
+                "networks at the top, nofollow-only at the bottom. If you "
+                "want a whole network left out, put an x in the last column "
+                "and tell me — that is the only reason to touch this tab.")
     ws["A2"].font = Font(name=FONT, size=9, italic=True, color="595959")
 
     HDR = 4
     heads = [("Priority", 26), ("Network", 44), ("Domains", 9),
              ("Backlinks", 11), ("Follow links", 13), ("Max authority", 12),
              ("Why it is flagged", 78), ("Example domain", 30),
-             ("Approve? (Y / N / HOLD)", 22), ("Notes", 40)]
+             ("Leave this one out? (optional)", 24), ("Notes", 40)]
     for i, (h, w) in enumerate(heads, start=1):
         c = ws.cell(HDR, i, h)
         c.font = Font(name=FONT, size=10, bold=True, color="FFFFFF")
@@ -301,7 +306,7 @@ def _networks_tab(wb, dis):
         c.number_format = "#,##0"
     ws.freeze_panes = ws.cell(HDR + 1, 3).coordinate
     ws.auto_filter.ref = f"A{HDR}:J{last}"
-    dv = DataValidation(type="list", formula1='"Y,N,HOLD"', allow_blank=True)
+    dv = DataValidation(type="list", formula1='"x"', allow_blank=True)
     ws.add_data_validation(dv)
     dv.add(f"I{HDR+1}:I{last}")
     return len(groups)
@@ -422,45 +427,43 @@ def _start_tab(wb, dom, n_networks):
         w("Needs your call",
           f"{c['REVIEW_MANUALLY']} domains. Each one carries my "
           "recommendation and the evidence for it.")
-    else:
-        w("Needs your call",
-          "Nothing outstanding — the review queue is cleared. The "
-          "Decisions log tab records what was decided and where it differs "
-          "from what this audit recommended.")
     w("Keep", f"{c['KEEP_AFFILIATE_RETAIN']:,} domains — affiliates, brand "
       "estate, editorial citations and low-exposure retains.", gap=1)
 
+    w("What is left to do", "", bold=True, colour="9C3A00")
+    w("One decision",
+      "dtcx.com — see below. Everything else is settled: 1,183 domains "
+      "disavowed, 1,745 kept, nothing pending.")
+    w("Then submit",
+      "disavow_full.txt, as it stands, in Google Search Console's disavow "
+      "tool — every disavowed domain, grouped by network with comment "
+      "headers. Nothing in this workbook needs filling in first. "
+      "disavow_core.txt (the 803 that pass equity) and "
+      "disavow_nofollow_hygiene.txt (the 380 inert ones) are the same list "
+      "split in two, so you can see the composition; submitting the full "
+      "file matches your call to include nofollow.", gap=1)
+
     w("The tabs", "", bold=True)
     w("How to read them",
-      "Numbered tabs are the workflow, in order. The two unnumbered tabs are "
-      "reference — nothing in them needs a decision.")
-    w("2 Approve networks",
-      f"Start here. The {c['DISAVOW']:,} disavows are {n_networks} networks, "
-      f"not {c['DISAVOW']:,} separate judgements — 139 rows are "
-      "seo-anomaly-s1.xyz through s139.xyz, one operator. Approve or reject "
-      "each network. "
-      "Equity-passing ones are at the top; nofollow-only at the bottom, and "
-      "those change nothing either way.")
-    w("3 Disavow list",
-      "The members of each network, grouped under it with a rule between "
-      "groups. Use it to spot-check a network before approving, or to pull a "
-      "single domain out of one.")
-    if c["REVIEW_MANUALLY"]:
-        w("3b Review queue",
-          f"The {c['REVIEW_MANUALLY']} the rules would not decide. "
-          "Recommendation and evidence sit in columns B and C. Set the "
-          "Decision column.")
-    else:
-        w("Decisions log  (reference)",
-          "The review queue after your call: 7 retained by name, the other "
-          "63 disavowed as a block. 'Audit said' keeps this audit's own "
-          "recommendation next to what was applied, and the Agree column "
-          "flags the 38 rows where the two differ. Reversing any of them is "
-          "one line out of disavow_full.txt.")
-    w("All domains  (reference)",
-      f"Every one of the {len(dom):,} domains, with each sampled backlink "
-      "listed under its domain. Filter Level=DOMAIN for the verdict list. "
-      "Nothing to action.", gap=1)
+      "This tab is the only one with anything in it for you. The other four "
+      "are reference — they explain and evidence the file, and none of them "
+      "asks you to do anything.")
+    w("Networks summary",
+      f"The {c['DISAVOW']:,} disavowed domains as the {n_networks} operators "
+      "behind them — 139 of those rows are seo-anomaly-s1.xyz through "
+      "s139.xyz, one generator. Read this if you want to see what you are "
+      "submitting without going through 1,183 rows.")
+    w("Disavow list",
+      "The same file domain by domain, grouped under its network. Read this "
+      "if you want to check a particular network's members.")
+    w("Decisions log",
+      "The 70-domain review queue after your call: 7 retained by name, 63 "
+      "disavowed. 'Audit said' keeps this audit's own recommendation next to "
+      "what was applied, and the Agree column flags the 38 rows where the two "
+      "differ.")
+    w("All domains",
+      f"All {len(dom):,} domains with each sampled backlink listed beneath "
+      "its domain. Filter Level=DOMAIN for the plain verdict list.", gap=1)
 
     dtcx = next((r for r in dom if r["Referring Domain"] == "dtcx.com"), None)
     decided = bool(dtcx) and dtcx["Action Recommendation"] == "DISAVOW"
@@ -478,14 +481,6 @@ def _start_tab(wb, dom, n_networks):
          "submit." if decided else
          " I have left it unresolved rather than guess."),
       colour="9C3A00", gap=1)
-
-    w("What to submit", "", bold=True)
-    w("The file",
-      "disavow_full.txt is the file for Google's tool — every disavowed "
-      "domain, grouped by network with comment headers. disavow_core.txt is "
-      "the equity-passing subset and disavow_nofollow_hygiene.txt the inert "
-      "remainder; together they are exactly disavow_full.txt. Submitting the "
-      "full file matches your call to include nofollow.", gap=1)
 
     w("Where the confidence sits", "", bold=True)
     ev = Counter(r["Evidence Level"] for r in dom)
@@ -680,14 +675,15 @@ def main(outdir):
                             r["Primary Risk Factor"],
                             _prio(r), -int(r["Backlinks (true)"])))
     _work_tab(
-        wb, "3 Disavow list", dis, DISAVOW_COLS,
-        "Grouped by network, equity-passing first. 'Disavow Entry' is the "
-        "exact line for Google's tool — note where it names a subdomain: "
-        "those hosts are compromised, not hostile, and the narrow scope is "
-        "deliberate. Approve whole networks on the Networks tab; use this to "
-        "check members or pull one out.",
-        confirm_header="Confirmed? (Y / N / HOLD)",
-        confirm_list='"Y,N,HOLD"',
+        wb, "Disavow list", dis, DISAVOW_COLS,
+        "REFERENCE — the contents of disavow_full.txt, one row per domain, "
+        "grouped by network. 'Disavow Entry' is the exact line in the file; "
+        "where it names a subdomain that is deliberate, because the host is "
+        "compromised rather than hostile and the narrow scope protects the "
+        "rest of the site. Nothing to action — the last column is only there "
+        "if you want a domain pulled out.",
+        confirm_header="Pull this one out? (optional)",
+        confirm_list='"x"',
         group_col="Network",
     )
 

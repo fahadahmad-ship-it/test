@@ -579,3 +579,29 @@ first cell now says which it is.
 | **3 Disavow list** | The 1,183 domains, grouped under their network |
 | Decisions log | Reference: the 70-domain queue, your call beside the audit's, disagreements flagged |
 | All domains | Reference: all 2,928 domains with sampled backlinks beneath each. Filter `Level=DOMAIN` for the verdict list |
+
+## The approval gate removed (2026-08-25)
+
+Fair challenge from the client: why approve networks when the disavow file is
+already final? The Networks tab was built as a work surface for deciding, and
+once the review queue was cleared it was asking for a second sign-off on 1,183
+domains that had already been signed off. An approval step that cannot change
+anything is just friction.
+
+So the workbook now has **one tab with anything in it and four that explain the
+file**:
+
+| Tab | Purpose |
+|---|---|
+| **1 Start here** | The only tab with something for you: what is left to do, then submit |
+| Networks summary | Reference. The 1,183 disavows as the 26 operators behind them |
+| Disavow list | Reference. The same file domain by domain, grouped by network |
+| Decisions log | Reference. The 70-domain queue, your call beside the audit's |
+| All domains | Reference. All 2,928 with sampled backlinks beneath each |
+
+Every reference tab says `REFERENCE` in its first cell, and the Y/N/HOLD and
+PENDING dropdowns are gone — the only remaining input is an optional "leave this
+one out" marker, for pulling a network or a domain if you decide to.
+
+What is actually outstanding is one thing: `dtcx.com`. Then submit
+`disavow_full.txt` as it stands.
