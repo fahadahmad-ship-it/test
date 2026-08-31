@@ -117,15 +117,19 @@ This is a research gap — see section 4.
 | # | Gap | Why it matters | Effort |
 |---|---|---|---|
 | R1 | Segment editorial vs passive/footprint referring domains (last 12m) | Sets an honest baseline and defensible KPI (F5) | 2–3 hrs |
-| R2 | Anchor text distribution for nmi.com | Determines anchor plan and over-optimisation risk | 1 hr |
-| R3 | Referring domain **quality** split (DR bands) vs Checkout.com / Paysafe / Finix | Justifies the DR tier mix in the scope | 2 hrs |
-| R4 | Link intersect: sites linking to 2+ of the SERP competitor set but not NMI | Produces the initial prospect list — a tangible pitch asset | 2–3 hrs |
+| ~~R2~~ | ~~Anchor text distribution~~ | **DONE** — see `03-backlink-analysis-semrush.md` §4. Two anchors flagged. | ✅ |
+| ~~R3~~ | ~~Referring domain quality split~~ | **DONE** — §3. NMI has 374 domains at AS 40+ vs Checkout.com's 998 (2.7x gap). | ✅ |
+| ~~R4~~ | ~~Link intersect~~ | **DONE** — §5. 50 domains linking to all four competitors and not NMI; 20 actionable. | ✅ |
 | R5 | What is Battenhall already doing? (digital PR, content, social) | Avoid double-charging and scope collision | Ask Battenhall |
 | R6 | Confirm NMI's priority product pages and commercial priority order | Client's "product pages" is too vague to scope against | Ask client |
 | R7 | Full striking-distance export (pos. 4–20, US) beyond the top-25 sample | Sizes the opportunity properly for the forecast | 1–2 hrs |
 
-R4 is the one I would prioritise — a live prospect list in the pitch deck is worth more than
-another slide of analysis.
+**R2, R3 and R4 are now complete** — see `03-backlink-analysis-semrush.md`. R1 (editorial vs
+footprint segmentation) and R7 (full striking-distance export) remain open.
+
+**Metric switch:** Battenhall works in Semrush, so all client-facing numbers now use Authority
+Score. Do not put Ahrefs DR in front of them — the two scales tell materially different stories
+(NMI is 11–13 DR points behind Adyen/Authorize.Net, but only 2–3 AS points behind).
 
 ---
 

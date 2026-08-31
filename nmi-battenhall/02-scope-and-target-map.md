@@ -137,28 +137,53 @@ that Battenhall then has to defend internally.
 
 ## 5. Anchor text framework
 
-Provisional — **must be validated against R2 (NMI's current anchor distribution) before issue.**
-NMI's profile is dominated by footprint links from the gateway/checkout integration, which
-typically skew heavily branded. If that is confirmed, there is more headroom for partial-match
-than a standard framework would allow.
+**Updated against live Semrush anchor data** (`03-backlink-analysis-semrush.md` §4). The earlier
+provisional split was too conservative.
 
-| Anchor type | Provisional target | Notes |
-|---|---|---|
-| Branded | 40–50% | Likely already over-represented via the footprint |
-| Naked URL / generic | 15–20% | |
-| Partial match | 25–30% | Where the headroom probably sits |
-| Exact match | 5–10% | Keep tight — `payment processing`/`payment processor` are KD 50–51 and heavily scrutinised terms |
+NMI's anchor profile is almost entirely branded, acquired-brand (`usaepay.com`, `iriscrm.com`,
+`agreementexpress.com`), naked URL and generic. **There is effectively no exact-match commercial
+anchor presence at all.** That gives unusually wide headroom.
+
+| Anchor type | Target | Change vs provisional | Notes |
+|---|---|---|---|
+| Branded | 30–40% | ↓ from 40–50% | Already heavily over-represented via the badge footprint |
+| Naked URL / generic | 10–15% | ↓ from 15–20% | 376 domains already use raw privacy-policy URLs |
+| **Partial match** | **35–40%** | **↑ from 25–30%** | This is where the headroom is |
+| Exact match | 10–15% | ↑ from 5–10% | Still keep tight on `payment processing`/`payment processor` (KD 50–51) |
+
+**Two anchors flagged for NMI** (see §4 of the analysis): a live third-party spam anchor across
+100 referring domains, and a typo-domain cluster requiring ownership verification.
 
 ---
+
+## 5b. Recommended link mix and quality floor
+
+| # | Link type | Target AS | Share |
+|---|---|---|---|
+| 1 | Fintech & payments trade press | 30–60 | Largest |
+| 2 | Developer ecosystem & integration listings | 30–55 | Significant |
+| 3 | Comparison, review & software directories | 25–50 | Moderate |
+| 4 | Data-led digital PR (original survey data) | 50+ | Quarterly asset (£5K) / 6-monthly (£4K) |
+
+**Quality floor: AS 30 minimum, majority AS 40+.** Below AS 30 the link does not move the metric
+Battenhall reports on.
+
+**Deprioritised:** badge/footer/template placements (NMI already has 22.8m — zero marginal value),
+low-AS directories (the AS 0–9 band is already 57% of the profile), and anything that adds
+backlink count without adding a new referring domain at AS 30+.
+
+**Target to quote:** NMI has **374 referring domains at AS 40+** against ~998 for the closest
+comparable profile — a **2.7x gap**, consistent at every quality threshold.
 
 ## 6. KPIs and what we will and will not commit to
 
 **Commit to:**
-- Editorial referring domains acquired per month, by DR tier
+- Editorial referring domains acquired per month, **by Semrush AS tier** (Battenhall's metric)
 - Referring domain gain **per target page** against the Tier 1/Tier 2 map
 - Position movement on the named Tier 1 target keywords
 
 **Do not commit to:**
+- **Total backlinks.** NMI carries 22.8m backlinks from 4,968 domains — 4,605 per domain, 5.6x Authorize.Net. The count is one integration placement counted millions of times and is meaningless as a KPI.
 - **Total site referring domains.** NMI already gains ~113/month passively from the gateway
   footprint. Accepting this as a KPI means being measured against growth we did not create.
 - **Total organic traffic.** `/logins/` and the `secure.nmi.com` login pages pull 4,000+
