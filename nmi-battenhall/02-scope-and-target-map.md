@@ -1,6 +1,6 @@
 # NMI × Battenhall — Target Page Map & Scope Architecture
 
-**Status:** volume cells deliberately left blank — to be completed against the SUSO rate card.
+**Status:** volume cells deliberately left blank — to be completed against the rate card.
 Strategy decisions recorded in section 0 are settled; everything marked `___` or *TBC* is not.
 
 ---
@@ -112,10 +112,10 @@ hold a link count is how this account is lost at month four.
 
 ### 4b. Content production — two cost models pending Battenhall's answer
 
-| Model | What SUSO scopes | Risk to flag |
+| Model | What we scopes | Risk to flag |
 |---|---|---|
-| **A: SUSO produces** | Outreach + placement content, costed into the retainer | Reduces link volume at the same budget; possible duplication of Battenhall's editorial output |
-| **B: Battenhall produces, SUSO places** | Outreach and placement only | Delivery risk — our output becomes dependent on their content pipeline and turnaround. Needs an SLA in the proposal. |
+| **A: we produce** | Outreach + placement content, costed into the retainer | Reduces link volume at the same budget; possible duplication of Battenhall's editorial output |
+| **B: Battenhall produces, we place** | Outreach and placement only | Delivery risk — our output becomes dependent on their content pipeline and turnaround. Needs an SLA in the proposal. |
 
 Both models should appear in the proposal with the question put explicitly to Battenhall.
 Do not pick one unilaterally.
@@ -204,8 +204,8 @@ the passive footprint, as at contract start.
 
 | # | Blocker | Owner | Blocks |
 |---|---|---|---|
-| B1 | SUSO rate card — per-link cost by DR tier | SUSO (internal) | All volume cells in §2, §3, §4a |
+| B1 | rate card — per-link cost by DR tier | Internal | All volume cells in §2, §3, §4a |
 | B2 | Content production ownership (D4) | Battenhall | §4b, and indirectly the volumes |
-| B3 | SUSO's share of the the relevant option | Battenhall | Which scope leads the pitch |
-| B4 | Minimum commitment — 6 or 12 months | SUSO (internal) | Forecast model |
-| B5 | R1–R4, R7 research (see `00-plan-of-attack.md` §4) | SUSO | Forecast, anchor framework, prospect list |
+| B3 | our share of the the relevant option | Battenhall | Which scope leads the pitch |
+| B4 | Minimum commitment — 6 or 12 months | Internal | Forecast model |
+| B5 | R1–R4, R7 research (see `00-plan-of-attack.md` §4) | we | Forecast, anchor framework, prospect list |

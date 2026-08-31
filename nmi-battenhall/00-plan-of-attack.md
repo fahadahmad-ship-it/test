@@ -3,8 +3,8 @@
 
 **Prepared:** 31 August 2026
 **Client:** NMI (nmi.com) — UK-HQ embedded payments platform, US-focused GTM
-**Route:** Battenhall (agency partner); SUSO as specialist link acquisition partner
-**Budget:** £5,000/month total. SUSO allocation TBC — two scopes required (£5,000 and £4,000)
+**Route:** Battenhall (agency partner); specialist link acquisition partner
+**Budget:** £5,000/month total. we allocation TBC — two scopes required (£5,000 and £4,000)
 **Stated competitors:** Stripe, Adyen, Authorize.Net
 **Stated keyword themes:** payment processing / payment processor, embedded payments
 **Stated link targets:** product pages + blog
@@ -104,7 +104,7 @@ NMI's link programme against Stripe would set a target we cannot hit and should 
 Referring domains grew **2,719 → 4,070 in the last 12 months (~113/month net)**, accelerating
 since February 2026.
 
-**Implication:** if we do not baseline this properly, SUSO will be measured against a growth curve
+**Implication:** if we do not baseline this properly, we will be measured against a growth curve
 we did not create — or worse, credited for it and then held to it. Much of that growth is likely
 the passive merchant/gateway footprint, not editorial links. **Before the pitch we must segment
 editorial referring domains from the passive footprint and quote our targets in editorial RDs only.**
@@ -144,7 +144,7 @@ Score. Do not put Ahrefs DR in front of them — the two scales tell materially 
 7. **Forecast & KPIs** — modelled on striking-distance movement, with stated assumptions
 8. **Quick wins for NMI** — the privacy-policy consolidation and internal linking audit (F2),
    given free as a credibility play
-9. **Ways of working** — how SUSO plugs into Battenhall: approvals, reporting cadence, escalation
+9. **Ways of working** — how we plugs into Battenhall: approvals, reporting cadence, escalation
 
 ---
 
@@ -156,10 +156,10 @@ Score. Do not put Ahrefs DR in front of them — the two scales tell materially 
   first 90 days, ~30% thin relevance-led layer to product pages.
 - **D2 — Say so openly in the pitch.** We present the evidence for re-weighting the brief rather
   than quietly deviating from it.
-- **D3 — Volumes come from the SUSO rate card**, not from benchmark assumptions. All volume cells
+- **D3 — Volumes come from the rate card**, not from benchmark assumptions. All volume cells
   in the scope tables are currently blank.
 - **D4 — Content production ownership goes to Battenhall as an explicit question.** Both cost
-  models (SUSO produces / Battenhall produces) are drafted so we can price either.
+  models (we produce / Battenhall produces) are drafted so we can price either.
 
 **The honest lever between the two scopes is volume and link-magnet cadence, not quality.** In US
 fintech/payments, dropping the DR floor to preserve a link count is how this account gets lost at
@@ -178,7 +178,7 @@ runway to the same KPIs — *not* a cheaper, lighter product.
   volumes rather than let Battenhall infer a bigger number.
 - **NMI's existing velocity (F5) is a trap.** Do not accept a KPI expressed as total referring
   domains.
-- **Duplicate-URL and internal linking issues (F2) may not be SUSO's to fix** — but if nobody
+- **Duplicate-URL and internal linking issues (F2) may not be our to fix** — but if nobody
   fixes them, our links underperform. Flag ownership explicitly in the proposal.
 - **Battenhall is a comms/PR agency.** There is a real risk of overlap between their digital PR
   output and our link acquisition. Resolve R5 before scoping, or we will end up either
@@ -188,13 +188,13 @@ runway to the same KPIs — *not* a cheaper, lighter product.
 
 ## 8. Open questions
 
-**For the SUSO side (blocking the scope tables):**
+**For the we side (blocking the scope tables):**
 1. Current per-link cost bands by DR tier, and expected monthly link volume at £5,000 and £4,000
-2. Does SUSO's scope include content production for placements, or is that Battenhall's?
+2. Does our scope include content production for placements, or is that Battenhall's?
 3. Minimum commitment we want to propose (6 or 12 months) — this changes the forecast materially
 
 **For Battenhall:**
-4. What is the SUSO allocation of the £5,000?
+4. What is the we allocation of the £5,000?
 5. What are Battenhall already delivering — digital PR, content, technical SEO?
 6. Who owns the relationship with NMI's web/dev team for on-site fixes?
 7. Is the £5,000 the total NMI budget, or the total for this workstream?
@@ -211,7 +211,7 @@ runway to the same KPIs — *not* a cheaper, lighter product.
 | Stage | Work | Depends on |
 |---|---|---|
 | 1 | Close R1–R4 and R7 | — |
-| 2 | Answer Q1–Q3 internally | SUSO rate card |
+| 2 | Answer Q1–Q3 internally | rate card |
 | 3 | Build target page map + anchor framework | Stage 1 |
 | 4 | Build the two scopes | Stage 2 |
 | 5 | Build forecast + KPIs | Stages 3–4 |

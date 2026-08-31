@@ -1,6 +1,6 @@
 # NMI — Backlink Audit: Methodology & Productisation
 
-Two things live in this document: **the screening model** SUSO uses to judge a link (which is
+Two things live in this document: **the screening model** we use to judge a link (which is
 what we are actually selling), and **the split** between the free pitch snapshot and the paid
 audit engagement.
 

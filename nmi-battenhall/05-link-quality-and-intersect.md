@@ -1,7 +1,7 @@
 # NMI — Link Quality Benchmark & Ahrefs Link Intersect
 
 **Internal working document.** Data pulled 31 August 2026.
-Quality thresholds per SUSO's definition: **AS 30+** for authority, **1,000+ monthly organic
+Quality thresholds per the agreed definition: **AS 30+** for authority, **1,000+ monthly organic
 traffic** for "good", with spam judged on **anchors and zero-traffic domains**, not score alone.
 
 ---
@@ -103,7 +103,7 @@ Of the **327 spam-flagged domains at DR 30+**:
 > table.
 
 This is the strongest asset in the pitch. It is concrete, checkable in either tool in under a
-minute, and it demonstrates precisely why SUSO's screening model is not the same as a DR filter.
+minute, and it demonstrates precisely why the screening model is not the same as a DR filter.
 
 ### What we do and do not say
 - **Do say:** it exists, that it is 327 domains at DR 30+, that it is live, and that score-only

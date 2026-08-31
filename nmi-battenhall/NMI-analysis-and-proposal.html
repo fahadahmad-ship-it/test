@@ -69,6 +69,12 @@ td{padding:13px 14px 13px 0;border-bottom:1px solid var(--line);vertical-align:t
 td:last-child,th:last-child{padding-right:0}
 tr.us td{background:rgba(255,34,81,.045);font-weight:700}
 .num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar{display:block;height:5px;background:#EFEFEF;margin-top:7px;min-width:110px}
+.bar i{display:block;height:100%;background:#B9B9B9}
+tr.us .bar{background:rgba(255,34,81,.16)}
+tr.us .bar i{background:var(--accent)}
+tr.out td{color:var(--muted)}
+.scalenote{font-family:var(--alt);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:-14px 0 26px}
 
 .call{border-left:4px solid var(--accent);padding:20px 0 20px 26px;margin:32px 0;background:var(--wash)}
 .call p{margin:0;font-size:18px;line-height:1.5;font-weight:600;max-width:62ch}
@@ -101,9 +107,9 @@ footer b{color:var(--ink)}
 
 <div class="wrap">
   <header class="hero">
-    <p class="eyebrow">Prepared for Battenhall &nbsp;&middot;&nbsp; Client: NMI</p>
-    <h1>Three points from your <em>two biggest competitors.</em></h1>
-    <p class="standfirst">NMI sits closer to Adyen and Authorize.Net than the raw numbers suggest, and the profile is cleaner than both. The gap is scale. Here is what we found and what we would build.</p>
+    <p class="eyebrow">Link acquisition analysis &nbsp;&middot;&nbsp; Prepared for NMI</p>
+    <h1>Fewer links than anyone. <em>More return from each one.</em></h1>
+    <p class="standfirst">NMI holds the smallest link profile in its category and converts it into more visibility than the size suggests. The constraint is volume at the top of the profile. Here is what the data shows and what we would build.</p>
     <div class="meta">
       <div>Market<b>United States</b></div>
       <div>Focus<b>Product pages and blog</b></div>
@@ -115,13 +121,12 @@ footer b{color:var(--ink)}
 
 <nav class="tabbar">
   <div class="wrap" role="tablist" aria-label="Sections">
-    <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true"><span class="idx">01</span>Position</button>
-    <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false"><span class="idx">02</span>Comparison</button>
-    <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false"><span class="idx">03</span>Quality</button>
-    <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false"><span class="idx">04</span>Risk</button>
-    <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false"><span class="idx">05</span>Opportunity</button>
-    <button class="tab" role="tab" id="t6" aria-controls="p6" aria-selected="false"><span class="idx">06</span>Targets</button>
-    <button class="tab final" role="tab" id="t7" aria-controls="p7" aria-selected="false"><span class="idx">07</span>Proposal</button>
+    <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true"><span class="idx">01</span>Landscape</button>
+    <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false"><span class="idx">02</span>Quality</button>
+    <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false"><span class="idx">03</span>Risk</button>
+    <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false"><span class="idx">04</span>Opportunity</button>
+    <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false"><span class="idx">05</span>Targets</button>
+    <button class="tab final" role="tab" id="t6" aria-controls="p6" aria-selected="false"><span class="idx">06</span>Proposal</button>
   </div>
 </nav>
 
@@ -129,71 +134,58 @@ footer b{color:var(--ink)}
 
 <!-- 01 -->
 <section class="panel" role="tabpanel" id="p1" aria-labelledby="t1" tabindex="0">
-  <p class="snum">01 &nbsp;Position</p>
-  <h2>The Authority Score gap is three points, not thirty.</h2>
-  <p class="lede">Measured on Semrush Authority Score, NMI sits within three points of both named competitors. That single fact changes what a link programme can realistically target.</p>
+  <p class="snum">01 &nbsp;Landscape</p>
+  <h2>The smallest profile in the category, and the hardest working.</h2>
+  <p class="lede">Eight domains, measured the same way. The first table is what each company has built. The second is what it returns.</p>
 
-  <table>
-    <thead><tr><th>Domain</th><th class="num">Authority Score</th><th class="num">Referring domains</th></tr></thead>
-    <tbody>
-      <tr><td>Stripe</td><td class="num">79</td><td class="num">696,910</td></tr>
-      <tr><td>Adyen</td><td class="num">49</td><td class="num">59,017</td></tr>
-      <tr><td>Authorize.Net</td><td class="num">48</td><td class="num">39,946</td></tr>
-      <tr class="us"><td>NMI</td><td class="num">46</td><td class="num">4,968</td></tr>
-    </tbody>
-  </table>
-
-  <p>The real distance sits in referring domain count. NMI has roughly 8 times fewer than Adyen and 12 times fewer than Authorize.Net. Stripe is a different order of magnitude and we would not scope against it.</p>
-
-  <h3>Who actually competes in the results</h3>
-  <p>Stripe, Adyen and Authorize.Net are the brands NMI competes with commercially. They are not always the pages NMI competes with in search. On the target terms the pages ranking above NMI include GoCardless, Adobe, Helcim, SVB, WEX and Wikipedia. We track both sets, because the second one determines rankings and the first one determines how progress gets judged internally.</p>
-</section>
-
-<!-- 02 -->
-<section class="panel" role="tabpanel" id="p2" aria-labelledby="t2" tabindex="0" hidden>
-  <p class="snum">02 &nbsp;Comparison</p>
-  <h2>A small link profile doing a large amount of work.</h2>
-  <p class="lede">Set side by side with the wider category, NMI is the smallest profile in the group by referring domains and one of the strongest by what it returns.</p>
-
+  <h3>The link profile</h3>
   <table>
     <thead><tr><th>Domain</th><th class="num">Authority Score</th><th class="num">Domain Rating</th><th class="num">Referring domains</th><th class="num">Backlinks</th></tr></thead>
     <tbody>
-      <tr><td>Stripe</td><td class="num">79</td><td class="num">95</td><td class="num">696,910</td><td class="num">146,428,354</td></tr>
-      <tr><td>Adyen</td><td class="num">49</td><td class="num">88</td><td class="num">59,017</td><td class="num">1,434,387</td></tr>
-      <tr><td>Authorize.Net</td><td class="num">48</td><td class="num">90</td><td class="num">39,946</td><td class="num">33,079,406</td></tr>
-      <tr><td>Checkout.com</td><td class="num">52</td><td class="num">80</td><td class="num">11,610</td><td class="num">817,121</td></tr>
-      <tr><td>Paysafe</td><td class="num">44</td><td class="num">80</td><td class="num">13,580</td><td class="num">1,329,972</td></tr>
-      <tr class="us"><td>NMI</td><td class="num">46</td><td class="num">77</td><td class="num">4,968</td><td class="num">22,878,932</td></tr>
-      <tr><td>Finix</td><td class="num">37</td><td class="num">66</td><td class="num">2,330</td><td class="num">14,369</td></tr>
-      <tr><td>Payrix</td><td class="num">27</td><td class="num">66</td><td class="num">1,005</td><td class="num">5,512</td></tr>
+      <tr class="out"><td>Stripe</td><td class="num">79</td><td class="num">95</td><td class="num">696,910</td><td class="num">146,428,354</td></tr>
+      <tr><td>Adyen</td><td class="num">49</td><td class="num">88</td><td class="num">59,017<span class="bar"><i style="width:100%"></i></span></td><td class="num">1,434,387</td></tr>
+      <tr><td>Authorize.Net</td><td class="num">48</td><td class="num">90</td><td class="num">39,946<span class="bar"><i style="width:67.7%"></i></span></td><td class="num">33,079,406</td></tr>
+      <tr><td>Paysafe</td><td class="num">44</td><td class="num">80</td><td class="num">13,580<span class="bar"><i style="width:23.0%"></i></span></td><td class="num">1,329,972</td></tr>
+      <tr><td>Checkout.com</td><td class="num">52</td><td class="num">80</td><td class="num">11,610<span class="bar"><i style="width:19.7%"></i></span></td><td class="num">817,121</td></tr>
+      <tr class="us"><td>NMI</td><td class="num">46</td><td class="num">77</td><td class="num">4,968<span class="bar"><i style="width:8.4%"></i></span></td><td class="num">22,878,932</td></tr>
+      <tr><td>Finix</td><td class="num">37</td><td class="num">66</td><td class="num">2,330<span class="bar"><i style="width:3.9%"></i></span></td><td class="num">14,369</td></tr>
+      <tr><td>Payrix</td><td class="num">27</td><td class="num">66</td><td class="num">1,005<span class="bar"><i style="width:1.7%"></i></span></td><td class="num">5,512</td></tr>
     </tbody>
   </table>
+  <p class="scalenote">Bars scaled to Adyen. Stripe sits outside the comparable set and is shown for context only.</p>
 
-  <h3>What that profile returns</h3>
-
+  <h3>What it returns</h3>
   <table>
     <thead><tr><th>Domain</th><th class="num">US organic traffic</th><th class="num">Organic keywords</th><th class="num">Monthly traffic value</th></tr></thead>
     <tbody>
-      <tr><td>Stripe</td><td class="num">1,628,443</td><td class="num">146,935</td><td class="num">$7,232,605</td></tr>
-      <tr><td>Adyen</td><td class="num">66,860</td><td class="num">11,672</td><td class="num">$747,071</td></tr>
-      <tr><td>Authorize.Net</td><td class="num">51,161</td><td class="num">1,685</td><td class="num">$182,868</td></tr>
-      <tr><td>Checkout.com</td><td class="num">36,620</td><td class="num">6,377</td><td class="num">$170,467</td></tr>
-      <tr class="us"><td>NMI</td><td class="num">23,512</td><td class="num">1,382</td><td class="num">$130,405</td></tr>
-      <tr><td>Paysafe</td><td class="num">12,259</td><td class="num">1,746</td><td class="num">$68,431</td></tr>
-      <tr><td>Finix</td><td class="num">3,523</td><td class="num">538</td><td class="num">$27,424</td></tr>
-      <tr><td>Payrix</td><td class="num">650</td><td class="num">172</td><td class="num">$3,161</td></tr>
+      <tr class="out"><td>Stripe</td><td class="num">1,628,443</td><td class="num">146,935</td><td class="num">$7,232,605</td></tr>
+      <tr><td>Adyen</td><td class="num">66,860<span class="bar"><i style="width:100%"></i></span></td><td class="num">11,672</td><td class="num">$747,071</td></tr>
+      <tr><td>Authorize.Net</td><td class="num">51,161<span class="bar"><i style="width:76.5%"></i></span></td><td class="num">1,685</td><td class="num">$182,868</td></tr>
+      <tr><td>Checkout.com</td><td class="num">36,620<span class="bar"><i style="width:54.8%"></i></span></td><td class="num">6,377</td><td class="num">$170,467</td></tr>
+      <tr class="us"><td>NMI</td><td class="num">23,512<span class="bar"><i style="width:35.2%"></i></span></td><td class="num">1,382</td><td class="num">$130,405</td></tr>
+      <tr><td>Paysafe</td><td class="num">12,259<span class="bar"><i style="width:18.3%"></i></span></td><td class="num">1,746</td><td class="num">$68,431</td></tr>
+      <tr><td>Finix</td><td class="num">3,523<span class="bar"><i style="width:5.3%"></i></span></td><td class="num">538</td><td class="num">$27,424</td></tr>
+      <tr><td>Payrix</td><td class="num">650<span class="bar"><i style="width:1.0%"></i></span></td><td class="num">172</td><td class="num">$3,161</td></tr>
     </tbody>
   </table>
 
   <div class="call">
-    <p>NMI reaches 82 percent of Authorize.Net's keyword footprint and 46 percent of its US traffic, using 14 percent of the referring domains.</p>
-    <p>It also outranks Paysafe on traffic, keywords and value while holding roughly a third of the links.</p>
+    <p>Compare the two bars for NMI. The link profile sits at 8 percent of Adyen's. The US traffic sits at 35 percent.</p>
+    <p>Against Authorize.Net the same pattern holds. NMI reaches 46 percent of its US traffic and 82 percent of its keyword footprint from 14 percent of the referring domains.</p>
   </div>
 
-  <p>The practical read is that links land harder here than they do for the competition. NMI is not carrying dead weight in the profile, so an added domain has more room to contribute. That is unusual and it argues for building on what is already there rather than rebuilding it.</p>
+  <h3>Being straight about the Authority Score gap</h3>
+  <p>NMI scores 46 against 48 for Authorize.Net and 49 for Adyen. That looks like a short distance and it is worth being clear that it is not.</p>
+  <p>Authority Score is a logarithmic scale. Moving from 46 to 49 is not three units of work. It represents thousands of additional referring domains, and the higher the score the more each further point costs. Anyone who tells you the gap is nearly closed is reading the scale wrong.</p>
+  <p>The honest measure of distance is the link count itself. NMI holds roughly one eighth of Adyen's referring domains and one seventh of Authorize.Net's. That is the real gap and it is a multi year build, not a quarter of work.</p>
+
+  <div class="call">
+    <p>What makes the position winnable is not the score. It is that the pages ranking for the target terms carry between 1 and 14 referring domains each.</p>
+    <p>Individual results are decided at page level, where the bar is low and NMI already clears the domain level threshold. That is where a focused programme returns quickly, while the profile builds underneath it.</p>
+  </div>
 
   <h3>The one number that misleads</h3>
-  <p>NMI shows 22.8 million backlinks, second only to Stripe in this group and higher than Adyen by a factor of sixteen. That figure describes one thing, not many. It is the badge on merchant checkouts, repeated across millions of pages, and it comes from just 4,968 domains.</p>
+  <p>NMI shows 22.8 million backlinks, second only to Stripe in this group and sixteen times Adyen. That figure describes one thing rather than many. It is the badge sitting on merchant checkouts, repeated across millions of pages, and it comes from only 4,968 domains.</p>
 
   <div class="stats">
     <div class="stat"><div class="n">4,605</div><div class="l">Backlinks per referring domain at NMI</div></div>
@@ -201,14 +193,17 @@ footer b{color:var(--ink)}
     <div class="stat"><div class="n">70</div><div class="l">The same measure at Checkout.com</div></div>
   </div>
 
-  <p>Read the referring domain column, not the backlink column. Everything in this analysis works from the former.</p>
+  <p>Read the referring domain column and ignore the backlink column. Everything that follows works from the former.</p>
 
-  <p class="note">Authority Score from Semrush. Domain Rating, traffic, keyword and value figures from Ahrefs. Traffic value is a tool estimate of what the same visits would cost through paid search. A share of NMI's US traffic is branded and navigational, including logins, so the efficiency comparison is directional rather than exact.</p>
+  <h3>Who actually competes in the results</h3>
+  <p>Stripe, Adyen and Authorize.Net are the brands NMI competes with commercially. They are not always the pages it competes with in search. On the target terms the pages ranking above NMI include GoCardless, Adobe, Helcim, SVB, WEX and Wikipedia. Both sets matter, because the second decides rankings and the first decides how progress gets judged internally.</p>
+
+  <p class="note">Authority Score from Semrush. Domain Rating, traffic, keyword and value figures from Ahrefs. Traffic value estimates what the same visits would cost through paid search. A share of NMI's US traffic is branded and navigational, logins included, so the return per link comparison is directional rather than exact.</p>
 </section>
 
-<!-- 03 -->
-<section class="panel" role="tabpanel" id="p3" aria-labelledby="t3" tabindex="0" hidden>
-  <p class="snum">03 &nbsp;Quality</p>
+<!-- 02 -->
+<section class="panel" role="tabpanel" id="p2" aria-labelledby="t2" tabindex="0" hidden>
+  <p class="snum">02 &nbsp;Quality</p>
   <h2>The profile is proportionally cleaner than both competitors.</h2>
   <p class="lede">Benchmarked at Authority Score 30 and above, the point below which a link stops moving the metric, NMI's composition beats Adyen and Authorize.Net. There is simply less of it.</p>
 
@@ -243,9 +238,9 @@ footer b{color:var(--ink)}
   <p>That pattern is the powered by NMI badge sitting on merchant checkouts, counted millions of times over. It inflates the backlink number and contributes very little authority. We would advise against reporting on total backlinks for this account at all.</p>
 </section>
 
-<!-- 04 -->
-<section class="panel" role="tabpanel" id="p4" aria-labelledby="t4" tabindex="0" hidden>
-  <p class="snum">04 &nbsp;Risk</p>
+<!-- 03 -->
+<section class="panel" role="tabpanel" id="p3" aria-labelledby="t3" tabindex="0" hidden>
+  <p class="snum">03 &nbsp;Risk</p>
   <h2>An active spam network points at nmi.com today.</h2>
 
   <div class="stats">
@@ -275,9 +270,9 @@ footer b{color:var(--ink)}
   <p class="note">We have not measured penalty risk and we are not claiming any. That assessment belongs in a full audit.</p>
 </section>
 
-<!-- 05 -->
-<section class="panel" role="tabpanel" id="p5" aria-labelledby="t5" tabindex="0" hidden>
-  <p class="snum">05 &nbsp;Opportunity</p>
+<!-- 04 -->
+<section class="panel" role="tabpanel" id="p4" aria-labelledby="t4" tabindex="0" hidden>
+  <p class="snum">04 &nbsp;Opportunity</p>
   <h2>Every competitor holds developer links. NMI holds none.</h2>
   <p class="lede">NMI sells embedded payments to developers in the United States. Adyen, Authorize.Net, Checkout.com and Paysafe all carry links from package registries, integration directories, technology profilers and developer communities. NMI carries none of them.</p>
 
@@ -301,9 +296,9 @@ footer b{color:var(--ink)}
   <p>Beyond the developer set, the qualified pool breaks into payments and fintech peers, specialist trade press, and comparison and review sites. Each group is already demonstrably willing to link to companies in this category, which removes most of the guesswork from prospecting.</p>
 </section>
 
-<!-- 06 -->
-<section class="panel" role="tabpanel" id="p6" aria-labelledby="t6" tabindex="0" hidden>
-  <p class="snum">06 &nbsp;Targets</p>
+<!-- 05 -->
+<section class="panel" role="tabpanel" id="p5" aria-labelledby="t5" tabindex="0" hidden>
+  <p class="snum">05 &nbsp;Targets</p>
   <h2>Eight pages sit one push from page one.</h2>
   <p class="lede">The brief asks for links to product pages and the blog. The data is clear about the order those should come in.</p>
 
@@ -339,9 +334,9 @@ footer b{color:var(--ink)}
   <p><span class="tag">Payment facilitator</span><span class="tag">PayFac</span><span class="tag">White label payment gateway</span><span class="tag">Payment orchestration</span> Difficulty between 0 and 8, with cost per click between $11 and $25. This is the winnable middle, it carries the highest commercial value in the set, and NMI already has ranking pages for all four. The first ninety days should concentrate here.</p>
 </section>
 
-<!-- 07 -->
-<section class="panel" role="tabpanel" id="p7" aria-labelledby="t7" tabindex="0" hidden>
-  <p class="snum">07 &nbsp;Proposal</p>
+<!-- 06 -->
+<section class="panel" role="tabpanel" id="p6" aria-labelledby="t6" tabindex="0" hidden>
+  <p class="snum">06 &nbsp;Proposal</p>
   <h2>Four link types, one quality floor.</h2>
 
   <table>
@@ -350,7 +345,7 @@ footer b{color:var(--ink)}
       <tr><td class="num">01</td><td><strong>Fintech and payments trade press</strong></td><td class="num">30 to 60</td><td>Closes the AS 30 and above gap while carrying topical relevance, which is what these results reward</td></tr>
       <tr><td class="num">02</td><td><strong>Developer ecosystem and integration listings</strong></td><td class="num">30 to 55</td><td>Matches the buyer, competitors already hold them, low cost and qualified referral traffic</td></tr>
       <tr><td class="num">03</td><td><strong>Comparison, review and software directories</strong></td><td class="num">25 to 50</td><td>Commercial intent, so it converts as well as it ranks</td></tr>
-      <tr><td class="num">04</td><td><strong>Press built on original research</strong></td><td class="num">50 and above</td><td>Proven for this brand, and it gives Battenhall a press cycle to run</td></tr>
+      <tr><td class="num">04</td><td><strong>Press built on original research</strong></td><td class="num">50 and above</td><td>Proven for this brand, and it gives the wider communications programme a press cycle to run</td></tr>
     </tbody>
   </table>
 
@@ -375,7 +370,7 @@ footer b{color:var(--ink)}
       <p><strong>What we commit to</strong></p>
       <ul>
         <li>Editorial referring domains won each month, split by Authority Score band</li>
-        <li>Referring domains gained per target page against the map in section 06</li>
+        <li>Referring domains gained per target page against the map in section 05</li>
         <li>Position movement on the named target keywords</li>
       </ul>
     </div>
@@ -393,7 +388,7 @@ footer b{color:var(--ink)}
   <h3>What we would need to start</h3>
   <ul>
     <li>NMI's product pages ranked in commercial priority order</li>
-    <li>Agreement on who produces placement content, Battenhall or ourselves</li>
+    <li>Agreement on where production of placement content sits</li>
     <li>Any link history worth knowing about, including prior agencies, disavow files and manual actions</li>
     <li>Confirmation of target markets beyond the United States</li>
   </ul>
@@ -405,7 +400,7 @@ footer b{color:var(--ink)}
 </section>
 
 <footer>
-  <p><b>Prepared by SUSO Digital for Battenhall</b> &nbsp;&middot;&nbsp; August 2026<br>
+  <p><b>Link acquisition analysis prepared for NMI</b> &nbsp;&middot;&nbsp; August 2026<br>
   Metrics drawn from Semrush Authority Score and Ahrefs, pulled 31 August 2026. Traffic and traffic value figures are tool estimates and are quoted in US dollars.</p>
 </footer>
 

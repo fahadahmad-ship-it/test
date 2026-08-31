@@ -1,5 +1,5 @@
 # NMI — Backlink Snapshot
-### Prepared by SUSO Digital for Battenhall
+### Prepared by for Battenhall
 
 *A high-level read of NMI's link profile against Stripe, Adyen and Authorize.Net. All metrics are
 Semrush. This is a snapshot, not an audit — a full backlink audit is a separate engagement.*
