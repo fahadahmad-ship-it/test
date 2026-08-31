@@ -54,7 +54,10 @@ td{padding:13px 14px 13px 0;border-bottom:1px solid var(--line);vertical-align:t
 td:last-child,th:last-child{padding-right:0}
 tr.us td{background:rgba(255,34,81,.05);font-weight:700}
 tr.out td{color:var(--muted)}
-.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.num{font-variant-numeric:tabular-nums}
+.tscroll{overflow-x:auto;margin:28px 0}
+.tscroll table{margin:0;min-width:100%}
+th,td{overflow-wrap:anywhere}
 .bar{display:block;height:5px;background:#EFEFEF;margin-top:7px;min-width:96px}
 .bar i{display:block;height:100%;background:#B9B9B9}
 tr.us .bar{background:rgba(255,34,81,.16)}
@@ -112,7 +115,7 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
   <h2>Small profile, outsized return.</h2>
   <p class="point">NMI holds a fraction of the links its competitors do and converts them into far more traffic per link than any of them.</p>
 
-  <table>
+  <div class="tscroll"><table>
     <thead><tr><th>Domain</th><th class="num">Authority Score</th><th class="num">Referring domains</th><th class="num">US organic traffic</th><th class="num">Keywords</th></tr></thead>
     <tbody>
       <tr class="out"><td>Stripe</td><td class="num">79</td><td class="num">696,910</td><td class="num">1,628,443</td><td class="num">146,935</td></tr>
@@ -120,7 +123,7 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
       <tr><td>Authorize.Net</td><td class="num">48</td><td class="num">39,946<span class="bar"><i style="width:67.7%"></i></span></td><td class="num">51,161</td><td class="num">1,685</td></tr>
       <tr class="us"><td>NMI</td><td class="num">46</td><td class="num">4,968<span class="bar"><i style="width:8.4%"></i></span></td><td class="num">23,512</td><td class="num">1,382</td></tr>
     </tbody>
-  </table>
+  </table></div>
 
   <div class="call">
     <p>NMI reaches 46 percent of Authorize.Net's US traffic and 82 percent of its keyword footprint from one eighth of the referring domains.</p>
@@ -142,7 +145,7 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
   <p class="point">One is costing NMI links it has already paid for. The other is a live spam network pointed at the homepage.</p>
 
   <h3>One. More equity points at your old brands than at you</h3>
-  <table>
+  <div class="tscroll"><table>
     <thead><tr><th>Domain</th><th class="num">Referring domains</th></tr></thead>
     <tbody>
       <tr><td>usaepay.com</td><td class="num">2,081</td></tr>
@@ -153,8 +156,8 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
       <tr class="us"><td>Total pointing at absorbed brands</td><td class="num">5,202</td></tr>
       <tr><td>Pointing at nmi.com</td><td class="num">4,164</td></tr>
     </tbody>
-  </table>
-  <p>None of the five is consolidated and all still rank independently. Filtering to properties with real traffic, roughly 180 of them link to a legacy brand and not to NMI at all.</p>
+  </table></div>
+  <p>Four of the five still hold their own Google rankings, which means they are not redirecting to NMI and their link equity is not reaching it. Filtering to properties with real traffic, roughly 180 of them link to a legacy brand and not to NMI at all.</p>
   <div class="call">
     <p>That is roughly 180 quality referring domains recoverable through redirect mapping, with no prospecting and no outreach.</p>
   </div>
@@ -191,14 +194,14 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
   <h2>Three tiers, three different jobs.</h2>
   <p class="point">The industry terms you pointed us at behave in three distinct ways. Each needs a different move, and they run in sequence rather than together.</p>
 
-  <table>
+  <div class="tscroll"><table>
     <thead><tr><th>Tier</th><th>Terms</th><th class="num">Links on winning pages</th><th class="num">NMI today</th><th>When</th></tr></thead>
     <tbody>
       <tr class="us"><td><strong>One</strong></td><td>PayFac, embedded payments, white label payment gateway</td><td class="num">4 to 8.5</td><td class="num">Position 2 to 4</td><td>First quarter</td></tr>
       <tr><td><strong>Two</strong></td><td>Integrated payments, ISO and ISV, payments API, orchestration</td><td class="num">Low</td><td class="num">Partial positions</td><td>Second quarter</td></tr>
       <tr><td><strong>Three</strong></td><td>Payment processing, payment processor, payment gateway, merchant services</td><td class="num">44 to 58</td><td class="num">No ranking page yet</td><td>Build toward</td></tr>
     </tbody>
-  </table>
+  </table></div>
 
   <p>Tier one is the immediate opportunity. NMI already ranks between second and fourth on all three terms, and the pages beating it carry between four and eight referring domains. That is a handful of links, not a campaign.</p>
   <p>Tier three is where the volume sits, and it is held by incumbents whose ranking pages carry 44 to 58 referring domains against a top ten averaging a Domain Rating in the high eighties. Those terms need a page built and established before links have anything to lift.</p>
@@ -222,7 +225,7 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
 <section class="panel" role="tabpanel" id="p4" aria-labelledby="t4" tabindex="0" hidden>
   <p class="snum">04 &nbsp;Which pages</p>
   <h2>Your product pages do not need more links.</h2>
-  <p class="point">They need the blog to stop outranking them first. This is an offsite plan, so we flag that as a dependency rather than propose to do it.</p>
+  <p class="point">Several NMI pages compete against each other for the same terms, which changes where a link will move something and where it will not. This is an offsite plan, so we flag it rather than propose to resolve it.</p>
 
   <div class="call">
     <p>Adyen's flagship online payments page carries 49 referring domains. NMI's payments page carries 64 and its gateway page carries 66.</p>
@@ -231,12 +234,12 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
 
   <p>The clearest proof is inside NMI's own site. The ScanX underwriting page holds 313 referring domains and earns no organic traffic at all.</p>
 
-  <h3>What is actually happening</h3>
-  <p>The blog owns the commercial clusters the product pages should own. On white label terms the blog guide holds thirteen variants including the valuable ones, while the gateway product page is left with a single low volume term. Three NMI URLs share that one result. The same pattern repeats on text to pay, unattended payments, merchant onboarding and fraud, where six NMI URLs compete against each other on a single term.</p>
-  <p>Sending links at those product pages before resolving the overlap pushes against NMI's own internal competition.</p>
+  <h3>What the data shows</h3>
+  <p>On several commercial clusters, a blog page currently outranks the product page. On white label terms the blog guide holds thirteen variants including the valuable ones, while the gateway product page is left with a single low volume term. Three NMI URLs share that one result. The same pattern repeats on text to pay, unattended payments, merchant onboarding and fraud, where six NMI URLs compete against each other on a single term.</p>
+  <p>We cannot say from outside the site which page should own each term, and that is a decision for whoever owns the content. What we can say is that pointing links at a page while another NMI page outranks it for the same term is unlikely to be the efficient move, so we would sequence around it.</p>
 
   <h3>Product pages, in order</h3>
-  <table>
+  <div class="tscroll"><table>
     <thead><tr><th>Page</th><th class="num">Links now</th><th class="num">Target</th><th>What has to happen first</th></tr></thead>
     <tbody>
       <tr class="us"><td>Solutions. Mobile payments</td><td class="num">10</td><td class="num">30</td><td>Nothing. Correct intent, no overlap, ten keywords stuck between positions 3 and 9</td></tr>
@@ -246,10 +249,10 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
       <tr><td>Products. Text to pay</td><td class="num">1</td><td class="num">15</td><td>Merge the blog guide into it</td></tr>
       <tr><td>Solutions. In person payments</td><td class="num">10</td><td class="num">15</td><td>Retarget. It ranks 22nd for its own head term</td></tr>
     </tbody>
-  </table>
+  </table></div>
 
   <h3>Blog pages already within reach</h3>
-  <table>
+  <div class="tscroll"><table>
     <thead><tr><th>Page</th><th>Term</th><th class="num">Position</th><th class="num">Links now</th></tr></thead>
     <tbody>
       <tr class="us"><td>PayFacs and the payment facilitator model</td><td>payfac</td><td class="num">4</td><td class="num">4</td></tr>
@@ -257,7 +260,7 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
       <tr><td>Navigating the merchant onboarding process</td><td>merchant onboarding</td><td class="num">5</td><td class="num">1</td></tr>
       <tr><td>What are embedded payments</td><td>embedded payments</td><td class="num">2</td><td class="num">5</td></tr>
     </tbody>
-  </table>
+  </table></div>
   <p>Four pages, eleven referring domains between them, all sitting within a few links of the top three on terms NMI sells against.</p>
 
   <h3>Pages we would exclude from the link plan</h3>
@@ -278,7 +281,7 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
   <h2>Four formats work in payments. NMI has none of them.</h2>
   <p class="point">Rather than guess, we pulled the most linked pages across all three competitors and looked at what they actually are.</p>
 
-  <table>
+  <div class="tscroll"><table>
     <thead><tr><th>Format</th><th>Example</th><th class="num">Referring domains</th></tr></thead>
     <tbody>
       <tr><td><strong>Glossary and explainers</strong></td><td>Adyen, digital wallets</td><td class="num">1,176</td></tr>
@@ -287,14 +290,14 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
       <tr><td><strong>Developer documentation</strong></td><td>Adyen docs</td><td class="num">355</td></tr>
       <tr class="us"><td><strong>NMI's best content asset</strong></td><td>Blog, generative AI in payments</td><td class="num">143</td></tr>
     </tbody>
-  </table>
+  </table></div>
 
   <p>Two of those four cost almost nothing to produce. A clear diagram of a payment flow earned Authorize.Net 610 referring domains and has been cited for years. NMI has no page in any of these classes. Everything else in its most linked pages is the homepage, product pages and privacy URLs.</p>
 
   <h3>And the places your competitors are listed</h3>
   <p>We tested 74 named link targets across all three competitors. NMI holds 37, Adyen 47, Stripe 65. That leaves <strong>29 confirmed targets a direct competitor holds and NMI does not.</strong></p>
 
-  <table>
+  <div class="tscroll"><table>
     <thead><tr><th>Category</th><th class="num">Confirmed gaps</th><th>Examples</th></tr></thead>
     <tbody>
       <tr class="us"><td>Developer registries and documentation</td><td class="num">8</td><td>npm, NuGet, RubyGems, Postman, RapidAPI</td></tr>
@@ -305,7 +308,7 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
       <tr><td>Associations and standards</td><td class="num">3</td><td>EMVCo, Nacha, W3C</td></tr>
       <tr><td>Research and data citation</td><td class="num">1</td><td>Statista</td></tr>
     </tbody>
-  </table>
+  </table></div>
 
   <div class="call">
     <p>NMI sells embedded payments to developers, and is largely absent from the developer ecosystem its competitors sit inside.</p>
@@ -337,14 +340,14 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
   </ul>
 
   <h3>The tiers</h3>
-  <table>
+  <div class="tscroll"><table>
     <thead><tr><th>Tier</th><th>Job</th><th class="num">Authority Score</th><th class="num">Organic traffic</th><th>Share of mix</th></tr></thead>
     <tbody>
       <tr><td><strong>A</strong></td><td>Raise the domain ceiling</td><td class="num">60 and above</td><td class="num">250,000 and above</td><td>Smallest</td></tr>
       <tr class="us"><td><strong>B</strong></td><td>Move rankings on payments terms</td><td class="num">40 to 60</td><td class="num">25,000 and above</td><td>Largest</td></tr>
       <tr><td><strong>C</strong></td><td>Diversity and ecosystem presence</td><td class="num">30 to 45</td><td class="num">1,000 and above</td><td>Substantial</td></tr>
     </tbody>
-  </table>
+  </table></div>
 
   <h3>Tier A. Authority lift</h3>
   <p><strong>What it is.</strong> National business and technology press, major finance media, research and data platforms.</p>
@@ -371,7 +374,7 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
   <p>Not a prospecting list built from scratch. We compared NMI's live profile against all three competitors and isolated every domain that links to a competitor and not to NMI. That produced <strong>93 named domains</strong>, of which 78 are actionable.</p>
   <p>Relevance and willingness are already evidenced on every one of them, because a direct competitor in the same category already has the link.</p>
 
-  <table>
+  <div class="tscroll"><table>
     <thead><tr><th>How it is acquired</th><th class="num">Domains</th><th>What it involves</th></tr></thead>
     <tbody>
       <tr class="us"><td>Editorial outreach</td><td class="num">23</td><td>Payments and fintech trade press, developer publications, comparison sites. The core of the programme and the part we run end to end</td></tr>
@@ -381,7 +384,7 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
       <tr><td>Community participation</td><td class="num">5</td><td>Developer and founder communities. Earned by presence, not by pitching</td></tr>
       <tr class="out"><td>Not recommended</td><td class="num">15</td><td>Card networks, banks, language documentation and vendor partner pages. Competitors hold them through commercial relationships, not outreach</td></tr>
     </tbody>
-  </table>
+  </table></div>
 
   <div class="call">
     <p>That last row is the important one. Fifteen of the domains competitors hold are not acquirable by any agency, at any level of effort.</p>
@@ -390,7 +393,7 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
 
   <h3>Illustrative first quarter</h3>
   <p>Sequenced so the fastest and most relevant come first, and so early results are visible before the slower editorial work lands.</p>
-  <table>
+  <div class="tscroll"><table>
     <thead><tr><th>Month</th><th>Domain</th><th>Category</th><th>Route</th><th class="num">Authority Score</th></tr></thead>
     <tbody>
       <tr class="us"><td rowspan="4"><strong>One</strong></td><td>seeklogo.com</td><td>Brand asset directory</td><td>Product listing</td><td class="num">59</td></tr>
@@ -406,14 +409,14 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
       <tr><td>splitit.com</td><td>Payments peer</td><td>Partnership</td><td class="num">42</td></tr>
       <tr><td>recurly.com</td><td>Payments peer</td><td>Partnership</td><td class="num">40</td></tr>
     </tbody>
-  </table>
+  </table></div>
   <p>Every domain above is one a direct competitor already links from. The full list of 93, with category, route, traffic and which competitor holds each one, sits alongside this document.</p>
 
   <h3>Which of these you already have</h3>
   <p>A handful of strong payments and technology publications already link to NMI, including PYMNTS, Payments Dive, Fintech Futures, Practical Ecommerce, TechCrunch and Forbes. Those come out of the acquisition plan and go on a retention list instead, because losing an existing link costs the same as failing to win a new one and is far less visible.</p>
 
   <h3>Anchor split across the plan</h3>
-  <table>
+  <div class="tscroll"><table>
     <thead><tr><th>Anchor type</th><th class="num">Share of new links</th><th>Mainly from</th></tr></thead>
     <tbody>
       <tr class="us"><td>Branded</td><td class="num">45 to 55%</td><td>All tiers</td></tr>
@@ -422,7 +425,7 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
       <tr><td>Naked URL</td><td class="num">5 to 10%</td><td>Tier A</td></tr>
       <tr><td>Exact match commercial</td><td class="num">3% or less</td><td>Tier B only</td></tr>
     </tbody>
-  </table>
+  </table></div>
   <p>NMI's profile today is 9.8 percent branded against 32.3 percent pointing at the absorbed brands. The priority is restoring brand dominance rather than chasing commercial anchors, and since there is no exact match footprint to defend, the risk here is dilution rather than over optimisation.</p>
 
   <h3>What will not appear in the plan</h3>
@@ -455,14 +458,14 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
   <p>A payment flow diagram, the cheapest asset in the category. A PayFac and ISO glossary hub, since explainers are the most linked format across all three competitors and this is the cluster NMI can win outright. Developer documentation built to be cited. Original research each quarter, which NMI's own history supports, since the generative AI piece earned 143 referring domains without being built for that purpose.</p>
 
   <h3>Sequence</h3>
-  <table>
+  <div class="tscroll"><table>
     <thead><tr><th>Phase</th><th>Focus</th></tr></thead>
     <tbody>
       <tr><td><strong>First quarter</strong></td><td>Reclaim begins. Baseline set. Links to the mobile payments page and the two blog pages sitting at position 4. First diagram asset</td></tr>
       <tr><td><strong>Second quarter</strong></td><td>Developer registries and integration directories. Glossary hub live. Product page overlap resolved, then the gateway and text to pay pages funded</td></tr>
       <tr><td><strong>Second half</strong></td><td>Trade press, comparison sites and standards bodies. Quarterly research. Build toward the tier three head terms</td></tr>
     </tbody>
-  </table>
+  </table></div>
 
   <h3>What good looks like in twelve months</h3>
   <ul>
@@ -502,13 +505,13 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
   <h3>What we would need to start</h3>
   <ul>
     <li>Who owns on site changes, since the product page sequence depends on the overlap being resolved</li>
-    <li>Ownership of the five absorbed brand domains and whether redirects are possible</li>
+    <li>Ownership of the five absorbed brand domains, and whether redirecting them is commercially acceptable. Some may be worth keeping live as separate brands, which changes the size of this opportunity</li>
     <li>Your product pages in commercial priority order, to check against ours</li>
     <li>Any link history worth knowing, including prior agencies, disavow files and manual actions</li>
   </ul>
 
   <h3>What this plan covers</h3>
-  <table>
+  <div class="tscroll"><table>
     <thead><tr><th>Asked for</th><th>Where it sits</th></tr></thead>
     <tbody>
       <tr><td>Competitor position against Stripe, Adyen and Authorize.Net</td><td>Section 01</td></tr>
@@ -518,7 +521,7 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
       <tr><td>Analysis to guide strategy and focus</td><td>Sections 01 to 05</td></tr>
       <tr><td>The link plan itself</td><td>Section 06</td></tr>
     </tbody>
-  </table>
+  </table></div>
 
   <div class="call">
     <p>This is a snapshot rather than an audit.</p>
