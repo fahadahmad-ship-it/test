@@ -146,30 +146,23 @@ another slide of analysis.
 
 ## 6. Scope architecture (£5K vs £4K)
 
-**The honest lever between the two scopes is volume, not quality.** In US fintech/payments,
-dropping the DR floor to preserve a link count is how this account gets lost at month four.
-Both scopes should hold the same quality bar and flex on output.
+**Now built out in `02-scope-and-target-map.md`.** Decisions taken:
 
-| Workstream | £5,000/mo | £4,000/mo |
-|---|---|---|
-| Strategy, prospecting & target page mapping | Full | Full |
-| Editorial link acquisition — Tier A (high DR, high relevance) | Core volume | Reduced |
-| Editorial link acquisition — Tier B (mid DR, high relevance) | Core volume | Reduced |
-| Link magnet / data-led asset | 1 per quarter | 1 per 6 months |
-| Technical consolidation advisory (F2) | Included | Included |
-| Anchor & risk management | Included | Included |
-| Reporting & review call | Monthly | Monthly |
-| Battenhall liaison / reporting into client | Included | Included |
+- **D1 — Lead with striking distance.** ~70% of allocation to the positions 2–12 pages in the
+  first 90 days, ~30% thin relevance-led layer to product pages.
+- **D2 — Say so openly in the pitch.** We present the evidence for re-weighting the brief rather
+  than quietly deviating from it.
+- **D3 — Volumes come from the SUSO rate card**, not from benchmark assumptions. All volume cells
+  in the scope tables are currently blank.
+- **D4 — Content production ownership goes to Battenhall as an explicit question.** Both cost
+  models (SUSO produces / Battenhall produces) are drafted so we can price either.
 
-**Blocked on:** SUSO's rate card. I cannot fill in link volumes per tier until I know the current
-per-link cost bands and whether content production for placements sits with SUSO or Battenhall.
-See section 8.
+**The honest lever between the two scopes is volume and link-magnet cadence, not quality.** In US
+fintech/payments, dropping the DR floor to preserve a link count is how this account gets lost at
+month four.
 
-**Recommended framing for the £4K version:** present it as the same strategy at a slower cadence
-with a longer runway to the same KPIs — *not* as a cheaper, lighter product. That keeps the £5K
-option as the obvious choice without making £4K look like a compromise on quality.
-
----
+**Recommended framing for the £4K version:** the same strategy at a slower cadence with a longer
+runway to the same KPIs — *not* a cheaper, lighter product.
 
 ## 7. Things to challenge in the brief
 
