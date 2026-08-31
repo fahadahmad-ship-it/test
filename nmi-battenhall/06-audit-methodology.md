@@ -95,11 +95,11 @@ pool, disavow candidate file, target page map with link allocation, 60-minute wa
 
 | # | Item | Status |
 |---|---|---|
-| M1 | Exact count of RDs with 1,000+ traffic | **Blocked** — API caps exports at 250 rows; needs paginated pulls (~30 min) |
-| M2 | Exact size of the spam network | **Blocked** — same cap; 250+ confirmed, true figure unknown |
+| ~~M1~~ | ~~Exact count of RDs with 1,000+ traffic~~ | **RESOLVED — 783 of 4,164 (18.8%)**, via paginated banding |
+| ~~M2~~ | ~~Exact size of the spam network~~ | **RESOLVED — 851+ total, 327 at DR 30+**, of which only 12 have any traffic |
 | M3 | Typo-domain cluster ownership | **Blocked** — needs WHOIS/registrar check or a direct question to NMI |
 | M4 | Editorial vs footprint RD split (R1) | Open — required before any KPI is agreed |
 | M5 | Spam network impact assessment | Open — **do not claim penalty risk in the pitch without this** |
 
-M1 and M2 matter for the deck: **quote them as "250+" and "500+", not as precise figures**, until
-the paginated pull is done.
+M1 and M2 are now exact and safe to quote: **783 good links**, **327 DR 30+ spam domains**.
+The sub-DR-5 spam tail is still capped and should be quoted as "851+ total", not a precise figure.

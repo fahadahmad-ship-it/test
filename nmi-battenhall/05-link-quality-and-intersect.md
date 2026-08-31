@@ -33,61 +33,83 @@ and the realistic 12–24 month target at **2.4x**.
 ## 2. Traffic-based quality — "good" = 1,000+ monthly organic traffic
 
 Score alone does not settle whether a link is good. An AS 15 domain with real traffic is a real
-link; an AS 50 domain with zero traffic usually is not. Ahrefs figures, live links:
+link; an AS 50 domain with zero traffic usually is not. Ahrefs figures, live links, **exact counts
+via paginated banding** (the API caps any single export at 250 rows):
 
-| Segment | Count |
+| Traffic band | Referring domains |
 |---|---|
-| Total referring domains | **4,164** |
-| RDs with **22,637+** monthly organic traffic | **250** |
-| RDs with **1,000–22,636** monthly organic traffic | **250+** (export capped) |
-| **RDs with 1,000+ traffic — total** | **500+** ⚠️ true figure higher; API caps exports at 250 rows |
+| 22,637+ | 250 |
+| 4,516 – 22,636 | 250 |
+| 1,202 – 4,515 | 250 |
+| 1,000 – 1,201 | 33 |
+| **Total with 1,000+ traffic** | **783** |
+| Total referring domains | 4,164 |
+| **Good-link rate** | **18.8%** |
 
-⚠️ **Methodology note:** the Ahrefs MCP export caps at 250 rows per query, so 500+ is a floor, not
-a count. To quote an exact number in the deck we need paginated pulls — roughly 30 minutes of work.
-**Do not put "500" in the deck as if it were precise.** Either quote it as "500+" or get the exact
-figure first.
+**783 of NMI's 4,164 referring domains carry 1,000+ monthly organic traffic.** Figure is exact.
 
-Top of the good-link segment is genuinely strong: Wikipedia, Google, Apple, Adobe, GitHub,
-Forbes, Shopify, Salesforce, PCMag, Stack Overflow, Bloomberg, TechCrunch, Mastercard, Crunchbase,
-PYMNTS, Fintech Futures, Fintech Magazine, Payments Dive.
+Top of the segment is genuinely strong: Wikipedia, Google, Apple, Adobe, GitHub, Forbes, Shopify,
+Salesforce, PCMag, Stack Overflow, Bloomberg, TechCrunch, Mastercard, Crunchbase, PYMNTS,
+Fintech Futures, Fintech Magazine, Payments Dive.
 
-**Read:** NMI's *good* links are good. There just are not many of them relative to the profile
-size, and almost none point anywhere except the homepage (see `01-data-appendix.md` §C).
+**Read:** NMI's *good* links are good. There just are not many of them relative to profile size,
+and almost none point anywhere except the homepage (see `01-data-appendix.md` §C).
 
 ---
 
 ## 3. 🚩 Active spam link network — the significant finding
 
-Filtering NMI's referring domains to Ahrefs' spam flag returns **250+ domains (export capped)**.
-This is not historical noise. It is a live, ongoing network, and it validates exactly why score
-alone cannot be the filter.
+Filtering NMI's referring domains to Ahrefs' spam flag, banded by DR for exact counts:
+
+| DR band | Spam-flagged RDs |
+|---|---|
+| 40+ | 95 |
+| 33 – 39 | 27 |
+| 30 – 32 | 205 |
+| **DR 30+ subtotal** | **327** |
+| 20 – 29 | 97 |
+| 10 – 19 | 88 |
+| 5 – 9 | 89 |
+| Under 5 | 250+ (tail, still capped) |
+| **Total** | **851+** |
+
+This is not historical noise. It is a live, growing network.
 
 **The pattern:**
 
 | Cluster | Examples | DR | Traffic |
 |---|---|---|---|
-| Explicit link-selling domains | `buybacklinks.agency`, `backlinker.shop`, `buyseobacklinks.shop`, `pbnseolinks.shop`, `authoritybacklinks.shop`, `rankrisebacklinks.shop` | 53–73 | **0** |
-| "SEO Express" / "Link Baron" / "Outrank HQ" / "Rank Forge" `.store` network | `seoexpress-pbn-experts.store`, `master-rank-forge-pbn-league.store`, `link-baron-da-pa-luxury-directory.store`, `outrank-hq-dr-90-paramount-system.store` — **100+ domains** | 32 | **0** |
-| Directory network | `topbilliondirectory.com`, `rankfastdirectory.com`, `worldzonedirectory.com`, `mostrankingdirectory.com` | 46–54 | **0** |
+| Explicit link-selling domains | `buybacklinks.agency`, `backlinker.shop`, `buyseobacklinks.shop`, `pbnseolinks.shop`, `authoritybacklinks.shop` | 53–73 | **0** |
+| "SEO Express" / "Link Baron" / "Outrank HQ" / "Rank Forge" `.store` network | `seoexpress-pbn-experts.store`, `master-rank-forge-pbn-league.store`, `outrank-hq-dr-90-paramount-system.store` — **100+ domains** | 32 | **0** |
+| Directory network | `topbilliondirectory.com`, `rankfastdirectory.com`, `worldzonedirectory.com` | 46–54 | **0** |
 
-This connects directly to the Semrush anchor finding (`03-backlink-analysis-semrush.md` §4):
-the anchor `telegram @seo_anomaly - seo backlinks, black-links, traffic boost, link indexing`
-across 100 referring domains. **Same network.**
+Connects directly to the Semrush anchor finding (`03` §4): the anchor
+`telegram @seo_anomaly - seo backlinks, black-links, traffic boost, link indexing` across 100
+referring domains. **Same network.**
 
-### Why this is the single best pitch asset
+### 3a. The proof that score-only screening fails
 
-**Every one of these domains would pass a DR/AS filter. Almost none has any organic traffic.**
-DR 32–74, traffic 0. If NMI or Battenhall are screening links on Authority Score alone, this
-network is invisible to them — and it is currently pointing at nmi.com and growing.
+Of the **327 spam-flagged domains at DR 30+**:
 
-That is a concrete, checkable demonstration of exactly the methodology point SUSO is selling:
-**score plus traffic plus anchor, never score alone.**
+| | Count |
+|---|---|
+| Would pass a **DR 30+ filter** | **327** |
+| Of those, with **1,000+ monthly traffic** | **12** |
+| Of those 12, actually legitimate on inspection | ~8 (`pages.dev`, `web.app`, `brandfetch.com`, `prospeo.io` — hosting subdomains and real SaaS tools, i.e. false positives on the spam flag) |
+| **Removed by adding a traffic filter** | **315 (96%)** |
+
+> **A DR/AS 30+ filter passes all 327 of these domains. Adding "1,000+ organic traffic" removes
+> 315 of them.** That is the entire methodology argument, proven on the client's own data, in one
+> table.
+
+This is the strongest asset in the pitch. It is concrete, checkable in either tool in under a
+minute, and it demonstrates precisely why SUSO's screening model is not the same as a DR filter.
 
 ### What we do and do not say
-- **Do say:** it exists, roughly how large it is, that it is live, and that score-only screening
-  misses it.
-- **Do not say:** that it is causing a penalty, or that NMI needs an urgent disavow. We have not
-  assessed impact, and over-claiming here is how the pitch loses credibility.
+- **Do say:** it exists, that it is 327 domains at DR 30+, that it is live, and that score-only
+  screening cannot see it.
+- **Do not say:** that it is causing a penalty or that NMI needs an urgent disavow. We have not
+  assessed impact, and over-claiming is how the pitch loses credibility.
 - **Do not** hand over the domain list. That is the audit.
 
 ---
