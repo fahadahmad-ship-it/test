@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NMI Link Analysis and Proposal</title>
+<title>NMI Link Plan and Proposal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -20,14 +20,14 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font
 h1{font-size:clamp(36px,5.6vw,60px);line-height:1.04;font-weight:800;letter-spacing:-.033em;margin:0 0 24px;max-width:17ch}
 h1 em{font-style:normal;color:var(--accent)}
 .standfirst{font-size:20px;line-height:1.5;color:var(--muted);max-width:58ch;margin:0}
-.meta{margin-top:34px;padding-top:20px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:38px;
+.meta{margin-top:34px;padding-top:20px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:36px;
 font-family:var(--alt);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
 .meta b{display:block;color:var(--ink);font-weight:700;letter-spacing:.01em;text-transform:none;font-size:14.5px;margin-top:4px}
 .tabbar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:3px solid var(--ink);padding-top:6px}
 .tabbar .wrap{display:flex;overflow-x:auto;scrollbar-width:none}
 .tabbar .wrap::-webkit-scrollbar{display:none}
 .tab{appearance:none;background:none;border:0;cursor:pointer;white-space:nowrap;font-family:var(--alt);font-size:13px;
-font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding:16px 20px 14px;
+font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding:16px 22px 14px;
 border-bottom:3px solid transparent;margin-bottom:-3px;transition:color .15s}
 .tab:first-child{padding-left:0}
 .tab:hover{color:var(--ink)}
@@ -35,64 +35,58 @@ border-bottom:3px solid transparent;margin-bottom:-3px;transition:color .15s}
 .tab .idx{color:var(--accent);margin-right:8px;font-variant-numeric:tabular-nums}
 .tab.final{color:var(--accent)}
 .tab.final[aria-selected="true"]{color:var(--ink)}
-.panel{padding:60px 0 76px}
+.panel{padding:60px 0 78px}
 .panel[hidden]{display:none}
 .nojs .panel[hidden]{display:block}
 .snum{font-family:var(--alt);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
 h2{font-size:clamp(28px,3.6vw,40px);line-height:1.1;font-weight:800;letter-spacing:-.026em;margin:0 0 22px;max-width:20ch}
-h3{font-size:20px;font-weight:700;letter-spacing:-.011em;margin:44px 0 12px}
+h3{font-size:20px;font-weight:700;letter-spacing:-.011em;margin:46px 0 12px}
+h4{font-size:16.5px;font-weight:700;margin:30px 0 8px}
 p{margin:0 0 18px;max-width:66ch}
 .point{font-size:20px;line-height:1.5;font-weight:600;max-width:58ch;margin:0 0 30px;padding-left:18px;border-left:3px solid var(--accent)}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:34px 0}
-.stat{background:var(--bg);padding:28px 24px}
-.stat .n{font-size:44px;line-height:1;font-weight:800;letter-spacing:-.04em;color:var(--accent);margin-bottom:10px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:32px 0}
+.stat{background:var(--bg);padding:26px 24px}
+.stat .n{font-size:42px;line-height:1;font-weight:800;letter-spacing:-.04em;color:var(--accent);margin-bottom:10px}
 .stat .l{font-family:var(--alt);font-size:13px;line-height:1.4;color:var(--muted)}
-table{width:100%;border-collapse:collapse;margin:28px 0;font-size:15px}
+.tscroll{overflow-x:auto;margin:26px 0}
+table{width:100%;border-collapse:collapse;margin:0;font-size:14.5px;min-width:100%}
 th{text-align:left;font-family:var(--alt);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
 color:var(--muted);padding:0 14px 11px 0;border-bottom:2px solid var(--ink);vertical-align:bottom}
-td{padding:13px 14px 13px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td{padding:12px 14px 12px 0;border-bottom:1px solid var(--line);vertical-align:top}
 td:last-child,th:last-child{padding-right:0}
+th,td{overflow-wrap:break-word}
+.lbl{white-space:nowrap;width:1%}
 tr.us td{background:rgba(255,34,81,.05);font-weight:700}
 tr.out td{color:var(--muted)}
 .num{font-variant-numeric:tabular-nums}
-.tscroll{overflow-x:auto;margin:28px 0}
-.tscroll table{margin:0;min-width:100%}
-th,td{overflow-wrap:break-word}
-.lbl{white-space:nowrap;width:1%}
-th.lbl{white-space:nowrap}
-.bar{display:block;height:5px;background:#EFEFEF;margin-top:7px;min-width:96px}
-.bar i{display:block;height:100%;background:#B9B9B9}
-tr.us .bar{background:rgba(255,34,81,.16)}
-tr.us .bar i{background:var(--accent)}
-.call{border-left:4px solid var(--accent);padding:22px 0 22px 26px;margin:34px 0;background:var(--wash)}
+.call{border-left:4px solid var(--accent);padding:22px 0 22px 26px;margin:32px 0;background:var(--wash)}
 .call p{margin:0;font-size:18.5px;line-height:1.5;font-weight:600;max-width:56ch}
 .call p+p{margin-top:12px;font-size:16px;font-weight:400;color:var(--muted)}
-ul{margin:0 0 18px;padding-left:20px;max-width:66ch}
+ul,ol{margin:0 0 18px;padding-left:20px;max-width:66ch}
 li{margin-bottom:10px}
 li::marker{color:var(--accent)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:44px}
-.note{font-size:13.5px;color:var(--muted);max-width:64ch;margin-top:26px;padding-top:14px;border-top:1px solid var(--line)}
+.note{font-size:13.5px;color:var(--muted);max-width:64ch;margin-top:28px;padding-top:14px;border-top:1px solid var(--line)}
 footer{border-top:1px solid var(--line);padding:40px 0 70px;font-family:var(--alt);font-size:13px;color:var(--muted)}
 footer b{color:var(--ink)}
 @media(max-width:720px){.two{grid-template-columns:1fr;gap:0}.wrap{padding:0 22px}
-.hero{padding:46px 0 30px}.panel{padding:42px 0 54px}.tab{padding:14px 15px 12px;font-size:12px}}
+.hero{padding:46px 0 30px}.panel{padding:42px 0 56px}.tab{padding:14px 16px 12px;font-size:12px}}
 @media print{.tabbar{display:none}.panel[hidden]{display:block !important}
 .panel{padding:24px 0;break-before:page}.panel:first-of-type{break-before:auto}
-body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
+body{font-size:10.5pt}.stats,.tscroll,.call{break-inside:avoid}}
 </style>
 </head>
 <body class="nojs">
 
 <div class="wrap">
   <header class="hero">
-    <p class="eyebrow">Link acquisition analysis &nbsp;&middot;&nbsp; Prepared for NMI</p>
+    <p class="eyebrow">Link plan and proposal &nbsp;&middot;&nbsp; Prepared for NMI</p>
     <h1>A quarter of your link profile is spam, <em>and it is still growing.</em></h1>
-    <p class="standfirst">Roughly 1,170 of NMI's referring domains carry a spam flag, with around 170 more arriving every month, and nobody is watching it. Separately, around 180 publications already link to brands NMI owns and have never linked to NMI. Those are the warmest prospects in the plan.</p>
+    <p class="standfirst">Roughly 1,170 referring domains carry a spam flag, with around 170 more arriving every month and nobody watching. Separately, around 180 publications already link to brands NMI owns and have never linked to NMI. Those are the warmest prospects in this plan.</p>
     <div class="meta">
       <div>Scope<b>Offsite link acquisition</b></div>
       <div>Market<b>United States</b></div>
       <div>Link targets<b>Product pages and blog</b></div>
-      <div>Sources<b>Semrush and Ahrefs</b></div>
       <div>Data as of<b>August 2026</b></div>
     </div>
   </header>
@@ -100,45 +94,40 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
 
 <nav class="tabbar">
   <div class="wrap" role="tablist" aria-label="Sections">
-    <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true"><span class="idx">01</span>Position</button>
+    <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true"><span class="idx">01</span>Where you stand</button>
     <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false"><span class="idx">02</span>What we found</button>
-    <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false"><span class="idx">03</span>Where you win</button>
-    <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false"><span class="idx">04</span>Which pages</button>
-    <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false"><span class="idx">05</span>How links are earned</button>
-    <button class="tab final" role="tab" id="t6" aria-controls="p6" aria-selected="false"><span class="idx">06</span>The link plan</button>
-    <button class="tab final" role="tab" id="t7" aria-controls="p7" aria-selected="false"><span class="idx">07</span>Delivery</button>
+    <button class="tab final" role="tab" id="t3" aria-controls="p3" aria-selected="false"><span class="idx">03</span>The link plan</button>
+    <button class="tab final" role="tab" id="t4" aria-controls="p4" aria-selected="false"><span class="idx">04</span>Delivery</button>
   </div>
 </nav>
 
 <div class="wrap">
 
 <section class="panel" role="tabpanel" id="p1" aria-labelledby="t1" tabindex="0">
-  <p class="snum">01 &nbsp;Position</p>
-  <h2>Small profile, outsized return.</h2>
+  <p class="snum">01 &nbsp;Where you stand</p>
+  <h2>Smallest profile, largest return per link.</h2>
   <p class="point">NMI holds a fraction of the links its competitors do and converts them into far more traffic per link than any of them.</p>
 
   <div class="tscroll"><table>
     <thead><tr><th>Domain</th><th class="num">Authority Score</th><th class="num">Referring domains</th><th class="num">US organic traffic</th><th class="num">Keywords</th></tr></thead>
     <tbody>
       <tr class="out"><td>Stripe</td><td class="num">79</td><td class="num">696,910</td><td class="num">1,628,443</td><td class="num">146,935</td></tr>
-      <tr><td>Adyen</td><td class="num">49</td><td class="num">59,017<span class="bar"><i style="width:100%"></i></span></td><td class="num">66,860</td><td class="num">11,672</td></tr>
-      <tr><td>Authorize.Net</td><td class="num">48</td><td class="num">39,946<span class="bar"><i style="width:67.7%"></i></span></td><td class="num">51,161</td><td class="num">1,685</td></tr>
-      <tr class="us"><td>NMI</td><td class="num">46</td><td class="num">4,968<span class="bar"><i style="width:8.4%"></i></span></td><td class="num">23,512</td><td class="num">1,382</td></tr>
+      <tr><td>Adyen</td><td class="num">49</td><td class="num">59,017</td><td class="num">66,860</td><td class="num">11,672</td></tr>
+      <tr><td>Authorize.Net</td><td class="num">48</td><td class="num">39,946</td><td class="num">51,161</td><td class="num">1,685</td></tr>
+      <tr class="us"><td>NMI</td><td class="num">46</td><td class="num">4,968</td><td class="num">23,512</td><td class="num">1,382</td></tr>
     </tbody>
   </table></div>
 
   <div class="call">
     <p>NMI reaches 46 percent of Authorize.Net's US traffic and 82 percent of its keyword footprint from one eighth of the referring domains.</p>
+    <p>And the direction of travel favours you. Over the last twelve months NMI added 113 referring domains a month. Authorize.Net lost 315 a month, down 3,780 on the year, and has not recovered its October peak.</p>
   </div>
 
-  <h3>And the direction of travel favours you</h3>
-  <p>Over the last twelve months NMI added 113 referring domains a month, up 49.7 percent. Adyen added 244, up 4.7 percent. Authorize.Net lost 315 a month and is down 12.1 percent, having fallen from a peak of 31,842 last October to 27,361 without recovering.</p>
-
   <h3>Two things worth saying plainly</h3>
-  <p><strong>The Authority Score gap is wider than it looks.</strong> Three points between 46 and 49 is not three units of work. The scale is logarithmic, so it represents thousands of referring domains and each further point costs more than the last.</p>
-  <p><strong>Why this plan counts websites and not links.</strong> NMI's profile shows 22.8 million backlinks, which sounds enormous. They come from fewer than 5,000 websites. The NMI badge sits on merchant checkout pages, so it gets counted again on every page it appears on. To a search engine, one website linking a thousand times is still one website. Adyen averages 24 links per website. NMI averages 4,605. Every figure in this plan counts websites, because that is the number that moves rankings.</p>
+  <p><strong>The Authority Score gap is wider than it looks.</strong> Three points between 46 and 49 is not three units of work. The scale is logarithmic, so it represents thousands of referring domains and each further point costs more than the last. The score on its own makes the distance look far shorter than it is.</p>
+  <p><strong>Why this plan counts websites and not links.</strong> NMI's profile shows 22.8 million backlinks, which sounds enormous. They come from fewer than 5,000 websites. The NMI badge sits on merchant checkout pages, so it is counted again on every page it appears on. To a search engine, one website linking a thousand times is still one website. Adyen averages 24 links per website. NMI averages 4,605.</p>
 
-  <p class="note">Authority Score from Semrush. Traffic and keyword figures from Ahrefs. Bars scaled to Adyen. Stripe is shown for context and is not a realistic competitive target at any sensible level of investment.</p>
+  <p class="note">Authority Score from Semrush. Traffic and keyword figures from Ahrefs, United States. The two tools index differently, so Semrush reports 4,968 referring domains for NMI where Ahrefs reports 4,164. Every table states its source and no figure mixes the two. Stripe is shown for context and is not a realistic competitive target.</p>
 </section>
 
 <section class="panel" role="tabpanel" id="p2" aria-labelledby="t2" tabindex="0" hidden>
@@ -152,16 +141,8 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
     <div class="stat"><div class="n">327</div><div class="l">Of those at Domain Rating 30 or above</div></div>
     <div class="stat"><div class="n">12</div><div class="l">Of those 327 with any real traffic</div></div>
   </div>
-  <p>It is arriving at roughly 170 domains a month and 72 percent of it landed in 2026 alone. Around 95 percent points at the homepage, with smaller clusters on the EMV kernels page, the merchant relationship pages and the secure, support and go subdomains. Roughly 30 percent of recent arrivals are followed links.</p>
-
-  <h4>What it actually looks like</h4>
-  <p>Three distinct clusters, and none of them is subtle.</p>
-  <ul>
-    <li><strong>Domains that openly sell links.</strong> Names like buybacklinks.agency and pbnseolinks.shop, running at Domain Rating between 53 and 73 with no organic traffic at all.</li>
-    <li><strong>A single network of more than 100 domains</strong> on one commercial top level domain, every one at Domain Rating 32, every one with no traffic, with names assembled from the same handful of marketing words.</li>
-    <li><strong>A directory network</strong> at Domain Rating between 46 and 54, again with no traffic.</li>
-  </ul>
-  <p>The anchor text has moved through five generations since October 2025. The first advertised a link service through a Telegram handle across 100 referring domains. Later ones used fake testimonial copy, a second handle, guest post boilerplate, and most recently text offering premium backlinks. Each generation is keyed to a different NMI brand, including the absorbed ones, so whoever built it scraped the full portfolio rather than just the main domain.</p>
+  <p>Arriving at roughly 170 domains a month, with 72 percent of it landed in 2026 alone. Around 95 percent points at the homepage. Three clusters, none of them subtle: domains that openly sell links, running between Domain Rating 53 and 73 with no traffic at all; a single network of more than 100 domains on one commercial top level domain, every one at Domain Rating 32 with no traffic; and a directory network between 46 and 54.</p>
+  <p>The anchor text has moved through five generations since October 2025, each keyed to a different NMI brand including the absorbed ones, so whoever built it scraped the full portfolio.</p>
 
   <div class="call">
     <p>A filter set on authority alone passes all 327 of these domains. Adding a traffic threshold removes almost all of them.</p>
@@ -170,36 +151,39 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
 
   <h3>Two. Publications that link to brands you own, and never to you</h3>
   <p>NMI has absorbed USAePay, IRIS CRM, Creditcall, CRM Dialer and Agreement Express. Four of the five still run as live properties with their own rankings, which is a reasonable commercial decision and not one this plan questions.</p>
-  <p>What matters here is narrower. A set of publications links to one of those brands and has never linked to NMI.</p>
 
   <div class="call">
     <p>Creditcall alone earned coverage in American Banker, TechRadar, BetaNews and The Next Web. None of it points at NMI.</p>
-    <p>Those are the same publications section 06 targets. The difference is that NMI already has a relationship with each of them through a brand it owns, which turns a cold pitch into a warm one.</p>
+    <p>Those are the same publications this plan targets. The difference is that NMI already has a relationship with each of them through a brand it owns, which turns a cold pitch into a warm one.</p>
   </div>
 
-  <h4>How big it actually is</h4>
-  <p>The five domains hold 2,081, 962, 780, 693 and 686 referring domains respectively. Those totals overstate the opportunity and we would rather say so now.</p>
-  <ul>
-    <li><strong>They overlap.</strong> A site linking to two of the five is counted twice.</li>
-    <li><strong>Around half already link to NMI as well,</strong> so that portion is already in NMI's profile.</li>
-    <li><strong>Much of the remainder is the same kind of link we discount on nmi.com.</strong> Merchant checkout integrations and link shorteners rather than editorial coverage. One pet adoption site alone accounts for 205 links to USAePay.</li>
-  </ul>
-  <p>Filtered to properties with real traffic that do not already link to NMI, the usable list is <strong>roughly 180 domains</strong>. Smaller than the raw totals, and the warmest prospects in the entire plan.</p>
+  <p>The five domains hold 2,081, 962, 780, 693 and 686 referring domains. Those totals overstate the opportunity and we would rather say so. They overlap, around half already link to NMI as well, and much of the remainder is merchant checkout integration and link shorteners rather than editorial coverage. One pet adoption site alone accounts for 205 links to USAePay.</p>
+  <p>Filtered to properties with real traffic that do not already link to NMI, the usable list is <strong>roughly 180 domains.</strong> We are not proposing to redirect or retire those brand properties. That is a migration decision with merchant and support implications and it sits outside an offsite programme.</p>
 
-  <h4>What we are not proposing</h4>
-  <p>We are not proposing to redirect or retire those domains. That is a migration decision with merchant and support implications, it sits outside an offsite link programme, and NMI may well be running them deliberately. If consolidation is ever considered we can size what it would be worth, but it is not part of this plan.</p>
-
-  <h3>For balance, the good links are genuinely good</h3>
+  <h3>For balance, your good links are genuinely good</h3>
   <p>783 referring domains carry a thousand or more monthly organic visits, including Wikipedia, Adobe, GitHub, Forbes, Shopify, Salesforce, Bloomberg, Mastercard and PYMNTS. Roughly one in five. There are simply not many of them and almost all point at the homepage rather than at anything that sells.</p>
 
-  <p class="note">We have not assessed penalty risk and are not claiming any. Establishing whether the spam network is doing measurable harm is audit work, not snapshot work.</p>
+  <p class="note">We have not assessed penalty risk and are not claiming any. Establishing whether the spam network is doing measurable harm is audit work rather than snapshot work.</p>
 </section>
 
 <section class="panel" role="tabpanel" id="p3" aria-labelledby="t3" tabindex="0" hidden>
-  <p class="snum">03 &nbsp;Where you win</p>
-  <h2>Three tiers, three different jobs.</h2>
-  <p class="point">The industry terms you pointed us at behave in three distinct ways. Each needs a different move, and they run in sequence rather than together.</p>
+  <p class="snum">03 &nbsp;The link plan</p>
+  <h2>93 domains your competitors have and you do not.</h2>
 
+  <div class="tscroll"><table>
+    <tbody>
+      <tr><td class="lbl"><strong>Objective</strong></td><td>Top three on the terms NMI already ranks for, and the referring domain gap closed on four striking distance pages</td></tr>
+      <tr><td class="lbl"><strong>Market</strong></td><td>United States</td></tr>
+      <tr><td class="lbl"><strong>Link targets</strong></td><td>Product pages and blog</td></tr>
+      <tr><td class="lbl"><strong>Quality floor</strong></td><td>1,000 US organic visits, Authority Score 30, topical relevance, clean profile</td></tr>
+      <tr><td class="lbl"><strong>Tier mix</strong></td><td>Roughly 15 percent authority lift, 55 percent topical relevance, 30 percent ecosystem</td></tr>
+      <tr><td class="lbl"><strong>Initial term</strong></td><td>Six months, run in quarterly phases</td></tr>
+      <tr class="us"><td class="lbl"><strong>Target pool</strong></td><td>93 named domains a competitor already links from, of which 78 are actionable</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Where the links point</h3>
+  <p>The industry terms behave in three distinct ways, and each tier needs a different move.</p>
   <div class="tscroll"><table>
     <thead><tr><th class="lbl">Tier</th><th>Terms</th><th class="num">Links on winning pages</th><th class="num">NMI today</th><th class="num">When</th></tr></thead>
     <tbody>
@@ -208,56 +192,9 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
       <tr><td class="lbl"><strong>Three</strong></td><td>Payment processing, payment processor, payment gateway, merchant services</td><td class="num">44 to 58</td><td class="num">No ranking page yet</td><td class="num">Build toward</td></tr>
     </tbody>
   </table></div>
+  <p>Starting at tier one is not caution. Tier one compounds into tier three, because the middle terms share topical ground with the head terms and the authority earned winning them is the authority the head terms demand.</p>
 
-  <p>Tier one is the immediate opportunity. NMI already ranks between second and fourth on all three terms, and the pages beating it carry between four and eight referring domains. That is a handful of links, not a campaign.</p>
-  <p>Tier three is where the volume sits, and it is held by incumbents whose ranking pages carry 44 to 58 referring domains against a top ten averaging a Domain Rating in the high eighties. Those terms need a page built and established before links have anything to lift.</p>
-
-  <div class="call">
-    <p>Starting at tier one is not caution. Tier one compounds into tier three.</p>
-    <p>The middle terms share topical ground with the head terms, and the authority earned winning them is the same authority the head terms demand. The route to payment processing runs through payfac and embedded payments rather than around them.</p>
-  </div>
-
-  <h3>You already beat two of the three</h3>
-  <ul>
-    <li><strong>Embedded payments.</strong> NMI ranks second. Stripe is fourth. Adyen is ninth.</li>
-    <li><strong>White label payment gateway.</strong> NMI is fourth. Adyen is eighth.</li>
-    <li><strong>The whole ISO, ISV, PayFac and underwriting cluster.</strong> Authorize.Net holds only 1,445 US keywords, all legacy. It does not contest this territory, and it is the territory NMI sells into.</li>
-  </ul>
-  <p>These are positions to build from rather than ambitions to chase.</p>
-
-  <p class="note">Ahrefs SERP data, United States, organic top ten. Link counts are the median for pages ranking on each term. Merchant services is set aside on audience rather than difficulty, since its result carries a local pack and a bank bias.</p>
-</section>
-
-<section class="panel" role="tabpanel" id="p4" aria-labelledby="t4" tabindex="0" hidden>
-  <p class="snum">04 &nbsp;Which pages</p>
-  <h2>Your product pages do not need more links.</h2>
-  <p class="point">Several NMI pages compete against each other for the same terms, which changes where a link will move something and where it will not. This is an offsite plan, so we flag it rather than propose to resolve it.</p>
-
-  <div class="call">
-    <p>Adyen's flagship online payments page carries 49 referring domains. NMI's payments page carries 64 and its gateway page carries 66.</p>
-    <p>NMI's product pages already out link Adyen's. Volume is not the constraint.</p>
-  </div>
-
-  <p>The clearest proof is inside NMI's own site. The ScanX underwriting page holds 313 referring domains and earns no organic traffic at all.</p>
-
-  <h3>What the data shows</h3>
-  <p>On several commercial clusters, a blog page currently outranks the product page. On white label terms the blog guide holds thirteen variants including the valuable ones, while the gateway product page is left with a single low volume term. Three NMI URLs share that one result. The same pattern repeats on text to pay, unattended payments, merchant onboarding and fraud, where six NMI URLs compete against each other on a single term.</p>
-  <p>We cannot say from outside the site which page should own each term, and that is a decision for whoever owns the content. What we can say is that pointing links at a page while another NMI page outranks it for the same term is unlikely to be the efficient move, so we would sequence around it.</p>
-
-  <h3>Product pages, in order</h3>
-  <div class="tscroll"><table>
-    <thead><tr><th>Page</th><th class="num">Links now</th><th class="num">Target</th><th>What has to happen first</th></tr></thead>
-    <tbody>
-      <tr class="us"><td>Solutions. Mobile payments</td><td class="num">10</td><td class="num">30</td><td>Nothing. Correct intent, no overlap, ten keywords stuck between positions 3 and 9</td></tr>
-      <tr><td>Solutions. Unattended and self service</td><td class="num">14</td><td class="num">25</td><td>Consolidate the two competing blog posts</td></tr>
-      <tr><td>Solutions. Fraud defense suite</td><td class="num">9</td><td class="num">25</td><td>Retarget the page at the term it currently ranks 36th for</td></tr>
-      <tr><td>Products. Payment gateway</td><td class="num">66</td><td class="num">80</td><td>Resolve the white label overlap with the blog</td></tr>
-      <tr><td>Products. Text to pay</td><td class="num">1</td><td class="num">15</td><td>Merge the blog guide into it</td></tr>
-      <tr><td>Solutions. In person payments</td><td class="num">10</td><td class="num">15</td><td>Retarget. It ranks 22nd for its own head term</td></tr>
-    </tbody>
-  </table></div>
-
-  <h3>Blog pages already within reach</h3>
+  <h4>Blog pages, already within reach</h4>
   <div class="tscroll"><table>
     <thead><tr><th>Page</th><th>Term</th><th class="num">Position</th><th class="num">Links now</th></tr></thead>
     <tbody>
@@ -267,209 +204,99 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
       <tr><td>What are embedded payments</td><td>embedded payments</td><td class="num">2</td><td class="num">5</td></tr>
     </tbody>
   </table></div>
-  <p>Four pages, eleven referring domains between them, all sitting within a few links of the top three on terms NMI sells against.</p>
+  <p>Four pages, eleven referring domains between them, all within a few links of the top three.</p>
 
-  <h3>Pages we would exclude from the link plan</h3>
-  <ul>
-    <li><strong>Merchant Central and ScanX.</strong> 646 and 313 referring domains already. Keyword targeting and internal linking unlock more here than any link would.</li>
-    <li><strong>NMI Payments and Ecommerce payments.</strong> Both rank, but on brand terms. Resolving the internal competition frees them to rank commercially.</li>
-    <li><strong>Five solutions pages carrying no organic keywords.</strong> A content and indexation issue worth fixing, and one we would flag rather than bill against.</li>
-  </ul>
-  <p>We would rather tell you where a link does nothing than take the work and report movement that was never available.</p>
-  <div class="call">
-    <p>Everything in this section that is not a link recommendation is a flag, not a proposal.</p>
-    <p>The overlap resolution, the page retargeting and the indexation issues sit with whoever owns the site. We would document them, sequence around them, and tell you when a link is being held back by one of them.</p>
-  </div>
-</section>
-
-<section class="panel" role="tabpanel" id="p5" aria-labelledby="t5" tabindex="0" hidden>
-  <p class="snum">05 &nbsp;How links are earned</p>
-  <h2>Four formats work in payments. NMI has none of them.</h2>
-  <p class="point">Rather than guess, we pulled the most linked pages across all three competitors and looked at what they actually are.</p>
-
+  <h4>Product pages, in order</h4>
+  <p>Adyen's flagship online payments page carries 49 referring domains. NMI's payments page carries 64 and its gateway page 66. Volume is not the constraint, so these are sequenced by what unlocks them rather than by link count.</p>
   <div class="tscroll"><table>
-    <thead><tr><th>Format</th><th>Example</th><th class="num">Referring domains</th></tr></thead>
+    <thead><tr><th>Page</th><th class="num">Links now</th><th class="num">Target</th><th>What has to happen first</th></tr></thead>
     <tbody>
-      <tr><td><strong>Glossary and explainers</strong></td><td>Adyen, digital wallets</td><td class="num">1,176</td></tr>
-      <tr><td><strong>Simple process diagrams</strong></td><td>Authorize.Net, eCheck diagram</td><td class="num">610</td></tr>
-      <tr><td><strong>Public pricing pages</strong></td><td>Authorize.Net</td><td class="num">360</td></tr>
-      <tr><td><strong>Developer documentation</strong></td><td>Adyen docs</td><td class="num">355</td></tr>
-      <tr class="us"><td><strong>NMI's best content asset</strong></td><td>Blog, generative AI in payments</td><td class="num">143</td></tr>
+      <tr class="us"><td>Solutions. Mobile payments</td><td class="num">10</td><td class="num">30</td><td>Nothing. Correct intent, no overlap, ten keywords stuck between positions 3 and 9</td></tr>
+      <tr><td>Solutions. Unattended and self service</td><td class="num">14</td><td class="num">25</td><td>Two competing blog posts consolidated</td></tr>
+      <tr><td>Solutions. Fraud defense suite</td><td class="num">9</td><td class="num">25</td><td>Retargeted at the term it currently ranks 36th for</td></tr>
+      <tr><td>Products. Payment gateway</td><td class="num">66</td><td class="num">80</td><td>White label overlap with the blog resolved</td></tr>
+      <tr><td>Products. Text to pay</td><td class="num">1</td><td class="num">15</td><td>Blog guide merged into it</td></tr>
+      <tr><td>Solutions. In person payments</td><td class="num">10</td><td class="num">15</td><td>Retargeted. It ranks 22nd for its own head term</td></tr>
     </tbody>
   </table></div>
-
-  <p>Two of those four cost almost nothing to produce. A clear diagram of a payment flow earned Authorize.Net 610 referring domains and has been cited for years. NMI has no page in any of these classes. Everything else in its most linked pages is the homepage, product pages and privacy URLs.</p>
-
-  <h3>And the places your competitors are listed</h3>
-  <p>We tested 74 named link targets across all three competitors. NMI holds 37, Adyen 47, Stripe 65. That leaves <strong>29 confirmed targets a direct competitor holds and NMI does not.</strong></p>
-
-  <div class="tscroll"><table>
-    <thead><tr><th>Category</th><th class="num">Confirmed gaps</th><th>Examples</th></tr></thead>
-    <tbody>
-      <tr class="us"><td>Developer registries and documentation</td><td class="num">8</td><td>npm, NuGet, RubyGems, Postman, RapidAPI</td></tr>
-      <tr class="us"><td>Integration and app directories</td><td class="num">6</td><td>Make, Workato, n8n, Pipedream, HubSpot</td></tr>
-      <tr><td>Comparison and review sites</td><td class="num">4</td><td>Capterra, Merchant Maverick</td></tr>
-      <tr><td>Technology profilers</td><td class="num">4</td><td>BuiltWith, Wappalyzer, StackShare</td></tr>
-      <tr><td>Fintech and payments press</td><td class="num">3</td><td>Finextra, Digital Transactions, Tearsheet</td></tr>
-      <tr><td>Associations and standards</td><td class="num">3</td><td>EMVCo, Nacha, W3C</td></tr>
-      <tr><td>Research and data citation</td><td class="num">1</td><td>Statista</td></tr>
-    </tbody>
-  </table></div>
-
-  <div class="call">
-    <p>NMI sells embedded payments to developers, and is largely absent from the developer ecosystem its competitors sit inside.</p>
-    <p>These are earned through integration documentation, SDK listings and community presence, and they return qualified referral traffic alongside authority.</p>
-  </div>
-
-  <p class="note">The 29 are confirmed by direct check against each competitor. The wider pool behind them runs into the low hundreds, which is an estimate from the tested sample rather than a forecast.</p>
-</section>
-
-<section class="panel" role="tabpanel" id="p6" aria-labelledby="t6" tabindex="0" hidden>
-  <p class="snum">06 &nbsp;The link plan</p>
-  <h2>Three tiers, each doing a different job.</h2>
-  <p class="point">Every candidate clears traffic and relevance before authority is looked at. That order is deliberate, and section 02 shows why.</p>
-
-  <div class="tscroll"><table>
-    <thead><tr><th>Plan detail</th><th>Detail</th></tr></thead>
-    <tbody>
-      <tr><td class="lbl"><strong>Objective</strong></td><td>Top three on the tier one terms NMI already ranks for, and the referring domain gap closed on the four striking distance pages</td></tr>
-      <tr><td class="lbl"><strong>Market</strong></td><td>United States</td></tr>
-      <tr><td class="lbl"><strong>Link targets</strong></td><td>Product pages and blog, weighted by the map in section 04</td></tr>
-      <tr><td class="lbl"><strong>Link types</strong></td><td>Editorial outreach, product listing, partnership, digital PR, community</td></tr>
-      <tr><td class="lbl"><strong>Quality floor</strong></td><td>1,000 US organic visits, Authority Score 30, topical relevance, clean profile</td></tr>
-      <tr><td class="lbl"><strong>Initial term</strong></td><td>Six months, run in quarterly phases</td></tr>
-      <tr class="us"><td class="lbl"><strong>Target pool</strong></td><td>93 named domains a competitor already links from, of which 78 are actionable</td></tr>
-    </tbody>
-  </table></div>
-
-  <h3>How every domain is vetted</h3>
-  <p>Eleven checks per domain, applied in this order. Traffic comes first rather than last, because it is the check that catches networks passing on score. It is also the check that would have caught all 327 spam domains in section 02.</p>
-  <ul>
-    <li><strong>Organic traffic and where it comes from.</strong> A thousand monthly visits as the floor, weighted to the United States</li>
-    <li><strong>Traffic trend</strong> rather than the current figure alone</li>
-    <li><strong>Topical relevance</strong> to payments, fintech, ecommerce or developer tooling</li>
-    <li><strong>Link type.</strong> Followed and inside the main content only</li>
-    <li><strong>Authority Score,</strong> with 30 as the floor</li>
-    <li><strong>The referring domain profile of the site itself</strong></li>
-    <li><strong>Outbound link pattern</strong> and how many domains it links to</li>
-    <li><strong>Anchor text distribution</strong> across its existing outbound links</li>
-    <li><strong>Indexation status</strong> of the page the link will sit on</li>
-    <li><strong>Domain history</strong> and previous ownership</li>
-    <li><strong>Spam and blacklist signals,</strong> including the patterns identified in section 02</li>
-  </ul>
-
-  <h3>The tiers</h3>
-  <div class="tscroll"><table>
-    <thead><tr><th>Tier</th><th>Job</th><th class="num">Authority Score</th><th class="num">Organic traffic</th><th>Share of mix</th></tr></thead>
-    <tbody>
-      <tr><td><strong>A</strong></td><td>Raise the domain ceiling</td><td class="num">60 and above</td><td class="num">250,000 and above</td><td>Smallest</td></tr>
-      <tr class="us"><td><strong>B</strong></td><td>Move rankings on payments terms</td><td class="num">40 to 60</td><td class="num">25,000 and above</td><td>Largest</td></tr>
-      <tr><td><strong>C</strong></td><td>Diversity and ecosystem presence</td><td class="num">30 to 45</td><td class="num">1,000 and above</td><td>Substantial</td></tr>
-    </tbody>
-  </table></div>
-
-  <div class="tscroll"><table>
-    <thead><tr><th class="lbl">Tier</th><th>What it is</th><th>Why it is in the plan</th><th>Where it points</th><th>Anchor</th></tr></thead>
-    <tbody>
-      <tr><td class="lbl"><strong>A</strong></td><td>National business and technology press, major finance media, research and data platforms</td><td>Domain authority is what gates the tier three head terms, and page level links cannot buy it</td><td>Homepage and the glossary hub</td><td>Branded and naked URL</td></tr>
-      <tr class="us"><td class="lbl"><strong>B</strong></td><td>Payments and fintech trade press, ecommerce media, developer publications, industry analysts</td><td>The winnable terms are decided at page level on four to eight referring domains. This tier supplies them</td><td>The four blog pages in section 04 and the tier one keyword pages</td><td>Branded and partial match</td></tr>
-      <tr><td class="lbl"><strong>C</strong></td><td>Developer registries and documentation, integration and app directories, technology profilers, comparison sites, associations</td><td>29 of these are held by a competitor and not by NMI. They match the buyer and most are earned rather than bought</td><td>Product and solutions pages, developer documentation</td><td>Branded and navigational</td></tr>
-    </tbody>
-  </table></div>
-  <p>Tier B is the largest share and the engine of the programme. Tier A is the smallest, because those placements are the slowest to earn and a small number does the job. Tier C is substantial and the fastest to build.</p>
+  <p>Several NMI pages compete against each other for the same terms. We cannot say from outside the site which page should own each term, so we flag it and sequence around it rather than propose to fix it. Merchant Central and ScanX are excluded entirely: they hold 646 and 313 referring domains already and ScanX earns nothing from them.</p>
 
   <h3>Where the targets come from</h3>
-  <p>Not a prospecting list built from scratch. We compared NMI's live profile against all three competitors and isolated every domain that links to a competitor and not to NMI. That produced <strong>93 named domains</strong>, of which 78 are actionable.</p>
-  <p>Relevance and willingness are already evidenced on every one of them, because a direct competitor in the same category already has the link.</p>
-
+  <p>Not prospecting from scratch. We compared NMI's live profile against all three competitors and isolated every domain that links to a competitor and not to NMI. Relevance and willingness are evidenced on every one before we make contact.</p>
   <div class="tscroll"><table>
     <thead><tr><th>How it is acquired</th><th class="num">Domains</th><th>What it involves</th></tr></thead>
     <tbody>
-      <tr class="us"><td>Editorial outreach</td><td class="num">23</td><td>Payments and fintech trade press, developer publications, comparison sites. The core of the programme and the part we run end to end</td></tr>
-      <tr class="us"><td>Partnership or integration</td><td class="num">21</td><td>Payments peers and platform marketplaces. Earned by a listing or an integration, so it needs a nudge from your side rather than outreach from ours</td></tr>
-      <tr class="us"><td>Product listing</td><td class="num">18</td><td>Package registries, API directories, technology profilers, associations. Mostly free, and several need a package or listing published first</td></tr>
-      <tr><td>Digital PR with original data</td><td class="num">11</td><td>Research and business press. Earned only with data worth citing, which is why the research asset sits in the plan</td></tr>
+      <tr class="us"><td>Editorial outreach</td><td class="num">23</td><td>Payments and fintech trade press, developer publications, comparison sites. Run end to end by us</td></tr>
+      <tr class="us"><td>Partnership or integration</td><td class="num">21</td><td>Payments peers and platform marketplaces. Earned by a listing, so it needs a nudge from your side</td></tr>
+      <tr class="us"><td>Product listing</td><td class="num">18</td><td>Package registries, API directories, technology profilers. Mostly free, several need a package published first</td></tr>
+      <tr><td>Digital PR with original data</td><td class="num">11</td><td>Research and business press. Earned only with data worth citing</td></tr>
       <tr><td>Community participation</td><td class="num">5</td><td>Developer and founder communities. Earned by presence, not by pitching</td></tr>
-      <tr class="out"><td>Not recommended</td><td class="num">15</td><td>Card networks, banks, language documentation and vendor partner pages. Competitors hold them through commercial relationships, not outreach</td></tr>
+      <tr class="out"><td>Not recommended</td><td class="num">15</td><td>Card networks, banks, language documentation, vendor partner pages. Competitors hold these through commercial relationships, not outreach</td></tr>
     </tbody>
   </table></div>
-
   <div class="call">
     <p>That last row is the important one. Fifteen of the domains competitors hold are not acquirable by any agency, at any level of effort.</p>
-    <p>A plan that lists them to look impressive falls apart in the first month. We have separated them out so the target list is one you can actually hold us to.</p>
+    <p>A plan that lists them to look impressive falls apart in month one. We have separated them out so the target list is one you can hold us to.</p>
   </div>
 
   <h3>Sample links, first quarter</h3>
-  <p>Every domain below is one a direct competitor already links from, and every one has been run through the eleven checks. Sequenced so the fastest and most relevant land first.</p>
   <div class="tscroll"><table>
-    <thead><tr><th class="lbl">Month</th><th>Domain</th><th class="num">Authority Score</th><th class="num">US traffic</th><th class="num">Referring domains</th><th>Category</th><th>Route</th></tr></thead>
+    <thead><tr><th class="lbl">Month</th><th>Domain</th><th class="num">Authority Score</th><th class="num">US traffic</th><th class="num">Referring domains</th><th>Route</th></tr></thead>
     <tbody>
-      <tr class="us"><td class="lbl"><strong>One</strong></td><td>seeklogo.com</td><td class="num">59</td><td class="num">213,714</td><td class="num">33,446</td><td>Brand asset directory</td><td>Product listing</td></tr>
-      <tr class="us"><td class="lbl"></td><td>ecommercefastlane.com</td><td class="num">48</td><td class="num">2,428</td><td class="num">9,768</td><td>Ecommerce media</td><td>Editorial outreach</td></tr>
-      <tr class="us"><td class="lbl"></td><td>cocoapods.org</td><td class="num">46</td><td class="num">1,674</td><td class="num">8,694</td><td>Developer registry</td><td>Product listing</td></tr>
-      <tr class="us"><td class="lbl"></td><td>wappalyzer.com</td><td class="num">42</td><td class="num">2,724</td><td class="num">8,518</td><td>Technology profiler</td><td>Product listing</td></tr>
-      <tr><td class="lbl"><strong>Two</strong></td><td>retaildive.com</td><td class="num">55</td><td class="num">58,923</td><td class="num">32,776</td><td>Commerce trade press</td><td>Editorial outreach</td></tr>
-      <tr><td class="lbl"></td><td>sitepoint.com</td><td class="num">55</td><td class="num">44,225</td><td class="num">46,480</td><td>Developer publication</td><td>Editorial outreach</td></tr>
-      <tr><td class="lbl"></td><td>americanbanker.com</td><td class="num">49</td><td class="num">33,738</td><td class="num">28,001</td><td>Finance trade press</td><td>Warm, links to Creditcall</td></tr>
-      <tr><td class="lbl"></td><td>financemagnates.com</td><td class="num">43</td><td class="num">2,610</td><td class="num">24,922</td><td>Fintech trade press</td><td>Editorial outreach</td></tr>
-      <tr><td class="lbl"><strong>Three</strong></td><td>lightspeedhq.com</td><td class="num">49</td><td class="num">91,723</td><td class="num">39,760</td><td>Commerce platform</td><td>Partnership</td></tr>
-      <tr><td class="lbl"></td><td>indiehackers.com</td><td class="num">54</td><td class="num">61,509</td><td class="num">23,176</td><td>Developer community</td><td>Community</td></tr>
-      <tr><td class="lbl"></td><td>nayax.com</td><td class="num">43</td><td class="num">30,475</td><td class="num">4,856</td><td>Unattended payments peer</td><td>Partnership</td></tr>
-      <tr><td class="lbl"></td><td>altexsoft.com</td><td class="num">51</td><td class="num">30,346</td><td class="num">9,674</td><td>Technology content</td><td>Editorial outreach</td></tr>
+      <tr class="us"><td class="lbl"><strong>One</strong></td><td>seeklogo.com</td><td class="num">59</td><td class="num">213,714</td><td class="num">33,446</td><td>Product listing</td></tr>
+      <tr class="us"><td class="lbl"></td><td>ecommercefastlane.com</td><td class="num">48</td><td class="num">2,428</td><td class="num">9,768</td><td>Editorial outreach</td></tr>
+      <tr class="us"><td class="lbl"></td><td>cocoapods.org</td><td class="num">46</td><td class="num">1,674</td><td class="num">8,694</td><td>Product listing</td></tr>
+      <tr class="us"><td class="lbl"></td><td>wappalyzer.com</td><td class="num">42</td><td class="num">2,724</td><td class="num">8,518</td><td>Product listing</td></tr>
+      <tr><td class="lbl"><strong>Two</strong></td><td>retaildive.com</td><td class="num">55</td><td class="num">58,923</td><td class="num">32,776</td><td>Editorial outreach</td></tr>
+      <tr><td class="lbl"></td><td>sitepoint.com</td><td class="num">55</td><td class="num">44,225</td><td class="num">46,480</td><td>Editorial outreach</td></tr>
+      <tr><td class="lbl"></td><td>americanbanker.com</td><td class="num">49</td><td class="num">33,738</td><td class="num">28,001</td><td>Warm, links to Creditcall</td></tr>
+      <tr><td class="lbl"></td><td>financemagnates.com</td><td class="num">43</td><td class="num">2,610</td><td class="num">24,922</td><td>Editorial outreach</td></tr>
+      <tr><td class="lbl"><strong>Three</strong></td><td>lightspeedhq.com</td><td class="num">49</td><td class="num">91,723</td><td class="num">39,760</td><td>Partnership</td></tr>
+      <tr><td class="lbl"></td><td>indiehackers.com</td><td class="num">54</td><td class="num">61,509</td><td class="num">23,176</td><td>Community</td></tr>
+      <tr><td class="lbl"></td><td>altexsoft.com</td><td class="num">51</td><td class="num">30,346</td><td class="num">9,674</td><td>Editorial outreach</td></tr>
+      <tr><td class="lbl"></td><td>nayax.com</td><td class="num">43</td><td class="num">30,475</td><td class="num">4,856</td><td>Partnership</td></tr>
     </tbody>
   </table></div>
-  <p>Also qualified and held for later phases: The Next Web at Authority Score 50, Splitit at 42, BetaNews at 44 and Recurly at 40. The Next Web and BetaNews both already link to Creditcall, so they join American Banker on the warm list.</p>
+  <p>Also qualified and held for later phases: The Next Web at 50, BetaNews at 44, Splitit at 42 and Recurly at 40. The Next Web and BetaNews both already link to Creditcall, so they join American Banker on the warm list.</p>
 
   <h4>Two we rejected, and why</h4>
-  <p>Both of these are held by all three competitors and both look reasonable on authority. Neither survived the traffic check.</p>
   <div class="tscroll"><table>
-    <thead><tr><th>Domain</th><th class="num">Authority Score</th><th class="num">US organic traffic</th><th class="num">Referring domains</th><th>Why it was rejected</th></tr></thead>
+    <thead><tr><th>Domain</th><th class="num">Authority Score</th><th class="num">US traffic</th><th>Why it was rejected</th></tr></thead>
     <tbody>
-      <tr class="out"><td>paymentsindustryintelligence.com</td><td class="num">33</td><td class="num">312</td><td class="num">4,215</td><td>Below the US traffic floor despite strong topical fit</td></tr>
-      <tr class="out"><td>merchantmachine.co.uk</td><td class="num">29</td><td class="num">93</td><td class="num">2,738</td><td>Below the floor and weighted to the United Kingdom, not the target market</td></tr>
+      <tr class="out"><td>paymentsindustryintelligence.com</td><td class="num">33</td><td class="num">312</td><td>Below the traffic floor despite strong topical fit</td></tr>
+      <tr class="out"><td>merchantmachine.co.uk</td><td class="num">29</td><td class="num">93</td><td>Below the floor and weighted to the United Kingdom</td></tr>
     </tbody>
   </table></div>
-  <p>We have left these in the document deliberately. A plan that only shows what passed tells you nothing about the standard being applied.</p>
+  <p>Both are held by all three competitors and both look respectable on authority, which is exactly why a score only filter passes them. A plan that shows only what passed tells you nothing about the standard being applied.</p>
 
-  <p>The full list of 93 domains, with category, route, traffic and which competitor holds each one, sits alongside this document.</p>
-
-  <h3>Which of these you already have</h3>
-  <p>A handful of strong payments and technology publications already link to NMI, including PYMNTS, Payments Dive, Fintech Futures, Practical Ecommerce, TechCrunch and Forbes. Those come out of the acquisition plan and go on a retention list instead, because losing an existing link costs the same as failing to win a new one and is far less visible.</p>
-
-  <h3>Anchor split across the plan</h3>
-  <div class="tscroll"><table>
-    <thead><tr><th>Anchor type</th><th class="num">Share of new links</th><th>Mainly from</th></tr></thead>
-    <tbody>
-      <tr class="us"><td>Branded</td><td class="num">45 to 55%</td><td>All tiers</td></tr>
-      <tr><td>Partial match</td><td class="num">20 to 25%</td><td>Tier B</td></tr>
-      <tr><td>Generic and navigational</td><td class="num">10 to 15%</td><td>Tier C</td></tr>
-      <tr><td>Naked URL</td><td class="num">5 to 10%</td><td>Tier A</td></tr>
-      <tr><td>Exact match commercial</td><td class="num">3% or less</td><td>Tier B only</td></tr>
-    </tbody>
-  </table></div>
-  <p>NMI's profile today is 9.8 percent branded against 32.3 percent pointing at the absorbed brands. The priority is restoring brand dominance rather than chasing commercial anchors, and since there is no exact match footprint to defend, the risk here is dilution rather than over optimisation.</p>
-
-  <h3>How a month runs</h3>
+  <h3>How every domain is vetted</h3>
+  <p>Eleven checks, in this order. Traffic comes first rather than last, because it is the check that catches networks passing on score.</p>
   <ol>
-    <li>Prospect against the intersect pool and refresh it as competitor profiles move</li>
-    <li>Vet each candidate against the eleven checks and discard what fails</li>
-    <li>Agree the target page and anchor for each placement before outreach begins</li>
-    <li>Outreach, placement and quality check on the live link</li>
-    <li>Verify indexation and monitor persistence on everything placed to date</li>
-    <li>Report, including what was rejected and why</li>
+    <li>Organic traffic and where it comes from</li>
+    <li>Traffic trend rather than the current figure alone</li>
+    <li>Topical relevance to payments, fintech, ecommerce or developer tooling</li>
+    <li>Link type. Followed and inside the main content only</li>
+    <li>Authority Score, with 30 as the floor</li>
+    <li>The referring domain profile of the site itself</li>
+    <li>Outbound link pattern and how many domains it links to</li>
+    <li>Anchor text distribution across its existing outbound links</li>
+    <li>Indexation status of the page the link will sit on</li>
+    <li>Domain history and previous ownership</li>
+    <li>Spam and blacklist signals, including the patterns in section 02</li>
   </ol>
 
-  <h3>What to expect, and what we will not promise</h3>
-  <p>The forecast is built from the measured link gap on named pages rather than from a click through assumption, because the gaps are small enough to be specific about.</p>
+  <h3>Anchor split</h3>
   <div class="tscroll"><table>
-    <thead><tr><th class="lbl">By</th><th>Expected</th></tr></thead>
+    <thead><tr><th>Anchor type</th><th class="num">Today</th><th class="num">Target for new links</th></tr></thead>
     <tbody>
-      <tr><td class="lbl"><strong>Quarter one</strong></td><td>Referring domain gaps closed on the four striking distance pages. Movement expected first on payfac and white label payment gateway, both at position 4 against a measured bar of 4 to 8.5 links</td></tr>
-      <tr class="us"><td class="lbl"><strong>Quarter two</strong></td><td>Top three on the tier one terms. Tier two pages entering positions 4 to 10. Mobile payments moving on its ten stuck keywords</td></tr>
-      <tr><td class="lbl"><strong>Month twelve</strong></td><td>Tier one held, tier two converted, roughly 180 reclaimed domains consolidated, and the spam baseline shrinking rather than growing</td></tr>
+      <tr class="us"><td>Branded</td><td class="num">9.8%</td><td class="num">45 to 55%</td></tr>
+      <tr><td>Partial match</td><td class="num">1.5%</td><td class="num">20 to 25%</td></tr>
+      <tr><td>Generic and navigational</td><td class="num">5.6%</td><td class="num">10 to 15%</td></tr>
+      <tr><td>Naked URL</td><td class="num">24.6%</td><td class="num">5 to 10%</td></tr>
+      <tr><td>Exact match commercial</td><td class="num">Effectively 0%</td><td class="num">3% or less</td></tr>
     </tbody>
   </table></div>
-  <p><strong>We will not forecast a site wide organic traffic percentage.</strong> Login and brand queries account for a large share of NMI's traffic, and AI Overviews appear on seven of the eight priority terms, so any headline percentage would be a number chosen to look good rather than one we could stand behind. Page level movement on named terms is measurable and is what we would be held to.</p>
+  <p>NMI's own brand accounts for under a tenth of its anchors while absorbed brands account for nearly a third. The priority is restoring brand dominance, not chasing commercial anchors. There is no exact match footprint to defend, so the risk here is dilution rather than over optimisation.</p>
 
   <h3>What will not appear in the plan</h3>
   <ul>
@@ -477,56 +304,43 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
     <li>Any domain with no organic traffic, whatever its authority score reads</li>
     <li>Sitewide, footer or template placements. NMI already has 22.8 million of those</li>
     <li>Thin directories and generic listing pages with no rankings of their own</li>
-    <li>Automatically generated or low quality content sites</li>
-    <li>Anything matching the pattern clusters identified in section 02</li>
     <li>Domains we cannot realistically acquire, listed to inflate the plan</li>
   </ul>
 
-  <p class="note">Domains and status are drawn from our own comparison of NMI's live profile against the three named competitors, using Ahrefs and Semrush. Tier thresholds are the standard we would hold rather than a description of what is easy to source. Every candidate is vetted individually against the eleven checks above before it reaches a target list.</p>
+  <p class="note">The full list of 93 domains, with category, route, traffic and which competitor holds each one, sits alongside this document.</p>
 </section>
 
-<section class="panel" role="tabpanel" id="p7" aria-labelledby="t7" tabindex="0" hidden>
-  <p class="snum">07 &nbsp;Delivery</p>
-  <h2>Three workstreams. The first needs no outreach.</h2>
+<section class="panel" role="tabpanel" id="p4" aria-labelledby="t4" tabindex="0" hidden>
+  <p class="snum">04 &nbsp;Delivery</p>
+  <h2>Reclaim first, then build.</h2>
 
-  <h3>One. Reclaim before acquiring</h3>
-  <p>Three pieces of work that need no new prospecting.</p>
-  <ul>
-    <li><strong>Warm outreach to the roughly 180 publications</strong> that link to a brand NMI owns and have never linked to NMI. An existing relationship, a natural reason to make contact, and no cold pitch.</li>
-    <li><strong>Lost link reclamation.</strong> Referring domains decay continuously across a profile of this age, and a quarterly pass recovers what can be recovered.</li>
-    <li><strong>Spam disavow</strong> in banded batches, starting with recent followed placements, measured before and after.</li>
-  </ul>
-  <p>Two further items sit on the site and outside this plan, so we flag them rather than propose them. The duplicate privacy pages holding around 1,900 referring domains across five versions, and any decision about consolidating the absorbed brand domains.</p>
-  <p>This is the cheapest work in the programme and it runs first.</p>
+  <h3>Three workstreams</h3>
+  <p><strong>One. Reclaim before acquiring.</strong> Warm outreach to the roughly 180 publications that link to a brand NMI owns and have never linked to NMI. Lost link reclamation on a quarterly pass. Spam disavow in banded batches, measured before and after. Two further items sit on the site and outside this plan, so we flag rather than propose them: the duplicate privacy pages holding around 1,900 referring domains across five versions, and any decision about the absorbed brand domains.</p>
+  <p><strong>Two. Build against proven targets.</strong> The 78 actionable domains, prioritised by route. Developer registries and integration directories first, because they match who NMI sells to and cost the least to earn.</p>
+  <p><strong>Three. Earn with the formats that work here.</strong> A payment flow diagram, the cheapest asset in the category and one a competitor equivalent holds 610 referring domains from. A PayFac and ISO glossary hub, since explainers are the most linked format across all three competitors. Original research each quarter, which NMI's own history supports since the generative AI piece earned 143 referring domains without being built for it.</p>
 
-  <h3>Two. Build against proven targets</h3>
-  <p>Not prospecting from scratch. The 29 confirmed gaps are places a direct competitor already holds a link, so relevance and willingness are evidenced before we make contact. Developer registries and integration directories come first because they match who NMI sells to.</p>
-  <p><strong>Every prospect clears four gates.</strong> Real organic traffic, which is the primary filter because it is the one that catches networks passing on score. Topical relevance. A clean outbound profile. Then authority score, as the last check rather than the first.</p>
+  <h3>How a month runs</h3>
+  <ol>
+    <li>Prospect against the intersect pool and refresh it as competitor profiles move</li>
+    <li>Vet each candidate against the eleven checks and discard what fails</li>
+    <li>Agree the target page and anchor before outreach begins</li>
+    <li>Outreach, placement and quality check on the live link</li>
+    <li>Verify indexation and monitor persistence on everything placed to date</li>
+    <li>Report, including what was rejected and why</li>
+  </ol>
 
-  <h3>Three. Earn links with the formats that work</h3>
-  <p>A payment flow diagram, the cheapest asset in the category. A PayFac and ISO glossary hub, since explainers are the most linked format across all three competitors and this is the cluster NMI can win outright. Developer documentation built to be cited. Original research each quarter, which NMI's own history supports, since the generative AI piece earned 143 referring domains without being built for that purpose.</p>
-
-  <h3>Sequence</h3>
+  <h3>What to expect</h3>
   <div class="tscroll"><table>
-    <thead><tr><th>Phase</th><th>Focus</th></tr></thead>
+    <thead><tr><th class="lbl">By</th><th>Expected</th></tr></thead>
     <tbody>
-      <tr><td><strong>First quarter</strong></td><td>Reclaim begins. Baseline set. Links to the mobile payments page and the two blog pages sitting at position 4. First diagram asset</td></tr>
-      <tr><td><strong>Second quarter</strong></td><td>Developer registries and integration directories. Glossary hub live. Product page overlap resolved, then the gateway and text to pay pages funded</td></tr>
-      <tr><td><strong>Second half</strong></td><td>Trade press, comparison sites and standards bodies. Quarterly research. Build toward the tier three head terms</td></tr>
+      <tr><td class="lbl"><strong>Quarter one</strong></td><td>Referring domain gaps closed on the four blog pages. Movement first on payfac and white label payment gateway, both at position 4 against a measured bar of 4 to 8.5 links</td></tr>
+      <tr class="us"><td class="lbl"><strong>Quarter two</strong></td><td>Top three on the tier one terms. Tier two pages entering positions 4 to 10. Mobile payments moving on its ten stuck keywords</td></tr>
+      <tr><td class="lbl"><strong>Month twelve</strong></td><td>Tier one held, tier two converted, roughly 180 warm domains worked through, and the spam baseline shrinking rather than growing</td></tr>
     </tbody>
   </table></div>
+  <p><strong>We will not forecast a site wide traffic percentage.</strong> Login and brand queries account for a large share of NMI's traffic, and AI Overviews appear on seven of the eight priority terms, so any headline number would be chosen to look good rather than defended. Page level movement on named terms is measurable and is what we would be held to.</p>
 
-  <h3>What good looks like in twelve months</h3>
-  <ul>
-    <li>Top three on payfac and white label payment gateway, both currently fourth with the bar within reach</li>
-    <li>First place defended on embedded payments, where NMI already leads Stripe and Adyen</li>
-    <li>Mobile payments, unattended and fraud ranking on their own head terms rather than on variants</li>
-    <li>Roughly 180 quality referring domains reclaimed and the absorbed brand equity consolidated</li>
-    <li>The spam baseline documented and shrinking rather than growing</li>
-    <li>A first set of citable assets live, on the formats that demonstrably earn links here</li>
-  </ul>
-
-  <h3>How we would measure it</h3>
+  <h3>Measurement</h3>
   <div class="two">
     <div>
       <p><strong>What we report</strong></p>
@@ -546,10 +360,10 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
       </ul>
     </div>
   </div>
-  <p>Before month one we would set a baseline separating editorially earned domains from the badge footprint and the spam. Without that split the programme gets measured against movement it did not create.</p>
+  <p>Before month one we would set a baseline separating editorially earned domains from the badge footprint and the spam, so the programme is not measured against movement it did not create.</p>
 
   <h3>Why this starts now</h3>
-  <p>The spam network adds roughly 500 domains a quarter, so every quarter of delay is more to assess against a baseline that gets harder to read. Authorize.Net is down 3,780 referring domains year on year and has not recovered its October peak, and a gap closes fastest while a competitor is weak. Link equity decays continuously, so the roughly 180 recoverable domains are worth more now than in twelve months.</p>
+  <p>The spam network adds roughly 500 domains a quarter, so every quarter of delay is more to assess against a baseline that gets harder to read. Authorize.Net is down 3,780 referring domains on the year and has not recovered its peak, and a gap closes fastest while a competitor is weak. Link equity decays continuously, so the warm list is worth more now than in twelve months.</p>
 
   <h3>What we would need to start</h3>
   <ul>
@@ -559,27 +373,14 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
     <li>Any link history worth knowing, including prior agencies, disavow files and manual actions</li>
   </ul>
 
-  <h3>What this plan covers</h3>
-  <div class="tscroll"><table>
-    <thead><tr><th>Asked for</th><th>Where it sits</th></tr></thead>
-    <tbody>
-      <tr><td>Competitor position against Stripe, Adyen and Authorize.Net</td><td>Section 01</td></tr>
-      <tr><td>Industry terms including payment processing and embedded payments</td><td>Section 03</td></tr>
-      <tr><td>Links to product pages</td><td>Section 04</td></tr>
-      <tr><td>Links to the blog</td><td>Section 04</td></tr>
-      <tr><td>Analysis to guide strategy and focus</td><td>Sections 01 to 05</td></tr>
-      <tr><td>The link plan itself</td><td>Section 06</td></tr>
-    </tbody>
-  </table></div>
-
   <div class="call">
     <p>This is a snapshot rather than an audit.</p>
-    <p>The full anchor and toxicity review, the spam network domain by domain, a disavow file, the complete prospect pool and the redirect mapping project sit in a separate piece of work.</p>
+    <p>The full anchor and toxicity review, the spam network domain by domain, a disavow file and the complete prospect pool sit in a separate piece of work.</p>
   </div>
 </section>
 
 <footer>
-  <p><b>Link acquisition analysis prepared for NMI</b> &nbsp;&middot;&nbsp; August 2026<br>
+  <p><b>Link plan and proposal prepared for NMI</b> &nbsp;&middot;&nbsp; August 2026<br>
   Authority Score from Semrush. Referring domains, traffic, keywords, anchors and spam flags from Ahrefs, live links, accurate as at 31 August 2026. Traffic figures are tool estimates.</p>
 </footer>
 
