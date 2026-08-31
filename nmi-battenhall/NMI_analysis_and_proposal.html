@@ -57,7 +57,9 @@ tr.out td{color:var(--muted)}
 .num{font-variant-numeric:tabular-nums}
 .tscroll{overflow-x:auto;margin:28px 0}
 .tscroll table{margin:0;min-width:100%}
-th,td{overflow-wrap:anywhere}
+th,td{overflow-wrap:break-word}
+.lbl{white-space:nowrap;width:1%}
+th.lbl{white-space:nowrap}
 .bar{display:block;height:5px;background:#EFEFEF;margin-top:7px;min-width:96px}
 .bar i{display:block;height:100%;background:#B9B9B9}
 tr.us .bar{background:rgba(255,34,81,.16)}
@@ -85,7 +87,7 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
   <header class="hero">
     <p class="eyebrow">Link acquisition analysis &nbsp;&middot;&nbsp; Prepared for NMI</p>
     <h1>A quarter of your link profile is spam, <em>and it is still growing.</em></h1>
-    <p class="standfirst">Roughly 1,170 of NMI's referring domains carry a spam flag, with around 170 more arriving every month. A further 5,202 point at brands NMI has already absorbed rather than at NMI itself. Neither is being managed, and both are fixable without a single new placement.</p>
+    <p class="standfirst">Roughly 1,170 of NMI's referring domains carry a spam flag, with around 170 more arriving every month. Separately, five brands NMI has absorbed still hold their own link profiles, with around 180 quality domains among them that have never linked to NMI. Neither is being managed.</p>
     <div class="meta">
       <div>Scope<b>Offsite link acquisition</b></div>
       <div>Market<b>United States</b></div>
@@ -142,27 +144,9 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
 <section class="panel" role="tabpanel" id="p2" aria-labelledby="t2" tabindex="0" hidden>
   <p class="snum">02 &nbsp;What we found</p>
   <h2>Two things nobody is watching.</h2>
-  <p class="point">One is costing NMI links it has already paid for. The other is a live spam network pointed at the homepage.</p>
+  <p class="point">One is a live spam network pointed at the homepage. The other is link equity stranded on brands NMI has absorbed. Neither is being managed.</p>
 
-  <h3>One. More equity points at your old brands than at you</h3>
-  <div class="tscroll"><table>
-    <thead><tr><th>Domain</th><th class="num">Referring domains</th></tr></thead>
-    <tbody>
-      <tr><td>usaepay.com</td><td class="num">2,081</td></tr>
-      <tr><td>iriscrm.com</td><td class="num">962</td></tr>
-      <tr><td>creditcall.com</td><td class="num">780</td></tr>
-      <tr><td>crmdialer.com</td><td class="num">693</td></tr>
-      <tr><td>agreementexpress.com</td><td class="num">686</td></tr>
-      <tr class="us"><td>Total pointing at absorbed brands</td><td class="num">5,202</td></tr>
-      <tr><td>Pointing at nmi.com</td><td class="num">4,164</td></tr>
-    </tbody>
-  </table></div>
-  <p>Four of the five still hold their own Google rankings, which means they are not redirecting to NMI and their link equity is not reaching it. Filtering to properties with real traffic, roughly 180 of them link to a legacy brand and not to NMI at all.</p>
-  <div class="call">
-    <p>That is roughly 180 quality referring domains recoverable through redirect mapping, with no prospecting and no outreach.</p>
-  </div>
-
-  <h3>Two. An active spam network, still growing</h3>
+  <h3>One. An active spam network, still growing</h3>
   <div class="stats">
     <div class="stat"><div class="n">1,170</div><div class="l">Referring domains carrying a spam flag, around 28 percent of the profile</div></div>
     <div class="stat"><div class="n">327</div><div class="l">Of those at Domain Rating 30 or above</div></div>
@@ -178,10 +162,40 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
     <li><strong>A directory network</strong> at Domain Rating between 46 and 54, again with no traffic.</li>
   </ul>
   <p>The anchor text has moved through five generations since October 2025. The first advertised a link service through a Telegram handle across 100 referring domains. Later ones used fake testimonial copy, a second handle, guest post boilerplate, and most recently text offering premium backlinks. Each generation is keyed to a different NMI brand, including the absorbed ones, so whoever built it scraped the full portfolio rather than just the main domain.</p>
+
   <div class="call">
     <p>A filter set on authority alone passes all 327 of these domains. Adding a traffic threshold removes almost all of them.</p>
     <p>This is why we screen on traffic and relevance first and treat authority score as the last check rather than the first.</p>
   </div>
+
+  <h3>Two. Link equity stranded on absorbed brands</h3>
+  <p>NMI has absorbed USAePay, IRIS CRM, Creditcall, CRM Dialer and Agreement Express. All five still carry their own link profiles.</p>
+  <div class="tscroll"><table>
+    <thead><tr><th>Domain</th><th class="num">Referring domains</th><th class="num">Still ranking</th></tr></thead>
+    <tbody>
+      <tr><td>usaepay.com</td><td class="num">2,081</td><td class="num">Yes</td></tr>
+      <tr><td>iriscrm.com</td><td class="num">962</td><td class="num">Yes</td></tr>
+      <tr><td>creditcall.com</td><td class="num">780</td><td class="num">Yes</td></tr>
+      <tr><td>crmdialer.com</td><td class="num">693</td><td class="num">No</td></tr>
+      <tr><td>agreementexpress.com</td><td class="num">686</td><td class="num">Yes</td></tr>
+    </tbody>
+  </table></div>
+  <p>Four of the five still hold their own Google rankings, which confirms they are not redirecting and their equity is not reaching NMI.</p>
+
+  <h4>Sizing this honestly</h4>
+  <p>Those totals overstate the opportunity and we would rather say so now. Three reasons.</p>
+  <ul>
+    <li><strong>They overlap.</strong> A site linking to two of the five is counted twice, so the true number of unique domains is lower.</li>
+    <li><strong>Around half already link to NMI as well,</strong> so that portion is already counted in NMI's own profile.</li>
+    <li><strong>Much of the remainder is the same kind of link we told you to discount on nmi.com.</strong> Merchant checkout integrations and link shorteners rather than editorial coverage. One pet adoption site alone accounts for 205 links to USAePay.</li>
+  </ul>
+
+  <div class="call">
+    <p>Filtered to properties with real traffic that do not already link to NMI, the recoverable figure is roughly 180 domains.</p>
+    <p>Smaller than the headline totals, and still the cheapest links in the programme, because they need redirect mapping rather than prospecting.</p>
+  </div>
+
+  <p>There is a genuine seam inside it. Creditcall in particular earned real technology and finance coverage that has never pointed at NMI, including American Banker, TechRadar, BetaNews and The Next Web. Those are exactly the publications the acquisition plan is targeting, and NMI already has a relationship with them through a brand it owns.</p>
 
   <h3>For balance, the good links are genuinely good</h3>
   <p>783 referring domains carry a thousand or more monthly organic visits, including Wikipedia, Adobe, GitHub, Forbes, Shopify, Salesforce, Bloomberg, Mastercard and PYMNTS. Roughly one in five. There are simply not many of them and almost all point at the homepage rather than at anything that sells.</p>
@@ -195,11 +209,11 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
   <p class="point">The industry terms you pointed us at behave in three distinct ways. Each needs a different move, and they run in sequence rather than together.</p>
 
   <div class="tscroll"><table>
-    <thead><tr><th>Tier</th><th>Terms</th><th class="num">Links on winning pages</th><th class="num">NMI today</th><th>When</th></tr></thead>
+    <thead><tr><th class="lbl">Tier</th><th>Terms</th><th class="num">Links on winning pages</th><th class="num">NMI today</th><th class="num">When</th></tr></thead>
     <tbody>
-      <tr class="us"><td><strong>One</strong></td><td>PayFac, embedded payments, white label payment gateway</td><td class="num">4 to 8.5</td><td class="num">Position 2 to 4</td><td>First quarter</td></tr>
-      <tr><td><strong>Two</strong></td><td>Integrated payments, ISO and ISV, payments API, orchestration</td><td class="num">Low</td><td class="num">Partial positions</td><td>Second quarter</td></tr>
-      <tr><td><strong>Three</strong></td><td>Payment processing, payment processor, payment gateway, merchant services</td><td class="num">44 to 58</td><td class="num">No ranking page yet</td><td>Build toward</td></tr>
+      <tr class="us"><td class="lbl"><strong>One</strong></td><td>PayFac, embedded payments, white label payment gateway</td><td class="num">4 to 8.5</td><td class="num">Position 2 to 4</td><td class="num">First quarter</td></tr>
+      <tr><td class="lbl"><strong>Two</strong></td><td>Integrated payments, ISO and ISV, payments API, orchestration</td><td class="num">Low</td><td class="num">Partial positions</td><td class="num">Second quarter</td></tr>
+      <tr><td class="lbl"><strong>Three</strong></td><td>Payment processing, payment processor, payment gateway, merchant services</td><td class="num">44 to 58</td><td class="num">No ranking page yet</td><td class="num">Build toward</td></tr>
     </tbody>
   </table></div>
 
@@ -457,7 +471,7 @@ body{font-size:10.5pt}.stats,table,.call{break-inside:avoid}}
   <h2>Three workstreams. The first needs no outreach.</h2>
 
   <h3>One. Reclaim what is already yours</h3>
-  <p>Redirect the five absorbed brand properties, which consolidates 5,202 referring domains and brings in roughly 180 net new quality domains with no prospecting. Consolidate the duplicate privacy pages, where around 1,900 referring domains are split across five versions of the same page. Begin disavowing the spam network in banded batches, measured before and after.</p>
+  <p>Redirect or consolidate the five absorbed brand properties, which brings in roughly 180 net new quality referring domains with no prospecting. Sized against the caveats in section 02 rather than against the headline totals. Consolidate the duplicate privacy pages, where around 1,900 referring domains are split across five versions of the same page. Begin disavowing the spam network in banded batches, measured before and after.</p>
   <p>This is the highest return work in the programme and the least glamorous. It runs first.</p>
 
   <h3>Two. Build against proven targets</h3>
