@@ -86,13 +86,18 @@ IRIS CRM acquisition and it already ranks #1 for its target.
 
 ## 4. Scope architecture
 
-Same quality bar in both. **The lever between £5K and £4K is volume and link-magnet cadence,
+> **Pricing is out of scope for this document.** Commercial terms are handled by another
+> department. Options A and B differ on volume and link magnet cadence only. No monetary figures
+> appear in any client facing deliverable.
+
+
+Same quality bar in both. **The lever between the relevant optionK and the relevant optionK is volume and link-magnet cadence,
 never DR floor.** In payments — CPCs of $11–25 on the target terms — dropping the quality bar to
 hold a link count is how this account is lost at month four.
 
 ### 4a. Workstream breakdown
 
-| Workstream | £5,000/mo | £4,000/mo | Notes |
+| Workstream | Option A | Option B | Notes |
 |---|---|---|---|
 | Strategy, prospecting & target page mapping | Full | Full | Not reduced — it is what makes the rest work |
 | Link acquisition — **Tier A** (high DR, high relevance) | `___` links/mo | `___` links/mo | |
@@ -127,10 +132,10 @@ survey format is the stronger recommendation: it is repeatable, it is defensible
 competitors who cannot copy the data, and it gives Battenhall something to run a PR cycle on —
 which turns a scope overlap into a scope *synergy*. Worth leading with in the pitch.
 
-### 4d. Framing the £4K option
+### 4d. Framing the the relevant optionK option
 
 Present as **the same strategy on a longer runway to the same KPIs** — not a cheaper, lighter
-product. This keeps £5K the obvious choice without making £4K look like a quality compromise
+product. This keeps the relevant optionK the obvious choice without making the relevant optionK look like a quality compromise
 that Battenhall then has to defend internally.
 
 ---
@@ -163,7 +168,7 @@ anchor presence at all.** That gives unusually wide headroom.
 | 1 | Fintech & payments trade press | 30–60 | Largest |
 | 2 | Developer ecosystem & integration listings | 30–55 | Significant |
 | 3 | Comparison, review & software directories | 25–50 | Moderate |
-| 4 | Data-led digital PR (original survey data) | 50+ | Quarterly asset (£5K) / 6-monthly (£4K) |
+| 4 | Data-led digital PR (original survey data) | 50+ | Quarterly asset (the relevant optionK) / 6-monthly (the relevant optionK) |
 
 **Quality floor: AS 30 minimum, majority AS 40+.** Below AS 30 the link does not move the metric
 Battenhall reports on.
@@ -201,6 +206,6 @@ the passive footprint, as at contract start.
 |---|---|---|---|
 | B1 | SUSO rate card — per-link cost by DR tier | SUSO (internal) | All volume cells in §2, §3, §4a |
 | B2 | Content production ownership (D4) | Battenhall | §4b, and indirectly the volumes |
-| B3 | SUSO's share of the £5,000 | Battenhall | Which scope leads the pitch |
+| B3 | SUSO's share of the the relevant option | Battenhall | Which scope leads the pitch |
 | B4 | Minimum commitment — 6 or 12 months | SUSO (internal) | Forecast model |
 | B5 | R1–R4, R7 research (see `00-plan-of-attack.md` §4) | SUSO | Forecast, anchor framework, prospect list |
