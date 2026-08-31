@@ -74,6 +74,23 @@ footer b{color:var(--ink)}
 @media print{.tabbar{display:none}.panel[hidden]{display:block !important}
 .panel{padding:24px 0;break-before:page}.panel:first-of-type{break-before:auto}
 body{font-size:10.5pt}.stats,.tscroll,.call{break-inside:avoid}}
+
+.tier{border:1px solid var(--line);border-radius:6px;padding:26px 28px;margin:26px 0;background:var(--wash)}
+.tier.lead{border-color:var(--accent);border-width:1.5px}
+.tierhead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.tierhead h3{margin:0;font-size:22px}
+.tierbadge{font-family:var(--alt);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+color:var(--accent);border:1px solid var(--accent);border-radius:100px;padding:3px 12px}
+.tiercount{margin-left:auto;font-family:var(--alt);font-size:13px;font-weight:700;color:var(--ink)}
+.tier table{margin-top:18px}
+.tier .note{border-top:1px solid var(--line);margin-top:16px}
+.seq{counter-reset:step;list-style:none;padding:0;margin:26px 0}
+.seq li{position:relative;padding:0 0 18px 46px;margin:0}
+.seq li:before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;
+width:30px;height:30px;border-radius:100px;background:var(--accent);color:#fff;font-family:var(--alt);
+font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
+.seq li strong{display:block;margin-bottom:2px}
+footer .wrap{text-align:center}
 </style>
 </head>
 <body class="nojs">
@@ -82,7 +99,7 @@ body{font-size:10.5pt}.stats,.tscroll,.call{break-inside:avoid}}
   <header class="hero">
     <p class="eyebrow">Link analysis and proposal &nbsp;&middot;&nbsp; Prepared for NMI</p>
     <h1>A quarter of your link profile is spam, <em>and it is still growing.</em></h1>
-    <p class="standfirst">Roughly 1,170 referring domains carry a spam flag, with around 170 more arriving every month and nobody watching. Against that, NMI already outperforms its named competitors on the links it does have. This is where the opportunity is, and the kind of links we would build.</p>
+    <p class="standfirst">Roughly 1,170 referring domains carry a spam flag, with around 170 more arriving every month and nobody watching. Against that, NMI already outperforms its named competitors on the links it does have, and has eight pages sitting one push from the top of the results.</p>
     <div class="meta">
       <div>Scope<b>Offsite link acquisition</b></div>
       <div>Market<b>United States</b></div>
@@ -96,7 +113,8 @@ body{font-size:10.5pt}.stats,.tscroll,.call{break-inside:avoid}}
   <div class="wrap" role="tablist" aria-label="Sections">
     <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true"><span class="idx">01</span>Where you stand</button>
     <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false"><span class="idx">02</span>What we found</button>
-    <button class="tab final" role="tab" id="t3" aria-controls="p3" aria-selected="false"><span class="idx">03</span>The link plan</button>
+    <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false"><span class="idx">03</span>The opportunity</button>
+    <button class="tab final" role="tab" id="t4" aria-controls="p4" aria-selected="false"><span class="idx">04</span>The link plan</button>
   </div>
 </nav>
 
@@ -106,7 +124,6 @@ body{font-size:10.5pt}.stats,.tscroll,.call{break-inside:avoid}}
   <p class="snum">01 &nbsp;Where you stand</p>
   <h2>Smallest profile, largest return per link.</h2>
   <p class="point">NMI holds a fraction of the links its competitors do and turns them into far more traffic per link than any of them.</p>
-
   <div class="tscroll"><table>
     <thead><tr><th>Domain</th><th class="num">Authority Score</th><th class="num">Referring domains</th><th class="num">US organic traffic</th><th class="num">Keywords</th></tr></thead>
     <tbody>
@@ -116,12 +133,10 @@ body{font-size:10.5pt}.stats,.tscroll,.call{break-inside:avoid}}
       <tr class="us"><td>NMI</td><td class="num">46</td><td class="num">4,968</td><td class="num">23,512</td><td class="num">1,382</td></tr>
     </tbody>
   </table></div>
-
   <div class="call">
     <p>NMI reaches 46 percent of Authorize.Net's US traffic and 82 percent of its keyword footprint from one eighth of the referring domains.</p>
     <p>And momentum favours you. Over the last twelve months NMI added 113 referring domains a month. Authorize.Net lost 315 a month and is down 3,780 on the year.</p>
   </div>
-
   <h3>Two things worth saying plainly</h3>
   <p><strong>The Authority Score gap is wider than it looks.</strong> Three points between 46 and 49 is not three units of work. The scale is logarithmic, so it stands for thousands of referring domains and each further point costs more than the last. The score alone makes the distance look far shorter than it is.</p>
   <p><strong>The backlink count is misleading.</strong> NMI shows 22.8 million backlinks from fewer than 5,000 websites. The NMI badge sits on merchant checkout pages, so it is counted again on every page it appears on. To a search engine, one website linking a thousand times is still one website. Adyen averages 24 links per website. NMI averages 4,605. Every figure in this document counts websites, not links.</p>
@@ -131,20 +146,16 @@ body{font-size:10.5pt}.stats,.tscroll,.call{break-inside:avoid}}
   <p class="snum">02 &nbsp;What we found</p>
   <h2>A spam network nobody is watching.</h2>
   <p class="point">It would pass any check built on authority alone. It fails the moment you look at traffic, which is exactly how we screen.</p>
-
   <div class="stats">
     <div class="stat"><div class="n">1,170</div><div class="l">Referring domains carrying a spam flag, around 28 percent of the profile</div></div>
     <div class="stat"><div class="n">327</div><div class="l">Of those at Domain Rating 30 or above</div></div>
     <div class="stat"><div class="n">12</div><div class="l">Of those 327 with any real traffic</div></div>
   </div>
-
   <p>Arriving at roughly 170 domains a month, with 72 percent of it landed in 2026 alone. Around 95 percent points at the homepage. Three clusters, none of them subtle: domains that openly sell links, running between Domain Rating 53 and 73 with no traffic at all; a single network of more than 100 domains on one commercial top level domain, every one at Domain Rating 32 with no traffic; and a directory network between 46 and 54. The anchor text has moved through five generations since October 2025, each a different link selling brand.</p>
-
   <div class="call">
     <p>A filter set on authority alone passes all 327 of these domains. Adding a traffic threshold removes almost all of them.</p>
-    <p>This is the whole reason we screen on traffic and relevance first, and treat authority score as the last check rather than the first.</p>
+    <p>Getting them off the profile needs a full backlink audit and a disavow, which is the first thing we would do.</p>
   </div>
-
   <h3>The anchor text tells the same story</h3>
   <div class="tscroll"><table>
     <thead><tr><th>Anchor type</th><th class="num">Share of profile</th></tr></thead>
@@ -157,20 +168,82 @@ body{font-size:10.5pt}.stats,.tscroll,.call{break-inside:avoid}}
     </tbody>
   </table></div>
   <p>One anchor in five is spam or link selling text, the same network showing up again. And genuine commercial anchors, the payments terms NMI wants to rank for, are barely 2 percent, so there is no optimised footprint to unbalance. That is wide, safe headroom for new links.</p>
-
   <h3>For balance, your good links are genuinely good</h3>
   <p>783 referring domains carry a thousand or more monthly organic visits, including Wikipedia, Adobe, GitHub, Forbes, Shopify, Salesforce, Bloomberg, Mastercard and PYMNTS. Roughly one in five. There are simply not many of them, and almost all point at the homepage rather than at anything that sells.</p>
-
-  <p class="note">We have not assessed penalty risk and are not claiming any. Establishing whether the spam is doing measurable harm is part of a full backlink audit, which would precede any delivery schedule.</p>
+  <p class="note">We have not assessed penalty risk and are not claiming any. Establishing whether the spam is doing measurable harm is part of the full audit.</p>
 </section>
 
 <section class="panel" role="tabpanel" id="p3" aria-labelledby="t3" tabindex="0" hidden>
-  <p class="snum">03 &nbsp;The link plan</p>
-  <h2>Two ways to buy it.</h2>
+  <p class="snum">03 &nbsp;The opportunity</p>
+  <h2>Eight pages, one push from the top.</h2>
+  <p class="point">NMI already ranks on the terms that matter. Eight pages sit between positions 2 and 12, held back by a handful of links each. This is the fastest return available.</p>
+  <p>Five of the eight, and what stands between them and the top of the results:</p>
+  <div class="tscroll"><table>
+    <thead><tr><th>Page</th><th>Term</th><th class="num">US volume</th><th class="num">Position</th><th class="num">Referring domains</th></tr></thead>
+    <tbody>
+      <tr class="us"><td>White label payment gateway guide</td><td>white label payment gateway</td><td class="num">800</td><td class="num">4</td><td class="num">2</td></tr>
+      <tr class="us"><td>PayFacs and the payment facilitator model</td><td>payfac</td><td class="num">900</td><td class="num">4</td><td class="num">4</td></tr>
+      <tr><td>What are embedded payments</td><td>embedded payments</td><td class="num">1,700</td><td class="num">2</td><td class="num">5</td></tr>
+      <tr><td>How contactless payments work</td><td>what is a contactless payment</td><td class="num">20,000</td><td class="num">12</td><td class="num">8</td></tr>
+      <tr><td>Navigating the merchant onboarding process</td><td>merchant onboarding</td><td class="num">2,200</td><td class="num">5</td><td class="num">1</td></tr>
+    </tbody>
+  </table></div>
+  <p>Together these eight pages carry around <strong>$22,800 a month in equivalent search traffic value</strong>, on an average of fewer than five referring domains each. The pages beating them on these terms carry between four and eight. That is a gap a focused link programme closes, not a mountain.</p>
+
+  <h3>The larger prize sits behind them</h3>
+  <p>On the head terms, payment processing, payment processor, payment gateway and merchant services, NMI does not yet hold a ranking page at all. Those searches run to 4,500, 3,100, 4,600 and 9,600 a month. Capturing them needs a page built and established first, then links, so they come later in the plan. The route to them runs through the eight pages above, because the topical authority is the same.</p>
+
+  <h3>How we would get there</h3>
+  <ol class="seq">
+    <li><strong>Full audit and disavow</strong>The complete backlink audit, the spam network domain by domain, and a disavow file to get roughly 1,170 flagged domains off the profile before new links land on a clean base.</li>
+    <li><strong>Lock the priority pages</strong>Confirm the target pages and the terms each should own, resolving where NMI's own pages currently compete with each other, so every link points where it moves a ranking.</li>
+    <li><strong>Build the links</strong>The Custom and Curated programmes in section 04, pointed at the pages above.</li>
+  </ol>
+  <p class="note">Links are step three, not step one. Sending links at a profile that is a quarter spam, or at pages that compete with each other, wastes the budget. The audit is what makes the link build pay.</p>
+</section>
+
+<section class="panel" role="tabpanel" id="p4" aria-labelledby="t4" tabindex="0" hidden>
+  <p class="snum">04 &nbsp;The link plan</p>
+  <h2>Two ways to build it.</h2>
   <p class="point">Every target is a site relevant to payments, fintech, ecommerce or developers, and one NMI does not already have. The two plans differ on the caliber of name and the number of placements, not on the standard.</p>
 
+  <div class="tier lead">
+    <div class="tierhead"><h3>Custom</h3><span class="tierbadge">&pound;5,000</span><span class="tiercount">4 to 5 placements a month</span></div>
+    <p>The biggest names, finance led. National business and finance titles and direct industry peers, with the digital PR track running toward the payments trade press that does not sell placements, American Banker, Payments Dive and Finextra.</p>
+    <div class="tscroll"><table>
+      <thead><tr><th>Domain</th><th class="num">Authority Score</th><th class="num">Monthly traffic</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr class="us"><td>finance.yahoo.com</td><td class="num">100</td><td class="num">560,237,952</td><td>Finance</td></tr>
+        <tr class="us"><td>investing.com</td><td class="num">98</td><td class="num">115,215,457</td><td>Global finance</td></tr>
+        <tr class="us"><td>reuters.com</td><td class="num">88</td><td class="num">17,930,184</td><td>Business and finance newswire</td></tr>
+        <tr><td>businessinsider.com</td><td class="num">85</td><td class="num">13,366,357</td><td>Business press</td></tr>
+        <tr><td>benzinga.com</td><td class="num">65</td><td class="num">2,055,695</td><td>Finance and markets media</td></tr>
+        <tr><td>sitepoint.com</td><td class="num">54</td><td class="num">249,489</td><td>Developer publication</td></tr>
+        <tr><td>recurly.com</td><td class="num">40</td><td class="num">16,567</td><td>Payments peer</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Yahoo Finance, Investing.com and Reuters anchor the tier. The largest are periodic showpieces rather than every month, and a showpiece month runs to two or three placements, since a single title of that weight is worth several elsewhere.</p>
+  </div>
+
+  <div class="tier">
+    <div class="tierhead"><h3>Curated</h3><span class="tierbadge">&pound;4,000</span><span class="tiercount">Up to 8 placements a month</span></div>
+    <p>Broader coverage across the target pages. Every site sits at Authority Score 35 or above with 3,000 or more monthly visits, drawn from the intersect and relevant trade media, screened on the same standard.</p>
+    <div class="tscroll"><table>
+      <thead><tr><th>Domain</th><th class="num">Authority Score</th><th class="num">Monthly traffic</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr class="us"><td>mashable.com</td><td class="num">83</td><td class="num">10,273,477</td><td>Technology press</td></tr>
+        <tr class="us"><td>theglobeandmail.com</td><td class="num">77</td><td class="num">5,576,113</td><td>Business broadsheet</td></tr>
+        <tr><td>retaildive.com</td><td class="num">55</td><td class="num">58,923</td><td>Commerce trade press</td></tr>
+        <tr><td>altexsoft.com</td><td class="num">51</td><td class="num">92,584</td><td>Technology and software</td></tr>
+        <tr><td>ecommercefastlane.com</td><td class="num">44</td><td class="num">53,195</td><td>Ecommerce trade media</td></tr>
+        <tr><td>splitit.com</td><td class="num">42</td><td class="num">27,437</td><td>Payments peer</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">The lower price per site means broader coverage across the target pages, at the same quality floor.</p>
+  </div>
+
   <h3>Where the links point</h3>
-  <p>The industry terms behave in three ways, and each needs a different move.</p>
+  <p>Weighted to the eight opportunity pages in section 03. The industry terms sort into three tiers, and the plan works the winnable ones first.</p>
   <div class="tscroll"><table>
     <thead><tr><th class="lbl">Tier</th><th>Terms</th><th class="num">Referring domains on winning pages</th><th class="num">NMI today</th></tr></thead>
     <tbody>
@@ -179,63 +252,20 @@ body{font-size:10.5pt}.stats,.tscroll,.call{break-inside:avoid}}
       <tr><td class="lbl"><strong>Three</strong></td><td>Payment processing, payment processor, payment gateway, merchant services</td><td class="num">44 to 58</td><td class="num">No ranking page yet</td></tr>
     </tbody>
   </table></div>
-  <p>Tier one is where the money is. NMI already ranks between second and fourth, and the pages beating it carry between four and eight referring domains. Tier three is the volume, held by incumbents whose pages carry 44 to 58, and needs a ranking page built first. The route to tier three runs through tier one, because the topical authority is the same.</p>
-
-  <h3>Which pages the links land on</h3>
-  <p>The brief asks for product pages and blog. Four blog pages sit within a few referring domains of the top three already.</p>
-  <div class="tscroll"><table>
-    <thead><tr><th>Page</th><th>Term</th><th class="num">Position</th><th class="num">Referring domains</th></tr></thead>
-    <tbody>
-      <tr class="us"><td>PayFacs and the payment facilitator model</td><td>payfac</td><td class="num">4</td><td class="num">4</td></tr>
-      <tr class="us"><td>White label payment gateway guide</td><td>white label payment gateway</td><td class="num">4</td><td class="num">2</td></tr>
-      <tr><td>Navigating the merchant onboarding process</td><td>merchant onboarding</td><td class="num">5</td><td class="num">1</td></tr>
-      <tr><td>What are embedded payments</td><td>embedded payments</td><td class="num">2</td><td class="num">5</td></tr>
-    </tbody>
-  </table></div>
-  <p>NMI's gateway and payments product pages already carry 66 and 64 referring domains, more than Adyen's flagship at 49, so their constraint is not more links. We prioritise the pages where a link actually moves the ranking, and flag the rest.</p>
-
-  <h3>Custom &nbsp;&middot;&nbsp; &pound;5,000</h3>
-  <p>Fewer placements, the biggest names. National business and finance titles, with the digital PR track running toward the payments trade press that does not sell placements, American Banker, Payments Dive and Finextra.</p>
-  <div class="tscroll"><table>
-    <thead><tr><th>Domain</th><th class="num">Authority Score</th><th class="num">Monthly traffic</th><th>Type</th></tr></thead>
-    <tbody>
-      <tr class="us"><td>investing.com</td><td class="num">98</td><td class="num">115,215,457</td><td>Global finance</td></tr>
-      <tr class="us"><td>reuters.com</td><td class="num">88</td><td class="num">17,930,184</td><td>Global business newswire</td></tr>
-      <tr class="us"><td>businessinsider.com</td><td class="num">85</td><td class="num">13,366,357</td><td>National business press</td></tr>
-      <tr><td>mashable.com</td><td class="num">83</td><td class="num">10,273,477</td><td>Technology press</td></tr>
-      <tr><td>theglobeandmail.com</td><td class="num">77</td><td class="num">5,576,113</td><td>Business broadsheet</td></tr>
-      <tr><td>benzinga.com</td><td class="num">65</td><td class="num">2,055,695</td><td>Finance and markets media</td></tr>
-    </tbody>
-  </table></div>
-  <p>Four to five placements a month. The premium names cost more to secure, so the count is deliberately lower. Reuters and Mashable feature as periodic showpieces, and a month built around one runs to two or three placements, since a single title of that weight is worth several elsewhere.</p>
-
-  <h3>Curated &nbsp;&middot;&nbsp; &pound;4,000</h3>
-  <p>More placements, drawn from the intersect and from relevant editorial. Every site sits at Authority Score 35 or above with 3,000 or more monthly visits, screened on the same standard.</p>
-  <div class="tscroll"><table>
-    <thead><tr><th>Domain</th><th class="num">Authority Score</th><th class="num">Monthly traffic</th><th>Type</th></tr></thead>
-    <tbody>
-      <tr class="us"><td>benzinga.com</td><td class="num">65</td><td class="num">2,055,695</td><td>Finance media</td></tr>
-      <tr class="us"><td>retaildive.com</td><td class="num">55</td><td class="num">58,923</td><td>Commerce trade press</td></tr>
-      <tr><td>sitepoint.com</td><td class="num">54</td><td class="num">249,489</td><td>Developer publication</td></tr>
-      <tr><td>altexsoft.com</td><td class="num">51</td><td class="num">92,584</td><td>Technology content</td></tr>
-      <tr><td>ecommercefastlane.com</td><td class="num">44</td><td class="num">53,195</td><td>Ecommerce trade media</td></tr>
-      <tr><td>splitit.com</td><td class="num">42</td><td class="num">27,437</td><td>Payments peer</td></tr>
-      <tr><td>recurly.com</td><td class="num">40</td><td class="num">16,567</td><td>Payments peer</td></tr>
-    </tbody>
-  </table></div>
-  <p>Up to nine placements a month. The lower price per site means broader coverage across the target pages, at the same quality floor.</p>
 
   <h3>What every domain has to clear</h3>
   <p>Real organic traffic weighted to the United States, a topical fit with payments, fintech or ecommerce, a followed in content link, a clean outbound profile, and Authority Score 30 as an absolute floor. Traffic is the first gate, not the last, because it is the one that catches the spam network in section 02. We do not use private blog networks, thin directories, sitewide or footer placements, or any site without real traffic whatever its score reads.</p>
 
-  <p class="note">Sample sites are verified against NMI's live profile and are not among its existing links. A full backlink audit precedes the month by month schedule.</p>
+  <p class="note">Sample sites are relevant, verified names. The programme prioritises new referring domains, with a small number of marquee titles such as Yahoo Finance reinforcing the homepage from a stronger, on topic page. The month by month schedule follows the audit in section 03.</p>
 </section>
 
 </div>
 
 <footer>
+  <div class="wrap">
   <p><b>Link analysis and proposal prepared for NMI</b> &nbsp;&middot;&nbsp; August 2026<br>
   NMI and competitor figures from Ahrefs. Authority Score and sample site figures from Semrush. All figures are live as at analysis and are tool estimates.</p>
+  </div>
 </footer>
 
 <script>
