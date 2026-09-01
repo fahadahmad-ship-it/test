@@ -235,130 +235,213 @@ with open('ngwindows_backlink_audit_complete.csv','w',newline='',encoding='utf-8
 print('wrote ngwindows_backlink_audit_complete.csv')
 
 # ================= DASHBOARD =================
-P={'disavow':'#e34948','review':'#eda100','keep':'#008300','ink':'#0b0b0b','ink2':'#52514e',
-   'surf':'#ffffff','panel':'#fbfbfa','line':'#e6e6e2','accent':'#2a78d6'}
-cat_counts=collections.Counter(r['why'] for r in DIS)
-top_cats=cat_counts.most_common(9)
-anchor_counts=collections.Counter(r['anchor_type'] for r in rows if r['anchor_type']!='n/a (Semrush-only)')
-follow_counts=collections.Counter(r['follow'] for r in rows if r['follow'])
-# link networks (recompute from ip among disavow/review)
-ipc=collections.Counter(r['ip'] for r in rows if r['ip'] and r['decision']!='KEEP')
+P={'disavow':'#e34948','review':'#eda100','keep':'#008300','ink':'#101010','ink2':'#5b5a55',
+   'surf':'#ffffff','line':'#e7e7e2','accent':'#2a78d6','bg':'#f4f4f1','navy':'#16233b'}
 FARM={'203.161.54.114','118.139.181.85','118.139.176.46','118.139.178.200','118.139.161.199',
  '118.139.181.255','184.168.115.60','195.20.19.178','67.223.118.29','188.40.17.96','92.249.46.138','191.101.14.187'}
-nets=[(ip,n) for ip,n in ipc.most_common(20) if n>=4 and ip in FARM][:8]
+def dis_reason(r):
+    a=r['aclass']; cat=r['category']
+    M={'Link-selling / SEO-service PBN':'Backlink-seller / SEO PBN','Blogspot PBN / spam post':'Blogspot PBN post',
+       'Gambling / casino spam':'Gambling / casino','Adult spam':'Adult spam',
+       'URL-shortener / redirect link network':'URL-shortener / redirect net',
+       'Auto-generated stats / worth-checker':'Auto stats / scraper page','Low-quality directory / TLD list':'Spam directory',
+       'Expired-domain / auto network':'Expired-domain network','Free-host throwaway page':'Free-host throwaway'}
+    if cat in M: return M[cat]
+    if a=='money/spam': return 'Paid / Telegram spam anchor'
+    if r['ip'] in FARM: return 'Farm-IP link network'
+    if a=='commercial': return 'Exact-match commercial anchor'
+    if _re.match(r'^\d{1,3}(\.\d{1,3}){3}$',r['domain']): return 'Raw-IP / junk host'
+    if str(r['is_spam']).upper()=='TRUE': return 'Ahrefs spam-flagged'
+    return 'Other spam signal'
+reason_counts=collections.Counter(dis_reason(r) for r in DIS).most_common(10)
+aclass_counts=collections.Counter(r['aclass'] for r in DIS).most_common()
+dof=sum(1 for r in DIS if r['follow']=='dofollow' or (str(r['dofollow_n']).isdigit() and int(r['dofollow_n'])>0))
+nof=len(DIS)-dof
+netmap=collections.defaultdict(list)
+for r in DIS+REV:
+    if r['ip'] in FARM: netmap[r['ip']].append(r['domain'])
+nets=sorted(((ip,d) for ip,d in netmap.items()),key=lambda x:-len(x[1]))[:8]
 anchors=[('…SEOExpress.org and their backlink building service worked wonders… traffic +400%',222),
  ('Complete SEO for ngwindows.com: premium guest posts, contextual backlinks…',44),
  ('High Quality Dofollow Backlinks DA50 PA40 Premium PBN … Buy Backlinks Online Cheap',21),
  ('JOIN OUR TELEGRAM https://t.me/s/darksidelinks',10),
  ('tLvtiPx5V2OVDzj (random gibberish anchor)',11)]
 
-def hbars(data,color,unit='',w=580,rowh=30,pad=190):
+def hbars(data,color,unit='',w=600,rowh=32,pad=210,fs=12.5):
     if not data: return ''
     mx=max(v for _,v in data) or 1
-    bw=w-pad-70; H=len(data)*rowh+10; out=[f'<svg viewBox="0 0 {w} {H}" width="100%" role="img">']
+    bw=w-pad-64; H=len(data)*rowh+8; out=[f'<svg viewBox="0 0 {w} {H}" width="100%" role="img" aria-hidden="false">']
     for i,(lab,v) in enumerate(data):
-        y=i*rowh+8; bl=max(6,bw*v/mx)
-        lab_s=html.escape(str(lab))
-        if len(lab_s)>28: lab_s=lab_s[:27]+'…'
-        out.append(f'<text x="{pad-8}" y="{y+15}" text-anchor="end" font-size="12.5" fill="{P["ink2"]}">{lab_s}</text>')
-        out.append(f'<rect x="{pad}" y="{y+3}" width="{bl:.1f}" height="16" rx="4" fill="{color}"/>')
-        out.append(f'<text x="{pad+bl+7}" y="{y+15}" font-size="12" font-weight="600" fill="{P["ink"]}">{v}{unit}</text>')
+        y=i*rowh+8; bl=max(5,bw*v/mx); ls=html.escape(str(lab))
+        if len(ls)>32: ls=ls[:31]+'…'
+        out.append(f'<text x="{pad-10}" y="{y+15}" text-anchor="end" font-size="{fs}" fill="{P["ink2"]}">{ls}</text>')
+        out.append(f'<rect x="{pad}" y="{y+2}" width="{bl:.1f}" height="18" rx="4" fill="{color}"><title>{ls}: {v}</title></rect>')
+        out.append(f'<text x="{pad+bl+8}" y="{y+15}" font-size="12" font-weight="700" fill="{P["ink"]}">{v}{unit}</text>')
     out.append('</svg>'); return ''.join(out)
 
-def donut(parts):  # [(label,val,color)]
+def donut(parts):
     tot=sum(v for _,v,_ in parts) or 1; import math
-    cx,cy,r,sw=90,90,66,26; a=-math.pi/2; seg=[]
+    cx,cy,r,sw=92,92,66,24; a=-math.pi/2; seg=[]
     for lab,v,col in parts:
         frac=v/tot; a2=a+frac*2*math.pi
         x1,y1=cx+r*math.cos(a),cy+r*math.sin(a); x2,y2=cx+r*math.cos(a2),cy+r*math.sin(a2)
-        large=1 if frac>0.5 else 0
-        seg.append(f'<path d="M {x1:.1f} {y1:.1f} A {r} {r} 0 {large} 1 {x2:.1f} {y2:.1f}" fill="none" stroke="{col}" stroke-width="{sw}"/>')
+        lg=1 if frac>0.5 else 0
+        seg.append(f'<path d="M {x1:.1f} {y1:.1f} A {r} {r} 0 {lg} 1 {x2:.1f} {y2:.1f}" fill="none" stroke="{col}" stroke-width="{sw}" stroke-linecap="butt"><title>{html.escape(lab)}: {v}</title></path>')
         a=a2
-    return (f'<svg viewBox="0 0 180 180" width="180" height="180" role="img">{"".join(seg)}'
-            f'<text x="90" y="86" text-anchor="middle" font-size="26" font-weight="700" fill="{P["ink"]}">{tot}</text>'
-            f'<text x="90" y="106" text-anchor="middle" font-size="12" fill="{P["ink2"]}">domains</text></svg>')
+    return (f'<svg viewBox="0 0 184 184" width="176" height="176" role="img">{"".join(seg)}'
+            f'<text x="92" y="88" text-anchor="middle" font-size="30" font-weight="800" fill="{P["ink"]}">{tot}</text>'
+            f'<text x="92" y="108" text-anchor="middle" font-size="12" fill="{P["ink2"]}">domains</text></svg>')
 
-def kpi(v,l,c):
-    return (f'<div class="kpi"><div class="kpi-v" style="color:{c}">{v}</div><div class="kpi-l">{l}</div></div>')
+def kpi(v,l,c,sub=''):
+    s=f'<div class="kpi-sub">{sub}</div>' if sub else ''
+    return f'<div class="kpi" style="--ac:{c}"><div class="kpi-v" style="color:{c}">{v}</div><div class="kpi-l">{l}</div>{s}</div>'
 
 toxic_pct=round(100*len(DIS)/len(rows))
-net_rows=''.join(f'<tr><td class="mono">{html.escape(ip)}</td><td style="text-align:right">{n}</td></tr>' for ip,n in nets)
-anc_rows=''.join(f'<tr><td>{html.escape(a)}</td><td style="text-align:right">{n}</td></tr>' for a,n in anchors)
-DONUT=[('Disavow (strict-verified)',len(DIS),P['disavow']),
-       ('Manual review',len(REV),P['review']),('Keep',len(KEEP),P['keep'])]
-legend=''.join(f'<span class="lg"><i style="background:{c}"></i>{l} — {v}</span>' for l,v,c in DONUT)
+net_rows=''.join(f'<tr><td class="mono">{html.escape(ip)}</td><td class="r">{len(d)}</td></tr>' for ip,d in nets)
+anc_rows=''.join(f'<tr><td>{html.escape(a)}</td><td class="r">{n}</td></tr>' for a,n in anchors)
+DONUT=[('Disavow (verified)',len(DIS),P['disavow']),('Manual review',len(REV),P['review']),('Keep',len(KEEP),P['keep'])]
+legend=''.join(f'<div class="lg"><i style="background:{c}"></i><span>{l}</span><b>{v}</b></div>' for l,v,c in DONUT)
+checked=sum(1 for r in (DIS+REV) if r.get('backlink_url'))
 
-HTML=f"""<!doctype html><html lang="en"><meta charset="utf-8">
+HTML=f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ngwindows.com — Backlink Disavow Dashboard</title>
 <style>
- :root{{--surf:{P['surf']};--panel:{P['panel']};--ink:{P['ink']};--ink2:{P['ink2']};--line:{P['line']}}}
- *{{box-sizing:border-box}} body{{margin:0;font:14px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-  background:#f2f2ef;color:var(--ink);padding:26px}}
- .wrap{{max-width:1120px;margin:0 auto}}
- h1{{font-size:22px;margin:0 0 2px}} .sub{{color:var(--ink2);margin-bottom:20px;font-size:13px}}
- .grid{{display:grid;gap:16px}} .k5{{grid-template-columns:repeat(5,1fr)}}
- .two{{grid-template-columns:1.15fr .85fr}} .two2{{grid-template-columns:1fr 1fr}}
- @media(max-width:820px){{.k5,.two,.two2{{grid-template-columns:1fr}}}}
- .card{{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:18px 18px 14px}}
- .card h2{{font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink2);margin:0 0 14px;font-weight:700}}
- .kpi{{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:16px 14px;text-align:center}}
- .kpi-v{{font-size:30px;font-weight:800;line-height:1}} .kpi-l{{font-size:12px;color:var(--ink2);margin-top:6px}}
- .lg{{display:inline-flex;align-items:center;gap:6px;margin-right:16px;font-size:12.5px;color:var(--ink2)}}
- .lg i{{width:11px;height:11px;border-radius:3px;display:inline-block}}
- .donutrow{{display:flex;align-items:center;gap:18px;flex-wrap:wrap}}
+ :root{{--surf:{P['surf']};--ink:{P['ink']};--ink2:{P['ink2']};--line:{P['line']};--red:{P['disavow']};--amber:{P['review']};--green:{P['keep']}}}
+ *{{box-sizing:border-box}}
+ body{{margin:0;font:14px/1.55 ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:{P['bg']};color:var(--ink)}}
+ .wrap{{max-width:1140px;margin:0 auto;padding:0 22px 40px}}
+ header.hd{{background:{P['navy']};color:#fff;margin-bottom:22px;border-radius:0 0 16px 16px;
+   padding:26px 28px;box-shadow:0 2px 12px rgba(20,35,59,.14)}}
+ header.hd .row{{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;max-width:1140px;margin:0 auto}}
+ header.hd h1{{font-size:23px;margin:0 0 4px;font-weight:800;letter-spacing:-.01em}}
+ header.hd .sub{{color:#c7d0de;font-size:12.5px}}
+ .pill{{background:rgba(227,73,72,.16);color:#ffb4b3;border:1px solid rgba(227,73,72,.5);
+   padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:700;white-space:nowrap}}
+ .grid{{display:grid;gap:15px}} .k5{{grid-template-columns:repeat(5,1fr)}}
+ .two{{grid-template-columns:1.18fr .82fr}} .two2{{grid-template-columns:1fr 1fr}}
+ @media(max-width:860px){{.k5{{grid-template-columns:repeat(2,1fr)}}.two,.two2{{grid-template-columns:1fr}}}}
+ .card{{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:18px 20px 15px;box-shadow:0 1px 2px rgba(16,16,16,.04)}}
+ .card h2{{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);margin:0 0 15px;font-weight:800}}
+ .kpi{{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:16px 15px 15px;position:relative;overflow:hidden}}
+ .kpi:before{{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ac)}}
+ .kpi-v{{font-size:31px;font-weight:800;line-height:1;letter-spacing:-.01em}}
+ .kpi-l{{font-size:12px;color:var(--ink2);margin-top:7px;font-weight:600}}
+ .kpi-sub{{font-size:11px;color:var(--ink2);margin-top:3px}}
+ .banner{{background:linear-gradient(0deg,#fff,#fdf0f0);border:1px solid #f2c0c0;border-left:5px solid var(--red);
+   border-radius:12px;padding:15px 18px;margin-bottom:16px;font-size:13.5px}}
+ .donutrow{{display:flex;align-items:center;gap:22px;flex-wrap:wrap}}
+ .lg{{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink2);margin:7px 0}}
+ .lg i{{width:12px;height:12px;border-radius:3px}} .lg b{{margin-left:auto;color:var(--ink);font-variant-numeric:tabular-nums}}
+ .lg span{{min-width:130px}}
  table{{width:100%;border-collapse:collapse;font-size:12.5px}}
- td{{padding:6px 8px;border-bottom:1px solid var(--line)}} .mono{{font-family:ui-monospace,Menlo,Consolas,monospace}}
- .warn{{background:#fff4e5;border:1px solid #f0c98a;border-left:4px solid {P['review']};border-radius:10px;padding:14px 16px;margin-top:16px}}
+ td{{padding:7px 8px;border-bottom:1px solid var(--line)}} tr:last-child td{{border-bottom:0}}
+ th{{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink2);padding:0 8px 8px}}
+ .r{{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}}
+ .mono{{font-family:ui-monospace,Menlo,Consolas,monospace}}
+ .warn{{background:#fff7ea;border:1px solid #f0cf94;border-left:5px solid var(--amber);border-radius:12px;padding:15px 18px;margin-top:16px;font-size:13px}}
  .warn b{{color:#9a5b00}}
- .banner{{background:#fdecec;border:1px solid #f2b8b8;border-left:4px solid {P['disavow']};border-radius:10px;padding:14px 16px;margin-bottom:18px;font-size:13.5px}}
- .foot{{color:var(--ink2);font-size:11.5px;margin-top:22px;text-align:center}}
-</style>
+ .split{{display:flex;gap:10px;margin-top:10px}}
+ .chip{{flex:1;text-align:center;border:1px solid var(--line);border-radius:10px;padding:10px 6px}}
+ .chip .n{{font-size:20px;font-weight:800}} .chip .t{{font-size:11px;color:var(--ink2);margin-top:2px}}
+ .foot{{color:var(--ink2);font-size:11.5px;margin-top:24px;text-align:center}}
+ .steps{{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:2px}}
+ @media(max-width:860px){{.steps{{grid-template-columns:1fr 1fr}}}}
+ .step{{border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:12.5px}}
+ .step b{{display:block;color:var(--ink);margin-bottom:3px}}
+</style></head><body>
+<header class="hd"><div class="row">
+  <div><h1>Backlink Disavow Audit — ngwindows.com</h1>
+   <div class="sub">Ahrefs + Semrush · {datetime.date.today()} · {checked}/{len(DIS)+len(REV)} flagged domains verified at the actual-backlink level (anchor + follow)</div></div>
+  <div class="pill">⚠ {toxic_pct}% toxic — paid-PBN profile</div>
+</div></header>
 <div class="wrap">
- <h1>ngwindows.com — Backlink Disavow Dashboard</h1>
- <div class="sub">Ahrefs + Semrush referring-domain audit · {datetime.date.today()} · anchors, follow-status &amp; {sum(1 for r in (DIS+REV) if r.get('backlink_url'))}/{len(DIS)+len(REV)} flagged domains checked at the actual-backlink level</div>
 
- <div class="banner"><b>Profile verdict: heavily manipulated (paid-PBN) link profile.</b>
-  After a strict, anchor-driven re-check, <b>{len(DIS)}</b> domains are staged for disavow (P1 Core {len(P1)} + P2 Recommended {len(P2)}) —
-  <b>each carries a real spam signal</b> (footprint, is_spam, farm-IP, paid/exact-match anchor, or raw-IP). {len(REV)} ambiguous
-  domains (generic/blank anchors, off-topic, or your own microsites) are held for manual review, not auto-disavowed.</div>
+ <div class="banner"><b>Verdict: heavily manipulated (paid-PBN) link profile.</b>
+  After a strict, anchor-driven re-check, <b>{len(DIS)} domains</b> are staged for disavow (P1 Core {len(P1)} + P2 {len(P2)}) —
+  <b>each carries a real spam signal</b> (footprint, is_spam, farm-IP, paid/exact-match anchor, or raw-IP host).
+  {len(REV)} ambiguous domains are held for manual review, not auto-disavowed.</div>
 
- <div class="grid k5" style="margin-bottom:16px">
-  {kpi(len(rows),'Referring domains',P['ink'])}
-  {kpi(len(DIS),'Disavow (verified)',P['disavow'])}
-  {kpi(len(P1),'P1 Core (tightest)',P['disavow'])}
-  {kpi(len(REV),'Manual review',P['review'])}
-  {kpi(len(KEEP),'Keep (protected)',P['keep'])}
+ <div class="grid k5" style="margin-bottom:15px">
+  {kpi(len(rows),'Referring domains',P['navy'])}
+  {kpi(len(DIS),'Disavow',P['disavow'],'verified')}
+  {kpi(len(P1),'P1 Core',P['disavow'],'tightest cut')}
+  {kpi(len(REV),'Manual review',P['review'],'you decide')}
+  {kpi(len(KEEP),'Keep',P['keep'],'protected')}
  </div>
 
- <div class="grid two" style="margin-bottom:16px">
-  <div class="card"><h2>Why domains are flagged (disavow reasons)</h2>{hbars(top_cats,P['disavow'])}</div>
+ <div class="grid two" style="margin-bottom:15px">
+  <div class="card"><h2>Why domains are flagged</h2>{hbars(reason_counts,P['disavow'])}</div>
   <div class="card"><h2>Decision split</h2>
-   <div class="donutrow">{donut(DONUT)}
-    <div>{legend.replace('<span','<div style="margin:6px 0" ').replace('</span>','</div>')}</div></div></div>
+   <div class="donutrow">{donut(DONUT)}<div style="flex:1;min-width:190px">{legend}</div></div></div>
  </div>
 
- <div class="grid two2" style="margin-bottom:16px">
-  <div class="card"><h2>Anchor-text type (Ahrefs, one per domain)</h2>{hbars(anchor_counts.most_common(),P['accent'])}
-   <div style="font-size:12px;color:var(--ink2);margin-top:10px">Follow status:
-   <b style="color:{P['disavow']}">{follow_counts.get('nofollow',0)} nofollow</b> · {follow_counts.get('dofollow',0)} dofollow
-   — nofollow links pass no equity, so they are lower disavow priority.</div></div>
+ <div class="grid two2" style="margin-bottom:15px">
+  <div class="card"><h2>Anchor type of disavowed links</h2>{hbars(aclass_counts,P['accent'],pad=150)}
+   <div class="split">
+    <div class="chip"><div class="n" style="color:{P['disavow']}">{dof}</div><div class="t">dofollow (pass equity)</div></div>
+    <div class="chip"><div class="n">{nof}</div><div class="t">nofollow (lower priority)</div></div>
+   </div></div>
   <div class="card"><h2>Largest link networks (shared farm IP)</h2>
-   <table><tr><td><b>IP</b></td><td style="text-align:right"><b>domains</b></td></tr>{net_rows}</table></div>
+   <table><thead><tr><th>IP address</th><th class="r">domains</th></tr></thead><tbody>{net_rows}</tbody></table></div>
  </div>
 
- <div class="card"><h2>Smoking-gun spam anchors</h2>
-  <table><tr><td><b>Anchor text (verbatim)</b></td><td style="text-align:right"><b>ref. domains</b></td></tr>{anc_rows}</table></div>
+ <div class="card" style="margin-bottom:15px"><h2>Smoking-gun spam anchors (verbatim from the links)</h2>
+  <table><thead><tr><th>Anchor text</th><th class="r">ref. domains</th></tr></thead><tbody>{anc_rows}</tbody></table></div>
 
  <div class="warn"><b>⚠ Verify ownership before disavowing:</b> 15 near-identical window-brand microsites
-  (ngawindows.com, ngwindow.com, northgawindows.com, roiwindows.com, thermalprowindows.com, performingwindows.com …)
-  sit on shared AWS IPs and are likely <b>your own sites or a self-built PBN</b>. They are held in <b>Manual review</b>,
-  not disavow — redirect/consolidate your own sites rather than disavow them.</div>
+  (ngawindows.com, ngwindow.com, roiwindows.com, thermalprowindows.com, performingwindows.com …) sit on shared AWS IPs and are
+  likely <b>your own sites or a self-built PBN</b>. Held in manual review — redirect/consolidate your own sites, don't disavow them.</div>
 
- <div class="foot">Nothing is submitted to Google automatically. Review the workbook, then upload disavow.txt yourself.</div>
-</div></html>"""
+ <div class="card" style="margin-top:15px"><h2>How to use this</h2>
+  <div class="steps">
+   <div class="step"><b>1 · Submit</b>Upload <span class="mono">disavow.txt</span> (P1+P2 = {len(DIS)}) to Google Search Console → Disavow Tool. For the safest cut, submit P1 Core only ({len(P1)}).</div>
+   <div class="step"><b>2 · Review</b>Skim the {len(REV)} manual-review rows; move any obvious spam into disavow, keep real sites out.</div>
+   <div class="step"><b>3 · Ownership</b>Confirm the 15 microsites — disavow only if they are a third-party PBN.</div>
+   <div class="step"><b>4 · Files</b>Every list is provided as a CSV in the csv/ folder + the full workbook.</div>
+  </div></div>
+
+ <div class="foot">Nothing is submitted to Google automatically. Evidence per domain is in the workbook / complete CSV.</div>
+</div></body></html>"""
 open('dashboard.html','w').write(HTML)
 print('dashboard.html bytes:',len(HTML))
+
+# ================= CSV EXPORTS (all files) =================
+import os
+os.makedirs('csv',exist_ok=True)
+def wcsv(name,cols,data):
+    with open('csv/'+name,'w',newline='',encoding='utf-8') as o:
+        w=csv.DictWriter(o,fieldnames=cols,extrasaction='ignore'); w.writeheader()
+        for r in data: w.writerow(r)
+SC=['domain','decision','priority','strict_verdict','why','follow','aclass','example_anchor','backlink_url',
+    'authority','dr','ascore','traffic','positions','is_spam','links','ip','country','tier_reason','link_checked']
+wcsv('01_all_domains.csv',FULL,sorted(DIS+REV+KEEP,key=lambda x:(x['decision'],x['priority'],x['domain'])))
+wcsv('02_disavow_all_545.csv',SC,sorted(DIS,key=lambda x:(x['priority'],x['domain'])))
+wcsv('03_disavow_P1_core.csv',SC,sorted(P1,key=lambda x:x['domain']))
+wcsv('04_disavow_P2_recommended.csv',SC,sorted(P2,key=lambda x:x['domain']))
+wcsv('05_manual_review.csv',SC,sorted(REV,key=lambda x:x['domain']))
+wcsv('06_keep_protected.csv',SC,sorted(KEEP,key=lambda x:x['domain']))
+# google-format single column
+with open('csv/07_disavow_google_format.csv','w',newline='',encoding='utf-8') as o:
+    o.write('entry\n')
+    for r in sorted(DIS,key=lambda x:x['domain']): o.write('domain:%s\n'%r['domain'])
+# link networks
+with open('csv/08_link_networks.csv','w',newline='',encoding='utf-8') as o:
+    w=csv.writer(o); w.writerow(['ip','domains_on_ip','member_domains'])
+    for ip,d in sorted(netmap.items(),key=lambda x:-len(x[1])): w.writerow([ip,len(d),', '.join(sorted(d))])
+# toxic anchors
+with open('csv/09_toxic_anchors.csv','w',newline='',encoding='utf-8') as o:
+    w=csv.writer(o); w.writerow(['anchor_text','referring_domains']); [w.writerow([a,n]) for a,n in anchors]
+# summary
+with open('csv/10_summary.csv','w',newline='',encoding='utf-8') as o:
+    w=csv.writer(o); w.writerow(['metric','value'])
+    for k,v in [('total_referring_domains',len(rows)),('disavow_total',len(DIS)),('disavow_P1_core',len(P1)),
+        ('disavow_P2_recommended',len(P2)),('manual_review',len(REV)),('keep_protected',len(KEEP)),
+        ('toxic_pct',toxic_pct),('disavow_dofollow',dof),('disavow_nofollow',nof),
+        ('downgraded_disavow_to_review',sum(1 for r in rows if 'DOWNGRADED' in r.get('strict_verdict',''))),
+        ('upgraded_review_to_disavow',sum(1 for r in rows if 'UPGRADED' in r.get('strict_verdict',''))),
+        ('microsites_ownership_hold',sum(1 for r in rows if 'ownership' in r.get('strict_verdict','')))]:
+        w.writerow([k,v])
+# keep the flat complete CSV at root too
+print('CSV files written to csv/:',sorted(os.listdir('csv')))
 print('disavow',len(DIS),'review',len(REV),'keep',len(KEEP),'toxic%',toxic_pct)
-print('top cats:',top_cats[:5])
-print('nets:',nets)

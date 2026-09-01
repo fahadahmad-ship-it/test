@@ -1,0 +1,13 @@
+metric,value
+total_referring_domains,803
+disavow_total,545
+disavow_P1_core,411
+disavow_P2_recommended,134
+manual_review,196
+keep_protected,62
+toxic_pct,68
+disavow_dofollow,315
+disavow_nofollow,230
+downgraded_disavow_to_review,104
+upgraded_review_to_disavow,21
+microsites_ownership_hold,15
