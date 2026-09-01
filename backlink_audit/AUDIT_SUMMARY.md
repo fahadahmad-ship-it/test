@@ -54,11 +54,18 @@ Each domain was scored on **independent, corroborating signals** — no domain i
 
 ---
 
-## 4. Results (after critical QA pass)
+## 4. Results (evidence-tiered — verified at backlink level)
 
-- **Flagged for disavow (HIGH + MEDIUM): 628 domains** → `disavow.txt`
-- **Manual-review-only (REVIEW): 112 domains** → in the flagged CSV / workbook, excluded from disavow.txt
-- **Protected (KEEP): 63 domains** — e.g. apple.com, yahoo.com, bing.com, pinterest.com, bbb.org, yellowpages.com, nextdoor.com, zoominfo.com, porch.com, expertise.com, glass.com, glassonweb.com, windowanddoor.com, windowdigest.com, constantcontact.com, chamberofcommerce.com.
+Every flagged domain was checked against its **actual backlink** (real source URL, anchor, follow status pulled from Semrush + Ahrefs). That lets us tier by strength of evidence rather than lump everything together:
+
+- **P1 — Core: 312** — clear spam footprint or ≥2 independent signals. Disavow with confidence.
+- **P2 — Recommended: 209** — a dead/low-quality domain that **also** carries a corroborating link signal (dofollow, money/spam anchor, farm-IP, or Ahrefs `is_spam`).
+- **➡ Recommended disavow = P1 + P2 = 521 domains** (this is what `disavow.txt` submits by default).
+- **P3 — Optional: 107** — flagged on a *single* "dead/low-quality" signal only, where the actual link is **nofollow + a branded mention** and nothing else. Not clearly manipulative, so **left commented-out** in `disavow.txt`; uncomment to push the total to 628.
+- **Manual review: 112** (+ the 107 P3) — includes the window-microsite cluster.
+- **Protected (KEEP): 63 domains**
+
+**Why not 628?** The earlier 628 counted 316 "MEDIUM," of which 110 rested on one soft "dead domain" signal. Judged against the real link (nofollow, branded, no other spam marker), those aren't clearly manipulative — Google advises disavowing only clearly manipulative links — so they moved to P3/Optional. — e.g. apple.com, yahoo.com, bing.com, pinterest.com, bbb.org, yellowpages.com, nextdoor.com, zoominfo.com, porch.com, expertise.com, glass.com, glassonweb.com, windowanddoor.com, windowdigest.com, constantcontact.com, chamberofcommerce.com.
 
 ### Critical QA / second-look (every decision re-checked)
 An independent verification pass re-examined each domain and surfaced **57 QA items**, of which ~29 are genuine judgment calls a human should confirm (the rest are positive "confirmed by both tools" notes). The QA rules catch: *passed-but-toxic*, *flagged-but-has-real-traffic*, *high-authority-but-off-topic (possible paid guest post)*, and *own-network*. See the **QA Second-Look** tab / `qa_note` column.

@@ -49,9 +49,39 @@ for r in rows:
     r['why']=WHY.get(r['category'],r['category'])
     r['authority']=max(float(r['dr'] or 0), int(r['ascore'] or 0))
 
+# ---- evidence-based priority tiering (answers "628 is too high") ----
+FARM={'203.161.54.114','118.139.181.85','118.139.176.46','118.139.178.200','118.139.161.199',
+ '118.139.181.255','184.168.115.60','195.20.19.178','67.223.118.29','188.40.17.96','92.249.46.138','191.101.14.187'}
+def corroborating(r):
+    b=get_bl(r['domain']); a=get_anchor(r['domain']); rs=[]
+    if (b.get('dofollow',0) or 0)>0 or a.get('dofollow')=='dofollow': rs.append('dofollow')
+    if a.get('anchor_type') in ('SPAM/money','spam paragraph','commercial/keyword'): rs.append('money/spam anchor')
+    if r['ip'] in FARM: rs.append('farm IP')
+    if str(r['is_spam']).upper()=='TRUE': rs.append('is_spam')
+    return rs
+for r in rows:
+    if r['confidence']=='HIGH':
+        r['priority']='P1 – Core (disavow)'
+    elif r['confidence']=='MEDIUM':
+        rs=corroborating(r)
+        if rs:
+            r['priority']='P2 – Recommended (disavow)'; r['tier_reason']=', '.join(rs)
+        else:
+            # only a "dead/low-quality" signal, nofollow + branded → do not auto-disavow
+            r['priority']='P3 – Optional (low-quality only)'
+            r['decision']='REVIEW'; r['confidence']='REVIEW'
+            r['tier_reason']='dead/low-quality only; link is nofollow & branded — not clearly manipulative'
+    elif r['decision']=='REVIEW':
+        r['priority']='Review (manual)'
+    else:
+        r['priority']='Keep'
+
 DIS=[r for r in rows if r['decision']=='DISAVOW']
 REV=[r for r in rows if r['decision']=='REVIEW']
 KEEP=[r for r in rows if r['decision']=='KEEP']
+P1=[r for r in DIS if r['priority'].startswith('P1')]
+P2=[r for r in DIS if r['priority'].startswith('P2')]
+P3=[r for r in rows if r['priority'].startswith('P3')]
 conf=collections.Counter(r['confidence'] for r in rows)
 
 # ================= WORKBOOK =================
@@ -87,13 +117,20 @@ info=[
  ['3','The “③ Disavow file” tab is the exact text to upload to Google Search Console → Disavow Tool (or use disavow.txt).'],
  ['4','“④ Keep” = do NOT disavow. “⑤ Full data” = every signal if you want the detail.'],
  ['',''],
- ['NUMBERS','—'],
+ ['NUMBERS (evidence-tiered)','—'],
  ['Total referring domains',len(rows)],
- ['Disavow (HIGH+MEDIUM)',len(DIS)],
- ['   • HIGH confidence',conf['HIGH']],
- ['   • MEDIUM confidence',conf['MEDIUM']],
- ['Manual review',len(REV)],
+ ['RECOMMENDED disavow = P1 + P2',len(P1)+len(P2)],
+ ['   • P1 Core (footprint / 2+ signals)',len(P1)],
+ ['   • P2 Recommended (dofollow/money-anchor/farm-IP/spam)',len(P2)],
+ ['P3 Optional (low-quality only, nofollow+branded)',len(P3)],
+ ['   → left OUT of disavow.txt by default; uncomment to add (max total %d)'%(len(P1)+len(P2)+len(P3)),''],
+ ['Manual review (incl. P3 + microsites)',len(REV)],
  ['Keep (protected)',len(KEEP)],
+ ['',''],
+ ['WHY NOT 628?','—'],
+ ['The earlier 628 included 316 “MEDIUM”, of which 110 were flagged on ONE soft “dead domain” signal only.',''],
+ ['Using the actual backlink (nofollow + branded, no other spam marker) those 110 are NOT clearly manipulative,',''],
+ ['so they are moved to P3/Optional. Google advises disavowing only clearly manipulative links.',''],
  ['',''],
  ['ACTUAL BACKLINKS CHECKED','—'],
  ['Pulled 5,000+ individual backlink records (source page URL, anchor, follow) from Semrush + Ahrefs.',''],
@@ -113,26 +150,44 @@ ws['A1'].font=Font(bold=True,size=14,color='1F3864')
 for rr in range(1,ws.max_row+1):
     if ws.cell(rr,2).value=='—': ws.cell(rr,1).font=Font(bold=True,color='C00000')
 
-SIMPLE=['domain','decision','confidence','why','follow','example_anchor','backlink_url','authority','traffic','link_checked']
-SW={'domain':28,'decision':11,'confidence':11,'why':34,'follow':9,'example_anchor':34,'backlink_url':50,
+SIMPLE=['domain','decision','priority','why','follow','example_anchor','backlink_url','authority','traffic','link_checked']
+SW={'domain':28,'decision':11,'priority':26,'why':32,'follow':9,'example_anchor':32,'backlink_url':48,
     'authority':10,'traffic':9,'link_checked':16}
 build(wb.create_sheet('② Review list'),SIMPLE,DIS+REV,SW)
 build(wb.create_sheet('④ Keep (do NOT disavow)'),SIMPLE,KEEP,SW)
 
-# Tab 3: disavow file text
+# Tab 3: disavow file text (P1 Core + P2 Recommended active; P3 optional commented)
 ws=wb.create_sheet('③ Disavow file')
 ws.append(['Paste into Google Search Console → Disavow Tool (or use disavow.txt)'])
 ws['A1'].font=Font(bold=True,color='1F3864')
-ws.append([f'# ngwindows.com disavow — {datetime.date.today()} — {len(DIS)} domains'])
-for r in sorted(DIS,key=lambda x:(x['confidence'],x['domain'])):
-    ws.append([f"domain:{r['domain']}"])
-ws.column_dimensions['A'].width=45
+ws.append([f'# ngwindows.com disavow — {datetime.date.today()}'])
+ws.append([f'# RECOMMENDED = P1 Core ({len(P1)}) + P2 Recommended ({len(P2)}) = {len(P1)+len(P2)} domains'])
+ws.append(['# --- P1 CORE: clear spam footprint or 2+ signals ---'])
+for r in sorted(P1,key=lambda x:x['domain']): ws.append([f"domain:{r['domain']}"])
+ws.append(['# --- P2 RECOMMENDED: dofollow / money anchor / farm-IP / spam-flagged ---'])
+for r in sorted(P2,key=lambda x:x['domain']): ws.append([f"domain:{r['domain']}"])
+ws.append(['# --- P3 OPTIONAL (low-quality only; nofollow+branded). Uncomment to include ---'])
+for r in sorted(P3,key=lambda x:x['domain']): ws.append([f"#domain:{r['domain']}"])
+ws.column_dimensions['A'].width=60
+
+# write disavow.txt (recommended default = P1+P2, P3 commented)
+with open('disavow.txt','w') as o:
+    o.write(f'# Disavow file for ngwindows.com — {datetime.date.today()}\n')
+    o.write('# Source: Ahrefs + Semrush referring-domain audit, verified at backlink level.\n')
+    o.write(f'# RECOMMENDED to submit = P1 Core ({len(P1)}) + P2 Recommended ({len(P2)}) = {len(P1)+len(P2)} domains.\n')
+    o.write(f'# P3 Optional ({len(P3)}) low-quality-only domains are listed commented at the bottom — uncomment to include (total would be {len(P1)+len(P2)+len(P3)}).\n#\n')
+    o.write(f'# ===== P1 — CORE ({len(P1)}): clear spam footprint or 2+ independent signals =====\n')
+    for r in sorted(P1,key=lambda x:x['domain']): o.write(f"domain:{r['domain']}\n")
+    o.write(f'#\n# ===== P2 — RECOMMENDED ({len(P2)}): dofollow / money anchor / farm-IP / spam-flagged =====\n')
+    for r in sorted(P2,key=lambda x:x['domain']): o.write(f"domain:{r['domain']}\n")
+    o.write(f'#\n# ===== P3 — OPTIONAL ({len(P3)}): low-quality/dead only, nofollow + branded. Uncomment to disavow =====\n')
+    for r in sorted(P3,key=lambda x:x['domain']): o.write(f"#domain:{r['domain']}\n")
 
 # Tab 5: full data
-FULL=['domain','decision','confidence','category','why','anchor_type','example_anchor','backlink_url',
+FULL=['domain','decision','priority','confidence','category','why','anchor_type','example_anchor','backlink_url',
       'follow','bl_count','dofollow_n','nofollow_n','link_checked','dr','ascore','authority','traffic',
-      'positions','is_spam','links','ip','country','evidence','qa_note']
-FW={'domain':30,'category':26,'why':34,'example_anchor':40,'backlink_url':50,'evidence':55,'qa_note':60,'ip':15}
+      'positions','is_spam','links','ip','country','tier_reason','evidence','qa_note']
+FW={'domain':30,'priority':26,'category':26,'why':34,'example_anchor':40,'backlink_url':50,'tier_reason':40,'evidence':55,'qa_note':60,'ip':15}
 build(wb.create_sheet('⑤ Full data'),FULL,DIS+REV+KEEP,{**SW,**FW})
 
 wb.save('ngwindows_disavow_review.xlsx')
@@ -188,8 +243,9 @@ def kpi(v,l,c):
 toxic_pct=round(100*len(DIS)/len(rows))
 net_rows=''.join(f'<tr><td class="mono">{html.escape(ip)}</td><td style="text-align:right">{n}</td></tr>' for ip,n in nets)
 anc_rows=''.join(f'<tr><td>{html.escape(a)}</td><td style="text-align:right">{n}</td></tr>' for a,n in anchors)
-legend=''.join(f'<span class="lg"><i style="background:{c}"></i>{l} — {v}</span>' for l,v,c in
-    [('Disavow',len(DIS),P['disavow']),('Review',len(REV),P['review']),('Keep',len(KEEP),P['keep'])])
+DONUT=[('Recommended disavow',len(P1)+len(P2),P['disavow']),('Optional (low-qual)',len(P3),'#eb6834'),
+       ('Manual review',len(REV)-len(P3),P['review']),('Keep',len(KEEP),P['keep'])]
+legend=''.join(f'<span class="lg"><i style="background:{c}"></i>{l} — {v}</span>' for l,v,c in DONUT)
 
 HTML=f"""<!doctype html><html lang="en"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -222,21 +278,22 @@ HTML=f"""<!doctype html><html lang="en"><meta charset="utf-8">
  <div class="sub">Ahrefs + Semrush referring-domain audit · {datetime.date.today()} · anchors, follow-status &amp; {sum(1 for r in (DIS+REV) if r.get('backlink_url'))}/{len(DIS)+len(REV)} flagged domains checked at the actual-backlink level</div>
 
  <div class="banner"><b>Profile verdict: heavily manipulated (paid-PBN) link profile.</b>
-  {toxic_pct}% of referring domains are toxic and staged for disavow. The scheme is self-evident in the anchor text
-  (“Buy Backlinks Online Cheap”, “Premium PBN Network Service”, Telegram spam).</div>
+  Recommended disavow is <b>{len(P1)+len(P2)}</b> domains (P1 Core {len(P1)} + P2 Recommended {len(P2)}), each backed by a real
+  spam footprint, dofollow/money anchor, farm-IP, or spam flag. A further {len(P3)} “dead but harmless” domains are
+  left <b>optional</b>. The scheme is self-evident in the anchors (“Buy Backlinks Online Cheap”, Telegram spam).</div>
 
  <div class="grid k5" style="margin-bottom:16px">
   {kpi(len(rows),'Referring domains',P['ink'])}
-  {kpi(len(DIS),'Flag to disavow',P['disavow'])}
-  {kpi(len(REV),'Manual review',P['review'])}
+  {kpi(len(P1)+len(P2),'Recommended disavow',P['disavow'])}
+  {kpi(len(P3),'Optional (low-qual)',P['review'])}
+  {kpi(len(REV)-len(P3),'Manual review',P['review'])}
   {kpi(len(KEEP),'Keep (protected)',P['keep'])}
-  {kpi(str(toxic_pct)+'%','Toxic share',P['disavow'])}
  </div>
 
  <div class="grid two" style="margin-bottom:16px">
   <div class="card"><h2>Why domains are flagged (disavow reasons)</h2>{hbars(top_cats,P['disavow'])}</div>
   <div class="card"><h2>Decision split</h2>
-   <div class="donutrow">{donut([('Disavow',len(DIS),P['disavow']),('Review',len(REV),P['review']),('Keep',len(KEEP),P['keep'])])}
+   <div class="donutrow">{donut(DONUT)}
     <div>{legend.replace('<span','<div style="margin:6px 0" ').replace('</span>','</div>')}</div></div></div>
  </div>
 
