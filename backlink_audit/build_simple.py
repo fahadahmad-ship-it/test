@@ -5,6 +5,7 @@ import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 
+import json
 rows=list(csv.DictReader(open('merged_all_domains.csv')))
 anch={r['domain']:r for r in csv.DictReader(open('anchor_by_domain.csv'))}
 def root2(d):  # last two labels, for subdomain fallback matching
@@ -12,6 +13,10 @@ def root2(d):  # last two labels, for subdomain fallback matching
 anch_root={root2(k):v for k,v in anch.items()}
 def get_anchor(d):
     return anch.get(d) or anch.get(root2(d)) or anch_root.get(root2(d)) or {}
+# actual backlink-level evidence from Semrush (source URL + anchor + follow)
+BL=json.load(open('semrush_backlink_by_domain.json'))
+def get_bl(d):
+    return BL.get(d) or BL.get(root2(d)) or {}
 
 WHY={
  'Link-selling / SEO-service PBN':'Paid-link / backlink-seller site',
@@ -31,10 +36,16 @@ WHY={
  'LEGITIMATE / high-authority':'Legitimate / high-authority — keep',
 }
 for r in rows:
-    a=get_anchor(r['domain'])
-    r['anchor_type']=a.get('anchor_type','n/a (Semrush-only)')
-    r['anchor']=a.get('anchor','')
-    r['follow']=a.get('dofollow','')
+    a=get_anchor(r['domain']); b=get_bl(r['domain'])
+    r['anchor_type']=a.get('anchor_type','')
+    # example backlink: prefer Semrush source URL, else Ahrefs url_from
+    r['backlink_url']=b.get('ex_url') or a.get('url_from','')
+    r['example_anchor']=b.get('ex_anchor') or a.get('anchor','')
+    r['follow']=b.get('ex_follow') or a.get('dofollow','')
+    r['bl_count']=b.get('bl_count','')
+    r['dofollow_n']=b.get('dofollow','')
+    r['nofollow_n']=b.get('nofollow','')
+    r['link_checked']='yes' if (b or a) else 'no (beyond sample)'
     r['why']=WHY.get(r['category'],r['category'])
     r['authority']=max(float(r['dr'] or 0), int(r['ascore'] or 0))
 
@@ -84,12 +95,15 @@ info=[
  ['Manual review',len(REV)],
  ['Keep (protected)',len(KEEP)],
  ['',''],
- ['ANCHORS','—'],
- ['Anchor text WAS analysed. Sample toxic anchors found across 200+ domains:',''],
+ ['ACTUAL BACKLINKS CHECKED','—'],
+ ['Pulled 5,000+ individual backlink records (source page URL, anchor, follow) from Semrush + Ahrefs.',''],
+ ['Each flagged row shows a real example link in “backlink_url” + “example_anchor”; “link_checked” = yes/beyond-sample.',''],
+ ['Sample toxic anchors found across 200+ domains:',''],
  ['  •','“…SEOExpress.org and their backlink building service worked wonders… traffic +400%”'],
  ['  •','“High Quality Dofollow Backlinks DA50 PA40 Premium PBN … Buy Backlinks Online Cheap”'],
  ['  •','“JOIN OUR TELEGRAM https://t.me/s/darksidelinks”'],
- ['Of 250 Ahrefs-measured links, 142 are nofollow (pass no equity — lower priority).',''],
+ ['Blogspot PBNs (innocyscx / burnersgamershitasd) link using your microsite names (qualitypluswindows.com, roiwindows.com) as anchors.',''],
+ ['Most spam links are nofollow (pass no equity — lower priority); the follow column flags the dofollow ones that matter most.',''],
  ['',''],
  ['⚠ OWNERSHIP','15 window-brand microsites (ngawindows.com, ngwindow.com, roiwindows.com …) may be YOUR OWN sites — they are in REVIEW, not disavow. Confirm before acting.'],
 ]
@@ -99,8 +113,9 @@ ws['A1'].font=Font(bold=True,size=14,color='1F3864')
 for rr in range(1,ws.max_row+1):
     if ws.cell(rr,2).value=='—': ws.cell(rr,1).font=Font(bold=True,color='C00000')
 
-SIMPLE=['domain','decision','confidence','why','anchor_type','follow','authority','traffic','sources']
-SW={'domain':30,'decision':11,'confidence':11,'why':40,'anchor_type':18,'follow':10,'authority':10,'traffic':9,'sources':14}
+SIMPLE=['domain','decision','confidence','why','follow','example_anchor','backlink_url','authority','traffic','link_checked']
+SW={'domain':28,'decision':11,'confidence':11,'why':34,'follow':9,'example_anchor':34,'backlink_url':50,
+    'authority':10,'traffic':9,'link_checked':16}
 build(wb.create_sheet('② Review list'),SIMPLE,DIS+REV,SW)
 build(wb.create_sheet('④ Keep (do NOT disavow)'),SIMPLE,KEEP,SW)
 
@@ -114,9 +129,10 @@ for r in sorted(DIS,key=lambda x:(x['confidence'],x['domain'])):
 ws.column_dimensions['A'].width=45
 
 # Tab 5: full data
-FULL=['domain','decision','confidence','category','why','anchor_type','anchor','follow',
-      'dr','ascore','authority','traffic','positions','is_spam','links','ip','country','evidence','qa_note']
-FW={'domain':30,'category':26,'why':34,'anchor':46,'evidence':55,'qa_note':60,'ip':15}
+FULL=['domain','decision','confidence','category','why','anchor_type','example_anchor','backlink_url',
+      'follow','bl_count','dofollow_n','nofollow_n','link_checked','dr','ascore','authority','traffic',
+      'positions','is_spam','links','ip','country','evidence','qa_note']
+FW={'domain':30,'category':26,'why':34,'example_anchor':40,'backlink_url':50,'evidence':55,'qa_note':60,'ip':15}
 build(wb.create_sheet('⑤ Full data'),FULL,DIS+REV+KEEP,{**SW,**FW})
 
 wb.save('ngwindows_disavow_review.xlsx')
@@ -203,7 +219,7 @@ HTML=f"""<!doctype html><html lang="en"><meta charset="utf-8">
 </style>
 <div class="wrap">
  <h1>ngwindows.com — Backlink Disavow Dashboard</h1>
- <div class="sub">Ahrefs + Semrush referring-domain audit · {datetime.date.today()} · anchors and follow-status analysed</div>
+ <div class="sub">Ahrefs + Semrush referring-domain audit · {datetime.date.today()} · anchors, follow-status &amp; {sum(1 for r in (DIS+REV) if r.get('backlink_url'))}/{len(DIS)+len(REV)} flagged domains checked at the actual-backlink level</div>
 
  <div class="banner"><b>Profile verdict: heavily manipulated (paid-PBN) link profile.</b>
   {toxic_pct}% of referring domains are toxic and staged for disavow. The scheme is self-evident in the anchor text
