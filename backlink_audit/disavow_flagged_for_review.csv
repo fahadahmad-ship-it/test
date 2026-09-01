@@ -1,0 +1,741 @@
+domain,sources,confidence,category,dr,ascore,traffic,positions,is_spam,links,ip,country,first,last,evidence
+ineed2pee.com,semrush,HIGH,Adult spam,0.0,10,0,0,False,1,216.201.82.231,us,2025-11-10,2026-03-05,footprint: Adult spam
+submissivewomendominated.us,ahrefs,HIGH,Adult spam,0.0,0,0,0,False,3,,,2017-11-05,2017-12-10,"footprint: Adult spam | S:dead (auth=0, 0 traffic, 0 keywords)"
+bestwebstats.com,semrush,HIGH,Auto-generated stats / worth-checker,0.0,2,0,0,False,61,184.168.115.60,sg,2026-02-28,2026-09-01,"footprint: Auto-generated stats / worth-checker | S:link-network IP 184.168.115.60 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+complaintinfo.com,semrush,HIGH,Auto-generated stats / worth-checker,0.0,6,0,0,False,11,104.21.35.245,,2025-10-06,2026-08-31,footprint: Auto-generated stats / worth-checker | S:no organic traffic/keywords (auth=6)
+domainanalysis.org,semrush,HIGH,Auto-generated stats / worth-checker,0.0,2,0,0,False,63,184.168.115.60,sg,2026-01-23,2026-09-01,"footprint: Auto-generated stats / worth-checker | S:link-network IP 184.168.115.60 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+domainsc.com,semrush,HIGH,Auto-generated stats / worth-checker,0.0,2,0,0,False,62,184.168.115.60,sg,2026-03-21,2026-08-31,"footprint: Auto-generated stats / worth-checker | S:link-network IP 184.168.115.60 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+getwebsiteworth.com,semrush,HIGH,Auto-generated stats / worth-checker,0.0,3,0,0,False,57,118.139.178.110,sg,2025-12-01,2026-08-29,"footprint: Auto-generated stats / worth-checker | S:known link-farm IP block | S:dead (auth=3, 0 traffic, 0 keywords)"
+gsitestatus.com,semrush,HIGH,Auto-generated stats / worth-checker,0.0,4,0,0,False,4,172.67.136.161,,2026-05-23,2026-05-23,footprint: Auto-generated stats / worth-checker | S:no organic traffic/keywords (auth=4)
+seodomains.website,semrush,HIGH,Auto-generated stats / worth-checker,0.0,3,0,0,False,36,172.67.212.159,,2025-12-17,2026-08-29,"footprint: Auto-generated stats / worth-checker | S:dead (auth=3, 0 traffic, 0 keywords)"
+websiterace.com,semrush,HIGH,Auto-generated stats / worth-checker,0.0,2,0,0,False,41,118.139.176.46,sg,2025-12-28,2026-08-31,"footprint: Auto-generated stats / worth-checker | S:link-network IP 118.139.176.46 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+websitescrawl.art,semrush,HIGH,Auto-generated stats / worth-checker,0.0,2,0,0,False,19,118.139.181.85,sg,2026-03-16,2026-08-30,"footprint: Auto-generated stats / worth-checker | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+webworthchecker.cv,semrush,HIGH,Auto-generated stats / worth-checker,0.0,2,0,0,False,30,118.139.181.85,sg,2026-03-15,2026-08-29,"footprint: Auto-generated stats / worth-checker | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+23cucuc12es.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,172.253.122.132,us,2026-03-08,2026-08-26,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+6rpsskystyrenees.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,142.250.31.132,us,2026-03-14,2026-08-29,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+9bobob15es.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,3,142.251.163.132,us,2026-03-07,2026-08-30,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+alysonspes.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,10,172.253.139.132,us,2026-03-18,2026-08-23,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+anamorphic-aes.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,172.253.63.132,us,2026-03-12,2026-08-08,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+arceofswedenes.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,142.251.111.132,us,2026-03-20,2026-08-14,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+bifoldingdoorsraganamo.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,2,192.178.155.132,us,2026-05-09,2026-05-09,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+burnersgamershitasd.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,149,142.251.163.132,us,2026-03-13,2026-08-31,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+carwindowreplacementfukiyabo.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,172.253.63.132,us,2026-03-15,2026-03-15,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+carwindowreplacementnosatsuji.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,142.251.111.132,us,2026-04-09,2026-04-09,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+carwindowreplacementznali.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,172.253.115.132,us,2026-03-15,2026-03-15,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+chlamydia-genome.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,64.233.180.132,us,2026-03-14,2026-03-14,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+customdoorspeisara.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,142.251.111.132,us,2026-04-05,2026-04-05,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+dommonjilike.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,7,172.253.122.132,us,2026-03-17,2026-08-28,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+doorsinteriorkakerumo.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,2,142.251.167.132,us,2026-08-13,2026-08-13,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+doubleentrydoorspokusubo.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,6,192.178.218.132,us,2026-03-21,2026-04-19,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+doublehungwindownome.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,172.253.115.132,us,2026-06-24,2026-06-24,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+doublehungwindowwosukana.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,192.178.218.132,us,2026-04-24,2026-04-24,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+fiberglassdoorpantai.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,2,172.253.139.132,us,2026-08-02,2026-08-02,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+fiberglassdoorseshizakino.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,2,192.179.18.132,us,2026-08-04,2026-08-04,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+glassreplacementkaev.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,4,172.253.139.132,us,2026-03-07,2026-07-23,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+glassreplacementlnenbire.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,2,192.178.218.132,us,2026-04-07,2026-04-26,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+glassreplacementnemurashi.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,2,64.233.180.132,us,2026-08-24,2026-08-24,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+glassreplacementsiholo.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,3,172.253.63.132,us,2026-05-18,2026-07-28,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+glazeddoorsrikanmu.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,9,142.250.31.132,us,2026-03-09,2026-08-29,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+innocyscx.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,36,172.253.63.132,us,2026-03-16,2026-09-01,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+insurancesolutionforyouesv.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,8,172.253.122.132,us,2026-03-17,2026-08-28,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+interiorfrenchdoorsederuma.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,142.251.163.132,us,2026-06-29,2026-06-29,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+knotknastylimddsd.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,142.251.16.132,us,2026-03-01,2026-03-01,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+mahoganykeishina.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,2,142.251.163.132,us,2026-06-13,2026-06-13,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+morisova.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,64.233.180.132,us,2026-01-20,2026-03-09,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+movil-13-11-2021.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,26,142.250.31.132,us,2026-02-28,2026-08-29,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+novaland-oceanresidence.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,23,172.253.139.132,us,2026-02-28,2026-09-01,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+odicdsfe.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,27,172.253.139.132,us,2026-03-01,2026-09-01,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+olspsystem.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,31,172.253.139.132,us,2026-03-01,2026-08-28,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+oozeas.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,146,172.253.122.132,us,2026-03-14,2026-08-28,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+palmspringsrentaljinokoku.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,2,172.253.63.132,us,2026-03-24,2026-03-24,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+pasteurnorte29.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,172.253.63.132,us,2026-03-18,2026-08-08,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+picturewindowtenyude.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,2,173.194.45.132,us,2026-04-15,2026-08-08,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+replacementwindowsctankasu.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,142.251.16.132,us,2026-03-04,2026-03-04,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+replacementwindowstodays.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,6,173.194.45.132,us,2025-10-18,2026-08-08,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+slidingdoorantikreigai.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,3,172.253.115.132,us,2026-04-10,2026-06-14,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+vabeatzweser.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,7,142.250.31.132,us,2026-03-27,2026-08-31,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+vinylwindowszosima.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,2,172.253.62.132,us,2026-04-16,2026-05-12,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+windowcompaniesbado.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,2,142.251.111.132,us,2026-03-24,2026-08-13,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+windowcompaniesbaisashi.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,142.251.179.132,us,2026-02-26,2026-08-25,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+windowglassreplacementmarik.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,3,172.253.62.132,us,2026-03-19,2026-06-02,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+windowglassreplacementnshinso.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,142.251.179.132,us,2026-03-25,2026-03-25,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+windowpanestsuihasu.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,6,142.251.179.132,us,2026-03-06,2026-03-25,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+windowpaneszor.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,10,172.253.139.132,us,2026-03-28,2026-08-28,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+windowreplacementpodrya.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,5,142.251.163.132,us,2026-05-23,2026-07-14,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+windowreplacementyubirige.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,3,142.251.111.132,us,2026-04-27,2026-08-11,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+windowstylesrabokume.blogspot.com,semrush,HIGH,Blogspot PBN / spam post,0.0,2,0,0,False,1,192.178.218.132,us,2026-04-18,2026-04-18,"footprint: Blogspot PBN / spam post | S:dead (auth=2, 0 traffic, 0 keywords)"
+all-aged-domains.com,semrush,HIGH,Expired-domain / auto network,0.0,5,0,0,False,20,172.67.215.228,,2025-10-24,2026-09-01,footprint: Expired-domain / auto network | S:no organic traffic/keywords (auth=5)
+alltopleveldomains.space,semrush,HIGH,Expired-domain / auto network,0.0,2,0,0,False,15,118.139.181.85,sg,2026-02-08,2026-04-30,"footprint: Expired-domain / auto network | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+domraider.eu.com,semrush,HIGH,Expired-domain / auto network,0.0,0,0,0,False,9,104.21.16.138,,2026-08-11,2026-09-01,"footprint: Expired-domain / auto network | S:dead (auth=0, 0 traffic, 0 keywords)"
+domraider.gb.net,semrush,HIGH,Expired-domain / auto network,0.0,0,0,0,False,13,104.21.94.138,,2026-08-10,2026-08-30,"footprint: Expired-domain / auto network | S:dead (auth=0, 0 traffic, 0 keywords)"
+domraider.it.com,semrush,HIGH,Expired-domain / auto network,0.0,0,0,0,False,10,104.21.1.165,,2026-08-16,2026-08-29,"footprint: Expired-domain / auto network | S:dead (auth=0, 0 traffic, 0 keywords)"
+centralc.pages.dev,semrush,HIGH,Free-host throwaway page,0.0,2,0,0,False,1,172.66.44.212,,2026-03-08,2026-08-23,"footprint: Free-host throwaway page | S:dead (auth=2, 0 traffic, 0 keywords)"
+flamingos.pages.dev,semrush,HIGH,Free-host throwaway page,0.0,2,0,0,False,2,172.66.47.118,,2025-11-29,2026-08-02,"footprint: Free-host throwaway page | S:dead (auth=2, 0 traffic, 0 keywords)"
+global-rank.pages.dev,semrush,HIGH,Free-host throwaway page,0.0,4,0,0,False,1,172.66.44.155,,2026-07-27,2026-07-27,footprint: Free-host throwaway page | S:no organic traffic/keywords (auth=4)
+global-ranks.pages.dev,semrush,HIGH,Free-host throwaway page,0.0,4,0,0,False,1,172.66.47.146,,2025-12-22,2026-05-18,footprint: Free-host throwaway page | S:no organic traffic/keywords (auth=4)
+gracez.pages.dev,semrush,HIGH,Free-host throwaway page,0.0,2,0,0,False,2,172.66.46.243,,2026-04-04,2026-05-24,"footprint: Free-host throwaway page | S:dead (auth=2, 0 traffic, 0 keywords)"
+huldra.pages.dev,semrush,HIGH,Free-host throwaway page,0.0,2,0,0,False,6,172.66.44.118,,2025-12-13,2026-08-30,"footprint: Free-host throwaway page | S:dead (auth=2, 0 traffic, 0 keywords)"
+naiad.pages.dev,semrush,HIGH,Free-host throwaway page,0.0,3,0,0,False,1,172.66.44.199,,2026-05-07,2026-08-23,"footprint: Free-host throwaway page | S:dead (auth=3, 0 traffic, 0 keywords)"
+rosa-humphrey.pages.dev,semrush,HIGH,Free-host throwaway page,0.0,2,0,0,False,1,172.66.44.133,,2026-01-31,2026-07-28,"footprint: Free-host throwaway page | S:dead (auth=2, 0 traffic, 0 keywords)"
+webbys.pages.dev,semrush,HIGH,Free-host throwaway page,0.0,4,0,0,False,1,172.66.47.196,,2026-03-10,2026-07-18,footprint: Free-host throwaway page | S:no organic traffic/keywords (auth=4)
+bestnz-poker-casinoslot.com,semrush,HIGH,Gambling / casino spam,0.0,2,0,0,False,3,172.67.189.170,,2026-08-27,2026-08-30,"footprint: Gambling / casino spam | S:dead (auth=2, 0 traffic, 0 keywords)"
+betwinnermirror.com,semrush,HIGH,Gambling / casino spam,0.0,2,0,0,False,2,172.67.172.111,,2026-08-27,2026-08-28,"footprint: Gambling / casino spam | S:dead (auth=2, 0 traffic, 0 keywords)"
+casinooftheking.com,semrush,HIGH,Gambling / casino spam,0.0,2,0,0,False,4,172.67.222.57,,2026-08-25,2026-08-31,"footprint: Gambling / casino spam | S:dead (auth=2, 0 traffic, 0 keywords)"
+hotonlinegaming.com,semrush,HIGH,Gambling / casino spam,0.0,3,0,0,False,8,172.67.129.112,,2026-08-24,2026-08-31,"footprint: Gambling / casino spam | S:dead (auth=3, 0 traffic, 0 keywords)"
+m98ufa.com,semrush,HIGH,Gambling / casino spam,0.0,5,0,0,False,6,172.67.170.144,,2026-07-01,2026-08-30,footprint: Gambling / casino spam | S:no organic traffic/keywords (auth=5)
+pick4d.live,semrush,HIGH,Gambling / casino spam,0.0,3,0,0,False,3,67.223.118.29,us,2026-02-03,2026-07-21,"footprint: Gambling / casino spam | S:link-network IP 67.223.118.29 (+5 sibling domains) | S:dead (auth=3, 0 traffic, 0 keywords)"
+pokerplayer365.com,semrush,HIGH,Gambling / casino spam,0.0,5,0,0,False,1,209.205.209.102,us,2026-02-09,2026-07-31,footprint: Gambling / casino spam | S:no organic traffic/keywords (auth=5)
+truebookies.com,semrush,HIGH,Gambling / casino spam,0.0,2,0,0,False,1,172.67.73.211,,2026-04-15,2026-04-15,"footprint: Gambling / casino spam | S:dead (auth=2, 0 traffic, 0 keywords)"
+ufabettererm4.com,semrush,HIGH,Gambling / casino spam,0.0,2,0,0,False,4,104.21.9.132,,2026-08-28,2026-08-30,"footprint: Gambling / casino spam | S:dead (auth=2, 0 traffic, 0 keywords)"
+99backlinksbuy.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-07-01,2026-08-24,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+allbaclinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-07-02,2026-08-28,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+atozbacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-07-02,2026-08-21,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+backlink-agency.online,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,1,172.67.220.104,,2026-04-29,2026-05-19,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+backlink-agency.pro,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,2,172.67.147.91,,2026-02-28,2026-03-21,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+backlinkboosters.online,ahrefs,HIGH,Link-selling / SEO-service PBN,0.0,0,0,0,True,2,172.67.190.21,,2025-12-19,2026-06-06,"footprint: Link-selling / SEO-service PBN | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+backlinkbuilders.pro,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,1,104.21.91.60,,2025-09-26,2026-03-13,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+backlinkhouse.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,28,118.139.161.199,sg,2026-07-03,2026-08-31,"footprint: Link-selling / SEO-service PBN | S:link-network IP 118.139.161.199 (+4 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+backlinkon.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,27,118.139.161.199,sg,2026-07-01,2026-08-29,"footprint: Link-selling / SEO-service PBN | S:link-network IP 118.139.161.199 (+4 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+backlinkoptimizer.pro,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,2,172.67.157.196,,2025-12-06,2026-03-13,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+backlinkpartners.shop,ahrefs,HIGH,Link-selling / SEO-service PBN,0.0,0,0,0,True,2,104.21.41.65,,2026-07-28,2026-08-27,"footprint: Link-selling / SEO-service PBN | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+backlinkrise.pro,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,104.21.36.17,,2026-02-17,2026-03-10,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+backlinks-checker.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,6,0,0,False,8,195.20.19.178,md,2026-03-17,2026-08-09,footprint: Link-selling / SEO-service PBN | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=6)
+backlinksbank.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,3,0,0,False,27,118.139.161.199,sg,2026-07-03,2026-08-29,"footprint: Link-selling / SEO-service PBN | S:link-network IP 118.139.161.199 (+4 sibling domains) | S:known link-farm IP block | S:dead (auth=3, 0 traffic, 0 keywords)"
+backlinkshouse.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,21,118.139.161.199,sg,2026-07-06,2026-09-01,"footprint: Link-selling / SEO-service PBN | S:link-network IP 118.139.161.199 (+4 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+backlinksolutions.info,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,5,172.67.214.7,,2025-08-30,2026-05-09,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+backlinksplace.site,semrush,HIGH,Link-selling / SEO-service PBN,0.0,0,0,0,False,1,13.140.137.15,fr,2026-07-17,2026-07-17,"footprint: Link-selling / SEO-service PBN | S:dead (auth=0, 0 traffic, 0 keywords)"
+backlinkstree.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,28,118.139.161.199,sg,2026-07-10,2026-08-31,"footprint: Link-selling / SEO-service PBN | S:link-network IP 118.139.161.199 (+4 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+bestrankbacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-06-30,2026-08-28,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+bestseobacklinkforsite.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-07-01,2026-08-29,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+bestsitesbacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-06-30,2026-08-28,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+blinks.monster,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,34,172.67.161.83,,2025-12-11,2026-08-26,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+blinks.sbs,semrush,HIGH,Link-selling / SEO-service PBN,0.0,4,0,0,False,17,104.21.3.70,,2026-01-19,2026-08-28,footprint: Link-selling / SEO-service PBN | S:no organic traffic/keywords (auth=4)
+blogerreviewers.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,7,104.21.91.112,,2026-08-24,2026-08-31,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+booastrankingwithbacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-07-02,2026-08-25,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+buyfairbacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-06-30,2026-08-20,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+buyrankbacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,5,0,0,False,3,203.161.54.114,us,2026-06-26,2026-08-28,footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:no organic traffic/keywords (auth=5)
+buyseolinks.site,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,199.188.206.19,us,2026-08-02,2026-08-19,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+buytopqualitybacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-07-02,2026-08-28,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+clicktobuybacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-07-02,2026-09-01,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+daolink.mom,semrush,HIGH,Link-selling / SEO-service PBN,0.0,3,0,0,False,4,67.223.118.29,us,2026-01-19,2026-07-20,"footprint: Link-selling / SEO-service PBN | S:link-network IP 67.223.118.29 (+5 sibling domains) | S:dead (auth=3, 0 traffic, 0 keywords)"
+eliteseobacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-08-06,2026-08-23,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+firstguestpost.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,5,0,0,False,1,104.21.72.232,,2026-08-29,2026-08-29,footprint: Link-selling / SEO-service PBN | S:no organic traffic/keywords (auth=5)
+friendlybacklinksbuy.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-06-30,2026-08-27,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+goooogla.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,4,0,0,False,35,203.161.54.114,us,2026-04-06,2026-08-26,footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:no organic traffic/keywords (auth=4)
+increasewebtrafficwithlinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-07-01,2026-08-25,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+linksnatcher.art,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,23,118.139.181.85,sg,2026-03-18,2026-08-30,"footprint: Link-selling / SEO-service PBN | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+linksnatcher.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,59,118.139.181.255,sg,2026-01-11,2026-08-23,"footprint: Link-selling / SEO-service PBN | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+mediaboooster.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,5,0,0,False,4,172.67.157.188,,2026-08-25,2026-08-31,footprint: Link-selling / SEO-service PBN | S:no organic traffic/keywords (auth=5)
+newblogerseo.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,172.67.161.249,,2026-08-27,2026-08-30,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+quickseolinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-07-02,2026-08-25,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+rankvance-agency.online,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,4,172.67.188.70,,2025-12-25,2026-07-05,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+rankvance.info,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,4,104.21.30.204,,2025-12-24,2026-05-22,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+rankvance.online,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,4,172.67.140.5,,2025-10-16,2026-05-16,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+rankvance.website,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,2,104.21.61.71,,2025-09-07,2026-04-12,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+rankvanceagency.info,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,4,104.21.43.18,,2026-03-01,2026-05-17,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+rankvanceauthority.info,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,172.67.211.24,,2025-12-21,2026-07-05,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+rankvanceauthority.pro,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,1,104.21.20.47,,2026-02-15,2026-03-08,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+rankvanceboost.info,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,5,172.67.222.56,,2025-09-10,2026-04-10,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+rankvancelinks.info,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,6,172.67.185.200,,2025-12-02,2026-08-18,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+rankvancelinks.online,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,5,172.67.209.72,,2025-10-16,2026-08-18,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+rankvanceseo.info,semrush,HIGH,Link-selling / SEO-service PBN,0.0,5,0,0,False,4,172.67.183.193,,2025-08-31,2026-07-06,footprint: Link-selling / SEO-service PBN | S:no organic traffic/keywords (auth=5)
+rankvanceseo.website,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,1,104.21.13.220,,2026-01-12,2026-03-20,"footprint: Link-selling / SEO-service PBN | S:dead (auth=2, 0 traffic, 0 keywords)"
+rarebacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-07-02,2026-08-25,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+seolinkexpress.shop,ahrefs,HIGH,Link-selling / SEO-service PBN,0.0,0,0,0,True,2,172.67.188.238,,2026-08-13,,"footprint: Link-selling / SEO-service PBN | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+skylinkseo.site,semrush,HIGH,Link-selling / SEO-service PBN,0.0,4,0,0,False,3,67.223.118.29,us,2025-11-24,2026-07-18,footprint: Link-selling / SEO-service PBN | S:link-network IP 67.223.118.29 (+5 sibling domains) | S:no organic traffic/keywords (auth=4)
+superbqualitybacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-07-01,2026-09-01,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+topratedbacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-08-12,2026-08-29,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+trafficboosterlinkseo.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-06-30,2026-08-18,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+viralbacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-06-28,2026-08-25,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+webbacklinkskbuy.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-08-09,2026-08-26,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+webrankingsolutionbacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-06-29,2026-08-26,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+welinkbacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-06-30,2026-08-26,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+worldbusinesspromote.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,3,0,0,False,3,67.223.118.29,us,2026-03-31,2026-07-16,"footprint: Link-selling / SEO-service PBN | S:link-network IP 67.223.118.29 (+5 sibling domains) | S:dead (auth=3, 0 traffic, 0 keywords)"
+worldtopbacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-06-29,2026-08-27,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+wowqualitybacklinks.com,semrush,HIGH,Link-selling / SEO-service PBN,0.0,2,0,0,False,3,203.161.54.114,us,2026-06-29,2026-08-25,"footprint: Link-selling / SEO-service PBN | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+allwebsitesdirectory.com,semrush,HIGH,Low-quality directory / TLD list,0.0,2,0,0,False,60,184.168.115.60,sg,2026-01-03,2026-09-01,"footprint: Low-quality directory / TLD list | S:link-network IP 184.168.115.60 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+australianwebdirectory.shop,semrush,HIGH,Low-quality directory / TLD list,0.0,3,0,0,False,22,184.168.111.168,sg,2025-06-21,2026-03-14,"footprint: Low-quality directory / TLD list | S:known link-farm IP block | S:dead (auth=3, 0 traffic, 0 keywords)"
+directorylinkservice.com,semrush,HIGH,Low-quality directory / TLD list,0.0,3,0,0,False,6,184.168.113.185,sg,2026-02-22,2026-07-04,"footprint: Low-quality directory / TLD list | S:known link-farm IP block | S:dead (auth=3, 0 traffic, 0 keywords)"
+domainwork.space,semrush,HIGH,Low-quality directory / TLD list,0.0,2,0,0,False,13,118.139.181.85,sg,2026-02-14,2026-04-30,"footprint: Low-quality directory / TLD list | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+newwebsiteslist.com,semrush,HIGH,Low-quality directory / TLD list,0.0,2,0,0,False,5,184.168.115.60,sg,2026-07-09,2026-08-26,"footprint: Low-quality directory / TLD list | S:link-network IP 184.168.115.60 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+topleveldomains.space,semrush,HIGH,Low-quality directory / TLD list,0.0,2,0,0,False,24,118.139.181.85,sg,2026-02-10,2026-04-30,"footprint: Low-quality directory / TLD list | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+toplist.co.in,semrush,HIGH,Low-quality directory / TLD list,0.0,4,0,0,False,1,184.168.109.253,sg,2026-04-16,2026-08-13,footprint: Low-quality directory / TLD list | S:known link-farm IP block | S:no organic traffic/keywords (auth=4)
+trendspotdirectory.com,ahrefs+semrush,HIGH,Low-quality directory / TLD list,0.0,6,0,0,False,1,35.208.147.119,us,2026-06-14,2026-08-15,footprint: Low-quality directory / TLD list | S:no organic traffic/keywords (auth=6)
+uaewebdirectory.info,semrush,HIGH,Low-quality directory / TLD list,0.0,2,0,0,False,30,118.139.181.85,sg,2026-02-08,2026-07-23,"footprint: Low-quality directory / TLD list | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+yesdomains.space,semrush,HIGH,Low-quality directory / TLD list,0.0,2,0,0,False,14,118.139.181.85,sg,2026-02-11,2026-04-30,"footprint: Low-quality directory / TLD list | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+1000.co.in,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,14,118.139.181.85,sg,2026-04-05,2026-08-26,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+2x9.co,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,23,118.139.178.200,sg,2025-12-05,2026-06-12,"two or more independent toxic signals | S:link-network IP 118.139.178.200 (+3 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+abyoxohg.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,4,104.21.96.1,,2025-05-21,2026-04-07,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+acquire.co.in,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,2,92.249.46.138,in,2026-04-29,2026-05-11,"two or more independent toxic signals | S:link-network IP 92.249.46.138 (+3 sibling domains) | S:dead (auth=2, 0 traffic, 0 keywords)"
+agkjaxjp.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,7,104.21.53.224,,2025-05-21,2026-02-27,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+alljobs.info,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,42,118.139.176.46,sg,2026-01-14,2026-09-01,"two or more independent toxic signals | S:link-network IP 118.139.176.46 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+aocrsljd.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,188.114.97.0,,2025-05-28,2026-01-28,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+azabuhfq.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,10,104.21.0.188,,2025-05-21,2026-04-02,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+bitbuzz.org,semrush,HIGH,Multi-signal spam,0.0,6,0,0,False,1,184.168.108.151,sg,2026-05-24,2026-05-24,two or more independent toxic signals | S:known link-farm IP block | S:no organic traffic/keywords (auth=6)
+booksreadr.org,semrush,HIGH,Multi-signal spam,0.0,4,0,0,False,33,92.249.46.138,in,2025-12-09,2026-06-05,two or more independent toxic signals | S:link-network IP 92.249.46.138 (+3 sibling domains) | S:no organic traffic/keywords (auth=4)
+brilko.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.63.118,,2026-08-28,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+carplz.com,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,8,118.139.181.85,sg,2026-02-09,2026-07-17,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+cheapsmmprovider.info,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,7,118.139.181.85,sg,2026-04-09,2026-06-06,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+cheapsmmprovider.online,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,17,118.139.181.85,sg,2026-05-14,2026-08-01,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+cnftcymf.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,188.114.96.2,,2025-05-21,2026-01-27,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+corrector.in,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,10,118.139.181.85,sg,2026-02-11,2026-03-13,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+crjvnslb.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,7,172.67.156.174,,2025-05-21,2026-03-13,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+cusholvz.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.32.1,,2025-05-21,2026-03-18,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+customerservicetrust.com,ahrefs+semrush,HIGH,Multi-signal spam,0.0,2,0,0,True,3,172.67.179.24,,2026-04-07,2026-07-26,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=2, 0 traffic, 0 keywords)"
+cvwpfwsi.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,188.114.96.0,,2025-05-21,2026-01-22,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+cwnvzssm.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,9,104.21.96.1,,2025-05-27,2026-02-01,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+cxcvnjpq.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,1,104.21.41.149,,2025-05-25,2025-12-16,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+ddpjurqs.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,7,188.114.97.0,,2025-05-27,2026-02-10,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+dmjltsfe.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,3,188.114.96.2,,2025-05-21,2026-03-14,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+domain.com.lc,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,59,184.168.115.60,sg,2026-01-03,2026-09-01,"two or more independent toxic signals | S:link-network IP 184.168.115.60 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+domainrankboost.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,172.67.153.220,,2026-08-07,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+domainrankexperts.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.48.203,,2026-08-07,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+domains.com.bz,semrush,HIGH,Multi-signal spam,0.0,4,0,0,False,11,184.168.115.60,sg,2026-02-16,2026-08-26,two or more independent toxic signals | S:link-network IP 184.168.115.60 (+8 sibling domains) | S:known link-farm IP block | S:no organic traffic/keywords (auth=4)
+doorswindowscompany.com,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,3,191.101.14.187,us,2024-11-23,2026-06-16,"two or more independent toxic signals | S:link-network IP 191.101.14.187 (+3 sibling domains) | S:dead (auth=2, 0 traffic, 0 keywords)"
+ecommercebenchmarking.com,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,9,118.139.178.200,sg,2026-03-15,2026-03-23,"two or more independent toxic signals | S:link-network IP 118.139.178.200 (+3 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+efbgtvmn.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.80.1,,2025-05-21,2026-01-15,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+egyptiandirectory.com,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,45,184.168.116.137,sg,2026-01-19,2026-06-19,"two or more independent toxic signals | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+factmags.com,semrush,HIGH,Multi-signal spam,0.0,4,0,0,False,76,203.161.54.114,us,2026-02-18,2026-09-01,two or more independent toxic signals | S:link-network IP 203.161.54.114 (+26 sibling domains) | S:known link-farm IP block | S:no organic traffic/keywords (auth=4)
+fifkxhby.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,4,104.21.84.81,,2025-05-22,2026-02-15,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+findinfo.in,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,27,118.139.181.85,sg,2026-03-18,2026-09-01,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+gamerkun.com,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,18,118.139.181.85,sg,2026-03-30,2026-08-31,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+getonline.co.in,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,26,118.139.181.85,sg,2026-03-14,2026-08-30,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+globalecommerce.org,semrush,HIGH,Multi-signal spam,0.0,3,0,0,False,58,118.139.177.45,sg,2025-12-11,2026-08-29,"two or more independent toxic signals | S:known link-farm IP block | S:dead (auth=3, 0 traffic, 0 keywords)"
+googleseoauthority.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.91.152,,2026-08-11,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+googleseocraft.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,172.67.223.91,,2026-08-11,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+googleseoexperts.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.78.137,,2026-08-12,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+googleseopoint.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.50.155,,2026-08-12,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+hebagh.cv,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,17,118.139.181.85,sg,2026-03-16,2026-06-28,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+homefinance.co.in,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,34,118.139.181.85,sg,2026-02-10,2026-09-01,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+hwousfvg.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,3,172.67.179.169,,2025-05-21,2026-01-22,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+indexaward.com,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,42,118.139.176.46,sg,2026-04-04,2026-08-30,"two or more independent toxic signals | S:link-network IP 118.139.176.46 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+indians.cc,semrush,HIGH,Multi-signal spam,0.0,3,0,0,False,55,118.139.181.255,sg,2026-01-14,2026-09-01,"two or more independent toxic signals | S:known link-farm IP block | S:dead (auth=3, 0 traffic, 0 keywords)"
+intconference.org,semrush,HIGH,Multi-signal spam,0.0,5,0,0,False,2,184.168.107.83,sg,2026-03-02,2026-03-21,two or more independent toxic signals | S:known link-farm IP block | S:no organic traffic/keywords (auth=5)
+itsyourgold.com,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,184.168.115.60,,2026-08-13,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:link-network IP 184.168.115.60 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=0, 0 traffic, 0 keywords)"
+izzbpkzo.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,4,172.67.162.88,,2025-05-21,2025-12-22,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+jattihep.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,172.67.163.79,,2025-05-21,2026-01-15,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+jdbfiqxv.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,3,172.67.161.117,,2025-05-21,2026-01-02,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+jtdzcpmo.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,1,172.67.217.128,,2025-06-23,2025-06-23,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+jxwikfum.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.47.108,,2025-07-21,2026-03-11,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+kbgkeiip.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,5,172.67.161.115,,2025-05-21,2026-02-15,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+kpbcgzzk.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,3,104.21.96.1,,2025-06-13,2026-03-26,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+lgrpgnok.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,6,104.21.93.228,,2025-05-28,2026-02-04,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+linkgrowthauthority.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,172.67.146.146,,2026-08-09,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+linkseoprovider.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.75.213,,2026-08-08,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+locabee.ch,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,3,188.40.17.96,de,2026-08-04,2026-08-04,"two or more independent toxic signals | S:link-network IP 188.40.17.96 (+4 sibling domains) | S:dead (auth=2, 0 traffic, 0 keywords)"
+locabee.gr,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,1,188.40.17.96,de,2026-05-16,2026-05-16,"two or more independent toxic signals | S:link-network IP 188.40.17.96 (+4 sibling domains) | S:dead (auth=2, 0 traffic, 0 keywords)"
+localshutters.net,ahrefs+semrush,HIGH,Multi-signal spam,0.0,2,0,0,True,4,172.67.135.113,,2026-01-02,2026-08-25,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=2, 0 traffic, 0 keywords)"
+lvmrfker.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,3,104.21.45.205,,2025-05-21,2026-01-21,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+marathiladies.com,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,7,92.249.46.138,in,2026-05-12,2026-05-29,"two or more independent toxic signals | S:link-network IP 92.249.46.138 (+3 sibling domains) | S:dead (auth=2, 0 traffic, 0 keywords)"
+marketingexperts.click,semrush,HIGH,Multi-signal spam,0.0,3,0,0,False,5,67.223.118.29,us,2026-03-04,2026-07-21,"two or more independent toxic signals | S:link-network IP 67.223.118.29 (+5 sibling domains) | S:dead (auth=3, 0 traffic, 0 keywords)"
+mp3fresh.net,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,29,118.139.181.85,sg,2026-03-18,2026-09-01,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+musweb.org,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,19,184.168.111.168,sg,2025-12-18,2026-03-14,"two or more independent toxic signals | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+ngawindows.com,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,4,15.197.225.128,us,2024-07-08,2026-08-30,"two or more independent toxic signals | S:link-network IP 15.197.225.128 (+3 sibling domains) | S:dead (auth=2, 0 traffic, 0 keywords)"
+northgeorgiawindows.net,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,6,15.197.225.128,us,2024-09-01,2026-08-20,"two or more independent toxic signals | S:link-network IP 15.197.225.128 (+3 sibling domains) | S:dead (auth=2, 0 traffic, 0 keywords)"
+okhwefjs.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.16.1,,2025-06-27,2026-03-04,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+omrbsvkq.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,10,188.114.97.0,,2025-05-21,2026-02-18,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+organicrankexpress.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.63.203,,2026-08-07,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+organicranknetwork.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,172.67.181.238,,2026-08-07,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+pagesearch.net,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,41,118.139.176.46,sg,2025-12-28,2026-09-01,"two or more independent toxic signals | S:link-network IP 118.139.176.46 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+pageseocollective.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.47.215,,2026-08-11,2026-08-29,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+pageseomasters.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.21.10,,2026-08-08,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+pageseoservice.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,172.67.160.172,,2026-08-07,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+pictoshow.com,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,1,172.67.158.233,,2021-12-11,2022-01-01,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+prashikshan.in,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,27,118.139.181.85,sg,2026-03-16,2026-09-01,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+preparation.co.in,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,27,118.139.181.85,sg,2026-03-14,2026-08-30,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+procycling.org,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,29,118.139.181.85,sg,2026-03-17,2026-08-30,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+pudhe.com,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,39,184.168.115.60,sg,2026-01-04,2026-09-01,"two or more independent toxic signals | S:link-network IP 184.168.115.60 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+qlliqzun.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,1,104.21.94.57,,2025-05-21,2026-01-11,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+queries.co.in,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,16,118.139.181.85,sg,2026-02-08,2026-04-28,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+rankgrowthboost.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.53.149,,2026-08-09,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+rankgrowthinsights.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,172.67.168.57,,2026-08-08,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+rankgrowthservice.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.64.81,,2026-08-08,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+rankseoprovider.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,172.67.192.44,,2026-08-09,2026-08-30,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+read.org.in,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,40,118.139.178.200,sg,2026-01-01,2026-07-05,"two or more independent toxic signals | S:link-network IP 118.139.178.200 (+3 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+ready.pro,semrush,HIGH,Multi-signal spam,0.0,4,0,0,False,27,118.139.177.45,sg,2026-02-03,2026-08-31,two or more independent toxic signals | S:known link-farm IP block | S:no organic traffic/keywords (auth=4)
+roiwindows.com,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,6,15.197.225.128,us,2024-07-22,2026-08-16,"two or more independent toxic signals | S:link-network IP 15.197.225.128 (+3 sibling domains) | S:dead (auth=2, 0 traffic, 0 keywords)"
+sazfmezf.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,3,104.21.77.253,,2025-05-25,2026-04-04,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+scionybg.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,7,104.21.48.1,,2025-05-21,2026-02-04,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+seoboostacademy.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,172.67.156.190,,2026-08-09,2026-08-26,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+seoboostexchange.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.25.16,,2026-08-09,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+seoboostresults.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.66.231,,2026-07-28,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+seogrowthprovider.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.79.253,,2026-08-03,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+seogrowthstudio.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,172.67.135.254,,2026-08-15,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+siterankprovider.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,172.67.203.229,,2026-08-08,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+sporstcenter.com,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,1,92.249.46.138,in,2026-06-03,2026-06-03,"two or more independent toxic signals | S:link-network IP 92.249.46.138 (+3 sibling domains) | S:dead (auth=2, 0 traffic, 0 keywords)"
+sportlives.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,1,95.216.225.167,,2024-06-27,2024-07-19,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+taxies.biz,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,33,118.139.181.85,sg,2026-03-15,2026-08-31,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+theface.in,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,29,118.139.181.85,sg,2026-03-16,2026-08-31,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+themumbai.in,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,22,118.139.181.85,sg,2026-04-20,2026-08-25,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+thermalprowindows.com,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,5,15.197.225.128,us,2024-09-14,2026-08-17,"two or more independent toxic signals | S:link-network IP 15.197.225.128 (+3 sibling domains) | S:dead (auth=2, 0 traffic, 0 keywords)"
+thirty.co.in,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,26,118.139.181.85,sg,2026-03-17,2026-08-30,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+tkzojtbf.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,4,172.67.166.253,,2025-05-23,2026-02-04,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+toprankpartners.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,172.67.222.37,,2026-08-09,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+toprankprovider.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,172.67.179.252,,2026-08-08,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+toprankresults.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.67.69,,2026-08-09,,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+tunca.org,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,40,118.139.176.46,sg,2025-12-30,2026-08-27,"two or more independent toxic signals | S:link-network IP 118.139.176.46 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+tyre.pro,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,26,118.139.181.85,sg,2026-03-24,2026-08-31,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+tyres.pro,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,27,118.139.181.85,sg,2026-03-16,2026-08-30,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+uiisjzij.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,1,104.21.80.178,,2025-05-21,2026-01-24,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+usabuildingsuppliers.com,semrush,HIGH,Multi-signal spam,0.0,6,0,0,False,3,191.101.14.187,us,2024-07-16,2026-07-29,two or more independent toxic signals | S:link-network IP 191.101.14.187 (+3 sibling domains) | S:no organic traffic/keywords (auth=6)
+vfoskvzw.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,6,104.21.112.1,,2025-05-21,2026-03-07,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+vydxyefz.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,188.114.97.0,,2025-05-21,2026-01-31,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+vzynhhud.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,6,172.67.166.118,,2025-05-21,2026-02-23,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+wallpapers.pro,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,62,118.139.176.46,sg,2025-12-27,2026-08-31,"two or more independent toxic signals | S:link-network IP 118.139.176.46 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+way2check.art,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,29,118.139.181.85,sg,2026-04-01,2026-08-29,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+way2check.cv,semrush,HIGH,Multi-signal spam,0.0,3,0,0,False,41,118.139.178.200,sg,2026-01-20,2026-09-01,"two or more independent toxic signals | S:link-network IP 118.139.178.200 (+3 sibling domains) | S:known link-farm IP block | S:dead (auth=3, 0 traffic, 0 keywords)"
+webrankindia.com,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,3,118.139.181.85,sg,2026-02-15,2026-03-30,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+webrankprovider.shop,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,104.21.7.31,,2026-08-07,2026-08-28,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+websitesea.com,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,11,118.139.176.46,sg,2025-12-31,2026-04-26,"two or more independent toxic signals | S:link-network IP 118.139.176.46 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+whzoyytu.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,1,188.114.97.2,,2025-05-22,2025-12-11,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+wiknluhc.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,4,172.67.129.205,,2025-05-21,2026-02-17,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+wlzkxbgt.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,5,172.67.134.63,,2025-05-21,2026-01-21,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+wnbbnviw.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,1,188.114.97.2,,2025-05-21,2026-01-21,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+wogibtswas.net,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,1,188.40.17.96,de,2026-07-25,2026-07-25,"two or more independent toxic signals | S:link-network IP 188.40.17.96 (+4 sibling domains) | S:dead (auth=2, 0 traffic, 0 keywords)"
+wonvision.com,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,40,118.139.176.46,sg,2025-12-30,2026-08-31,"two or more independent toxic signals | S:link-network IP 118.139.176.46 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+wvoysjve.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,2,172.67.146.29,,2025-05-21,2026-01-10,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+ycm.info,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,38,118.139.176.46,sg,2026-01-01,2026-08-31,"two or more independent toxic signals | S:link-network IP 118.139.176.46 (+8 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+youtoo.in,semrush,HIGH,Multi-signal spam,0.0,2,0,0,False,21,118.139.181.85,sg,2026-03-16,2026-08-01,"two or more independent toxic signals | S:link-network IP 118.139.181.85 (+31 sibling domains) | S:known link-farm IP block | S:dead (auth=2, 0 traffic, 0 keywords)"
+zlzfsaat.xyz,ahrefs,HIGH,Multi-signal spam,0.0,0,0,0,True,1,172.67.201.142,,2025-05-21,2025-12-12,"two or more independent toxic signals | S:Ahrefs-is_spam=true | S:dead (auth=0, 0 traffic, 0 keywords)"
+analyticshaven.top,semrush,HIGH,URL-shortener / redirect link network,0.0,6,0,0,False,14,195.20.19.178,md,2026-03-11,2026-08-31,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=6)
+anchorurl.cloud,semrush,HIGH,URL-shortener / redirect link network,0.0,6,0,0,False,7,195.20.19.178,md,2026-05-13,2026-08-22,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=6)
+atomizelink.icu,semrush,HIGH,URL-shortener / redirect link network,0.0,5,0,0,False,15,195.20.19.178,md,2025-11-21,2026-08-15,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=5)
+blogsphere.top,semrush,HIGH,URL-shortener / redirect link network,0.0,6,0,0,False,9,195.20.19.178,md,2026-01-24,2026-08-31,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=6)
+buzzshrink.website,semrush,HIGH,URL-shortener / redirect link network,0.0,6,0,0,False,16,195.20.19.178,md,2026-02-08,2026-08-31,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=6)
+bye.fyi,semrush,HIGH,URL-shortener / redirect link network,0.0,24,0,0,False,9,195.20.19.178,md,2025-11-26,2026-08-18,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster
+byteshort.xyz,semrush,HIGH,URL-shortener / redirect link network,0.0,6,0,0,False,17,195.20.19.178,md,2025-11-23,2026-08-23,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=6)
+creativeposts.top,semrush,HIGH,URL-shortener / redirect link network,0.0,6,0,0,False,13,195.20.19.178,md,2026-03-08,2026-08-29,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=6)
+dailymusings.top,semrush,HIGH,URL-shortener / redirect link network,0.0,6,0,0,False,14,195.20.19.178,md,2026-03-02,2026-08-25,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=6)
+drjack.world,semrush,HIGH,URL-shortener / redirect link network,0.0,6,0,0,False,12,195.20.19.178,md,2025-12-23,2026-08-31,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=6)
+jake.eu,semrush,HIGH,URL-shortener / redirect link network,0.0,6,0,0,False,14,195.20.19.178,md,2026-01-22,2026-09-01,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=6)
+metamagic.top,semrush,HIGH,URL-shortener / redirect link network,0.0,14,0,0,False,11,195.20.19.178,md,2026-01-07,2026-08-28,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster
+optimizeflow.top,semrush,HIGH,URL-shortener / redirect link network,0.0,6,0,0,False,15,195.20.19.178,md,2026-03-02,2026-09-01,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=6)
+quero.party,semrush,HIGH,URL-shortener / redirect link network,0.0,6,0,0,False,9,195.20.19.178,md,2026-03-21,2026-08-30,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=6)
+screenshots.wiki,semrush,HIGH,URL-shortener / redirect link network,0.0,6,0,0,False,10,195.20.19.178,md,2026-02-06,2026-08-22,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=6)
+shortenurls.eu,semrush,HIGH,URL-shortener / redirect link network,0.0,14,0,0,False,13,195.20.19.178,md,2026-01-11,2026-08-29,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster
+urls-shortener.eu,semrush,HIGH,URL-shortener / redirect link network,0.0,5,0,0,False,9,195.20.19.178,md,2025-12-12,2026-08-29,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=5)
+websites.freemyip.com,semrush,HIGH,URL-shortener / redirect link network,0.0,5,0,0,False,11,195.20.19.178,md,2025-12-29,2026-08-13,footprint: URL-shortener / redirect link network | S:link-network IP 195.20.19.178 (+18 sibling domains) | S:Moldova spam cluster | S:no organic traffic/keywords (auth=5)
+domaineye.com,semrush,MEDIUM,Auto-generated stats / worth-checker,0.0,16,0,0,False,1,83.138.53.13,nl,2026-01-18,2026-08-15,footprint: Auto-generated stats / worth-checker
+websitescrawl.com,semrush,MEDIUM,Auto-generated stats / worth-checker,0.0,12,0,0,False,1,68.178.235.175,us,2026-03-09,2026-04-29,footprint: Auto-generated stats / worth-checker
+eastus2-01.azurewebsites.net,semrush,MEDIUM,Free-host throwaway page,0.0,40,0,0,False,1,20.119.128.24,us,2025-10-21,2026-03-29,footprint: Free-host throwaway page
+01webdirectory.com,semrush,MEDIUM,Low-quality directory / TLD list,0.0,20,0,0,False,1,88.99.0.6,de,2026-01-04,2026-08-15,footprint: Low-quality directory / TLD list
+uklistingz.co.uk,semrush,MEDIUM,Low-quality directory / TLD list,0.0,13,0,0,False,1,23.229.199.133,us,2025-04-22,2026-07-07,footprint: Low-quality directory / TLD list
+100xrecruiting.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,216.24.57.1,us,2026-07-24,2026-08-22,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+128.199.173.17,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,278,128.199.173.17,,2019-04-15,2022-05-18,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+142.54.190.10,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,5,,,2018-02-25,2018-04-22,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+18tokyo.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-10-25,2017-12-03,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+1builder.us,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,3,104.21.49.205,,2025-03-19,2026-07-28,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+1stcallglasscare.com,semrush,MEDIUM,Single-signal low-quality,0.0,3,0,0,False,6,104.21.21.200,,2025-12-03,2026-07-23,"one strong toxic signal | S:dead (auth=3, 0 traffic, 0 keywords)"
+5minuteguide.net,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,23.229.209.5,,2022-02-14,2023-10-24,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+a-dinteriors.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-03-19,2017-06-20,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+abworo.pics,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,5,188.114.97.2,,2023-06-24,2023-12-21,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+adcreativevideo.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,172.67.184.163,,2026-08-30,2026-08-30,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+aemobilewallpapersh.gq,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-11-24,2018-03-04,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+agroinsursas.com,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,1,190.8.176.51,us,2026-03-16,2026-06-24,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+airlive.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-01-08,2018-02-10,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+akzent.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,4,,,2018-02-16,2018-07-25,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+aloysionunes.com,semrush,MEDIUM,Single-signal low-quality,0.0,5,0,0,False,4,172.67.138.242,,2026-08-28,2026-08-31,one strong toxic signal | S:no organic traffic/keywords (auth=5)
+alpharettatoprated.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,2,104.21.71.157,,2026-07-28,2026-08-31,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+anizcom.press,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,3,,,2017-04-22,2017-09-25,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+answerism.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2020-06-19,2020-07-09,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+aozxy168.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,4,35.215.144.141,,2022-12-30,2023-09-17,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+appm.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,3,,,2017-10-26,2017-12-07,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+appsava.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2016-12-29,2017-03-04,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+apsibr.pics,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,18,188.114.96.2,,2023-08-09,2023-08-29,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+archive-hu.com,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,3,104.21.38.108,,2026-08-26,2026-08-28,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+asenor.pics,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,9,188.114.96.2,,2023-08-05,2023-08-23,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+ateliereleaurorei.ro,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,172.67.203.169,,2026-03-17,2026-04-20,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+athomeinthefutureblog.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,172.67.149.71,,2025-02-25,2026-06-18,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+atlantanewsdaily7.com,semrush,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,172.67.134.199,,2026-07-10,2026-07-10,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+atlantatoprated.com,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,2,104.21.67.118,,2026-07-26,2026-08-30,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+atrine.pics,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,188.114.97.2,,2023-07-13,2023-12-06,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+attitudefitness.top,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,120.24.195.144,,2025-04-20,2026-01-23,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+awesomepix.net,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2016-08-04,2016-12-01,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+awesomewomanproject.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,45.32.218.188,us,2026-01-14,2026-06-13,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+azbaseimages.net,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-04-21,2017-10-16,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+backan.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-10-27,2018-04-28,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+bbuidco.in,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,16,188.114.97.2,,2023-10-31,2023-12-12,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+bcb370.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2016-06-05,2016-08-30,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+beihaishitrade.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,172.67.161.178,,2025-03-30,,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+bergenviewtrail.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,104.21.42.4,,2023-10-18,2023-10-27,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+bestaround.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,104.21.48.173,,2026-08-18,2026-08-22,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+bestbeautyschoolincalgary.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,188.114.97.2,,2023-10-18,2023-10-28,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+betulcrime.com,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,4,104.21.11.207,,2026-08-26,2026-08-31,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+bizscoreai.com,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,20,172.67.158.113,,2026-07-07,2026-08-28,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+bizvelora.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,103.138.189.54,sg,2026-08-13,2026-08-13,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+bizzibid.com,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,4,216.137.176.69,us,2025-12-16,2026-08-31,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+blogestilofeminino.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,6,,,2018-04-02,2018-05-12,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+bloggrupoactialia.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,1,True,1,,,2018-06-18,2019-06-04,one strong toxic signal | S:Ahrefs-is_spam=true
+blogroselin.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-06-10,2021-01-14,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+bluecantera.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,6,192.169.172.129,us,2026-03-17,2026-04-26,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+bmobilebandroidlove.ga,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-01-05,2018-03-03,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+branded-tins.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2018-01-22,2018-05-06,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+breachviews.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,4,172.67.216.74,,2026-08-26,2026-08-27,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+briefconcepts.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-09-22,2017-11-19,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+brushandroller.info,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,28,,,2018-10-30,2019-03-18,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+bulkdata.io,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,2,178.62.48.29,gb,2025-10-30,2026-06-30,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+businessvocal.com,semrush,MEDIUM,Single-signal low-quality,0.0,3,0,0,False,13,172.67.164.57,,2025-07-26,2026-03-31,"one strong toxic signal | S:dead (auth=3, 0 traffic, 0 keywords)"
+buytshirt.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,4,,,2018-09-08,2018-12-04,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+bwallpapershbb.ml,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2018-02-01,2018-02-19,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+cameraamministrativasalernitana.it,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,89.46.108.67,it,2026-01-29,2026-05-08,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+candidmama.com,semrush,MEDIUM,Single-signal low-quality,0.0,3,0,0,False,1,185.181.255.109,us,2026-03-01,2026-09-01,"one strong toxic signal | S:dead (auth=3, 0 traffic, 0 keywords)"
+capetownthing.co.za,semrush,MEDIUM,Single-signal low-quality,0.0,3,0,0,False,1,69.163.180.195,us,2026-03-09,2026-04-24,"one strong toxic signal | S:dead (auth=3, 0 traffic, 0 keywords)"
+cbd-research.net,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,3,,,2018-06-04,2018-07-23,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+ceemobiled.gq,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-11-28,2018-03-19,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+chadbryant.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,5,,,2017-10-19,2017-11-07,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+chattanoogatoprated.com,semrush,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,104.21.4.193,,2026-08-06,2026-08-29,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+chimneyproduct.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-03-22,2017-05-04,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+choiceviewwindows.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,3,3.33.152.147,us,2026-04-17,2026-08-22,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+circuscoolschool.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-06-04,2018-06-04,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+cityvetted.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,2,62.169.24.248,fr,2026-06-20,2026-08-24,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+clackamaswebacademy.info,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2016-04-01,2016-05-04,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+click2kolkata.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2019-06-20,2020-10-22,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+clifflisting.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,5,172.67.207.213,,2026-08-22,2026-08-31,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+clvecom.press,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-04-29,2017-10-16,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+cmocheatsheets.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,104.21.91.99,,2026-08-29,2026-08-29,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+collegefootballschedule.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-10-30,2017-11-08,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+colormehouse.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,68.65.123.94,us,2026-01-08,2026-08-19,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+computersolutionscr.info,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-10-03,2017-11-15,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+contractorsnearme.ai,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,104.26.5.129,,2026-02-28,2026-04-22,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+contractorsup.com,semrush,MEDIUM,Single-signal low-quality,0.0,15,0,0,False,2,191.101.14.187,us,2026-04-30,2026-05-07,one strong toxic signal | S:link-network IP 191.101.14.187 (+3 sibling domains)
+coruzants.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,2,172.67.192.96,,2026-08-26,2026-09-01,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+cqzhan.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-10-29,2017-11-06,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+criticalopshacks.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,4,,,2018-07-09,2018-08-08,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+crowdyhome.com,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,2,13.56.15.200,us,2025-10-11,2026-09-01,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+crystalcoastrentals.net,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-07-03,2017-09-04,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+cubi.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,5,,,2017-11-02,2018-02-12,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+cvcard.ir,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2016-12-11,2016-12-27,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+cvillico.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,104.21.14.64,,2026-08-30,2026-08-30,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+daechul.co.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,2,172.67.128.17,,2026-08-30,2026-08-31,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+data2salesai.com,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,1,104.21.77.21,,2026-08-20,2026-08-29,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+databaseimg.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2016-10-06,2016-12-06,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+dcoutesnjacob.com,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,1,107.180.115.34,us,2026-03-10,2026-04-19,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+decorologyblog.com,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,2,104.21.59.59,,2024-07-18,2026-06-20,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+descargas-mundiales.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-08-23,2017-09-01,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+designgfandroiddesktop.ga,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-12-10,2018-01-06,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+dishwashercreations.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,69.28.90.102,us,2024-07-08,2026-07-29,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+disunplugged.com,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,2,108.171.164.213,us,2025-04-11,2026-07-06,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+dltech.forum,semrush,MEDIUM,Single-signal low-quality,0.0,9,0,0,False,4,67.223.118.29,us,2026-03-27,2026-07-20,one strong toxic signal | S:link-network IP 67.223.118.29 (+5 sibling domains)
+doordesigns.space,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-02-21,2018-03-13,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+draperiesboca.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-11-07,2017-11-15,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+dream-houses.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-09-24,2017-11-20,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+dtviewlx.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,104.21.63.213,,2025-12-19,2026-08-20,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+ducknest.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,16,,,2018-06-24,2019-01-20,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+dugdo.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,4,,,2017-11-06,2018-05-06,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+dupurgeniefr.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,3,104.21.43.118,,2026-08-28,2026-08-28,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+e2windows.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,3,15.197.142.173,us,2026-03-27,2026-08-22,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+eastbeachvc.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,4,,,2017-10-20,2018-01-25,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+easycoin.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,8,,,2018-11-04,2018-12-13,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+eliotzigmundjazz.com,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,2,107.180.51.41,us,2026-03-13,2026-08-22,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+etradeads.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2014-02-03,2016-05-11,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+eurekster.com,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,64,170.9.240.198,us,2024-12-29,2026-08-14,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+explosivo.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-11-02,2017-12-15,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+ezio.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-01-29,2018-03-01,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+fashionclothingnews.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,2,172.67.156.33,,2026-08-28,2026-08-29,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+fastlifesite.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,172.67.176.248,,2026-08-29,2026-08-29,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+fdidesktopf.gq,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-12-19,2018-05-06,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+feathermountainpress.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,3,,,2015-12-05,2016-09-10,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+feslcom.press,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-04-27,2017-06-14,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+ficheroes.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,9,,,2017-11-06,2018-08-15,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+find-address-now.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,172.67.205.208,,2021-10-30,2022-01-02,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+fixthehome.com,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,3,216.137.176.69,us,2025-07-13,2026-08-28,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+foaminsulationtips.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,4,172.67.185.120,,2024-04-13,2026-08-08,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+fosser.online,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,5,104.21.14.104,,2023-12-20,2024-01-31,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+francesc.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-09-24,2017-10-02,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+freetobuild.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,160.153.0.4,,2025-09-03,2025-10-14,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+frenchmature.me,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,4,,,2017-06-10,2017-08-13,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+froecom.press,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-04-30,2017-10-02,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+generatorgator.com,semrush,MEDIUM,Single-signal low-quality,0.0,5,0,0,False,3,172.67.220.23,,2025-07-20,2026-08-31,one strong toxic signal | S:no organic traffic/keywords (auth=5)
+georgiashutters.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,104.21.31.145,,2026-03-16,2026-08-27,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+ggmap.co.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,3,104.21.10.112,,2026-08-26,2026-08-29,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+ggmap.us.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,6,104.21.93.158,,2026-08-25,2026-09-01,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+gladeflowers.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,5,172.67.168.3,,2026-08-25,2026-08-29,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+gmailaccountreset.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,4,,,2018-06-17,2018-08-08,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+goldenpondconsulting.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-06-07,2018-07-02,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+goodhomestyle.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-02-12,2018-07-14,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+greattraveladvisor.com,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,1,107.180.2.227,us,2026-04-14,2026-08-29,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+gunbuyback.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-10-19,2017-11-07,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+haitisoleil.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2016-06-26,2017-08-12,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+hannahleakirk.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,3,,,2019-05-09,2020-03-11,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+harian24.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,172.67.189.185,,2026-03-05,2026-03-05,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+hellobetty.co,semrush,MEDIUM,Single-signal low-quality,0.0,5,0,0,False,1,147.79.79.21,us,2024-04-25,2026-07-06,one strong toxic signal | S:no organic traffic/keywords (auth=5)
+hghomeclub.com,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,1,132.148.183.109,us,2026-01-17,2026-08-12,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+homebuilderdeveloper.com,semrush,MEDIUM,Single-signal low-quality,0.0,3,0,0,False,8,162.250.126.98,us,2025-06-21,2026-08-22,"one strong toxic signal | S:dead (auth=3, 0 traffic, 0 keywords)"
+homeconfig.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,8,,,2018-09-26,2019-05-14,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+homeconstruct.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,12,,,2018-10-19,2019-09-03,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+homerenoworld.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,4,216.185.212.113,us,2025-08-16,2026-09-01,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+hometop.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-07-08,2017-09-11,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+homezex.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,12,,,2018-06-06,2018-11-25,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+houseandhomeonline.com,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,1,54.85.8.229,us,2025-10-28,2026-08-26,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+housegarden.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-01-29,2017-02-07,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+houselamp.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-01-30,2017-05-04,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+hwnerds.com,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,1,107.180.51.31,us,2026-05-08,2026-08-24,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+ib6.info,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-02-01,2018-02-18,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+imagcoollibrary.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2016-10-13,2016-11-24,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+indiarestaurant.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-10-16,2017-10-24,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+iniact.best,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,33,188.114.96.2,,2023-06-08,2023-12-09,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+intermeritocracy.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,6,198.12.240.20,us,2025-10-13,2026-08-31,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+iphone5scase.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,6,,,2017-10-14,2018-01-07,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+istarcam.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,3,,,2017-10-23,2017-12-03,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+jeuxodefriv.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-08-09,2017-11-16,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+jobhiring.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-11-10,2018-01-04,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+jobsapp.info,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,22,104.21.0.207,,2025-07-12,2026-08-29,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+jogger.net,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2018-07-09,2018-07-18,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+johnnybroccolii.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,54.36.152.144,fr,2026-02-27,2026-08-10,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+jpteacher.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-11-14,2017-12-01,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+keirseybooks.com,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,1,107.180.3.106,us,2026-05-16,2026-05-16,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+khalifahallah.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,11,,,2017-06-16,2017-10-16,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+kinge.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,4,,,2018-05-01,2018-08-08,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+kizi2.club,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-12-29,2018-04-17,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+knows.monster,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,46,172.67.214.69,,2025-12-30,2026-08-30,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+knows.sbs,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,36,104.21.51.183,,2025-10-20,2026-08-31,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+ktfrps.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2016-04-17,2016-09-16,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+laguku.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-10-11,2018-01-20,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+lawyerinjeddah.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,8,172.67.201.48,,2026-08-09,2026-09-01,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+lewser.pics,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,190,188.114.97.2,,2023-06-25,2023-11-22,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+libyanatravel.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,9,104.21.70.241,,2026-07-15,2026-08-31,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+lifequalia.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,64.90.49.138,,2023-06-22,2025-04-25,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+linjoury.com,semrush,MEDIUM,Single-signal low-quality,0.0,5,0,0,False,1,104.21.32.96,,2026-07-19,2026-07-19,one strong toxic signal | S:no organic traffic/keywords (auth=5)
+liveonline24.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,3,,,2017-11-03,2017-12-01,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+locabee.com,semrush,MEDIUM,Single-signal low-quality,0.0,10,0,0,False,3,188.40.17.96,de,2026-08-01,2026-08-01,one strong toxic signal | S:link-network IP 188.40.17.96 (+4 sibling domains)
+location.com,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,4,162.159.140.113,us,2025-12-29,2026-09-01,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+losangelesworkerscompensationlawyers.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2016-10-05,2016-12-12,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+loseingweight.xyz,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,172.67.134.246,,2025-06-08,2026-03-25,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+lpraudit.com,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,1,3.162.112.94,us,2026-05-22,2026-08-19,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+lydiaroyrealestate.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,12,104.21.35.146,,2026-06-28,2026-09-01,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+maktraka.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-04-25,2017-05-03,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+mandelaeffects.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,4,,,2018-06-04,2018-11-03,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+marcmphotography.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,4,,,2017-11-10,2018-02-25,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+marinasone.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,2,172.67.185.196,,2026-08-27,2026-08-27,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+masihnyata.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,5,172.67.149.19,,2026-08-27,2026-08-31,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+matureamateur.me,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-06-08,2017-08-11,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+maverickmansions.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,195.200.9.21,gb,2026-05-09,2026-08-02,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+mbsk.info,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-08-04,2017-08-16,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+medidocs.com,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,2,72.167.102.111,us,2026-05-27,2026-06-05,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+middagsaasen.no,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-06-08,2018-06-16,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+missburrg.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,3,172.67.142.89,,2026-08-21,2026-08-31,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+missfrugalmommy.com,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,1,160.153.44.71,us,2025-12-30,2026-08-16,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+mixwebup.com,semrush,MEDIUM,Single-signal low-quality,0.0,5,0,0,False,1,104.21.81.154,,2026-01-02,2026-08-30,one strong toxic signal | S:no organic traffic/keywords (auth=5)
+mizarstvo-matko.si,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-06-08,2019-02-25,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+mobilewalla3dwallpapers.cf,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-02-12,2018-02-17,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+modatrend.net,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-01-15,2017-06-15,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+monetaryhistoryofworld.com,semrush,MEDIUM,Single-signal low-quality,0.0,5,0,0,False,12,107.180.21.70,us,2025-07-17,2026-08-31,one strong toxic signal | S:no organic traffic/keywords (auth=5)
+mplcom.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-03-14,2018-03-30,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+mt-foto.dk,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-06-07,2019-06-07,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+mtnviewband.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,9,,,2016-10-13,2018-06-08,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+myfrontporch.news,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,2,100.29.208.54,us,2025-05-10,2026-03-05,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+mylike.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,3,,,2017-10-31,2017-11-17,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+mymarketpost.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,5,172.67.159.15,,2026-08-27,2026-09-01,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+myquestion.info,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,8,,,2018-05-15,2018-10-15,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+naturallyhealthyparenting.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,164.132.95.179,fr,2025-10-28,2026-08-10,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+newsblogsports.site,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,104.21.51.36,,2026-04-21,2026-06-26,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+nextfounder.it,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,89.116.109.103,,2026-06-20,,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+ngwindow.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,2,15.197.142.173,us,2026-06-10,2026-08-28,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+nhadatthanhvinh.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-11-03,2017-12-21,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+nivira.shop,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,6,104.21.73.168,,2026-08-27,2026-08-30,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+northgawindows.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,2,3.33.152.147,us,2026-07-11,2026-08-25,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+northgeorgiawindow.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,3,3.33.152.147,us,2026-07-27,2026-08-25,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+northpointwindows.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,6,3.33.251.168,us,2024-07-27,2026-08-17,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+nutshellcanada.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-06-04,2017-08-29,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+obekcom.press,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,3,,,2017-04-29,2017-10-16,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+okna-togliatty.ru,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-07-13,2018-02-27,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+onlineshoppingidea.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,4,104.21.20.72,,2026-08-20,2026-08-29,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+onvaxs.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,4,104.21.24.3,,2026-08-27,2026-08-29,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+osobiste.info,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2018-06-09,2018-06-24,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+performingwindows.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,5,3.33.251.168,us,2024-08-06,2026-08-30,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+phanerosart.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,104.21.56.40,,2026-08-28,2026-08-28,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+plrdownloadshub.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,4,104.21.11.148,,2026-08-29,2026-08-31,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+plumeriamarketing.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,13,172.67.160.252,,2026-07-04,2026-08-30,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+plurio.shop,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,172.67.145.174,,2026-08-24,2026-08-24,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+portailorange.net,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,11,172.67.167.49,,2026-07-01,2026-08-31,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+pravilassl.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-06-28,2017-07-15,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+promocodesfree.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2020-02-25,2020-04-27,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+prosgrade.com,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,2,172.67.150.187,,2026-04-15,2026-08-27,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+prothor-ing.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,192.99.207.151,ca,2026-04-10,2026-04-18,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+purahealthy.net,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,209.59.158.108,,2024-06-27,2024-09-16,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+qscam.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,145.79.209.143,,2025-08-02,2026-02-26,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+quality-hd-wallpapers.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,3,,,2017-10-27,2017-11-25,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+qualitypluswindows.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,5,3.33.251.168,us,2024-07-31,2026-08-16,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+quotesblom.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,172.67.157.219,,2026-08-30,2026-08-30,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+qwenterprise.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,11,104.21.92.98,,2026-07-22,2026-09-01,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+rchasg.site,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,220.132.97.163,,2024-06-29,2024-07-21,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+rdxextremez.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,10,172.67.167.172,,2026-07-05,2026-08-31,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+realreviews.org,semrush,MEDIUM,Single-signal low-quality,0.0,5,0,0,False,1,104.21.75.168,,2026-06-30,2026-06-30,one strong toxic signal | S:no organic traffic/keywords (auth=5)
+reness.pics,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,50,188.114.96.2,,2023-06-07,2023-12-05,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+renovationsup.com,semrush,MEDIUM,Single-signal low-quality,0.0,16,0,0,False,3,191.101.14.187,us,2025-07-31,2026-04-24,one strong toxic signal | S:link-network IP 191.101.14.187 (+3 sibling domains)
+revaliew.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,4,104.21.53.59,,2025-09-28,2026-06-28,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+revan-me.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,160.153.129.19,us,2026-03-18,2026-05-27,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+reversemortgagequote.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,5,,,2017-10-15,2017-11-28,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+rianneverwoert.nl,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,5.22.249.25,nl,2025-12-21,2026-08-22,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+riverranch.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,3,,,2017-10-12,2017-11-08,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+rjcentinc.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,172.67.187.61,,2026-08-29,2026-08-29,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+robuta.com,semrush,MEDIUM,Single-signal low-quality,0.0,5,0,0,False,6,162.159.140.164,us,2026-01-08,2026-06-02,one strong toxic signal | S:no organic traffic/keywords (auth=5)
+royaldb.us.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,6,104.21.87.48,,2026-08-27,2026-08-30,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+ryanssearch.com,semrush,MEDIUM,Single-signal low-quality,0.0,5,0,0,False,1,195.35.60.6,us,2024-11-26,2026-06-05,one strong toxic signal | S:no organic traffic/keywords (auth=5)
+sapphirevpn.net,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,8,104.21.19.197,,2026-07-02,2026-08-31,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+securedrate.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2019-02-15,2019-02-20,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+sellypro.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,2,104.21.35.240,,2026-01-23,2026-07-07,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+seo-high-ranking.shop,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,104.21.92.130,,2026-03-06,2026-03-06,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+seol.store,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,34,172.67.139.248,,2025-10-27,2026-08-27,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+seomuda.id,semrush,MEDIUM,Single-signal low-quality,0.0,3,0,0,False,1,15.235.188.158,sg,2026-03-31,2026-04-29,"one strong toxic signal | S:dead (auth=3, 0 traffic, 0 keywords)"
+short-concepts.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-08-12,2018-02-21,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+sicsemperva.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-11-20,2017-12-10,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+sitestats.top,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2018-11-14,2018-12-19,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+skystarnews.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,4,104.21.92.6,,2026-08-21,2026-08-29,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+slapshady.com,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,1,208.109.22.214,us,2026-01-11,2026-08-28,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+smallbusinesstelephonesystemsvoip.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2016-09-27,2016-12-03,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+smallwindows.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,68,,,2018-09-17,2019-03-20,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+smartmoneys.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,22,,,2018-03-24,2018-08-08,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+smartstimer.com,semrush,MEDIUM,Single-signal low-quality,0.0,3,0,0,False,2,172.67.161.212,,2026-08-27,2026-08-31,"one strong toxic signal | S:dead (auth=3, 0 traffic, 0 keywords)"
+smyrnafoundation.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,34.149.87.45,us,2026-04-23,2026-08-20,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+sonnenseite.site,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,1,148.113.199.75,ca,2026-02-28,2026-08-14,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+soulvocable.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,2,104.21.37.103,,2026-08-27,2026-08-30,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+soundproofcentral.com,semrush,MEDIUM,Single-signal low-quality,0.0,5,0,0,False,1,194.1.147.18,gb,2026-01-02,2026-06-01,one strong toxic signal | S:no organic traffic/keywords (auth=5)
+sportsprint.com.au,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,1,68.178.224.214,us,2026-03-17,2026-07-01,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+spottedcow.media,semrush,MEDIUM,Single-signal low-quality,0.0,5,0,0,False,1,92.205.133.229,fr,2026-04-30,2026-07-18,one strong toxic signal | S:no organic traffic/keywords (auth=5)
+sq-kj.net,ahrefs+semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,34.92.162.42,hk,2026-01-01,2026-05-31,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+ssreteam.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,34.102.120.206,us,2025-12-31,2026-08-15,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+startupwebsolutions.com.au,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,1,104.21.89.78,,2026-01-27,2026-06-27,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+subhikh.com,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,1,93.188.2.55,se,2026-03-08,2026-07-21,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+suggest-tool.ru,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,4,,,2017-03-28,2017-09-21,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+sunshinervresorts.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-10-26,2017-11-27,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+takes.homes,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,28,172.67.212.175,,2025-11-25,2026-08-29,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+takes.sbs,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,53,104.21.67.109,,2025-10-28,2026-08-30,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+tbincom.press,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-06-26,2017-07-29,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+thecloudherald.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,13,172.66.44.234,,2025-09-05,2026-08-30,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+thecoffeemom.net,semrush,MEDIUM,Single-signal low-quality,0.0,6,0,0,False,1,104.236.14.31,us,2025-10-15,2026-08-17,one strong toxic signal | S:no organic traffic/keywords (auth=6)
+thekerrieshow.com,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,1,192.178.218.121,us,2026-02-22,2026-07-31,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+themoneyguy.co.uk,semrush,MEDIUM,Single-signal low-quality,0.0,3,0,0,False,1,178.33.200.187,fr,2025-04-21,2026-07-08,"one strong toxic signal | S:dead (auth=3, 0 traffic, 0 keywords)"
+thenewz.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-11-01,2017-11-12,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+thermalastwindows.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,3,3.33.152.147,us,2026-02-08,2026-08-14,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+thermatrustwindows.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,4,3.33.251.168,us,2024-07-01,2026-08-19,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+thetaleofwhatif.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,34.149.87.45,,2025-03-20,2025-05-10,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+thetarotalk.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,2,104.21.49.195,,2026-05-04,2026-05-06,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+tooder.pics,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,5,172.67.205.226,,2023-06-27,2023-08-04,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+topdoorswindows.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,3,145.223.126.72,us,2025-06-02,2026-06-20,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+topsitessearch.com,semrush,MEDIUM,Single-signal low-quality,0.0,5,0,0,False,1,172.67.143.123,,2026-03-16,2026-08-23,one strong toxic signal | S:no organic traffic/keywords (auth=5)
+trendshomedesign.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2017-05-02,2017-08-24,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+trendyhealthtimes.com,semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,16,104.21.67.6,,2026-06-30,2026-08-31,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+uahot.com,semrush,MEDIUM,Single-signal low-quality,0.0,5,0,0,False,4,169.59.200.49,us,2025-08-11,2026-08-28,one strong toxic signal | S:no organic traffic/keywords (auth=5)
+upsell.us,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,4,,,2017-09-20,2018-09-16,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+usatcom.press,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-04-28,2017-07-06,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+usedpatiofurniture.org,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2016-10-02,2016-12-03,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+viainkdesign.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,104.21.23.192,,2023-10-15,2023-10-28,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+vuink.com,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,1,159.65.227.229,us,2025-12-17,2026-04-03,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+wallfree.ninja,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2016-05-25,2016-10-24,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+wallpapersaaec.ga,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-02-05,2018-02-17,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+wallpapersist.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-01-18,2018-03-14,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+wants.cfd,semrush,MEDIUM,Single-signal low-quality,0.0,3,0,0,False,59,104.21.44.63,,2025-10-05,2026-08-31,"one strong toxic signal | S:dead (auth=3, 0 traffic, 0 keywords)"
+wateratworkministry.org,semrush,MEDIUM,Single-signal low-quality,0.0,4,0,0,False,1,34.149.87.45,us,2025-09-17,2026-07-04,one strong toxic signal | S:no organic traffic/keywords (auth=4)
+wealthinsidermag.com,semrush,MEDIUM,Single-signal low-quality,0.0,5,0,0,False,1,45.56.65.145,us,2025-07-16,2026-06-13,one strong toxic signal | S:no organic traffic/keywords (auth=5)
+wecaksu.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,188.114.96.2,,2023-10-16,2023-10-28,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+whatzonyourmind.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,4,,,2016-12-30,2017-06-07,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+whosmypro.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,133,76.13.115.83,,2026-05-05,,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+windowdoor-test.com,ahrefs+semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,14,54.82.179.35,us,2025-07-17,2026-08-27,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+windowgrade.com,semrush,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,52.162.107.14,us,2026-04-07,2026-05-02,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+wogibtswas.de,semrush,MEDIUM,Single-signal low-quality,0.0,28,0,0,False,1,188.40.17.96,de,2026-07-22,2026-07-22,one strong toxic signal | S:link-network IP 188.40.17.96 (+4 sibling domains)
+writeradar.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,172.67.222.159,,2026-08-25,,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+xiaobook.net,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2016-02-27,2016-08-02,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+xoxo6.info,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2016-01-22,2016-06-24,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+youaskedme.com,ahrefs+semrush,MEDIUM,Single-signal low-quality,0.0,2,0,0,False,1,63.250.43.146,us,2026-02-26,2026-08-28,"one strong toxic signal | S:dead (auth=2, 0 traffic, 0 keywords)"
+yourrights.co,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2018-01-29,2018-06-29,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+yucatanhomeinspect.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,2,,,2017-12-23,2018-05-11,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+zuke315.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,3,,,2017-12-30,2018-02-08,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+zybsfood.com,ahrefs,MEDIUM,Single-signal low-quality,0.0,0,0,0,False,1,,,2016-10-30,2016-11-27,"one strong toxic signal | S:dead (auth=0, 0 traffic, 0 keywords)"
+pinqube.com,ahrefs,REVIEW,Low-authority (needs review),0.0,0,38,16,False,2,104.21.17.151,,2026-08-19,,low authority=0; no hard spam footprint
+repairhomeexperts.com,ahrefs,REVIEW,Low-authority (needs review),0.0,0,0,1,False,2,18.239.236.14,,2026-05-15,,low authority=0; no hard spam footprint
+todaywindowsdoors.com,ahrefs+semrush,REVIEW,Low-authority (needs review),0.0,2,1,1,False,3,23.227.38.65,ca,2026-05-10,2026-06-14,low authority=2; no hard spam footprint
+trustedhomeinstallers.com,ahrefs+semrush,REVIEW,Low-authority (needs review),0.0,2,0,1,False,19,192.0.78.152,us,2026-05-05,2026-08-22,low authority=2; no hard spam footprint
+windowrank.com,ahrefs+semrush,REVIEW,Low-authority (needs review),0.0,6,8,4,False,26,216.150.1.1,us,2026-04-05,2026-08-26,low authority=6; no hard spam footprint
+aarlreviews.com,semrush,REVIEW,Unclear — manual review,0.0,15,0,0,False,2,104.21.70.159,,2025-11-11,2026-09-01,authority=15; borderline
+adventuresfrugalmom.com,semrush,REVIEW,Unclear — manual review,0.0,25,0,0,False,1,104.21.43.99,,2025-04-24,2026-08-11,authority=25; borderline
+afewgoodygumdrops.com,semrush,REVIEW,Unclear — manual review,0.0,12,0,0,False,1,209.59.154.115,us,2025-06-06,2026-08-27,authority=12; borderline
+ahimsahouse.org,semrush,REVIEW,Unclear — manual review,0.0,24,0,0,False,1,209.126.30.63,us,2024-06-21,2026-08-19,authority=24; borderline
+alazharcilacap.sch.id,semrush,REVIEW,Unclear — manual review,0.0,13,0,0,False,1,103.150.190.231,id,2026-03-23,2026-03-23,authority=13; borderline
+angelaricardo.com,semrush,REVIEW,Unclear — manual review,0.0,24,0,0,False,1,167.114.89.124,ca,2026-01-13,2026-08-25,authority=24; borderline
+askawayblog.com,semrush,REVIEW,Unclear — manual review,0.0,27,0,0,False,1,172.253.139.121,us,2025-11-03,2026-07-15,authority=27; borderline
+athomeinthefuture.com,semrush,REVIEW,Unclear — manual review,0.0,20,0,0,False,1,69.163.187.180,us,2025-06-15,2026-05-29,authority=20; borderline
+athomepros.com,semrush,REVIEW,Unclear — manual review,0.0,22,0,0,False,2,172.67.73.145,,2025-07-31,2026-09-01,authority=22; borderline
+atlantabestmedia.com,semrush,REVIEW,Unclear — manual review,0.0,25,0,0,False,12,104.17.46.19,,2025-10-07,2026-08-20,authority=25; borderline
+atlantaglow.org,semrush,REVIEW,Unclear — manual review,0.0,22,0,0,False,1,172.66.3.8,us,2025-12-31,2026-08-31,authority=22; borderline
+atlantahomeimprovement.com,semrush,REVIEW,Unclear — manual review,0.0,25,0,0,False,91,104.17.46.19,,2023-05-20,2026-09-01,authority=25; borderline
+atlantaunitedsoccer.com,semrush,REVIEW,Unclear — manual review,0.0,25,0,0,False,1,104.17.199.145,,2025-03-22,2026-04-01,authority=25; borderline
+authenticfeedback.com,semrush,REVIEW,Unclear — manual review,0.0,18,0,0,False,3,50.18.123.174,us,2026-03-02,2026-08-29,authority=18; borderline
+beautifultouches.com,semrush,REVIEW,Unclear — manual review,0.0,17,0,0,False,1,172.67.75.83,,2025-10-13,2026-08-13,authority=17; borderline
+bizhwy.com,semrush,REVIEW,Unclear — manual review,0.0,22,0,0,False,1,66.119.8.177,us,2025-11-26,2026-08-17,authority=22; borderline
+bktgeorgia.com,semrush,REVIEW,Unclear — manual review,0.0,16,0,0,False,1,34.213.0.242,us,2026-02-14,2026-08-28,authority=16; borderline
+brightside-arabic.com,semrush,REVIEW,Unclear — manual review,0.0,21,0,0,False,1,148.113.199.75,ca,2025-12-28,2026-08-29,authority=21; borderline
+buckeyestateroofing.com,semrush,REVIEW,Unclear — manual review,0.0,15,0,0,False,1,104.19.154.92,,2026-02-01,2026-06-16,authority=15; borderline
+buildermuse.com,semrush,REVIEW,Unclear — manual review,0.0,19,0,0,False,2,63.176.8.218,de,2026-05-24,2026-08-24,authority=19; borderline
+bulkdataprovider.com,semrush,REVIEW,Unclear — manual review,0.0,9,0,0,False,1,172.67.156.181,,2026-05-04,2026-06-19,authority=9; borderline
+cambridgetheatre.org,semrush,REVIEW,Unclear — manual review,0.0,15,0,0,False,1,198.185.159.145,us,2026-04-25,2026-08-13,authority=15; borderline
+cdakids.org,semrush,REVIEW,Unclear — manual review,0.0,20,0,0,False,1,143.244.144.216,us,2025-12-24,2026-08-27,authority=20; borderline
+cleverdude.com,semrush,REVIEW,Unclear — manual review,0.0,16,0,0,False,1,192.124.249.70,us,2026-02-20,2026-08-30,authority=16; borderline
+clientsbee.com,semrush,REVIEW,Unclear — manual review,0.0,11,0,0,False,1,110.227.219.221,in,2025-08-07,2026-06-05,authority=11; borderline
+crystalclearfl.com,semrush,REVIEW,Unclear — manual review,0.0,9,0,0,False,1,34.174.168.65,us,2025-12-14,2026-08-25,authority=9; borderline
+csswinner.com,semrush,REVIEW,Unclear — manual review,0.0,29,0,0,False,62,128.199.173.17,sg,2025-07-24,2026-08-29,authority=29; borderline
+cultivatehd.com,semrush,REVIEW,Unclear — manual review,0.0,14,0,0,False,1,192.30.132.114,us,2026-07-07,2026-08-21,authority=14; borderline
+dailyhomesafety.com,semrush,REVIEW,Unclear — manual review,0.0,15,0,0,False,1,15.204.105.183,us,2025-12-30,2026-08-18,authority=15; borderline
+derchidoor.com,semrush,REVIEW,Unclear — manual review,0.0,23,0,0,False,143,18.154.227.29,us,2025-11-20,2026-06-02,authority=23; borderline
+dynamix.site,semrush,REVIEW,Unclear — manual review,0.0,23,0,0,False,3,172.67.71.243,,2025-11-09,2026-08-29,authority=23; borderline
+elevatedmagazines.com,semrush,REVIEW,Unclear — manual review,0.0,27,0,0,False,1,34.160.37.117,us,2026-05-06,2026-05-06,authority=27; borderline
+everythingwithatwist.com,semrush,REVIEW,Unclear — manual review,0.0,14,0,0,False,1,35.212.72.114,us,2026-01-14,2026-08-30,authority=14; borderline
+excellentcontractor.com,semrush,REVIEW,Unclear — manual review,0.0,15,0,0,False,3,145.223.126.72,us,2026-04-24,2026-04-24,authority=15; borderline
+facturmfg.com,semrush,REVIEW,Unclear — manual review,0.0,24,0,0,False,2,108.138.64.41,us,2026-08-28,2026-08-28,authority=24; borderline
+fairviewwindows.co.uk,semrush,REVIEW,Unclear — manual review,0.0,18,0,0,False,1,195.200.10.150,gb,2026-04-22,2026-05-30,authority=18; borderline
+fallatlantahomeshow.com,semrush,REVIEW,Unclear — manual review,0.0,20,0,0,False,14,150.171.109.73,us,2026-02-01,2026-05-22,authority=20; borderline
+farmhouse40.com,semrush,REVIEW,Unclear — manual review,0.0,15,0,0,False,1,34.160.17.71,us,2025-12-04,2026-08-19,authority=15; borderline
+georgiarush.com,semrush,REVIEW,Unclear — manual review,0.0,13,0,0,False,4,104.17.197.145,,2025-04-19,2026-06-03,authority=13; borderline
+gnpmilton.com,semrush,REVIEW,Unclear — manual review,0.0,11,0,0,False,2,34.68.234.4,us,2025-03-09,2026-05-06,authority=11; borderline
+goclward.com,semrush,REVIEW,Unclear — manual review,0.0,24,0,0,False,1,34.74.187.144,us,2026-03-16,2026-08-31,authority=24; borderline
+gridinsoft.ua,semrush,REVIEW,Unclear — manual review,0.0,12,0,0,False,1,104.21.50.161,,2025-07-28,2026-04-14,authority=12; borderline
+herculescustomiron.com,semrush,REVIEW,Unclear — manual review,0.0,18,0,0,False,1,104.21.24.195,,2026-01-19,2026-08-30,authority=18; borderline
+homepro-inspection.com,semrush,REVIEW,Unclear — manual review,0.0,13,0,0,False,1,198.49.23.144,us,2026-05-05,2026-08-26,authority=13; borderline
+idyllicpursuit.com,semrush,REVIEW,Unclear — manual review,0.0,19,0,0,False,1,69.163.172.251,us,2025-03-13,2026-08-19,authority=19; borderline
+illatopositivo.club,semrush,REVIEW,Unclear — manual review,0.0,8,0,0,False,1,148.113.199.76,ca,2026-03-10,2026-08-13,authority=8; borderline
+intently.co,semrush,REVIEW,Unclear — manual review,0.0,19,0,0,False,3,67.227.198.170,us,2025-04-23,2026-05-04,authority=19; borderline
+jeffslist.com,semrush,REVIEW,Unclear — manual review,0.0,10,0,0,False,1,199.16.173.214,us,2025-11-15,2026-05-08,authority=10; borderline
+koalatyremodel.com,semrush,REVIEW,Unclear — manual review,0.0,12,0,0,False,5,34.160.17.71,us,2025-10-11,2026-08-26,authority=12; borderline
+legendarycorp.com,semrush,REVIEW,Unclear — manual review,0.0,15,0,0,False,1,216.150.1.1,us,2026-03-21,2026-08-20,authority=15; borderline
+lifewithheidi.com,semrush,REVIEW,Unclear — manual review,0.0,24,0,0,False,1,162.248.188.100,us,2025-12-25,2026-08-22,authority=24; borderline
+localrepairsnow.com,semrush,REVIEW,Unclear — manual review,0.0,13,0,0,False,1,172.67.219.209,,2026-03-29,2026-05-19,authority=13; borderline
+lombardohomegroup.com,semrush,REVIEW,Unclear — manual review,0.0,8,0,0,False,1,104.21.18.198,,2025-12-29,2026-08-17,authority=8; borderline
+longislandwindowsandsiding.com,semrush,REVIEW,Unclear — manual review,0.0,19,0,0,False,1,35.227.194.51,us,2026-01-04,2026-09-01,authority=19; borderline
+mcglobalconstruction.com,semrush,REVIEW,Unclear — manual review,0.0,8,0,0,False,1,35.212.81.132,us,2025-07-07,2026-07-29,authority=8; borderline
+megforit.com,semrush,REVIEW,Unclear — manual review,0.0,17,0,0,False,1,34.174.21.213,us,2025-04-11,2026-08-05,authority=17; borderline
+midtownhi.com,semrush,REVIEW,Unclear — manual review,0.0,27,0,0,False,1,69.46.46.73,us,2026-08-08,2026-08-25,authority=27; borderline
+mybeautifuladventures.com,semrush,REVIEW,Unclear — manual review,0.0,20,0,0,False,1,151.101.66.159,us,2025-07-18,2026-08-28,authority=20; borderline
+nashvillefallhomeshow.com,semrush,REVIEW,Unclear — manual review,0.0,21,0,0,False,9,150.171.109.245,us,2026-02-16,2026-05-27,authority=21; borderline
+neededinthehome.com,semrush,REVIEW,Unclear — manual review,0.0,15,0,0,False,1,198.72.127.74,ca,2025-10-13,2026-08-31,authority=15; borderline
+needinstall.com,semrush,REVIEW,Unclear — manual review,0.0,7,0,0,False,1,5.78.158.140,us,2026-02-21,2026-05-05,authority=7; borderline
+northatlantastar.com,semrush,REVIEW,Unclear — manual review,0.0,14,0,0,False,2,172.67.140.253,,2026-03-12,2026-08-04,authority=14; borderline
+nowiveseeneverything.club,semrush,REVIEW,Unclear — manual review,0.0,17,0,0,False,1,213.196.36.228,nl,2026-01-02,2026-08-13,authority=17; borderline
+olivare.com.ar,semrush,REVIEW,Unclear — manual review,0.0,16,0,0,False,1,104.21.40.229,,2026-02-13,2026-04-10,authority=16; borderline
+olumlubak.club,semrush,REVIEW,Unclear — manual review,0.0,13,0,0,False,1,213.196.36.236,nl,2026-01-04,2026-08-16,authority=13; borderline
+openingtimes.co,semrush,REVIEW,Unclear — manual review,0.0,13,0,0,False,2,194.26.222.202,gb,2026-01-30,2026-08-14,authority=13; borderline
+power100.io,semrush,REVIEW,Unclear — manual review,0.0,16,0,0,False,2,104.21.29.38,,2026-02-28,2026-08-12,authority=16; borderline
+professionalwindowcleaning.com,semrush,REVIEW,Unclear — manual review,0.0,28,0,0,False,1,198.202.211.1,us,2026-03-11,2026-08-29,authority=28; borderline
+reputablebusinesses.com,semrush,REVIEW,Unclear — manual review,0.0,15,0,0,False,3,145.223.126.72,us,2026-05-18,2026-05-18,authority=15; borderline
+residencetalk.com,semrush,REVIEW,Unclear — manual review,0.0,15,0,0,False,1,104.21.36.32,,2025-12-24,2026-08-24,authority=15; borderline
+rhynepark.org,semrush,REVIEW,Unclear — manual review,0.0,9,0,0,False,1,104.17.201.145,,2025-02-24,2026-03-03,authority=9; borderline
+roswellartfestival.com,semrush,REVIEW,Unclear — manual review,0.0,19,0,0,False,4,173.201.184.150,us,2025-02-21,2026-08-26,authority=19; borderline
+secureglaze-windows.co.uk,semrush,REVIEW,Unclear — manual review,0.0,9,0,0,False,2,65.98.19.47,us,2025-12-11,2026-08-28,authority=9; borderline
+sergechel.info,semrush,REVIEW,Unclear — manual review,0.0,11,0,0,False,21,104.21.31.88,,2025-07-16,2026-09-01,authority=11; borderline
+shabbychicboho.com,semrush,REVIEW,Unclear — manual review,0.0,19,0,0,False,1,172.67.192.115,,2026-02-10,2026-08-20,authority=19; borderline
+showmehydroclean.com,semrush,REVIEW,Unclear — manual review,0.0,9,0,0,False,1,149.28.107.249,us,2026-01-09,2026-08-25,authority=9; borderline
+sisgroup.lk,semrush,REVIEW,Unclear — manual review,0.0,9,0,0,False,1,194.233.75.17,sg,2026-02-27,2026-03-19,authority=9; borderline
+skyfiveproperties.com,semrush,REVIEW,Unclear — manual review,0.0,21,0,0,False,1,141.193.213.10,us,2026-03-05,2026-08-08,authority=21; borderline
+smb.co,semrush,REVIEW,Unclear — manual review,0.0,27,0,0,False,1,172.67.69.39,,2026-02-06,2026-05-24,authority=27; borderline
+southfwb.com,semrush,REVIEW,Unclear — manual review,0.0,12,0,0,False,2,172.67.165.246,,2026-08-26,2026-08-27,authority=12; borderline
+thebuildermarket.com,semrush,REVIEW,Unclear — manual review,0.0,22,0,0,False,8,172.67.75.244,,2026-04-09,2026-08-31,authority=22; borderline
+thecodex.wiki,semrush,REVIEW,Unclear — manual review,0.0,22,0,0,False,1,174.138.37.165,us,2025-12-08,2026-08-26,authority=22; borderline
+thededicatedhouse.com,semrush,REVIEW,Unclear — manual review,0.0,20,0,0,False,1,172.67.156.71,,2026-01-07,2026-08-29,authority=20; borderline
+thehomefixitpage.com,semrush,REVIEW,Unclear — manual review,0.0,13,0,0,False,6,104.21.82.128,,2026-01-12,2026-09-01,authority=13; borderline
+thesocialhouseja.com,semrush,REVIEW,Unclear — manual review,0.0,7,0,0,False,1,72.167.69.37,us,2026-08-13,2026-08-13,authority=7; borderline
+thesuburbansocialite.com,semrush,REVIEW,Unclear — manual review,0.0,13,0,0,False,1,75.119.206.187,us,2025-03-16,2026-05-05,authority=13; borderline
+thesweetestlittlelife.com,semrush,REVIEW,Unclear — manual review,0.0,20,0,0,False,1,192.0.78.243,us,2025-07-13,2026-08-22,authority=20; borderline
+towncontractors.com,semrush,REVIEW,Unclear — manual review,0.0,10,0,0,False,1,104.21.87.210,,2025-12-02,2026-04-13,authority=10; borderline
+unitedkingdominbusiness.co.uk,semrush,REVIEW,Unclear — manual review,0.0,19,0,0,False,1,172.67.163.151,,2026-03-03,2026-07-31,authority=19; borderline
+wackyworld.org,semrush,REVIEW,Unclear — manual review,0.0,10,0,0,False,1,198.185.159.145,us,2026-01-08,2026-07-13,authority=10; borderline
+weaverexterior.ca,semrush,REVIEW,Unclear — manual review,0.0,19,0,0,False,1,172.67.146.82,,2025-12-18,2026-08-18,authority=19; borderline
+windorpro.co.za,semrush,REVIEW,Unclear — manual review,0.0,9,0,0,False,2,169.255.59.76,za,2025-03-16,2026-08-17,authority=9; borderline
