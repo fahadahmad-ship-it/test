@@ -1,100 +1,41 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ngwindows.com — Backlink Disavow Dashboard</title>
-<style>
- :root{--surf:#ffffff;--ink:#101010;--ink2:#5b5a55;--line:#e7e7e2;--red:#e34948;--amber:#eda100;--green:#008300}
- *{box-sizing:border-box}
- body{margin:0;font:14px/1.55 ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#f4f4f1;color:var(--ink)}
- .wrap{max-width:1140px;margin:0 auto;padding:0 22px 40px}
- header.hd{background:#16233b;color:#fff;margin-bottom:22px;border-radius:0 0 16px 16px;
-   padding:26px 28px;box-shadow:0 2px 12px rgba(20,35,59,.14)}
- header.hd .row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;max-width:1140px;margin:0 auto}
- header.hd h1{font-size:23px;margin:0 0 4px;font-weight:800;letter-spacing:-.01em}
- header.hd .sub{color:#c7d0de;font-size:12.5px}
- .pill{background:rgba(227,73,72,.16);color:#ffb4b3;border:1px solid rgba(227,73,72,.5);
-   padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:700;white-space:nowrap}
- .grid{display:grid;gap:15px} .k5{grid-template-columns:repeat(5,1fr)}
- .two{grid-template-columns:1.18fr .82fr} .two2{grid-template-columns:1fr 1fr}
- @media(max-width:860px){.k5{grid-template-columns:repeat(2,1fr)}.two,.two2{grid-template-columns:1fr}}
- .card{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:18px 20px 15px;box-shadow:0 1px 2px rgba(16,16,16,.04)}
- .card h2{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);margin:0 0 15px;font-weight:800}
- .kpi{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:16px 15px 15px;position:relative;overflow:hidden}
- .kpi:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ac)}
- .kpi-v{font-size:31px;font-weight:800;line-height:1;letter-spacing:-.01em}
- .kpi-l{font-size:12px;color:var(--ink2);margin-top:7px;font-weight:600}
- .kpi-sub{font-size:11px;color:var(--ink2);margin-top:3px}
- .banner{background:linear-gradient(0deg,#fff,#fdf0f0);border:1px solid #f2c0c0;border-left:5px solid var(--red);
-   border-radius:12px;padding:15px 18px;margin-bottom:16px;font-size:13.5px}
- .donutrow{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
- .lg{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink2);margin:7px 0}
- .lg i{width:12px;height:12px;border-radius:3px} .lg b{margin-left:auto;color:var(--ink);font-variant-numeric:tabular-nums}
- .lg span{min-width:130px}
- table{width:100%;border-collapse:collapse;font-size:12.5px}
- td{padding:7px 8px;border-bottom:1px solid var(--line)} tr:last-child td{border-bottom:0}
- th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink2);padding:0 8px 8px}
- .r{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
- .mono{font-family:ui-monospace,Menlo,Consolas,monospace}
- .warn{background:#fff7ea;border:1px solid #f0cf94;border-left:5px solid var(--amber);border-radius:12px;padding:15px 18px;margin-top:16px;font-size:13px}
- .warn b{color:#9a5b00}
- .split{display:flex;gap:10px;margin-top:10px}
- .chip{flex:1;text-align:center;border:1px solid var(--line);border-radius:10px;padding:10px 6px}
- .chip .n{font-size:20px;font-weight:800} .chip .t{font-size:11px;color:var(--ink2);margin-top:2px}
- .foot{color:var(--ink2);font-size:11.5px;margin-top:24px;text-align:center}
- .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:2px}
- @media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
- .step{border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:12.5px}
- .step b{display:block;color:var(--ink);margin-bottom:3px}
-</style></head><body>
-<header class="hd"><div class="row">
-  <div><h1>Backlink Disavow Audit — ngwindows.com</h1>
-   <div class="sub">Ahrefs + Semrush · 2026-09-01 · 686/741 flagged domains verified at the actual-backlink level (anchor + follow)</div></div>
-  <div class="pill">⚠ 68% toxic — paid-PBN profile</div>
-</div></header>
-<div class="wrap">
-
- <div class="banner"><b>Verdict: heavily manipulated (paid-PBN) link profile.</b>
-  After a strict, anchor-driven re-check, <b>545 domains</b> are staged for disavow (P1 Core 411 + P2 134) —
-  <b>each carries a real spam signal</b> (footprint, is_spam, farm-IP, paid/exact-match anchor, or raw-IP host).
-  196 ambiguous domains are held for manual review, not auto-disavowed.</div>
-
- <div class="grid k5" style="margin-bottom:15px">
-  <div class="kpi" style="--ac:#16233b"><div class="kpi-v" style="color:#16233b">803</div><div class="kpi-l">Referring domains</div></div>
-  <div class="kpi" style="--ac:#e34948"><div class="kpi-v" style="color:#e34948">545</div><div class="kpi-l">Disavow</div><div class="kpi-sub">verified</div></div>
-  <div class="kpi" style="--ac:#e34948"><div class="kpi-v" style="color:#e34948">411</div><div class="kpi-l">P1 Core</div><div class="kpi-sub">tightest cut</div></div>
-  <div class="kpi" style="--ac:#eda100"><div class="kpi-v" style="color:#eda100">196</div><div class="kpi-l">Manual review</div><div class="kpi-sub">you decide</div></div>
-  <div class="kpi" style="--ac:#008300"><div class="kpi-v" style="color:#008300">62</div><div class="kpi-l">Keep</div><div class="kpi-sub">protected</div></div>
- </div>
-
- <div class="grid two" style="margin-bottom:15px">
-  <div class="card"><h2>Why domains are flagged</h2><svg viewBox="0 0 600 328" width="100%" role="img" aria-hidden="false"><text x="200" y="23" text-anchor="end" font-size="12.5" fill="#5b5a55">Paid / Telegram spam anchor</text><rect x="210" y="10" width="326.0" height="18" rx="4" fill="#e34948"><title>Paid / Telegram spam anchor: 140</title></rect><text x="544.0" y="23" font-size="12" font-weight="700" fill="#101010">140</text><text x="200" y="55" text-anchor="end" font-size="12.5" fill="#5b5a55">Exact-match commercial anchor</text><rect x="210" y="42" width="326.0" height="18" rx="4" fill="#e34948"><title>Exact-match commercial anchor: 140</title></rect><text x="544.0" y="55" font-size="12" font-weight="700" fill="#101010">140</text><text x="200" y="87" text-anchor="end" font-size="12.5" fill="#5b5a55">Backlink-seller / SEO PBN</text><rect x="210" y="74" width="153.7" height="18" rx="4" fill="#e34948"><title>Backlink-seller / SEO PBN: 66</title></rect><text x="371.6857142857143" y="87" font-size="12" font-weight="700" fill="#101010">66</text><text x="200" y="119" text-anchor="end" font-size="12.5" fill="#5b5a55">Farm-IP link network</text><rect x="210" y="106" width="132.7" height="18" rx="4" fill="#e34948"><title>Farm-IP link network: 57</title></rect><text x="350.7285714285714" y="119" font-size="12" font-weight="700" fill="#101010">57</text><text x="200" y="151" text-anchor="end" font-size="12.5" fill="#5b5a55">Blogspot PBN post</text><rect x="210" y="138" width="123.4" height="18" rx="4" fill="#e34948"><title>Blogspot PBN post: 53</title></rect><text x="341.4142857142857" y="151" font-size="12" font-weight="700" fill="#101010">53</text><text x="200" y="183" text-anchor="end" font-size="12.5" fill="#5b5a55">Ahrefs spam-flagged</text><rect x="210" y="170" width="44.2" height="18" rx="4" fill="#e34948"><title>Ahrefs spam-flagged: 19</title></rect><text x="262.24285714285713" y="183" font-size="12" font-weight="700" fill="#101010">19</text><text x="200" y="215" text-anchor="end" font-size="12.5" fill="#5b5a55">URL-shortener / redirect net</text><rect x="210" y="202" width="41.9" height="18" rx="4" fill="#e34948"><title>URL-shortener / redirect net: 18</title></rect><text x="259.9142857142857" y="215" font-size="12" font-weight="700" fill="#101010">18</text><text x="200" y="247" text-anchor="end" font-size="12.5" fill="#5b5a55">Auto stats / scraper page</text><rect x="210" y="234" width="27.9" height="18" rx="4" fill="#e34948"><title>Auto stats / scraper page: 12</title></rect><text x="245.94285714285715" y="247" font-size="12" font-weight="700" fill="#101010">12</text><text x="200" y="279" text-anchor="end" font-size="12.5" fill="#5b5a55">Spam directory</text><rect x="210" y="266" width="27.9" height="18" rx="4" fill="#e34948"><title>Spam directory: 12</title></rect><text x="245.94285714285715" y="279" font-size="12" font-weight="700" fill="#101010">12</text><text x="200" y="311" text-anchor="end" font-size="12.5" fill="#5b5a55">Free-host throwaway</text><rect x="210" y="298" width="23.3" height="18" rx="4" fill="#e34948"><title>Free-host throwaway: 10</title></rect><text x="241.28571428571428" y="311" font-size="12" font-weight="700" fill="#101010">10</text></svg></div>
-  <div class="card"><h2>Decision split</h2>
-   <div class="donutrow"><svg viewBox="0 0 184 184" width="176" height="176" role="img"><path d="M 92.0 26.0 A 66 66 0 1 1 32.5 120.6" fill="none" stroke="#e34948" stroke-width="24" stroke-linecap="butt"><title>Disavow (verified): 545</title></path><path d="M 32.5 120.6 A 66 66 0 0 1 61.2 33.6" fill="none" stroke="#eda100" stroke-width="24" stroke-linecap="butt"><title>Manual review: 196</title></path><path d="M 61.2 33.6 A 66 66 0 0 1 92.0 26.0" fill="none" stroke="#008300" stroke-width="24" stroke-linecap="butt"><title>Keep: 62</title></path><text x="92" y="88" text-anchor="middle" font-size="30" font-weight="800" fill="#101010">803</text><text x="92" y="108" text-anchor="middle" font-size="12" fill="#5b5a55">domains</text></svg><div style="flex:1;min-width:190px"><div class="lg"><i style="background:#e34948"></i><span>Disavow (verified)</span><b>545</b></div><div class="lg"><i style="background:#eda100"></i><span>Manual review</span><b>196</b></div><div class="lg"><i style="background:#008300"></i><span>Keep</span><b>62</b></div></div></div></div>
- </div>
-
- <div class="grid two2" style="margin-bottom:15px">
-  <div class="card"><h2>Anchor type of disavowed links</h2><svg viewBox="0 0 600 168" width="100%" role="img" aria-hidden="false"><text x="140" y="23" text-anchor="end" font-size="12.5" fill="#5b5a55">commercial</text><rect x="150" y="10" width="386.0" height="18" rx="4" fill="#2a78d6"><title>commercial: 359</title></rect><text x="544.0" y="23" font-size="12" font-weight="700" fill="#101010">359</text><text x="140" y="55" text-anchor="end" font-size="12.5" fill="#5b5a55">money/spam</text><rect x="150" y="42" width="164.5" height="18" rx="4" fill="#2a78d6"><title>money/spam: 153</title></rect><text x="322.5069637883008" y="55" font-size="12" font-weight="700" fill="#101010">153</text><text x="140" y="87" text-anchor="end" font-size="12.5" fill="#5b5a55">empty/blank</text><rect x="150" y="74" width="26.9" height="18" rx="4" fill="#2a78d6"><title>empty/blank: 25</title></rect><text x="184.88022284122562" y="87" font-size="12" font-weight="700" fill="#101010">25</text><text x="140" y="119" text-anchor="end" font-size="12.5" fill="#5b5a55">other</text><rect x="150" y="106" width="6.5" height="18" rx="4" fill="#2a78d6"><title>other: 6</title></rect><text x="164.45125348189416" y="119" font-size="12" font-weight="700" fill="#101010">6</text><text x="140" y="151" text-anchor="end" font-size="12.5" fill="#5b5a55">generic</text><rect x="150" y="138" width="5.0" height="18" rx="4" fill="#2a78d6"><title>generic: 2</title></rect><text x="163" y="151" font-size="12" font-weight="700" fill="#101010">2</text></svg>
-   <div class="split">
-    <div class="chip"><div class="n" style="color:#e34948">315</div><div class="t">dofollow (pass equity)</div></div>
-    <div class="chip"><div class="n">230</div><div class="t">nofollow (lower priority)</div></div>
-   </div></div>
-  <div class="card"><h2>Largest link networks (shared farm IP)</h2>
-   <table><thead><tr><th>IP address</th><th class="r">domains</th></tr></thead><tbody><tr><td class="mono">118.139.181.85</td><td class="r">32</td></tr><tr><td class="mono">203.161.54.114</td><td class="r">27</td></tr><tr><td class="mono">195.20.19.178</td><td class="r">19</td></tr><tr><td class="mono">184.168.115.60</td><td class="r">9</td></tr><tr><td class="mono">118.139.176.46</td><td class="r">9</td></tr><tr><td class="mono">67.223.118.29</td><td class="r">6</td></tr><tr><td class="mono">118.139.161.199</td><td class="r">5</td></tr><tr><td class="mono">188.40.17.96</td><td class="r">5</td></tr></tbody></table></div>
- </div>
-
- <div class="card" style="margin-bottom:15px"><h2>Smoking-gun spam anchors (verbatim from the links)</h2>
-  <table><thead><tr><th>Anchor text</th><th class="r">ref. domains</th></tr></thead><tbody><tr><td>…SEOExpress.org and their backlink building service worked wonders… traffic +400%</td><td class="r">222</td></tr><tr><td>Complete SEO for ngwindows.com: premium guest posts, contextual backlinks…</td><td class="r">44</td></tr><tr><td>High Quality Dofollow Backlinks DA50 PA40 Premium PBN … Buy Backlinks Online Cheap</td><td class="r">21</td></tr><tr><td>JOIN OUR TELEGRAM https://t.me/s/darksidelinks</td><td class="r">10</td></tr><tr><td>tLvtiPx5V2OVDzj (random gibberish anchor)</td><td class="r">11</td></tr></tbody></table></div>
-
- <div class="warn"><b>⚠ Verify ownership before disavowing:</b> 15 near-identical window-brand microsites
-  (ngawindows.com, ngwindow.com, roiwindows.com, thermalprowindows.com, performingwindows.com …) sit on shared AWS IPs and are
-  likely <b>your own sites or a self-built PBN</b>. Held in manual review — redirect/consolidate your own sites, don't disavow them.</div>
-
- <div class="card" style="margin-top:15px"><h2>How to use this</h2>
-  <div class="steps">
-   <div class="step"><b>1 · Submit</b>Upload <span class="mono">disavow.txt</span> (P1+P2 = 545) to Google Search Console → Disavow Tool. For the safest cut, submit P1 Core only (411).</div>
-   <div class="step"><b>2 · Review</b>Skim the 196 manual-review rows; move any obvious spam into disavow, keep real sites out.</div>
-   <div class="step"><b>3 · Ownership</b>Confirm the 15 microsites — disavow only if they are a third-party PBN.</div>
-   <div class="step"><b>4 · Files</b>Every list is provided as a CSV in the csv/ folder + the full workbook.</div>
-  </div></div>
-
- <div class="foot">Nothing is submitted to Google automatically. Evidence per domain is in the workbook / complete CSV.</div>
-</div></body></html>
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>ngwindows.com — Disavow Dashboard</title><style>
+*{box-sizing:border-box}body{margin:0;font:14px/1.55 ui-sans-serif,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#f4f4f1;color:#101010}
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px 40px}
+header{background:#16233b;color:#fff;padding:26px 28px;border-radius:0 0 16px 16px;margin-bottom:22px}
+header .row{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;max-width:1140px;margin:0 auto}
+header h1{font-size:23px;margin:0 0 4px;font-weight:800} header .sub{color:#c7d0de;font-size:12.5px}
+.pill{background:rgba(227,73,72,.16);color:#ffb4b3;border:1px solid rgba(227,73,72,.5);padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:700}
+.grid{display:grid;gap:15px}.k5{grid-template-columns:repeat(5,1fr)}.two{grid-template-columns:1.18fr .82fr}.two2{grid-template-columns:1fr 1fr}
+@media(max-width:860px){.k5{grid-template-columns:repeat(2,1fr)}.two,.two2{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid #e7e7e2;border-radius:14px;padding:18px 20px 15px}
+.card h2{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#5b5a55;margin:0 0 15px;font-weight:800}
+.kpi{background:#fff;border:1px solid #e7e7e2;border-radius:14px;padding:16px 15px;position:relative;overflow:hidden}
+.kpi:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ac)}
+.kpi-v{font-size:31px;font-weight:800;line-height:1}.kpi-l{font-size:12px;color:#5b5a55;margin-top:7px;font-weight:600}.kpi-sub{font-size:11px;color:#5b5a55;margin-top:3px}
+.banner{background:linear-gradient(0deg,#fff,#fdf0f0);border:1px solid #f2c0c0;border-left:5px solid #e34948;border-radius:12px;padding:15px 18px;margin-bottom:16px;font-size:13.5px}
+.donutrow{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.lg{display:flex;align-items:center;gap:8px;font-size:13px;color:#5b5a55;margin:7px 0}.lg i{width:12px;height:12px;border-radius:3px}.lg b{margin-left:auto;color:#101010}.lg span{min-width:120px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}td{padding:7px 8px;border-bottom:1px solid #e7e7e2}th{text-align:left;font-size:11px;text-transform:uppercase;color:#5b5a55;padding:0 8px 8px}.r{text-align:right;font-weight:700}.mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+.split{display:flex;gap:10px;margin-top:10px}.chip{flex:1;text-align:center;border:1px solid #e7e7e2;border-radius:10px;padding:10px 6px}.chip .n{font-size:20px;font-weight:800}.chip .t{font-size:11px;color:#5b5a55;margin-top:2px}
+.warn{background:#fff7ea;border:1px solid #f0cf94;border-left:5px solid #eda100;border-radius:12px;padding:15px 18px;margin-top:16px;font-size:13px}.warn b{color:#9a5b00}
+.foot{color:#5b5a55;font-size:11.5px;margin-top:24px;text-align:center}</style></head><body>
+<header><div class=row><div><h1>Backlink Disavow Audit — ngwindows.com</h1>
+<div class=sub>Ahrefs + Semrush · 2026-09-01 · strict, anchor-driven verification · nofollow-with-no-footprint excluded from disavow</div></div>
+<div class=pill>⚠ 57% toxic — paid-PBN profile</div></div></header><div class=wrap>
+<div class=banner><b>Verdict: heavily manipulated (paid-PBN) link profile.</b> Recommended disavow is <b>460 domains</b> —
+315 dofollow + 124 footprint-nofollow. Harmless nofollow links (no spam footprint) were moved to review, not disavowed, since nofollow passes no equity.</div>
+<div class="grid k5" style=margin-bottom:15px>
+<div class="kpi" style="--ac:#16233b"><div class="kpi-v" style="color:#16233b">803</div><div class="kpi-l">Referring domains</div></div><div class="kpi" style="--ac:#e34948"><div class="kpi-v" style="color:#e34948">460</div><div class="kpi-l">Disavow</div><div class=kpi-sub>dofollow+footprint</div></div><div class="kpi" style="--ac:#e34948"><div class="kpi-v" style="color:#e34948">381</div><div class="kpi-l">P1 Core</div><div class=kpi-sub>tightest</div></div><div class="kpi" style="--ac:#eda100"><div class="kpi-v" style="color:#eda100">281</div><div class="kpi-l">Manual review</div><div class=kpi-sub>you decide</div></div><div class="kpi" style="--ac:#008300"><div class="kpi-v" style="color:#008300">62</div><div class="kpi-l">Keep</div><div class=kpi-sub>protected</div></div></div>
+<div class="grid two" style=margin-bottom:15px>
+<div class=card><h2>Why domains are flagged</h2><svg viewBox="0 0 600 296" width="100%"><text x="200" y="23" text-anchor="end" font-size="12.5" fill="#5b5a55">Multiple spam signals (dead + f…</text><rect x="210" y="10" width="326.0" height="18" rx="4" fill="#e34948"><title>Multiple spam signals (dead + f…: 130</title></rect><text x="544.0" y="23" font-size="12" font-weight="700" fill="#101010">130</text><text x="200" y="55" text-anchor="end" font-size="12.5" fill="#5b5a55">Low-quality / dead domain</text><rect x="210" y="42" width="326.0" height="18" rx="4" fill="#e34948"><title>Low-quality / dead domain: 130</title></rect><text x="544.0" y="55" font-size="12" font-weight="700" fill="#101010">130</text><text x="200" y="87" text-anchor="end" font-size="12.5" fill="#5b5a55">Paid-link / backlink-seller site</text><rect x="210" y="74" width="165.5" height="18" rx="4" fill="#e34948"><title>Paid-link / backlink-seller site: 66</title></rect><text x="383.5076923076923" y="87" font-size="12" font-weight="700" fill="#101010">66</text><text x="200" y="119" text-anchor="end" font-size="12.5" fill="#5b5a55">Spam blog post (Blogspot PBN)</text><rect x="210" y="106" width="132.9" height="18" rx="4" fill="#e34948"><title>Spam blog post (Blogspot PBN): 53</title></rect><text x="350.9076923076923" y="119" font-size="12" font-weight="700" fill="#101010">53</text><text x="200" y="151" text-anchor="end" font-size="12.5" fill="#5b5a55">Redirect / URL-shortener link n…</text><rect x="210" y="138" width="45.1" height="18" rx="4" fill="#e34948"><title>Redirect / URL-shortener link n…: 18</title></rect><text x="263.13846153846157" y="151" font-size="12" font-weight="700" fill="#101010">18</text><text x="200" y="183" text-anchor="end" font-size="12.5" fill="#5b5a55">Spam directory listing</text><rect x="210" y="170" width="30.1" height="18" rx="4" fill="#e34948"><title>Spam directory listing: 12</title></rect><text x="248.09230769230768" y="183" font-size="12" font-weight="700" fill="#101010">12</text><text x="200" y="215" text-anchor="end" font-size="12.5" fill="#5b5a55">Auto-generated stats / scraper …</text><rect x="210" y="202" width="30.1" height="18" rx="4" fill="#e34948"><title>Auto-generated stats / scraper …: 12</title></rect><text x="248.09230769230768" y="215" font-size="12" font-weight="700" fill="#101010">12</text><text x="200" y="247" text-anchor="end" font-size="12.5" fill="#5b5a55">Borderline — manual check</text><rect x="210" y="234" width="30.1" height="18" rx="4" fill="#e34948"><title>Borderline — manual check: 12</title></rect><text x="248.09230769230768" y="247" font-size="12" font-weight="700" fill="#101010">12</text><text x="200" y="279" text-anchor="end" font-size="12.5" fill="#5b5a55">Throwaway free-host page</text><rect x="210" y="266" width="25.1" height="18" rx="4" fill="#e34948"><title>Throwaway free-host page: 10</title></rect><text x="243.07692307692307" y="279" font-size="12" font-weight="700" fill="#101010">10</text></svg></div>
+<div class=card><h2>Decision split</h2><div class=donutrow><svg viewBox="0 0 184 184" width="176" height="176"><path d="M 92.0 26.0 A 66 66 0 1 1 62.8 151.2" fill="none" stroke="#e34948" stroke-width="24"><title>Disavow: 460</title></path><path d="M 62.8 151.2 A 66 66 0 0 1 61.2 33.6" fill="none" stroke="#eda100" stroke-width="24"><title>Manual review: 281</title></path><path d="M 61.2 33.6 A 66 66 0 0 1 92.0 26.0" fill="none" stroke="#008300" stroke-width="24"><title>Keep: 62</title></path><text x="92" y="88" text-anchor="middle" font-size="30" font-weight="800">803</text><text x="92" y="108" text-anchor="middle" font-size="12" fill="#5b5a55">domains</text></svg><div style="flex:1;min-width:190px"><div class="lg"><i style="background:#e34948"></i><span>Disavow</span><b>460</b></div><div class="lg"><i style="background:#eda100"></i><span>Manual review</span><b>281</b></div><div class="lg"><i style="background:#008300"></i><span>Keep</span><b>62</b></div></div></div></div></div>
+<div class="grid two2" style=margin-bottom:15px>
+<div class=card><h2>Disavow link type</h2><div class=split>
+<div class=chip><div class=n style="color:#e34948">315</div><div class=t>dofollow (pass equity)</div></div>
+<div class=chip><div class=n>124</div><div class=t>nofollow (footprint only)</div></div></div>
+<div style="font-size:12px;color:#5b5a55;margin-top:12px">Nofollow kept only where the domain is a clear spam footprint (blogspot PBN, backlink-seller, shortener) — never on a nofollow link alone.</div></div>
+<div class=card><h2>Largest link networks (shared farm IP)</h2><table><thead><tr><th>IP</th><th class=r>domains</th></tr></thead><tbody><tr><td class="mono">118.139.181.85</td><td class="r">32</td></tr><tr><td class="mono">203.161.54.114</td><td class="r">27</td></tr><tr><td class="mono">195.20.19.178</td><td class="r">19</td></tr><tr><td class="mono">118.139.176.46</td><td class="r">9</td></tr><tr><td class="mono">184.168.115.60</td><td class="r">9</td></tr><tr><td class="mono">67.223.118.29</td><td class="r">6</td></tr><tr><td class="mono">118.139.161.199</td><td class="r">5</td></tr><tr><td class="mono">188.40.17.96</td><td class="r">5</td></tr></tbody></table></div></div>
+<div class=card style=margin-bottom:15px><h2>Smoking-gun spam anchors (verbatim)</h2><table><thead><tr><th>Anchor text</th><th class=r>ref. domains</th></tr></thead><tbody><tr><td>…SEOExpress.org and their backlink building service worked wonders… traffic +400%</td><td class="r">222</td></tr><tr><td>Complete SEO for ngwindows.com: premium guest posts, contextual backlinks…</td><td class="r">44</td></tr><tr><td>High Quality Dofollow Backlinks DA50 PA40 Premium PBN … Buy Backlinks Online Cheap</td><td class="r">21</td></tr><tr><td>JOIN OUR TELEGRAM https://t.me/s/darksidelinks</td><td class="r">10</td></tr></tbody></table></div>
+<div class=warn><b>⚠ Verify ownership:</b> 15 near-identical window-brand microsites (ngawindows.com, ngwindow.com, roiwindows.com …) sit on shared AWS IPs and are likely <b>your own sites</b> — held in review, don't disavow your own network.</div>
+<div class=foot>Upload disavow.txt to Google Search Console → Disavow Tool. Nothing is submitted automatically.</div></div></body></html>
