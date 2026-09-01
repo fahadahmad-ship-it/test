@@ -1,6 +1,6 @@
 # Disavow file for ngwindows.com — 2026-09-01
-# 460 domains (dofollow 315 + footprint-nofollow 124 + raw-IP). Nofollow-with-no-footprint excluded.
-# For the tightest cut submit P1 Core only (381).
+# 453 domains (dofollow 308 + footprint-nofollow 124 + raw-IP). Reviewed line-by-line.
+# Tightest cut: P1 Core only (381).
 #
 domain:01webdirectory.com
 domain:1000.co.in
@@ -79,7 +79,6 @@ domain:booastrankingwithbacklinks.com
 domain:booksreadr.org
 domain:breachviews.com
 domain:brilko.shop
-domain:bulkdataprovider.com
 domain:burnersgamershitasd.blogspot.com
 domain:buyfairbacklinks.com
 domain:buyrankbacklinks.com
@@ -194,7 +193,6 @@ domain:glazeddoorsrikanmu.blogspot.com
 domain:global-rank.pages.dev
 domain:global-ranks.pages.dev
 domain:globalecommerce.org
-domain:gnpmilton.com
 domain:googleseoauthority.shop
 domain:googleseocraft.shop
 domain:googleseoexperts.shop
@@ -234,7 +232,6 @@ domain:jtdzcpmo.xyz
 domain:jxwikfum.xyz
 domain:kbgkeiip.xyz
 domain:knotknastylimddsd.blogspot.com
-domain:koalatyremodel.com
 domain:kpbcgzzk.xyz
 domain:lawyerinjeddah.com
 domain:lgrpgnok.xyz
@@ -275,7 +272,6 @@ domain:musweb.org
 domain:mymarketpost.com
 domain:naiad.pages.dev
 domain:naturallyhealthyparenting.com
-domain:needinstall.com
 domain:newblogerseo.com
 domain:newwebsiteslist.com
 domain:nextfounder.it
@@ -354,7 +350,6 @@ domain:sazfmezf.xyz
 domain:scionybg.xyz
 domain:screenshots.wiki
 domain:securedrate.com
-domain:secureglaze-windows.co.uk
 domain:seoboostacademy.shop
 domain:seoboostexchange.shop
 domain:seoboostresults.shop
@@ -381,7 +376,6 @@ domain:taxies.biz
 domain:tbincom.press
 domain:thecoffeemom.net
 domain:theface.in
-domain:thehomefixitpage.com
 domain:thekerrieshow.com
 domain:themoneyguy.co.uk
 domain:themumbai.in
@@ -440,7 +434,6 @@ domain:whzoyytu.xyz
 domain:wiknluhc.xyz
 domain:windowcompaniesbado.blogspot.com
 domain:windowcompaniesbaisashi.blogspot.com
-domain:windowdigest.com
 domain:windowglassreplacementmarik.blogspot.com
 domain:windowglassreplacementnshinso.blogspot.com
 domain:windowgrade.com
