@@ -54,18 +54,22 @@ Each domain was scored on **independent, corroborating signals** — no domain i
 
 ---
 
-## 4. Results (evidence-tiered — verified at backlink level)
+## 4. Results (strict, anchor-driven re-verification)
 
-Every flagged domain was checked against its **actual backlink** (real source URL, anchor, follow status pulled from Semrush + Ahrefs). That lets us tier by strength of evidence rather than lump everything together:
+Every domain was re-judged from its **actual backlink** — the real anchor text, follow status, hosting IP, and footprint — not domain metrics alone. The anchor text was spam-scored for all domains (the earlier pass only scored the Ahrefs-joined ones), which corrected both over- and under-flagging:
 
-- **P1 — Core: 312** — clear spam footprint or ≥2 independent signals. Disavow with confidence.
-- **P2 — Recommended: 209** — a dead/low-quality domain that **also** carries a corroborating link signal (dofollow, money/spam anchor, farm-IP, or Ahrefs `is_spam`).
-- **➡ Recommended disavow = P1 + P2 = 521 domains** (this is what `disavow.txt` submits by default).
-- **P3 — Optional: 107** — flagged on a *single* "dead/low-quality" signal only, where the actual link is **nofollow + a branded mention** and nothing else. Not clearly manipulative, so **left commented-out** in `disavow.txt`; uncomment to push the total to 628.
-- **Manual review: 112** (+ the 107 P3) — includes the window-microsite cluster.
-- **Protected (KEEP): 63 domains**
+- **Downgraded disavow → review: 104** — rested only on "dofollow + a blank/generic anchor" with no spam marker → not clearly manipulative → moved to manual review.
+- **Upgraded review → disavow: 21** — carried paid/Telegram or exact-match commercial anchors that the first pass missed (e.g. "JOIN OUR TELEGRAM…", "Vinyl Windows Atlanta" from a dead DR0 domain).
+- **Held for ownership: 15** — the window-microsite cluster stays in review.
 
-**Why not 628?** The earlier 628 counted 316 "MEDIUM," of which 110 rested on one soft "dead domain" signal. Judged against the real link (nofollow, branded, no other spam marker), those aren't clearly manipulative — Google advises disavowing only clearly manipulative links — so they moved to P3/Optional. — e.g. apple.com, yahoo.com, bing.com, pinterest.com, bbb.org, yellowpages.com, nextdoor.com, zoominfo.com, porch.com, expertise.com, glass.com, glassonweb.com, windowanddoor.com, windowdigest.com, constantcontact.com, chamberofcommerce.com.
+**Final tally:**
+- **DISAVOW: 545** — every domain carries a real spam signal (footprint, `is_spam`, farm-IP, paid/exact-match commercial anchor, or raw-IP host).
+  - **P1 — Core: 411** (footprint / is_spam / farm-IP / paid anchor) — the tightest, safest cut.
+  - **P2 — Recommended: 134** (exact-match commercial anchor on a dead domain / raw-IP host / dofollow).
+- **Manual review: 196** — genuinely ambiguous (blank/generic anchors, off-topic, or own microsites). Not auto-disavowed.
+- **Keep (protected): 62.**
+
+`disavow.txt` contains the 545 (P1+P2); submit **P1 only (411)** if you want the most conservative list. The `strict_verdict` column in the workbook/CSV records what changed for every domain. — e.g. apple.com, yahoo.com, bing.com, pinterest.com, bbb.org, yellowpages.com, nextdoor.com, zoominfo.com, porch.com, expertise.com, glass.com, glassonweb.com, windowanddoor.com, windowdigest.com, constantcontact.com, chamberofcommerce.com.
 
 ### Critical QA / second-look (every decision re-checked)
 An independent verification pass re-examined each domain and surfaced **57 QA items**, of which ~29 are genuine judgment calls a human should confirm (the rest are positive "confirmed by both tools" notes). The QA rules catch: *passed-but-toxic*, *flagged-but-has-real-traffic*, *high-authority-but-off-topic (possible paid guest post)*, and *own-network*. See the **QA Second-Look** tab / `qa_note` column.
