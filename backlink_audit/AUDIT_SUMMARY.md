@@ -54,11 +54,17 @@ Each domain was scored on **independent, corroborating signals** — no domain i
 
 ---
 
-## 4. Results
+## 4. Results (after critical QA pass)
 
-- **Flagged for disavow (HIGH + MEDIUM): 643 domains** → `disavow.txt`
-- **Manual-review-only (REVIEW): 97 domains** → in the flagged CSV, excluded from disavow.txt
+- **Flagged for disavow (HIGH + MEDIUM): 628 domains** → `disavow.txt`
+- **Manual-review-only (REVIEW): 112 domains** → in the flagged CSV / workbook, excluded from disavow.txt
 - **Protected (KEEP): 63 domains** — e.g. apple.com, yahoo.com, bing.com, pinterest.com, bbb.org, yellowpages.com, nextdoor.com, zoominfo.com, porch.com, expertise.com, glass.com, glassonweb.com, windowanddoor.com, windowdigest.com, constantcontact.com, chamberofcommerce.com.
+
+### Critical QA / second-look (every decision re-checked)
+An independent verification pass re-examined each domain and surfaced **57 QA items**, of which ~29 are genuine judgment calls a human should confirm (the rest are positive "confirmed by both tools" notes). The QA rules catch: *passed-but-toxic*, *flagged-but-has-real-traffic*, *high-authority-but-off-topic (possible paid guest post)*, and *own-network*. See the **QA Second-Look** tab / `qa_note` column.
+
+### ⚠️ Window-company microsite cluster — DO NOT blind-disavow (15 domains, now REVIEW)
+A cluster of near-identical window-brand domains sits on shared AWS IPs (`15.197.225.128`, `15.197.142.173`, `3.33.152.147`, `3.33.251.168`): **ngawindows.com, ngwindow.com, northgawindows.com, northgeorgiawindow.com, northgeorgiawindows.net, roiwindows.com, thermalprowindows.com, thermalastwindows.com, thermatrustwindows.com, northpointwindows.com, performingwindows.com, qualitypluswindows.com, choiceviewwindows.com, e2windows.com** (+ `windowdoor-test.com`, an apparent staging domain). Because the client is *North Georgia Windows*, these are very likely **the client's own microsites / typo-domains or a self-built PBN**. They were moved out of the disavow set into **REVIEW** — confirm ownership first: you disavow a *third-party* PBN, but you redirect/consolidate your *own* sites rather than disavow them.
 
 ### HIGH-confidence category breakdown
 | Category | Domains |
@@ -94,9 +100,10 @@ The `rankvance*` family (rankvance.info/.online/.website + agency/authority/link
 
 | File | What it is |
 |---|---|
+| `ngwindows_backlink_audit.xlsx` | **Master workbook — everything in tabs:** Summary · All Domains · Disavow-HIGH · Disavow-MEDIUM · Manual Review · Keep · QA Second-Look · Link Networks · Toxic Anchors · Ahrefs raw · Semrush raw. Colour-coded by decision. |
 | `disavow.txt` | **Google-format disavow file**, `domain:` entries, grouped HIGH then MEDIUM with category comments. Ready to submit after your review. |
-| `disavow_flagged_for_review.csv` | **Every flagged domain (643 + 97 review)** with confidence, category, and per-domain evidence — your manual-review worksheet. |
-| `merged_all_domains.csv` | All 803 domains incl. the 63 KEEP, with full signals (DR, Authority Score, traffic, keyword positions, is_spam, IP, country, first/last seen). |
+| `disavow_flagged_for_review.csv` | Every flagged domain (628 disavow + 112 review) with confidence, category, evidence, and QA note. |
+| `merged_all_domains.csv` | All 803 domains incl. the 63 KEEP, with full signals + decision + QA note. |
 | `ahrefs_refdomains.csv` / `semrush_refdomains.csv` | Raw pulls from each source. |
 | `toxic_anchors.txt` | The smoking-gun spam anchor texts. |
 

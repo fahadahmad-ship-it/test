@@ -1,8 +1,6 @@
-# Disavow file for ngwindows.com
-# Generated 2026-09-01 from Ahrefs + Semrush referring-domain audit
-# Review before submitting to Google Search Console Disavow Tool.
-# HIGH-confidence (strong spam footprint): 316 domains
-# MEDIUM-confidence (recommended, verify): 327 domains
+# Disavow file for ngwindows.com  (2026-09-01)
+# From Ahrefs + Semrush referring-domain audit. Review before submitting.
+# HIGH: 312  MEDIUM: 316  (total 628)
 #
 # ===== HIGH CONFIDENCE =====
 # -- Adult spam (2) --
@@ -177,7 +175,7 @@ domain:toplist.co.in
 domain:trendspotdirectory.com
 domain:uaewebdirectory.info
 domain:yesdomains.space
-# -- Multi-signal spam (134) --
+# -- Multi-signal spam (130) --
 domain:1000.co.in
 domain:2x9.co
 domain:abyoxohg.xyz
@@ -245,8 +243,6 @@ domain:marathiladies.com
 domain:marketingexperts.click
 domain:mp3fresh.net
 domain:musweb.org
-domain:ngawindows.com
-domain:northgeorgiawindows.net
 domain:okhwefjs.xyz
 domain:omrbsvkq.xyz
 domain:organicrankexpress.shop
@@ -268,7 +264,6 @@ domain:rankgrowthservice.shop
 domain:rankseoprovider.shop
 domain:read.org.in
 domain:ready.pro
-domain:roiwindows.com
 domain:sazfmezf.xyz
 domain:scionybg.xyz
 domain:seoboostacademy.shop
@@ -282,7 +277,6 @@ domain:sportlives.xyz
 domain:taxies.biz
 domain:theface.in
 domain:themumbai.in
-domain:thermalprowindows.com
 domain:thirty.co.in
 domain:tkzojtbf.xyz
 domain:toprankpartners.shop
@@ -331,8 +325,7 @@ domain:screenshots.wiki
 domain:shortenurls.eu
 domain:urls-shortener.eu
 domain:websites.freemyip.com
-#
-# ===== MEDIUM CONFIDENCE (verify before submit) =====
+# ===== MEDIUM CONFIDENCE (verify) =====
 # -- Auto-generated stats / worth-checker (2) --
 domain:domaineye.com
 domain:websitescrawl.com
@@ -341,7 +334,7 @@ domain:eastus2-01.azurewebsites.net
 # -- Low-quality directory / TLD list (2) --
 domain:01webdirectory.com
 domain:uklistingz.co.uk
-# -- Single-signal low-quality (322) --
+# -- Single-signal low-quality (311) --
 domain:100xrecruiting.com
 domain:128.199.173.17
 domain:142.54.190.10
@@ -407,7 +400,6 @@ domain:ceemobiled.gq
 domain:chadbryant.us
 domain:chattanoogatoprated.com
 domain:chimneyproduct.com
-domain:choiceviewwindows.com
 domain:circuscoolschool.com
 domain:cityvetted.com
 domain:clackamaswebacademy.info
@@ -445,7 +437,6 @@ domain:dtviewlx.com
 domain:ducknest.us
 domain:dugdo.us
 domain:dupurgeniefr.com
-domain:e2windows.com
 domain:eastbeachvc.com
 domain:easycoin.us
 domain:eliotzigmundjazz.com
@@ -552,19 +543,14 @@ domain:myquestion.info
 domain:naturallyhealthyparenting.com
 domain:newsblogsports.site
 domain:nextfounder.it
-domain:ngwindow.com
 domain:nhadatthanhvinh.com
 domain:nivira.shop
-domain:northgawindows.com
-domain:northgeorgiawindow.com
-domain:northpointwindows.com
 domain:nutshellcanada.com
 domain:obekcom.press
 domain:okna-togliatty.ru
 domain:onlineshoppingidea.com
 domain:onvaxs.com
 domain:osobiste.info
-domain:performingwindows.com
 domain:phanerosart.com
 domain:plrdownloadshub.com
 domain:plumeriamarketing.com
@@ -577,7 +563,6 @@ domain:prothor-ing.com
 domain:purahealthy.net
 domain:qscam.com
 domain:quality-hd-wallpapers.us
-domain:qualitypluswindows.com
 domain:quotesblom.com
 domain:qwenterprise.com
 domain:rchasg.site
@@ -629,8 +614,6 @@ domain:thecoffeemom.net
 domain:thekerrieshow.com
 domain:themoneyguy.co.uk
 domain:thenewz.us
-domain:thermalastwindows.com
-domain:thermatrustwindows.com
 domain:thetaleofwhatif.com
 domain:thetarotalk.com
 domain:tooder.pics
@@ -653,7 +636,6 @@ domain:wealthinsidermag.com
 domain:wecaksu.com
 domain:whatzonyourmind.com
 domain:whosmypro.com
-domain:windowdoor-test.com
 domain:windowgrade.com
 domain:wogibtswas.de
 domain:writeradar.com
