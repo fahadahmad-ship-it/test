@@ -1,5 +1,5 @@
 # Master Lawn — disavow file (QA-PENDING, do not submit until signed off)
-# Generated 2026-09-04 from Semrush backlink audit.
+# Generated 2026-09-04 from Semrush backlink audit (2 QA passes).
 # 1003 toxic referring domains (domain-level).
 #
 domain:1000.co.in
