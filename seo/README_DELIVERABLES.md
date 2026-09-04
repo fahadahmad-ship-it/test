@@ -7,14 +7,16 @@
 
 ## Headline result (after 2 independent QA passes)
 
-Reviewed **every** referring domain (1,170) and **every** backlink (3,651).
+Reviewed **every** referring domain (1,169 unique) and **every** backlink (3,651).
 
 | Verdict | Domains | Meaning |
 |---|---:|---|
-| 🔴 **TOXIC** | **1,003 (85.7%)** | Recommended for disavow |
+| 🔴 **TOXIC** | **986 (84.3%)** | Recommended for disavow |
 | 🟢 KEEP | 113 | Legitimate / relevant — do not disavow |
-| 🟡 MONITOR | 49 | Ambiguous — watch, do NOT disavow yet |
+| 🟡 MONITOR | 65 | Ambiguous / low-value local citations — watch, do NOT disavow yet |
 | ⚫ OWN | 5 | Client/sister properties — never disavow |
+
+**Local-citation safeguard:** for a local business, low-quality directory *citations* (a real "Lawn Aeration Huntsville AL" listing) can help local SEO, so they are handled carefully. The spam network here deliberately fakes those anchors — 806 toxic domains use real city/service anchors but sit on PBN farms/throwaway hosts (camouflage). Only standalone, non-farm business directories were pulled out of the disavow into MONITOR; every geo-anchor link is listed on the **Local Citations Review** sheet for a human check.
 
 **Why so many?** The profile is dominated by an automated **directory/article/bookmark PBN + link-selling network** (single-IP farms on `64.182.x`, `69.13.x`, `94.46.x`, `118.139.x`, `159.198.75.x`, `195.20.19.178`), plus gambling/off-topic and foreign-hosting spam, and "buy backlinks / DA-PA / telegram" anchors. ~90% of referring domains sit at Authority Score ≤6. This is manipulation / negative-SEO contamination, not earned authority.
 

@@ -1,6 +1,6 @@
 # Master Lawn — disavow file (QA-PENDING, do not submit until signed off)
 # Generated 2026-09-04 from Semrush backlink audit (2 QA passes).
-# 1003 toxic referring domains (domain-level).
+# 986 toxic referring domains (domain-level).
 #
 domain:1000.co.in
 domain:10googol.org
@@ -336,8 +336,6 @@ domain:favoritedirectoree.com
 domain:favoritedirectori.com
 domain:favoritedirectory.org
 domain:favoritey.net
-domain:findabusinessthat.com
-domain:findbiz.info
 domain:findbusinesses.org
 domain:finddirectory.org
 domain:findelio.org
@@ -345,7 +343,6 @@ domain:findinfo.in
 domain:findingu.org
 domain:findist.net
 domain:findlocalcenter.com
-domain:findtor.com
 domain:findzy.net
 domain:finestbusinesslistings.com
 domain:firstguestpost.com
@@ -356,7 +353,6 @@ domain:flamingos.pages.dev
 domain:forever-biz.com
 domain:frontrunnerz.net
 domain:gamerkun.com
-domain:geobizdirectory.com
 domain:getbestspots.com
 domain:getbusinessedge.com
 domain:getdirectory.org
@@ -450,10 +446,8 @@ domain:indians.cc
 domain:infobusinesses.co
 domain:infobusinesslistings.com
 domain:infodirectory.biz
-domain:infodirectorynow.com
 domain:infolocal.biz
 domain:insearchlocal.com
-domain:inspiredirectory.com
 domain:instabookmarking.com
 domain:isardomains.com
 domain:israelmilitaria.blogspot.com
@@ -492,9 +486,7 @@ domain:linksnatcher.com
 domain:linksnewses.com
 domain:list.show
 domain:list2rank.com
-domain:listglobe.com
 domain:listify.biz
-domain:listing-quest.com
 domain:listingcenter.org
 domain:listingcenterpro.com
 domain:listingcircleweb.com
@@ -527,7 +519,6 @@ domain:local-chamber.com
 domain:local-leadz.com
 domain:localbizbureau.com
 domain:localbizselect.com
-domain:localbizsphere.com
 domain:localbizzz.com
 domain:localbusinessesdir.com
 domain:localbusinessfinder.co
@@ -543,7 +534,6 @@ domain:locallistingz.com
 domain:locallistingz.net
 domain:localpagecitybook.com
 domain:localpagesdirectory.com
-domain:localpulsedirectory.com
 domain:localquest.info
 domain:localquest.net
 domain:localroom.org
@@ -555,7 +545,6 @@ domain:locationbusinesslistings.com
 domain:london-essays.blog
 domain:lookupdata.org
 domain:lookuplists.com
-domain:loyaldirectory.com
 domain:m98ufa.com
 domain:magzine.org
 domain:mahalobiz.com
@@ -608,7 +597,6 @@ domain:onlinebeacon.co
 domain:onlinebrillians.com
 domain:onlinecompanypages.com
 domain:onlinediari.com
-domain:onlinelocalbrand.com
 domain:onlineshoppingidea.com
 domain:onlinewebsitecenter.com
 domain:onlinewebzone.com
@@ -728,7 +716,6 @@ domain:seoplex.biz
 domain:seoranks.co
 domain:sezza.org
 domain:sharedbookmark.net
-domain:shareddirectory.com
 domain:shizzle.biz
 domain:shoplogist.com
 domain:shortenurls.eu
@@ -851,7 +838,6 @@ domain:topeasylocal.com
 domain:tophref.com
 domain:topincitylocal.com
 domain:topleveldomains.space
-domain:topleveldomains.space
 domain:toplinksdirectory.com
 domain:toplistedgroup.com
 domain:toplistings.info
@@ -865,7 +851,6 @@ domain:topvotedlistings.com
 domain:topwebfind.com
 domain:total-web-directory.com
 domain:true-listings.com
-domain:truebizdirectory.com
 domain:truebookies.com
 domain:trustedonlinebiz.com
 domain:tunca.org
@@ -877,14 +862,12 @@ domain:uaewebdirectory.info
 domain:ufabettererm4.com
 domain:ultimatebiz.net
 domain:ultimatelistpro.com
-domain:ultimatelistzone.com
 domain:ultimatesites.info
 domain:ultimatesites.net
 domain:ultimatewebcenter.com
 domain:ultradir.biz
 domain:uniquewebsitez.com
 domain:urban-listings.com
-domain:urbanbizlistings.com
 domain:urlrange.com
 domain:urls-shortener.eu
 domain:urltribe.org

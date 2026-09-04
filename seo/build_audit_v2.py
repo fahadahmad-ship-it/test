@@ -54,6 +54,7 @@ def get_data():
              ("monitor_A_reviewed.csv", "monitor_B_reviewed.csv", "keep_reviewed.csv")]
     files += [os.path.join(BASE, "data", "qa2", f"toxic_{i}_reviewed.csv") for i in range(1, 8)]
     files.append(os.path.join(BASE, "data", "qa2", "keep_final_reviewed.csv"))
+    files.append(os.path.join(BASE, "data", "qa3", "local_citations_reviewed.csv"))
     for p in files:
         if not os.path.exists(p): continue
         with open(p, encoding="utf-8", errors="replace") as f:
@@ -382,6 +383,28 @@ def build():
         if len(doms) >= 2:
             ws.append([ipf, len(doms), ", ".join(doms[:10])+(" ..." if len(doms)>10 else "")])
 
+    # ============ LOCAL CITATIONS — REVIEW ============
+    review_path = os.path.join(BASE, "data", "review", "local_citations.csv")
+    if os.path.exists(review_path):
+        ws = wb.create_sheet("Local Citations Review")
+        cols = ["Referring domain","Authority Score","IP","On PBN farm?","Local links","Example local anchor","Example target page","Default recommendation"]
+        widths = [30,10,16,12,10,40,46,26]
+        hrow = banner(ws, "LOCAL CITATIONS — REVIEW BEFORE DISAVOW", len(cols),
+                      "Toxic domains that link with a real city/service anchor. 'On farm=yes' = camouflaged spam "
+                      "(safe to disavow). 'no' = standalone directory — human-review; some moved to MONITOR.")
+        header_row(ws, cols, hrow, widths)
+        with open(review_path, encoding="utf-8") as f:
+            rd = csv.reader(f); next(rd, None)
+            for row in rd:
+                ws.append(row)
+                onfarm = ws.cell(row=ws.max_row, column=4)
+                if str(onfarm.value).lower() == "no":
+                    onfarm.fill = fill(VC_SOFT["MONITOR"])
+                    onfarm.font = F(10, True, "B7860B")
+                else:
+                    onfarm.fill = fill(VC_SOFT["TOXIC"])
+        ws.auto_filter.ref = f"A{hrow}:{get_column_letter(len(cols))}{ws.max_row}"
+
     # ============ METHODOLOGY ============
     ws = wb.create_sheet("Methodology")
     ws.sheet_view.showGridLines = False
@@ -413,7 +436,7 @@ def build():
     # order sheets: Dashboard, Exec, Ref Domains, All Backlinks, Disavow, Anchor, Clusters, Method, (hidden ChartData)
     wb.move_sheet("Dashboard", -(wb.sheetnames.index("Dashboard")))
     desired = ["Dashboard","Executive Summary","Referring Domains","All Backlinks","Disavow List",
-               "Anchor Analysis","Toxic Clusters","Methodology","Chart Data"]
+               "Local Citations Review","Anchor Analysis","Toxic Clusters","Methodology","Chart Data"]
     wb._sheets.sort(key=lambda s: desired.index(s.title) if s.title in desired else 99)
     wb.active = 0
     wb.save(out)

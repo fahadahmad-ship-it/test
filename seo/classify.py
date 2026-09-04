@@ -199,7 +199,13 @@ def load_refdomains():
                              ip=ip, country=country,
                              first_seen=epoch_to_date(first),
                              last_seen=epoch_to_date(last)))
-    return rows
+    # dedupe by root domain (Semrush can return the same domain twice)
+    seen = set(); uniq = []
+    for r in rows:
+        if r["domain"].lower() in seen:
+            continue
+        seen.add(r["domain"].lower()); uniq.append(r)
+    return uniq
 
 def load_backlinks():
     path = os.path.join(DATA, "backlinks_raw.csv")
@@ -246,6 +252,7 @@ def build():
     # qa2 = critical second-pass review; loaded last so it takes precedence
     override_files += [os.path.join(DATA, "qa2", f"toxic_{i}_reviewed.csv") for i in range(1, 8)]
     override_files.append(os.path.join(DATA, "qa2", "keep_final_reviewed.csv"))
+    override_files.append(os.path.join(DATA, "qa3", "local_citations_reviewed.csv"))
     for p in override_files:
         if not os.path.exists(p):
             continue
