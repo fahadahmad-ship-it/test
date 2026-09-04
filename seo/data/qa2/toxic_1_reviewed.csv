@@ -1,0 +1,152 @@
+domain,final_verdict,confidence,note
+mygreenbucks.net,MONITOR,Low,Real finance/GPT site but sketchy; leave out
+escuela-indecopi.edu.pe,KEEP,Med,Real Peruvian public education institution
+solvermatic.com,KEEP,Med,Real US home/garden how-to site
+greentechtree.com,KEEP,High,Real MA tree service company
+businesslistingslocal.com,TOXIC,High,Directory spam, PBN IP cluster
+keirseybooks.com,MONITOR,Low,Real book brand domain, now gambling content
+bestarticleworld.com,TOXIC,High,Article-spam name
+prontowebdir.com,TOXIC,High,Directory spam, PBN cluster
+agroinsursas.com,TOXIC,Med,Foreign site serving casino spam pages
+startupwebsolutions.com.au,TOXIC,Med,Generic SEO/web agency, no relevance
+revan-me.com,TOXIC,Low,Generic name, no signal or relevance
+gardenshaper.com,KEEP,High,Real gardening/landscape blog, on-topic
+a-zbusinesses.com,TOXIC,High,Directory spam, PBN cluster
+alistweb.co,TOXIC,High,PBN IP cluster
+aotw.co,TOXIC,High,PBN IP cluster
+articlewiki.co,TOXIC,High,Article spam, PBN cluster
+bestlocalcenter.com,TOXIC,High,PBN IP cluster
+blogerreviewers.com,TOXIC,Med,Review-spam name
+businessinfoseek.com,TOXIC,High,Directory spam, PBN cluster
+cityvetted.com,TOXIC,Med,Generic directory-style, no relevance
+decoratingmom.com,MONITOR,Low,Possibly real decor blog, uncertain
+directorit.org,TOXIC,High,Directory spam, PBN cluster
+directoryninja.org,TOXIC,High,Directory spam, PBN cluster
+directoryshine.net,TOXIC,High,Directory spam, PBN cluster
+easybusinessdirect.com,TOXIC,High,Directory spam, PBN cluster
+enterprisebusinesslistings.com,TOXIC,High,Directory spam, PBN cluster
+favoritebusinesses.net,TOXIC,High,Directory spam, PBN cluster
+findtor.com,TOXIC,Med,Generic name, no relevance
+getlistedahead.com,TOXIC,High,Directory spam, PBN cluster
+godigitalbusinesshub.com,TOXIC,High,Directory spam, PBN cluster
+harian24.com,TOXIC,Med,Foreign site, irrelevant
+ideailluminator.com,TOXIC,High,PBN IP cluster
+lawyerinjeddah.com,TOXIC,Med,Foreign, irrelevant to Memphis lawn
+listingpros.info,TOXIC,High,Directory spam, PBN cluster
+listique.org,TOXIC,High,Directory-style, PBN cluster
+localbusinessesdir.com,TOXIC,High,Directory spam, PBN cluster
+localquest.info,TOXIC,High,PBN cluster, directory-style
+loyaldirectory.com,TOXIC,High,Directory spam, foreign cluster
+mymarketpost.com,TOXIC,Med,Generic content-spam name
+octopedia.biz,TOXIC,High,PBN IP cluster
+onlinezest.org,TOXIC,High,PBN IP cluster
+postyourstory.net,TOXIC,High,PBN cluster, article spam
+purebusinesslistings.com,TOXIC,High,Directory spam, foreign cluster
+reviewmx.com,TOXIC,Med,Review-spam name
+searchranks.org,TOXIC,High,SEO/rank scheme, PBN cluster
+shareddirectory.com,TOXIC,High,Directory spam, foreign cluster
+smallbizdir.org,TOXIC,High,Directory spam, PBN cluster
+snap-this.com,TOXIC,High,PBN IP cluster
+spotw.org,TOXIC,High,PBN IP cluster
+submitbestarticles.net,TOXIC,High,Article spam, foreign cluster
+techsb.ca,MONITOR,Low,Small Canadian tech site, unverified
+theseznam.net,TOXIC,High,PBN IP cluster
+topbusinessfinder.com,TOXIC,High,Directory spam, PBN cluster
+truebookies.com,TOXIC,High,Gambling vertical
+urlwiz.org,TOXIC,High,PBN IP cluster
+webitory.net,TOXIC,High,PBN IP cluster
+whassupdirectory.com,TOXIC,High,Directory spam, PBN cluster
+domraider.it.com,TOXIC,Med,Throwaway TLD, no signal
+reputablebusinesses.com,TOXIC,Med,Directory-style, shared IP
+webmit.net,TOXIC,High,PBN IP cluster
+firstguestpost.com,TOXIC,High,Guest-post link scheme
+archive-hu.com,TOXIC,Med,Generic, no relevance
+australianwebdirectory.shop,TOXIC,High,Directory spam, spam TLD
+1pointweb.net,TOXIC,High,PBN IP cluster
+angelinasweb.net,TOXIC,High,PBN IP cluster
+articleshub.us,TOXIC,High,Article spam, foreign cluster
+belistedontop.com,TOXIC,High,Directory spam, PBN cluster
+bigbusinesseslisting.com,TOXIC,High,Directory spam, PBN cluster
+bizfront.org,TOXIC,High,PBN IP cluster
+bonuslinx.com,TOXIC,High,PBN IP cluster
+businessesmart.org,TOXIC,High,PBN IP cluster
+buzzlisting.org,TOXIC,High,Directory spam, PBN cluster
+coolwebdirectory.com,TOXIC,High,Directory spam, PBN cluster
+directopedia.us,TOXIC,High,Directory spam, PBN cluster
+directoryhq.net,TOXIC,High,Directory spam, foreign cluster
+directoryspace.biz,TOXIC,High,Directory spam, PBN cluster
+elibtory.com,TOXIC,High,PBN IP cluster
+favoritedirectori.com,TOXIC,High,Directory spam, PBN cluster
+getquicklisting.com,TOXIC,High,Directory spam, PBN cluster
+greatbizdir.com,TOXIC,High,Directory spam, PBN cluster
+hallofdistinction.com,TOXIC,High,PBN IP cluster
+hotvsnot.ws,TOXIC,High,Spam TLD, PBN cluster
+huntpush.com,TOXIC,High,PBN IP cluster
+infobusinesses.co,TOXIC,High,PBN IP cluster
+leading-businesses.com,TOXIC,High,PBN IP cluster
+listingcenter.org,TOXIC,High,Directory spam, PBN cluster
+listmybusiness.org,TOXIC,High,Directory spam, foreign cluster
+localpagecitybook.com,TOXIC,High,PBN IP cluster
+monetized.biz,TOXIC,High,PBN IP cluster
+officialdirectory.co,TOXIC,High,Directory spam, PBN cluster
+open-web-directory.com,TOXIC,High,Directory spam, PBN cluster
+popularweb.co.uk,TOXIC,High,PBN IP cluster
+primelistings.info,TOXIC,High,Directory spam, PBN cluster
+rizing.biz,TOXIC,High,PBN IP cluster
+seekbump.org,TOXIC,High,PBN IP cluster
+sitealliance.net,TOXIC,High,PBN IP cluster
+stardirectory.org,TOXIC,High,Directory spam, PBN cluster
+suggestwebsite.org,TOXIC,High,PBN IP cluster
+tapalmbeaches.com,MONITOR,Med,Real US title/escrow agency, unrelated
+thehubquest.com,TOXIC,High,PBN IP cluster
+topcontentcenter.com,TOXIC,High,PBN IP cluster
+topvoted.biz,TOXIC,High,PBN IP cluster
+urlrange.com,TOXIC,High,PBN IP cluster
+webbizquest.com,TOXIC,High,PBN IP cluster
+weblistingz.net,TOXIC,High,Directory spam, foreign cluster
+wikiarticles.us,TOXIC,High,Article spam, foreign cluster
+worldwebdirectory.co,TOXIC,High,Directory spam, PBN cluster
+yourinformationhub.com,TOXIC,High,PBN cluster, foreign
+zinglocal.net,TOXIC,High,PBN cluster, foreign
+raven-frost.online,TOXIC,Med,Spam TLD, no signal
+directoryvilla.org,TOXIC,High,Directory spam, PBN cluster
+aceoftheweb.org,TOXIC,High,PBN IP cluster
+atozweb.org,TOXIC,High,PBN IP cluster
+bizjournal.us,TOXIC,High,PBN IP cluster
+bookmarksavvy.com,TOXIC,High,Bookmark spam, PBN cluster
+businesswirenetwork.com,TOXIC,High,PBN IP cluster
+cvillico.com,TOXIC,Med,Generic, shared IP cluster
+directoryofbestsites.com,TOXIC,High,Directory spam, PBN cluster
+favoritedirectory.org,TOXIC,High,Directory spam, PBN cluster
+howsthat.org,TOXIC,High,PBN IP cluster
+klassyweb.com,TOXIC,High,PBN IP cluster
+listify.biz,TOXIC,High,PBN IP cluster
+marketingupdatee.com,TOXIC,Med,Marketing/SEO spam name
+newblogerseo.com,TOXIC,High,SEO link-scheme name
+powerbiz.org,TOXIC,High,PBN IP cluster
+sbsocial.net,TOXIC,High,PBN IP cluster
+sitedirectori.com,TOXIC,High,Directory spam, PBN cluster
+thetarotalk.com,TOXIC,Med,Tarot blog, irrelevant
+ufabettererm4.com,TOXIC,High,Gambling (ufabet) vertical
+webmine.co,TOXIC,High,PBN IP cluster
+willettonuniforms.com.au,MONITOR,Med,Real AU uniform shop, unrelated
+ziplistings.co,TOXIC,High,Directory spam, PBN cluster
+global-websites.pages.dev,TOXIC,High,Throwaway pages.dev host
+bookmarkingbuddy.com,TOXIC,High,Bookmark spam, PBN cluster
+smoothbookmarks.com,TOXIC,High,Bookmark spam, PBN cluster
+backlinkon.com,TOXIC,High,Backlink scheme, PBN cluster
+huldra.pages.dev,TOXIC,High,Throwaway pages.dev host
+ecommercebenchmarking.com,TOXIC,High,PBN cluster, foreign
+domainsc.com,TOXIC,High,PBN cluster, foreign
+wallpapers.pro,TOXIC,High,Spam TLD, PBN cluster
+shortenurls.eu,TOXIC,High,URL-shortener farm, large cluster
+creativeposts.top,TOXIC,High,Spam TLD, large cluster
+atomizelink.icu,TOXIC,High,Link scheme, spam TLD
+businessnewses.com,TOXIC,High,PBN cluster (159.198.75)
+linksnewses.com,TOXIC,High,PBN cluster (159.198.75)
+wayseolinks.com,TOXIC,High,SEO link scheme, PBN cluster
+cheapsmmprovider.online,TOXIC,High,SMM/link scheme, large cluster
+findinfo.in,TOXIC,High,PBN cluster, foreign
+mp3fresh.net,TOXIC,High,MP3 piracy, PBN cluster
+themumbai.in,TOXIC,High,PBN cluster, foreign
+webrankindia.com,TOXIC,High,SEO rank scheme, PBN cluster
