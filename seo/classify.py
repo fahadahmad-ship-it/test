@@ -239,12 +239,37 @@ def build():
     refs = load_refdomains()
     bls = load_backlinks()
 
+    # load QA overrides (agent-reviewed verdicts), if present
+    overrides = {}
+    qa_dir = os.path.join(DATA, "qa")
+    for fn in ("monitor_A_reviewed.csv", "monitor_B_reviewed.csv", "keep_reviewed.csv"):
+        p = os.path.join(qa_dir, fn)
+        if not os.path.exists(p):
+            continue
+        with open(p, encoding="utf-8", errors="replace") as f:
+            rd = csv.reader(f)
+            hdr = next(rd, None)
+            for row in rd:
+                if len(row) < 2 or not row[0].strip():
+                    continue
+                dom = root_domain(row[0])
+                fv = row[1].strip().upper()
+                note = row[3].strip() if len(row) > 3 else ""
+                if fv in ("TOXIC", "MONITOR", "KEEP"):
+                    overrides[dom] = (fv, note)
+
     # classify referring domains
     verdict_counts = collections.Counter()
     reason_counts = collections.Counter()
     for r in refs:
         v, score, code, reasons = classify(r["domain"], r["ascore"], r["backlinks"],
                                             r["ip"], r["country"])
+        ov = overrides.get(r["domain"].lower())
+        if ov and v not in ("OWN",):
+            if ov[0] != v:
+                code = "qa-override:" + code
+                reasons.append(f"QA agent → {ov[0]}" + (f" ({ov[1]})" if ov[1] else ""))
+            v = ov[0]
         r["verdict"] = v
         r["tox_score"] = score
         r["reason_code"] = code

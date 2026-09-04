@@ -1,0 +1,103 @@
+domain,ascore,backlinks,ip,country,first_seen,last_seen,current_verdict,tox_score,reasons
+civiltej.com,3,2,108.181.242.144,us,2026-03-02,2026-09-02,MONITOR,1,very-low-authority(AS3); weak signal — human QA
+hotonlinegaming.com,3,3,172.67.129.112,,2026-08-27,2026-08-27,MONITOR,1,very-low-authority(AS3); weak signal — human QA
+isardomains.com,3,1,104.21.48.247,,2026-03-12,2026-08-21,MONITOR,1,very-low-authority(AS3); weak signal — human QA
+mygirlyspace.com,3,1,31.170.166.36,us,2024-05-19,2026-06-16,MONITOR,1,very-low-authority(AS3); weak signal — human QA
+revan-me.com,3,1,160.153.129.19,us,2026-03-02,2026-07-28,MONITOR,1,very-low-authority(AS3); weak signal — human QA
+subhikh.com,3,1,93.188.2.55,se,2026-05-28,2026-05-28,MONITOR,2,very-low-authority(AS3); foreign-geo-cluster(se); weak signal — human QA
+turfinstallpros.com,3,4,104.21.20.231,,2026-03-19,2026-09-03,MONITOR,1,very-low-authority(AS3); weak signal — human QA
+wants.cfd,3,25,104.21.44.63,,2026-03-29,2026-08-31,MONITOR,2,very-low-authority(AS3); spam-tld(.cfd); weak signal — human QA
+wecelebrities.com,3,3,172.67.199.73,,2026-09-02,2026-09-02,MONITOR,1,very-low-authority(AS3); weak signal — human QA
+writfy.com,3,1,104.21.57.78,,2025-05-20,2026-07-06,MONITOR,1,very-low-authority(AS3); weak signal — human QA
+7minutos.es,4,1,51.38.62.183,fr,2026-03-06,2026-08-21,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+agroinsursas.com,4,1,190.8.176.51,us,2026-03-10,2026-09-03,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+animalstart.com,4,10,172.67.209.131,,2025-10-02,2026-08-05,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+archive-hu.com,4,1,172.67.222.64,,2026-08-27,2026-08-27,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+betulcrime.com,4,3,172.67.192.162,,2026-08-23,2026-09-03,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+blinks.sbs,4,20,104.21.3.70,,2026-02-28,2026-08-26,MONITOR,2,very-low-authority(AS4); spam-tld(.sbs); weak signal — human QA
+booksreadr.org,4,10,92.249.46.138,in,2026-03-10,2026-06-05,MONITOR,2,very-low-authority(AS4); foreign-geo-cluster(in); weak signal — human QA
+eliotzigmundjazz.com,4,1,107.180.51.41,us,2026-04-05,2026-04-05,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+factmags.com,4,12,203.161.54.114,us,2026-02-28,2026-08-28,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+global-rank.pages.dev,4,2,172.66.44.155,,2026-03-13,2026-03-29,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+global-ranks.pages.dev,4,1,172.66.44.110,,2026-08-31,2026-08-31,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+global-websites.pages.dev,4,1,172.66.47.78,,2026-07-05,2026-07-05,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+goooogla.com,4,11,203.161.54.114,us,2026-04-09,2026-08-27,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+greattraveladvisor.com,4,1,107.180.2.227,us,2026-04-03,2026-08-08,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+knows.monster,4,15,172.67.214.69,,2026-02-18,2026-08-25,MONITOR,2,very-low-authority(AS4); spam-tld(.monster); weak signal — human QA
+lovetravellife.com,4,1,108.181.247.75,us,2026-03-13,2026-08-22,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+medidocs.com,4,2,72.167.102.111,us,2026-03-23,2026-06-05,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+slapshady.com,4,1,208.109.22.214,us,2026-04-19,2026-08-13,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+startupwebsolutions.com.au,4,4,172.67.138.213,,2026-05-30,2026-06-01,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+unifiedgarden.com,4,4,145.223.89.37,gb,2024-12-13,2026-07-04,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+updatejakarta.com,4,1,104.21.34.221,,2025-11-20,2026-04-04,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+webbys.pages.dev,4,1,172.66.47.196,,2026-05-30,2026-07-26,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+weedspots.net,4,2,165.227.88.129,us,2026-02-26,2026-08-18,MONITOR,1,very-low-authority(AS4); weak signal — human QA
+all-aged-domains.com,5,7,104.21.35.81,,2026-02-23,2026-09-04,MONITOR,1,very-low-authority(AS5); weak signal — human QA
+aloysionunes.com,5,3,104.21.54.136,,2026-08-30,2026-08-30,MONITOR,1,very-low-authority(AS5); weak signal — human QA
+findabusinessthat.com,5,2,172.67.146.82,,2026-04-06,2026-04-17,MONITOR,1,very-low-authority(AS5); weak signal — human QA
+findingfarina.com,5,1,145.223.106.169,us,2023-10-22,2026-06-17,MONITOR,1,very-low-authority(AS5); weak signal — human QA
+housesumo.com,5,1,156.67.71.92,us,2025-07-16,2026-06-21,MONITOR,1,very-low-authority(AS5); weak signal — human QA
+mediaboooster.com,5,1,104.21.14.45,,2026-09-03,2026-09-03,MONITOR,1,very-low-authority(AS5); weak signal — human QA
+robuta.com,5,5,162.159.140.164,us,2026-05-06,2026-05-11,MONITOR,1,very-low-authority(AS5); weak signal — human QA
+unanswered.io,5,6,104.21.73.181,,2026-03-01,2026-09-04,MONITOR,1,very-low-authority(AS5); weak signal — human QA
+webhubsites.com,5,1,172.67.192.40,,2026-03-04,2026-08-30,MONITOR,1,very-low-authority(AS5); weak signal — human QA
+worldlinksites.com,5,1,104.21.11.111,,2026-03-02,2026-08-28,MONITOR,1,very-low-authority(AS5); weak signal — human QA
+bermudagrassbible.com,6,1,172.67.183.122,,2026-02-28,2026-08-29,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+contractorsjunction.com,6,1,132.148.248.252,us,2026-03-30,2026-08-16,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+developmentmi.com,6,2,104.21.89.233,,2026-03-16,2026-07-16,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+divisionesmodularesjq.com,6,1,162.215.210.151,us,2025-07-18,2026-03-12,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+dowjones.io,6,1,192.0.66.208,us,2026-04-15,2026-08-11,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+dreamlandsdesign.com,6,1,185.77.97.183,gb,2023-03-22,2026-05-03,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+eurekster.com,6,122,170.9.240.198,us,2025-01-14,2026-08-28,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+houseandhomeonline.com,6,4,54.85.8.229,us,2024-08-12,2026-09-03,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+jobsapp.info,6,7,172.67.128.71,,2026-03-01,2026-09-01,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+keirseybooks.com,6,1,107.180.3.106,us,2026-05-25,2026-05-25,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+landscapeatlas.com,6,3,216.150.1.1,us,2026-02-23,2026-08-19,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+popularask.net,6,1,104.21.23.20,,2026-03-08,2026-08-04,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+residencestyle.com,6,1,91.108.103.168,gb,2023-11-18,2026-07-01,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+smoothdecorator.com,6,4,104.21.6.230,,2024-11-28,2026-08-26,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+starcourts.com,6,2,104.21.68.102,,2026-02-24,2026-03-21,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+theambiencenews.com,6,1,198.12.232.179,us,2026-04-11,2026-04-11,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+usapridenetwork.us,6,1,172.67.179.136,,2026-03-16,2026-08-25,MONITOR,1,very-low-authority(AS6); weak signal — human QA
+richwaylandscape.com,7,5,132.148.211.127,us,2025-07-05,2026-09-02,MONITOR,0,"on-topic but low authority; monitor, do not disavow"
+southernlanka.lk,7,2,135.181.210.47,fi,2025-10-20,2026-03-18,MONITOR,0,no strong signal — human QA
+thesocialhouseja.com,7,1,72.167.69.37,us,2026-06-05,2026-07-28,MONITOR,0,no strong signal — human QA
+wealthyoverview.com,7,1,172.67.130.236,,2026-03-15,2026-08-21,MONITOR,0,no strong signal — human QA
+gorentals.com.pa,8,1,89.17.204.80,es,2025-09-14,2026-05-29,MONITOR,0,no strong signal — human QA
+greentechtree.com,8,1,174.136.57.104,us,2025-08-29,2026-08-11,MONITOR,0,no strong signal — human QA
+allphazeirrigation.com,9,1,34.174.237.170,us,2026-04-04,2026-04-24,MONITOR,0,"on-topic but low authority; monitor, do not disavow"
+swipenow.com,9,2,148.72.27.147,us,2025-09-19,2026-04-21,MONITOR,0,no strong signal — human QA
+designbysully.com,10,1,89.116.53.64,nl,2023-10-13,2026-06-01,MONITOR,0,no strong signal — human QA
+sisgroup.lk,10,1,194.233.75.17,sg,2026-03-01,2026-03-21,MONITOR,1,foreign-geo-cluster(sg); weak signal — human QA
+thenllc.ca,10,2,156.67.77.68,us,2025-04-25,2026-06-07,MONITOR,0,no strong signal — human QA
+natureandsustainability.com,11,1,195.200.9.226,gb,2024-02-19,2026-06-26,MONITOR,0,no strong signal — human QA
+pflanzensache.de,11,2,104.21.70.94,,2026-03-01,2026-08-30,MONITOR,0,no strong signal — human QA
+sergechel.info,11,7,104.21.31.88,,2026-02-27,2026-08-29,MONITOR,0,no strong signal — human QA
+sportmediaset.co,11,1,172.67.192.199,,2026-02-27,2026-08-28,MONITOR,0,no strong signal — human QA
+addresspage.com,12,2,172.67.151.92,,2026-06-18,2026-06-18,MONITOR,0,no strong signal — human QA
+ejobscircular.com,12,1,104.21.68.155,,2026-03-01,2026-05-01,MONITOR,0,no strong signal — human QA
+reputablebusinesses.com,12,3,145.223.126.72,us,2026-04-21,2026-04-21,MONITOR,0,no strong signal — human QA
+semalt.ai,12,2,185.100.234.251,nl,2026-03-20,2026-07-16,MONITOR,0,no strong signal — human QA
+solvermatic.com,12,1,162.159.134.42,us,2026-03-01,2026-08-31,MONITOR,0,no strong signal — human QA
+southfwb.com,12,1,104.21.16.20,,2026-08-27,2026-08-27,MONITOR,0,no strong signal — human QA
+websitescrawl.com,12,1,68.178.235.175,us,2026-04-18,2026-04-18,MONITOR,0,no strong signal — human QA
+completegardening.com,13,3,5.78.104.237,us,2026-02-24,2026-08-26,MONITOR,0,"on-topic but low authority; monitor, do not disavow"
+dreamchaserhub.com,13,1,205.196.220.15,us,2026-03-14,2026-08-28,MONITOR,0,no strong signal — human QA
+escuela-indecopi.edu.pe,13,1,173.212.231.25,fr,2026-03-04,2026-05-28,MONITOR,0,no strong signal — human QA
+intently.co,13,1,67.227.198.170,us,2026-03-13,2026-03-13,MONITOR,0,no strong signal — human QA
+olivare.com.ar,13,1,104.21.40.229,,2026-03-07,2026-03-07,MONITOR,0,no strong signal — human QA
+openingtimes.co,13,5,194.26.222.202,gb,2025-12-11,2026-08-22,MONITOR,0,no strong signal — human QA
+outsidetheboxmom.com,13,1,23.235.240.157,us,2026-03-12,2026-08-21,MONITOR,0,no strong signal — human QA
+resonancelabjo.com,13,1,160.153.133.225,us,2026-02-22,2026-03-14,MONITOR,0,no strong signal — human QA
+bloggerinterrupted.com,14,1,31.170.166.215,us,2024-10-17,2026-06-17,MONITOR,0,no strong signal — human QA
+domaineye.com,16,1,83.138.53.13,nl,2026-03-05,2026-09-03,MONITOR,0,no strong signal — human QA
+linkcenter.com,16,2,78.129.199.5,gb,2026-02-26,2026-07-02,MONITOR,0,no strong signal — human QA
+pixwox.org,16,1,162.0.235.107,us,2026-03-14,2026-09-01,MONITOR,0,no strong signal — human QA
+renovationsup.com,16,4,191.101.14.187,us,2025-06-11,2026-04-25,MONITOR,0,no strong signal — human QA
+vangvela.com,16,1,195.35.60.128,us,2025-08-15,2026-04-10,MONITOR,0,no strong signal — human QA
+howto.org,17,1,198.89.96.3,us,2025-07-23,2026-08-01,MONITOR,0,no strong signal — human QA
+buyatreechangealife.com,18,2,198.185.159.144,us,2026-03-04,2026-08-23,MONITOR,0,no strong signal — human QA
+designedbyai.io,18,1,104.21.34.193,,2026-03-05,2026-08-18,MONITOR,0,no strong signal — human QA
+viral-status.com,18,1,104.21.72.65,,2026-03-20,2026-08-18,MONITOR,0,no strong signal — human QA
+ohsospotless.com,19,2,104.21.15.165,,2025-07-07,2026-09-02,MONITOR,0,no strong signal — human QA
+intercom.help,58,1,18.97.36.28,us,2025-06-15,2026-03-03,MONITOR,1,spam-tld(.help); weak signal — human QA
