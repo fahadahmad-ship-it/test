@@ -104,7 +104,7 @@ def header_row(ws, cols, row, widths=None):
         c.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
         c.border = BORDER
     ws.row_dimensions[row].height = 26
-    ws.freeze_panes = ws.cell(row=row + 1, column=1)
+    ws.freeze_panes = f"A{row + 1}"   # string coord: don't instantiate a blank data row
     if widths:
         for i, w in enumerate(widths, 1):
             ws.column_dimensions[get_column_letter(i)].width = w
@@ -156,11 +156,13 @@ def build():
         return "70+"
     asb = collections.Counter(bucket_as(r["ascore"]) for r in refs)
     asb_order = ["0–9","10–19","20–29","30–39","40–49","50–69","70+"]
-    country = collections.Counter((r["country"] or "??").upper() for r in refs)
+    country = collections.Counter((r["country"].upper() if r["country"] else "Unknown") for r in refs)
     tld = collections.Counter(r["domain"].rsplit(".",1)[-1] for r in refs)
     def yr(d): return (d or "")[:4]
     years = collections.Counter(yr(r["first_seen"]) for r in toxic if yr(r["first_seen"]))
     ipfarm = collections.Counter(C.ip_prefix(r["ip"],3) for r in toxic)
+    all_years = collections.Counter(yr(r["first_seen"]) for r in refs if yr(r["first_seen"]))
+    pct2026 = all_years.get("2026", 0) / total * 100
 
     wb = Workbook()
 
@@ -242,7 +244,7 @@ def build():
     note.value = ("KEY FINDING — The profile is ~86% toxic: an automated directory/article/bookmark PBN and "
                   "link-selling network (single-IP farms on 64.182.x, 69.13.x, 94.46.x, 118.139.x, 159.198.75.x, "
                   "195.20.19.178), gambling/off-topic domains, and 'buy backlinks / DA-PA / telegram' anchors. "
-                  "Injection is ongoing (many links first seen 2025–2026). Recommendation: submit the embedded "
+                  f"~{pct2026:.0f}% of all referring domains first appeared in 2026 = active negative-SEO blast. Recommendation: submit the embedded "
                   "disavow (Disavow List sheet), refresh monthly, and rebuild with earned local/industry links.")
     note.font = F(10, False, INK); note.alignment = Alignment(wrap_text=True, vertical="top")
     note.fill = fill(BAND)
@@ -288,7 +290,9 @@ def build():
     bullet("~86% of referring domains are toxic — a manipulated / negative-SEO profile, not earned authority; ~90% sit at Authority Score ≤6.")
     bullet("Dominant footprint: directory/article/bookmark PBN + link-selling farms on shared IPs (64.182.x, 69.13.x, 94.46.x, 118.139.x, 159.198.75.x, 195.20.19.178).")
     bullet("Blatant spam anchors: 'buy backlinks / DA 50 PA 40 / PBN network', 'join our telegram darksidelinks', 'WhatsApp +1(226)…'; plus gambling & off-topic domains.")
-    bullet("Injection is ONGOING (many toxic links first seen 2025–2026) — disavow must be refreshed monthly and re-uploaded cumulatively.")
+    bullet(f"RECENT BLAST: ~{pct2026:.0f}% of ALL referring domains first appeared in 2026 (979 of 1,003 toxic) — "
+           "consistent with an active negative-SEO attack, not slow historic decay. Disavow must be refreshed monthly & re-uploaded cumulatively. "
+           "(first-seen = Semrush discovery date.)")
     bullet("A small legitimate core remains: national platforms, local news/chambers, and real lawn/landscape businesses (see KEEP).")
     r += 1
     section("RECOMMENDATION")
