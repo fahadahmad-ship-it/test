@@ -243,3 +243,49 @@ to §3.2; disavowed-domain count trending down (health check).
 _All backlink metrics above are from Ahrefs' live index (2026-09-01). Vietnamese search-volume/vertical
 priorities are informed by the domain's own ranking data plus market knowledge; validate exact volumes
 in Ahrefs Keywords Explorer (VN) before finalizing per-vertical link weighting._
+
+---
+
+## 10. Execution log & monthly build
+
+> **Policy note:** Disavow is intentionally **not** used — the vertical runs on spam and the toxic
+> profile is treated as baseline cost. Naturalness is managed on the *outbound build side* (anchor blend
+> discipline, page matching, diversification), not by cleaning inbound spam.
+
+### Month 1 (built) — 7 links
+
+| Anchor | Target | Class |
+|---|---|---|
+| 3king | `/` | Branded |
+| 3King | `/` | Branded |
+| 3king game | `/` | Branded |
+| game nổ hũ | `/no-hu` | Exact money |
+| chơi bắn cá online | `/ban-ca` | Exact money |
+| bắn cá online | `/ban-ca` | Exact money |
+| app tài xỉu online | `/` | Money (mismatched → homepage) |
+
+**Issues to correct:** (a) 0 naked-URL and 0 generic anchors; (b) `/ban-ca` took 2 exact-match anchors
+in one month (concentration); (c) `app tài xỉu online` pointed at `/` — no `/tai-xiu` page existed.
+
+### Month 2 (planned) — 10 links, rebalancing toward brand/URL/generic
+
+| # | Anchor | Target URL | Class |
+|---|---|---|---|
+| 1 | `3king.cc` | `https://3king.cc/` | Naked URL |
+| 2 | `3king.cc/no-hu` | `https://3king.cc/no-hu` | Naked URL |
+| 3 | `tại đây` | `https://3king.cc/no-hu` | Generic |
+| 4 | `xem thêm` | `https://3king.cc/ban-ca` | Generic |
+| 5 | `nhà cái 3king` | `https://3king.cc/` | Branded |
+| 6 | `nổ hũ 3king` | `https://3king.cc/no-hu` | Partial (brand+kw) |
+| 7 | `bắn cá 3king` | `https://3king.cc/ban-ca` | Partial |
+| 8 | `tải game 3king` | `https://3king.cc/tai-app` | Partial (new target) |
+| 9 | `game bài 3king` | `https://3king.cc/game-bai` | Partial (new target) |
+| 10 | `tài xỉu đổi thưởng` | `https://3king.cc/tai-xiu` | Exact money (new page; fixes M1 mismatch) |
+
+Month-2 blend: URL 2 · Generic 2 · Branded 1 · Partial 4 · Exact 1 (deliberately light on exact).
+Do not reuse any Month-1 anchor+URL pair. **Dependency:** #8–#10 require `/tai-app`, `/game-bai`,
+`/tai-xiu` to be live/indexable first; if not ready, substitute `truy cập 3king` → `/`,
+`game nổ hũ đổi thưởng` → `/no-hu`, and a second branded anchor → `/`.
+
+**Rolling rule:** keep subsequent months brand/URL/generic-led so the cumulative exact-match share
+trends **down**, and rotate exact anchors across verticals/pages rather than concentrating on one URL.
