@@ -11,16 +11,15 @@
 
 A baseline pull on 2026-09-04 shows a profile that is **wide but weak and contaminated**:
 
-| Metric | Value | Read |
+| Metric (Semrush) | Value | Read |
 |---|---|---|
-| Domain Rating (Ahrefs) | **21** | Low for a business with 1,100+ referring domains |
-| Live referring domains | **1,111** | High relative to DR/organic footprint |
-| Live backlinks | **2,039** | — |
-| All-time referring domains | **2,343** | ~1,200 lost/dropped over time |
-| Organic keywords (US) | **278** (27 in top 3) | Small footprint |
-| Est. organic traffic | **~901 / mo** (~$1,545 value) | Modest for the link count |
+| Authority Score (AS) | **23** | Low; inflated by spam volume, not earned trust |
+| Referring domains | **1,167** | High relative to authority/organic footprint |
+| Total backlinks | **3,613** | — |
+| Organic keywords (US) | **2,525** (104 in top 3) | Real but modest footprint |
+| Organic traffic | **~2,391 / mo** (~$10,324 value) | Modest for the link count |
 
-**The tell:** 1,100+ referring domains but DR 21 and <300 ranking keywords is the fingerprint of a **manipulated / spam-injected link profile** — not organic authority. A sample of the profile confirms it directly:
+**The tell:** 1,167 referring domains but Authority Score 23, with ~90% of those domains at AS ≤6, is the fingerprint of a **manipulated / spam-injected link profile** — not organic authority. A sample of the profile confirms it directly:
 
 - **Money-anchor spam** advertising link-selling services *through* Master Lawn's own backlinks — e.g. *"High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service masterlawn.com … Buy Backlinks Online Cheap"* and *"Take masterlawn.com to page one with high-quality backlinks, guest posts…"*.
 - **Telegram / "darkside links"** and **gambling** anchors (`m98ufa.com`, `hotonlinegaming.com`, `@happygrannypies`).
@@ -137,9 +136,9 @@ Disavow when one or more hold, **and** there is no offsetting legitimacy:
 **Objective:** Freeze a "before" snapshot so the impact of disavow + rebuild is measurable. **Captured 2026-09-04** — see `baseline-benchmark-2026-09-04.md`.
 
 ### 3.1 What we baseline
-- **Authority:** Ahrefs DR (21), Semrush AS, ref-domain counts (live/all-time), backlink counts, dofollow ratio, anchor-text distribution (branded vs money vs junk), % toxic.
+- **Authority:** Semrush Authority Score (23), ref-domain counts, backlink counts, dofollow ratio, anchor-text distribution (branded vs money vs junk), % toxic.
 - **Rankings:** target-keyword positions (local "lawn care / fertilization / weed control / mosquito control + Germantown/Collierville/Bartlett/Memphis TN, Olive Branch MS, Huntsville AL"), top-3 / top-10 counts, share of the local pack; set up **Semrush Position Tracking / Ahrefs Rank Tracker** for ongoing capture.
-- **Organic traffic & value:** Ahrefs est. traffic (~901/mo) and, once granted, **GSC** clicks/impressions/CTR/avg-position + **GA4** organic sessions/conversions (the source of truth).
+- **Organic traffic & value:** Semrush est. traffic (~2,391/mo, ~$10,324 value) and, once granted, **GSC** clicks/impressions/CTR/avg-position + **GA4** organic sessions/conversions (the source of truth).
 - **Visibility:** organic keyword count (278; 27 in top 3), top pages, top-page dependency.
 
 ### 3.2 Method & cadence
