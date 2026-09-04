@@ -267,25 +267,37 @@ in Ahrefs Keywords Explorer (VN) before finalizing per-vertical link weighting._
 **Issues to correct:** (a) 0 naked-URL and 0 generic anchors; (b) `/ban-ca` took 2 exact-match anchors
 in one month (concentration); (c) `app tài xỉu online` pointed at `/` — no `/tai-xiu` page existed.
 
-### Month 2 (planned) — 10 links, rebalancing toward brand/URL/generic
+### Month 2 (planned) — the critical 7 (ranking-focused)
 
-| # | Anchor | Target URL | Class |
-|---|---|---|---|
-| 1 | `3king.cc` | `https://3king.cc/` | Naked URL |
-| 2 | `3king.cc/no-hu` | `https://3king.cc/no-hu` | Naked URL |
-| 3 | `tại đây` | `https://3king.cc/no-hu` | Generic |
-| 4 | `xem thêm` | `https://3king.cc/ban-ca` | Generic |
-| 5 | `nhà cái 3king` | `https://3king.cc/` | Branded |
-| 6 | `nổ hũ 3king` | `https://3king.cc/no-hu` | Partial (brand+kw) |
-| 7 | `bắn cá 3king` | `https://3king.cc/ban-ca` | Partial |
-| 8 | `tải game 3king` | `https://3king.cc/tai-app` | Partial (new target) |
-| 9 | `game bài 3king` | `https://3king.cc/game-bai` | Partial (new target) |
-| 10 | `tài xỉu đổi thưởng` | `https://3king.cc/tai-xiu` | Exact money (new page; fixes M1 mismatch) |
+**Principle: concentration over coverage.** With only 7 links, spreading one link per page moves
+nothing. Stack them on the pages closest to ranking to push near-rankers into the top 10. Weighting is
+by *probability of converting an existing near-ranking*, not by covering every vertical.
 
-Month-2 blend: URL 2 · Generic 2 · Branded 1 · Partial 4 · Exact 1 (deliberately light on exact).
-Do not reuse any Month-1 anchor+URL pair. **Dependency:** #8–#10 require `/tai-app`, `/game-bai`,
-`/tai-xiu` to be live/indexable first; if not ready, substitute `truy cập 3king` → `/`,
-`game nổ hũ đổi thưởng` → `/no-hu`, and a second branded anchor → `/`.
+| # | Priority | Anchor | Target URL | Class | Why it moves rankings |
+|---|---|---|---|---|---|
+| 1 | ★★★ | `nổ hũ 3king` | `https://3king.cc/no-hu` | Partial | Relevance to the proven near-ranking page |
+| 2 | ★★★ | `nổ hũ đổi thưởng` | `https://3king.cc/no-hu` | Exact | Commercial intent, new variant (≠ M1 "game nổ hũ") |
+| 3 | ★★★ | `3king.cc/no-hu` | `https://3king.cc/no-hu` | Naked URL | Completes a natural mini-profile; passes authority |
+| 4 | ★★ | `bắn cá 3king` | `https://3king.cc/ban-ca` | Partial | Diversifies /ban-ca off pure exact; adds authority |
+| 5 | ★★ | `bắn cá online 3king` | `https://3king.cc/ban-ca` | Partial | 2nd relevance signal without a raw exact |
+| 6 | ★★ | `nhà cái 3king` | `https://3king.cc/` | Branded | Domain/entity authority → lifts all deep pages |
+| 7 | ★ | `tài xỉu đổi thưởng` | `https://3king.cc/tai-xiu` | Exact | Fixes M1 mismatch; highest-volume vertical, correct page |
 
-**Rolling rule:** keep subsequent months brand/URL/generic-led so the cumulative exact-match share
-trends **down**, and rotate exact anchors across verticals/pages rather than concentrating on one URL.
+**Concentration:** 7 links → 4 URLs (`/no-hu` ×3, `/ban-ca` ×2, `/` ×1, `/tai-xiu` ×1).
+**Blend:** Partial 3 · Exact 2 · URL 1 · Branded 1 — relevance-rich, not exact-stacked. No Month-1
+anchor+URL pair reused.
+
+**Why these vs. spreading wider:** `/no-hu` already exists *and* ranks (branded) → cheapest page to push
+over the top-10 line, so it gets the heaviest stack. `/ban-ca` already took 2 exacts in M1, so it gets
+partials (authority + diversity, not over-optimization). One homepage brand link compounds into deep
+pages via internal equity. `/game-bai`, `/tai-app` and generic filler are **deliberately deferred** —
+a single link each would rank nothing; add them after `/no-hu` and `/ban-ca` are pushed.
+
+**Contingencies:**
+- `/tai-xiu` must be live/indexable or #7 is wasted → if not built, repoint #7 to
+  `game nổ hũ đổi thưởng` → `/no-hu` (stack the proven page harder), **not** the homepage.
+- For pure ranking velocity (dropping brand-safety this month), #6 can become `game bài 3king` →
+  `/game-bai` **only if that page exists**; otherwise keep the homepage brand link.
+
+**Rolling rule:** once `/no-hu`/`/ban-ca` reach page 1, rotate the stack to the next vertical rather than
+piling more exact anchors on a won page; keep cumulative exact-match trending down with brand/URL/generic.
