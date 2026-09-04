@@ -281,10 +281,14 @@ by *probability of converting an existing near-ranking*, not by covering every v
 | 4 | ★★ | `bắn cá 3king` | `https://3king.cc/ban-ca` | Partial | Diversifies /ban-ca off pure exact; adds authority |
 | 5 | ★★ | `bắn cá online 3king` | `https://3king.cc/ban-ca` | Partial | 2nd relevance signal without a raw exact |
 | 6 | ★★ | `nhà cái 3king` | `https://3king.cc/` | Branded | Domain/entity authority → lifts all deep pages |
-| 7 | ★ | `tài xỉu đổi thưởng` | `https://3king.cc/tai-xiu` | Exact | Fixes M1 mismatch; highest-volume vertical, correct page |
+| 7 | ★★ | `3king.cc/ban-ca` | `https://3king.cc/ban-ca` | Naked URL | `/tai-xiu` is a dead URL (404) → reallocated to the proven /ban-ca page |
 
-**Concentration:** 7 links → 4 URLs (`/no-hu` ×3, `/ban-ca` ×2, `/` ×1, `/tai-xiu` ×1).
-**Blend:** Partial 3 · Exact 2 · URL 1 · Branded 1 — relevance-rich, not exact-stacked. No Month-1
+> **Note:** `/tai-xiu` returns no working page (confirmed 404), so the original #7 (`tài xỉu đổi thưởng`
+> → `/tai-xiu`) is **pulled** — never link to a non-200 URL. The slot moves to `/ban-ca` as a naked-URL
+> anchor to balance that page's profile.
+
+**Concentration:** 7 links → 3 confirmed-live URLs (`/no-hu` ×3, `/ban-ca` ×3, `/` ×1).
+**Blend:** Partial 3 · Exact 1 · URL 2 · Branded 1 — relevance-rich, not exact-stacked. No Month-1
 anchor+URL pair reused.
 
 **Why these vs. spreading wider:** `/no-hu` already exists *and* ranks (branded) → cheapest page to push
@@ -293,11 +297,10 @@ partials (authority + diversity, not over-optimization). One homepage brand link
 pages via internal equity. `/game-bai`, `/tai-app` and generic filler are **deliberately deferred** —
 a single link each would rank nothing; add them after `/no-hu` and `/ban-ca` are pushed.
 
-**Contingencies:**
-- `/tai-xiu` must be live/indexable or #7 is wasted → if not built, repoint #7 to
-  `game nổ hũ đổi thưởng` → `/no-hu` (stack the proven page harder), **not** the homepage.
-- For pure ranking velocity (dropping brand-safety this month), #6 can become `game bài 3king` →
-  `/game-bai` **only if that page exists**; otherwise keep the homepage brand link.
+**Page-build backlog (blocking future links):** `/tai-xiu` (404 — highest-volume vertical, top
+priority), `/game-bai`, `/tai-app`, `/khuyen-mai`. Each must return **200 + be indexable with real
+content and internal links** before it can be a link target. Verify every target URL returns 200
+before placement.
 
 **Rolling rule:** once `/no-hu`/`/ban-ca` reach page 1, rotate the stack to the next vertical rather than
 piling more exact anchors on a won page; keep cumulative exact-match trending down with brand/URL/generic.
