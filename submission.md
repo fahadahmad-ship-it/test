@@ -1,57 +1,90 @@
-# Link Building Direction: Priority Inner Pages (accessible.org)
+# Link Building Direction: Priority Inner Pages
 
-A focused direction for one to two priority inner pages, covering page
-selection, anchor direction, and source types for AI citation and traditional
-SEO value. Backed by Ahrefs data (US organic, September 2026).
+**Client:** accessible.org
+**Market:** United States, organic search
+**Data source:** Ahrefs, September 2026
 
-## 1. Target page selection
+## Overview
 
-**Primary, traditional SEO: https://accessible.org/services/ada-website-audits/**
-This page owns the most winnable commercial keyword, "ada compliance audit"
-(position 8, KD 2, 1,100 volume, commercial intent), yet it is badly under
-linked. A small, relevant push plus internal links can move it into the top 3,
-directly on a money page. I did not choose /services/audits/ because it already
-ranks in the top 3 for its terms and sits near its ceiling, so new links there
-return little.
+This document sets out a focused link building direction for one to two priority
+inner pages. It covers target page selection, the recommended anchor direction,
+and the source types that deliver value for both AI citation and traditional SEO.
+The aim is a small, high leverage direction rather than a full campaign plan.
 
-**Secondary, AI citation: https://accessible.org/digital-accessibility-companies/**
-The companies comparison format is exactly what AI systems retrieve and quote
-for "top digital accessibility companies" style queries. It earns nothing today,
-so it is pure upside and covers the AI citation side of the brief that the audit
-page cannot serve.
+## Target Page Selection
 
-## 2. Recommended anchor direction
+Two pages are recommended, each chosen to serve a different objective.
 
-Keep the profile mostly branded and partial match, with exact match kept small
-and introduced last. The domain currently has almost no commercial anchors, so a
-burst of exact match on a low difficulty term would stand out.
+**Primary target, traditional SEO**
+`accessible.org/services/ada-website-audits/`
 
-Audit page: "Accessible.org" (branded), "ADA website audit" and "ADA website
-audit services" (partial), "web accessibility audit" and "WCAG audit" (topical),
-and "ada compliance audit" (exact, capped near 10 percent and delivered mainly
-through internal links so it carries no overoptimization risk).
+- Already ranks position 8 for "ada compliance audit," a commercial term with
+  keyword difficulty 2 and roughly 1,100 monthly searches.
+- Currently under linked despite that strong position, so the opportunity is
+  clear.
+- A modest volume of relevant links, supported by internal linking, can move it
+  into the top 3 on a page that drives revenue.
+- The alternative audits page was not selected. It already ranks in the top 3 for
+  its terms and is close to its ceiling, so additional links would yield little.
 
-Companies page: "Accessible.org" plus descriptive anchors such as "digital
-accessibility companies" and "top digital accessibility companies". No commercial
-exact match here, since the goal is to be cited as a neutral authority.
+**Secondary target, AI citation**
+`accessible.org/digital-accessibility-companies/`
 
-## 3. Source types
+- The comparison style format is what AI systems retrieve and quote for queries
+  such as "top digital accessibility companies."
+- The page earns no organic traffic today, so it represents pure upside.
+- It addresses the AI citation objective that the commercial audit page cannot.
 
-Traditional SEO value: topically relevant editorial links from legal and
-compliance blogs, web development and agency sites, and B2B SaaS blogs; agency
-resource pages; and journalist or HARO style requests on ADA lawsuit stories.
-Prioritize relevance and editorial context over raw domain rating.
+## Recommended Anchor Direction
 
-AI citation value: industry roundups and comparison listicles, Wikipedia and
-Wikidata entity references, original data and statistics pages (the settlement
-amounts page and the automated scans study), and mentions in directories and
-forum or Q and A threads. AI systems reward being the quotable, referenced
-source.
+The profile should remain predominantly branded and partial match, with exact
+match kept minimal and introduced last. The domain currently holds very few
+commercial anchors, so a concentration of exact match anchors on a low difficulty
+term would appear unnatural.
 
-## Two flags worth raising
+**Audit page**
 
-1. The backlink profile carries PBN and testimonial spam, so a disavow review
-   should run alongside any link building.
-2. Audit intent is currently split across four competing URLs
-   (/services/ada-website-audits/, /services/audits/, /audits/, /Services), which
-   should be consolidated to one canonical page before building links.
+- Branded: Accessible.org
+- Partial match: ADA website audit, ADA website audit services
+- Topical: web accessibility audit, WCAG audit
+- Exact match: ada compliance audit, capped at approximately 10 percent and
+  delivered primarily through internal links to avoid an overoptimization
+  footprint
+
+**Companies page**
+
+- Branded: Accessible.org
+- Descriptive: digital accessibility companies, top digital accessibility
+  companies
+- No commercial exact match, since the objective is to be cited as a neutral
+  authority
+
+## Source Types
+
+**Traditional SEO value**
+
+- Topically relevant editorial links from legal and compliance blogs, web
+  development and agency sites, and B2B SaaS publications
+- Agency resource pages
+- Journalist and expert commentary requests on ADA lawsuit and compliance stories
+
+Relevance and editorial context should be prioritised over raw domain rating.
+
+**AI citation value**
+
+- Industry roundups and comparison articles
+- References from Wikipedia and Wikidata
+- Original data and statistics assets, such as the settlement amounts page and
+  the automated scans study
+- Mentions in directories and relevant forum discussions
+
+AI systems consistently favour sources that are original, well referenced, and
+easy to quote.
+
+## Additional Recommendations
+
+- **Disavow review:** the current backlink profile contains PBN and testimonial
+  spam, which should be reviewed and disavowed alongside any link building.
+- **URL consolidation:** audit intent is currently split across four competing
+  URLs. These should be consolidated into a single canonical page before links
+  are directed to the target.
