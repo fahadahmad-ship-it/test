@@ -1,0 +1,75 @@
+domain,final_verdict,confidence,note
+olivebranchmagazine.com,KEEP,High,Local Olive Branch MS magazine; relevant community site
+contractorsup.com,KEEP,Med,Contractor supply/home-services; on-topic real business
+excellentcontractor.com,MONITOR,Low,Generic paid contractor directory; low authority
+yplocal.us,KEEP,Med,YP local directory aggregator; legitimate
+plantisima.com,KEEP,Med,Gardening/plants blog; on-topic
+freeplants.com,KEEP,Med,Gardening/plants site; on-topic
+aesbid.com,KEEP,Low,Event/auction platform; no spam signal
+alcturf.com.au,KEEP,Med,Australian turf company; industry-relevant off-geo
+jepturf.net,KEEP,Med,Turf business; on-topic
+positivebloom.com,KEEP,Med,Gardening blog; on-topic
+regionaldirectory.us,KEEP,Med,US regional business directory; legitimate aggregator
+springtouchlawn.com,KEEP,Med,Real lawn-care business; on-topic
+americanaccent.com,KEEP,Low,Accent-training firm; off-topic but legitimate
+athomepros.com,KEEP,Med,Home-services site; on-topic
+meritan.org,KEEP,Med,Meritan Memphis nonprofit; real local org
+thebuildermarket.com,KEEP,Med,Home/builder marketplace; legitimate
+vestigeview.com,KEEP,Med,Fleet GPS/camera SaaS company; legitimate
+deliciouslysavvy.com,KEEP,Med,Lifestyle/recipe blog; off-topic but legit
+reasonstoskipthehousework.com,KEEP,Med,Mom/lifestyle blog; off-topic but legit
+thinkdear.com,MONITOR,Low,News site but sells guest posts
+harbingermarketing.com,KEEP,Med,Real marketing agency; legitimate
+loginslink.com,TOXIC,Med,Auto-generated login-link scraper; off-topic SEO spam
+find-us-here.com,KEEP,Med,Business listing directory; legitimate aggregator
+agreatertown.com,KEEP,Med,Local business directory; legitimate
+southavenchamber.com,KEEP,High,Southaven MS chamber; relevant local
+tntcode.com,KEEP,Low,Coding/tech blog; off-topic but legit
+coldlytics.com,KEEP,Med,Data/lead-gen SaaS; legitimate
+grasspros.com,KEEP,Med,Lawn/grass business; on-topic
+mikolmarmi.com,KEEP,Low,Marble company on Shopify; off-topic but legit
+taradel.com,KEEP,Med,Direct-mail marketing company; legitimate
+hatcherlandscape.com,KEEP,High,Landscape company; on-topic long history
+linkcentre.com,MONITOR,Low,Old web directory but link-submission scheme
+mymilitarybenefits.com,KEEP,Med,Military benefits resource; legitimate
+landscapeleadership.com,KEEP,High,Landscape-industry marketing agency; relevant
+olivebranchms.com,KEEP,High,Olive Branch MS local site; relevant
+anationofmoms.com,KEEP,Med,Mom/lifestyle blog; off-topic but legit
+desotocountynews.com,KEEP,High,DeSoto County MS local news; relevant
+bestprosintown.com,KEEP,Med,Local reviews/directory; legitimate aggregator
+gluesticksgumdrops.com,KEEP,Med,Craft/mom blog; off-topic but legit
+parse.gl,KEEP,Low,AI brand-visibility SaaS tool; legitimate
+warelandscaping.com,KEEP,Med,Landscaping business; on-topic
+mygreenbucks.net,TOXIC,Med,GPT/survey site, fabricated address; off-topic spam
+natureworldnews.com,KEEP,Med,Real news/media site; legitimate
+propartsdirect.net,KEEP,Med,Outdoor power equipment parts; on-topic
+totallandscapecare.com,KEEP,High,Landscape-industry trade publication; relevant
+neustarlocaleze.biz,KEEP,High,Neustar Localeze major data aggregator
+servicio-online.net,KEEP,Low,Spanish email-hosting provider; off-topic but legit
+citysquares.com,KEEP,High,CitySquares local directory; recognized legitimate
+dexknows.com,KEEP,High,DexKnows major directory; legitimate
+enigma.com,KEEP,Med,Enigma business-data platform; legitimate
+strollmag.com,KEEP,Med,Stroll neighborhood magazines; legitimate
+landscapeprofessionals.org,KEEP,High,NALP landscape industry body; relevant
+hsvchamber.org,KEEP,High,Huntsville AL chamber; relevant local
+growthzoneapp.com,KEEP,Med,GrowthZone chamber membership software; legitimate
+owler.com,KEEP,High,Owler company platform; recognized legitimate
+sitelike.org,MONITOR,Low,Auto-generated similar-sites listing tool; low value
+ireceptar.cz,KEEP,Med,Czech gardening/lifestyle site; legitimate
+housedigest.com,KEEP,High,House Digest home site; legitimate
+hub.biz,KEEP,Med,Business directory; legitimate aggregator
+yourgreenpal.com,KEEP,High,GreenPal lawn-care marketplace; on-topic relevant
+superpages.com,KEEP,High,Superpages directory; recognized legitimate
+devpost.com,KEEP,Med,Devpost hackathon platform; off-topic but legit
+theorg.com,KEEP,High,The Org company profiles; legitimate
+extension.org,KEEP,High,Cooperative Extension; relevant to lawn/turf
+birdeye.com,KEEP,High,Birdeye reviews platform; recognized legitimate
+pitchbook.com,KEEP,High,PitchBook data platform; recognized legitimate
+thesun.ie,KEEP,High,The Sun Ireland news; legitimate
+yellowpages.com,KEEP,High,YellowPages directory; recognized legitimate
+dhgate.com,KEEP,Med,DHgate marketplace; off-topic but legit
+rocketreach.co,KEEP,High,RocketReach contact-data platform; legitimate
+express.co.uk,KEEP,High,Express UK news; legitimate
+alibaba.com,KEEP,High,Alibaba marketplace; legitimate
+bing.com,KEEP,High,Bing search engine; recognized legitimate
+yahoo.com,KEEP,High,Yahoo portal; recognized legitimate
