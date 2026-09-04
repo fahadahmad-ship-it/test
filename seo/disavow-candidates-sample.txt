@@ -1,0 +1,71 @@
+# Master Lawn — DISAVOW CANDIDATES (SAMPLE — QA-PENDING, NOT FINAL)
+# Generated: 2026-09-04 from an Ahrefs is_spam sample (top by DR).
+# DO NOT SUBMIT AS-IS. This is a seed list to demonstrate format and method.
+# Every entry must pass Task-1 classification + Task-2 false-positive sweep
+# + two-analyst and client sign-off before the real file is uploaded to GSC.
+# Syntax: one "domain:<root>" per line. Comments start with #.
+#
+# --- Link-selling / PBN network domains (high DR, ~0 organic traffic) ---
+domain:buybacklinks.agency
+domain:backlinker.shop
+domain:backlinksplace.site
+domain:backlinkshop.site
+domain:rankyour.website
+domain:rank-top.click
+domain:rank-fast.agency
+domain:rankxlinks.shop
+domain:ranklinkerpro.shop
+domain:ranklinkpro.shop
+domain:linkrankpro.shop
+domain:linkrankboost.shop
+domain:linkrankseo.shop
+domain:linkseopro.shop
+domain:seolinkpro.shop
+domain:seorankflow.shop
+domain:rankboostly.shop
+domain:premiumseolinks.shop
+domain:pbnseolinks.shop
+domain:authoritybacklinks.shop
+domain:buyseobacklinks.shop
+domain:toplinkranker.shop
+domain:thetoprankingseo.shop
+domain:therankboostseo.shop
+domain:rankingseohigh.shop
+domain:theseorankinghigh.shop
+domain:seorankinghigh.shop
+domain:thehighseo.shop
+domain:seo-high-ranking.shop
+domain:trafficspike.shop
+domain:a2zseoarticles.com
+domain:proseoarticles.com
+domain:proseolinksdirectory.com
+domain:globalproseo.com
+domain:linkodirectory.com
+domain:clicktohigh.com
+domain:postonseo.com
+domain:seoflx.net
+domain:seoexpress.org
+domain:seoexpress.site
+domain:seoexpress.shop
+domain:seoexpress.store
+domain:seoexpress.space
+domain:seoexpress.website
+domain:thebestbacklinksavailable.click
+#
+# --- Irrelevant high-risk verticals (gambling / off-topic) ---
+domain:m98ufa.com
+domain:hotonlinegaming.com
+domain:sport-life.club
+#
+# --- Randomized / low-trust spam hosts ---
+domain:hzdlpq.com
+domain:kgzxkf.com
+domain:qhtycw.com
+domain:dsnylu.com
+domain:byteshort.xyz
+domain:atomizelink.icu
+domain:browseallexpireddomains.us
+#
+# NOTE: The full, QA'd disavow file will contain the complete classified toxic
+# set (potentially several hundred domains) from the merged Ahrefs+Semrush+GSC
+# export, not just this DR-sorted sample.
