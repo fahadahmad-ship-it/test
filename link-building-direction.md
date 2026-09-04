@@ -103,27 +103,58 @@ linking) should move it into the top 3.
 
 ## 4. Priority page selection (the 1–2 pages)
 
-### Primary — `/services/ada-website-audits/` (money page)
-- **Why:** Best commercial opportunity on the site. `ada compliance audit`
-  already #8 at KD 2; the page is critically under-linked (not even in the top
-  25 by referring domains). Small equity gains convert directly to a top-3
-  commercial ranking.
-- **Reality check:** nobody links to a sales page on its own merits. So this
-  page is fed mostly by *internal* links from linkable assets, plus a small
-  number of *directly earned* editorial links.
+### The candidate pages, compared (exact-URL, US organic)
 
-### Secondary / support — `/wcag/` (WCAG checklist)
-- **Why:** The site's strongest proven link magnet (72 ref domains) and its best
-  AI-citation asset (a referenceable, definitional resource). Use it as the tip
-  of the spear to *earn* links, then pass equity internally down to the audit
-  page.
-- **Role:** link acquisition target + internal-equity conduit, not the
-  conversion goal itself.
+| Candidate page | Org kw | Kw in top 3 | Traffic/mo | Value/mo | Read |
+|---|---|---|---|---|---|
+| `/services/audits/` | 6 | 5 | 160 | $1,513 | Best performer — near ceiling, low marginal ROI |
+| `/services/ada-website-audits/` | 4 | 3 | 63 | $614 | Winnable KD-2 term at #8 — real headroom |
+| `/lawsuits/` | 6 | 2 | 28 | $126 | Modest; true citation magnet is the settlement-amounts page |
+| `/services/vpat/` | 0 | 0 | 0 | $0 | Invisible — 6,100 VPAT vol lost to an info page |
+| `/digital-accessibility-companies/` | 0 | 0 | 0 | $0 | Invisible — but the natural AI-citation format |
 
-**The play:** earn links to `/wcag/` (and the other proven assets — settlement
-amounts, automated-scans study), then internal-link from those high-authority
-assets into `/services/ada-website-audits/` with commercial anchors. This is how
-you rank a page nobody wants to link to.
+Two structural problems the data exposes:
+
+1. **Audit-intent cannibalization.** Audit keywords are split across four URLs
+   (`/services/ada-website-audits/`, `/services/audits/`, `/audits/`,
+   `/Services`). Building links before consolidating dilutes equity across pages
+   that compete with each other. Consolidate to one canonical audit URL first.
+2. **VPAT is a targeting failure, not a link opportunity.** The money page ranks
+   nowhere; the informational `/examples-vpats-acrs/` absorbs the 6,100-vol
+   demand. Links alone won't fix that — it needs on-page consolidation. Don't
+   lead a link campaign with it.
+
+The brief asks for **both** AI-citation and traditional-SEO value, so the
+strongest pick is one page for each axis rather than two of the same kind.
+
+### 🎯 Primary (traditional SEO) — `/services/ada-website-audits/`
+- **Why:** the only candidate with a fast, defensible win. `ada compliance
+  audit` sits at #8, KD 2, 1,100 vol, commercial intent — a small relevant link
+  push plus internal links moves it to top 3, on a money page. `/services/audits/`
+  earns more today but is near its ceiling; marginal ROI of new links is far
+  higher here.
+- **Condition:** resolve the audit-URL cannibalization first, or the equity
+  leaks across competing pages.
+- **Reality check:** nobody links to a sales page on merit — feed it mainly via
+  internal links from linkable assets, plus a few directly earned editorial links.
+
+### 🤖 Secondary (AI citation) — `/digital-accessibility-companies/`
+- **Why:** comparison/"companies" pages are disproportionately retrieved and
+  cited by LLMs and AI Overviews for discovery queries ("top digital
+  accessibility companies"). It earns *citations and referrals* rather than
+  ranking clicks — the AI-citation half of the brief the audit page can't serve.
+  At zero today, so pure upside.
+- **Condition:** it must be genuinely authoritative (original selection criteria,
+  data, opinion), not a bare list, or it won't be cited.
+- **Fallback:** if that bar can't be met, amplify
+  `/ada-website-compliance-lawsuit-settlement-amounts/` instead — it already
+  earns data-citations (47 ref domains, 95 dofollow).
+
+### The mechanism that ties them together
+Earn external links to `/wcag/` (the proven magnet, 72 ref domains) and the data
+assets (settlement amounts, automated-scans study), then **internal-link down**
+into `/services/ada-website-audits/` with commercial anchors. This is how you
+rank a page nobody wants to link to directly.
 
 ---
 
