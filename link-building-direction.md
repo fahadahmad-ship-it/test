@@ -245,5 +245,94 @@ WCAG checklist + lawsuit/settlement assets already sit in that overlap.
 
 ---
 
+## 8. Appendix A — Concrete anchor plan (execution-ready)
+
+Scaled to a realistic small campaign: ~20 external links + a fixed internal-link
+pass over ~90 days. Anchor strings below are literal.
+
+### Page 1 — `/services/ada-website-audits/` (commercial)
+Goal: move `ada compliance audit` from #8 → top 3.
+
+**External links (12):**
+
+| # | Anchor string | Type | Share |
+|---|---|---|---|
+| 1–4 | `Accessible.org` ×2, `Accessible.org's audit team` ×1, `the team at Accessible.org` ×1 | Branded | 33% |
+| 5–7 | `ADA website audit` ×1, `ADA website audit services` ×1, `ADA compliance audit services from Accessible.org` ×1 | Partial | 25% |
+| 8–9 | `web accessibility audit` ×1, `WCAG audit` ×1 | Topical | 17% |
+| 10 | `ada compliance audit` ×1 | Exact | 8% |
+| 11–12 | `accessible.org/services/ada-website-audits/` ×1, `learn more` ×1 | Naked/generic | 17% |
+
+**Internal links (5–6)** — from `/wcag/`, `/ada-website-compliance-lawsuit-settlement-amounts/`,
+`/automated-scans-wcag/`, `/ada-compliance/`:
+`ada compliance audit` ×2, `ADA website audit` ×1, `professional ADA compliance audit` ×1,
+`get a WCAG audit` ×1. Internal anchors carry the exact-match keyword with no
+external over-optimization risk.
+
+### Page 2 — `/digital-accessibility-companies/` (AI citation)
+Goal: become the cited source for "top digital accessibility companies." Zero
+commercial-exact anchors.
+
+**External links (8):**
+
+| # | Anchor string | Type | Share |
+|---|---|---|---|
+| 1–3 | `Accessible.org` ×3 | Branded | 38% |
+| 4–6 | `digital accessibility companies` ×1, `top digital accessibility companies` ×1, `leading accessibility companies` ×1 | Descriptive | 37% |
+| 7 | `accessibility service providers` ×1 | Semantic | 13% |
+| 8 | naked URL ×1 | Naked | 12% |
+
+**Internal:** 1–2 links from homepage/resources with `digital accessibility companies`.
+
+### Phasing (sequence is the critical part)
+
+| Phase | Weeks | Page 1 | Page 2 | Guardrail |
+|---|---|---|---|---|
+| 1 — Foundation | 1–3 | All internal links + branded/naked externals (#1–4, 11–12) | Branded externals (#1–3) + internal | Run disavow review of PBN/Telegram spam first |
+| 2 — Relevance | 4–8 | Partial + topical externals (#5–9) | Descriptive/semantic externals (#4–7) + citation outreach | Watch for anchor-spam re-injection |
+| 3 — Push | 9–12 | The single exact-match external (#10), last | Naked (#8); amplify data assets | Only after brand/topical cushion exists |
+
+**Why this order:** dropping exact-match `ada compliance audit` first — against a
+profile with near-zero commercial anchors and live PBN spam — is the fastest way
+to trip an over-optimization filter on a KD-2 term. Earn brand + topical +
+internal equity first, then place the one exact-match link into a profile that
+can absorb it.
+
+**Gating prerequisite:** consolidate the four cannibalizing audit URLs
+(`/services/ada-website-audits/`, `/services/audits/`, `/audits/`, `/Services`)
+to one canonical target *before* Phase 2, or links split across competing pages.
+
+---
+
+## 9. Appendix B — Minimum viable version (only 3 links)
+
+With just 3 links, **concentrate all of them on one page.** Splitting across two
+pages is too thin to move either; the AI-citation page needs a cluster of
+citations to matter, so one link there is wasted. Put all 3 on the winnable
+commercial term.
+
+**Target URL (all 3):** `/services/ada-website-audits/` — `ada compliance audit`,
+#8, KD 2, 1,100 vol.
+
+| Link | Anchor string | Type | Reason |
+|---|---|---|---|
+| 1 | `Accessible.org` | Branded | Foundation; matches the brand-anchor baseline, safest first touch. Highest-authority relevant source. |
+| 2 | `ADA website audit` | Partial-match | Keyword + service framing, no hard exact-match. Legal/compliance or web-dev editorial page. |
+| 3 | `web accessibility audit` | Topical | Reinforces relevance from a second angle; keeps a tiny anchor set from looking engineered. |
+
+- **No external exact-match** (`ada compliance audit`) at this volume — too strong
+  a footprint against a near-zero commercial baseline plus live PBN spam.
+- **Deliver exact-match internally instead:** 2–3 internal links from `/wcag/`
+  and `/ada-website-compliance-lawsuit-settlement-amounts/` using
+  `ada compliance audit` / `professional ADA compliance audit`.
+- **Same prerequisites:** disavow the spam first; consolidate the audit URLs.
+
+**Alternative (only if AI citation is mandatory):** 2 + 1 — links 1 & 2 to the
+audit page, link 3 = `Accessible.org` → `/digital-accessibility-companies/`.
+Trades measurable ranking movement for a citation signal too small to register
+yet; not recommended at this budget.
+
+---
+
 *Prepared as a focused direction, not a full campaign plan. All metrics are US
 organic, Ahrefs, 2026-09-04, and will shift over time.*
