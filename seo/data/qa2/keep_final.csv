@@ -1,0 +1,104 @@
+domain,ascore,backlinks,ip,ip_shared_count,country,first_seen,last_seen,current_verdict,reasons
+besttownfencepros.com,2,2,34.174.136.8,1,us,2025-10-03,2026-08-23,KEEP,very-low-authority(AS2); weak signal — human QA
+carolinaserviceslandscaping.com,2,1,35.215.115.193,1,us,2025-05-23,2026-08-07,KEEP,very-low-authority(AS2); weak signal — human QA
+changingfaceshousing.com,2,2,191.96.144.160,1,us,2025-09-12,2026-04-19,KEEP,very-low-authority(AS2); weak signal — human QA
+greenhouseblack.com,2,2,88.223.84.107,1,us,2025-02-05,2026-07-02,KEEP,very-low-authority(AS2); weak signal — human QA
+hatcherlandscapepartners.com,2,1,185.199.109.153,1,us,2026-03-03,2026-09-01,KEEP,very-low-authority(AS2); weak signal — human QA
+houseimprovementcenter.com,2,1,104.21.81.49,1,,2026-04-10,2026-07-18,KEEP,very-low-authority(AS2); weak signal — human QA
+lydiaroyrealestate.com,2,10,104.21.35.146,2,,2026-06-28,2026-09-01,KEEP,very-low-authority(AS2); weak signal — human QA
+snowlawn.net,2,1,216.239.34.21,1,us,2026-08-31,2026-08-31,KEEP,very-low-authority(AS2); weak signal — human QA
+southboundlandscape.com,2,4,104.21.66.24,1,,2026-08-11,2026-08-28,KEEP,very-low-authority(AS2); weak signal — human QA
+yardclue.com,2,5,34.225.22.69,1,us,2026-08-26,2026-08-27,KEEP,very-low-authority(AS2); weak signal — human QA
+yardislife.com,2,1,104.21.22.191,1,,2025-08-07,2026-08-02,KEEP,very-low-authority(AS2); weak signal — human QA
+1stcallglasscare.com,3,1,172.67.200.22,1,,2026-03-15,2026-07-23,KEEP,very-low-authority(AS3); weak signal — human QA
+turfinstallpros.com,3,4,104.21.20.231,2,,2026-03-19,2026-09-03,KEEP,very-low-authority(AS3); weak signal — human QA
+eliotzigmundjazz.com,4,1,107.180.51.41,1,us,2026-04-05,2026-04-05,KEEP,very-low-authority(AS4); weak signal — human QA
+unifiedgarden.com,4,4,145.223.89.37,1,gb,2024-12-13,2026-07-04,KEEP,very-low-authority(AS4); weak signal — human QA
+housesumo.com,5,1,156.67.71.92,1,us,2025-07-16,2026-06-21,KEEP,very-low-authority(AS5); weak signal — human QA
+bermudagrassbible.com,6,1,172.67.183.122,2,,2026-02-28,2026-08-29,KEEP,very-low-authority(AS6); weak signal — human QA
+dreamlandsdesign.com,6,1,185.77.97.183,1,gb,2023-03-22,2026-05-03,KEEP,very-low-authority(AS6); weak signal — human QA
+houseandhomeonline.com,6,4,54.85.8.229,1,us,2024-08-12,2026-09-03,KEEP,very-low-authority(AS6); weak signal — human QA
+landscapeatlas.com,6,3,216.150.1.1,1,us,2026-02-23,2026-08-19,KEEP,very-low-authority(AS6); weak signal — human QA
+olivebranchmagazine.com,6,1,209.213.221.213,2,us,2026-05-13,2026-05-13,KEEP,recognized legitimate platform (relevant)
+residencestyle.com,6,1,91.108.103.168,1,gb,2023-11-18,2026-07-01,KEEP,very-low-authority(AS6); weak signal — human QA
+smoothdecorator.com,6,4,104.21.6.230,1,,2024-11-28,2026-08-26,KEEP,very-low-authority(AS6); weak signal — human QA
+richwaylandscape.com,7,5,132.148.211.127,1,us,2025-07-05,2026-09-02,KEEP,"on-topic but low authority; monitor, do not disavow"
+allphazeirrigation.com,9,1,34.174.237.170,1,us,2026-04-04,2026-04-24,KEEP,"on-topic but low authority; monitor, do not disavow"
+designbysully.com,10,1,89.116.53.64,1,nl,2023-10-13,2026-06-01,KEEP,no strong signal — human QA
+natureandsustainability.com,11,1,195.200.9.226,1,gb,2024-02-19,2026-06-26,KEEP,no strong signal — human QA
+pflanzensache.de,11,2,104.21.70.94,3,,2026-03-01,2026-08-30,KEEP,no strong signal — human QA
+completegardening.com,13,3,5.78.104.237,1,us,2026-02-24,2026-08-26,KEEP,"on-topic but low authority; monitor, do not disavow"
+outsidetheboxmom.com,13,1,23.235.240.157,1,us,2026-03-12,2026-08-21,KEEP,no strong signal — human QA
+bloggerinterrupted.com,14,1,31.170.166.215,2,us,2024-10-17,2026-06-17,KEEP,no strong signal — human QA
+contractorsup.com,15,23,191.101.14.187,2,us,2025-06-15,2026-04-29,KEEP,on-topic/local + real authority; no strong spam signal
+yplocal.us,15,1,142.93.75.207,1,us,2026-02-12,2026-08-28,KEEP,recognized legitimate platform (neutral-authority)
+domaineye.com,16,1,83.138.53.13,1,nl,2026-03-05,2026-09-03,KEEP,no strong signal — human QA
+plantisima.com,16,6,172.67.184.90,1,,2026-02-23,2026-08-27,KEEP,on-topic/local + real authority; no strong spam signal
+renovationsup.com,16,4,191.101.14.187,2,us,2025-06-11,2026-04-25,KEEP,no strong signal — human QA
+howto.org,17,1,198.89.96.3,1,us,2025-07-23,2026-08-01,KEEP,no strong signal — human QA
+freeplants.com,19,1,165.227.90.144,1,us,2026-03-14,2026-08-24,KEEP,on-topic/local + real authority; no strong spam signal
+ohsospotless.com,19,2,104.21.15.165,3,,2025-07-07,2026-09-02,KEEP,no strong signal — human QA
+aesbid.com,21,3,52.85.193.94,1,us,2025-08-12,2026-05-05,KEEP,AS>=20 with no spam signal
+alcturf.com.au,21,2,198.185.159.144,3,us,2026-02-28,2026-08-29,KEEP,on-topic/local + real authority; no strong spam signal
+jepturf.net,21,1,104.21.26.120,1,,2026-03-11,2026-08-20,KEEP,on-topic/local + real authority; no strong spam signal
+positivebloom.com,21,3,104.26.10.88,1,,2026-03-05,2026-09-04,KEEP,on-topic/local + real authority; no strong spam signal
+regionaldirectory.us,21,1,34.24.45.149,1,us,2025-10-05,2026-06-05,KEEP,recognized legitimate platform (neutral-authority)
+springtouchlawn.com,21,2,34.149.87.45,1,us,2026-03-28,2026-05-26,KEEP,on-topic/local + real authority; no strong spam signal
+americanaccent.com,22,4,205.178.146.236,1,us,2025-09-23,2026-04-04,KEEP,AS>=20 with no spam signal
+athomepros.com,22,1,104.26.1.9,2,,2026-03-23,2026-09-03,KEEP,AS>=20 with no spam signal
+meritan.org,22,2,198.185.159.136,3,us,2026-03-19,2026-09-04,KEEP,AS>=20 with no spam signal
+thebuildermarket.com,22,5,104.26.5.168,1,,2025-08-30,2026-09-01,KEEP,AS>=20 with no spam signal
+vestigeview.com,22,1,104.21.84.56,2,,2026-02-26,2026-08-28,KEEP,AS>=20 with no spam signal
+deliciouslysavvy.com,23,1,192.124.249.134,1,us,2026-02-27,2026-09-03,KEEP,AS>=20 with no spam signal
+reasonstoskipthehousework.com,23,1,104.21.3.47,2,,2026-03-14,2026-07-27,KEEP,AS>=20 with no spam signal
+harbingermarketing.com,24,1,67.225.152.101,2,us,2026-04-05,2026-04-29,KEEP,AS>=20 with no spam signal
+find-us-here.com,25,1,104.21.48.122,3,,2026-03-31,2026-08-24,KEEP,recognized legitimate platform (neutral-authority)
+agreatertown.com,26,1,172.66.41.31,1,,2026-04-04,2026-08-17,KEEP,recognized legitimate platform (neutral-authority)
+southavenchamber.com,26,6,172.170.249.2,2,us,2026-02-12,2026-09-04,KEEP,recognized legitimate platform (relevant)
+tntcode.com,26,4,104.26.1.125,2,,2025-11-03,2026-08-25,KEEP,AS>=20 with no spam signal
+coldlytics.com,27,1,99.83.220.108,1,us,2026-03-03,2026-06-14,KEEP,AS>=20 with no spam signal
+grasspros.com,27,1,141.193.213.11,3,us,2026-02-27,2026-06-01,KEEP,on-topic/local + real authority; no strong spam signal
+mikolmarmi.com,27,1,23.227.38.74,1,ca,2026-08-13,2026-08-13,KEEP,AS>=20 with no spam signal
+taradel.com,27,1,209.213.221.24,2,us,2026-03-06,2026-08-16,KEEP,AS>=20 with no spam signal
+hatcherlandscape.com,28,32,199.60.103.227,3,us,2023-03-10,2026-09-03,KEEP,on-topic/local + real authority; no strong spam signal
+mymilitarybenefits.com,28,1,141.193.213.10,3,us,2026-04-27,2026-09-04,KEEP,recognized legitimate platform (neutral-authority)
+landscapeleadership.com,29,4,199.60.103.226,3,us,2026-02-15,2026-08-29,KEEP,recognized legitimate platform (relevant)
+olivebranchms.com,29,3,20.33.3.52,2,us,2026-02-26,2026-08-17,KEEP,recognized legitimate platform (relevant)
+anationofmoms.com,30,1,173.236.227.8,1,us,2025-05-13,2026-07-07,KEEP,AS>=20 with no spam signal
+desotocountynews.com,30,2,54.165.172.168,1,us,2024-12-31,2026-09-01,KEEP,recognized legitimate platform (relevant)
+bestprosintown.com,31,1,104.26.4.129,2,,2026-05-08,2026-05-08,KEEP,recognized legitimate platform (neutral-authority)
+gluesticksgumdrops.com,31,1,104.21.70.214,3,,2026-03-04,2026-08-13,KEEP,AS>=20 with no spam signal
+parse.gl,31,2,172.67.69.103,2,,2026-08-08,2026-08-16,KEEP,AS>=20 with no spam signal
+warelandscaping.com,31,1,141.193.213.11,3,us,2026-02-25,2026-08-26,KEEP,on-topic/local + real authority; no strong spam signal
+natureworldnews.com,32,2,172.67.193.157,1,,2026-02-26,2026-08-28,KEEP,recognized legitimate platform (neutral-authority)
+propartsdirect.net,32,16,104.18.19.27,1,,2025-01-22,2026-08-31,KEEP,recognized legitimate platform (neutral-authority)
+totallandscapecare.com,32,6,104.20.28.253,1,,2026-03-15,2026-09-03,KEEP,recognized legitimate platform (relevant)
+neustarlocaleze.biz,33,61,172.64.144.239,1,,2025-05-24,2026-03-24,KEEP,recognized legitimate platform (neutral-authority)
+servicio-online.net,33,1,82.194.68.65,1,es,2025-06-26,2026-06-03,KEEP,AS>=20 with no spam signal
+citysquares.com,34,4,104.26.3.223,1,,2025-03-31,2026-07-12,KEEP,recognized legitimate platform (neutral-authority)
+dexknows.com,35,62,104.18.41.181,1,,2025-04-10,2026-08-22,KEEP,recognized legitimate platform (neutral-authority)
+enigma.com,35,4,18.67.76.48,1,us,2025-11-22,2026-09-03,KEEP,recognized legitimate platform (neutral-authority)
+strollmag.com,35,4,75.2.60.5,1,us,2026-03-15,2026-09-03,KEEP,recognized legitimate platform (neutral-authority)
+landscapeprofessionals.org,37,2,104.21.73.159,4,,2026-03-07,2026-08-26,KEEP,recognized legitimate platform (relevant)
+hsvchamber.org,38,3,20.33.3.52,2,us,2026-02-20,2026-09-04,KEEP,recognized legitimate platform (relevant)
+growthzoneapp.com,41,6,172.170.249.2,2,us,2026-02-14,2026-09-02,KEEP,recognized legitimate platform (neutral-authority)
+owler.com,42,1,23.212.249.199,1,us,2026-05-01,2026-08-31,KEEP,recognized legitimate platform (neutral-authority)
+ireceptar.cz,44,1,104.26.13.168,1,,2026-03-02,2026-08-31,KEEP,AS>=20 with no spam signal
+housedigest.com,45,1,3.171.61.29,1,us,2026-03-05,2026-08-18,KEEP,recognized legitimate platform (neutral-authority)
+hub.biz,45,1,96.234.110.96,1,us,2026-05-20,2026-07-03,KEEP,recognized legitimate platform (neutral-authority)
+yourgreenpal.com,46,1,104.18.37.238,1,,2025-09-02,2026-09-04,KEEP,recognized legitimate platform (neutral-authority)
+superpages.com,47,28,172.64.154.144,1,,2025-10-23,2026-08-29,KEEP,recognized legitimate platform (neutral-authority)
+devpost.com,49,1,44.205.201.244,1,us,2026-06-22,2026-06-22,KEEP,recognized legitimate platform (neutral-authority)
+theorg.com,51,1,15.197.167.90,1,us,2026-06-20,2026-06-20,KEEP,recognized legitimate platform (neutral-authority)
+extension.org,52,1,157.230.67.214,1,us,2026-03-03,2026-09-01,KEEP,recognized legitimate platform (neutral-authority)
+intercom.help,58,1,18.97.36.28,1,us,2025-06-15,2026-03-03,KEEP,spam-tld(.help); weak signal — human QA
+birdeye.com,59,2,54.183.121.116,1,us,2026-05-14,2026-05-19,KEEP,recognized legitimate platform (neutral-authority)
+pitchbook.com,63,4,162.159.140.76,2,us,2025-08-12,2026-08-14,KEEP,recognized legitimate platform (neutral-authority)
+thesun.ie,68,1,108.138.64.127,1,us,2025-07-27,2026-03-13,KEEP,recognized legitimate platform (neutral-authority)
+yellowpages.com,68,21,104.18.32.4,1,,2025-07-06,2026-08-26,KEEP,recognized legitimate platform (neutral-authority)
+dhgate.com,69,1,104.18.20.183,2,,2026-03-05,2026-08-22,KEEP,recognized legitimate platform (neutral-authority)
+rocketreach.co,70,1,104.18.0.150,1,,2026-03-14,2026-08-13,KEEP,recognized legitimate platform (neutral-authority)
+express.co.uk,79,1,3.170.3.45,1,us,2026-03-17,2026-06-10,KEEP,recognized legitimate platform (neutral-authority)
+alibaba.com,84,1,47.246.131.61,1,us,2026-02-18,2026-03-10,KEEP,recognized legitimate platform (neutral-authority)
+bing.com,96,5,150.171.28.10,1,us,2026-06-29,2026-08-15,KEEP,recognized legitimate platform (neutral-authority)
+yahoo.com,100,3,66.218.84.137,1,us,2025-08-21,2026-04-23,KEEP,recognized legitimate platform (neutral-authority)

@@ -1,0 +1,152 @@
+domain,ascore,backlinks,ip,ip_shared_count,country,first_seen,last_seen,current_verdict,reasons
+dreamchaserhub.com,13,1,205.196.220.15,1,us,2026-03-14,2026-08-28,TOXIC,no strong signal — human QA
+semalt.ai,12,2,185.100.234.251,1,nl,2026-03-20,2026-07-16,TOXIC,no strong signal — human QA
+gorentals.com.pa,8,1,89.17.204.80,1,es,2025-09-14,2026-05-29,TOXIC,no strong signal — human QA
+5starlocalcenter.com,6,1,64.182.130.243,1,us,2026-08-10,2026-08-27,TOXIC,pbn-ip-cluster:64.182.130; very-low-authority(AS6)
+jobsapp.info,6,7,172.67.128.71,1,,2026-03-01,2026-09-01,TOXIC,very-low-authority(AS6); weak signal — human QA
+aloysionunes.com,5,3,104.21.54.136,1,,2026-08-30,2026-08-30,TOXIC,very-low-authority(AS5); weak signal — human QA
+makerslistings.com,5,1,69.13.108.18,1,us,2026-08-25,2026-09-03,TOXIC,pbn-ip-cluster:69.13.108; very-low-authority(AS5); directory/article/bookmark-spam-name
+7minutos.es,4,1,51.38.62.183,1,fr,2026-03-06,2026-08-21,TOXIC,very-low-authority(AS4); weak signal — human QA
+slapshady.com,4,1,208.109.22.214,1,us,2026-04-19,2026-08-13,TOXIC,very-low-authority(AS4); weak signal — human QA
+directorylinkservice.com,3,1,184.168.113.185,1,sg,2026-05-25,2026-06-28,TOXIC,pbn-ip-cluster:184.168.113; very-low-authority(AS3); directory/article/bookmark-spam-name; foreign-geo-cluster(sg)
+writfy.com,3,1,104.21.57.78,1,,2025-05-20,2026-07-06,TOXIC,very-low-authority(AS3); weak signal — human QA
+7starweb.co.uk,2,2,64.182.88.17,1,us,2026-02-28,2026-04-09,TOXIC,pbn-ip-cluster:64.182.88; very-low-authority(AS2)
+addmysitez.com,2,2,64.182.8.64,1,us,2026-02-26,2026-04-07,TOXIC,pbn-ip-cluster:64.182.8; very-low-authority(AS2)
+answersmeta.com,2,6,104.21.17.21,1,,2026-05-13,2026-08-26,TOXIC,very-low-authority(AS2); weak signal — human QA
+articlevelley.com,2,1,94.46.118.11,1,se,2026-04-25,2026-05-03,TOXIC,pbn-ip-cluster:94.46.118; very-low-authority(AS2); directory/article/bookmark-spam-name; foreign-geo-cluster(se)
+bestbusinessselect.com,2,1,69.13.53.15,1,us,2026-08-11,2026-08-27,TOXIC,pbn-ip-cluster:69.13.53; very-low-authority(AS2)
+blc-eu.com,2,1,109.105.49.240,1,cz,2026-03-22,2026-08-20,TOXIC,very-low-authority(AS2); foreign-geo-cluster(cz); weak signal — human QA
+busineessupdir.com,2,2,69.13.10.225,1,us,2026-03-02,2026-08-29,TOXIC,pbn-ip-cluster:69.13.10; very-low-authority(AS2)
+citylocalhub.com,2,2,69.13.19.11,1,us,2026-03-13,2026-09-01,TOXIC,pbn-ip-cluster:69.13.19; very-low-authority(AS2)
+coolbusiness.co,2,2,64.182.60.180,1,us,2026-02-23,2026-04-05,TOXIC,pbn-ip-cluster:64.182.60; very-low-authority(AS2)
+directbusinesslistings.com,2,1,185.51.1.20,1,se,2026-03-04,2026-04-13,TOXIC,pbn-ip-cluster:185.51.1; very-low-authority(AS2); directory/article/bookmark-spam-name; foreign-geo-cluster(se)
+directorymatix.org,2,2,69.13.36.48,1,us,2026-03-07,2026-08-26,TOXIC,pbn-ip-cluster:69.13.36; very-low-authority(AS2); directory/article/bookmark-spam-name
+directoryservice.co,2,1,69.13.40.74,1,us,2026-08-10,2026-08-27,TOXIC,pbn-ip-cluster:69.13.40; very-low-authority(AS2); directory/article/bookmark-spam-name
+earticlesweb.com,2,1,64.182.50.9,1,us,2026-02-20,2026-04-01,TOXIC,pbn-ip-cluster:64.182.50; very-low-authority(AS2); directory/article/bookmark-spam-name
+energeticonline.com,2,2,69.13.51.104,1,us,2026-03-09,2026-08-15,TOXIC,pbn-ip-cluster:69.13.51; very-low-authority(AS2)
+fastlifesite.com,2,1,172.67.176.248,1,,2026-09-04,2026-09-04,TOXIC,very-low-authority(AS2); weak signal — human QA
+findist.net,2,2,69.13.58.116,1,us,2026-02-27,2026-08-30,TOXIC,pbn-ip-cluster:69.13.58; very-low-authority(AS2)
+getdirectory.org,2,1,69.13.62.216,1,us,2026-08-24,2026-09-01,TOXIC,pbn-ip-cluster:69.13.62; very-low-authority(AS2); directory/article/bookmark-spam-name
+globalweb.co,2,2,64.182.59.176,1,us,2026-02-27,2026-04-08,TOXIC,pbn-ip-cluster:64.182.59; very-low-authority(AS2)
+greatestbusinesslistings.com,2,1,94.46.45.26,1,se,2026-02-15,2026-03-26,TOXIC,pbn-ip-cluster:94.46.45; very-low-authority(AS2); directory/article/bookmark-spam-name; foreign-geo-cluster(se)
+hubsite.biz,2,2,69.13.182.36,1,us,2026-02-12,2026-04-14,TOXIC,pbn-ip-cluster:69.13.182; very-low-authority(AS2)
+kitabibrothers.com,2,1,147.93.17.109,1,in,2025-07-07,2026-04-25,TOXIC,very-low-authority(AS2); foreign-geo-cluster(in); weak signal — human QA
+listinghub.org,2,2,69.13.220.127,1,us,2026-03-04,2026-08-26,TOXIC,pbn-ip-cluster:69.13.220; very-low-authority(AS2); directory/article/bookmark-spam-name
+listingzclub.com,2,1,188.114.242.99,1,se,2026-03-22,2026-04-11,TOXIC,pbn-ip-cluster:188.114.242; very-low-authority(AS2); directory/article/bookmark-spam-name; foreign-geo-cluster(se)
+localbizzz.com,2,2,104.21.33.48,1,,2026-07-05,2026-08-27,TOXIC,very-low-authority(AS2); weak signal — human QA
+localpulsedirectory.com,2,2,51.81.112.25,1,us,2026-03-04,2026-04-09,TOXIC,very-low-authority(AS2); directory/article/bookmark-spam-name
+lookuplists.com,2,1,69.13.107.97,1,us,2026-08-10,2026-08-19,TOXIC,pbn-ip-cluster:69.13.107; very-low-authority(AS2)
+mooli.us,2,2,69.13.230.162,1,us,2026-03-05,2026-04-15,TOXIC,pbn-ip-cluster:69.13.230; very-low-authority(AS2)
+nukewebdirectory.com,2,2,69.13.229.131,1,us,2026-03-19,2026-04-08,TOXIC,pbn-ip-cluster:69.13.229; very-low-authority(AS2); directory/article/bookmark-spam-name
+onlinewebsitecenter.com,2,1,69.13.115.129,1,us,2026-08-28,2026-08-28,TOXIC,pbn-ip-cluster:69.13.115; very-low-authority(AS2)
+populardirectory.co,2,2,69.13.118.201,1,us,2026-03-04,2026-08-23,TOXIC,pbn-ip-cluster:69.13.118; very-low-authority(AS2); directory/article/bookmark-spam-name
+prolocalbusinesssearch.com,2,1,69.13.187.177,1,us,2026-09-01,2026-09-01,TOXIC,pbn-ip-cluster:69.13.187; very-low-authority(AS2)
+recommendit.biz,2,2,64.182.158.16,1,us,2026-02-22,2026-04-03,TOXIC,pbn-ip-cluster:64.182.158; very-low-authority(AS2)
+searchengineschoice.com,2,2,64.182.191.17,1,us,2026-02-26,2026-04-07,TOXIC,pbn-ip-cluster:64.182.191; very-low-authority(AS2)
+sezza.org,2,2,64.182.195.42,1,us,2026-02-28,2026-04-09,TOXIC,pbn-ip-cluster:64.182.195; very-low-authority(AS2)
+smallbizdir.com,2,1,69.13.133.33,1,us,2026-08-11,2026-08-28,TOXIC,pbn-ip-cluster:69.13.133; very-low-authority(AS2); directory/article/bookmark-spam-name
+smoothdirectory.com,2,1,94.46.8.42,1,se,2026-03-09,2026-04-18,TOXIC,pbn-ip-cluster:94.46.8; very-low-authority(AS2); directory/article/bookmark-spam-name; foreign-geo-cluster(se)
+spotseek.org,2,1,188.114.230.38,1,se,2026-03-05,2026-04-22,TOXIC,pbn-ip-cluster:188.114.230; very-low-authority(AS2); foreign-geo-cluster(se)
+studartcorrea.com.br,2,1,172.67.196.110,1,,2025-08-27,2026-06-18,TOXIC,very-low-authority(AS2); weak signal — human QA
+takes.sbs,2,24,172.67.221.98,1,,2026-03-22,2026-08-30,TOXIC,very-low-authority(AS2); spam-tld(.sbs); weak signal — human QA
+themicrodigits.com,2,1,104.21.71.254,1,,2026-09-03,2026-09-03,TOXIC,very-low-authority(AS2); weak signal — human QA
+topbusinesses.info,2,2,64.182.89.94,1,us,2026-02-28,2026-08-30,TOXIC,pbn-ip-cluster:64.182.89; very-low-authority(AS2)
+truebizdirectory.com,2,2,144.217.115.112,1,us,2026-02-26,2026-04-13,TOXIC,very-low-authority(AS2); directory/article/bookmark-spam-name
+urbanbizlistings.com,2,2,51.81.2.93,1,us,2026-02-13,2026-04-19,TOXIC,very-low-authority(AS2); directory/article/bookmark-spam-name
+webestate.co,2,3,64.182.235.104,1,us,2026-02-25,2026-04-07,TOXIC,pbn-ip-cluster:64.182.235; very-low-authority(AS2)
+werecommend.us,2,2,64.182.240.241,1,us,2026-02-28,2026-04-20,TOXIC,pbn-ip-cluster:64.182.240; very-low-authority(AS2)
+blog-forest.help,0,2,104.21.38.56,1,,2026-08-23,2026-09-02,TOXIC,very-low-authority(AS0); spam-tld(.help); weak signal — human QA
+ejobscircular.com,12,1,104.21.68.155,2,,2026-03-01,2026-05-01,TOXIC,no strong signal — human QA
+starcourts.com,6,2,104.21.68.102,2,,2026-02-24,2026-03-21,TOXIC,very-low-authority(AS6); weak signal — human QA
+editorlistings.com,5,2,64.182.48.6,2,us,2026-04-01,2026-04-01,TOXIC,pbn-ip-cluster:64.182.48; very-low-authority(AS5); directory/article/bookmark-spam-name
+worldwideranks.com,5,1,172.67.214.226,2,,2026-03-07,2026-09-04,TOXIC,very-low-authority(AS5); seo/link-scheme-name
+updatejakarta.com,4,1,104.21.34.221,2,,2025-11-20,2026-04-04,TOXIC,very-low-authority(AS4); weak signal — human QA
+1888webdirectory.com,2,2,69.13.14.202,2,us,2026-02-27,2026-04-08,TOXIC,pbn-ip-cluster:69.13.14; very-low-authority(AS2); directory/article/bookmark-spam-name
+alphabiz.info,2,1,64.182.6.8,2,us,2026-03-01,2026-04-10,TOXIC,pbn-ip-cluster:64.182.6; very-low-authority(AS2)
+articles4all.org,2,2,94.46.121.60,2,se,2026-02-13,2026-04-15,TOXIC,pbn-ip-cluster:94.46.121; very-low-authority(AS2); directory/article/bookmark-spam-name; foreign-geo-cluster(se)
+beezlistings.com,2,1,69.13.169.26,2,us,2026-08-11,2026-08-27,TOXIC,pbn-ip-cluster:69.13.169; very-low-authority(AS2); directory/article/bookmark-spam-name
+bestprodirectory.com,2,1,64.182.137.13,2,us,2026-08-10,2026-08-26,TOXIC,pbn-ip-cluster:64.182.137; very-low-authority(AS2); directory/article/bookmark-spam-name
+bizbooknow.com,2,1,185.39.137.39,2,se,2026-03-12,2026-04-18,TOXIC,pbn-ip-cluster:185.39.137; very-low-authority(AS2); foreign-geo-cluster(se)
+boblistings.org,2,1,69.13.8.14,2,us,2026-08-30,2026-08-30,TOXIC,pbn-ip-cluster:69.13.8; very-low-authority(AS2); directory/article/bookmark-spam-name
+businesseshub.org,2,1,94.46.126.8,2,se,2026-03-07,2026-04-16,TOXIC,pbn-ip-cluster:94.46.126; very-low-authority(AS2); foreign-geo-cluster(se)
+busybiz.co,2,3,69.13.38.224,2,us,2026-03-15,2026-04-04,TOXIC,pbn-ip-cluster:69.13.38; very-low-authority(AS2)
+cooldirweb.com,2,2,64.182.131.211,2,us,2026-03-04,2026-08-29,TOXIC,pbn-ip-cluster:64.182.131; very-low-authority(AS2)
+digitallongevity.com,2,2,188.114.240.28,2,se,2026-02-28,2026-04-27,TOXIC,pbn-ip-cluster:188.114.240; very-low-authority(AS2); foreign-geo-cluster(se)
+directoryfind.info,2,1,69.13.32.16,2,us,2026-08-11,2026-08-27,TOXIC,pbn-ip-cluster:69.13.32; very-low-authority(AS2); directory/article/bookmark-spam-name
+directoryscape.net,2,2,64.182.47.60,2,us,2026-03-08,2026-04-17,TOXIC,pbn-ip-cluster:64.182.47; very-low-authority(AS2); directory/article/bookmark-spam-name
+editorschoice.co,2,1,64.182.55.107,2,us,2026-02-13,2026-04-14,TOXIC,pbn-ip-cluster:64.182.55; very-low-authority(AS2)
+ezeelisting.org,2,1,64.182.121.62,2,us,2026-08-10,2026-08-27,TOXIC,pbn-ip-cluster:64.182.121; very-low-authority(AS2); directory/article/bookmark-spam-name
+getbestspots.com,2,2,64.182.70.96,2,us,2026-02-25,2026-04-07,TOXIC,pbn-ip-cluster:64.182.70; very-low-authority(AS2)
+gotohub.net,2,2,64.182.82.48,2,us,2026-02-26,2026-04-07,TOXIC,pbn-ip-cluster:64.182.82; very-low-authority(AS2)
+hahadirectory.com,2,3,64.182.86.240,2,us,2026-03-05,2026-04-14,TOXIC,pbn-ip-cluster:64.182.86; very-low-authority(AS2); directory/article/bookmark-spam-name
+hoturls.org,2,1,64.182.107.16,2,us,2026-02-25,2026-04-07,TOXIC,pbn-ip-cluster:64.182.107; very-low-authority(AS2)
+huddledir.com,2,2,64.182.93.16,2,us,2026-02-14,2026-04-15,TOXIC,pbn-ip-cluster:64.182.93; very-low-authority(AS2)
+incrawler.net,2,3,64.182.95.16,2,us,2026-03-08,2026-04-17,TOXIC,pbn-ip-cluster:64.182.95; very-low-authority(AS2)
+krivetyspace.com,2,2,69.13.79.145,2,us,2026-03-19,2026-08-30,TOXIC,pbn-ip-cluster:69.13.79; very-low-authority(AS2)
+list2rank.com,2,2,64.182.137.16,2,us,2026-02-28,2026-04-09,TOXIC,pbn-ip-cluster:64.182.137; very-low-authority(AS2)
+listingsweb.org,2,1,185.196.39.22,2,se,2025-12-31,2026-04-21,TOXIC,pbn-ip-cluster:185.196.39; very-low-authority(AS2); directory/article/bookmark-spam-name; foreign-geo-cluster(se)
+localjournal.org,2,1,188.114.243.36,2,se,2026-03-08,2026-04-18,TOXIC,pbn-ip-cluster:188.114.243; very-low-authority(AS2); foreign-geo-cluster(se)
+maxwebsites.org,2,3,64.182.127.48,2,us,2026-02-16,2026-04-19,TOXIC,pbn-ip-cluster:64.182.127; very-low-authority(AS2)
+nicebusinessdirectory.com,2,1,69.13.34.5,2,us,2026-08-08,2026-08-25,TOXIC,pbn-ip-cluster:69.13.34; very-low-authority(AS2); directory/article/bookmark-spam-name
+onweblook.com,2,1,94.46.252.31,2,se,2026-03-10,2026-03-31,TOXIC,pbn-ip-cluster:94.46.252; very-low-authority(AS2); foreign-geo-cluster(se)
+populardiary.com,2,2,64.182.174.122,2,us,2026-03-14,2026-04-03,TOXIC,pbn-ip-cluster:64.182.174; very-low-authority(AS2)
+premiumlistings.co,2,1,69.13.120.17,2,us,2026-08-09,2026-08-26,TOXIC,pbn-ip-cluster:69.13.120; very-low-authority(AS2); directory/article/bookmark-spam-name
+rankvanceboost.pro,2,1,172.67.129.128,2,,2026-03-11,2026-03-11,TOXIC,very-low-authority(AS2); seo/link-scheme-name; spam-tld(.pro)
+searchlocalbiz.org,2,1,185.198.8.9,2,se,2026-03-12,2026-04-21,TOXIC,pbn-ip-cluster:185.198.8; very-low-authority(AS2); foreign-geo-cluster(se)
+shoplogist.com,2,1,172.67.180.152,2,,2026-04-19,2026-05-04,TOXIC,very-low-authority(AS2); weak signal — human QA
+stablesites.org,2,3,64.182.185.33,2,us,2026-02-27,2026-04-09,TOXIC,pbn-ip-cluster:64.182.185; very-low-authority(AS2)
+succesfinders.com,2,1,69.13.13.46,2,us,2026-08-09,2026-08-26,TOXIC,pbn-ip-cluster:69.13.13; very-low-authority(AS2)
+takes.homes,2,26,172.67.212.175,2,,2026-03-17,2026-08-27,TOXIC,very-low-authority(AS2); spam-tld(.homes); weak signal — human QA
+thehawkdirectory.com,2,2,64.182.81.80,2,us,2026-03-12,2026-09-03,TOXIC,pbn-ip-cluster:64.182.81; very-low-authority(AS2); directory/article/bookmark-spam-name
+topbizdir.com,2,1,64.182.86.213,2,us,2026-08-11,2026-08-20,TOXIC,pbn-ip-cluster:64.182.86; very-low-authority(AS2); directory/article/bookmark-spam-name
+topoftheweb.org,2,2,64.182.211.145,2,us,2026-02-20,2026-04-21,TOXIC,pbn-ip-cluster:64.182.211; very-low-authority(AS2)
+uniquewebsitez.com,2,4,64.182.221.152,2,us,2025-07-16,2026-04-06,TOXIC,pbn-ip-cluster:64.182.221; very-low-authority(AS2)
+webalphas.org,2,2,64.182.227.160,2,us,2026-03-03,2026-04-12,TOXIC,pbn-ip-cluster:64.182.227; very-low-authority(AS2)
+weblistings.info,2,2,64.182.102.225,2,us,2026-03-08,2026-08-29,TOXIC,pbn-ip-cluster:64.182.102; very-low-authority(AS2); directory/article/bookmark-spam-name
+welkome.co,2,3,64.182.255.32,2,us,2026-02-27,2026-04-08,TOXIC,pbn-ip-cluster:64.182.255; very-low-authority(AS2)
+worldofdirectory.com,2,1,94.46.43.34,2,se,2026-02-28,2026-04-20,TOXIC,pbn-ip-cluster:94.46.43; very-low-authority(AS2); directory/article/bookmark-spam-name; foreign-geo-cluster(se)
+yourbusinesscenter.org,2,1,64.182.107.82,2,us,2026-08-10,2026-08-26,TOXIC,pbn-ip-cluster:64.182.107; very-low-authority(AS2)
+zenvo.org,2,2,64.182.111.51,2,us,2026-03-04,2026-08-23,TOXIC,pbn-ip-cluster:64.182.111; very-low-authority(AS2)
+domraider.gb.net,0,4,172.67.168.81,2,,2026-08-11,2026-08-29,TOXIC,very-low-authority(AS0); weak signal — human QA
+zlymoweb.com,6,1,64.182.114.98,3,us,2026-08-11,2026-08-28,TOXIC,pbn-ip-cluster:64.182.114; very-low-authority(AS6)
+360directory.biz,2,2,64.182.42.61,3,us,2026-03-16,2026-04-05,TOXIC,pbn-ip-cluster:64.182.42; very-low-authority(AS2); directory/article/bookmark-spam-name
+atozbizlisting.com,2,2,64.182.249.80,3,us,2026-03-01,2026-08-28,TOXIC,pbn-ip-cluster:64.182.249; very-low-authority(AS2); directory/article/bookmark-spam-name
+bizfocus.org,2,1,69.13.4.216,3,us,2026-08-10,2026-08-27,TOXIC,pbn-ip-cluster:69.13.4; very-low-authority(AS2)
+bmoz.co,2,2,64.182.30.12,3,us,2026-03-10,2026-04-20,TOXIC,pbn-ip-cluster:64.182.30; very-low-authority(AS2)
+businessontop.co,2,2,69.13.15.69,3,us,2026-03-01,2026-08-28,TOXIC,pbn-ip-cluster:69.13.15; very-low-authority(AS2)
+craigswebdirectori.com,2,3,64.182.43.12,3,us,2026-03-03,2026-04-13,TOXIC,pbn-ip-cluster:64.182.43; very-low-authority(AS2); directory/article/bookmark-spam-name
+directorylisting.us,2,2,64.182.45.11,3,us,2026-03-01,2026-04-10,TOXIC,pbn-ip-cluster:64.182.45; very-low-authority(AS2); directory/article/bookmark-spam-name
+ezarticles.us,2,1,94.46.115.24,3,se,2026-03-01,2026-03-21,TOXIC,pbn-ip-cluster:94.46.115; very-low-authority(AS2); directory/article/bookmark-spam-name; foreign-geo-cluster(se)
+hotlisting.co.uk,2,2,64.182.96.17,3,us,2026-02-18,2026-04-15,TOXIC,pbn-ip-cluster:64.182.96; very-low-authority(AS2); directory/article/bookmark-spam-name
+jameslist.us,2,2,64.182.100.16,3,us,2026-03-07,2026-04-16,TOXIC,pbn-ip-cluster:64.182.100; very-low-authority(AS2)
+linkroo.org,2,2,64.182.112.96,3,us,2026-02-26,2026-04-08,TOXIC,pbn-ip-cluster:64.182.112; very-low-authority(AS2)
+marathiladies.com,2,1,92.249.46.138,3,in,2026-05-26,2026-05-26,TOXIC,very-low-authority(AS2); foreign-geo-cluster(in); weak signal — human QA
+newbizlisting.com,2,2,64.182.135.17,3,us,2026-03-02,2026-04-01,TOXIC,pbn-ip-cluster:64.182.135; very-low-authority(AS2); directory/article/bookmark-spam-name
+positivesites.net,2,3,64.182.145.25,3,us,2026-03-03,2026-04-12,TOXIC,pbn-ip-cluster:64.182.145; very-low-authority(AS2)
+rozzbee.com,2,2,69.13.126.101,3,us,2026-02-27,2026-08-15,TOXIC,pbn-ip-cluster:69.13.126; very-low-authority(AS2)
+sightquest.net,2,2,64.182.180.97,3,us,2026-04-21,2026-04-21,TOXIC,pbn-ip-cluster:64.182.180; very-low-authority(AS2)
+superblists.com,2,2,64.182.76.16,3,us,2026-03-02,2026-08-20,TOXIC,pbn-ip-cluster:64.182.76; very-low-authority(AS2)
+topwebfind.com,2,1,64.182.97.48,3,us,2026-08-09,2026-08-25,TOXIC,pbn-ip-cluster:64.182.97; very-low-authority(AS2)
+webmartha.com,2,2,64.182.4.182,3,us,2026-03-19,2026-04-08,TOXIC,pbn-ip-cluster:64.182.4; very-low-authority(AS2)
+whatuseek.biz,2,2,64.182.249.75,3,us,2026-03-08,2026-04-18,TOXIC,pbn-ip-cluster:64.182.249; very-low-authority(AS2)
+zipbusiness.net,2,1,94.46.115.6,3,se,2026-02-25,2026-04-15,TOXIC,pbn-ip-cluster:94.46.115; very-low-authority(AS2); foreign-geo-cluster(se)
+betulcrime.com,4,3,172.67.192.162,4,,2026-08-23,2026-09-03,TOXIC,very-low-authority(AS4); weak signal — human QA
+bimpsy.com,2,2,64.182.101.17,4,us,2026-02-25,2026-04-03,TOXIC,pbn-ip-cluster:64.182.101; very-low-authority(AS2)
+sharedbookmark.net,2,3,15.204.130.151,4,us,2026-02-21,2026-07-21,TOXIC,pbn-ip-cluster:15.204.130; very-low-authority(AS2); directory/article/bookmark-spam-name
+backlinkhouse.com,2,5,118.139.161.199,5,sg,2026-07-10,2026-08-23,TOXIC,pbn-ip-cluster:118.139.161; very-low-authority(AS2); seo/link-scheme-name; foreign-geo-cluster(sg)
+flamingos.pages.dev,2,1,172.66.44.138,6,,2026-03-26,2026-03-26,TOXIC,very-low-authority(AS2); weak signal — human QA
+australianwebdirectory.com,2,2,118.139.178.200,7,sg,2026-03-08,2026-04-29,TOXIC,pbn-ip-cluster:118.139.178; very-low-authority(AS2); directory/article/bookmark-spam-name; foreign-geo-cluster(sg)
+domainanalysis.org,2,19,184.168.115.60,8,sg,2026-03-05,2026-09-03,TOXIC,pbn-ip-cluster:184.168.115; very-low-authority(AS2); foreign-geo-cluster(sg)
+tunca.org,2,14,118.139.176.46,9,sg,2026-02-27,2026-09-04,TOXIC,pbn-ip-cluster:118.139.176; very-low-authority(AS2); foreign-geo-cluster(sg)
+metamagic.top,14,4,195.20.19.178,19,md,2026-04-23,2026-08-28,TOXIC,pbn-ip-cluster:195.20.19; spam-tld(.top); foreign-geo-cluster(md)
+byteshort.xyz,6,10,195.20.19.178,19,md,2026-03-21,2026-08-30,TOXIC,pbn-ip-cluster:195.20.19; very-low-authority(AS6); foreign-geo-cluster(md)
+screenshots.wiki,6,9,195.20.19.178,19,md,2026-04-29,2026-08-05,TOXIC,pbn-ip-cluster:195.20.19; very-low-authority(AS6); foreign-geo-cluster(md)
+bilalarticles.com,5,1,159.198.75.134,25,us,2026-02-19,2026-05-31,TOXIC,pbn-ip-cluster:159.198.75; very-low-authority(AS5); directory/article/bookmark-spam-name
+linkodirectory.com,5,1,159.198.75.134,25,us,2026-03-01,2026-06-14,TOXIC,pbn-ip-cluster:159.198.75; very-low-authority(AS5); directory/article/bookmark-spam-name
+wayseodirectory.com,5,1,159.198.75.134,25,us,2026-02-21,2026-06-03,TOXIC,pbn-ip-cluster:159.198.75; very-low-authority(AS5); seo/link-scheme-name; directory/article/bookmark-spam-name
+sitesnewses.com,4,1,159.198.75.134,25,us,2026-02-28,2026-05-29,TOXIC,pbn-ip-cluster:159.198.75; very-low-authority(AS4)
+corrector.in,2,1,118.139.181.85,35,sg,2026-02-13,2026-03-13,TOXIC,pbn-ip-cluster:118.139.181; very-low-authority(AS2); foreign-geo-cluster(sg)
+linksnatcher.com,2,19,118.139.181.255,35,sg,2026-02-24,2026-08-23,TOXIC,pbn-ip-cluster:118.139.181; very-low-authority(AS2); foreign-geo-cluster(sg)
+theface.in,2,5,118.139.181.85,35,sg,2026-03-19,2026-08-22,TOXIC,pbn-ip-cluster:118.139.181; very-low-authority(AS2); foreign-geo-cluster(sg)
+way2check.art,2,5,118.139.181.85,35,sg,2026-03-14,2026-09-02,TOXIC,pbn-ip-cluster:118.139.181; very-low-authority(AS2); spam-tld(.art); foreign-geo-cluster(sg)
+topleveldomains.space,0,7,118.139.181.85,35,sg,2026-02-08,2026-04-30,TOXIC,pbn-ip-cluster:118.139.181; very-low-authority(AS0); spam-tld(.space); foreign-geo-cluster(sg)

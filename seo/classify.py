@@ -241,9 +241,12 @@ def build():
 
     # load QA overrides (agent-reviewed verdicts), if present
     overrides = {}
-    qa_dir = os.path.join(DATA, "qa")
-    for fn in ("monitor_A_reviewed.csv", "monitor_B_reviewed.csv", "keep_reviewed.csv"):
-        p = os.path.join(qa_dir, fn)
+    override_files = [os.path.join(DATA, "qa", fn) for fn in
+                     ("monitor_A_reviewed.csv", "monitor_B_reviewed.csv", "keep_reviewed.csv")]
+    # qa2 = critical second-pass review; loaded last so it takes precedence
+    override_files += [os.path.join(DATA, "qa2", f"toxic_{i}_reviewed.csv") for i in range(1, 8)]
+    override_files.append(os.path.join(DATA, "qa2", "keep_final_reviewed.csv"))
+    for p in override_files:
         if not os.path.exists(p):
             continue
         with open(p, encoding="utf-8", errors="replace") as f:
