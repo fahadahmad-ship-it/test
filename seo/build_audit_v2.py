@@ -93,6 +93,37 @@ def get_data():
             r["verdict"] = "MONITOR"
             r["reason"] = ((r["reason"] + "; ") if r["reason"] else "") + \
                 "all-nofollow → no PageRank risk; kept out of disavow (may aid GMB/local citations)"
+
+    # EVIDENCE: prove spam from the raw URLs/anchors (independent of any authority score).
+    import re as _re
+    ev = collections.defaultdict(set)
+    for b in bls:
+        d = b["refdomain"]; src = b["source_url"] or ""; a = (b["anchor"] or "").lower()
+        if _re.search(r"/detail/\d+/", src): ev[d].add("auto-gen directory template")
+        if _re.search(r"/page-[0-9a-f]{16,}", src): ev[d].add("duplicate hash page")
+        if _re.search(r"/all/\d+/\d+\.html", src): ev[d].add("injection template")
+        if "bookmark" in d: ev[d].add("bookmark-spam network")
+        if any(x in a for x in ["buy backlinks", "pbn network", "da 50 pa 40"]): ev[d].add("self-identifying 'buy backlinks/PBN' anchor")
+        if "telegram" in a or "darkside" in a: ev[d].add("telegram/darkside anchor")
+        if "whatsapp" in a and "domain authority" in a: ev[d].add("'boost your DA' WhatsApp anchor")
+        if any(g in a for g in ["casino", "poker", "ufa", "slot"]): ev[d].add("gambling anchor")
+    _FARM = {"64.182", "69.13", "94.46", "118.139", "159.198", "195.20", "15.204",
+             "184.168", "188.114", "185.39", "185.41", "185.51", "185.196", "185.198"}
+    def _ip16(ip):
+        p = (ip or "").split("."); return ".".join(p[:2]) if len(p) >= 2 else ip
+    for r in refs:
+        tags = set(ev.get(r["domain"], set()))
+        gdom = any(g in r["domain"].lower() for g in ["casino","poker","ufa","slot","gambl","bookie"])
+        if gdom: tags.add("gambling domain")
+        on_farm = _ip16(r["ip"]) in _FARM
+        if on_farm: tags.add("PBN hosting farm (IP)")
+        hard_or_farm = bool(tags)
+        r["evidence"] = ", ".join(sorted(tags)) if tags else "signal-only (name + Authority Score)"
+        # keep only demonstrable spam in the disavow; signal-only toxic → MONITOR for human review
+        if r["verdict"] == "TOXIC" and not hard_or_farm:
+            r["verdict"] = "MONITOR"
+            r["reason"] = ((r["reason"] + "; ") if r["reason"] else "") + \
+                "no hard spam fingerprint & not on a PBN farm → moved to review (signal-only)"
     by = {r["domain"]: r for r in refs}
     for b in bls:
         rr = by.get(b["refdomain"])
@@ -319,8 +350,8 @@ def build():
 
     # ============ REFERRING DOMAINS ============
     ws = wb.create_sheet("Referring Domains")
-    cols = ["#","Referring domain","Verdict","Authority Score","Backlinks","Dofollow","Nofollow","IP","IP shared","Country","First seen","Last seen","Reason / evidence"]
-    widths = [5,32,11,10,9,9,9,16,9,8,11,11,58]
+    cols = ["#","Referring domain","Verdict","Authority Score","Backlinks","Dofollow","Nofollow","IP","IP shared","Country","First seen","Last seen","Spam evidence","Reason / notes"]
+    widths = [5,32,11,10,9,9,9,16,9,8,11,11,40,46]
     hrow = banner(ws, f"REFERRING DOMAINS — {total} analyzed & classified", len(cols),
                   "Verdict colour-coded. Sorted Toxic → Monitor → Keep → Own, then by toxicity.")
     header_row(ws, cols, hrow, widths)
@@ -330,7 +361,8 @@ def build():
         n += 1
         row = [n, rr["domain"], rr["verdict"], rr["ascore"], rr["backlinks"],
                rr.get("dofollow_links", 0), rr.get("nofollow_links", 0), rr["ip"],
-               rr["ip_shared"], rr["country"], rr["first_seen"], rr["last_seen"], rr["reason"]]
+               rr["ip_shared"], rr["country"], rr["first_seen"], rr["last_seen"],
+               rr.get("evidence", ""), rr["reason"]]
         ws.append(row)
         rnum = ws.max_row
         vc = ws.cell(row=rnum, column=3); vc.fill = fill(VC.get(rr["verdict"],"BFBFBF"))
@@ -359,16 +391,17 @@ def build():
 
     # ============ DISAVOW LIST (embedded) ============
     ws = wb.create_sheet("Disavow List")
-    cols = ["#","Disavow entry","Referring domain","Authority Score","Country","Reason / evidence"]
-    widths = [5,34,30,10,8,60]
+    cols = ["#","Disavow entry","Referring domain","Authority Score","Country","Spam evidence","Reason / notes"]
+    widths = [5,34,28,10,8,42,46]
     hrow = banner(ws, f"DISAVOW LIST — {len(toxic)} domains (QA-PENDING)", len(cols),
-                  "Domain-level entries for Google's Disavow tool. Copy column B into the .txt. "
-                  "Excludes KEEP / MONITOR / OWN. Do NOT submit until sign-off.")
+                  "Domain-level entries for Google's Disavow tool. Every row carries hard spam evidence "
+                  "(URL template / duplicate page / gambling / self-identifying anchor / PBN farm). Excludes KEEP/MONITOR/OWN.")
     header_row(ws, cols, hrow, widths)
     n = 0
     for rr in sorted(toxic, key=lambda x:(-x["tox"], x["domain"])):
         n += 1
-        ws.append([n, f"domain:{rr['domain']}", rr["domain"], rr["ascore"], rr["country"], rr["reason"]])
+        ws.append([n, f"domain:{rr['domain']}", rr["domain"], rr["ascore"], rr["country"],
+                   rr.get("evidence",""), rr["reason"]])
         for c in range(1, len(cols)+1):
             if n % 2 == 0 and not ws.cell(row=ws.max_row,column=c).fill.patternType:
                 ws.cell(row=ws.max_row, column=c).fill = fill(VC_SOFT["TOXIC"])

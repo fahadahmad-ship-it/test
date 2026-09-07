@@ -1,73 +1,74 @@
 # Master Lawn — SEO Deliverables Index & Notes
 
-**Client:** https://www.masterlawn.com/ · **Data source:** Semrush · **Snapshot:** 2026-09-04
-**Scope covered:** Task 1 (Backlink Audit), Task 2 (Disavow prep), Task 3 (Baseline Benchmark). Task 4 (Authority link acquisition) is parked pending your sign-off.
+**Client:** https://www.masterlawn.com/ · **Data source:** Semrush (Authority Score & Traffic), cross-checked with Ahrefs · **Snapshot:** 2026-09-04
+**Scope:** Task 1 (Backlink Audit), Task 2 (Disavow prep), Task 3 (Baseline Benchmark). Task 4 (Authority link acquisition) parked pending sign-off.
 
 ---
 
-## Headline result (after 2 independent QA passes)
+## Headline result
 
 Reviewed **every** referring domain (1,169 unique) and **every** backlink (3,651).
 
 | Verdict | Domains | Meaning |
 |---|---:|---|
-| 🔴 **TOXIC** | **916 (78.4%)** | Dofollow manipulative links — recommended for disavow |
+| 🔴 **TOXIC** | **865 (74.0%)** | Recommended for disavow — **every one carries hard spam evidence** |
 | 🟢 KEEP | 113 | Legitimate / relevant — do not disavow |
-| 🟡 MONITOR | 135 | Ambiguous, low-value local citations, or **all-nofollow** — watch, do NOT disavow |
+| 🟡 MONITOR | 186 | Ambiguous, low-value local citations, all-nofollow, or signal-only — watch, do NOT disavow |
 | ⚫ OWN | 5 | Client/sister properties — never disavow |
 
-**Nofollow policy:** a domain whose links are all **nofollow** passes no PageRank, so it carries ~no algorithmic risk and is **not disavowed** (moved to MONITOR) — low-quality nofollow directory listings can still support GMB/local NAP. The disavow therefore targets **dofollow** spam (plus clearly malicious verticals). The Referring Domains sheet now shows Dofollow/Nofollow counts per domain.
+### Why these 865 are actually spam (not just "low score")
+Every disavowed domain is backed by evidence visible in the raw URLs/anchors — independent of any authority metric:
+- **819** sit on known **PBN hosting farms** (shared /16 blocks: 64.182.x, 69.13.x, 94.46.x, 118.139.x, …).
+- **576** serve the *identical* auto-generated URL template `/detail/<id>/<service-city>.html` (one software across hundreds of domains).
+- **57** share a duplicate `/page-<hash>` file across domains; **31** an `/all/<id>/<n>.html` injection template.
+- **32** links literally advertise the scheme ("buy backlinks / DA 50 PA 40 / PBN network"); **9** "boost your DA, WhatsApp us"; **1** telegram/darkside; **9** bookmark-spam; **5** gambling.
 
-**Local-citation safeguard:** for a local business, low-quality directory *citations* (a real "Lawn Aeration Huntsville AL" listing) can help local SEO, so they are handled carefully. The spam network here deliberately fakes those anchors — 806 toxic domains use real city/service anchors but sit on PBN farms/throwaway hosts (camouflage). Only standalone, non-farm business directories were pulled out of the disavow into MONITOR; every geo-anchor link is listed on the **Local Citations Review** sheet for a human check.
+The **Disavow List** and **Referring Domains** sheets show the evidence tag per domain, so each entry is justified.
 
-**Why so many?** The profile is dominated by an automated **directory/article/bookmark PBN + link-selling network** (single-IP farms on `64.182.x`, `69.13.x`, `94.46.x`, `118.139.x`, `159.198.75.x`, `195.20.19.178`), plus gambling/off-topic and foreign-hosting spam, and "buy backlinks / DA-PA / telegram" anchors. ~90% of referring domains sit at Authority Score ≤6. This is manipulation / negative-SEO contamination, not earned authority.
+### Judgment calls handled conservatively
+- **Nofollow:** all-nofollow toxic domains pass no PageRank → moved to MONITOR (low-quality nofollow directory citations can still aid GMB/local NAP).
+- **Local citations:** genuine reputable directories are KEPT; standalone low-quality directories moved to MONITOR; every geo-anchor link is listed on the **Local Citations Review** sheet.
+- **Signal-only:** 51 domains with no hard fingerprint and not on a farm were moved to MONITOR — not disavowed.
 
 ---
 
 ## The files
 
-### 1. `MasterLawn_Backlink_Audit.xlsx` — the full audit
-| Sheet | What it contains |
+### 1. `MasterLawn_Backlink_Audit.xlsx`
+| Sheet | Contents |
 |---|---|
-| **Summary** | Scope, verdict counts, % toxic, key finding. Start here. |
-| **Referring Domains** | All 1,170 domains, each with verdict, toxicity score, Authority Score, backlinks, IP, country, first/last seen, reason code, and evidence. Colour-coded; auto-filtered; header frozen. |
-| **All Backlinks** | All 3,651 links — source URL, target URL, **anchor text**, nofollow, sitewide, page AS, referring domain, inherited verdict, dates. Auto-filtered. |
-| **Anchor Analysis** | Top anchors with ref-domain/backlink counts; spam & gambling anchors flagged red. |
-| **Distributions** | Referring domains by Authority Score, by TLD zone, and by country (IP geo). |
-| **Toxic Clusters** | PBN farms grouped by shared IP /24 (how many toxic domains sit on each). |
-| **Methodology** | The 3-axis (Trust / Relevance / Language) scoring rubric and verdict thresholds. |
+| **Dashboard** | KPI tiles + 6 charts (verdict split, Authority-Score distribution, toxic-by-year, country, TLD, PBN IP clusters). |
+| **Executive Summary** | Metrics, classification result, key findings, recommendation. |
+| **Referring Domains** | All 1,169, classified: verdict, Authority Score, Dofollow/Nofollow counts, IP, **Spam evidence**, reason. Colour-coded, auto-filtered, frozen header. |
+| **All Backlinks** | All 3,651 links — source URL, target URL, anchor, nofollow, sitewide, verdict. |
+| **Disavow List** | The 865 domains as `domain:` entries, each with its **spam evidence**. |
+| **Local Citations Review** | Every geo-anchor link with on-farm flag + example anchor/target for human review. |
+| **Anchor Analysis / Toxic Clusters / Methodology** | Anchor spam flags · PBN farms by IP · scoring rubric + nofollow/evidence policy. |
 
-### 2. `MasterLawn_Disavow.xlsx` (+ `disavow_masterlawn.txt`) — the disavow prep
-| Sheet | What it contains |
-|---|---|
-| **Disavow (domain-level)** | The **1,003 TOXIC** domains as `domain:` entries, with Authority Score, IP, country, reason code and evidence. Auto-filtered. |
-| **README** | Submission steps, what's included/excluded, and QA sign-off requirements. |
+### 2. `MasterLawn_Disavow.xlsx` (+ `disavow_masterlawn.txt`)
+Standalone disavow — 865 `domain:` entries with evidence + a README with submission steps. `disavow_masterlawn.txt` is the Google-format file. **Status: QA-PENDING** until false-positive sweep + client sign-off.
 
-`disavow_masterlawn.txt` = the Google-format file (1,003 `domain:` lines, comment header). **Status: QA-PENDING** — do not upload until the false-positive sweep + two-analyst + client sign-off are done.
+### 3. `MasterLawn_Baseline_Benchmark.xlsx`
+KPI tiles + Semrush metrics (AS 23, traffic 2,391/mo), toxicity split, Local Keyword Set, Change Log.
 
-### 3. `MasterLawn_Baseline_Benchmark.xlsx` — the critical baseline (Task 3)
-| Sheet | What it contains |
-|---|---|
-| **Baseline Benchmark** | Semrush authority & backlink profile, this audit's toxicity split, organic visibility (rank, keywords, traffic, value), and pending GSC/GA4 items. |
-| **Local Keyword Set** | Services × geo modifiers (Memphis/Germantown/Collierville/Bartlett/Olive Branch/Southaven/Huntsville) to load into rank tracking. |
-| **Change Log** | Dated row for the 2026-09-04 baseline; add a row each month to trend the recovery. |
-
-### Supporting files (audit trail)
-- `MasterLawn-SEO-Audit-Plan.md` — the overall project plan across all 4 tasks.
-- `classify.py` — the deterministic classifier that produced the workbooks (reproducible).
-- `data/` — raw Semrush exports + both QA review layers (`qa/` first pass, `qa2/` critical second pass) so every verdict is traceable.
+### Supporting / audit trail
+- `MasterLawn-SEO-Audit-Plan.md` — overall 4-task plan.
+- `build_audit_v2.py` / `build_extras_v2.py` / `classify.py` — reproducible generators.
+- `data/` — raw Semrush exports + QA layers (`qa/`, `qa2/` critical pass, `qa3/` local-citation) so every verdict is traceable.
 
 ---
 
-## How the 1,003 were validated (why you can trust the list)
+## How the list was validated
+1. Deterministic classifier over all domains (Authority Score, PBN IPs, spam patterns, TLDs, geo/relevance).
+2. **QA pass 1** — agents adjudicated borderline + verified keeps.
+3. **QA pass 2 (adversarial, 8 agents)** — re-checked every toxic to rescue false-positives; re-verified keeps.
+4. **Nofollow + local-citation + hard-evidence passes** — disavow narrowed to only dofollow, demonstrable spam.
+5. **Cross-checked with Ahrefs** (independent crawler) — same PBN/directory domains confirmed dofollow.
+   *Limitation: pages could not be live-fetched from this environment (egress proxy blocks the spam domains); verification is via URL/anchor fingerprints + two crawlers, not rendered screenshots.*
 
-1. **Pass 0 — deterministic classifier** over all 1,170 domains (Authority Score, PBN IP clusters, spam name patterns, spam TLDs, gambling/off-topic, foreign-geo, on-topic/geo relevance offsets).
-2. **QA pass 1** — agents adjudicated the 204 borderline (MONITOR) domains + verified the 74 KEEP.
-3. **QA pass 2 (critical, adversarial)** — every one of the (then) 1,057 TOXIC domains was re-reviewed by 7 agents with a mandate to **rescue anything plausibly real**, and all KEEP re-checked to **catch hidden spam**. Net effect: ~50+ domains rescued out of disavow (real local/lawn businesses, .edu/charity, legit platforms), a handful of programmatic lead-gen directories pulled into TOXIC.
+Journey of the disavow count: 1,057 → 1,003 → 986 (dedupe) → 916 (dofollow-only) → **865 (evidence-backed only)**.
 
-**Design & formatting:** yes — the workbooks use styled/frozen header rows, colour-coded verdicts, auto-filters on every large table, sized columns, wrapped evidence text, and a self-documenting Summary/Methodology/README. They're built to hand to a client or work in directly.
-
-## Before you submit the disavow (recommended)
-- Human false-positive sweep of the **KEEP** and **MONITOR** sheets (49 monitor domains are deliberately excluded from the file).
-- Confirm ownership of `masterlawninc.com`, `masterlawn.org`, `masterlawn.net`, `midsouthturf.com`, `greenkingspray.com` (treated as OWN, never disavowed).
-- Upload to the correct GSC property; refresh **monthly** (the injection is ongoing) and always re-upload the full cumulative file.
+## Before you submit
+- Human sweep of **MONITOR (186)** and **KEEP (113)** sheets.
+- Confirm ownership of masterlawninc.com / masterlawn.org / .net / midsouthturf.com / greenkingspray.com (OWN).
+- Upload to the correct GSC property; refresh monthly (injection ongoing); always re-upload the full cumulative file.

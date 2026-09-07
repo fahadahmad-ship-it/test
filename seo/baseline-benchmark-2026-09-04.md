@@ -33,7 +33,7 @@
 ## Profile health indicators (this audit)
 | Indicator | Observation |
 |---|---|
-| Toxicity | 916 of 1,169 unique referring domains toxic (**78.4%**); 113 keep, 135 monitor, 5 own — disavow targets dofollow spam (all-nofollow kept out) |
+| Toxicity | 865 of 1,169 unique referring domains toxic (**74.0%**); 113 keep, 186 monitor, 5 own — every disavowed domain carries hard spam evidence (URL template / dup page / gambling / self-ID anchor / PBN farm) |
 | Authority spread | ~90% of referring domains at Authority Score ≤6 (spam/PBN bulk) |
 | Recency | ~94% of referring domains first seen in 2026 → active negative-SEO blast |
 | Footprint | directory/article/bookmark PBN + link-selling farms on shared IPs; gambling/off-topic; foreign hosting (SE/SG/MD) |
@@ -54,4 +54,4 @@ Memphis TN, Germantown TN, Collierville TN, Bartlett TN, Olive Branch MS, Southa
 ## Change log
 | Date | Authority Score | Ref domains | Toxic | Org keywords | Org traffic/mo | Note |
 |---|---|---|---|---|---|---|
-| 2026-09-04 | 23 | 1,169 | 916 | 2,525 | 2,391 | Baseline captured (pre-disavow) |
+| 2026-09-04 | 23 | 1,169 | 865 | 2,525 | 2,391 | Baseline captured (pre-disavow) |

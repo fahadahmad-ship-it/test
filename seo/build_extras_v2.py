@@ -22,8 +22,8 @@ def build():
     wb = Workbook()
     ws = wb.active; ws.title = "Disavow List"
     ws.sheet_view.showGridLines = False
-    cols = ["#", "Disavow entry", "Referring domain", "Authority Score", "Country", "Reason / evidence"]
-    widths = [5, 34, 30, 10, 8, 62]
+    cols = ["#", "Disavow entry", "Referring domain", "Authority Score", "Country", "Spam evidence", "Reason / notes"]
+    widths = [5, 34, 28, 10, 8, 42, 46]
     # KPI tile band above the table
     ws.merge_cells("A1:F1")
     c = ws["A1"]; c.value = f"DISAVOW LIST — {len(toxic)} domains (QA-PENDING)"
@@ -38,7 +38,7 @@ def build():
     n = 0
     for rr in sorted(toxic, key=lambda x: (-x["tox"], x["domain"])):
         n += 1
-        ws.append([n, f"domain:{rr['domain']}", rr["domain"], rr["ascore"], rr["country"], rr["reason"]])
+        ws.append([n, f"domain:{rr['domain']}", rr["domain"], rr["ascore"], rr["country"], rr.get("evidence",""), rr["reason"]])
         if n % 2 == 0:
             for cc in range(1, len(cols) + 1):
                 if not ws.cell(row=ws.max_row, column=cc).fill.patternType:

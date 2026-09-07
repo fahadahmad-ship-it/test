@@ -1,6 +1,6 @@
 # Master Lawn — disavow file (QA-PENDING, do not submit until signed off)
 # Generated 2026-09-07 from Semrush backlink audit (2 QA passes).
-# 916 toxic referring domains (domain-level).
+# 865 toxic referring domains (domain-level).
 #
 domain:1000.co.in
 domain:10googol.org
@@ -80,7 +80,6 @@ domain:authoritylistings.com
 domain:awesomori.com
 domain:b-listings.com
 domain:backlinkhouse.com
-domain:backlinklab.pro
 domain:backlinkon.com
 domain:backlinksbank.com
 domain:backlinkshouse.com
@@ -89,7 +88,6 @@ domain:bazoomble.com
 domain:beezlistings.com
 domain:belistedontop.com
 domain:bestarticlessite.com
-domain:bestarticleworld.com
 domain:bestbizofweb.com
 domain:bestbusinessesdirectory.com
 domain:bestbusinesseslist.com
@@ -101,7 +99,6 @@ domain:bestnichedirectory.com
 domain:bestnz-poker-casinoslot.com
 domain:bestofbusinesslistings.com
 domain:bestprodirectory.com
-domain:besttownfencepros.com
 domain:bestwebstats.com
 domain:betulcrime.com
 domain:bigbusinesseslisting.com
@@ -129,7 +126,6 @@ domain:bizscopedirectory.com
 domain:biztrophy.org
 domain:bizzopedia.com
 domain:blahoo.org
-domain:blc-eu.com
 domain:blegg.biz
 domain:blimey.us
 domain:blog-forest.help
@@ -177,7 +173,6 @@ domain:businesswirenetwork.com
 domain:busybiz.co
 domain:buzzlisting.org
 domain:callupbusinesses.com
-domain:capetownthing.co.za
 domain:carplz.com
 domain:casinooftheking.com
 domain:centralweb.co
@@ -186,7 +181,6 @@ domain:cheapsmmprovider.online
 domain:checkthemout.biz
 domain:citylevels.com
 domain:citylocalhub.com
-domain:civiltej.com
 domain:clickdir.net
 domain:clicknmark.com
 domain:clicktohigh.com
@@ -209,12 +203,10 @@ domain:customerfriendlysites.com
 domain:customwebdirectori.com
 domain:customwebdirectory.com
 domain:cvillico.com
-domain:daily-hacks.pages.dev
 domain:dazoodle.net
 domain:dazzlinglist.info
 domain:deluxeweblinks.com
 domain:demandbusinesses.com
-domain:developmentmi.com
 domain:digitalage.company
 domain:digitallongevity.com
 domain:digitbusinesslistings.com
@@ -229,7 +221,6 @@ domain:directoristorm.com
 domain:directorit.org
 domain:directory24x7.org
 domain:directorybox.net
-domain:directorycell.com
 domain:directorycentered.com
 domain:directorycircles.com
 domain:directorycool.com
@@ -262,16 +253,12 @@ domain:directoryview.com
 domain:directoryvilla.org
 domain:directoryzilla.net
 domain:dirfly.net
-domain:divisionesmodularesjq.com
 domain:domain.com.lc
 domain:domainanalysis.org
 domain:domains.com.bz
 domain:domainsc.com
 domain:domainwork.space
 domain:domow.org
-domain:domraider.eu.com
-domain:domraider.gb.net
-domain:domraider.it.com
 domain:downtownlists.com
 domain:dynalistings.com
 domain:dynamiclist.net
@@ -323,7 +310,6 @@ domain:findzy.net
 domain:finestbusinesslistings.com
 domain:firstguestpost.com
 domain:fivestarbusinesslistings.com
-domain:fixhubs.net
 domain:fixx.co
 domain:forever-biz.com
 domain:frontrunnerz.net
@@ -376,7 +362,6 @@ domain:hitz.co
 domain:holabiz.com
 domain:homefinance.co.in
 domain:honestdir.com
-domain:horizon-layer.live
 domain:hostseolinks.com
 domain:hotcatalogues.com
 domain:hotdirectory.co.uk
@@ -416,12 +401,9 @@ domain:infodirectory.biz
 domain:infolocal.biz
 domain:insearchlocal.com
 domain:instabookmarking.com
-domain:isardomains.com
 domain:jake.eu
 domain:jameslist.us
-domain:jobsapp.info
 domain:joeant.biz
-domain:kitabibrothers.com
 domain:klassyweb.com
 domain:klouty.net
 domain:koolbiz.us
@@ -502,7 +484,6 @@ domain:localstack.org
 domain:localstudio.info
 domain:locatebusiness.org
 domain:locationbusinesslistings.com
-domain:london-essays.blog
 domain:lookupdata.org
 domain:lookuplists.com
 domain:m98ufa.com
@@ -527,7 +508,6 @@ domain:mooli.us
 domain:morelinks.org
 domain:moresites.net
 domain:mp3fresh.net
-domain:multiranks.com
 domain:musweb.org
 domain:mybestsites.net
 domain:mydirectori.com
@@ -537,7 +517,6 @@ domain:mysmallbiz.net
 domain:mysuperlistings.com
 domain:newbizlisting.com
 domain:newblogerseo.com
-domain:newsblogsports.site
 domain:newwebsiteslist.com
 domain:nextleveldirectory.com
 domain:nicebusinessdirectory.com
@@ -610,20 +589,12 @@ domain:puredirectorylistings.com
 domain:queries.co.in
 domain:quotesblom.com
 domain:radiantdir.com
-domain:rankdirectorysite.com
 domain:rankerdirectory.com
-domain:ranksarticle.com
 domain:rankupdirectory.com
-domain:rankvance.info
-domain:rankvanceauthority.info
-domain:rankvanceboost.pro
-domain:rankvancelinks.info
-domain:rankvanceseo.info
 domain:raven-frost.online
 domain:read.org.in
 domain:realdir.net
 domain:reallistings.net
-domain:realtalkaj.me
 domain:recommendit.biz
 domain:rizing.biz
 domain:rockonsites.com
@@ -632,7 +603,6 @@ domain:roidirectory.org
 domain:royaldb.us.com
 domain:royalwebdirectory.net
 domain:rozzbee.com
-domain:safebizlistings.com
 domain:safewebsitez.com
 domain:sbmain.com
 domain:sbsocial.net
@@ -650,13 +620,10 @@ domain:seeklocally.net
 domain:seekurls.org
 domain:seekzap.net
 domain:selectbusinesszone.com
-domain:semalt.ai
 domain:seoboost.biz
-domain:seodirectorysite.com
 domain:seofriendlydirectory.in
 domain:seohitz.net
 domain:seohubdirectory.com
-domain:seomuda.id
 domain:seoplex.biz
 domain:seoranks.co
 domain:sezza.org
@@ -686,31 +653,24 @@ domain:smoothbookmarks.com
 domain:smoothdirectory.com
 domain:snap-this.com
 domain:snapsearch.org
-domain:snowlawn.net
 domain:sociablediary.com
 domain:socialdir.org
 domain:socialdirectionz.com
-domain:softranks.com
 domain:solace-moon.online
-domain:southernlanka.lk
 domain:sparkelzdirectory.com
 domain:spectacularsites.co
 domain:spiderable.net
 domain:sporstcenter.com
-domain:sportmediaset.co
 domain:spotjournal.info
 domain:spotseek.org
 domain:spotw.org
 domain:squaredirectory.com
 domain:stablesites.org
-domain:starcourts.com
 domain:stardirectory.org
 domain:starlisting.org
-domain:starsarticle.com
 domain:staticdirectori.org
 domain:staticdirectory.com
 domain:storebusinesslistings.com
-domain:studartcorrea.com.br
 domain:stumblesites.org
 domain:sublimedirectori.net
 domain:submitarticle.us
@@ -752,7 +712,6 @@ domain:thelocalfalcon.com
 domain:thelocalstockinc.com
 domain:themicrodigits.com
 domain:themumbai.in
-domain:thenllc.ca
 domain:theseznam.net
 domain:thetopbizclub.com
 domain:thetopdir.com
@@ -774,7 +733,6 @@ domain:topeasylocal.com
 domain:tophref.com
 domain:topincitylocal.com
 domain:topleveldomains.space
-domain:toplinksdirectory.com
 domain:toplistedgroup.com
 domain:toplistings.info
 domain:toplistingz.com
@@ -806,20 +764,17 @@ domain:urban-listings.com
 domain:urlrange.com
 domain:urltribe.org
 domain:urlwiz.org
-domain:usapridenetwork.us
 domain:veryimportantsites.com
 domain:veryimportantsites.net
 domain:vibrantbiz.org
 domain:viewbusinesslistings.com
 domain:vipsites.org
-domain:viral-status.com
 domain:voteit.biz
 domain:wallpapers.pro
 domain:way2check.art
 domain:way2check.cv
 domain:wayseodirectory.com
 domain:wayseolinks.com
-domain:wealthyoverview.com
 domain:web247listings.com
 domain:web2directory.org
 domain:webadore.net
@@ -834,7 +789,6 @@ domain:webeditori.com
 domain:webestate.co
 domain:webeverest.co
 domain:webfriendly.us
-domain:webhubsites.com
 domain:webiraa.com
 domain:webitory.net
 domain:weblegends.net
@@ -852,7 +806,6 @@ domain:webopedia.biz
 domain:webpowerlinks.net
 domain:webpulso.net
 domain:webrankindia.com
-domain:webranksite.com
 domain:websearchquest.com
 domain:webseodirectory.com
 domain:webshutl.com
@@ -881,13 +834,10 @@ domain:wiredsites.org
 domain:wonvision.com
 domain:woorivo.com
 domain:worldbestweblinkz.com
-domain:worldlinksites.com
 domain:worldofdirectory.com
 domain:worldsbestsites.biz
 domain:worldsbestsitez.net
 domain:worldwebdirectory.co
-domain:worldwideranks.com
-domain:writfy.com
 domain:xfactorbiz.com
 domain:xylo-mist.online
 domain:ycm.info
@@ -898,7 +848,6 @@ domain:yesdomains.space
 domain:yeswecanlinks.com
 domain:yippee.co
 domain:yourarticlehub.com
-domain:yourbizlistings.com
 domain:yourbusinessarchive.com
 domain:yourbusinesscenter.org
 domain:yourinformationhub.com
