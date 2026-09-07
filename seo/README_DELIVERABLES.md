@@ -11,10 +11,12 @@ Reviewed **every** referring domain (1,169 unique) and **every** backlink (3,651
 
 | Verdict | Domains | Meaning |
 |---|---:|---|
-| 🔴 **TOXIC** | **986 (84.3%)** | Recommended for disavow |
+| 🔴 **TOXIC** | **916 (78.4%)** | Dofollow manipulative links — recommended for disavow |
 | 🟢 KEEP | 113 | Legitimate / relevant — do not disavow |
-| 🟡 MONITOR | 65 | Ambiguous / low-value local citations — watch, do NOT disavow yet |
+| 🟡 MONITOR | 135 | Ambiguous, low-value local citations, or **all-nofollow** — watch, do NOT disavow |
 | ⚫ OWN | 5 | Client/sister properties — never disavow |
+
+**Nofollow policy:** a domain whose links are all **nofollow** passes no PageRank, so it carries ~no algorithmic risk and is **not disavowed** (moved to MONITOR) — low-quality nofollow directory listings can still support GMB/local NAP. The disavow therefore targets **dofollow** spam (plus clearly malicious verticals). The Referring Domains sheet now shows Dofollow/Nofollow counts per domain.
 
 **Local-citation safeguard:** for a local business, low-quality directory *citations* (a real "Lawn Aeration Huntsville AL" listing) can help local SEO, so they are handled carefully. The spam network here deliberately fakes those anchors — 806 toxic domains use real city/service anchors but sit on PBN farms/throwaway hosts (camouflage). Only standalone, non-farm business directories were pulled out of the disavow into MONITOR; every geo-anchor link is listed on the **Local Citations Review** sheet for a human check.
 

@@ -76,6 +76,23 @@ def get_data():
         r["verdict"] = v; r["tox"] = score
         r["reason"] = "; ".join(reasons)
         r["ip_shared"] = ipc[C.ip_prefix(r["ip"], 3)]
+    # follow/nofollow re-tier: an all-nofollow toxic domain passes no PageRank, so it
+    # carries ~no algorithmic risk — keep it OUT of the disavow (low-quality nofollow
+    # directory citations can still aid GMB/local NAP). Dofollow spam stays toxic.
+    fol = collections.defaultdict(lambda: [0, 0])   # [dofollow, nofollow]
+    for b in bls:
+        nf = str(b["nofollow"]).strip().lower() == "true"
+        fol[b["refdomain"]][1 if nf else 0] += 1
+    MAL = ["casino", "poker", "ufa", "slot", "bookie", "gambl", "betting", "porn",
+           "xxx", "adult", "escort", "pharma", "viagra", "cialis"]
+    for r in refs:
+        do, nofo = fol[r["domain"]]
+        r["dofollow_links"] = do; r["nofollow_links"] = nofo
+        if (r["verdict"] == "TOXIC" and do == 0 and nofo > 0
+                and not any(t in r["domain"].lower() for t in MAL)):
+            r["verdict"] = "MONITOR"
+            r["reason"] = ((r["reason"] + "; ") if r["reason"] else "") + \
+                "all-nofollow → no PageRank risk; kept out of disavow (may aid GMB/local citations)"
     by = {r["domain"]: r for r in refs}
     for b in bls:
         rr = by.get(b["refdomain"])
@@ -302,8 +319,8 @@ def build():
 
     # ============ REFERRING DOMAINS ============
     ws = wb.create_sheet("Referring Domains")
-    cols = ["#","Referring domain","Verdict","Authority Score","Backlinks","IP","IP shared","Country","First seen","Last seen","Reason / evidence"]
-    widths = [5,32,11,10,9,16,9,8,11,11,58]
+    cols = ["#","Referring domain","Verdict","Authority Score","Backlinks","Dofollow","Nofollow","IP","IP shared","Country","First seen","Last seen","Reason / evidence"]
+    widths = [5,32,11,10,9,9,9,16,9,8,11,11,58]
     hrow = banner(ws, f"REFERRING DOMAINS — {total} analyzed & classified", len(cols),
                   "Verdict colour-coded. Sorted Toxic → Monitor → Keep → Own, then by toxicity.")
     header_row(ws, cols, hrow, widths)
@@ -311,7 +328,8 @@ def build():
     n = 0
     for rr in sorted(refs, key=lambda x:(order.get(x["verdict"],9), -x["tox"], x["domain"])):
         n += 1
-        row = [n, rr["domain"], rr["verdict"], rr["ascore"], rr["backlinks"], rr["ip"],
+        row = [n, rr["domain"], rr["verdict"], rr["ascore"], rr["backlinks"],
+               rr.get("dofollow_links", 0), rr.get("nofollow_links", 0), rr["ip"],
                rr["ip_shared"], rr["country"], rr["first_seen"], rr["last_seen"], rr["reason"]]
         ws.append(row)
         rnum = ws.max_row
@@ -426,6 +444,11 @@ def build():
         ("   re-checked all toxic to rescue false-positives and re-verified keeps for false-negatives.", False),
         ("", False),
         ("Disavow is conservative: only TOXIC entries; MONITOR/KEEP/OWN excluded; client sign-off required.", True),
+        ("", False),
+        ("NOFOLLOW POLICY — a domain whose links are ALL nofollow passes no PageRank, so it carries", True),
+        ("   ~no algorithmic risk and is NOT disavowed (moved to MONITOR). Low-quality nofollow", False),
+        ("   directory listings can still support GMB / local NAP citations. Only DOFOLLOW spam", False),
+        ("   (and clearly malicious verticals) is disavowed. See Dofollow/Nofollow columns.", False),
     ]
     rr2 = hrow
     for txt, bold in lines:
