@@ -1,6 +1,6 @@
 # Master Lawn — disavow file (QA-PENDING, do not submit until signed off)
-# Generated 2026-09-07 from Semrush backlink audit (2 QA passes).
-# 865 toxic referring domains (domain-level).
+# Generated 2026-09-08 from Semrush backlink audit (2 QA passes).
+# 852 toxic referring domains (domain-level).
 #
 domain:1000.co.in
 domain:10googol.org
@@ -131,7 +131,6 @@ domain:blimey.us
 domain:blog-forest.help
 domain:blogerreviewers.com
 domain:bmoz.co
-domain:boblistings.org
 domain:bonuslinx.com
 domain:bookmarkhaven.com
 domain:bookmarkingbuddy.com
@@ -209,10 +208,8 @@ domain:deluxeweblinks.com
 domain:demandbusinesses.com
 domain:digitalage.company
 domain:digitallongevity.com
-domain:digitbusinesslistings.com
 domain:dirbull.org
 domain:directbusinesslistings.com
-domain:directopedia.us
 domain:directopia.us
 domain:directori.org.uk
 domain:directorial.org
@@ -286,7 +283,6 @@ domain:enterprisebusinesslistings.com
 domain:eurekadir.com
 domain:excellentsites.co
 domain:expertschoice.net
-domain:expressbusinesslistings.com
 domain:ezarticles.us
 domain:ezeelisting.org
 domain:ezlinx.org
@@ -414,10 +410,8 @@ domain:lawyerinjeddah.com
 domain:leading-businesses.com
 domain:leadstotop.com
 domain:libyanatravel.com
-domain:likesite.org
 domain:linkanews.com
 domain:linkcentre.co
-domain:linkedintoweb.com
 domain:linkjuicedirectory.org
 domain:linklogic.org
 domain:linkodirectory.com
@@ -449,7 +443,6 @@ domain:listingspace.net
 domain:listingssearch.org
 domain:listingsspot.com
 domain:listingsweb.org
-domain:listingzclub.com
 domain:listique.org
 domain:listmybusiness.org
 domain:listurwebsite.com
@@ -472,7 +465,6 @@ domain:localedgepro.com
 domain:localinsidernetwork.com
 domain:localizespace.com
 domain:localjournal.org
-domain:locallistingz.com
 domain:locallistingz.net
 domain:localpagecitybook.com
 domain:localpagesdirectory.com
@@ -480,7 +472,6 @@ domain:localquest.info
 domain:localquest.net
 domain:localroom.org
 domain:localseek.org
-domain:localstack.org
 domain:localstudio.info
 domain:locatebusiness.org
 domain:locationbusinesslistings.com
@@ -513,7 +504,6 @@ domain:mybestsites.net
 domain:mydirectori.com
 domain:mymarketpost.com
 domain:myreallistings.com
-domain:mysmallbiz.net
 domain:mysuperlistings.com
 domain:newbizlisting.com
 domain:newblogerseo.com
@@ -580,7 +570,6 @@ domain:procycling.org
 domain:prolinksdirectory.com
 domain:prolocalbusinesssearch.com
 domain:promotionzdirectori.com
-domain:prontowebdir.com
 domain:proseoarticles.com
 domain:proseolinksdirectory.com
 domain:pudhe.com
@@ -861,8 +850,6 @@ domain:zenvo.org
 domain:zinglocal.net
 domain:zipbusiness.net
 domain:ziplistings.co
-domain:ziplocale.com
-domain:zlymoweb.com
 domain:zohodirectory.org
 domain:zoombizz.net
 domain:zoomlistweb.com

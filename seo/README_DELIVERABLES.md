@@ -11,9 +11,9 @@ Reviewed **every** referring domain (1,169 unique) and **every** backlink (3,651
 
 | Verdict | Domains | Meaning |
 |---|---:|---|
-| 🔴 **TOXIC** | **865 (74.0%)** | Recommended for disavow — **every one carries hard spam evidence** |
+| 🔴 **TOXIC** | **852 (72.9%)** | Disavow — **every one has hard spam evidence AND zero organic traffic** |
 | 🟢 KEEP | 113 | Legitimate / relevant — do not disavow |
-| 🟡 MONITOR | 186 | Ambiguous, low-value local citations, all-nofollow, or signal-only — watch, do NOT disavow |
+| 🟡 MONITOR | 199 | Ambiguous, low-value local citations, all-nofollow, or signal-only — watch, do NOT disavow |
 | ⚫ OWN | 5 | Client/sister properties — never disavow |
 
 ### Why these 865 are actually spam (not just "low score")
@@ -66,9 +66,9 @@ KPI tiles + Semrush metrics (AS 23, traffic 2,391/mo), toxicity split, Local Key
 5. **Cross-checked with Ahrefs** (independent crawler) — same PBN/directory domains confirmed dofollow.
    *Limitation: pages could not be live-fetched from this environment (egress proxy blocks the spam domains); verification is via URL/anchor fingerprints + two crawlers, not rendered screenshots.*
 
-Journey of the disavow count: 1,057 → 1,003 → 986 (dedupe) → 916 (dofollow-only) → **865 (evidence-backed only)**.
+Journey of the disavow count: 1,057 → 1,003 → 986 (dedupe) → 916 (dofollow-only) → 865 (evidence-backed) → **852 (zero-traffic only)**.
 
 ## Before you submit
-- Human sweep of **MONITOR (186)** and **KEEP (113)** sheets.
+- Human sweep of **MONITOR (199)** and **KEEP (113)** sheets.
 - Confirm ownership of masterlawninc.com / masterlawn.org / .net / midsouthturf.com / greenkingspray.com (OWN).
 - Upload to the correct GSC property; refresh monthly (injection ongoing); always re-upload the full cumulative file.

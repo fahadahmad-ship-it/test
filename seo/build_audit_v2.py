@@ -124,6 +124,22 @@ def get_data():
             r["verdict"] = "MONITOR"
             r["reason"] = ((r["reason"] + "; ") if r["reason"] else "") + \
                 "no hard spam fingerprint & not on a PBN farm → moved to review (signal-only)"
+
+    # ORGANIC TRAFFIC (Ahrefs): a functioning directory that aids GMB gets indexed and
+    # ranks; a dead PBN page has zero traffic. Any toxic domain with real traffic is
+    # held for review (not disavowed) — so no disavowed domain has organic traffic.
+    traf = {}
+    tp = os.path.join(BASE, "data", "ahrefs_traffic.csv")
+    if os.path.exists(tp):
+        for row in csv.DictReader(open(tp, encoding="utf-8")):
+            try: traf[row["domain"].lower()] = int(row["traffic"])
+            except Exception: pass
+    for r in refs:
+        r["org_traffic"] = traf.get(r["domain"].lower(), 0)
+        if r["verdict"] == "TOXIC" and r["org_traffic"] > 0:
+            r["verdict"] = "MONITOR"
+            r["reason"] = ((r["reason"] + "; ") if r["reason"] else "") + \
+                f"has minor organic traffic ({r['org_traffic']}/mo, Ahrefs) → held for review, not disavowed"
     by = {r["domain"]: r for r in refs}
     for b in bls:
         rr = by.get(b["refdomain"])
@@ -350,8 +366,8 @@ def build():
 
     # ============ REFERRING DOMAINS ============
     ws = wb.create_sheet("Referring Domains")
-    cols = ["#","Referring domain","Verdict","Authority Score","Backlinks","Dofollow","Nofollow","IP","IP shared","Country","First seen","Last seen","Spam evidence","Reason / notes"]
-    widths = [5,32,11,10,9,9,9,16,9,8,11,11,40,46]
+    cols = ["#","Referring domain","Verdict","Authority Score","Org traffic","Backlinks","Dofollow","Nofollow","IP","IP shared","Country","First seen","Last seen","Spam evidence","Reason / notes"]
+    widths = [5,32,11,10,10,9,9,9,16,9,8,11,11,40,46]
     hrow = banner(ws, f"REFERRING DOMAINS — {total} analyzed & classified", len(cols),
                   "Verdict colour-coded. Sorted Toxic → Monitor → Keep → Own, then by toxicity.")
     header_row(ws, cols, hrow, widths)
@@ -359,7 +375,7 @@ def build():
     n = 0
     for rr in sorted(refs, key=lambda x:(order.get(x["verdict"],9), -x["tox"], x["domain"])):
         n += 1
-        row = [n, rr["domain"], rr["verdict"], rr["ascore"], rr["backlinks"],
+        row = [n, rr["domain"], rr["verdict"], rr["ascore"], rr.get("org_traffic", 0), rr["backlinks"],
                rr.get("dofollow_links", 0), rr.get("nofollow_links", 0), rr["ip"],
                rr["ip_shared"], rr["country"], rr["first_seen"], rr["last_seen"],
                rr.get("evidence", ""), rr["reason"]]
@@ -391,17 +407,17 @@ def build():
 
     # ============ DISAVOW LIST (embedded) ============
     ws = wb.create_sheet("Disavow List")
-    cols = ["#","Disavow entry","Referring domain","Authority Score","Country","Spam evidence","Reason / notes"]
-    widths = [5,34,28,10,8,42,46]
+    cols = ["#","Disavow entry","Referring domain","Authority Score","Org traffic","Country","Spam evidence","Reason / notes"]
+    widths = [5,34,28,10,10,8,42,46]
     hrow = banner(ws, f"DISAVOW LIST — {len(toxic)} domains (QA-PENDING)", len(cols),
-                  "Domain-level entries for Google's Disavow tool. Every row carries hard spam evidence "
-                  "(URL template / duplicate page / gambling / self-identifying anchor / PBN farm). Excludes KEEP/MONITOR/OWN.")
+                  "Domain-level entries for Google's Disavow tool. Every row has hard spam evidence AND zero organic "
+                  "traffic (Ahrefs) — dead PBN pages, not functioning directories. Excludes KEEP/MONITOR/OWN.")
     header_row(ws, cols, hrow, widths)
     n = 0
     for rr in sorted(toxic, key=lambda x:(-x["tox"], x["domain"])):
         n += 1
-        ws.append([n, f"domain:{rr['domain']}", rr["domain"], rr["ascore"], rr["country"],
-                   rr.get("evidence",""), rr["reason"]])
+        ws.append([n, f"domain:{rr['domain']}", rr["domain"], rr["ascore"], rr.get("org_traffic",0),
+                   rr["country"], rr.get("evidence",""), rr["reason"]])
         for c in range(1, len(cols)+1):
             if n % 2 == 0 and not ws.cell(row=ws.max_row,column=c).fill.patternType:
                 ws.cell(row=ws.max_row, column=c).fill = fill(VC_SOFT["TOXIC"])
