@@ -16,7 +16,7 @@ Reviewed **every** referring domain (1,169 unique) and **every** backlink (3,651
 | 🟡 MONITOR | 199 | Ambiguous, low-value local citations, all-nofollow, or signal-only — watch, do NOT disavow |
 | ⚫ OWN | 5 | Client/sister properties — never disavow |
 
-### Why these 865 are actually spam (not just "low score")
+### Why these 852 are actually spam (not just "low score")
 Every disavowed domain is backed by evidence visible in the raw URLs/anchors — independent of any authority metric:
 - **819** sit on known **PBN hosting farms** (shared /16 blocks: 64.182.x, 69.13.x, 94.46.x, 118.139.x, …).
 - **576** serve the *identical* auto-generated URL template `/detail/<id>/<service-city>.html` (one software across hundreds of domains).
@@ -41,12 +41,12 @@ The **Disavow List** and **Referring Domains** sheets show the evidence tag per 
 | **Executive Summary** | Metrics, classification result, key findings, recommendation. |
 | **Referring Domains** | All 1,169, classified: verdict, Authority Score, Dofollow/Nofollow counts, IP, **Spam evidence**, reason. Colour-coded, auto-filtered, frozen header. |
 | **All Backlinks** | All 3,651 links — source URL, target URL, anchor, nofollow, sitewide, verdict. |
-| **Disavow List** | The 865 domains as `domain:` entries, each with its **spam evidence**. |
+| **Disavow List** | The 852 domains as `domain:` entries, each with its **spam evidence**. |
 | **Local Citations Review** | Every geo-anchor link with on-farm flag + example anchor/target for human review. |
 | **Anchor Analysis / Toxic Clusters / Methodology** | Anchor spam flags · PBN farms by IP · scoring rubric + nofollow/evidence policy. |
 
 ### 2. `MasterLawn_Disavow.xlsx` (+ `disavow_masterlawn.txt`)
-Standalone disavow — 865 `domain:` entries with evidence + a README with submission steps. `disavow_masterlawn.txt` is the Google-format file. **Status: QA-PENDING** until false-positive sweep + client sign-off.
+Standalone disavow — 852 `domain:` entries with evidence + a README with submission steps. `disavow_masterlawn.txt` is the Google-format file. **Status: QA-PENDING** until false-positive sweep + client sign-off.
 
 ### 3. `MasterLawn_Baseline_Benchmark.xlsx`
 KPI tiles + Semrush metrics (AS 23, traffic 2,391/mo), toxicity split, Local Keyword Set, Change Log.
