@@ -22,8 +22,8 @@ def build():
     wb = Workbook()
     ws = wb.active; ws.title = "Disavow List"
     ws.sheet_view.showGridLines = False
-    cols = ["#", "Disavow entry", "Referring domain", "Authority Score", "Org traffic", "Country", "Spam evidence", "Reason / notes"]
-    widths = [5, 34, 28, 10, 10, 8, 42, 46]
+    cols = ["#", "Disavow entry", "Referring domain", "Category", "Authority Score", "Org traffic", "Country", "Spam evidence", "Reason / notes"]
+    widths = [5, 34, 28, 30, 10, 10, 8, 42, 46]
     # KPI tile band above the table
     ws.merge_cells("A1:F1")
     c = ws["A1"]; c.value = f"DISAVOW LIST — {len(toxic)} domains (QA-PENDING)"
@@ -36,9 +36,9 @@ def build():
     s.font = B.F(10, False, B.INK_SOFT, italic=True); s.alignment = Alignment(indent=1)
     B.header_row(ws, cols, 3, widths)
     n = 0
-    for rr in sorted(toxic, key=lambda x: (-x["tox"], x["domain"])):
+    for rr in sorted(toxic, key=lambda x: (x.get("category",""), x["domain"])):
         n += 1
-        ws.append([n, f"domain:{rr['domain']}", rr["domain"], rr["ascore"], rr.get("org_traffic",0), rr["country"], rr.get("evidence",""), rr["reason"]])
+        ws.append([n, f"domain:{rr['domain']}", rr["domain"], rr.get("category",""), rr["ascore"], rr.get("org_traffic",0), rr["country"], rr.get("evidence",""), rr["reason"]])
         if n % 2 == 0:
             for cc in range(1, len(cols) + 1):
                 if not ws.cell(row=ws.max_row, column=cc).fill.patternType:

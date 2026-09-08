@@ -46,6 +46,35 @@ def F(sz=11, b=False, color=INK, italic=False):
 def fill(hex_):
     return PatternFill("solid", fgColor=hex_)
 
+def categorize(r):
+    """Single category per referring domain, across all verdicts."""
+    d = r["domain"].lower(); ev = r.get("evidence", "").lower(); v = r["verdict"]
+    if v == "OWN":
+        return "Client / sister property"
+    if v == "TOXIC":
+        if "gambling" in ev or any(g in d for g in ["casino","poker","ufa","slot","bookie","betting"]): return "Gambling / off-topic vertical"
+        if any(t in d for t in ["seo","backlink","dofollow","pbn","guestpost","rank","aged-domain","smmprovider","hostseo","index","linkbuild"]) or "buy backlinks" in ev or "boost your da" in ev or "telegram" in ev: return "Link-selling / SEO / PBN-service"
+        if "bookmark" in d or "bookmark" in ev: return "Bookmark spam"
+        if any(t in d for t in ["article","earticle"]): return "Article-directory spam"
+        if any(t in d for t in ["director","listing","weblink","weblist","webdir","bizdir","bizlist","yellowpage","citylocal","localbiz","biglocal"]) or "auto-gen directory" in ev: return "Directory / listing spam"
+        if "injection template" in ev: return "Hacked / injected page"
+        if "duplicate hash" in ev: return "Auto-generated duplicate page"
+        if "pbn hosting farm" in ev: return "PBN network (generic)"
+        return "Other low-quality spam"
+    if v == "KEEP":
+        CIT = {"yellowpages.com","superpages.com","dexknows.com","citysquares.com","agreatertown.com","hub.biz","neustarlocaleze.biz","find-us-here.com","yplocal.us","regionaldirectory.us","bestprosintown.com","athomepros.com","birdeye.com","owler.com","pitchbook.com","rocketreach.co","theorg.com","devpost.com","enigma.com","datanyze.com","sitelike.org","hff.io","dhgate.com","alibaba.com","bing.com","yahoo.com","loginslink.com","express.co.uk","thesun.ie"}
+        if d in CIT: return "Recognized citation / platform"
+        if any(t in d for t in ["chamber","desotocountynews","olivebranchms","olivebranchmagazine","strollmag","hsvchamber","natureworldnews","anationofmoms"]): return "Local news / chamber / media"
+        if any(t in d for t in ["landscapeprofessionals","totallandscapecare","landscapeleadership","landscape.directory"]): return "Industry body (landscape)"
+        if any(t in d for t in ["lawn","landscap","turf","garden","grass","yard","mosquito","irrigat","greenhouse","plant","bloom","tree","nursery","gardening"]): return "Relevant lawn / garden site"
+        if any(t in d for t in ["home","house","renovat","decorat","contractor","build","spotless","fix"]): return "Relevant home-services site"
+        return "Other legitimate business/site"
+    # MONITOR
+    if r.get("org_traffic", 0) > 0: return "Monitor — has some traffic"
+    if r.get("dofollow_links", 0) == 0: return "Monitor — all-nofollow (GMB-safe)"
+    if any(t in d for t in ["director","listing","local","biz","find"]): return "Monitor — low-value local directory"
+    return "Monitor — signal-only / review"
+
 # ---------------- load + classify (with all QA overrides) ----------------
 def get_data():
     refs = C.load_refdomains(); bls = C.load_backlinks()
@@ -144,6 +173,8 @@ def get_data():
     for b in bls:
         rr = by.get(b["refdomain"])
         b["verdict"] = rr["verdict"] if rr else "UNMAPPED"
+    for r in refs:
+        r["category"] = categorize(r)
     return refs, bls
 
 # ---------------- helpers ----------------
@@ -351,6 +382,11 @@ def build():
     kv("MONITOR — watch, do not disavow yet", len(monitor), "B7860B")
     kv("OWN — client / sister properties", len(own), ACCENT)
     r += 1
+    section("DISAVOW (852) BY CATEGORY")
+    catc = collections.Counter(x["category"] for x in toxic)
+    for cat, nn in catc.most_common():
+        kv(cat, nn, RED)
+    r += 1
     section("KEY FINDINGS")
     bullet("~86% of referring domains are toxic — a manipulated / negative-SEO profile, not earned authority; ~90% sit at Authority Score ≤6.")
     bullet("Dominant footprint: directory/article/bookmark PBN + link-selling farms on shared IPs (64.182.x, 69.13.x, 94.46.x, 118.139.x, 159.198.75.x, 195.20.19.178).")
@@ -366,8 +402,8 @@ def build():
 
     # ============ REFERRING DOMAINS ============
     ws = wb.create_sheet("Referring Domains")
-    cols = ["#","Referring domain","Verdict","Authority Score","Org traffic","Backlinks","Dofollow","Nofollow","IP","IP shared","Country","First seen","Last seen","Spam evidence","Reason / notes"]
-    widths = [5,32,11,10,10,9,9,9,16,9,8,11,11,40,46]
+    cols = ["#","Referring domain","Verdict","Category","Authority Score","Org traffic","Backlinks","Dofollow","Nofollow","IP","IP shared","Country","First seen","Last seen","Spam evidence","Reason / notes"]
+    widths = [5,32,11,30,10,10,9,9,9,16,9,8,11,11,40,46]
     hrow = banner(ws, f"REFERRING DOMAINS — {total} analyzed & classified", len(cols),
                   "Verdict colour-coded. Sorted Toxic → Monitor → Keep → Own, then by toxicity.")
     header_row(ws, cols, hrow, widths)
@@ -375,7 +411,7 @@ def build():
     n = 0
     for rr in sorted(refs, key=lambda x:(order.get(x["verdict"],9), -x["tox"], x["domain"])):
         n += 1
-        row = [n, rr["domain"], rr["verdict"], rr["ascore"], rr.get("org_traffic", 0), rr["backlinks"],
+        row = [n, rr["domain"], rr["verdict"], rr.get("category",""), rr["ascore"], rr.get("org_traffic", 0), rr["backlinks"],
                rr.get("dofollow_links", 0), rr.get("nofollow_links", 0), rr["ip"],
                rr["ip_shared"], rr["country"], rr["first_seen"], rr["last_seen"],
                rr.get("evidence", ""), rr["reason"]]
@@ -407,16 +443,16 @@ def build():
 
     # ============ DISAVOW LIST (embedded) ============
     ws = wb.create_sheet("Disavow List")
-    cols = ["#","Disavow entry","Referring domain","Authority Score","Org traffic","Country","Spam evidence","Reason / notes"]
-    widths = [5,34,28,10,10,8,42,46]
+    cols = ["#","Disavow entry","Referring domain","Category","Authority Score","Org traffic","Country","Spam evidence","Reason / notes"]
+    widths = [5,34,28,30,10,10,8,42,46]
     hrow = banner(ws, f"DISAVOW LIST — {len(toxic)} domains (QA-PENDING)", len(cols),
-                  "Domain-level entries for Google's Disavow tool. Every row has hard spam evidence AND zero organic "
-                  "traffic (Ahrefs) — dead PBN pages, not functioning directories. Excludes KEEP/MONITOR/OWN.")
+                  "Domain-level entries for Google's Disavow tool, categorized. Every row has hard spam evidence AND zero "
+                  "organic traffic (Ahrefs) — dead PBN pages, not functioning directories. Excludes KEEP/MONITOR/OWN.")
     header_row(ws, cols, hrow, widths)
     n = 0
-    for rr in sorted(toxic, key=lambda x:(-x["tox"], x["domain"])):
+    for rr in sorted(toxic, key=lambda x:(x.get("category",""), x["domain"])):
         n += 1
-        ws.append([n, f"domain:{rr['domain']}", rr["domain"], rr["ascore"], rr.get("org_traffic",0),
+        ws.append([n, f"domain:{rr['domain']}", rr["domain"], rr.get("category",""), rr["ascore"], rr.get("org_traffic",0),
                    rr["country"], rr.get("evidence",""), rr["reason"]])
         for c in range(1, len(cols)+1):
             if n % 2 == 0 and not ws.cell(row=ws.max_row,column=c).fill.patternType:
