@@ -214,7 +214,7 @@ print("shared data loaded")
 # =====================================================================
 # TAB 0 — README & Methodology
 # =====================================================================
-ws0 = wb.create_sheet("12 README & Methodology")
+ws0 = wb.create_sheet("13 README & Methodology")
 ws0.sheet_properties.tabColor = TAB_APPENDIX
 ws0.column_dimensions["A"].width = 34
 ws0.column_dimensions["B"].width = 95
@@ -1118,9 +1118,35 @@ autosize(ws8, {"A":52,"B":40,"C":16,"D":34,"E":22,"F":10})
 print("tab8 done")
 
 # =====================================================================
-# TAB 9 — Competitor Link Detail (per-competitor refdomains, long format)
+# TAB 9 — Backlinks Review (link-level triage: Keep / Review / Disavow)
 # =====================================================================
-ws9 = wb.create_sheet("9 Competitor Link Detail")
+ws_bl = wb.create_sheet("9 Backlinks Review")
+ws_bl.cell(row=1,column=1,value="Backlinks Review: mark each flagged link Keep, Review or Disavow").font=hfont(13,True,CLR_HEADER)
+ws_bl.cell(row=2,column=1,value="Referring domains are the sites that link to the Client. Backlinks are the individual links, each with its own anchor text. Disavow is decided here at the link level from the anchor. Rows marked Disavow are collected in the ready to submit file data/disavow/disavow_nationalfosteringgroup.txt. Type your call in the last column.").font=hfont(9,False,"666666")
+blcols=["Referring_Domain","Recommended_Action","Why_Flagged","Example_Anchor","Your_Decision"]
+hb=4
+for j,c in enumerate(blcols,1): ws_bl.cell(row=hb,column=j,value=c)
+style_header_row(ws_bl,hb,len(blcols))
+blrows=read_csv(f"{DATA}/disavow/backlinks_review.csv")
+_ord={"Disavow":0,"Review":1,"Keep":2}
+blrows.sort(key=lambda x:(_ord.get(x["Recommended_Action"],3), x["Referring_Domain"]))
+r=hb+1
+for row in blrows:
+    vals=[row["Referring_Domain"],row["Recommended_Action"],row["Why_Flagged"],row["Example_Anchor"],row["Your_Decision"]]
+    for j,v in enumerate(vals,1):
+        cell=ws_bl.cell(row=r,column=j,value=v); cell.font=hfont(9); cell.border=BORDER; cell.alignment=Alignment(vertical="top",wrap_text=(j in (3,4)))
+    fill={"Disavow":"F4D9D9","Review":"F7EAD0","Keep":"DDEBDD"}.get(row["Recommended_Action"])
+    if fill: ws_bl.cell(row=r,column=2).fill=PatternFill("solid",fgColor=fill)
+    r+=1
+ws_bl.freeze_panes=f"A{hb+1}"
+ws_bl.auto_filter.ref=f"A{hb}:E{r-1}"
+autosize(ws_bl,{"A":30,"B":16,"C":34,"D":50,"E":16})
+print("tab9 backlinks review done", r-hb-1, "rows")
+
+# =====================================================================
+# TAB 10 — Competitor Link Detail (per-competitor refdomains, long format)
+# =====================================================================
+ws9 = wb.create_sheet("10 Competitor Link Detail")
 ws9.sheet_properties.tabColor = TAB_ANALYST
 COMPS = {"capstonefostercare.co.uk":"capstonefostercare","compassfostering.com":"compassfostering",
  "fosteringpeople.co.uk":"fosteringpeople","fosterplus.co.uk":"fosterplus","ispfostering.org.uk":"ispfostering",
@@ -1169,7 +1195,7 @@ print("tab9 done", d9e-d9s+1, "link rows")
 # =====================================================================
 # TAB 10 — Priority Target List (cross-tab roll-up)
 # =====================================================================
-ws10 = wb.create_sheet("10 Priority Target List")
+ws10 = wb.create_sheet("11 Priority Target List")
 ws10.sheet_properties.tabColor = TAB_ROLLUP
 ws10.cell(row=1,column=1,value="PRIORITY TARGET LIST — curated Month-2+ action queue, grouped by action type (backlink outreach, content-for-keyword, regional push, disavow). No composite score: backlink items are ordered by Semrush Authority Score, keyword items by search volume.").font=hfont(10,True,CLR_HEADER)
 ws10.merge_cells(start_row=1,start_column=1,end_row=1,end_column=10)
@@ -1254,7 +1280,7 @@ print("tab10 done", d10e-d10s+1, "actions")
 # =====================================================================
 # TAB 11 — Data Dictionary & Raw Exports
 # =====================================================================
-ws11 = wb.create_sheet("11 Data Dictionary & Raw")
+ws11 = wb.create_sheet("12 Data Dictionary & Raw")
 ws11.sheet_properties.tabColor = TAB_APPENDIX
 ws11.cell(row=1,column=1,value="Data Dictionary & Raw Exports — column definitions, source attribution, file index, changelog").font=hfont(13,True,CLR_HEADER)
 r=3
@@ -1340,8 +1366,8 @@ print("tab11 done", len(files), "files indexed")
 # =====================================================================
 order_names=["1 Executive Scorecard","2 Competitor Benchmark",
  "3 NFG Backlink Profile","4 NFG Keyword Profile","5 Backlink Gap Targets","6 Keyword Gap",
- "7 Regional Whitespace Map","8 Anchors & Toxicity","9 Competitor Link Detail",
- "10 Priority Target List","11 Data Dictionary & Raw","12 README & Methodology"]
+ "7 Regional Whitespace Map","8 Anchors & Toxicity","9 Backlinks Review","10 Competitor Link Detail",
+ "11 Priority Target List","12 Data Dictionary & Raw","13 README & Methodology"]
 wb._sheets.sort(key=lambda s: order_names.index(s.title))
 # final pass: strip em/en dashes, arrows and prose hyphens from every string cell
 sanitize_workbook(wb)
