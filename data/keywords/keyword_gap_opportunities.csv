@@ -1,0 +1,36 @@
+Rank;OpportunityScore;Keyword;Volume;KD;Intent;NFG_Pos(0=absent);BestRival;BestRivalPos;RivalDensity;Cluster;QuickWin
+1;1.592;ehcp meaning;12100;info;21;0;isp;39;1;SEND/eligibility;0
+2;0.904;playtime therapy;3600;info;11;0;thefca;28;1;therapeutic;0
+3;0.699;ehcp plan;8100;info;32;0;isp;14;1;SEND/eligibility;0
+4;0.667;fetal alcohol syndrome;18100;info;75;0;thefca;13;1;FASD/health;0
+5;0.547;foetal alcohol syndrome;8100;info;47;0;thefca;15;2;FASD/health;0
+6;0.534;foster carer pay;1000;comm;15;11;capstone;13;4;allowance/pay;1
+7;0.469;fostering near me;590;trans;12;14;fosterplus;52;2;regional/money;1
+8;0.401;what is ehcp;2900;info;20;0;isp;69;1;SEND/eligibility;0
+9;0.382;autism in girls;5400;info;39;0;thefca;8;1;autism/health;0
+10;0.364;kinship;5400;info;41;0;compass;39;1;kinship;0
+11;0.353;fostering books;1000;info;9;0;capstone;3;2;informational;0
+12;0.336;foster payments;880;comm;21;14;capstone;17;4;allowance/pay;1
+13;0.318;care leaver meaning;1600;info;16;0;capstone;13;2;eligibility/care;0
+14;0.288;ehcps;2400;info;23;0;isp;8;1;SEND/eligibility;0
+15;0.286;what is an ehcp;2900;info;28;0;isp;63;1;SEND/eligibility;0
+16;0.282;what is a care leaver;1600;info;18;0;capstone;17;2;eligibility/care;0
+17;0.279;fostering allowance;1600;info;23;11;fosteringpeople;6;4;allowance/pay;1
+18;0.267;kinship care;2900;info;39;0;thefosteringnetwork;8;3;kinship;0
+19;0.201;ehc plan;2400;info;33;0;isp;10;1;SEND/eligibility;0
+20;0.173;pace training;1000;info;16;0;compass;31;1;attachment/therapeutic;0
+21;0.17;ehc;2400;info;39;0;isp;5;1;SEND/eligibility;0
+22;0.166;disorganised attachment style;2400;info;40;0;compass;4;1;attachment/therapeutic;0
+23;0.147;kinship carer;1300;info;28;0;capstone;27;2;kinship;0
+24;0.146;disorganised attachment;1900;info;36;0;compass;5;1;attachment/therapeutic;0
+25;0.142;fasd symptoms;2900;info;65;0;thefca;17;2;FASD/health;0
+26;0.141;care leaver;1600;info;36;0;capstone;21;2;eligibility/care;0
+27;0.116;what is kinship care;880;info;24;0;capstone;10;2;kinship;0
+28;0.075;online grooming;1000;info;37;0;compass;55;1;safeguarding/info;0
+29;0.074;private fostering;720;info;27;0;capstone;72;1;eligibility/care;0
+30;0.069;foster carers;720;nav;50;17;capstone;40;2;money(brand-ish);1
+31;0.066;kinship carers;880;info;37;0;compass;48;1;kinship;0
+32;0.059;attachment types;1000;info;47;0;compass;6;1;attachment/therapeutic;0
+33;0.056;what is kinship placement;590;info;29;0;capstone;3;1;kinship;0
+34;0.046;special education needs;720;info;43;0;isp;13;1;SEND/eligibility;0
+35;0.027;kinship allowance;260;info;27;0;capstone;99;1;allowance;0
