@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build NFG Month-1 Foundation Audit 12-tab workbook from collected CSVs."""
-import csv, os, glob
+import csv, os, glob, re
 from datetime import datetime, timezone
 from collections import Counter, defaultdict
 import openpyxl
@@ -94,6 +94,56 @@ def flag_cell(cell, level, text):
     cell.value = text
     cell.fill = PatternFill("solid", fgColor=fg)
     cell.font = hfont(10, False, tx)
+
+CLR_BAND = "F6F2FB"  # very light purple banding for alternate rows
+def band_rows(ws, first, last, ncols, height=19, fill=CLR_BAND):
+    """Light banding on alternate rows + a readable row height. Skips cells that
+    already carry a solid fill (accent/flag cells) so they are not overwritten."""
+    for row in range(first, last + 1):
+        ws.row_dimensions[row].height = height
+        if (row - first) % 2 == 1:
+            for c in range(1, ncols + 1):
+                cell = ws.cell(row=row, column=c)
+                if cell.fill is None or cell.fill.patternType is None:
+                    cell.fill = PatternFill("solid", fgColor=fill)
+
+# ---------- punctuation sanitiser: strip em/en dashes, arrows and numeric-range
+# hyphens from PROSE, while preserving hyphens inside domains, URLs, ISO dates and
+# real data cells. Runs as a final pass over every string cell before save. ----------
+_ISO   = re.compile(r"\d{4}-\d{2}-\d{2}")
+_MONY  = re.compile(r"\b[A-Za-z]{3,9}-\d{4}\b")          # Feb-2026, January-2026
+_YM    = re.compile(r"\b\d{4}-\d{2}\b")                   # 2026-02
+_DOTTOK = re.compile(r"[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9-]+)+")  # domains, IPs, decimals
+def _sanitize_text(s):
+    if not isinstance(s, str) or not s:
+        return s
+    if "://" in s or s.startswith("www."):
+        return s  # URL cell: leave hyphens/dashes untouched
+    store = []
+    def stash(m):
+        store.append(m.group(0)); return "\x00%d\x00" % (len(store) - 1)
+    for rx in (_ISO, _MONY, _YM, _DOTTOK):
+        s = rx.sub(stash, s)
+    # em / en / horizontal-bar dashes -> comma
+    for d in ("—", "–", "―", "‒", "−"):
+        s = s.replace(" %s " % d, ", ").replace(d, ", ")
+    # arrows -> the word "to"
+    s = re.sub(r"\s*->\s*", " to ", s)
+    # numeric-range hyphens (0-10, 11-30, 50-75%) -> "to"
+    s = re.sub(r"(?<=\d)\s*-\s*(?=\d)", " to ", s)
+    # hyphen used as a prose separator -> comma
+    s = s.replace(" - ", ", ")
+    s = re.sub(r"\x00(\d+)\x00", lambda m: store[int(m.group(1))], s)
+    s = re.sub(r" {2,}", " ", s).replace(" ,", ",").replace(" .", ".").strip()
+    return s
+def sanitize_workbook(wb):
+    for ws in wb.worksheets:
+        for row in ws.iter_rows():
+            for cell in row:
+                if isinstance(cell.value, str):
+                    nv = _sanitize_text(cell.value)
+                    if nv != cell.value:
+                        cell.value = nv
 
 wb = openpyxl.Workbook()
 wb.remove(wb.active)
