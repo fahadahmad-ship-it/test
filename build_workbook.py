@@ -226,6 +226,10 @@ with open(f"{DATA}/disavow/disavow_nationalfosteringgroup.txt", encoding="utf-8"
         if _line.startswith("domain:"):
             DISAVOW_DOMS.add(_line.split(":", 1)[1].strip().lower())
 
+# the Client's own and redirected domains (National Fostering Agency nfa.co.uk redirects to
+# nationalfosteringgroup.co.uk; the others are group-owned brands) — never external spam, always Keep
+OWN_DOMS = {"nfa.co.uk","nationalfosteringgroup.co.uk","reachoutcare.co.uk","familyplacement.com"}
+
 # registrable-domain helper (eTLD+1, small public-suffix table)
 _TWO_LEVEL = {"co.uk","org.uk","gov.uk","sch.uk","me.uk","ltd.uk","plc.uk","net.uk","ac.uk",
  "nhs.uk","com.au","net.au","org.au","com.bz","com.lc","co.za","co.in","org.in","co.com",
@@ -256,21 +260,21 @@ _DIR_MARK = ["papasearch","pagesearch","loginslink","ranksdirectory","directory"
 def classify_link(anchor, source_url, page_as, nofollow):
     a = (anchor or "").lower()
     host = src_host(source_url); root = reg_domain(source_url)
-    if any(p in a for p in _DIS_ANCHOR):
-        return "Disavow"
-    if root in DISAVOW_DOMS or host in DISAVOW_DOMS:
-        return "Disavow"
-    if any(host.endswith(t) for t in _PARK_TLD):
-        return "Disavow"
-    if any(k in host for k in _DIS_DOMKW):
-        return "Disavow"
-    if "/domain/domain/part" in (source_url or "").lower():
-        return "Disavow"
-    if any(host.endswith(t) for t in _SHORT_TLD) and re.search(r"/(stats|share|report|domain)/", (source_url or "").lower()):
-        return "Disavow"
+    # the Client's own / redirected domain (e.g. nfa.co.uk) is never spam
+    if root in OWN_DOMS or host in OWN_DOMS:
+        return "Keep"
+    is_spam = (any(p in a for p in _DIS_ANCHOR)
+        or root in DISAVOW_DOMS or host in DISAVOW_DOMS
+        or any(host.endswith(t) for t in _PARK_TLD)
+        or any(k in host for k in _DIS_DOMKW)
+        or "/domain/domain/part" in (source_url or "").lower()
+        or (any(host.endswith(t) for t in _SHORT_TLD)
+            and re.search(r"/(stats|share|report|domain)/", (source_url or "").lower())))
+    if is_spam:
+        # only a dofollow spam link passes equity and is worth disavowing;
+        # a nofollow link passes no equity, so it is a review note, never a disavow
+        return "Review" if nofollow else "Disavow"
     if page_as is not None and page_as <= 2 and any(m in host for m in _DIR_MARK):
-        return "Review"
-    if nofollow and page_as is not None and page_as <= 1 and any(m in host for m in _DIR_MARK):
         return "Review"
     return "Keep"
 
@@ -308,12 +312,10 @@ for p in POOLED:
 
 def classify_domain(domain, as_val):
     d = domain.lower()
-    if d in DISAVOW_DOMS:
-        return "Disavow"
-    if any(d.endswith(t) for t in _PARK_TLD):
-        return "Disavow"
-    if any(k in d for k in _DIS_DOMKW):
-        return "Disavow"
+    # the Client's own / redirected domain (e.g. nfa.co.uk) is always Keep, never disavowed
+    if d in OWN_DOMS:
+        return "Keep"
+    # domain action follows its links, which already downgrade nofollow spam to Review
     dis, rev, keep = DOM_LINKS.get(d, [0,0,0])
     tot = dis + rev + keep
     if dis > 0 and (dis >= keep or tot <= 2):

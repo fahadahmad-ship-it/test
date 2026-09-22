@@ -1,14 +1,13 @@
 # Disavow file for nationalfosteringgroup.co.uk
 # Prepared by SUSO Digital. Semrush backlink data, snapshot 2026-09-22.
-# Basis: link-level anchor analysis. These referring domains send links whose
-# anchor text is explicit link-selling / PBN spam, for example:
-#   "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service
-#    nationalfosteringgroup.co.uk ... Buy Backlinks Online Cheap"
-#   "Professional Manual Outreach Backlinks for nationalfosteringgroup.co.uk ..."
-# These are casino, pharma and SEO-farm domains, part of the Feb 2026 link spike.
+# Basis: DOFOLLOW links only (nofollow links pass no equity and are not disavowed).
+# Each domain sends a dofollow link whose anchor is explicit link-selling / PBN spam
+# (buy backlinks, premium PBN network, seo authority backlinks) or is a known SEO farm.
+# The Client's own / redirected domains (nfa.co.uk etc.) are excluded.
 # Review before submitting to Google Search Console. domain: disavows the whole site.
 domain:aloysionunes.com
 domain:archive-hu.com
+domain:australianwebdirectory.shop
 domain:bazerdaily.com
 domain:bestirishcasinoonline.online
 domain:bestnz-poker-casinoslot.com
@@ -16,46 +15,71 @@ domain:bestonlinecasinogamescanada.online
 domain:bestonlinecasinomexico.online
 domain:betulcrime.com
 domain:betwinnermirror.com
+domain:bitproperty.online
 domain:blogerreviewers.com
 domain:breachviews.com
+domain:brilko.shop
+domain:brinto.shop
+domain:bripto.shop
+domain:canadapsilocybin.com
 domain:canlisohbethatlari.online
+domain:cartermanageus.com
 domain:casinoonlinecrazytime.online
 domain:casinopopular.online
 domain:cgpa2percentag.com
 domain:chordmp3.net
+domain:cinto.shop
 domain:clifflisting.com
 domain:coruzants.com
+domain:crinto.shop
+domain:cvillico.com
 domain:daechul.co.com
 domain:digitalchatni.com
 domain:doxycycline100mg.store
+domain:drumio.shop
 domain:dupurgeniefr.com
 domain:exotichealths.com
 domain:fashionclothingnews.com
 domain:fastlifesite.com
 domain:fioro.shop
 domain:firstguestpost.com
+domain:flenro.shop
+domain:florta.shop
+domain:forvi.shop
+domain:fralto.shop
 domain:ggmap.co.com
 domain:ggmap.us.com
 domain:gladeflowers.com
+domain:heavenarticle.com
 domain:homesforsaleoldgreenwichct.com
 domain:hotonlinegaming.com
 domain:juaralaundry.com
+domain:juvex.shop
+domain:kingranks.com
+domain:kkinsider.com
 domain:krito.shop
 domain:lawyerinjeddah.com
+domain:lemvi.shop
 domain:libyanatravel.com
 domain:luminko.shop
 domain:lydiaroyrealestate.com
 domain:m98ufa.com
 domain:marinasone.com
 domain:masihnyata.com
+domain:matrivo.shop
 domain:mediaboooster.com
 domain:mertio.shop
 domain:mervi.shop
 domain:missburrg.com
+domain:murvi.shop
+domain:murvix.shop
 domain:mylisthero.com
 domain:mymarketpost.com
 domain:newblogerseo.com
+domain:nimbra.shop
 domain:nimpa.shop
+domain:ninko.shop
+domain:nivira.shop
 domain:nokvio.shop
 domain:onlinegamblingbonus.online
 domain:onlineshoppingidea.com
@@ -64,14 +88,18 @@ domain:orplio.shop
 domain:pamto.shop
 domain:partio.shop
 domain:phanerosart.com
+domain:plavo.shop
+domain:plenko.shop
 domain:plrdownloadshub.com
 domain:plumeriamarketing.com
+domain:plurio.shop
 domain:primenewsartical.com
 domain:quotesblom.com
 domain:rdxextremez.com
 domain:realwinningonlinecasino.online
 domain:royaldb.us.com
 domain:sahammurah.com
+domain:sapphirevpn.net
 domain:sidarma88gacor.shop
 domain:sisusan88ax.shop
 domain:smartstimer.com
@@ -82,5 +110,8 @@ domain:theforbestimes.com
 domain:themicrodigits.com
 domain:tokyopush188.online
 domain:top5casino.online
+domain:toponlinegamblingcasinos.online
 domain:ufabettererm4.com
+domain:uncledspizza.com
+domain:units cost row
 domain:wecelebrities.com
