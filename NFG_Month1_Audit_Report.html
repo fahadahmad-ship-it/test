@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>National Fostering Group: Search Visibility Findings</title>
+<title>National Fostering Group: Off Site SEO Audit</title>
 <style>
   :root{
     color-scheme: light;
@@ -50,16 +50,40 @@
   .topbar .row{display:flex; align-items:center; gap:16px; height:56px}
   .brand{font-weight:700; letter-spacing:0.02em; font-size:15px}
   .brand .dot{color:var(--accent)}
-  .topnav{display:none; gap:18px; margin-left:auto; font-size:13.5px; color:var(--ink-2)}
-  .topnav a{color:var(--ink-2)}
-  .topnav a:hover{color:var(--accent)}
+  .topbar-tag{display:none; margin-left:14px; font-size:12.5px; letter-spacing:0.04em; color:var(--muted); font-weight:600}
+  @media(min-width:620px){ .topbar-tag{display:inline} }
   .toggle{
     margin-left:auto; border:1px solid var(--border); background:var(--surface);
     color:var(--ink-2); border-radius:999px; padding:7px 14px; cursor:pointer;
     font-size:13px; font-family:inherit; display:flex; align-items:center; gap:7px;
   }
   .toggle:hover{color:var(--accent); border-color:var(--accent)}
-  @media(min-width:900px){ .topnav{display:flex} .toggle{margin-left:0} }
+
+  /* tab bar */
+  .tabbar{
+    position:sticky; top:56px; z-index:30;
+    background:color-mix(in srgb, var(--page) 90%, transparent);
+    backdrop-filter:saturate(1.2) blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .tablist{display:flex; gap:6px; overflow-x:auto; padding:9px 0; scrollbar-width:none; -ms-overflow-style:none}
+  .tablist::-webkit-scrollbar{display:none}
+  .tab{
+    display:inline-flex; align-items:center; gap:8px; white-space:nowrap;
+    border:1px solid transparent; background:transparent; color:var(--ink-2);
+    font-family:inherit; font-size:14.5px; font-weight:600; letter-spacing:-0.005em;
+    padding:9px 16px; border-radius:999px; cursor:pointer; transition:background .12s,color .12s;
+  }
+  .tab .tnum{font-size:11px; font-weight:800; color:var(--muted); font-variant-numeric:tabular-nums}
+  .tab:hover{color:var(--accent); background:var(--surface)}
+  .tab[aria-selected="true"]{background:var(--accent-soft); color:var(--accent); border-color:var(--border)}
+  .tab[aria-selected="true"] .tnum{color:var(--accent)}
+  .tab:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+  /* panels: one visible at a time */
+  .tabpanel{display:none; border-top:none}
+  .tabpanel.active{display:block; animation:fade .22s ease}
+  @keyframes fade{from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:none}}
 
   /* hero */
   .hero{padding:76px 0 40px}
@@ -141,7 +165,8 @@
   .bar-mark{cursor:pointer}
   .bar-mark:hover{filter:brightness(1.06)}
   @media print{
-    .topbar,.toggle,#tip{display:none}
+    .topbar,.tabbar,.toggle,#tip{display:none}
+    .tabpanel{display:block !important; border-top:1px solid var(--border)}
     section,figure{break-inside:avoid}
     body{font-size:12pt}
   }
@@ -152,14 +177,7 @@
 <div class="topbar">
   <div class="wrap row">
     <div class="brand">SUSO<span class="dot">.</span>DIGITAL</div>
-    <nav class="topnav">
-      <a href="#glance">At a glance</a>
-      <a href="#backlinks">Backlinks</a>
-      <a href="#keywords">Search terms</a>
-      <a href="#regions">Regions</a>
-      <a href="#compare">Comparison</a>
-      <a href="#next">What next</a>
-    </nav>
+    <span class="topbar-tag">Off site SEO audit</span>
     <button class="toggle" id="themeBtn" aria-label="Switch colour theme">
       <span id="themeIcon">&#9789;</span><span id="themeTxt">Dark</span>
     </button>
@@ -167,16 +185,29 @@
 </div>
 
 <header class="hero wrap">
-  <span class="eyebrow">National Fostering Group &middot; Month 1 Foundation Audit</span>
-  <h1>Your search visibility, and what to do next.</h1>
-  <p class="stand">A plain reading of where the Client stands in organic search: what the numbers say, why the backlink base is the real constraint, and the four moves that compound fastest in the next phase.</p>
+  <span class="eyebrow">National Fostering Group &middot; Month 1 off site SEO audit</span>
+  <h1>Your off site SEO audit, and what to do next.</h1>
+  <p class="stand">This is an off site, or off page, SEO audit for the Client: the backlink profile, the competitor link gap and referring domains, plus the keyword and search term gap that guides link building and content targeting. Here is where the Client stands, and the four moves that compound fastest next.</p>
   <div class="srcline">Findings drawn from a Semrush snapshot taken on 22 September 2026, UK market, across National Fostering Group and its nine closest competitors.</div>
 </header>
 
-<main>
+<div class="tabbar">
+  <div class="wrap">
+    <div class="tablist" role="tablist" aria-label="Audit sections">
+      <button class="tab" role="tab" id="tab-glance"    aria-controls="glance"    aria-selected="true"><span class="tnum">01</span>At a glance</button>
+      <button class="tab" role="tab" id="tab-backlinks" aria-controls="backlinks" aria-selected="false"><span class="tnum">02</span>Backlinks</button>
+      <button class="tab" role="tab" id="tab-keywords"  aria-controls="keywords"  aria-selected="false"><span class="tnum">03</span>Search terms</button>
+      <button class="tab" role="tab" id="tab-regions"   aria-controls="regions"   aria-selected="false"><span class="tnum">04</span>Regions</button>
+      <button class="tab" role="tab" id="tab-compare"   aria-controls="compare"   aria-selected="false"><span class="tnum">05</span>Comparison</button>
+      <button class="tab" role="tab" id="tab-next"      aria-controls="next"      aria-selected="false"><span class="tnum">06</span>What next</button>
+    </div>
+  </div>
+</div>
+
+<main id="panels">
 
 <!-- 1. SITUATION AT A GLANCE -->
-<section id="glance" class="wrap">
+<section id="glance" class="wrap tabpanel active" role="tabpanel" aria-labelledby="tab-glance" tabindex="0">
   <p class="kicker">01 &middot; Situation at a glance</p>
   <h2>Strong on the page, thin off the page.</h2>
   <p class="lead">The Client punches well above its weight on the searches that bring in enquiries. The catch sits underneath: the link base that search engines use to judge trust is small and very new. Here are the four headline numbers, each with how the Client places among the ten fostering websites we benchmarked.</p>
@@ -211,7 +242,7 @@
 </section>
 
 <!-- 2. BACKLINKS -->
-<section id="backlinks" class="wrap">
+<section id="backlinks" class="wrap tabpanel" role="tabpanel" aria-labelledby="tab-backlinks" tabindex="0">
   <p class="kicker">02 &middot; The link base</p>
   <h2>A young and risky backlink profile.</h2>
   <p class="lead">A healthy link profile grows steadily over years and leans on trusted, relevant sites. The Client's did neither. It was flat for years, then jumped almost vertically, and much of what arrived carries the fingerprints of bought links.</p>
@@ -262,7 +293,7 @@
 </section>
 
 <!-- 3. KEYWORDS -->
-<section id="keywords" class="wrap">
+<section id="keywords" class="wrap tabpanel" role="tabpanel" aria-labelledby="tab-keywords" tabindex="0">
   <p class="kicker">03 &middot; The search terms</p>
   <h2>The Client already wins the commercial searches.</h2>
   <p class="lead">On the terms that turn into enquiries, the money terms, the Client is already strong. The real opening is elsewhere: high volume informational searches where the Client does not appear at all, but competitors do.</p>
@@ -299,7 +330,7 @@
 </section>
 
 <!-- 4. REGIONS -->
-<section id="regions" class="wrap">
+<section id="regions" class="wrap tabpanel" role="tabpanel" aria-labelledby="tab-regions" tabindex="0">
   <p class="kicker">04 &middot; The regional map</p>
   <h2>Where the Client is invisible: the regions.</h2>
   <p class="lead">Fostering demand is deeply local, and links from local news, councils and universities carry real weight. The Client is strong in a couple of regions and absent in others that competitors have already proven reachable, including places the Client genuinely operates.</p>
@@ -335,7 +366,7 @@
 </section>
 
 <!-- 5. COMPARISON -->
-<section id="compare" class="wrap">
+<section id="compare" class="wrap tabpanel" role="tabpanel" aria-labelledby="tab-compare" tabindex="0">
   <p class="kicker">05 &middot; The competitive field</p>
   <h2>How the Client compares.</h2>
   <p class="lead">The same ten fostering websites, ranked on the four measures that matter. The Client, shown in indigo, is top tier on three of them and last but one on the fourth. That fourth measure, referring domains, is the whole story in one picture.</p>
@@ -367,7 +398,7 @@
 </section>
 
 <!-- 6. WHAT NEXT -->
-<section id="next" class="wrap closing">
+<section id="next" class="wrap closing tabpanel" role="tabpanel" aria-labelledby="tab-next" tabindex="0">
   <p class="kicker">06 &middot; The plan</p>
   <h2>What the next phase should focus on.</h2>
   <p class="lead">Four moves follow directly from the findings. They are sequenced so the defensive clean up protects the base while the growth work builds on it. Together they turn a fragile, narrow profile into a durable one.</p>
@@ -423,6 +454,36 @@
     apply(root.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
     render();
   });
+})();
+
+/* ---------- tabs (one panel visible at a time) ---------- */
+(function(){
+  var tabs=Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var panels=document.getElementById('panels');
+  function activate(tab, doScroll){
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', t===tab ? 'true' : 'false'); });
+    var id=tab.getAttribute('aria-controls');
+    Array.prototype.slice.call(panels.children).forEach(function(sec){
+      if(sec.classList && sec.classList.contains('tabpanel')){
+        sec.classList.toggle('active', sec.id===id);
+      }
+    });
+    if(doScroll){
+      var top=panels.getBoundingClientRect().top + window.pageYOffset - 96;
+      if(window.pageYOffset > top){ window.scrollTo({top:top, behavior:'smooth'}); }
+    }
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click', function(){ activate(t, true); });
+    t.addEventListener('keydown', function(e){
+      var idx=i;
+      if(e.key==='ArrowRight'){ idx=(i+1)%tabs.length; }
+      else if(e.key==='ArrowLeft'){ idx=(i-1+tabs.length)%tabs.length; }
+      else { return; }
+      e.preventDefault(); tabs[idx].focus(); activate(tabs[idx], false);
+    });
+  });
+  window.__activateTab=activate; window.__tabs=tabs; /* test hook */
 })();
 
 /* ---------- helpers ---------- */
