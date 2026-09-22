@@ -1105,6 +1105,8 @@ ws9.merge_cells(start_row=1,start_column=1,end_row=1,end_column=len(cols9))
 hrow9=2
 for j,c in enumerate(cols9,1): ws9.cell(row=hrow9,column=j,value=c)
 style_header_row(ws9,hrow9,len(cols9))
+# Semrush Authority Score fetched for Ahrefs-sourced domains that Semrush's refdomains pull missed
+as_lookup={x["domain"].lower():int(x["ascore"]) for x in read_csv(f"{DATA}/gap/ahrefs_as_lookup.csv")}
 r=hrow9+1; d9s=r
 for dom,slug in COMPS.items():
     # SR (Ahrefs data still pooled silently for the AH-only rows below; DR never shown)
@@ -1122,7 +1124,7 @@ for dom,slug in COMPS.items():
     sr_set=set(x["Referring_Domain"].lower() for x in srrows)
     for rd_l,a in ah.items():
         if rd_l not in sr_set:
-            vals=[dom,a["Referring_Domain"],None,num(a["Links_to_Target"],None),a.get("First_Seen",""),"","","YES" if rd_l in nfg_own else ""]
+            vals=[dom,a["Referring_Domain"],as_lookup.get(rd_l),num(a["Links_to_Target"],None),a.get("First_Seen",""),"","","YES" if rd_l in nfg_own else ""]
             for j,v in enumerate(vals,1):
                 cell=ws9.cell(row=r,column=j,value=v); cell.font=hfont(9); cell.border=BORDER
                 if j==4: cell.number_format="#,##0"
