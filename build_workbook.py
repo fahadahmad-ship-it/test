@@ -169,7 +169,7 @@ def toxic_tail(dom):
     return tox / tot if tot else 0
 TOX = {d: toxic_tail(d) for d in ascore_files}
 
-TAGS = {NFG: "NFG (Target)", "thefca.co.uk": "Sector Body",
+TAGS = {NFG: "NFG (Client)", "thefca.co.uk": "Sector Body",
         "thefosteringnetwork.org.uk": "Sector Body", "capstonefostercare.co.uk": "Commercial IFA",
         "ispfostering.org.uk": "Commercial IFA", "fosterplus.co.uk": "Commercial IFA",
         "fosteringpeople.co.uk": "Commercial IFA", "swiisfostercare.com": "Commercial IFA",
@@ -192,7 +192,7 @@ def kv(ws, row, k, v, kfill=CLR_SUB, kbold=True):
     return row + 1
 t = ws0.cell(row=r, column=1, value="NFG Month-1 Foundation Audit — README & Methodology"); t.font = hfont(15, True, CLR_HEADER); r += 1
 ws0.cell(row=r, column=1, value="Off-site competitor analysis · Backlink-gap target list · Keyword analysis").font = hfont(10, False, "666666"); r += 2
-r = kv(ws0, r, "Client (target)", "National Fostering Group — nationalfosteringgroup.co.uk (NFG)")
+r = kv(ws0, r, "Client", "National Fostering Group, nationalfosteringgroup.co.uk (NFG)")
 r = kv(ws0, r, "Agency", "SUSO Digital")
 r = kv(ws0, r, "Snapshot date", SNAP + "  (single dated window; referenced by every tab header)")
 r = kv(ws0, r, "Database / region", "UK")
@@ -249,7 +249,8 @@ for cav in caveats:
     ws0.row_dimensions[r].height = 28; r += 1
 r += 1
 r = kv(ws0, r, "SUSO contact & sign-off", "Prepared by SUSO Digital SEO team · fahad.ahmad@susodigital.com · Sign-off: ____________  Date: __________")
-r = kv(ws0, r, "Legend", "NFG rows/columns carry the purple accent. Flags are RED/AMBER/GREEN paired with text. SR=Semrush, AH=Ahrefs, Pooled=AH+SR list SR-scored.")
+r = kv(ws0, r, "Legend", "NFG (Client) rows/columns carry the purple accent. Flags are RED/AMBER/GREEN paired with text. All reported metrics are Semrush; Ahrefs is used only to widen the pooled lists behind the scenes and is not exposed as a column.")
+ws0.freeze_panes = "A2"
 print("tab0 done")
 
 # =====================================================================
@@ -257,14 +258,25 @@ print("tab0 done")
 # =====================================================================
 ws2 = wb.create_sheet("2 Competitor Benchmark")
 ws2.sheet_properties.tabColor = TAB_ANALYST
-cols2 = ["Domain","Tag","Is_NFG","Authority_Score","Total_Backlinks","Referring_Domains",
-         "Referring_IPs","Follow_%","Backlinks_per_RefDomain","Toxic_Tail_%","Organic_Keywords_UK",
-         "Est_Organic_Traffic_UK","Est_Traffic_Cost_GBP","Pos_1_3","Pos_11_30_QuickWin","SemrushRank",
-         "Index_AS","Index_RefDomains","Rank_AS","Rank_RefDomains","Composite_Strength","Snapshot_Date"]
-title = ws2.cell(row=1, column=1, value=f"Competitor Benchmark — 10 domains, one Semrush snapshot {SNAP} (UK). Source: backlinks_comparison + benchmark_keywords. NFG row = purple accent.")
+# FIX: Organic Traffic (UK) promoted to an early column beside Authority Score and
+# Referring Domains; analyst-plumbing (Index_*/Rank_*/Composite) moved to the far right;
+# "Is_NFG" replaced by a plain-English "Role" (Client / Competitor).
+cols2 = ["Domain","Tag","Role","Authority_Score","Referring_Domains","Est_Organic_Traffic_UK",
+         "Organic_Keywords_UK","Est_Traffic_Cost_GBP","Total_Backlinks","Referring_IPs","Follow_%",
+         "Backlinks_per_RefDomain","Toxic_Tail_%","Pos_1_3","Pos_11_30_QuickWin","SemrushRank",
+         "Composite_Strength","Rank_AS","Rank_RefDomains","Index_AS","Index_RefDomains","Snapshot_Date"]
+DISP2 = {"Domain":"Domain","Tag":"Segment","Role":"Role","Authority_Score":"Authority Score (Semrush)",
+ "Referring_Domains":"Referring Domains","Est_Organic_Traffic_UK":"Organic Traffic (UK)",
+ "Organic_Keywords_UK":"Organic Keywords (UK)","Est_Traffic_Cost_GBP":"Est Traffic Cost (GBP)",
+ "Total_Backlinks":"Total Backlinks","Referring_IPs":"Referring IPs","Follow_%":"Follow %",
+ "Backlinks_per_RefDomain":"Backlinks per Ref Domain","Toxic_Tail_%":"Toxic Tail %",
+ "Pos_1_3":"Positions 1 to 3","Pos_11_30_QuickWin":"Positions 11 to 30 (quick win)","SemrushRank":"Semrush Rank",
+ "Composite_Strength":"Composite Strength","Rank_AS":"Rank by Authority Score","Rank_RefDomains":"Rank by Referring Domains",
+ "Index_AS":"Authority index (100 = median)","Index_RefDomains":"Ref domains index (100 = median)","Snapshot_Date":"Snapshot Date"}
+title = ws2.cell(row=1, column=1, value=f"Competitor Benchmark: NFG (the Client) and 9 competitors on one Semrush snapshot ({SNAP}, UK). The Client row carries the purple accent.")
 title.font = hfont(10, True, CLR_HEADER); ws2.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(cols2))
 for j, c in enumerate(cols2, 1):
-    ws2.cell(row=2, column=j, value=c)
+    ws2.cell(row=2, column=j, value=DISP2.get(c, c))
 style_header_row(ws2, 2, len(cols2))
 # order: NFG first then by AS desc
 blmap = {r["target"]: r for r in bench_bl}
@@ -277,7 +289,7 @@ for dom in order:
     follows = int(b["follows_num"]); nofollows = int(b["nofollows_num"])
     cost_usd = num(k.get("OrganicTrafficCost_USD"))
     vals = {
-        "Domain": dom, "Tag": TAGS[dom], "Is_NFG": "YES" if dom == NFG else "no",
+        "Domain": dom, "Tag": TAGS[dom], "Role": "Client" if dom == NFG else "Competitor",
         "Authority_Score": int(b["ascore"]), "Total_Backlinks": int(b["backlinks_num"]),
         "Referring_Domains": int(b["domains_num"]), "Referring_IPs": int(b["ips_num"]),
         "Backlinks_per_RefDomain": round(int(b["backlinks_num"]) / max(int(b["domains_num"]),1), 1),
@@ -371,9 +383,14 @@ ws2.cell(row=gnr+3, column=1, value="Capstone caveat: 127,526 backlinks / 156.9-
 ws2.merge_cells(start_row=gnr+1, start_column=1, end_row=gnr+1, end_column=len(cols2))
 ws2.merge_cells(start_row=gnr+2, start_column=1, end_row=gnr+2, end_column=len(cols2))
 ws2.merge_cells(start_row=gnr+3, start_column=1, end_row=gnr+3, end_column=len(cols2))
+band_rows(ws2, first_data, last_data, len(cols2))
 ws2.freeze_panes = "B3"
 ws2.auto_filter.ref = f"A2:{get_column_letter(len(cols2))}{last_data}"
-autosize(ws2, {"A":30,"B":15,"C":8,"D":9,"E":13,"F":11,"G":11,"H":9,"I":12,"J":11,"K":13,"L":14,"M":13,"N":8,"O":13,"P":12,"Q":9,"R":11,"S":9,"T":11,"U":12,"V":12})
+W2 = {"Domain":34,"Tag":15,"Role":13,"Authority_Score":16,"Referring_Domains":15,"Est_Organic_Traffic_UK":16,
+ "Organic_Keywords_UK":16,"Est_Traffic_Cost_GBP":16,"Total_Backlinks":14,"Referring_IPs":12,"Follow_%":10,
+ "Backlinks_per_RefDomain":16,"Toxic_Tail_%":12,"Pos_1_3":12,"Pos_11_30_QuickWin":16,"SemrushRank":12,
+ "Composite_Strength":14,"Rank_AS":16,"Rank_RefDomains":18,"Index_AS":16,"Index_RefDomains":16,"Snapshot_Date":13}
+autosize(ws2, {cL[c]: W2[c] for c in cols2})
 BENCH = {"sheet":"2 Competitor Benchmark","AScol":AScol,"RDcol":RDcol,"TBcol":cL["Total_Backlinks"],
          "KWcol":KWcol,"TRcol":TRcol,"FUcol":FUcol,"TTcol":TTcol,"first":first_data,"last":last_data,
          "nfg_row":first_data}
@@ -385,11 +402,11 @@ print("tab2 done")
 ws1 = wb.create_sheet("1 Executive Scorecard")
 ws1.sheet_properties.tabColor = TAB_EXEC
 S = f"'{BENCH['sheet']}'"; fd, ld = BENCH["first"], BENCH["last"]; nr = BENCH["nfg_row"]
-t = ws1.cell(row=1, column=1, value="Executive Scorecard — NFG vs the field (9 competitors)"); t.font = hfont(15, True, CLR_HEADER)
-ws1.cell(row=2, column=1, value=f"Semrush snapshot {SNAP} · UK · estimates, see caveats").font = hfont(9, False, "666666")
+t = ws1.cell(row=1, column=1, value="Executive Scorecard: how NFG (the Client) compares with the 9 competitors"); t.font = hfont(15, True, CLR_HEADER)
+ws1.cell(row=2, column=1, value=f"Semrush snapshot {SNAP}, UK, estimates (see caveats). Headline backlink metrics: Authority Score 36, referring domains rank 9 of 10 (gap to median minus 401.5), toxic tail 67 percent, and a February 2026 spike (see takeaways).").font = hfont(9, False, "666666")
 # KPI grid
-hdr = ["Metric","NFG Value","Field Median","Field Best","NFG Rank /10","Gap to Median","Percentile /100"]
-hrow = 4
+hdr = ["Metric","NFG (Client) value","Competitor median","Competitor best","NFG rank out of 10","Gap vs competitor median","Percentile (0 to 100)"]
+hrow = 3
 for j, c in enumerate(hdr, 1): ws1.cell(row=hrow, column=j, value=c)
 style_header_row(ws1, hrow, len(hdr))
 # FIX 2: KPI grid written as STATIC numeric values (same MEDIAN/MAX/RANK/gap/percentile math)
@@ -453,7 +470,7 @@ ws1.cell(row=tk, column=1, value="The five Month-1 takeaways (corrected — earl
 ws1.merge_cells(start_row=tk, start_column=1, end_row=tk, end_column=7); tk += 1
 takeaways = [
  ("1. BACKLINK TOXICITY is the real story", "RED",
-  "NFG's link profile is ~8 months old with a Feb-2026 spike (referring domains +512%: 24->147; backlinks +1,636%: 28->486; AS 2->10 in one month). 67% toxic tail (AS 0-10), live PBN/link-selling anchors ('buy backlinks online cheap...premium pbn network') and an IP-cluster footprint (42 domains on 2 IPs). Needs a disavow review. The 'AS 36 / rank 2-of-10' is recency-INFLATED, not earned breadth."),
+  "NFG's backlink profile was negligible, about 24 referring domains, until February 2026, then spiked (referring domains 24 to 147, +512 percent; backlinks 28 to 486, +1,636 percent; AS 2 to 10 in one month). Roughly 94 percent of its 420 referring domains were acquired in the last 8 months. Toxic tail is 67 percent (AS 0 to 10), with live PBN and link selling anchors ('buy backlinks online cheap ... premium pbn network') and an IP cluster footprint (42 domains on 2 IPs). Needs a disavow review. The 'AS 36, rank 2 of 10' is recency inflated, not earned breadth."),
  ("2. GENUINE AUTHORITY DEFICIT", "RED",
   "Referring domains rank 9/10, -401.5 below the cohort median (420 vs 821.5). Off-site breadth — not on-site — is the primary constraint. This -401.5 is the number that frames the Month-2+ deliverable."),
  ("3. KEYWORD GAP is INFORMATIONAL, not money terms", "AMBER",
@@ -476,15 +493,15 @@ cb = tk + 1
 cc = ws1.cell(row=cb, column=1, value="CAVEATS: Semrush estimates (modelled, not Google-truth); single snapshot 2026-09-22; regional classification is manual/inferential; target-quality is analyst judgment — see README tab 0 for the full box.")
 cc.font = hfont(9, False, TXT_AMBER); cc.fill = PatternFill("solid", fgColor=CLR_CAVEAT); cc.alignment = Alignment(wrap_text=True)
 ws1.merge_cells(start_row=cb, start_column=1, end_row=cb+1, end_column=7)
-autosize(ws1, {"A":44,"B":18,"C":14,"D":13,"E":13,"F":14,"G":14})
-ws1.freeze_panes = "A5"
+autosize(ws1, {"A":44,"B":18,"C":16,"D":15,"E":16,"F":20,"G":18})
+ws1.freeze_panes = "A4"
 
 # FIX 3: Exec Scorecard visuals (openpyxl charts) referencing the now-static Tab 2 cells.
 # (a) horizontal bar of all 10 domains by Composite_Strength, NFG point highlighted purple.
 CScol_idx = cols2.index("Composite_Strength") + 1
 dom_col_idx = cols2.index("Domain") + 1
-ch_a = BarChart(); ch_a.type = "bar"; ch_a.title = "Competitive strength — all 10 domains (Composite, 0-1)"
-ch_a.y_axis.title = None; ch_a.x_axis.title = "Composite_Strength"; ch_a.legend = None
+ch_a = BarChart(); ch_a.type = "bar"; ch_a.title = "Competitive strength across all 10 domains (composite, 0 to 1)"
+ch_a.y_axis.title = None; ch_a.x_axis.title = "Composite strength"; ch_a.legend = None
 data_a = Reference(ws2, min_col=CScol_idx, min_row=first_data, max_row=last_data)
 cats_a = Reference(ws2, min_col=dom_col_idx, min_row=first_data, max_row=last_data)
 ch_a.add_data(data_a, titles_from_data=False)
@@ -503,9 +520,9 @@ ws1.add_chart(ch_a, "I4")
 # (b) NFG vs field-median for the key KPIs (AS, referring domains, organic keywords, traffic),
 # indexed so field median = 100 (keeps very different scales readable). Helper table below.
 hb = 40
-ws1.cell(row=hb, column=13, value="KPI (indexed, field median = 100)").font = hfont(9, True)
-ws1.cell(row=hb, column=14, value="NFG").font = hfont(9, True)
-ws1.cell(row=hb, column=15, value="Field median").font = hfont(9, True)
+ws1.cell(row=hb, column=13, value="KPI (indexed, competitor median = 100)").font = hfont(9, True)
+ws1.cell(row=hb, column=14, value="NFG (Client)").font = hfont(9, True)
+ws1.cell(row=hb, column=15, value="Competitor median").font = hfont(9, True)
 kpi_idx_rows = [
     ("Authority Score", "AS"), ("Referring Domains", "RD"),
     ("Organic Keywords", "KW"), ("Est. Traffic", "TR"),
@@ -518,8 +535,8 @@ for lab, key in kpi_idx_rows:
     ws1.cell(row=rr, column=15, value=100).font = hfont(9)
     rr += 1
 ch_b = BarChart(); ch_b.type = "col"; ch_b.grouping = "clustered"
-ch_b.title = "NFG vs field median — key KPIs (indexed, median = 100)"
-ch_b.y_axis.title = "Index (median = 100)"; ch_b.x_axis.title = None
+ch_b.title = "How NFG compares with the 9 competitors: key KPIs (indexed, competitor median = 100)"
+ch_b.y_axis.title = "Index (competitor median = 100)"; ch_b.x_axis.title = None
 data_b = Reference(ws1, min_col=14, max_col=15, min_row=hb, max_row=hb + len(kpi_idx_rows))
 cats_b = Reference(ws1, min_col=13, min_row=hb + 1, max_row=hb + len(kpi_idx_rows))
 ch_b.add_data(data_b, titles_from_data=True)
