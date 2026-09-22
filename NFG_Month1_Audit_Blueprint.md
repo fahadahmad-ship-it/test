@@ -164,3 +164,34 @@ Collapses Backlink Gap (5) + Keyword Gap (6) + Regional Whitespace (7) + defensi
 - **KD is not authority-adjusted** — the `KD_vs_NFG_reach` column mitigates; a judgment call pending the authority read.
 - **Regional pages must respect real service geography** (NFA North, Reach Out Care first) — avoid thin/doorway-page risk.
 - This is a **plan** — no live metrics asserted; all cells populate only when the analyst runs the named Semrush calls at one labelled snapshot.
+
+---
+
+## Appendix A — Reference doc carry-over (UK Regional Competitor Link Analysis)
+
+The client-supplied regional analysis is treated as a **validated prior**: its findings pre-seed Tabs 5, 7 and 8 and must be reconciled against (not overwritten by) the fresh Semrush pulls. Nothing below is dropped.
+
+**A.1 Regional referring-domain matrix (identifiable high/mid-AS domains only) — reproduce & refresh in Tab 7.**
+NFG's own counts to beat: Scotland 6 · Wales 1 · N.Ireland 1 · North West 9 · Yorkshire&Humber 0 · North East 0 · East Midlands 1 · West Midlands 4 · East of England 3 · London 2 · South East 2 · South West 1.
+Reading: NFG strongest in **North West (9)** and **Scotland (6)**; **zero in Yorkshire & Humber and North East** (clear whitespace); theFosteringNetwork owns Yorkshire (5), theFCA owns Northern Ireland (6) and North East (4); ISP dominates South East (7). Only theFosteringNetwork and theFCA have broad all-nations coverage.
+
+**A.2 Named regional gap seed domains (link to competitors, not NFG) — pre-load into Tab 5/7 and verify with a fresh pull:**
+- **Yorkshire & Humber:** hulldailymail.co.uk, yorkshireeveningpost.co.uk, thestar.co.uk, leeds.ac.uk, doncasterfreepress.co.uk
+- **North East:** chroniclelive.co.uk, sunderlandecho.com, northumberlandgazette.co.uk, newcastleworld.com
+- **Northern Ireland:** belfasttelegraph.co.uk, belfastlive.co.uk, qub.ac.uk, derryjournal.com, familysupportni.gov.uk
+- **East Midlands:** nottinghampost.com, derbytelegraph.co.uk, northamptonchron.co.uk
+- **South East:** kentonline.co.uk, kent.gov.uk, theisleofthanetnews.com, bucksherald.co.uk
+- **South West:** bristolpost.co.uk, plymouthherald.co.uk, stroudtimes.com, totalguidetobath.com
+- **Scotland:** glasgowlive.co.uk, scotsman.com, dailyrecord.co.uk, iriss.org.uk, celcis.org
+- **Wales:** gov.wales, cardiff.ac.uk, nation.cymru, wales247.co.uk
+
+**A.3 Spam outliers (never inflate the matrix or enter targets — flag in Tab 8):**
+- hu17.net (AS 28) → 26,791 backlinks to capstonefostercare.co.uk — implausible volume, injected/widget spam.
+- sunderlandinformationpoint.co.uk → 184 links to compassfostering.com — disproportionate local-directory pattern.
+
+**A.4 Recommendations to carry into Tab 10 (Priority Target List):**
+- **Priority pick — close the Yorkshire & North East gap:** no NFG presence; both proven attainable via theFosteringNetwork/theFCA. Pair with NFG's real geography: **NFA North** covers Yorkshire & Lincolnshire (+ "Fostering in York" page); **Reach Out Care** covers North East, North Yorkshire & Cumbria (+ "Fostering in Newcastle" page).
+- **Consider a Northern Ireland push** if NFG operates there — theFCA has a unique NI cluster (press + QUB + gov) no one else replicates.
+- **Protect & extend the North West lead** (Liverpool Echo, Lancashire Live, Cheshire Live) + adjacent NW (Manchester, Wirral, Warrington).
+- **Benchmark ISP's South East playbook** (Kent, Bucks, Milton Keynes press) if NFG has SE operations.
+- The reference used **top-100 refdomains per site**; a **full manual audit of all referring domains** would sharpen the picture — this is exactly the *gap-list depth* decision (top 100 / 250 / full).
