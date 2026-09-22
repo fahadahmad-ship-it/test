@@ -5,7 +5,8 @@ OUT = "/home/user/test/NFG_Month1_Foundation_Audit_2026-09-22_v1.xlsx"
 wb = openpyxl.load_workbook(OUT)
 
 PROV = {"Seen_SR","Seen_AH","AS_source","Ahrefs_DR_evid","Source"}
-FORBIDDEN_SCORE = {"Opportunity_Score","Priority_Score","Tier","Unified_Priority_Score"}
+FORBIDDEN_SCORE = {"Opportunity_Score","Priority_Score","Tier","Unified_Priority_Score",
+                   "Composite_Strength","Index_AS","Index_RefDomains"}
 EMEN = "—–―‒−→←⟶"  # em en bar figure minus arrows
 DATE_RX = re.compile(r"^\d{4}-\d{2}-\d{2}$|^\d{4}-\d{2}$|^[A-Za-z]{3,9}-\d{4}$")
 NEG_RX  = re.compile(r"^-\d[\d,]*%?$")
@@ -129,6 +130,51 @@ print("\n=== 12. MANDATED BACKLINK-AGE WORDING PRESENT ===")
 found = [(ws.title, c.coordinate) for ws, c in all_str_cells() if "were acquired in the last 8 months" in c.value]
 print("  cells with mandated sentence:", found)
 
+print("\n=== 13. NO 'How NFG compares' TEXT ANYWHERE ===")
+compare_hits = [(ws.title, c.coordinate, c.value[:70]) for ws, c in all_str_cells() if "How NFG compares" in c.value]
+print("  'How NFG compares' hits:", len(compare_hits))
+for h in compare_hits: print("   ", h)
+
+print("\n=== 14. NO Composite_Strength / Index_AS / Index_RefDomains HEADER OR CELL ===")
+removed_hdr = {"Composite_Strength","Index_AS","Index_RefDomains"}
+removed_hits = [(ws.title, c.coordinate, c.value) for ws, c in all_str_cells() if c.value.strip() in removed_hdr]
+print("  removed-column header/cell hits:", len(removed_hits))
+for h in removed_hits: print("   ", h)
+
+print("\n=== 15. HEADLINE COUNTS BLOCK CLEANED (no 'NOT additive' / '44 are both' / 'NOT additive') ===")
+jargon = ["NOT additive","44 are both","Semrush-scored","Ahrefs-only","hard-spam excluded"]
+jargon_hits = []
+for ws, c in all_str_cells():
+    for j in jargon:
+        if j in c.value: jargon_hits.append((ws.title, c.coordinate, j))
+print("  headline-jargon hits:", len(jargon_hits))
+for h in jargon_hits: print("   ", h)
+
+print("\n=== 16. TWO NEW COMPARISON CHARTS ON EXEC SCORECARD (Authority Score bar + Organic Traffic bar) ===")
+ws1c = wb["1 Executive Scorecard"]
+chart_titles = []
+for ch in ws1c._charts:
+    t = ch.title
+    txt = ""
+    try:
+        for rich in t.tx.rich.p:
+            for run in rich.r:
+                txt += run.t or ""
+    except Exception:
+        txt = str(t)
+    chart_titles.append(txt)
+has_as_chart = any("Authority Score" in t for t in chart_titles)
+has_tr_chart = any("Organic Traffic" in t for t in chart_titles)
+print("  chart titles:", chart_titles)
+print("  Authority Score bar present:", has_as_chart, "| Organic Traffic bar present:", has_tr_chart)
+
+print("\n=== 17. TAB 3 INTRO MENTIONS 'referring domains' ===")
+ws3 = wb["3 NFG Backlink Profile"]
+intro3 = " ".join(str(ws3.cell(row=rn, column=1).value or "") for rn in (1,2))
+tab3_intro_ok = "referring domains" in intro3.lower()
+print("  Tab 3 row1+row2 text:", intro3[:160])
+print("  mentions 'referring domains':", tab3_intro_ok)
+
 print("\n=== SUMMARY ===")
 checks = {
   "freeze all low": fp_ok,
@@ -149,6 +195,12 @@ checks = {
   "charts only on exec scorecard": chart_sheets==["1 Executive Scorecard"],
   "12 tabs": len(wb.worksheets)==12,
   "mandated wording present": len(found)>=1,
+  "no 'How NFG compares' text": len(compare_hits)==0,
+  "no Composite/Index header or cell": len(removed_hits)==0,
+  "headline counts jargon removed": len(jargon_hits)==0,
+  "exec: Authority Score comparison chart": has_as_chart,
+  "exec: Organic Traffic comparison chart": has_tr_chart,
+  "tab3 intro mentions referring domains": tab3_intro_ok,
 }
 for k,v in checks.items(): print(f"  [{'PASS' if v else 'FAIL'}] {k}")
 print("ALL PASS:", all(checks.values()))

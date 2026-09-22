@@ -414,7 +414,7 @@ ws2.auto_filter.ref = f"A2:{get_column_letter(len(cols2))}{last_data}"
 W2 = {"Domain":34,"Authority_Score":16,"Referring_Domains":15,"Est_Organic_Traffic_UK":16,
  "Organic_Keywords_UK":16,"Est_Traffic_Cost_GBP":16,"Total_Backlinks":14,"Referring_IPs":12,"Follow_%":10,
  "Backlinks_per_RefDomain":16,"Toxic_Tail_%":12,"Pos_1_3":12,"Pos_11_30_QuickWin":16,"SemrushRank":12,
- "Composite_Strength":14,"Rank_AS":20,"Rank_RefDomains":22,"Index_AS":16,"Index_RefDomains":16,"Snapshot_Date":13}
+ "Rank_AS":20,"Rank_RefDomains":22,"Snapshot_Date":13}
 autosize(ws2, {cL[c]: W2[c] for c in cols2})
 BENCH = {"sheet":"2 Competitor Benchmark","AScol":AScol,"RDcol":RDcol,"TBcol":cL["Total_Backlinks"],
          "KWcol":KWcol,"TRcol":TRcol,"FUcol":FUcol,"TTcol":TTcol,"first":first_data,"last":last_data,
@@ -500,16 +500,12 @@ section_label(15, "COMPETITOR COMPARISON CHARTS")
 find = 50
 section_label(find, "Headline opportunity counts"); find += 1
 counts = [
- ("Backlink-gap referring domains found (pooled, link >=1 competitor, not NFG)", "866 unique (the categories below overlap — NOT additive)"),
- ("  712 Semrush-scored (the ranked list)", "712"),
- ("  149 Ahrefs-only unscored (raw only)", "149"),
- ("  49 hard-spam excluded (overlaps the unmatched above — 44 are both)", "49"),
- ("Consensus targets (linked by >=4 of 9 competitors)", "69 non-spam"),
- ("Keyword-gap opportunities (competitor ranks, NFG absent/weak)", "35 scored"),
- ("  cluster split", "SEND/EHCP, FASD, kinship, therapeutic — overwhelmingly INFORMATIONAL"),
- ("Quick-win keywords (NFG pos 11-30, commercial)", "22"),
- ("Regional whitespace regions flagged HIGH", "2 (Yorkshire & Humber, North East)"),
- ("Toxic-anchor / PBN exposure", "~84 domain-hits (~21% of top-50 anchors) = live PBN/link-buying"),
+ ("Backlink gap domains found", "866"),
+ ("Consensus targets (linked by 4 or more competitors)", "69"),
+ ("Keyword opportunities", "35"),
+ ("Quick win keywords (positions 11 to 30)", "22"),
+ ("Regional whitespace regions", "2 (Yorkshire & Humber, North East)"),
+ ("Toxic or PBN domains to review", "about 84"),
 ]
 for i, (lab, val) in enumerate(counts):
     a = ws1.cell(row=find, column=1, value=lab); a.font = hfont(10, lab[0] != " "); a.border = CARD_BORDER
@@ -553,55 +549,45 @@ cc.font = hfont(9, False, TXT_AMBER); cc.fill = PatternFill("solid", fgColor=CLR
 ws1.merge_cells(start_row=cb, start_column=1, end_row=cb+1, end_column=8)
 ws1.freeze_panes = "A3"
 
-# FIX 3: Exec Scorecard visuals (openpyxl charts) referencing the now-static Tab 2 cells.
-# (a) horizontal bar of all 10 domains by Composite_Strength, NFG point highlighted purple.
-CScol_idx = cols2.index("Composite_Strength") + 1
-dom_col_idx = cols2.index("Domain") + 1
-ch_a = BarChart(); ch_a.type = "bar"; ch_a.title = "Competitive strength across all 10 domains (composite, 0 to 1)"
-ch_a.y_axis.title = None; ch_a.x_axis.title = "Composite strength"; ch_a.legend = None
-data_a = Reference(ws2, min_col=CScol_idx, min_row=first_data, max_row=last_data)
-cats_a = Reference(ws2, min_col=dom_col_idx, min_row=first_data, max_row=last_data)
-ch_a.add_data(data_a, titles_from_data=False)
-ch_a.set_categories(cats_a)
-ser_a = ch_a.series[0]
-# highlight NFG's data point (index within first_data..last_data), mute the rest
-nfg_pt_idx = nfg_b["row"] - first_data
-pts = []
-for i in range(len(bench_num)):
-    color = CLR_NFG_STRONG if i == nfg_pt_idx else "C9C9CE"
-    pts.append(DataPoint(idx=i, spPr=GraphicalProperties(solidFill=color)))
-ser_a.data_points = pts
-ch_a.height = 7.5; ch_a.width = 17
-ws1.add_chart(ch_a, "A16")
-
-# (b) NFG vs field-median for the key KPIs (AS, referring domains, organic keywords, traffic),
-# indexed so field median = 100 (keeps very different scales readable). Helper table far-right.
-hb = 5; HC = 20  # helper table anchored well clear of the tiles (cols A-H) and charts
-ws1.cell(row=hb, column=HC, value="KPI (indexed, competitor median = 100)").font = hfont(9, True)
-ws1.cell(row=hb, column=HC+1, value="NFG (Client)").font = hfont(9, True)
-ws1.cell(row=hb, column=HC+2, value="Competitor median").font = hfont(9, True)
-kpi_idx_rows = [
-    ("Authority Score", "AS"), ("Referring Domains", "RD"),
-    ("Organic Keywords", "KW"), ("Est. Traffic", "TR"),
-]
-rr = hb + 1
-for lab, key in kpi_idx_rows:
-    med = _median(KPI[key])
-    ws1.cell(row=rr, column=HC, value=lab).font = hfont(9)
-    ws1.cell(row=rr, column=HC+1, value=round(nfg_b[key] / med * 100)).font = hfont(9)
-    ws1.cell(row=rr, column=HC+2, value=100).font = hfont(9)
-    rr += 1
-ch_b = BarChart(); ch_b.type = "col"; ch_b.grouping = "clustered"
-ch_b.title = "How NFG compares with the 9 competitors: key KPIs (indexed, competitor median = 100)"
-ch_b.y_axis.title = "Index (competitor median = 100)"; ch_b.x_axis.title = None
-data_b = Reference(ws1, min_col=HC+1, max_col=HC+2, min_row=hb, max_row=hb + len(kpi_idx_rows))
-cats_b = Reference(ws1, min_col=HC, min_row=hb + 1, max_row=hb + len(kpi_idx_rows))
-ch_b.add_data(data_b, titles_from_data=True)
-ch_b.set_categories(cats_b)
-ch_b.series[0].graphicalProperties = GraphicalProperties(solidFill=CLR_NFG_STRONG)
-ch_b.series[1].graphicalProperties = GraphicalProperties(solidFill="C9C9CE")
-ch_b.height = 7.5; ch_b.width = 17
-ws1.add_chart(ch_b, "A33")
+# Exec Scorecard visuals: two clean comparison bar charts (no index/composite numbers).
+# Each compares all ten domains on a real Semrush metric, sorted descending, NFG highlighted.
+def _short_dom(d):
+    return "NFG (Client)" if d == NFG else d.replace(".co.uk", "").replace(".org.uk", "").replace(".com", "")
+# helper tables live far-right (cols T onward), well clear of the tiles (A-H) and the charts.
+HCHDR = 4  # helper header row; values start on HCHDR+1
+def _chart_table(col, header, sorted_rows):
+    ws1.cell(row=HCHDR, column=col, value="Domain").font = hfont(9, True)
+    ws1.cell(row=HCHDR, column=col+1, value=header).font = hfont(9, True)
+    for i, (lab, val) in enumerate(sorted_rows):
+        ws1.cell(row=HCHDR+1+i, column=col, value=lab).font = hfont(9)
+        ws1.cell(row=HCHDR+1+i, column=col+1, value=val).font = hfont(9)
+def _comparison_chart(col, header, title, x_axis, sorted_rows):
+    n = len(sorted_rows)
+    _chart_table(col, header, sorted_rows)
+    ch = BarChart(); ch.type = "bar"; ch.legend = None; ch.title = title
+    ch.y_axis.title = None; ch.x_axis.title = x_axis
+    data = Reference(ws1, min_col=col+1, min_row=HCHDR, max_row=HCHDR+n)
+    cats = Reference(ws1, min_col=col, min_row=HCHDR+1, max_row=HCHDR+n)
+    ch.add_data(data, titles_from_data=True)
+    ch.set_categories(cats)
+    pts = []
+    for i, (lab, _v) in enumerate(sorted_rows):
+        color = CLR_NFG_STRONG if lab == "NFG (Client)" else "C9C9CE"
+        pts.append(DataPoint(idx=i, spPr=GraphicalProperties(solidFill=color)))
+    ch.series[0].data_points = pts
+    ch.y_axis.scaling.orientation = "maxMin"  # largest bar at the top
+    ch.height = 8; ch.width = 18
+    return ch
+# (a) Authority Score across all ten domains, descending
+as_rows = sorted(((b["dom"], b["AS"]) for b in bench_num), key=lambda x: -x[1])
+as_rows = [(_short_dom(d), v) for d, v in as_rows]
+ch_as = _comparison_chart(20, "Authority Score", "Authority Score by domain, all 10 (Semrush, NFG highlighted)", "Authority Score", as_rows)
+ws1.add_chart(ch_as, "A16")
+# (b) Organic Traffic (UK) across all ten domains, descending
+tr_rows = sorted(((b["dom"], b["TR"] or 0) for b in bench_num), key=lambda x: -x[1])
+tr_rows = [(_short_dom(d), v) for d, v in tr_rows]
+ch_tr = _comparison_chart(23, "Organic Traffic (UK)", "Organic Traffic (UK) by domain, all 10 (Semrush, NFG highlighted)", "Organic Traffic (UK) / mo", tr_rows)
+ws1.add_chart(ch_tr, "A33")
 print("tab1 done")
 
 # =====================================================================
@@ -610,11 +596,15 @@ print("tab1 done")
 ws3 = wb.create_sheet("3 NFG Backlink Profile")
 ws3.sheet_properties.tabColor = TAB_ANALYST
 ov = read_csv(f"{DATA}/backlinks/overview_NFG.csv")[0]
-ws3.cell(row=1, column=1, value="NFG Backlink Profile: critical off-site audit of the Client (Semrush, 2026-09-22)").font = hfont(13, True, CLR_HEADER)
-ws3.cell(row=2, column=1, value="Data table below shows the Client's top referring domains (top ~100 by Authority Score). Summary, critical flags and AS band distribution are in the labelled panel to the right, from column J onward.").font = hfont(9, False, "6E6E6E")
+ws3.cell(row=1, column=1, value="NFG Backlink Profile: the Client's referring domains (Semrush, 2026-09-22)").font = hfont(13, True, CLR_HEADER)
+ws3.cell(row=2, column=1, value="NFG has 1,743 backlinks from 420 referring domains. Below are the referring domains (the external websites that link to the Client, not individual backlinks). Backlinks from domain is how many links that site sends. Sorted by Backlinks from domain, then Authority Score, so the domains that link most meaningfully rise to the top; a very high Authority Score domain that sends a single link (e.g. apple.com, google.com, bbc.com, indeed.com) is an incidental mention, not a win. Summary, critical flags and AS band distribution are in the labelled panel to the right, from column J onward.").font = hfont(9, False, "6E6E6E")
 
 # ---- DATA TABLE at top-left; header on row 3, freeze just below it ----
 rd = read_csv(f"{DATA}/backlinks/nfg_refdomains_top100.csv")
+# Resort so the list reads sensibly for a client: primarily by how many links each domain
+# sends (Backlinks_from_Domain desc), then by Authority Score. This stops incidental single-link
+# high-authority domains (apple.com, google.com, bbc.com, indeed.com) from dominating the top.
+rd.sort(key=lambda x: (-int(x["backlinks_num"]), -int(x["domain_ascore"])))
 rdcols = ["Referring_Domain","Domain_AS","Backlinks_from_Domain","Domain_Trust","IP","Country","First_Seen","Last_Seen"]
 hrow3 = 3
 for j,c in enumerate(rdcols,1): ws3.cell(row=hrow3, column=j, value=c)
@@ -1199,9 +1189,10 @@ for row in gap:
     if not ("Genuine" in tq or "Relevant" in tq or "Directory-Citation" in tq): continue
     reg=row["Region"]; ncomp=int(row["Num_Competitors_Linking"])
     effort="L" if row["Tier"]=="1" else ("M" if row["Tier"]=="2" else "H")
+    comp_word="competitor" if ncomp==1 else "competitors"
     backlink_actions.append({"type":"Backlink outreach","target":row["Referring_Domain"],
-        "rationale":f"{tq}; links to {ncomp} competitor(s), not NFG",
-        "m1":f"AS {int(as_val)}","m2":f"{ncomp} competitors linking · {reg}",
+        "rationale":f"{tq}; links to {ncomp} {comp_word}, not NFG",
+        "m1":f"AS {int(as_val)}","m2":f"{ncomp} {comp_word} linking · {reg}",
         "region":reg if reg not in ("Non-UK/Unknown","UK-National") else "",
         "effort":effort,"_as":int(as_val),"_nc":ncomp})
 backlink_actions.sort(key=lambda a:(-a["_as"],-a["_nc"]))
@@ -1275,8 +1266,6 @@ dict_rows=[
  ("Authority_Score","1,2,3,5,8,9","Semrush domain authority 0-100","SR backlinks_comparison / refdomains","integer 0-100"),
  ("Toxic_Tail_%","1,2,3","Share of ref domains AS 0-10","SR backlinks_ascore_profile","percent"),
  ("Follow_%","1,2,3","follows/(follows+nofollows) at backlink level","SR backlinks_overview","percent"),
- ("Composite_Strength","2","Min-max normalised mean of AS, ref domains, keywords, traffic","Derived (formula)","0-1"),
- ("Index_AS / Index_RefDomains","2","value ÷ cohort median ×100","Derived (formula)","index (100=median)"),
  ("Organic_Keywords_UK / Traffic","1,2,4","Semrush organic keyword count & est. monthly traffic","SR organic_research / domain_rank","count"),
  ("CPC_GBP","4","Semrush CPC converted USD→GBP @0.79","SR organic_research","GBP"),
  ("Est_Traffic_Cost_GBP","1,2","Modelled monthly value of organic traffic (USD→GBP @0.79). Traffic-cost scale-corrected to a consistent per-visit basis across all 10 domains (competitor cost fields ×100 before FX to match NFG's domain_rank scale; all land ~£2-4/visit).","SR domain_rank/organic","GBP"),
