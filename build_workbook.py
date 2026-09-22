@@ -39,16 +39,25 @@ CLR_HEADERTXT = "FFFFFF"
 CLR_NFG = "E9D5FF"         # NFG accent highlight (light purple)
 CLR_NFG_STRONG = "7C3AED"  # NFG accent strong
 CLR_SUB = "EDE7F6"         # sub-header / summary block fill
-CLR_CAVEAT = "FFF4E5"      # caveat box fill
-CLR_GREEN = "C6EFCE"; TXT_GREEN = "006100"
-CLR_AMBER = "FFEB9C"; TXT_AMBER = "9C6500"
-CLR_RED = "FFC7CE"; TXT_RED = "9C0006"
+CLR_CAVEAT = "FBF3E7"      # caveat box fill (soft warm tint)
+# soft, low-saturation flag palette (muted sage / amber / rose) with accessible text
+CLR_GREEN = "DCE7D6"; TXT_GREEN = "3F6B4E"   # muted sage
+CLR_AMBER = "F2E7CE"; TXT_AMBER = "8A6A3B"   # soft amber
+CLR_RED   = "EBD7D7"; TXT_RED   = "8F4B4B"   # soft rose
 CLR_GREY = "F2F2F2"
+# conditional-format colour-scale stops (muted, low-saturation)
+SC_GOOD = "B7CDAC"   # sage  (favourable end)
+SC_MID  = "EDE3C8"   # sand  (mid)
+SC_BAD  = "E2B9BB"   # rose  (unfavourable end)
+# soft data-bar accents
+BAR_PURPLE = "B7A3D6"
+BAR_BLUE   = "9DB8D2"
+BAR_RED    = "D9A7A9"
 
-TAB_EXEC = "C9A227"    # gold
-TAB_ANALYST = "2E6DA4" # blue
-TAB_ROLLUP = "2E7D32"  # green
-TAB_APPENDIX = "757575"# grey
+TAB_EXEC = "B79A46"    # muted gold
+TAB_ANALYST = "5B7EA6" # muted blue
+TAB_ROLLUP = "5C8A5E"  # muted green
+TAB_APPENDIX = "9AA0A6"# soft grey
 
 thin = Side(style="thin", color="D9D9D9")
 BORDER = Border(left=thin, right=thin, top=thin, bottom=thin)
@@ -191,19 +200,22 @@ def toxic_tail(dom):
     return tox / tot if tot else 0
 TOX = {d: toxic_tail(d) for d in ascore_files}
 
-TAGS = {NFG: "NFG (Client)", "thefca.co.uk": "Sector Body",
-        "thefosteringnetwork.org.uk": "Sector Body", "capstonefostercare.co.uk": "Commercial IFA",
-        "ispfostering.org.uk": "Commercial IFA", "fosterplus.co.uk": "Commercial IFA",
-        "fosteringpeople.co.uk": "Commercial IFA", "swiisfostercare.com": "Commercial IFA",
-        "compassfostering.com": "Commercial IFA", "orangegrovefostercare.co.uk": "Commercial IFA"}
+# Internal-only cohort split (never rendered as a column or label in any cell).
+# Kept purely so weighting logic can tell the two informational bodies apart from the
+# direct rivals; the public workbook lists every competitor by domain name only.
+SEGMENT = {NFG: "client", "thefca.co.uk": "body",
+        "thefosteringnetwork.org.uk": "body", "capstonefostercare.co.uk": "rival",
+        "ispfostering.org.uk": "rival", "fosterplus.co.uk": "rival",
+        "fosteringpeople.co.uk": "rival", "swiisfostercare.com": "rival",
+        "compassfostering.com": "rival", "orangegrovefostercare.co.uk": "rival"}
 
 print("shared data loaded")
 
 # =====================================================================
 # TAB 0 — README & Methodology
 # =====================================================================
-ws0 = wb.create_sheet("0 README & Methodology")
-ws0.sheet_properties.tabColor = TAB_EXEC
+ws0 = wb.create_sheet("12 README & Methodology")
+ws0.sheet_properties.tabColor = TAB_APPENDIX
 ws0.column_dimensions["A"].width = 34
 ws0.column_dimensions["B"].width = 95
 r = 1
@@ -226,8 +238,9 @@ r = kv(ws0, r, "1. Metric firewall (Semrush-only)", "Every reported metric — A
 r = kv(ws0, r, "2. Lists may be pooled", "Raw backlink/refdomain LISTS pooled Semrush + Ahrefs to widen coverage, but every row is re-scored against Semrush AS before ranking. Ahrefs-only rows flagged AS_source=unmatched, kept in Raw, never scored. AS and DR never mixed in one column.")
 r += 1
 h = ws0.cell(row=r, column=1, value="Competitor set (9)"); h.font = hfont(12, True, CLR_HEADER); r += 1
-r = kv(ws0, r, "Sector Body (weighted separately)", "thefca.co.uk · thefosteringnetwork.org.uk — high-authority, informational")
-r = kv(ws0, r, "Commercial IFA (direct rivals)", "capstonefostercare.co.uk · ispfostering.org.uk · fosterplus.co.uk · fosteringpeople.co.uk · swiisfostercare.com · compassfostering.com · orangegrovefostercare.co.uk")
+r = kv(ws0, r, "Competitors (by domain)", "thefca.co.uk · thefosteringnetwork.org.uk · capstonefostercare.co.uk · ispfostering.org.uk · fosterplus.co.uk · fosteringpeople.co.uk · swiisfostercare.com · compassfostering.com · orangegrovefostercare.co.uk")
+r += 1
+r = kv(ws0, r, "How targets were prioritised", "No invented composite scores are used. Backlink targets are ranked by Semrush Authority Score and competitor consensus (how many of the nine competitors link the domain). Keyword targets are ranked by search volume and difficulty (KD). Every reported metric stays Semrush sourced.")
 r += 1
 h = ws0.cell(row=r, column=1, value="Metric definitions"); h.font = hfont(12, True, CLR_HEADER); r += 1
 defs = [
@@ -260,7 +273,7 @@ caveats = [
  "Spam/toxicity is rules-based judgment, not a certified verdict; thresholds are tunable priors.",
  "TARGET-QUALITY CAVEAT: many high-#competitor 'consensus' gap domains are generic directories (yell, thomsonlocal) or SEO/PR/mommy-blog farms competitors used as link schemes. These are separated from genuine editorial targets and must NOT be presented as top recommendations.",
  "Gap != guaranteed win (domains may be unreachable/paid/closed); tiering encodes acquisition realism, not outcomes.",
- "Sector bodies (theFCA, FosteringNetwork) distort the set — benchmarked but tagged/weighted separately.",
+ "The two informational bodies (theFCA, FosteringNetwork) distort the set — benchmarked but weighted separately behind the scenes; no segment label is shown on any tab.",
  "Keyword export in Tab 4 is the top 1,000 of NFG's 4,028 organic keywords (Semrush cap); summary counts use full-profile totals.",
  "swiisfostercare.com's regional counts (Tab 7) are under-populated: it has only ~300 total referring domains, so its top-100 cut is thin — a source characteristic, not an error.",
 ]
@@ -283,17 +296,17 @@ ws2.sheet_properties.tabColor = TAB_ANALYST
 # FIX: Organic Traffic (UK) promoted to an early column beside Authority Score and
 # Referring Domains; analyst-plumbing (Index_*/Rank_*/Composite) moved to the far right;
 # "Is_NFG" replaced by a plain-English "Role" (Client / Competitor).
-cols2 = ["Domain","Tag","Role","Authority_Score","Referring_Domains","Est_Organic_Traffic_UK",
+cols2 = ["Domain","Authority_Score","Referring_Domains","Est_Organic_Traffic_UK",
          "Organic_Keywords_UK","Est_Traffic_Cost_GBP","Total_Backlinks","Referring_IPs","Follow_%",
          "Backlinks_per_RefDomain","Toxic_Tail_%","Pos_1_3","Pos_11_30_QuickWin","SemrushRank",
          "Composite_Strength","Rank_AS","Rank_RefDomains","Index_AS","Index_RefDomains","Snapshot_Date"]
-DISP2 = {"Domain":"Domain","Tag":"Segment","Role":"Role","Authority_Score":"Authority Score (Semrush)",
+DISP2 = {"Domain":"Domain","Authority_Score":"Authority Score (Semrush)",
  "Referring_Domains":"Referring Domains","Est_Organic_Traffic_UK":"Organic Traffic (UK)",
  "Organic_Keywords_UK":"Organic Keywords (UK)","Est_Traffic_Cost_GBP":"Est Traffic Cost (GBP)",
  "Total_Backlinks":"Total Backlinks","Referring_IPs":"Referring IPs","Follow_%":"Follow %",
  "Backlinks_per_RefDomain":"Backlinks per Ref Domain","Toxic_Tail_%":"Toxic Tail %",
  "Pos_1_3":"Positions 1 to 3","Pos_11_30_QuickWin":"Positions 11 to 30 (quick win)","SemrushRank":"Semrush Rank",
- "Composite_Strength":"Composite Strength","Rank_AS":"Rank by Authority Score","Rank_RefDomains":"Rank by Referring Domains",
+ "Composite_Strength":"Composite Strength","Rank_AS":"NFG position out of 10 (by Authority Score)","Rank_RefDomains":"NFG position out of 10 (by Referring Domains)",
  "Index_AS":"Authority index (100 = median)","Index_RefDomains":"Ref domains index (100 = median)","Snapshot_Date":"Snapshot Date"}
 title = ws2.cell(row=1, column=1, value=f"Competitor Benchmark: NFG (the Client) and 9 competitors on one Semrush snapshot ({SNAP}, UK). The Client row carries the purple accent.")
 title.font = hfont(10, True, CLR_HEADER); ws2.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(cols2))
@@ -311,7 +324,7 @@ for dom in order:
     follows = int(b["follows_num"]); nofollows = int(b["nofollows_num"])
     cost_usd = num(k.get("OrganicTrafficCost_USD"))
     vals = {
-        "Domain": dom, "Tag": TAGS[dom], "Role": "Client" if dom == NFG else "Competitor",
+        "Domain": dom,
         "Authority_Score": int(b["ascore"]), "Total_Backlinks": int(b["backlinks_num"]),
         "Referring_Domains": int(b["domains_num"]), "Referring_IPs": int(b["ips_num"]),
         "Backlinks_per_RefDomain": round(int(b["backlinks_num"]) / max(int(b["domains_num"]),1), 1),
@@ -388,18 +401,18 @@ for row in range(first_data, last_data+1):
             ws2.cell(row=row, column=j).font = hfont(9, True)
 # conditional colour scale on Composite + AS; data bars on refdomains & traffic
 ws2.conditional_formatting.add(f"{CScol}{first_data}:{CScol}{last_data}",
-    ColorScaleRule(start_type="min", start_color="F8696B", mid_type="percentile", mid_value=50, mid_color="FFEB84", end_type="max", end_color="63BE7B"))
+    ColorScaleRule(start_type="min", start_color=SC_BAD, mid_type="percentile", mid_value=50, mid_color=SC_MID, end_type="max", end_color=SC_GOOD))
 ws2.conditional_formatting.add(f"{AScol}{first_data}:{AScol}{last_data}",
-    ColorScaleRule(start_type="min", start_color="F8696B", mid_type="percentile", mid_value=50, mid_color="FFEB84", end_type="max", end_color="63BE7B"))
-ws2.conditional_formatting.add(f"{RDcol}{first_data}:{RDcol}{last_data}", DataBarRule(start_type="min", end_type="max", color="7C3AED"))
-ws2.conditional_formatting.add(f"{tr_rng}", DataBarRule(start_type="min", end_type="max", color="2E6DA4"))
-# toxic tail: red scale (high=bad) reversed
+    ColorScaleRule(start_type="min", start_color=SC_BAD, mid_type="percentile", mid_value=50, mid_color=SC_MID, end_type="max", end_color=SC_GOOD))
+ws2.conditional_formatting.add(f"{RDcol}{first_data}:{RDcol}{last_data}", DataBarRule(start_type="min", end_type="max", color=BAR_PURPLE))
+ws2.conditional_formatting.add(f"{tr_rng}", DataBarRule(start_type="min", end_type="max", color=BAR_BLUE))
+# toxic tail: reversed scale (high=unfavourable)
 ws2.conditional_formatting.add(f"{TTcol}{first_data}:{TTcol}{last_data}",
-    ColorScaleRule(start_type="min", start_color="63BE7B", mid_type="percentile", mid_value=50, mid_color="FFEB84", end_type="max", end_color="F8696B"))
+    ColorScaleRule(start_type="min", start_color=SC_GOOD, mid_type="percentile", mid_value=50, mid_color=SC_MID, end_type="max", end_color=SC_BAD))
 # gap note row
 gnr = last_data + 2
 ws2.cell(row=gnr, column=1, value="Framing numbers:").font = hfont(10, True, CLR_HEADER)
-ws2.cell(row=gnr+1, column=1, value=f"AS: NFG 36 = rank 2/10, median 29, gap-to-median +7, gap-to-leader -3 (best of 7 Commercial IFAs — but recency-inflated, see Tab 3).").font = hfont(9)
+ws2.cell(row=gnr+1, column=1, value=f"AS: NFG 36 = rank 2/10, median 29, gap-to-median +7, gap-to-leader -3 (highest of the direct rivals, but recency-inflated, see Tab 3).").font = hfont(9)
 ws2.cell(row=gnr+2, column=1, value=f"Referring Domains: NFG 420 = rank 9/10, median 821.5, gap-to-median -401.5, competitor best 1,892. This -401.5 frames the Month-2+ deliverable.").font = hfont(9)
 ws2.cell(row=gnr+3, column=1, value="Capstone caveat: 127,526 backlinks / 156.9-per-domain (~30x cohort median) is a volume-inflation outlier — score on AS + ref domains, not raw backlink count.").font = hfont(9, False, TXT_AMBER)
 ws2.merge_cells(start_row=gnr+1, start_column=1, end_row=gnr+1, end_column=len(cols2))
@@ -408,10 +421,10 @@ ws2.merge_cells(start_row=gnr+3, start_column=1, end_row=gnr+3, end_column=len(c
 band_rows(ws2, first_data, last_data, len(cols2))
 ws2.freeze_panes = "B3"
 ws2.auto_filter.ref = f"A2:{get_column_letter(len(cols2))}{last_data}"
-W2 = {"Domain":34,"Tag":15,"Role":13,"Authority_Score":16,"Referring_Domains":15,"Est_Organic_Traffic_UK":16,
+W2 = {"Domain":34,"Authority_Score":16,"Referring_Domains":15,"Est_Organic_Traffic_UK":16,
  "Organic_Keywords_UK":16,"Est_Traffic_Cost_GBP":16,"Total_Backlinks":14,"Referring_IPs":12,"Follow_%":10,
  "Backlinks_per_RefDomain":16,"Toxic_Tail_%":12,"Pos_1_3":12,"Pos_11_30_QuickWin":16,"SemrushRank":12,
- "Composite_Strength":14,"Rank_AS":16,"Rank_RefDomains":18,"Index_AS":16,"Index_RefDomains":16,"Snapshot_Date":13}
+ "Composite_Strength":14,"Rank_AS":20,"Rank_RefDomains":22,"Index_AS":16,"Index_RefDomains":16,"Snapshot_Date":13}
 autosize(ws2, {cL[c]: W2[c] for c in cols2})
 BENCH = {"sheet":"2 Competitor Benchmark","AScol":AScol,"RDcol":RDcol,"TBcol":cL["Total_Backlinks"],
          "KWcol":KWcol,"TRcol":TRcol,"FUcol":FUcol,"TTcol":TTcol,"first":first_data,"last":last_data,
@@ -423,52 +436,80 @@ print("tab2 done")
 # =====================================================================
 ws1 = wb.create_sheet("1 Executive Scorecard")
 ws1.sheet_properties.tabColor = TAB_EXEC
-S = f"'{BENCH['sheet']}'"; fd, ld = BENCH["first"], BENCH["last"]; nr = BENCH["nfg_row"]
-t = ws1.cell(row=1, column=1, value="Executive Scorecard: how NFG (the Client) compares with the 9 competitors"); t.font = hfont(15, True, CLR_HEADER)
-ws1.cell(row=2, column=1, value=f"Semrush snapshot {SNAP}, UK, estimates (see caveats). Headline backlink metrics: Authority Score 36, referring domains rank 9 of 10 (gap to median minus 401.5), toxic tail 67 percent, and a February 2026 spike (see takeaways).").font = hfont(9, False, "666666")
-# KPI grid
-hdr = ["Metric","NFG (Client) value","Competitor median","Competitor best","NFG rank out of 10","Gap vs competitor median","Percentile (0 to 100)"]
-hrow = 3
-for j, c in enumerate(hdr, 1): ws1.cell(row=hrow, column=j, value=c)
-style_header_row(ws1, hrow, len(hdr))
-# FIX 2: KPI grid written as STATIC numeric values (same MEDIAN/MAX/RANK/gap/percentile math)
-# so the Exec Scorecard renders everywhere, not only inside Excel.
 KPI = {k: [b[k] for b in bench_num] for k in ("AS","RD","TB","KW","TR","FU","TT")}
 nfg_b = next(b for b in bench_num if b["is_nfg"])
-def kpi(row, label, key, fmt="#,##0", higher_better=True):
+# ---- consistent dashboard type hierarchy & muted card styling ----
+HAIR = Side(style="thin", color="E6DFF0")
+CARD_BORDER = Border(left=HAIR, right=HAIR, top=HAIR, bottom=HAIR)
+TILE_FILL = "F7F4FB"
+def _ord(n):
+    n = int(n)
+    suf = "th" if 10 <= n % 100 <= 20 else {1:"st",2:"nd",3:"rd"}.get(n % 10, "th")
+    return f"{n}{suf}"
+def _fmt(x, kind):
+    if kind == "pct": return f"{x*100:.1f}%"
+    if kind == "comma": return f"{x:,.0f}" if float(x) == int(x) else f"{x:,.1f}"
+    return f"{int(round(x))}"
+def section_label(row, text):
+    c = ws1.cell(row=row, column=1, value=text); c.font = hfont(11, True, CLR_HEADER)
+    c.alignment = Alignment(horizontal="left", vertical="center")
+    ws1.merge_cells(start_row=row, start_column=1, end_row=row, end_column=8)
+# widths: eight even columns carry both the tile band and the card band
+for col in "ABCDEFGH":
+    ws1.column_dimensions[col].width = 17
+# ---- title band ----
+t = ws1.cell(row=1, column=1, value="Executive Scorecard  ·  how NFG (the Client) compares with the nine competitors")
+t.font = hfont(16, True, CLR_HEADER); t.alignment = Alignment(vertical="center")
+ws1.merge_cells(start_row=1, start_column=1, end_row=1, end_column=8); ws1.row_dimensions[1].height = 26
+sub = ws1.cell(row=2, column=1, value=f"Semrush snapshot {SNAP}, UK, estimates (see caveats). Authority Score 36, referring domains 9th of 10 (gap to median minus 401.5), toxic tail 67 percent, and a February 2026 spike.")
+sub.font = hfont(9, False, "6E6E6E"); sub.alignment = Alignment(vertical="center", wrap_text=True)
+ws1.merge_cells(start_row=2, start_column=1, end_row=2, end_column=8); ws1.row_dimensions[2].height = 24
+ws1.row_dimensions[3].height = 6
+# ---- KPI TILE BAND ----
+section_label(4, "KEY METRICS — NFG value, with competitor median, best and NFG's position of ten")
+def tile(r0, c0, name, key, kind, higher_better=True):
     vals = KPI[key]; nfgv = nfg_b[key]
     med = _median(vals); best = max(vals) if higher_better else min(vals)
     rank = _rank_desc(nfgv, vals) if higher_better else _rank_asc(nfgv, vals)
-    gap = nfgv - med
-    lo, hi = min(vals), max(vals)
-    if hi == lo: pct = 100
-    else: pct = round(((nfgv - lo) if higher_better else (hi - nfgv)) / (hi - lo) * 100)
-    ws1.cell(row=row, column=1, value=label).font = hfont(10, True)
-    ws1.cell(row=row, column=2, value=nfgv)
-    ws1.cell(row=row, column=3, value=med)
-    ws1.cell(row=row, column=4, value=best)
-    ws1.cell(row=row, column=5, value=rank)
-    ws1.cell(row=row, column=6, value=round(gap, 3))
-    ws1.cell(row=row, column=7, value=pct)
-    for j in range(2, 8):
-        cell = ws1.cell(row=row, column=j); cell.font = hfont(10); cell.border = BORDER
-        if j in (2,3,4,6): cell.number_format = fmt
-    return row + 1
-r = hrow + 1
-r = kpi(r, "Authority Score (0-100)", "AS", "0")
-r = kpi(r, "Referring Domains", "RD", "#,##0")
-r = kpi(r, "Total Backlinks", "TB", "#,##0")
-r = kpi(r, "Organic Keywords (UK)", "KW", "#,##0")
-r = kpi(r, "Est. Organic Traffic (UK)", "TR", "#,##0")
-r = kpi(r, "Follow % (backlink level)", "FU", "0.0%")
-r = kpi(r, "Toxic Tail % (lower better)", "TT", "0.0%", higher_better=False)
-for rr in range(hrow+1, r):
-    ws1.cell(row=rr, column=1).fill = PatternFill("solid", fgColor=CLR_SUB)
-# highlight the two framing rows
-ws1.cell(row=hrow+2, column=1).comment = Comment("Ref-domain gap-to-median -401.5 = the number that frames the deliverable.","SUSO")
-# headline counts block
-hc = r + 1
-ws1.cell(row=hc, column=1, value="Headline opportunity counts").font = hfont(12, True, CLR_HEADER); hc += 1
+    for rr in range(r0, r0+4):
+        for cc in (c0, c0+1):
+            cell = ws1.cell(row=rr, column=cc)
+            cell.fill = PatternFill("solid", fgColor=TILE_FILL); cell.border = CARD_BORDER
+    n = ws1.cell(row=r0, column=c0, value=name); n.font = hfont(9, True, "6E6E6E")
+    n.alignment = Alignment(horizontal="left", vertical="center")
+    ws1.merge_cells(start_row=r0, start_column=c0, end_row=r0, end_column=c0+1)
+    v = ws1.cell(row=r0+1, column=c0, value=_fmt(nfgv, kind)); v.font = hfont(24, True, CLR_HEADER)
+    v.alignment = Alignment(horizontal="left", vertical="center")
+    ws1.merge_cells(start_row=r0+1, start_column=c0, end_row=r0+2, end_column=c0+1)
+    s = ws1.cell(row=r0+3, column=c0,
+                 value=f"competitor median {_fmt(med, kind)}  ·  competitor best {_fmt(best, kind)}  ·  NFG is {_ord(rank)} of ten")
+    s.font = hfont(8, False, "7C7C7C"); s.alignment = Alignment(horizontal="left", vertical="top", wrap_text=True)
+    ws1.merge_cells(start_row=r0+3, start_column=c0, end_row=r0+3, end_column=c0+1)
+tiles_def = [
+    ("Authority Score (0 to 100)", "AS", "int", True),
+    ("Referring Domains", "RD", "comma", True),
+    ("Total Backlinks", "TB", "comma", True),
+    ("Organic Keywords (UK)", "KW", "comma", True),
+    ("Organic Traffic (UK) / mo", "TR", "comma", True),
+    ("Follow % (backlink level)", "FU", "pct", True),
+    ("Toxic Tail % (lower is better)", "TT", "pct", False),
+]
+for i, (name, key, kind, hb_) in enumerate(tiles_def):
+    band = i // 4; slot = i % 4
+    r0 = 5 if band == 0 else 10
+    c0 = 1 + slot*2
+    tile(r0, c0, name, key, kind, hb_)
+for r0 in (5, 10):
+    ws1.row_dimensions[r0].height = 16
+    ws1.row_dimensions[r0+1].height = 20; ws1.row_dimensions[r0+2].height = 20
+    ws1.row_dimensions[r0+3].height = 30
+ws1.row_dimensions[9].height = 8; ws1.row_dimensions[14].height = 10
+ws1.cell(row=10, column=7).comment = Comment("Ref-domain gap-to-median -401.5 = the number that frames the deliverable.","SUSO")
+# ---- CHARTS (breathing room; rows 16-49 left clear for the two floating charts) ----
+section_label(15, "How NFG compares with the nine competitors")
+# ---- HEADLINE FINDINGS (clean cards below the charts) ----
+find = 50
+section_label(find, "Headline opportunity counts"); find += 1
 counts = [
  ("Backlink-gap referring domains found (pooled, link >=1 competitor, not NFG)", "866 unique (the categories below overlap — NOT additive)"),
  ("  712 Semrush-scored (the ranked list)", "712"),
@@ -481,15 +522,20 @@ counts = [
  ("Regional whitespace regions flagged HIGH", "2 (Yorkshire & Humber, North East)"),
  ("Toxic-anchor / PBN exposure", "~84 domain-hits (~21% of top-50 anchors) = live PBN/link-buying"),
 ]
-for lab, val in counts:
-    a = ws1.cell(row=hc, column=1, value=lab); a.font = hfont(10, lab[0] != " "); a.border = BORDER
-    b = ws1.cell(row=hc, column=2, value=val); b.font = hfont(10, True, CLR_HEADER); b.border = BORDER
-    ws1.merge_cells(start_row=hc, start_column=2, end_row=hc, end_column=7)
-    hc += 1
-# Five corrected takeaways
-tk = hc + 1
-ws1.cell(row=tk, column=1, value="The five Month-1 takeaways (corrected — earlier hypotheses disproven by data)").font = hfont(12, True, CLR_HEADER)
-ws1.merge_cells(start_row=tk, start_column=1, end_row=tk, end_column=7); tk += 1
+for i, (lab, val) in enumerate(counts):
+    a = ws1.cell(row=find, column=1, value=lab); a.font = hfont(10, lab[0] != " "); a.border = CARD_BORDER
+    a.alignment = Alignment(vertical="center", wrap_text=True)
+    ws1.merge_cells(start_row=find, start_column=1, end_row=find, end_column=4)
+    b = ws1.cell(row=find, column=5, value=val); b.font = hfont(10, True, CLR_HEADER); b.border = CARD_BORDER
+    b.alignment = Alignment(vertical="center", wrap_text=True)
+    ws1.merge_cells(start_row=find, start_column=5, end_row=find, end_column=8)
+    if i % 2 == 1:
+        for cc in range(1, 9): ws1.cell(row=find, column=cc).fill = PatternFill("solid", fgColor=CLR_GREY)
+    find += 1
+find += 1
+tk = find
+ws1.cell(row=tk, column=1, value="The five Month-1 takeaways (corrected — earlier hypotheses disproven by data)").font = hfont(11, True, CLR_HEADER)
+ws1.merge_cells(start_row=tk, start_column=1, end_row=tk, end_column=8); tk += 1
 takeaways = [
  ("1. BACKLINK TOXICITY is the real story", "RED",
   "The Client's backlink profile was negligible, about 24 referring domains, until February 2026, then it spiked. Roughly 94 percent of its 420 referring domains were acquired in the last 8 months. In February 2026 referring domains went from 24 to 147, a rise of 512 percent, then backlinks went from 28 to 486, a rise of 1,636 percent, then AS went from 2 to 10 in one month. Toxic tail is 67 percent (AS 0 to 10), with live PBN and link selling anchors ('buy backlinks online cheap ... premium pbn network') and an IP cluster footprint (42 domains on 2 IPs). Needs a disavow review. The 'AS 36, rank 2 of 10' is recency inflated, not earned breadth."),
@@ -506,17 +552,17 @@ for lab, lvl, txt in takeaways:
     a = ws1.cell(row=tk, column=1, value=lab)
     fg = {"RED":CLR_RED,"AMBER":CLR_AMBER,"GREEN":CLR_GREEN}[lvl]
     tx = {"RED":TXT_RED,"AMBER":TXT_AMBER,"GREEN":TXT_GREEN}[lvl]
-    a.font = hfont(10, True, tx); a.fill = PatternFill("solid", fgColor=fg); a.alignment = Alignment(vertical="top", wrap_text=True); a.border = BORDER
-    b = ws1.cell(row=tk, column=2, value=txt); b.font = hfont(10); b.alignment = Alignment(vertical="top", wrap_text=True); b.border = BORDER
-    ws1.merge_cells(start_row=tk, start_column=2, end_row=tk, end_column=7)
-    ws1.row_dimensions[tk].height = 70; tk += 1
+    a.font = hfont(10, True, tx); a.fill = PatternFill("solid", fgColor=fg); a.alignment = Alignment(vertical="top", wrap_text=True); a.border = CARD_BORDER
+    b = ws1.cell(row=tk, column=3, value=txt); b.font = hfont(10); b.alignment = Alignment(vertical="top", wrap_text=True); b.border = CARD_BORDER
+    ws1.merge_cells(start_row=tk, start_column=1, end_row=tk, end_column=2)
+    ws1.merge_cells(start_row=tk, start_column=3, end_row=tk, end_column=8)
+    ws1.row_dimensions[tk].height = 74; tk += 1
 # caveats box
 cb = tk + 1
-cc = ws1.cell(row=cb, column=1, value="CAVEATS: Semrush estimates (modelled, not Google-truth); single snapshot 2026-09-22; regional classification is manual/inferential; target-quality is analyst judgment — see README tab 0 for the full box.")
-cc.font = hfont(9, False, TXT_AMBER); cc.fill = PatternFill("solid", fgColor=CLR_CAVEAT); cc.alignment = Alignment(wrap_text=True)
-ws1.merge_cells(start_row=cb, start_column=1, end_row=cb+1, end_column=7)
-autosize(ws1, {"A":44,"B":18,"C":16,"D":15,"E":16,"F":20,"G":18})
-ws1.freeze_panes = "A4"
+cc = ws1.cell(row=cb, column=1, value="CAVEATS: Semrush estimates (modelled, not Google-truth); single snapshot 2026-09-22; regional classification is manual/inferential; target-quality is analyst judgment — see the README & Methodology tab for the full box.")
+cc.font = hfont(9, False, TXT_AMBER); cc.fill = PatternFill("solid", fgColor=CLR_CAVEAT); cc.alignment = Alignment(wrap_text=True, vertical="top")
+ws1.merge_cells(start_row=cb, start_column=1, end_row=cb+1, end_column=8)
+ws1.freeze_panes = "A3"
 
 # FIX 3: Exec Scorecard visuals (openpyxl charts) referencing the now-static Tab 2 cells.
 # (a) horizontal bar of all 10 domains by Composite_Strength, NFG point highlighted purple.
@@ -529,22 +575,22 @@ cats_a = Reference(ws2, min_col=dom_col_idx, min_row=first_data, max_row=last_da
 ch_a.add_data(data_a, titles_from_data=False)
 ch_a.set_categories(cats_a)
 ser_a = ch_a.series[0]
-# highlight NFG's data point (index within first_data..last_data), grey the rest
+# highlight NFG's data point (index within first_data..last_data), mute the rest
 nfg_pt_idx = nfg_b["row"] - first_data
 pts = []
 for i in range(len(bench_num)):
-    color = CLR_NFG_STRONG if i == nfg_pt_idx else "BFBFBF"
+    color = CLR_NFG_STRONG if i == nfg_pt_idx else "C9C9CE"
     pts.append(DataPoint(idx=i, spPr=GraphicalProperties(solidFill=color)))
 ser_a.data_points = pts
-ch_a.height = 8; ch_a.width = 16
-ws1.add_chart(ch_a, "I4")
+ch_a.height = 7.5; ch_a.width = 17
+ws1.add_chart(ch_a, "A16")
 
 # (b) NFG vs field-median for the key KPIs (AS, referring domains, organic keywords, traffic),
-# indexed so field median = 100 (keeps very different scales readable). Helper table below.
-hb = 40
-ws1.cell(row=hb, column=13, value="KPI (indexed, competitor median = 100)").font = hfont(9, True)
-ws1.cell(row=hb, column=14, value="NFG (Client)").font = hfont(9, True)
-ws1.cell(row=hb, column=15, value="Competitor median").font = hfont(9, True)
+# indexed so field median = 100 (keeps very different scales readable). Helper table far-right.
+hb = 5; HC = 20  # helper table anchored well clear of the tiles (cols A-H) and charts
+ws1.cell(row=hb, column=HC, value="KPI (indexed, competitor median = 100)").font = hfont(9, True)
+ws1.cell(row=hb, column=HC+1, value="NFG (Client)").font = hfont(9, True)
+ws1.cell(row=hb, column=HC+2, value="Competitor median").font = hfont(9, True)
 kpi_idx_rows = [
     ("Authority Score", "AS"), ("Referring Domains", "RD"),
     ("Organic Keywords", "KW"), ("Est. Traffic", "TR"),
@@ -552,21 +598,21 @@ kpi_idx_rows = [
 rr = hb + 1
 for lab, key in kpi_idx_rows:
     med = _median(KPI[key])
-    ws1.cell(row=rr, column=13, value=lab).font = hfont(9)
-    ws1.cell(row=rr, column=14, value=round(nfg_b[key] / med * 100)).font = hfont(9)
-    ws1.cell(row=rr, column=15, value=100).font = hfont(9)
+    ws1.cell(row=rr, column=HC, value=lab).font = hfont(9)
+    ws1.cell(row=rr, column=HC+1, value=round(nfg_b[key] / med * 100)).font = hfont(9)
+    ws1.cell(row=rr, column=HC+2, value=100).font = hfont(9)
     rr += 1
 ch_b = BarChart(); ch_b.type = "col"; ch_b.grouping = "clustered"
 ch_b.title = "How NFG compares with the 9 competitors: key KPIs (indexed, competitor median = 100)"
 ch_b.y_axis.title = "Index (competitor median = 100)"; ch_b.x_axis.title = None
-data_b = Reference(ws1, min_col=14, max_col=15, min_row=hb, max_row=hb + len(kpi_idx_rows))
-cats_b = Reference(ws1, min_col=13, min_row=hb + 1, max_row=hb + len(kpi_idx_rows))
+data_b = Reference(ws1, min_col=HC+1, max_col=HC+2, min_row=hb, max_row=hb + len(kpi_idx_rows))
+cats_b = Reference(ws1, min_col=HC, min_row=hb + 1, max_row=hb + len(kpi_idx_rows))
 ch_b.add_data(data_b, titles_from_data=True)
 ch_b.set_categories(cats_b)
 ch_b.series[0].graphicalProperties = GraphicalProperties(solidFill=CLR_NFG_STRONG)
-ch_b.series[1].graphicalProperties = GraphicalProperties(solidFill="BFBFBF")
-ch_b.height = 8; ch_b.width = 16
-ws1.add_chart(ch_b, "I22")
+ch_b.series[1].graphicalProperties = GraphicalProperties(solidFill="C9C9CE")
+ch_b.height = 7.5; ch_b.width = 17
+ws1.add_chart(ch_b, "A33")
 print("tab1 done")
 
 # =====================================================================
@@ -575,8 +621,8 @@ print("tab1 done")
 ws3 = wb.create_sheet("3 NFG Backlink Profile")
 ws3.sheet_properties.tabColor = TAB_ANALYST
 ov = read_csv(f"{DATA}/backlinks/overview_NFG.csv")[0]
-ws3.cell(row=1, column=1, value="NFG Backlink Profile: critical off-site audit of the Client (Semrush, 2026-09-22)").font = hfont(14, True, CLR_HEADER)
-ws3.cell(row=2, column=1, value="Data table below shows the Client's top referring domains (top ~100 by Authority Score). Summary, critical flags and AS band distribution are in the labelled panel to the right, from column J onward.").font = hfont(9, False, "666666")
+ws3.cell(row=1, column=1, value="NFG Backlink Profile: critical off-site audit of the Client (Semrush, 2026-09-22)").font = hfont(13, True, CLR_HEADER)
+ws3.cell(row=2, column=1, value="Data table below shows the Client's top referring domains (top ~100 by Authority Score). Summary, critical flags and AS band distribution are in the labelled panel to the right, from column J onward.").font = hfont(9, False, "6E6E6E")
 
 # ---- DATA TABLE at top-left; header on row 3, freeze just below it ----
 rd = read_csv(f"{DATA}/backlinks/nfg_refdomains_top100.csv")
@@ -600,8 +646,9 @@ for row in rd:
         if j in (3,): cell.number_format="#,##0"
     r += 1
 rd_end = r - 1
-ws3.conditional_formatting.add(f"B{rd_start}:B{rd_end}", ColorScaleRule(start_type="min",start_color="F8696B",mid_type="percentile",mid_value=50,mid_color="FFEB84",end_type="max",end_color="63BE7B"))
+ws3.conditional_formatting.add(f"B{rd_start}:B{rd_end}", ColorScaleRule(start_type="min",start_color=SC_BAD,mid_type="percentile",mid_value=50,mid_color=SC_MID,end_type="max",end_color=SC_GOOD))
 band_rows(ws3, rd_start, rd_end, len(rdcols))
+ws3.column_dimensions["I"].width = 3  # clean gutter between the table and the summary panel
 ws3.freeze_panes = f"A{hrow3+1}"
 ws3.auto_filter.ref = f"A{hrow3}:{get_column_letter(len(rdcols))}{rd_end}"
 
@@ -640,8 +687,8 @@ for lvl, lab, txt in flags:
     a = ws3.cell(row=pr, column=PC, value=lab)
     fg={"RED":CLR_RED,"AMBER":CLR_AMBER,"GREEN":CLR_GREEN}[lvl]; tx={"RED":TXT_RED,"AMBER":TXT_AMBER,"GREEN":TXT_GREEN}[lvl]
     a.font=hfont(10,True,tx); a.fill=PatternFill("solid",fgColor=fg); a.alignment=Alignment(vertical="top",wrap_text=True); a.border=BORDER
-    b=ws3.cell(row=pr,column=PC+1,value=txt); b.font=hfont(9); b.alignment=Alignment(vertical="top",wrap_text=True); b.border=BORDER
-    ws3.merge_cells(start_row=pr,start_column=PC+1,end_row=pr,end_column=PC+5); ws3.row_dimensions[pr].height=58; pr+=1
+    b=ws3.cell(row=pr,column=PC+1,value=txt); b.font=hfont(10); b.alignment=Alignment(vertical="top",wrap_text=True); b.border=BORDER
+    ws3.merge_cells(start_row=pr,start_column=PC+1,end_row=pr,end_column=PC+5); ws3.row_dimensions[pr].height=60; pr+=1
 pr += 1
 # AS band distribution mini-table (right panel)
 ws3.cell(row=pr, column=PC, value="AS band distribution (ref domains)").font = hfont(11, True, CLR_HEADER); pr += 1
@@ -658,9 +705,9 @@ for a in asrows:
     else: bands["71-100"]+=n
 bh = pr
 for j,(k,v) in enumerate(bands.items()):
-    hcell=ws3.cell(row=bh, column=PC+j, value=k); hcell.font=hfont(9,True,CLR_HEADERTXT); hcell.fill=PatternFill("solid",fgColor=CLR_HEADER); hcell.border=BORDER
-    c=ws3.cell(row=bh+1, column=PC+j, value=v); c.font=hfont(9); c.border=BORDER; c.number_format="#,##0"
-ws3.conditional_formatting.add(f"{get_column_letter(PC)}{bh+1}:{get_column_letter(PC+len(bands)-1)}{bh+1}", DataBarRule(start_type="min",end_type="max",color="7C3AED"))
+    hcell=ws3.cell(row=bh, column=PC+j, value=k); hcell.font=hfont(10,True,CLR_HEADERTXT); hcell.fill=PatternFill("solid",fgColor=CLR_HEADER); hcell.border=BORDER
+    c=ws3.cell(row=bh+1, column=PC+j, value=v); c.font=hfont(10); c.border=BORDER; c.number_format="#,##0"
+ws3.conditional_formatting.add(f"{get_column_letter(PC)}{bh+1}:{get_column_letter(PC+len(bands)-1)}{bh+1}", DataBarRule(start_type="min",end_type="max",color=BAR_PURPLE))
 # widths: data table (A-H) plus right panel (J label + K-O value block, band cols J-P)
 autosize(ws3, {"A":34,"B":10,"C":14,"D":11,"E":16,"F":9,"G":12,"H":12})
 ws3.column_dimensions[get_column_letter(PC)].width = 24
@@ -721,7 +768,7 @@ for k in kws:
         ws4.cell(row=r,column=14).fill=PatternFill("solid",fgColor=CLR_AMBER); ws4.cell(row=r,column=14).font=hfont(9,True,TXT_AMBER)
     r += 1
 kw_end=r-1
-ws4.conditional_formatting.add(f"J{kw_start}:J{kw_end}", ColorScaleRule(start_type="min",start_color="63BE7B",mid_type="percentile",mid_value=50,mid_color="FFEB84",end_type="max",end_color="F8696B"))
+ws4.conditional_formatting.add(f"J{kw_start}:J{kw_end}", ColorScaleRule(start_type="min",start_color=SC_GOOD,mid_type="percentile",mid_value=50,mid_color=SC_MID,end_type="max",end_color=SC_BAD))
 ws4.freeze_panes=f"B{hrow4+1}"
 ws4.auto_filter.ref=f"A{hrow4}:{get_column_letter(len(kcols))}{kw_end}"
 autosize(ws4, {"A":34,"B":9,"C":12,"D":8,"E":14,"F":9,"G":10,"H":9,"I":11,"J":7,"K":16,"L":42,"M":13,"N":12})
@@ -778,16 +825,19 @@ def target_quality(row):
     if spam=="soft": return "Soft-flagged"
     if rel>=1: return "Relevant-editorial"
     return "Other/Adjacent"
-cols5=["Referring_Domain","Authority_Score","Num_Competitors_Linking","Consensus_Target","Region","Region_Conf","Dominant_Link_Type","Relevance_Score","Target_Quality","Backlinks_per_Domain","First_Seen","Spam_Flag","Priority_Score","Tier","Acquisition_Type","Competitor_Targets","Snapshot_Date"]
-ws5.cell(row=1,column=1,value="Backlink Gap Target List — domains linking to >=1 competitor, not NFG · pooled SR+AH, Semrush-scored · sorted by Priority. Target_Quality separates genuine editorial from directory/farm spam.").font=hfont(10,True,CLR_HEADER)
+# Priority_Score and Tier removed: the client does not want invented composite scores to
+# defend. Rows are ranked by the real Semrush Authority Score, then competitor consensus.
+cols5=["Referring_Domain","Authority_Score","Num_Competitors_Linking","Consensus_Target","Region","Region_Conf","Dominant_Link_Type","Relevance_Score","Target_Quality","Backlinks_per_Domain","First_Seen","Spam_Flag","Acquisition_Type","Competitor_Targets","Snapshot_Date"]
+ws5.cell(row=1,column=1,value="Backlink Gap Target List — domains linking to >=1 competitor, not NFG · pooled SR+AH, Semrush-scored · sorted by Authority Score, then by number of competitors linking. Target_Quality separates genuine editorial from directory/farm spam. Consensus_Target = Y means linked by 4 or more competitors.").font=hfont(10,True,CLR_HEADER)
 ws5.merge_cells(start_row=1,start_column=1,end_row=1,end_column=len(cols5))
 hrow5=2
 for j,c in enumerate(cols5,1): ws5.cell(row=hrow5,column=j,value=c)
 style_header_row(ws5,hrow5,len(cols5))
-# sort: scored (has priority) desc, then spam/unmatched at bottom
+# sort: Authority Score desc, then competitors-linking desc; rows without an AS drop to the bottom
 def sortkey(row):
-    p=num(row["Priority_Score"],None)
-    return (0,-p) if p is not None else (1,0)
+    as_=num(row["Authority_Score"],None)
+    nc=int(row["Num_Competitors_Linking"]) if row["Num_Competitors_Linking"] else 0
+    return (0,-as_,-nc) if as_ is not None else (1,0,-nc)
 gap_sorted=sorted(gap,key=sortkey)
 r=hrow5+1; data5_start=r
 for row in gap_sorted:
@@ -797,12 +847,12 @@ for row in gap_sorted:
           int(as_) if as_ is not None else None,int(row["Num_Competitors_Linking"]),
           row["Consensus_Target"],row["Region"],row["Region_Confidence"],row["Dominant_Link_Type"],
           num(row["Relevance_Score"],None),tq,num(row["Backlinks_per_Domain"],None),
-          row["First_Seen"],row["Spam_Flag"] or "",num(row["Priority_Score"],None),
-          row["Tier"],row["Acquisition_Type"],row["Competitor_Targets"],SNAP]
+          row["First_Seen"],row["Spam_Flag"] or "",
+          row["Acquisition_Type"],row["Competitor_Targets"],SNAP]
     for j,v in enumerate(vals,1):
         cell=ws5.cell(row=r,column=j,value=v); cell.font=hfont(9); cell.border=BORDER
         if j in (10,): cell.number_format="#,##0"
-    # colour target quality (Target_Quality now column 9)
+    # colour target quality (Target_Quality column 9 = I) — paired with the text label in the cell
     tqcell=ws5.cell(row=r,column=9)
     if "Genuine" in tq or "Relevant" in tq: tqcell.fill=PatternFill("solid",fgColor=CLR_GREEN); tqcell.font=hfont(9,False,TXT_GREEN)
     elif "Excluded" in tq or "farm" in tq or "Generic" in tq: tqcell.fill=PatternFill("solid",fgColor=CLR_RED); tqcell.font=hfont(9,False,TXT_RED)
@@ -811,12 +861,12 @@ for row in gap_sorted:
         ws5.cell(row=r,column=4).fill=PatternFill("solid",fgColor=CLR_SUB); ws5.cell(row=r,column=4).font=hfont(9,True)
     r+=1
 data5_end=r-1
-# Priority_Score now column 13 (M); Authority_Score now column 2 (B)
-ws5.conditional_formatting.add(f"M{data5_start}:M{data5_end}", ColorScaleRule(start_type="min",start_color="F8696B",mid_type="percentile",mid_value=50,mid_color="FFEB84",end_type="max",end_color="63BE7B"))
-ws5.conditional_formatting.add(f"B{data5_start}:B{data5_end}", DataBarRule(start_type="min",end_type="max",color="7C3AED"))
+# Authority_Score = column 2 (B); soft data bar keyed to the real Semrush metric we now sort on
+ws5.conditional_formatting.add(f"B{data5_start}:B{data5_end}", DataBarRule(start_type="min",end_type="max",color=BAR_PURPLE))
+band_rows(ws5, data5_start, data5_end, len(cols5))
 ws5.freeze_panes=f"B{hrow5+1}"
 ws5.auto_filter.ref=f"A{hrow5}:{get_column_letter(len(cols5))}{data5_end}"
-autosize(ws5, {"A":30,"B":9,"C":10,"D":10,"E":16,"F":9,"G":18,"H":10,"I":24,"J":10,"K":12,"L":9,"M":10,"N":6,"O":18,"P":40,"Q":12})
+autosize(ws5, {"A":30,"B":11,"C":12,"D":12,"E":16,"F":9,"G":18,"H":10,"I":24,"J":12,"K":12,"L":10,"M":18,"N":40,"O":12})
 print("tab5 done", data5_end-data5_start+1, "gap rows")
 
 # =====================================================================
@@ -825,38 +875,38 @@ print("tab5 done", data5_end-data5_start+1, "gap rows")
 ws6 = wb.create_sheet("6 Keyword Gap")
 ws6.sheet_properties.tabColor = TAB_ANALYST
 kg = read_csv(f"{DATA}/keywords/keyword_gap_opportunities.csv")
-ws6.cell(row=1,column=1,value="Keyword Gap: competitors rank, the Client is absent or weak. Semrush UK, clustered. The gap is overwhelmingly INFORMATIONAL (SEND/EHCP, FASD, kinship, therapeutic). The Client already owns the money terms.").font=hfont(10,True,CLR_HEADER)
-ws6.merge_cells(start_row=1,start_column=1,end_row=1,end_column=13)
-ws6.cell(row=2,column=1,value="Data table below is the clustered keyword-gap opportunities. Cluster summary (addressable UK volume) is in the labelled panel to the right, from column O onward.").font=hfont(9,False,"666666")
+ws6.cell(row=1,column=1,value="Keyword Gap: competitors rank, the Client is absent or weak. Semrush UK. The gap is overwhelmingly INFORMATIONAL (SEND/EHCP, FASD, kinship, therapeutic). The Client already owns the money terms.").font=hfont(10,True,CLR_HEADER)
+ws6.merge_cells(start_row=1,start_column=1,end_row=1,end_column=9)
+ws6.cell(row=2,column=1,value="Data table below is the keyword-gap opportunities, sorted by search volume. Cluster summary (addressable UK volume) is in the labelled panel to the right, from column O onward.").font=hfont(9,False,"6E6E6E")
 # ---- DETAIL TABLE at top-left; header on row 3, freeze just below ----
+# NB: source CSV mislabels its columns — its "Intent" field holds the numeric KD and its
+# "KD" field holds the intent string; the mapping below renders each under the correct header.
 def rec_action(k):
     if k["QuickWin"]=="1": return "Optimize existing page + internal links (NFG already ranks 11-30)"
     if int(k["NFG_Pos(0=absent)"])==0: return "New informational/pillar page targeting cluster"
     return "Strengthen page + add FAQ/schema"
-cols6=["Rank","Opportunity_Score","Keyword","Cluster","Search_Volume_UK","KD","Intent","NFG_Pos(0=absent)","Best_Rival","Best_Rival_Pos","Rival_Density","Quick_Win","Recommended_Action"]
+# Opportunity_Score removed (invented composite the client will not defend). Real columns only.
+cols6=["Keyword","Cluster","Search_Volume_UK","KD","NFG_Pos(0=absent)","Best_Rival","Best_Rival_Pos","Intent","Recommended_Action"]
 hrow6=3
 for j,c in enumerate(cols6,1): ws6.cell(row=hrow6,column=j,value=c)
 style_header_row(ws6,hrow6,len(cols6))
-kg_sorted=sorted(kg,key=lambda k:(k["Cluster"],-float(k["OpportunityScore"])))
+kg_sorted=sorted(kg,key=lambda k:-int(k["Volume"]))
 r=hrow6+1; d6s=r
 for k in kg_sorted:
-    vals=[int(k["Rank"]),float(k["OpportunityScore"]),k["Keyword"],k["Cluster"],int(k["Volume"]),
-          int(float(k["Intent"])),k["KD"],int(k["NFG_Pos(0=absent)"]),k["BestRival"],int(k["BestRivalPos"]),
-          int(k["RivalDensity"]),"QUICK-WIN" if k["QuickWin"]=="1" else "",rec_action(k)]
+    vals=[k["Keyword"],k["Cluster"],int(k["Volume"]),int(float(k["Intent"])),
+          int(k["NFG_Pos(0=absent)"]),k["BestRival"],int(k["BestRivalPos"]),k["KD"],rec_action(k)]
     for j,v in enumerate(vals,1):
         cell=ws6.cell(row=r,column=j,value=v); cell.font=hfont(9); cell.border=BORDER
-        if j==5: cell.number_format="#,##0"
-        if j==2: cell.number_format="0.000"
-    if k["QuickWin"]=="1":
-        ws6.cell(row=r,column=12).fill=PatternFill("solid",fgColor=CLR_AMBER); ws6.cell(row=r,column=12).font=hfont(9,True,TXT_AMBER)
+        if j==3: cell.number_format="#,##0"
     r+=1
 d6e=r-1
-ws6.conditional_formatting.add(f"B{d6s}:B{d6e}", ColorScaleRule(start_type="min",start_color="FFEB84",mid_type="percentile",mid_value=50,mid_color="A9D08E",end_type="max",end_color="63BE7B"))
-ws6.conditional_formatting.add(f"F{d6s}:F{d6e}", ColorScaleRule(start_type="min",start_color="63BE7B",mid_type="percentile",mid_value=50,mid_color="FFEB84",end_type="max",end_color="F8696B"))
+# soft data bar on Search Volume (the real metric we now rank by); reversed muted scale on KD
+ws6.conditional_formatting.add(f"C{d6s}:C{d6e}", DataBarRule(start_type="min",end_type="max",color=BAR_BLUE))
+ws6.conditional_formatting.add(f"D{d6s}:D{d6e}", ColorScaleRule(start_type="min",start_color=SC_GOOD,mid_type="percentile",mid_value=50,mid_color=SC_MID,end_type="max",end_color=SC_BAD))
 band_rows(ws6, d6s, d6e, len(cols6))
 ws6.freeze_panes=f"A{hrow6+1}"
 ws6.auto_filter.ref=f"A{hrow6}:{get_column_letter(len(cols6))}{d6e}"
-autosize(ws6, {"A":6,"B":15,"C":26,"D":22,"E":14,"F":6,"G":8,"H":16,"I":16,"J":13,"K":12,"L":11,"M":48})
+autosize(ws6, {"A":26,"B":22,"C":14,"D":6,"E":16,"F":16,"G":13,"H":10,"I":48})
 
 # ---- RIGHT PANEL (columns O onward): cluster summary ----
 cl_vol=defaultdict(lambda:[0,0])
@@ -901,7 +951,7 @@ style_header_row(ws7,hrow7,1+len(domain_cols))
 ws7.row_dimensions[hrow7].height=30
 r=hrow7+1; m7s=r
 nfg_ci=domain_cols.index(NFG)+2
-CLR_WS="FCE4E4"  # light shading for the whitespace rows
+CLR_WS="F1E4E4"  # soft rose shading for the whitespace rows (paired with a text label)
 for row in reg:
     if row["UK_Region"].startswith("TOTAL"): continue
     is_ws=row["UK_Region"] in ("Yorkshire & Humber","North East")
@@ -917,7 +967,7 @@ for row in reg:
     r+=1
 m7e=r-1
 # colour scale across matrix body & accent NFG column
-ws7.conditional_formatting.add(f"B{m7s}:{get_column_letter(1+len(domain_cols))}{m7e}", ColorScaleRule(start_type="min",start_color="FFFFFF",mid_type="percentile",mid_value=50,mid_color="C9B3E8",end_type="max",end_color="7C3AED"))
+ws7.conditional_formatting.add(f"B{m7s}:{get_column_letter(1+len(domain_cols))}{m7e}", ColorScaleRule(start_type="min",start_color="FFFFFF",mid_type="percentile",mid_value=50,mid_color="DED2EF",end_type="max",end_color="A78BC2"))
 for rr in range(m7s,m7e+1):
     c=ws7.cell(row=rr,column=nfg_ci); c.font=hfont(9,True)
     c.border=Border(left=Side(style="medium",color=CLR_NFG_STRONG),right=Side(style="medium",color=CLR_NFG_STRONG))
@@ -1079,7 +1129,7 @@ for ip in refips[:25]:
         cell=ws8.cell(row=r,column=j,value=v); cell.font=hfont(9); cell.border=BORDER
         if j in (3,4): cell.number_format="#,##0"
     r+=1
-ws8.conditional_formatting.add(f"C{ip8s}:C{r-1}", DataBarRule(start_type="min",end_type="max",color="C00000"))
+ws8.conditional_formatting.add(f"C{ip8s}:C{r-1}", DataBarRule(start_type="min",end_type="max",color=BAR_RED))
 # FIX 7: footnote — shared-CDN ranges are review-only, not part of the disavow set.
 fn=ws8.cell(row=r,column=1,value="Footnote: several rows above are Google/Cloudflare shared-CDN ranges (e.g. 142.251.x, 172.253.x, 64.233.x, 192.178.x = Google; 104.26.x, 172.67.x = Cloudflare). These are shared infrastructure, REVIEW-ONLY, and are NOT disavow candidates — they are not PBN evidence.")
 fn.font=hfont(9,False,TXT_AMBER); fn.fill=PatternFill("solid",fgColor=CLR_CAVEAT); fn.alignment=Alignment(wrap_text=True,vertical="top")
@@ -1131,7 +1181,7 @@ for dom,slug in COMPS.items():
             if rd_l in nfg_own: ws9.cell(row=r,column=8).font=hfont(9,True,TXT_GREEN)
             r+=1
 d9e=r-1
-ws9.conditional_formatting.add(f"C{d9s}:C{d9e}", ColorScaleRule(start_type="min",start_color="F8696B",mid_type="percentile",mid_value=50,mid_color="FFEB84",end_type="max",end_color="63BE7B"))
+ws9.conditional_formatting.add(f"C{d9s}:C{d9e}", ColorScaleRule(start_type="min",start_color=SC_BAD,mid_type="percentile",mid_value=50,mid_color=SC_MID,end_type="max",end_color=SC_GOOD))
 ws9.freeze_panes=f"B{hrow9+1}"
 ws9.auto_filter.ref=f"A{hrow9}:{get_column_letter(len(cols9))}{d9e}"
 autosize(ws9, {"A":28,"B":32,"C":10,"D":10,"E":12,"F":12,"G":9,"H":16})
@@ -1142,98 +1192,83 @@ print("tab9 done", d9e-d9s+1, "link rows")
 # =====================================================================
 ws10 = wb.create_sheet("10 Priority Target List")
 ws10.sheet_properties.tabColor = TAB_ROLLUP
-ws10.cell(row=1,column=1,value="★ PRIORITY TARGET LIST — unified Month-2+ action queue (backlink outreach + content-for-keyword + regional push + disavow). Sorted by unified score; quick-wins float up. Top 25 = Month-2 shortlist.").font=hfont(10,True,CLR_HEADER)
-ws10.merge_cells(start_row=1,start_column=1,end_row=1,end_column=11)
-cols10=["Rank","Action_Type","Target","Rationale","Supporting_Metric_1","Supporting_Metric_2","Region_Tag","Effort","Unified_Priority_Score","Owner/Status","Month_Target"]
+ws10.cell(row=1,column=1,value="PRIORITY TARGET LIST — curated Month-2+ action queue, grouped by action type (backlink outreach, content-for-keyword, regional push, disavow). No composite score: backlink items are ordered by Semrush Authority Score, keyword items by search volume.").font=hfont(10,True,CLR_HEADER)
+ws10.merge_cells(start_row=1,start_column=1,end_row=1,end_column=10)
+# Unified_Priority_Score removed — no invented numeric score. A plain sequential row number
+# (No.) is kept; ordering is by real metrics within each action-type group.
+cols10=["No.","Action_Type","Target","Rationale","Supporting_Metric_1","Supporting_Metric_2","Region_Tag","Effort","Owner/Status","Month_Target"]
 hrow10=2
 for j,c in enumerate(cols10,1): ws10.cell(row=hrow10,column=j,value=c)
 style_header_row(ws10,hrow10,len(cols10))
 WHITESPACE={"Yorkshire & Humber","North East"}
-# Build candidate actions
-actions=[]
-# --- backlink targets: genuine quality, non-spam, scored ---
+# --- backlink targets: genuine quality, non-spam, with a real Authority Score; order by AS desc, then #competitors desc ---
+backlink_actions=[]
 for row in gap:
     if row["Spam_Flag"]=="hard": continue
-    tq=target_quality(row); p=num(row["Priority_Score"],None)
-    if p is None: continue
+    tq=target_quality(row); as_val=num(row["Authority_Score"],None)
+    if as_val is None: continue
     if not ("Genuine" in tq or "Relevant" in tq or "Directory-Citation" in tq): continue
-    genuine_bonus=1.0 if "Genuine" in tq else 0.6
-    reg=row["Region"]; ws_mult=1.15 if reg in WHITESPACE else 1.0
-    ncomp=int(row["Num_Competitors_Linking"])
+    reg=row["Region"]; ncomp=int(row["Num_Competitors_Linking"])
     effort="L" if row["Tier"]=="1" else ("M" if row["Tier"]=="2" else "H")
-    eff_v={"L":0.2,"M":0.5,"H":0.8}[effort]
-    src=p  # 0-1 native
-    unified=(0.45*src + 0.20*min(ncomp/9,1) + 0.20*(0.9 if reg in WHITESPACE else 0.3) + 0.15*(1-eff_v))*100*ws_mult*genuine_bonus
-    actions.append({"type":"Backlink outreach","target":row["Referring_Domain"],
+    backlink_actions.append({"type":"Backlink outreach","target":row["Referring_Domain"],
         "rationale":f"{tq}; links to {ncomp} competitor(s), not NFG",
-        "m1":f"AS {int(num(row['Authority_Score'],0))}","m2":f"{ncomp} competitors linking · {reg}",
+        "m1":f"AS {int(as_val)}","m2":f"{ncomp} competitors linking · {reg}",
         "region":reg if reg not in ("Non-UK/Unknown","UK-National") else "",
-        "effort":effort,"score":unified,"qw":row["Tier"]=="1"})
-# --- keyword actions from gap opportunities ---
+        "effort":effort,"_as":int(as_val),"_nc":ncomp})
+backlink_actions.sort(key=lambda a:(-a["_as"],-a["_nc"]))
+# --- keyword actions (gap + quick-win page fixes); order by search volume desc ---
+keyword_actions=[]
 for k in kg[:14]:
     qw=k["QuickWin"]=="1"
-    unified=(0.45*min(float(k["OpportunityScore"])/1.6,1)+0.20*(min(int(k["RivalDensity"])/4,1))+0.20*0.4+0.15*(0.8 if qw else 0.4))*100
-    if qw: unified+=8
-    actions.append({"type":"Content-for-keyword","target":k["Keyword"],
+    keyword_actions.append({"type":"Content-for-keyword","target":k["Keyword"],
         "rationale":f"{k['Cluster']} gap; best rival {k['BestRival']} p{k['BestRivalPos']}"+(" (NFG already 11-30 — quick win)" if qw else " (NFG absent)"),
         "m1":f"Vol {int(k['Volume']):,}/mo","m2":f"KD {int(float(k['Intent']))} · intent {k['KD']}",
-        "region":"","effort":"M" if not qw else "L","score":unified,"qw":qw})
-# --- quick-win keyword page fixes ---
+        "region":"","effort":"M" if not qw else "L","_vol":int(k['Volume'])})
 qw_kw=read_csv(f"{DATA}/keywords/nfg_quickwins_11_30.csv")
 for k in qw_kw[:6]:
-    unified=68+ (5 if k["Intent"] in ("comm","trans") else 0)
     kw_disp=k["Keyword"]; pos_disp=k["Position"]
-    # FIX 9: align the keyword-position variant with the Exec/Tab-4 money-terms string.
-    # "become a foster carer" ranks p9 on its primary URL (Exec: "become a foster carer p9")
-    # but is cannibalised down to p12 on the "becoming-a-foster" variant — present the same
-    # canonical string+position in both places, framed as the cannibalisation fix it is.
+    # align the keyword-position variant with the Exec/Tab-4 money-terms string:
+    # "become a foster carer" ranks p9 on its primary URL but is cannibalised to p12 on the
+    # "becoming-a-foster" variant — present the same canonical string+position, as the fix it is.
     if k["Keyword"]=="becoming a foster":
         kw_disp="become a foster carer"; pos_disp="9"
-    actions.append({"type":"Content-for-keyword","target":kw_disp+" (optimize)",
+    keyword_actions.append({"type":"Content-for-keyword","target":kw_disp+" (optimize)",
         "rationale":f"NFG pos {pos_disp} — quick win; fix page/cannibalisation",
         "m1":f"Vol {int(k['Volume']):,}/mo","m2":f"pos {pos_disp} · {k['RankingURL'][:40]}",
-        "region":"","effort":"L","score":unified,"qw":True})
-# --- regional pushes ---
-regional=[
- ("Regional push","Yorkshire & Humber cluster","Close whitespace: 1 NFG vs FosteringNetwork 5 / Capstone 5. Map to NFA North + 'Fostering in York'.","NFG top-100 refdomains = 1","leeds.ac.uk, leeds.gov.uk, hulldailymail.co.uk seeds","Yorkshire & Humber","M",92,True),
- ("Regional push","North East cluster","Close whitespace: 0 NFG vs theFCA 4 / swiis 3. Map to Reach Out Care + 'Fostering in Newcastle'.","NFG top-100 refdomains = 0","chroniclelive.co.uk, newcastle.gov.uk, sunderlandecho.com seeds","North East","M",94,True),
+        "region":"","effort":"L","_vol":int(k['Volume'])})
+keyword_actions.sort(key=lambda a:-a["_vol"])
+# --- regional pushes (curated) ---
+regional_actions=[
+ {"type":"Regional push","target":"Yorkshire & Humber cluster","rationale":"Close whitespace: 1 NFG vs FosteringNetwork 5 / Capstone 5. Map to NFA North + 'Fostering in York'.","m1":"NFG top-100 refdomains = 1","m2":"leeds.ac.uk, leeds.gov.uk, hulldailymail.co.uk seeds","region":"Yorkshire & Humber","effort":"M"},
+ {"type":"Regional push","target":"North East cluster","rationale":"Close whitespace: 0 NFG vs theFCA 4 / swiis 3. Map to Reach Out Care + 'Fostering in Newcastle'.","m1":"NFG top-100 refdomains = 0","m2":"chroniclelive.co.uk, newcastle.gov.uk, sunderlandecho.com seeds","region":"North East","effort":"M"},
 ]
-for a in regional:
-    actions.append({"type":a[0],"target":a[1],"rationale":a[2],"m1":a[3],"m2":a[4],"region":a[5],"effort":a[6],"score":a[7],"qw":a[8]})
-# --- disavow defensive block ---
-disavow=[
- ("Disavow","PBN IP-cluster domains (159.198.75.134 + 195.20.19.178)","Defensive: 42 domains on 2 IPs, PBN footprint aligned to Feb-2026 spike","42 domains on 2 IPs","67.1% toxic tail","","M",60),
- ("Disavow","'buy backlinks / premium pbn network' anchor domains","Defensive: 59 domains with explicit link-selling anchor","59 domains","~21% of top-50 anchors","","M",58),
+# --- disavow defensive block (curated) ---
+disavow_actions=[
+ {"type":"Disavow","target":"PBN IP-cluster domains (159.198.75.134 + 195.20.19.178)","rationale":"Defensive: 42 domains on 2 IPs, PBN footprint aligned to Feb-2026 spike","m1":"42 domains on 2 IPs","m2":"67.1% toxic tail","region":"","effort":"M"},
+ {"type":"Disavow","target":"'buy backlinks / premium pbn network' anchor domains","rationale":"Defensive: 59 domains with explicit link-selling anchor","m1":"59 domains","m2":"~21% of top-50 anchors","region":"","effort":"M"},
 ]
-for a in disavow:
-    actions.append({"type":a[0],"target":a[1],"rationale":a[2],"m1":a[3],"m2":a[4],"region":a[5],"effort":a[6],"score":a[7],"qw":False})
-# sort: score desc, quick-wins float (effort asc as tiebreak)
-eff_rank={"L":0,"M":1,"H":2}
-actions.sort(key=lambda a:(-a["score"], eff_rank[a["effort"]]))
+# concatenate in fixed group order → the list is grouped by action type, ordered within group
+actions = backlink_actions + keyword_actions + regional_actions + disavow_actions
 r=hrow10+1; d10s=r
 for i,a in enumerate(actions,1):
-    vals=[i,a["type"],a["target"],a["rationale"],a["m1"],a["m2"],a["region"],a["effort"],round(a["score"],1),"",""]
+    vals=[i,a["type"],a["target"],a["rationale"],a["m1"],a["m2"],a["region"],a["effort"],"",""]
     for j,v in enumerate(vals,1):
         cell=ws10.cell(row=r,column=j,value=v); cell.font=hfont(9); cell.border=BORDER; cell.alignment=Alignment(vertical="top",wrap_text=(j in (3,4,5,6)))
-    # colour by action type
+    # colour by action type (muted), text label stays in the Action_Type cell
     tc=ws10.cell(row=r,column=2)
-    cmap={"Backlink outreach":"D9E1F2","Content-for-keyword":"E2EFDA","Regional push":CLR_NFG,"Disavow":CLR_RED}
+    cmap={"Backlink outreach":"DCE6F1","Content-for-keyword":"E4EEDA","Regional push":CLR_NFG,"Disavow":CLR_RED}
     tc.fill=PatternFill("solid",fgColor=cmap.get(a["type"],"FFFFFF"))
     if a["type"]=="Disavow": tc.font=hfont(9,True,TXT_RED)
-    # editable columns highlighted yellow
-    ws10.cell(row=r,column=10).fill=PatternFill("solid",fgColor="FFF2CC")
-    ws10.cell(row=r,column=11).fill=PatternFill("solid",fgColor="FFF2CC")
+    # editable columns lightly tinted
+    ws10.cell(row=r,column=9).fill=PatternFill("solid",fgColor="FBF3D9")
+    ws10.cell(row=r,column=10).fill=PatternFill("solid",fgColor="FBF3D9")
     r+=1
 d10e=r-1
-ws10.conditional_formatting.add(f"I{d10s}:I{d10e}", ColorScaleRule(start_type="min",start_color="FFEB84",mid_type="percentile",mid_value=50,mid_color="A9D08E",end_type="max",end_color="2E7D32"))
-# shade top 25 shortlist
-for rr in range(d10s, min(d10s+25,d10e+1)):
-    ws10.cell(row=rr,column=1).fill=PatternFill("solid",fgColor="FCE4D6"); ws10.cell(row=rr,column=1).font=hfont(9,True)
-note=ws10.cell(row=d10e+2,column=1,value="Unified score = (0.45·source_score + 0.20·competitor-consensus + 0.20·regional-whitespace + 0.15·(1−effort)) ×100, whitespace-multiplied, quality-weighted. Rows 1-25 (shaded) = Month-2 shortlist. Owner/Status & Month_Target are editable (yellow).")
-note.font=hfont(9,False,"666666"); ws10.merge_cells(start_row=d10e+2,start_column=1,end_row=d10e+2,end_column=11); note.alignment=Alignment(wrap_text=True)
+note=ws10.cell(row=d10e+2,column=1,value="Curated shortlist grouped by action type. Backlink outreach items are ordered by Semrush Authority Score, keyword items by search volume; regional and disavow items are the curated defensive/regional plays. No invented composite score is used. Owner/Status & Month_Target are editable.")
+note.font=hfont(9,False,"6E6E6E"); ws10.merge_cells(start_row=d10e+2,start_column=1,end_row=d10e+2,end_column=10); note.alignment=Alignment(wrap_text=True)
 ws10.freeze_panes=f"A{hrow10+1}"
 ws10.auto_filter.ref=f"A{hrow10}:{get_column_letter(len(cols10))}{d10e}"
-autosize(ws10, {"A":6,"B":18,"C":34,"D":44,"E":20,"F":34,"G":18,"H":7,"I":13,"J":16,"K":13})
+autosize(ws10, {"A":6,"B":18,"C":34,"D":44,"E":20,"F":34,"G":18,"H":7,"I":16,"J":13})
 print("tab10 done", d10e-d10s+1, "actions")
 
 # =====================================================================
@@ -1256,13 +1291,11 @@ dict_rows=[
  ("Organic_Keywords_UK / Traffic","1,2,4","Semrush organic keyword count & est. monthly traffic","SR organic_research / domain_rank","count"),
  ("CPC_GBP","4","Semrush CPC converted USD→GBP @0.79","SR organic_research","GBP"),
  ("Est_Traffic_Cost_GBP","1,2","Modelled monthly value of organic traffic (USD→GBP @0.79). Traffic-cost scale-corrected to a consistent per-visit basis across all 10 domains (competitor cost fields ×100 before FX to match NFG's domain_rank scale; all land ~£2-4/visit).","SR domain_rank/organic","GBP"),
- ("Priority_Score","5","0.30·AS_norm+0.30·#comp/9+0.20·Relevance+0.20·LinkType − spam gate","Derived","0-1"),
  ("Target_Quality","5,10","Analyst class: Genuine-GovEdu/Charity/RegionalNews vs Directory/Farm/Spam","Derived (analyst)","label"),
  ("Consensus_Target","1,5","Linked by >=4 of 9 competitors","Derived","Y/blank"),
- ("Opportunity_Score","6","(norm Volume × Intent multiplier) ÷ KD band, rival/quick-win adj","Derived","score"),
  ("Whitespace_Level","7","Region link deficit × local demand judgment","Derived (manual)","HIGH/MED/LOW"),
  ("Region / Region_Confidence","5,7,9","Manual domain/brand/outlet classification (NOT IP-geo)","Derived (manual)","UK region + H/M/L"),
- ("Unified_Priority_Score","10","0.45·source+0.20·consensus+0.20·whitespace+0.15·(1−effort)","Derived","0-100"),
+ ("Prioritisation (no composite score)","5,6,10","Backlink targets ranked by Semrush Authority Score + competitor consensus; keyword targets by search volume + difficulty. No invented non-Semrush score is reported.","Method","note"),
 ]
 for row in dict_rows:
     for j,v in enumerate(row,1):
@@ -1327,10 +1360,10 @@ print("tab11 done", len(files), "files indexed")
 # =====================================================================
 # reorder sheets 0..11 and save
 # =====================================================================
-order_names=["0 README & Methodology","1 Executive Scorecard","2 Competitor Benchmark",
+order_names=["1 Executive Scorecard","2 Competitor Benchmark",
  "3 NFG Backlink Profile","4 NFG Keyword Profile","5 Backlink Gap Targets","6 Keyword Gap",
  "7 Regional Whitespace Map","8 Anchors & Toxicity","9 Competitor Link Detail",
- "10 Priority Target List","11 Data Dictionary & Raw"]
+ "10 Priority Target List","11 Data Dictionary & Raw","12 README & Methodology"]
 wb._sheets.sort(key=lambda s: order_names.index(s.title))
 # final pass: strip em/en dashes, arrows and prose hyphens from every string cell
 sanitize_workbook(wb)
