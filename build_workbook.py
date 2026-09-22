@@ -858,7 +858,6 @@ for dom,slug in COMPS.items():
             vals=[dom,a["Referring_Domain"],None,num(a["Ahrefs_DR"],None),num(a["Links_to_Target"],None),a.get("First_Seen",""),"","","AH","YES" if rd_l in nfg_own else ""]
             for j,v in enumerate(vals,1):
                 cell=ws9.cell(row=r,column=j,value=v); cell.font=hfont(9); cell.border=BORDER
-            ws9.cell(row=r,column=3).comment=Comment("AS_source=unmatched (Ahrefs-only, evidence-only, not scored)","SUSO")
             r+=1
 d9e=r-1
 ws9.conditional_formatting.add(f"C{d9s}:C{d9e}", ColorScaleRule(start_type="min",start_color="F8696B",mid_type="percentile",mid_value=50,mid_color="FFEB84",end_type="max",end_color="63BE7B"))
