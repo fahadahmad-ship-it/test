@@ -299,15 +299,15 @@ ws2.sheet_properties.tabColor = TAB_ANALYST
 cols2 = ["Domain","Authority_Score","Referring_Domains","Est_Organic_Traffic_UK",
          "Organic_Keywords_UK","Est_Traffic_Cost_GBP","Total_Backlinks","Referring_IPs","Follow_%",
          "Backlinks_per_RefDomain","Toxic_Tail_%","Pos_1_3","Pos_11_30_QuickWin","SemrushRank",
-         "Composite_Strength","Rank_AS","Rank_RefDomains","Index_AS","Index_RefDomains","Snapshot_Date"]
+         "Rank_AS","Rank_RefDomains","Snapshot_Date"]
 DISP2 = {"Domain":"Domain","Authority_Score":"Authority Score (Semrush)",
  "Referring_Domains":"Referring Domains","Est_Organic_Traffic_UK":"Organic Traffic (UK)",
  "Organic_Keywords_UK":"Organic Keywords (UK)","Est_Traffic_Cost_GBP":"Est Traffic Cost (GBP)",
  "Total_Backlinks":"Total Backlinks","Referring_IPs":"Referring IPs","Follow_%":"Follow %",
  "Backlinks_per_RefDomain":"Backlinks per Ref Domain","Toxic_Tail_%":"Toxic Tail %",
  "Pos_1_3":"Positions 1 to 3","Pos_11_30_QuickWin":"Positions 11 to 30 (quick win)","SemrushRank":"Semrush Rank",
- "Composite_Strength":"Composite Strength","Rank_AS":"NFG position out of 10 (by Authority Score)","Rank_RefDomains":"NFG position out of 10 (by Referring Domains)",
- "Index_AS":"Authority index (100 = median)","Index_RefDomains":"Ref domains index (100 = median)","Snapshot_Date":"Snapshot Date"}
+ "Rank_AS":"NFG position out of 10 (by Authority Score)","Rank_RefDomains":"NFG position out of 10 (by Referring Domains)",
+ "Snapshot_Date":"Snapshot Date"}
 title = ws2.cell(row=1, column=1, value=f"Competitor Benchmark: NFG (the Client) and 9 competitors on one Semrush snapshot ({SNAP}, UK). The Client row carries the purple accent.")
 title.font = hfont(10, True, CLR_HEADER); ws2.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(cols2))
 for j, c in enumerate(cols2, 1):
@@ -366,27 +366,19 @@ for dom in order:
         "FU": round(follows/(follows+nofollows), 3), "TT": round(TOX[dom], 3),
     })
     row += 1
-# formula columns: Index_AS, Index_RefDomains, Rank_AS, Rank_RefDomains, Composite_Strength
+# rank columns: Rank_AS, Rank_RefDomains (Index_* and Composite_Strength removed per client —
+# the client considers the normalised index/composite formulas unhelpful).
 AScol=cL["Authority_Score"]; RDcol=cL["Referring_Domains"]; KWcol=cL["Organic_Keywords_UK"]; TRcol=cL["Est_Organic_Traffic_UK"]
-IAcol=cL["Index_AS"]; IRcol=cL["Index_RefDomains"]; RAcol=cL["Rank_AS"]; RRcol=cL["Rank_RefDomains"]; CScol=cL["Composite_Strength"]
+RAcol=cL["Rank_AS"]; RRcol=cL["Rank_RefDomains"]
 FUcol=cL["Follow_%"]; TTcol=cL["Toxic_Tail_%"]
-as_rng=f"{AScol}{first_data}:{AScol}{last_data}"; rd_rng=f"{RDcol}{first_data}:{RDcol}{last_data}"
-kw_rng=f"{KWcol}{first_data}:{KWcol}{last_data}"; tr_rng=f"{TRcol}{first_data}:{TRcol}{last_data}"
-# FIX 2: compute Index_AS / Index_RefDomains / Rank_AS / Rank_RefDomains / Composite_Strength
-# as STATIC numeric values (same math as the previous formulas) so they render everywhere
+tr_rng=f"{TRcol}{first_data}:{TRcol}{last_data}"
+# compute Rank_AS / Rank_RefDomains as STATIC numeric values so they render everywhere
 # (PDF/preview/pandas), not just inside Excel.
 as_list = [b["AS"] for b in bench_num]; rd_list = [b["RD"] for b in bench_num]
-kw_list = [b["KW"] for b in bench_num]; tr_list = [b["TR"] for b in bench_num]
-as_med = _median(as_list); rd_med = _median(rd_list)
 for b in bench_num:
     row = b["row"]
-    ws2[f"{IAcol}{row}"] = round(b["AS"] / as_med * 100)
-    ws2[f"{IRcol}{row}"] = round(b["RD"] / rd_med * 100)
     ws2[f"{RAcol}{row}"] = _rank_desc(b["AS"], as_list)
     ws2[f"{RRcol}{row}"] = _rank_desc(b["RD"], rd_list)
-    composite = (_minmax(b["AS"], as_list) + _minmax(b["RD"], rd_list)
-                 + _minmax(b["KW"], kw_list) + _minmax(b["TR"], tr_list)) / 4
-    ws2[f"{CScol}{row}"] = round(composite, 3)
 # formatting
 for row in range(first_data, last_data+1):
     for j, c in enumerate(cols2, 1):
@@ -399,9 +391,7 @@ for row in range(first_data, last_data+1):
         for j in range(1, len(cols2)+1):
             ws2.cell(row=row, column=j).fill = PatternFill("solid", fgColor=CLR_NFG)
             ws2.cell(row=row, column=j).font = hfont(9, True)
-# conditional colour scale on Composite + AS; data bars on refdomains & traffic
-ws2.conditional_formatting.add(f"{CScol}{first_data}:{CScol}{last_data}",
-    ColorScaleRule(start_type="min", start_color=SC_BAD, mid_type="percentile", mid_value=50, mid_color=SC_MID, end_type="max", end_color=SC_GOOD))
+# conditional colour scale on AS; data bars on refdomains & traffic
 ws2.conditional_formatting.add(f"{AScol}{first_data}:{AScol}{last_data}",
     ColorScaleRule(start_type="min", start_color=SC_BAD, mid_type="percentile", mid_value=50, mid_color=SC_MID, end_type="max", end_color=SC_GOOD))
 ws2.conditional_formatting.add(f"{RDcol}{first_data}:{RDcol}{last_data}", DataBarRule(start_type="min", end_type="max", color=BAR_PURPLE))
@@ -458,7 +448,7 @@ def section_label(row, text):
 for col in "ABCDEFGH":
     ws1.column_dimensions[col].width = 17
 # ---- title band ----
-t = ws1.cell(row=1, column=1, value="Executive Scorecard  ·  how NFG (the Client) compares with the nine competitors")
+t = ws1.cell(row=1, column=1, value="Executive Scorecard")
 t.font = hfont(16, True, CLR_HEADER); t.alignment = Alignment(vertical="center")
 ws1.merge_cells(start_row=1, start_column=1, end_row=1, end_column=8); ws1.row_dimensions[1].height = 26
 sub = ws1.cell(row=2, column=1, value=f"Semrush snapshot {SNAP}, UK, estimates (see caveats). Authority Score 36, referring domains 9th of 10 (gap to median minus 401.5), toxic tail 67 percent, and a February 2026 spike.")
@@ -488,9 +478,8 @@ def tile(r0, c0, name, key, kind, higher_better=True):
 tiles_def = [
     ("Authority Score (0 to 100)", "AS", "int", True),
     ("Referring Domains", "RD", "comma", True),
-    ("Total Backlinks", "TB", "comma", True),
-    ("Organic Keywords (UK)", "KW", "comma", True),
     ("Organic Traffic (UK) / mo", "TR", "comma", True),
+    ("Organic Keywords (UK)", "KW", "comma", True),
     ("Follow % (backlink level)", "FU", "pct", True),
     ("Toxic Tail % (lower is better)", "TT", "pct", False),
 ]
@@ -506,7 +495,7 @@ for r0 in (5, 10):
 ws1.row_dimensions[9].height = 8; ws1.row_dimensions[14].height = 10
 ws1.cell(row=10, column=7).comment = Comment("Ref-domain gap-to-median -401.5 = the number that frames the deliverable.","SUSO")
 # ---- CHARTS (breathing room; rows 16-49 left clear for the two floating charts) ----
-section_label(15, "How NFG compares with the nine competitors")
+section_label(15, "COMPETITOR COMPARISON CHARTS")
 # ---- HEADLINE FINDINGS (clean cards below the charts) ----
 find = 50
 section_label(find, "Headline opportunity counts"); find += 1
