@@ -1,0 +1,86 @@
+# Disavow file for nationalfosteringgroup.co.uk
+# Prepared by SUSO Digital. Semrush backlink data, snapshot 2026-09-22.
+# Basis: link-level anchor analysis. These referring domains send links whose
+# anchor text is explicit link-selling / PBN spam, for example:
+#   "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service
+#    nationalfosteringgroup.co.uk ... Buy Backlinks Online Cheap"
+#   "Professional Manual Outreach Backlinks for nationalfosteringgroup.co.uk ..."
+# These are casino, pharma and SEO-farm domains, part of the Feb 2026 link spike.
+# Review before submitting to Google Search Console. domain: disavows the whole site.
+domain:aloysionunes.com
+domain:archive-hu.com
+domain:bazerdaily.com
+domain:bestirishcasinoonline.online
+domain:bestnz-poker-casinoslot.com
+domain:bestonlinecasinogamescanada.online
+domain:bestonlinecasinomexico.online
+domain:betulcrime.com
+domain:betwinnermirror.com
+domain:blogerreviewers.com
+domain:breachviews.com
+domain:canlisohbethatlari.online
+domain:casinoonlinecrazytime.online
+domain:casinopopular.online
+domain:cgpa2percentag.com
+domain:chordmp3.net
+domain:clifflisting.com
+domain:coruzants.com
+domain:daechul.co.com
+domain:digitalchatni.com
+domain:doxycycline100mg.store
+domain:dupurgeniefr.com
+domain:exotichealths.com
+domain:fashionclothingnews.com
+domain:fastlifesite.com
+domain:fioro.shop
+domain:firstguestpost.com
+domain:ggmap.co.com
+domain:ggmap.us.com
+domain:gladeflowers.com
+domain:homesforsaleoldgreenwichct.com
+domain:hotonlinegaming.com
+domain:juaralaundry.com
+domain:krito.shop
+domain:lawyerinjeddah.com
+domain:libyanatravel.com
+domain:luminko.shop
+domain:lydiaroyrealestate.com
+domain:m98ufa.com
+domain:marinasone.com
+domain:masihnyata.com
+domain:mediaboooster.com
+domain:mertio.shop
+domain:mervi.shop
+domain:missburrg.com
+domain:mylisthero.com
+domain:mymarketpost.com
+domain:newblogerseo.com
+domain:nimpa.shop
+domain:nokvio.shop
+domain:onlinegamblingbonus.online
+domain:onlineshoppingidea.com
+domain:onvaxs.com
+domain:orplio.shop
+domain:pamto.shop
+domain:partio.shop
+domain:phanerosart.com
+domain:plrdownloadshub.com
+domain:plumeriamarketing.com
+domain:primenewsartical.com
+domain:quotesblom.com
+domain:rdxextremez.com
+domain:realwinningonlinecasino.online
+domain:royaldb.us.com
+domain:sahammurah.com
+domain:sidarma88gacor.shop
+domain:sisusan88ax.shop
+domain:smartstimer.com
+domain:southfwb.com
+domain:techbumppy.com
+domain:thedocmag.com
+domain:theforbestimes.com
+domain:themicrodigits.com
+domain:tokyopush188.online
+domain:top5casino.online
+domain:ufabettererm4.com
+domain:wecelebrities.com
