@@ -215,6 +215,17 @@ for dom in order:
         "SemrushRank": int(k["SemrushRank"]) if k.get("SemrushRank") not in (None,"NA") else None,
         "Snapshot_Date": SNAP,
     }
+    # NFG keyword metrics come from the direct domain_rank pull (not in the competitor benchmark_keywords.csv),
+    # so populate its real UK values here instead of leaving the cells blank.
+    if dom == NFG:
+        vals.update({
+            "Organic_Keywords_UK": 4028,
+            "Est_Organic_Traffic_UK": 15906,
+            "Est_Traffic_Cost_GBP": round(47868 * USD_GBP, 2),
+            "Pos_1_3": 471,
+            "Pos_11_30_QuickWin": 351 + 326,  # pos 11-20 (351) + 21-30 (326) = 677
+            "SemrushRank": 32673,
+        })
     cL = {c: get_column_letter(cols2.index(c)+1) for c in cols2}
     for c in cols2:
         cell = ws2.cell(row=row, column=cols2.index(c)+1)
@@ -300,7 +311,10 @@ def kpi(row, label, col, fmt="#,##0", higher_better=True, value_is_pct=False):
     ws1.cell(row=row, column=4, value=(f"=MAX({rng})" if higher_better else f"=MIN({rng})"))
     ws1.cell(row=row, column=5, value=(f"=RANK({nfgref},{rng},0)" if higher_better else f"=RANK({nfgref},{rng},1)"))
     ws1.cell(row=row, column=6, value=f"={nfgref}-MEDIAN({rng})")
-    ws1.cell(row=row, column=7, value=f"=ROUND(({nfgref}-MIN({rng}))/(MAX({rng})-MIN({rng}))*100,0)")
+    # percentile: for lower-is-better metrics (e.g. toxic tail) invert so a high percentile always reads "good"
+    pct = (f"=ROUND(({nfgref}-MIN({rng}))/(MAX({rng})-MIN({rng}))*100,0)" if higher_better
+           else f"=ROUND((MAX({rng})-{nfgref})/(MAX({rng})-MIN({rng}))*100,0)")
+    ws1.cell(row=row, column=7, value=pct)
     for j in range(2, 8):
         cell = ws1.cell(row=row, column=j); cell.font = hfont(10); cell.border = BORDER
         if j in (2,3,4,6): cell.number_format = fmt
@@ -343,7 +357,7 @@ ws1.cell(row=tk, column=1, value="The five Month-1 takeaways (corrected — earl
 ws1.merge_cells(start_row=tk, start_column=1, end_row=tk, end_column=7); tk += 1
 takeaways = [
  ("1. BACKLINK TOXICITY is the real story", "RED",
-  "NFG's link profile is ~8 months old with a Feb-2026 +513% spike (28->486 backlinks, AS 2->10 in one month). 67% toxic tail (AS 0-10), live PBN/link-selling anchors ('buy backlinks online cheap...premium pbn network') and an IP-cluster footprint (42 domains on 2 IPs). Needs a disavow review. The 'AS 36 / rank 2-of-10' is recency-INFLATED, not earned breadth."),
+  "NFG's link profile is ~8 months old with a Feb-2026 spike (referring domains +512%: 24->147; backlinks +1,636%: 28->486; AS 2->10 in one month). 67% toxic tail (AS 0-10), live PBN/link-selling anchors ('buy backlinks online cheap...premium pbn network') and an IP-cluster footprint (42 domains on 2 IPs). Needs a disavow review. The 'AS 36 / rank 2-of-10' is recency-INFLATED, not earned breadth."),
  ("2. GENUINE AUTHORITY DEFICIT", "RED",
   "Referring domains rank 9/10, -401.5 below the cohort median (420 vs 821.5). Off-site breadth — not on-site — is the primary constraint. This -401.5 is the number that frames the Month-2+ deliverable."),
  ("3. KEYWORD GAP is INFORMATIONAL, not money terms", "AMBER",
@@ -386,7 +400,7 @@ summ = [
  ("Follow % (backlink level)", f'{int(ov["follows_num"])/(int(ov["follows_num"])+int(ov["nofollows_num"])):.1%}'),
  ("Toxic tail % (AS 0-10 ref domains)", f'{TOX[NFG]:.1%}'),
  ("Profile age", "~8 months of real growth (flat ~21 domains 2024->Jan-2026, then vertical)"),
- ("12-mo velocity", "+399 ref domains in 8 months; +513% backlinks in Feb-2026 alone"),
+ ("12-mo velocity", "+399 ref domains in 8 months; referring domains +512% in Feb-2026 alone (24->147; backlinks +1,636%, 28->486)"),
  ("New/last 90d", "296 (Jun) -> 358 -> 420 domains; backlinks 1,390 -> 1,843 -> 1,743"),
 ]
 for k, v in summ:
@@ -395,7 +409,7 @@ r += 1
 # RED flags
 ws3.cell(row=r, column=1, value="CRITICAL FLAGS (evidence-backed)").font = hfont(11, True, TXT_RED); r += 1
 flags = [
- ("RED","ISSUE 1 — Severe velocity anomaly","Flat ~21 domains / AS 0-2 from early-2024 to Jan-2026, then 2026-02: 147 domains, +513% backlinks, AS 10; 2026-06: 296, AS 35; 2026-09: 420, AS 36. Near-vertical spike = bought/aggressive campaign signature. 'Rank-2 AS' is recency-inflated. [historical_NFG.csv]"),
+ ("RED","ISSUE 1 — Severe velocity anomaly","Flat ~21 domains / AS 0-2 from early-2024 to Jan-2026, then 2026-02: 147 domains (referring domains +512%, 24->147; backlinks +1,636%, 28->486), AS 10; 2026-06: 296, AS 35; 2026-09: 420, AS 36. Near-vertical spike = bought/aggressive campaign signature. 'Rank-2 AS' is recency-inflated. [historical_NFG.csv]"),
  ("RED","ISSUE 2 — Toxic tail 67.1%","67.1% of ref domains AS 0-10 (AS-2 band alone = 127 domains) vs cohort median 53.6% (+13.5 pts). Spikes at AS 0-6, not a healthy pyramid; trusted mid-band thin. [ascore_NFG.csv]"),
  ("RED","ISSUE 3 — PBN / link-selling anchors","Overt paid-scheme fingerprints: 'high quality dofollow backlinks da 50 pa 40 premium pbn network service ... buy backlinks online cheap' (52+7 domains); 'professional manual outreach backlinks ... safe link velocity' (18); ~84 domain-hits (~21% of top-50 anchors). Live PBN/link-buying or negative-SEO. [nfg_anchors.csv]"),
  ("RED","ISSUE 4 — IP / subnet concentration","25 ref domains on 159.198.75.134 (US); 17 on 195.20.19.178 (Moldova) = 42 domains (~10%) on 2 IPs. Singapore 118.139.x cluster = 23 domains across 5 IPs. Textbook PBN, time-aligned with the Feb-2026 spike. [nfg_refips.csv]"),
@@ -492,7 +506,7 @@ ksum=[
  ("Money terms — STRENGTH","fostering agencies p4 · become a foster carer p9 · foster carer salary p5 (all page 1)"),
  ("Quick-win money fixes","foster carer pay p11 · fostering allowance p11 (cannibalised) · fostering near me p14"),
  ("Cannibalisation","48 keywords with 2+ NFG URLs; e.g. fostering allowance split /fostering-allowance/ vs /tax-and-foster-care/"),
- (f"Export band split","1-3: {band_counts['1-3']} · 4-10: {band_counts['4-10']} · 11-20: {band_counts['11-20']} · 21-30: {band_counts['21-30']} · 31-50: {band_counts['31-50']} · 51-100: {band_counts['51-100']}"),
+ ("Export band split", f"1-3: {band_counts['1-3']} · 4-10: {band_counts['4-10']} · 11-20: {band_counts['11-20']} · 21-30: {band_counts['21-30']} · 31-50: {band_counts['31-50']} · 51-100: {band_counts['51-100']}"),
 ]
 for k,v in ksum: r=kv(ws4,r,k,v,kfill=CLR_SUB)
 r += 1
