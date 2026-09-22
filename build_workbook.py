@@ -212,9 +212,129 @@ SEGMENT = {NFG: "client", "thefca.co.uk": "body",
 print("shared data loaded")
 
 # =====================================================================
+# FULL client-side backlink audit data (live Semrush + Ahrefs widen)
+#   Region UK, snapshot 2026-09-22. Reported metrics are Semrush only;
+#   Ahrefs is used solely to widen the pooled link/domain list.
+# =====================================================================
+BLF = os.path.join(DATA, "backlinks_full")
+
+# disavow domain set (ready-to-submit file prepared earlier)
+DISAVOW_DOMS = set()
+with open(f"{DATA}/disavow/disavow_nationalfosteringgroup.txt", encoding="utf-8") as _f:
+    for _line in _f:
+        _line = _line.strip()
+        if _line.startswith("domain:"):
+            DISAVOW_DOMS.add(_line.split(":", 1)[1].strip().lower())
+
+# registrable-domain helper (eTLD+1, small public-suffix table)
+_TWO_LEVEL = {"co.uk","org.uk","gov.uk","sch.uk","me.uk","ltd.uk","plc.uk","net.uk","ac.uk",
+ "nhs.uk","com.au","net.au","org.au","com.bz","com.lc","co.za","co.in","org.in","co.com",
+ "us.com","com.my","in.net","org.au"}
+def src_host(url):
+    h = re.sub(r"^https?://", "", (url or "").strip().lower()).split("/")[0].split(":")[0]
+    return h[4:] if h.startswith("www.") else h
+def reg_domain(url):
+    h = src_host(url)
+    parts = h.split(".")
+    if len(parts) >= 3 and ".".join(parts[-2:]) in _TWO_LEVEL:
+        return ".".join(parts[-3:])
+    return ".".join(parts[-2:]) if len(parts) >= 2 else h
+def norm_url(u):
+    return (u or "").strip().rstrip("/").lower()
+
+# ---- link-level classification (Keep / Review / Disavow) ----
+_DIS_ANCHOR = ["backlink","pbn","buy backlinks","premium pbn","seo service",
+ "dofollow backlinks da","manual outreach backlinks","seo authority backlinks"]
+_DIS_DOMKW = ["goooogla","factmags","kingranks","heavenarticle","seodomains","blinks"]
+_PARK_TLD = (".monster",".sbs",".cfd",".homes",".shop")
+_SHORT_TLD = (".top",".icu",".website",".party",".fyi",".world",".space",".mom",".store",".xyz",".cloud")
+_DIR_MARK = ["papasearch","pagesearch","loginslink","ranksdirectory","directory","find-open",
+ "companieshousemanager","fostercareagencies","fostercarecompare","safefostering","govspendbase",
+ "companiesintheuk","wegetyoufound","bizzr","find-your-support","findsupportinfo","openobjects",
+ "sponsoredjobs","hrninjas","yably","allthechildcare","websitescrawl","toparticlesdirectory",
+ "webranksdirectory","huntukvisasponsors","indexaward"]
+def classify_link(anchor, source_url, page_as, nofollow):
+    a = (anchor or "").lower()
+    host = src_host(source_url); root = reg_domain(source_url)
+    if any(p in a for p in _DIS_ANCHOR):
+        return "Disavow"
+    if root in DISAVOW_DOMS or host in DISAVOW_DOMS:
+        return "Disavow"
+    if any(host.endswith(t) for t in _PARK_TLD):
+        return "Disavow"
+    if any(k in host for k in _DIS_DOMKW):
+        return "Disavow"
+    if "/domain/domain/part" in (source_url or "").lower():
+        return "Disavow"
+    if any(host.endswith(t) for t in _SHORT_TLD) and re.search(r"/(stats|share|report|domain)/", (source_url or "").lower()):
+        return "Disavow"
+    if page_as is not None and page_as <= 2 and any(m in host for m in _DIR_MARK):
+        return "Review"
+    if nofollow and page_as is not None and page_as <= 1 and any(m in host for m in _DIR_MARK):
+        return "Review"
+    return "Keep"
+
+# ---- pooled backlinks: Semrush live + Ahrefs-only (deduped by source_url) ----
+POOL = {}
+for row in read_csv(f"{BLF}/backlinks_all.csv", delim=";"):
+    key = norm_url(row["source_url"])
+    if key in POOL:
+        continue
+    pa = num(row["page_ascore"], None)
+    POOL[key] = {"source_url": row["source_url"], "anchor": (row["anchor"].strip() or "<EmptyAnchor>"),
+        "target_url": row["target_url"], "page_as": int(pa) if pa is not None else None,
+        "nofollow": (row["nofollow"].strip().lower() == "true"),
+        "first_seen": epoch_iso(row["first_seen"]), "last_seen": epoch_iso(row["last_seen"])}
+_ah_added = 0
+for a in read_csv(f"{BLF}/ahrefs_backlinks.csv", delim=","):
+    key = norm_url(a["url_from"])
+    if key in POOL:
+        continue
+    _ah_added += 1
+    fs = (a.get("first_seen") or "")[:10]
+    POOL[key] = {"source_url": a["url_from"], "anchor": (a.get("anchor","").strip() or "<EmptyAnchor>"),
+        "target_url": a.get("url_to",""), "page_as": None,
+        "nofollow": (str(a.get("is_dofollow","1")).strip() == "0"),
+        "first_seen": fs, "last_seen": ""}
+POOLED = list(POOL.values())
+for p in POOLED:
+    p["ref_domain"] = reg_domain(p["source_url"])
+    p["action"] = classify_link(p["anchor"], p["source_url"], p["page_as"], p["nofollow"])
+# link-action counts per referring domain (feeds the domain-level action)
+DOM_LINKS = defaultdict(lambda: [0,0,0])  # domain -> [disavow, review, keep]
+for p in POOLED:
+    idx = {"Disavow":0,"Review":1,"Keep":2}[p["action"]]
+    DOM_LINKS[p["ref_domain"]][idx] += 1
+
+def classify_domain(domain, as_val):
+    d = domain.lower()
+    if d in DISAVOW_DOMS:
+        return "Disavow"
+    if any(d.endswith(t) for t in _PARK_TLD):
+        return "Disavow"
+    if any(k in d for k in _DIS_DOMKW):
+        return "Disavow"
+    dis, rev, keep = DOM_LINKS.get(d, [0,0,0])
+    tot = dis + rev + keep
+    if dis > 0 and (dis >= keep or tot <= 2):
+        return "Disavow"
+    if rev > 0:
+        return "Review"
+    if as_val is not None and as_val <= 2 and any(m in d for m in _DIR_MARK):
+        return "Review"
+    if dis > 0:
+        return "Review"
+    return "Keep"
+
+# referring-domain traffic (Semrush domain_rank; AS>=12 genuine, tail set 0)
+REF_TRAFFIC = {r["domain"].lower(): int(float(r["organic_traffic"])) for r in read_csv(f"{BLF}/refdomain_traffic.csv", delim=",")}
+print("full backlink audit loaded:", len(POOLED), "pooled backlinks (", _ah_added, "Ahrefs-only );",
+      len(REF_TRAFFIC), "traffic rows")
+
+# =====================================================================
 # TAB 0 — README & Methodology
 # =====================================================================
-ws0 = wb.create_sheet("13 README & Methodology")
+ws0 = wb.create_sheet("12 README & Methodology")
 ws0.sheet_properties.tabColor = TAB_APPENDIX
 ws0.column_dimensions["A"].width = 34
 ws0.column_dimensions["B"].width = 95
@@ -230,7 +350,7 @@ r = kv(ws0, r, "Client", "National Fostering Group, nationalfosteringgroup.co.uk
 r = kv(ws0, r, "Agency", "SUSO Digital")
 r = kv(ws0, r, "Snapshot date", SNAP + "  (single dated window; referenced by every tab header)")
 r = kv(ws0, r, "Database / region", "UK")
-r = kv(ws0, r, "Month-1 scope", "Foundation only — diagnostic + target map. No link placements or content shipped this month; Month 2+ outreach executes against Tabs 5, 6, 7 and 10.")
+r = kv(ws0, r, "Month-1 scope", "Foundation only — diagnostic + target map. No link placements or content shipped this month; Month 2+ outreach executes against Tabs 7, 8, 9 and 10.")
 r = kv(ws0, r, "Deliverable file", "NFG_Month1_Foundation_Audit_2026-09-22_v1.xlsx (12 tabs)")
 r += 1
 h = ws0.cell(row=r, column=1, value="Governance — the two rules that bind every cell"); h.font = hfont(12, True, CLR_HEADER); r += 1
@@ -274,8 +394,8 @@ caveats = [
  "TARGET-QUALITY CAVEAT: many high-#competitor 'consensus' gap domains are generic directories (yell, thomsonlocal) or SEO/PR/mommy-blog farms competitors used as link schemes. These are separated from genuine editorial targets and must NOT be presented as top recommendations.",
  "Gap != guaranteed win (domains may be unreachable/paid/closed); tiering encodes acquisition realism, not outcomes.",
  "The two informational bodies (theFCA, FosteringNetwork) distort the set — benchmarked but weighted separately behind the scenes; no segment label is shown on any tab.",
- "Keyword export in Tab 4 is the top 1,000 of NFG's 4,028 organic keywords (Semrush cap); summary counts use full-profile totals.",
- "swiisfostercare.com's regional counts (Tab 7) are under-populated: it has only ~300 total referring domains, so its top-100 cut is thin — a source characteristic, not an error.",
+ "Keyword export in Tab 6 is the top 1,000 of NFG's 4,028 organic keywords (Semrush cap); summary counts use full-profile totals.",
+ "swiisfostercare.com's regional counts (Tab 9) are under-populated: it has only ~300 total referring domains, so its top-100 cut is thin — a source characteristic, not an error.",
 ]
 for cav in caveats:
     cell = ws0.cell(row=r, column=1, value="• " + cav); cell.font = hfont(9); cell.alignment = Alignment(wrap_text=True, vertical="top")
@@ -591,48 +711,56 @@ ws1.add_chart(ch_tr, "A33")
 print("tab1 done")
 
 # =====================================================================
-# TAB 3 — NFG Backlink Profile
+# TAB 3 — NFG Referring Domains (ALL referring domains, live Semrush + traffic)
 # =====================================================================
-ws3 = wb.create_sheet("3 NFG Backlink Profile")
+ws3 = wb.create_sheet("3 NFG Referring Domains")
 ws3.sheet_properties.tabColor = TAB_ANALYST
 ov = read_csv(f"{DATA}/backlinks/overview_NFG.csv")[0]
-ws3.cell(row=1, column=1, value="NFG Backlink Profile: the Client's referring domains (Semrush, 2026-09-22)").font = hfont(13, True, CLR_HEADER)
-ws3.cell(row=2, column=1, value="NFG has 1,743 backlinks from 420 referring domains. Below are the referring domains (the external websites that link to the Client, not individual backlinks). Backlinks from domain is how many links that site sends. Sorted by Backlinks from domain, then Authority Score, so the domains that link most meaningfully rise to the top; a very high Authority Score domain that sends a single link (e.g. apple.com, google.com, bbc.com, indeed.com) is an incidental mention, not a win. Summary, critical flags and AS band distribution are in the labelled panel to the right, from column J onward.").font = hfont(9, False, "6E6E6E")
+ws3.cell(row=1, column=1, value="NFG Referring Domains: every site that links to the Client (Semrush, 2026-09-22)").font = hfont(13, True, CLR_HEADER)
+ws3.cell(row=2, column=1, value="These are referring domains, the external websites that link to the Client, not the individual links. The individual links, each with its own anchor text, are on the NFG Backlinks tab. Backlinks from domain is how many links that site sends. Organic Traffic is the Semrush estimated monthly UK organic traffic of that referring site (the low authority tail, Authority Score under 12, is spam with negligible traffic and is shown as 0). Recommended Action is the analyst call (Keep, Review or Disavow); Your Decision is yours to fill in. Summary and the AS band distribution are in the labelled panel to the right, from column L onward.").font = hfont(9, False, "6E6E6E")
 
-# ---- DATA TABLE at top-left; header on row 3, freeze just below it ----
-rd = read_csv(f"{DATA}/backlinks/nfg_refdomains_top100.csv")
-# Resort so the list reads sensibly for a client: primarily by how many links each domain
-# sends (Backlinks_from_Domain desc), then by Authority Score. This stops incidental single-link
-# high-authority domains (apple.com, google.com, bbc.com, indeed.com) from dominating the top.
+# ---- DATA TABLE at top-left; ALL referring domains from the live pull ----
+rd = read_csv(f"{BLF}/refdomains_all.csv", delim=";")
+# Client-friendly order: by how many links each domain sends (desc), then Authority Score (desc),
+# so incidental single-link high-authority domains (apple.com, google.com) do not dominate the top.
 rd.sort(key=lambda x: (-int(x["backlinks_num"]), -int(x["domain_ascore"])))
-rdcols = ["Referring_Domain","Domain_AS","Backlinks_from_Domain","Domain_Trust","IP","Country","First_Seen","Last_Seen"]
+rdcols = ["Referring_Domain","Authority_Score","Domain_Trust","Organic_Traffic",
+          "Backlinks_From_Domain","Country","First_Seen","Last_Seen","Recommended_Action","Your_Decision"]
 hrow3 = 3
 for j,c in enumerate(rdcols,1): ws3.cell(row=hrow3, column=j, value=c)
 style_header_row(ws3, hrow3, len(rdcols))
 rd_start = hrow3 + 1
 r = rd_start
+_act_fill = {"Disavow":(CLR_RED,TXT_RED),"Review":(CLR_AMBER,TXT_AMBER),"Keep":(CLR_GREEN,TXT_GREEN)}
 for row in rd:
-    ws3.cell(row=r, column=1, value=row["domain"])
-    ws3.cell(row=r, column=2, value=int(row["domain_ascore"]))
-    ws3.cell(row=r, column=3, value=int(row["backlinks_num"]))
-    ws3.cell(row=r, column=4, value=int(row["domain_trust_score"]) if row["domain_trust_score"] else None)
-    ws3.cell(row=r, column=5, value=row["ip"])
+    dom = row["domain"]; as_val = int(row["domain_ascore"])
+    trf = REF_TRAFFIC.get(dom.lower(), 0) if as_val >= 12 else 0
+    act = classify_domain(dom, as_val)
+    ws3.cell(row=r, column=1, value=dom)
+    ws3.cell(row=r, column=2, value=as_val)
+    ws3.cell(row=r, column=3, value=int(row["domain_trust_score"]) if row["domain_trust_score"] else 0)
+    ws3.cell(row=r, column=4, value=trf)
+    ws3.cell(row=r, column=5, value=int(row["backlinks_num"]))
     ws3.cell(row=r, column=6, value=row["country"])
     ws3.cell(row=r, column=7, value=epoch_iso(row["first_seen"]))
     ws3.cell(row=r, column=8, value=epoch_iso(row["last_seen"]))
-    for j in range(1,9):
+    ac = ws3.cell(row=r, column=9, value=act)
+    ws3.cell(row=r, column=10, value="")
+    for j in range(1,len(rdcols)+1):
         cell=ws3.cell(row=r,column=j); cell.font=hfont(9); cell.border=BORDER
-        if j in (3,): cell.number_format="#,##0"
+        if j in (4,5): cell.number_format="#,##0"
+    fg,tx=_act_fill[act]; ac.fill=PatternFill("solid",fgColor=fg); ac.font=hfont(9,True,tx)
+    ws3.cell(row=r,column=10).fill=PatternFill("solid",fgColor="FBF3D9")
     r += 1
 rd_end = r - 1
 ws3.conditional_formatting.add(f"B{rd_start}:B{rd_end}", ColorScaleRule(start_type="min",start_color=SC_BAD,mid_type="percentile",mid_value=50,mid_color=SC_MID,end_type="max",end_color=SC_GOOD))
 band_rows(ws3, rd_start, rd_end, len(rdcols))
-ws3.column_dimensions["I"].width = 3  # clean gutter between the table and the summary panel
+ws3.column_dimensions["K"].width = 3  # clean gutter between the table and the summary panel
 ws3.freeze_panes = f"A{hrow3+1}"
 ws3.auto_filter.ref = f"A{hrow3}:{get_column_letter(len(rdcols))}{rd_end}"
 
-# ---- RIGHT PANEL (columns J onward): summary, critical flags, AS band distribution ----
-PC = 10  # column J
+# ---- RIGHT PANEL (columns L onward): summary, critical flags, AS band distribution ----
+PC = 12  # column L
 pr = 3
 ws3.cell(row=pr, column=PC, value="SUMMARY BLOCK").font = hfont(11, True, CLR_HEADER); pr += 1
 summ = [
@@ -687,17 +815,17 @@ for j,(k,v) in enumerate(bands.items()):
     hcell=ws3.cell(row=bh, column=PC+j, value=k); hcell.font=hfont(10,True,CLR_HEADERTXT); hcell.fill=PatternFill("solid",fgColor=CLR_HEADER); hcell.border=BORDER
     c=ws3.cell(row=bh+1, column=PC+j, value=v); c.font=hfont(10); c.border=BORDER; c.number_format="#,##0"
 ws3.conditional_formatting.add(f"{get_column_letter(PC)}{bh+1}:{get_column_letter(PC+len(bands)-1)}{bh+1}", DataBarRule(start_type="min",end_type="max",color=BAR_PURPLE))
-# widths: data table (A-H) plus right panel (J label + K-O value block, band cols J-P)
-autosize(ws3, {"A":34,"B":10,"C":14,"D":11,"E":16,"F":9,"G":12,"H":12})
+# widths: data table (A-J) plus right panel (L label + M-Q value block)
+autosize(ws3, {"A":34,"B":15,"C":12,"D":15,"E":18,"F":9,"G":12,"H":12,"I":18,"J":15})
 ws3.column_dimensions[get_column_letter(PC)].width = 24
 for cc in range(PC+1, PC+7):
     ws3.column_dimensions[get_column_letter(cc)].width = 20
-print("tab3 done")
+print("tab3 referring domains done", rd_end-rd_start+1, "domains")
 
 # =====================================================================
 # TAB 4 — NFG Keyword Profile
 # =====================================================================
-ws4 = wb.create_sheet("4 NFG Keyword Profile")
+ws4 = wb.create_sheet("6 NFG Keyword Profile")
 ws4.sheet_properties.tabColor = TAB_ANALYST
 kws = read_csv(f"{DATA}/keywords/nfg_keywords.csv")
 INTENT = {"0":"Commercial","1":"Informational","2":"Navigational","3":"Transactional"}
@@ -775,7 +903,7 @@ for k,v in ksum:
     ws4.merge_cells(start_row=pr, start_column=PC+1, end_row=pr, end_column=PC+5)
     pr+=1
 pr+=1
-gflag = ws4.cell(row=pr, column=PC, value="GREEN: money terms are a STRENGTH, the Client owns them. Keyword gap (Tab 6) is therefore informational, not money.")
+gflag = ws4.cell(row=pr, column=PC, value="GREEN: money terms are a STRENGTH, the Client owns them. Keyword gap (Tab 8) is therefore informational, not money.")
 gflag.font=hfont(10,True,TXT_GREEN); gflag.fill=PatternFill("solid",fgColor=CLR_GREEN); gflag.alignment=Alignment(vertical="top",wrap_text=True)
 ws4.merge_cells(start_row=pr,start_column=PC,end_row=pr,end_column=PC+5)
 ws4.column_dimensions[get_column_letter(PC)].width=26
@@ -786,7 +914,7 @@ print("tab4 done", kw_end-kw_start+1, "keyword rows")
 # =====================================================================
 # TAB 5 — Backlink Gap Target List (with Target_Quality)
 # =====================================================================
-ws5 = wb.create_sheet("5 Backlink Gap Targets")
+ws5 = wb.create_sheet("7 Backlink Gap Targets")
 ws5.sheet_properties.tabColor = TAB_ANALYST
 gap = read_csv(f"{DATA}/gap/backlink_gap_targetlist.csv")
 GENERIC_DIR = {"yell.com","thomsonlocal.com","siteprice.org","sitelike.org","misterwhat.co.uk","companycheck.co.uk","endole.co.uk","crunchbase.com","patsnap.com","contactout.com","neverbounce.com","dentons.net","yudu.com","grokipedia.com","voucherix.co.uk"}
@@ -851,7 +979,7 @@ print("tab5 done", data5_end-data5_start+1, "gap rows")
 # =====================================================================
 # TAB 6 — Keyword Gap (clustered)
 # =====================================================================
-ws6 = wb.create_sheet("6 Keyword Gap")
+ws6 = wb.create_sheet("8 Keyword Gap")
 ws6.sheet_properties.tabColor = TAB_ANALYST
 kg = read_csv(f"{DATA}/keywords/keyword_gap_opportunities.csv")
 ws6.cell(row=1,column=1,value="Keyword Gap: competitors rank, the Client is absent or weak. Semrush UK. The gap is overwhelmingly INFORMATIONAL (SEND/EHCP, FASD, kinship, therapeutic). The Client already owns the money terms.").font=hfont(10,True,CLR_HEADER)
@@ -911,7 +1039,7 @@ print("tab6 done")
 # =====================================================================
 # TAB 7 — Regional Whitespace Map
 # =====================================================================
-ws7 = wb.create_sheet("7 Regional Whitespace Map")
+ws7 = wb.create_sheet("9 Regional Whitespace Map")
 ws7.sheet_properties.tabColor = TAB_ANALYST
 reg = read_csv(f"{DATA}/gap/regional_map.csv")
 domain_cols=[c for c in reg[0].keys() if c not in ("UK_Region","_pct_of_top100_note")]
@@ -1032,7 +1160,7 @@ print("tab7 done")
 # =====================================================================
 # TAB 8 — Anchors & Toxicity
 # =====================================================================
-ws8 = wb.create_sheet("8 Anchors & Toxicity")
+ws8 = wb.create_sheet("5 Anchors & Toxicity")
 ws8.sheet_properties.tabColor = TAB_ANALYST
 anchors = read_csv(f"{DATA}/backlinks/nfg_anchors.csv")
 refips = read_csv(f"{DATA}/backlinks/nfg_refips.csv")
@@ -1118,30 +1246,36 @@ autosize(ws8, {"A":52,"B":40,"C":16,"D":34,"E":22,"F":10})
 print("tab8 done")
 
 # =====================================================================
-# TAB 9 — Backlinks Review (link-level triage: Keep / Review / Disavow)
+# TAB 4 — NFG Backlinks (every backlink, pooled Semrush + Ahrefs-only, deduped)
 # =====================================================================
-ws_bl = wb.create_sheet("9 Backlinks Review")
-ws_bl.cell(row=1,column=1,value="Backlinks Review: mark each flagged link Keep, Review or Disavow").font=hfont(13,True,CLR_HEADER)
-ws_bl.cell(row=2,column=1,value="Referring domains are the sites that link to the Client. Backlinks are the individual links, each with its own anchor text. Disavow is decided here at the link level from the anchor. Rows marked Disavow are collected in the ready to submit file data/disavow/disavow_nationalfosteringgroup.txt. Type your call in the last column.").font=hfont(9,False,"666666")
-blcols=["Referring_Domain","Recommended_Action","Why_Flagged","Example_Anchor","Your_Decision"]
-hb=4
+ws_bl = wb.create_sheet("4 NFG Backlinks")
+ws_bl.sheet_properties.tabColor = TAB_ANALYST
+ws_bl.cell(row=1,column=1,value="NFG Backlinks: every individual link to the Client, with its anchor and recommended action").font=hfont(13,True,CLR_HEADER)
+ws_bl.cell(row=2,column=1,value="Each row is one backlink (a single link on a source page), each with its own anchor text; the sites those links come from are on the NFG Referring Domains tab. Disavow is decided at the link level, mainly from the anchor and the source domain. Rows are grouped Disavow first, then Review, then Keep, and within each group by Page Authority Score. Recommended Action is the analyst call; type your own call in Your Decision. This tab is long and scrolls. Semrush is the metric source; Ahrefs was used only to widen the link list.").font=hfont(9,False,"666666")
+blcols=["Source_URL","Referring_Domain","Anchor","Target_Page","Follow","Page_Authority_Score","First_Seen","Last_Seen","Recommended_Action","Your_Decision"]
+hb=3
 for j,c in enumerate(blcols,1): ws_bl.cell(row=hb,column=j,value=c)
 style_header_row(ws_bl,hb,len(blcols))
-blrows=read_csv(f"{DATA}/disavow/backlinks_review.csv")
 _ord={"Disavow":0,"Review":1,"Keep":2}
-blrows.sort(key=lambda x:(_ord.get(x["Recommended_Action"],3), x["Referring_Domain"]))
+POOLED.sort(key=lambda p:(_ord.get(p["action"],3), -(p["page_as"] if p["page_as"] is not None else -1)))
+_act_fill_bl={"Disavow":(CLR_RED,TXT_RED),"Review":(CLR_AMBER,TXT_AMBER),"Keep":(CLR_GREEN,TXT_GREEN)}
 r=hb+1
-for row in blrows:
-    vals=[row["Referring_Domain"],row["Recommended_Action"],row["Why_Flagged"],row["Example_Anchor"],row["Your_Decision"]]
+for p in POOLED:
+    follow="Nofollow" if p["nofollow"] else "Follow"
+    vals=[p["source_url"],p["ref_domain"],p["anchor"],p["target_url"],follow,
+          p["page_as"] if p["page_as"] is not None else "",p["first_seen"],p["last_seen"],p["action"],""]
     for j,v in enumerate(vals,1):
-        cell=ws_bl.cell(row=r,column=j,value=v); cell.font=hfont(9); cell.border=BORDER; cell.alignment=Alignment(vertical="top",wrap_text=(j in (3,4)))
-    fill={"Disavow":"F4D9D9","Review":"F7EAD0","Keep":"DDEBDD"}.get(row["Recommended_Action"])
-    if fill: ws_bl.cell(row=r,column=2).fill=PatternFill("solid",fgColor=fill)
+        cell=ws_bl.cell(row=r,column=j,value=v); cell.font=hfont(9); cell.border=BORDER
+        cell.alignment=Alignment(vertical="top",wrap_text=(j in (3,)))
+    ac=ws_bl.cell(row=r,column=9); fg,tx=_act_fill_bl[p["action"]]
+    ac.fill=PatternFill("solid",fgColor=fg); ac.font=hfont(9,True,tx)
+    ws_bl.cell(row=r,column=10).fill=PatternFill("solid",fgColor="FBF3D9")
     r+=1
+bl_end=r-1
 ws_bl.freeze_panes=f"A{hb+1}"
-ws_bl.auto_filter.ref=f"A{hb}:E{r-1}"
-autosize(ws_bl,{"A":30,"B":16,"C":34,"D":50,"E":16})
-print("tab9 backlinks review done", r-hb-1, "rows")
+ws_bl.auto_filter.ref=f"A{hb}:{get_column_letter(len(blcols))}{bl_end}"
+autosize(ws_bl,{"A":60,"B":26,"C":42,"D":58,"E":10,"F":10,"G":12,"H":12,"I":18,"J":15})
+print("tab4 backlinks done", bl_end-hb, "rows")
 
 # =====================================================================
 # TAB 10 — Competitor Link Detail (per-competitor refdomains, long format)
@@ -1154,7 +1288,7 @@ COMPS = {"capstonefostercare.co.uk":"capstonefostercare","compassfostering.com":
  "thefca.co.uk":"thefca","thefosteringnetwork.org.uk":"thefosteringnetwork"}
 # NFG own refdomains set for Also_Links_to_NFG
 nfg_own=set(r["Referring_Domain"].lower() for r in read_csv(f"{DATA}/gap/nfg_refdomains.csv"))
-ws9.cell(row=1,column=1,value="Competitor Link Detail: per competitor referring domains, Semrush scored. Raw evidence feeding Tabs 5 and 7. Authority Score is Semrush.").font=hfont(10,True,CLR_HEADER)
+ws9.cell(row=1,column=1,value="Competitor Link Detail: per competitor referring domains, Semrush scored. Raw evidence feeding Tabs 7 and 9. Authority Score is Semrush.").font=hfont(10,True,CLR_HEADER)
 cols9=["Competitor","Referring_Domain","Semrush_AS","Backlinks","First_Seen","Last_Seen","Country","Also_Links_to_NFG"]
 ws9.merge_cells(start_row=1,start_column=1,end_row=1,end_column=len(cols9))
 hrow9=2
@@ -1278,96 +1412,12 @@ autosize(ws10, {"A":6,"B":18,"C":34,"D":44,"E":20,"F":34,"G":18,"H":7,"I":16,"J"
 print("tab10 done", d10e-d10s+1, "actions")
 
 # =====================================================================
-# TAB 11 — Data Dictionary & Raw Exports
-# =====================================================================
-ws11 = wb.create_sheet("12 Data Dictionary & Raw")
-ws11.sheet_properties.tabColor = TAB_APPENDIX
-ws11.cell(row=1,column=1,value="Data Dictionary & Raw Exports — column definitions, source attribution, file index, changelog").font=hfont(13,True,CLR_HEADER)
-r=3
-ws11.cell(row=r,column=1,value="A — COLUMN DICTIONARY (key columns)").font=hfont(11,True,CLR_HEADER); r+=1
-dcols=["Column","Tab","Definition","Data origin","Units/Format"]
-for j,c in enumerate(dcols,1): ws11.cell(row=r,column=j,value=c)
-style_header_row(ws11,r,len(dcols)); r+=1
-dict_rows=[
- ("Authority_Score","1,2,3,5,8,9","Semrush domain authority 0-100","SR backlinks_comparison / refdomains","integer 0-100"),
- ("Toxic_Tail_%","1,2,3","Share of ref domains AS 0-10","SR backlinks_ascore_profile","percent"),
- ("Follow_%","1,2,3","follows/(follows+nofollows) at backlink level","SR backlinks_overview","percent"),
- ("Organic_Keywords_UK / Traffic","1,2,4","Semrush organic keyword count & est. monthly traffic","SR organic_research / domain_rank","count"),
- ("CPC_GBP","4","Semrush CPC converted USD→GBP @0.79","SR organic_research","GBP"),
- ("Est_Traffic_Cost_GBP","1,2","Modelled monthly value of organic traffic (USD→GBP @0.79). Traffic-cost scale-corrected to a consistent per-visit basis across all 10 domains (competitor cost fields ×100 before FX to match NFG's domain_rank scale; all land ~£2-4/visit).","SR domain_rank/organic","GBP"),
- ("Target_Quality","5,10","Analyst class: Genuine-GovEdu/Charity/RegionalNews vs Directory/Farm/Spam","Derived (analyst)","label"),
- ("Consensus_Target","1,5","Linked by >=4 of 9 competitors","Derived","Y/blank"),
- ("Whitespace_Level","7","Region link deficit × local demand judgment","Derived (manual)","HIGH/MED/LOW"),
- ("Region / Region_Confidence","5,7,9","Manual domain/brand/outlet classification (NOT IP-geo)","Derived (manual)","UK region + H/M/L"),
- ("Prioritisation (no composite score)","5,6,10","Backlink targets ranked by Semrush Authority Score + competitor consensus; keyword targets by search volume + difficulty. No invented non-Semrush score is reported.","Method","note"),
-]
-for row in dict_rows:
-    for j,v in enumerate(row,1):
-        cell=ws11.cell(row=r,column=j,value=v); cell.font=hfont(9); cell.border=BORDER; cell.alignment=Alignment(vertical="top",wrap_text=True)
-    r+=1
-r+=1
-ws11.cell(row=r,column=1,value="B — RAW EXPORT INDEX (files on disk under /home/user/test/data/)").font=hfont(11,True,CLR_HEADER); r+=1
-fcols=["File","Engine","Report","Pull_Date","Region_Filter","Row_Count"]
-for j,c in enumerate(fcols,1): ws11.cell(row=r,column=j,value=c)
-style_header_row(ws11,r,len(fcols)); r+=1
-def engine_report(fn):
-    if fn.startswith("ahrefs_"): return ("Ahrefs","referring-domains")
-    if fn.startswith("benchmark_backlinks"): return ("Semrush","backlinks_comparison")
-    if fn.startswith("benchmark_keywords"): return ("Semrush","domain_rank/organic")
-    if fn.startswith("nfg_keywords") or fn.startswith("gap_batch"): return ("Semrush","organic/domain_domains")
-    if fn.startswith("nfg_anchors"): return ("Semrush","backlinks_anchors")
-    if fn.startswith("nfg_refips"): return ("Semrush","backlinks_refips")
-    if fn.startswith("nfg_refdomains") or fn.startswith("refdomains_"): return ("Semrush","backlinks_refdomains")
-    if fn.startswith("ascore"): return ("Semrush","backlinks_ascore_profile")
-    if fn.startswith("historical"): return ("Semrush","backlinks_historical")
-    if fn.startswith("categories"): return ("Semrush","backlinks_categories")
-    if fn.startswith("tld"): return ("Semrush","backlinks_tld")
-    if fn.startswith("overview"): return ("Semrush","backlinks_overview")
-    if fn.startswith("backlink_gap_targetlist") or fn=="matrix.csv": return ("Pooled SR+AH","backlinks_matrix/derived")
-    if fn.startswith("keyword_gap") or fn.startswith("organic_competitors") or fn.startswith("nfg_quickwins") or fn.startswith("ifa_footprints"): return ("Semrush","domain_domains/organic")
-    if fn=="regional_map.csv": return ("Pooled SR+AH","derived regional matrix")
-    return ("Semrush","-")
-files=[]
-for d in ("backlinks","keywords","gap"):
-    for p in sorted(glob.glob(f"{DATA}/{d}/*.csv")):
-        fn=os.path.basename(p)
-        try: n=sum(1 for _ in open(p))-1
-        except: n=0
-        eng,rep=engine_report(fn)
-        files.append((f"{d}/{fn}",eng,rep,SNAP,"UK",n))
-for row in files:
-    for j,v in enumerate(row,1):
-        cell=ws11.cell(row=r,column=j,value=v); cell.font=hfont(9); cell.border=BORDER
-        if j==6: cell.number_format="#,##0"
-    r+=1
-r+=1
-ws11.cell(row=r,column=1,value="C — SNAPSHOT & API NOTES").font=hfont(11,True,CLR_HEADER); r+=1
-notes=[
- ("Snapshot date","2026-09-22 (single dated window, referenced by every tab)"),
- ("Region","UK (Semrush backlink reports are global; UK framing interpretive)"),
- ("Approx. API units consumed","~200,000 Semrush units across benchmark + 10-domain deep pulls + gap batches + Ahrefs pooling"),
- ("Firewall","All reported metrics Semrush-only; Ahrefs DR evidence-only; AS and DR never in one column"),
- ("Gap pooling","866 unique gap domains: 712 SR-scored, 149 AH-only unmatched, 49 hard-spam excluded"),
-]
-for k,v in notes: r=kv(ws11,r,k,v,kfill=CLR_SUB)
-r+=1
-ws11.cell(row=r,column=1,value="D — CHANGELOG").font=hfont(11,True,CLR_HEADER); r+=1
-for j,c in enumerate(["Version","Date","Editor","Change"],1): ws11.cell(row=r,column=j,value=c)
-style_header_row(ws11,r,4); r+=1
-ch=("v1","2026-09-22","SUSO SEO","Initial Month-1 foundation audit build — 12 tabs from Semrush+Ahrefs pulls; corrected narrative (backlink toxicity + authority deficit primary; informational keyword gap; Yorkshire/NE whitespace; target-quality tiering).")
-for j,v in enumerate(ch,1):
-    cell=ws11.cell(row=r,column=j,value=v); cell.font=hfont(9); cell.border=BORDER; cell.alignment=Alignment(vertical="top",wrap_text=True)
-autosize(ws11, {"A":34,"B":14,"C":40,"D":30,"E":16,"F":11})
-ws11.freeze_panes="A2"
-print("tab11 done", len(files), "files indexed")
-
-# =====================================================================
-# reorder sheets 0..11 and save
+# reorder sheets and save (Data Dictionary tab removed by design)
 # =====================================================================
 order_names=["1 Executive Scorecard","2 Competitor Benchmark",
- "3 NFG Backlink Profile","4 NFG Keyword Profile","5 Backlink Gap Targets","6 Keyword Gap",
- "7 Regional Whitespace Map","8 Anchors & Toxicity","9 Backlinks Review","10 Competitor Link Detail",
- "11 Priority Target List","12 Data Dictionary & Raw","13 README & Methodology"]
+ "3 NFG Referring Domains","4 NFG Backlinks","5 Anchors & Toxicity","6 NFG Keyword Profile",
+ "7 Backlink Gap Targets","8 Keyword Gap","9 Regional Whitespace Map","10 Competitor Link Detail",
+ "11 Priority Target List","12 README & Methodology"]
 wb._sheets.sort(key=lambda s: order_names.index(s.title))
 # final pass: strip em/en dashes, arrows and prose hyphens from every string cell
 sanitize_workbook(wb)

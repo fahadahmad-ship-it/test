@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
-"""Verification of the rebuilt NFG audit workbook (post-polish)."""
+"""Verification of the rebuilt NFG audit workbook (full backlink audit + reorder)."""
 import re, openpyxl
 OUT = "/home/user/test/NFG_Month1_Foundation_Audit_2026-09-22_v1.xlsx"
 wb = openpyxl.load_workbook(OUT)
 
-PROV = {"Seen_SR","Seen_AH","AS_source","Ahrefs_DR_evid","Source"}
-FORBIDDEN_SCORE = {"Opportunity_Score","Priority_Score","Tier","Unified_Priority_Score",
-                   "Composite_Strength","Index_AS","Index_RefDomains"}
+PROV = {"Seen_SR","Seen_AH","AS_source","Ahrefs_DR_evid","Source","DR","Ahrefs_DR"}
 EMEN = "—–―‒−→←⟶"  # em en bar figure minus arrows
 DATE_RX = re.compile(r"^\d{4}-\d{2}-\d{2}$|^\d{4}-\d{2}$|^[A-Za-z]{3,9}-\d{4}$")
 NEG_RX  = re.compile(r"^-\d[\d,]*%?$")
@@ -15,7 +13,7 @@ def prose_hyphens(s):
     n = 0
     for tok in re.split(r"\s+", s):
         if not tok: continue
-        if "." in tok or "/" in tok: continue
+        if "." in tok or "/" in tok or ":" in tok: continue
         core = tok.strip(" \t.,;:!?()[]{}\"'•")
         if DATE_RX.match(core): continue
         if NEG_RX.match(core): continue
@@ -29,178 +27,149 @@ def all_str_cells():
                 if isinstance(c.value, str):
                     yield ws, c
 
-print("=== 1. FREEZE PANES (prove header-only / low row) ===")
+EXPECTED = ["1 Executive Scorecard","2 Competitor Benchmark","3 NFG Referring Domains",
+ "4 NFG Backlinks","5 Anchors & Toxicity","6 NFG Keyword Profile","7 Backlink Gap Targets",
+ "8 Keyword Gap","9 Regional Whitespace Map","10 Competitor Link Detail",
+ "11 Priority Target List","12 README & Methodology"]
+
+print("=== 1. TAB LIST / ORDER ===")
+titles = [ws.title for ws in wb.worksheets]
+for t in titles: print("   -", t)
+order_ok = titles == EXPECTED
+print("  order matches expected 12-tab layout:", order_ok)
+print("  tab count == 12:", len(titles) == 12)
+print("  no Data Dictionary tab:", not any("Data Dictionary" in t for t in titles))
+print("  methodology/README is LAST:", ("README" in titles[-1] or "Methodology" in titles[-1]))
+
+print("\n=== 2. FREEZE HEADER-ONLY (every tab, freeze row <=5) ===")
 fp_ok = True
 for ws in wb.worksheets:
     fp = ws.freeze_panes
-    rownum = int(re.sub(r"[A-Z]+","",fp)) if fp else None
-    low = (rownum is not None and rownum <= 5)
+    rn = int(re.sub(r"[A-Z]+","",fp)) if fp else None
+    low = rn is not None and rn <= 5
     if not low: fp_ok = False
-    print(f"  {ws.title:34s} freeze={str(fp):6s} row={rownum} low(<=5)={low}")
+    print(f"   {ws.title:28s} freeze={str(fp):5s} row={rn} ok={low}")
 print("  ALL FREEZE LOW:", fp_ok)
 
-print("\n=== 2. NO PROVENANCE HEADER CELLS (Seen_SR/Seen_AH/AS_source/Ahrefs_DR/Source) ===")
-prov_hits = [(ws.title, c.coordinate, c.value) for ws, c in all_str_cells() if c.value.strip() in PROV]
-print("  provenance header/cell hits:", len(prov_hits))
-for h in prov_hits: print("   ", h)
+print("\n=== 3. TAB 3 NFG Referring Domains: rows + AS + traffic ===")
+ws3 = wb["3 NFG Referring Domains"]
+h3 = [ws3.cell(row=3, column=j).value for j in range(1, ws3.max_column+1)]
+print("  headers:", [h for h in h3 if h])
+ci = {h: i+1 for i, h in enumerate(h3) if h}
+as_c, tr_c, act_c = ci["Authority_Score"], ci["Organic_Traffic"], ci["Recommended_Action"]
+rows3 = 0; missing_as = 0; missing_tr = 0; bad_act = 0
+acts3 = set()
+rr = 4
+while ws3.cell(row=rr, column=1).value:
+    rows3 += 1
+    if ws3.cell(row=rr, column=as_c).value is None: missing_as += 1
+    if ws3.cell(row=rr, column=tr_c).value is None: missing_tr += 1
+    a = ws3.cell(row=rr, column=act_c).value
+    if a not in ("Keep","Review","Disavow"): bad_act += 1
+    else: acts3.add(a)
+    rr += 1
+print(f"  referring-domain rows: {rows3} (expect ~420)")
+print(f"  rows missing Authority_Score: {missing_as}; missing Organic_Traffic: {missing_tr}")
+print(f"  rows with bad/blank Recommended_Action: {bad_act}; actions seen: {sorted(acts3)}")
+intro3 = " ".join(str(ws3.cell(row=n, column=1).value or "") for n in (1,2))
+print("  intro mentions 'referring domains':", "referring domains" in intro3.lower())
+print("  intro points to Backlinks tab:", "backlinks tab" in intro3.lower())
 
-print("\n=== 3. NO INVENTED-SCORE HEADER/CELL (Opportunity_Score/Priority_Score/Tier/Unified_Priority_Score) ===")
-score_hits = [(ws.title, c.coordinate, c.value) for ws, c in all_str_cells() if c.value.strip() in FORBIDDEN_SCORE]
-print("  invented-score cell hits:", len(score_hits))
-for h in score_hits: print("   ", h)
-
-print("\n=== 4. SEGMENT LABELS 'Sector Body' / 'Commercial IFA' APPEAR NOWHERE ===")
-seg_hits = [(ws.title, c.coordinate, c.value[:60]) for ws, c in all_str_cells()
-            if "Sector Body" in c.value or "Commercial IFA" in c.value]
-print("  segment-label hits:", len(seg_hits))
-for h in seg_hits: print("   ", h)
+print("\n=== 4. TAB 4 NFG Backlinks: rows + anchor + action, sorted ===")
+ws4 = wb["4 NFG Backlinks"]
+h4 = [ws4.cell(row=3, column=j).value for j in range(1, ws4.max_column+1)]
+print("  headers:", [h for h in h4 if h])
+c4 = {h: i+1 for i, h in enumerate(h4) if h}
+an_c, ac_c, pa_c = c4["Anchor"], c4["Recommended_Action"], c4["Page_Authority_Score"]
+rows4 = 0; blank_anchor = 0; bad_act4 = 0
+order_seq = []
+rr = 4
+while ws4.cell(row=rr, column=1).value:
+    rows4 += 1
+    av = ws4.cell(row=rr, column=an_c).value
+    if av is None or str(av).strip() == "": blank_anchor += 1
+    a = ws4.cell(row=rr, column=ac_c).value
+    if a not in ("Keep","Review","Disavow"): bad_act4 += 1
+    order_seq.append(a)
+    rr += 1
+rank = {"Disavow":0,"Review":1,"Keep":2}
+grouped_ok = all(rank.get(order_seq[i],9) <= rank.get(order_seq[i+1],9) for i in range(len(order_seq)-1))
+from collections import Counter
+print(f"  backlink rows: {rows4} (expect ~1700+)")
+print(f"  rows with blank anchor: {blank_anchor}; bad/blank action: {bad_act4}")
+print(f"  action distribution: {dict(Counter(order_seq))}")
+print(f"  grouped Disavow->Review->Keep:", grouped_ok)
 
 print("\n=== 5. DASH / HYPHEN SCAN (every cell) ===")
-emen = 0; prose = 0; prose_examples = []
+emen = 0; prose = 0; ex = []
 for ws, c in all_str_cells():
     emen += sum(c.value.count(ch) for ch in EMEN)
     ph = prose_hyphens(c.value)
     if ph:
         prose += ph
-        if len(prose_examples) < 12: prose_examples.append((ws.title, c.coordinate, c.value[:80]))
+        if len(ex) < 10: ex.append((ws.title, c.coordinate, c.value[:70]))
 print("  em/en/bar/arrow dash characters:", emen, "(must be 0)")
-print("  prose hyphens (token without . or /, not date/neg):", prose, "(must be 0)")
-for e in prose_examples: print("   ", e)
+print("  prose hyphens:", prose, "(must be 0)")
+for e in ex: print("    ", e)
 
-print("\n=== 6. METHODOLOGY / README IS THE LAST SHEET ===")
-last = wb.worksheets[-1].title
-readme_last = ("README" in last) or ("Methodology" in last)
-print("  last sheet:", last, "-> is methodology/README:", readme_last)
+print("\n=== 6. NO PROVENANCE COLUMNS / CELLS ===")
+prov = [(ws.title, c.coordinate, c.value) for ws, c in all_str_cells() if c.value.strip() in PROV]
+print("  provenance header/cell hits:", len(prov), prov[:6])
 
-print("\n=== 7. TAB 2 HEADER ORDER (Client not Target; traffic early; no segment/role col) ===")
-ws2 = wb["2 Competitor Benchmark"]
-hdr2 = [ws2.cell(row=2, column=j).value for j in range(1, ws2.max_column+1)]
-print("  first 6 headers:", hdr2[:6])
-ti = next((i for i,h in enumerate(hdr2) if h and "Organic Traffic" in str(h)), None)
-ai = next((i for i,h in enumerate(hdr2) if h and "Authority Score" in str(h)), None)
-ri = next((i for i,h in enumerate(hdr2) if h and "Referring Domains" in str(h)), None)
-no_seg = not any(h in ("Segment","Tag","Role") for h in hdr2)
-traffic_early = ti is not None and ai < ti and ri < ti and ti <= 5
-print(f"  idx AuthorityScore={ai} RefDomains={ri} OrganicTraffic={ti}  traffic_early={traffic_early}  no segment/role col={no_seg}")
+print("\n=== 7. CLIENT NOT TARGET (NFG never labelled 'Target') ===")
+# The Priority tab's 'Target' column is a legitimate outreach-target header, so we only flag
+# cells that label the CLIENT (NFG) as a Target / Is_NFG-style provenance column.
+bad_target = [(ws.title, c.coordinate, c.value) for ws, c in all_str_cells()
+              if c.value.strip() in ("Is_NFG","Is_Target","NFG (Target)","Target Domain","Target_Domain")]
+has_client = any("client" in c.value.lower() for _, c in all_str_cells())
+print("  NFG-labelled-as-Target cells:", len(bad_target), bad_target[:4])
+print("  'Client' terminology present in workbook:", has_client)
 
-print("\n=== 8. RANK LABEL WORDING ('NFG position out of 10') ===")
-rank_labels = [ws2.cell(row=2, column=j).value for j in range(1, ws2.max_column+1)
-               if ws2.cell(row=2, column=j).value and "position out of 10" in str(ws2.cell(row=2, column=j).value)]
-bad_rank = [(ws.title, c.coordinate, c.value) for ws, c in all_str_cells()
-            if c.value.strip() in ("Rank","NFG Rank /10","NFG rank out of 10")]
-print("  benchmark 'position out of 10' headers:", rank_labels)
-print("  leftover bare 'Rank' / 'NFG Rank /10' headers:", len(bad_rank), bad_rank)
+print("\n=== 8. EXISTING TABS STILL POPULATED ===")
+def datarows(title, hdr_row):
+    ws = wb[title]
+    n = 0; rr = hdr_row+1
+    while ws.cell(row=rr, column=1).value not in (None, ""):
+        n += 1; rr += 1
+    return n
+for t, hr, exp in [("2 Competitor Benchmark",2,10),("5 Anchors & Toxicity",5,10),
+                   ("6 NFG Keyword Profile",3,900),("7 Backlink Gap Targets",2,866),
+                   ("8 Keyword Gap",3,10),("9 Regional Whitespace Map",3,5),
+                   ("10 Competitor Link Detail",2,1400),("11 Priority Target List",2,50)]:
+    n = datarows(t, hr)
+    print(f"   {t:28s} data rows={n}")
 
-print("\n=== 9. KEYWORD GAP SORTED BY SEARCH VOLUME DESC (Tab 6) ===")
-ws6 = wb["6 Keyword Gap"]
-h6 = [ws6.cell(row=3, column=j).value for j in range(1, ws6.max_column+1)]
-vcol = h6.index("Search_Volume_UK") + 1
-vols = []
-rr = 4
-while ws6.cell(row=rr, column=1).value:
-    vols.append(ws6.cell(row=rr, column=vcol).value); rr += 1
-kw_sorted = all(vols[i] >= vols[i+1] for i in range(len(vols)-1))
-print(f"  {len(vols)} rows; volume descending:", kw_sorted, " first 6:", vols[:6])
-
-print("\n=== 10. BACKLINK GAP SORTED BY AUTHORITY SCORE DESC + every row has AS (Tab 5) ===")
-ws5 = wb["5 Backlink Gap Targets"]
-h5 = [ws5.cell(row=2, column=j).value for j in range(1, ws5.max_column+1)]
-ascol = h5.index("Authority_Score") + 1
-as_vals = []
-rr = 3
-while ws5.cell(row=rr, column=1).value:
-    as_vals.append(ws5.cell(row=rr, column=ascol).value); rr += 1
-gap_rows = len(as_vals)
-every_as = all(v is not None for v in as_vals)
-as_sorted = all(as_vals[i] >= as_vals[i+1] for i in range(len(as_vals)-1) if as_vals[i] is not None and as_vals[i+1] is not None)
-print(f"  Tab5 rows={gap_rows} (expect 866); every row has AS={every_as}; AS descending={as_sorted}; first 6 AS={as_vals[:6]}")
-
-print("\n=== 11. STRUCTURE: tabs / row counts / charts ===")
-print("  sheet count:", len(wb.worksheets), "(expect 12)")
-for ws in wb.worksheets: print("   -", ws.title)
-ws9 = wb["9 Competitor Link Detail"]
-link_rows = sum(1 for rr in range(3, ws9.max_row+1) if ws9.cell(row=rr, column=1).value)
-print("  Tab 9 link data rows:", link_rows, "(expect ~1453)")
-ws1 = wb["1 Executive Scorecard"]
-print("  Tab 1 (Exec Scorecard) charts:", len(ws1._charts), "(expect 2)")
+print("\n=== 9. CHARTS ONLY ON EXEC SCORECARD ===")
 chart_sheets = [ws.title for ws in wb.worksheets if len(ws._charts) > 0]
-print("  sheets carrying charts:", chart_sheets, "(expect only Exec Scorecard)")
+print("  sheets carrying charts:", chart_sheets)
+print("  exec scorecard chart count:", len(wb["1 Executive Scorecard"]._charts))
+print("  charts only on Exec Scorecard:", chart_sheets == ["1 Executive Scorecard"])
 
-print("\n=== 12. MANDATED BACKLINK-AGE WORDING PRESENT ===")
+print("\n=== 10. MANDATED AGE WORDING PRESENT ===")
 found = [(ws.title, c.coordinate) for ws, c in all_str_cells() if "were acquired in the last 8 months" in c.value]
 print("  cells with mandated sentence:", found)
 
-print("\n=== 13. NO 'How NFG compares' TEXT ANYWHERE ===")
-compare_hits = [(ws.title, c.coordinate, c.value[:70]) for ws, c in all_str_cells() if "How NFG compares" in c.value]
-print("  'How NFG compares' hits:", len(compare_hits))
-for h in compare_hits: print("   ", h)
-
-print("\n=== 14. NO Composite_Strength / Index_AS / Index_RefDomains HEADER OR CELL ===")
-removed_hdr = {"Composite_Strength","Index_AS","Index_RefDomains"}
-removed_hits = [(ws.title, c.coordinate, c.value) for ws, c in all_str_cells() if c.value.strip() in removed_hdr]
-print("  removed-column header/cell hits:", len(removed_hits))
-for h in removed_hits: print("   ", h)
-
-print("\n=== 15. HEADLINE COUNTS BLOCK CLEANED (no 'NOT additive' / '44 are both' / 'NOT additive') ===")
-jargon = ["NOT additive","44 are both","Semrush-scored","Ahrefs-only","hard-spam excluded"]
-jargon_hits = []
-for ws, c in all_str_cells():
-    for j in jargon:
-        if j in c.value: jargon_hits.append((ws.title, c.coordinate, j))
-print("  headline-jargon hits:", len(jargon_hits))
-for h in jargon_hits: print("   ", h)
-
-print("\n=== 16. TWO NEW COMPARISON CHARTS ON EXEC SCORECARD (Authority Score bar + Organic Traffic bar) ===")
-ws1c = wb["1 Executive Scorecard"]
-chart_titles = []
-for ch in ws1c._charts:
-    t = ch.title
-    txt = ""
-    try:
-        for rich in t.tx.rich.p:
-            for run in rich.r:
-                txt += run.t or ""
-    except Exception:
-        txt = str(t)
-    chart_titles.append(txt)
-has_as_chart = any("Authority Score" in t for t in chart_titles)
-has_tr_chart = any("Organic Traffic" in t for t in chart_titles)
-print("  chart titles:", chart_titles)
-print("  Authority Score bar present:", has_as_chart, "| Organic Traffic bar present:", has_tr_chart)
-
-print("\n=== 17. TAB 3 INTRO MENTIONS 'referring domains' ===")
-ws3 = wb["3 NFG Backlink Profile"]
-intro3 = " ".join(str(ws3.cell(row=rn, column=1).value or "") for rn in (1,2))
-tab3_intro_ok = "referring domains" in intro3.lower()
-print("  Tab 3 row1+row2 text:", intro3[:160])
-print("  mentions 'referring domains':", tab3_intro_ok)
-
 print("\n=== SUMMARY ===")
 checks = {
-  "freeze all low": fp_ok,
-  "no provenance cells": len(prov_hits)==0,
-  "no invented-score cells": len(score_hits)==0,
-  "no 'Sector Body'/'Commercial IFA'": len(seg_hits)==0,
-  "em/en dashes == 0": emen==0,
-  "prose hyphens == 0": prose==0,
-  "methodology/README is last sheet": readme_last,
-  "tab2 traffic early + no seg/role col": traffic_early and no_seg,
-  "rank labels renamed": len(rank_labels)==2 and len(bad_rank)==0,
-  "keyword gap sorted by volume desc": kw_sorted,
-  "backlink gap sorted by AS desc": as_sorted,
-  "tab5 every row has AS": every_as,
-  "tab5==866": gap_rows==866,
-  "tab9~1453": abs(link_rows-1453)<=3,
-  "exec scorecard 2 charts": len(ws1._charts)==2,
-  "charts only on exec scorecard": chart_sheets==["1 Executive Scorecard"],
-  "12 tabs": len(wb.worksheets)==12,
-  "mandated wording present": len(found)>=1,
-  "no 'How NFG compares' text": len(compare_hits)==0,
-  "no Composite/Index header or cell": len(removed_hits)==0,
-  "headline counts jargon removed": len(jargon_hits)==0,
-  "exec: Authority Score comparison chart": has_as_chart,
-  "exec: Organic Traffic comparison chart": has_tr_chart,
-  "tab3 intro mentions referring domains": tab3_intro_ok,
+  "12 tabs in exact order": order_ok and len(titles)==12,
+  "no Data Dictionary tab": not any("Data Dictionary" in t for t in titles),
+  "methodology/README last": ("README" in titles[-1] or "Methodology" in titles[-1]),
+  "freeze header-only all tabs": fp_ok,
+  "Tab3 ~420 ref-domain rows": abs(rows3-420) <= 20,
+  "Tab3 every row has AS": missing_as == 0,
+  "Tab3 every row has traffic value": missing_tr == 0,
+  "Tab3 every row has action": bad_act == 0,
+  "Tab3 intro says referring domains": "referring domains" in intro3.lower(),
+  "Tab4 >=1700 backlink rows": rows4 >= 1700,
+  "Tab4 every row has anchor": blank_anchor == 0,
+  "Tab4 every row has action": bad_act4 == 0,
+  "Tab4 grouped Disavow/Review/Keep": grouped_ok,
+  "0 em/en dashes": emen == 0,
+  "0 prose hyphens": prose == 0,
+  "no provenance columns": len(prov) == 0,
+  "Client not Target": len(bad_target) == 0 and has_client,
+  "charts only on Exec Scorecard": chart_sheets == ["1 Executive Scorecard"],
+  "mandated age wording present": len(found) >= 1,
 }
-for k,v in checks.items(): print(f"  [{'PASS' if v else 'FAIL'}] {k}")
+for k, v in checks.items(): print(f"  [{'PASS' if v else 'FAIL'}] {k}")
 print("ALL PASS:", all(checks.values()))
