@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NFG Month-1 Foundation Audit — SEO Off-Page & Keyword Report</title>
+<style>
+/* ============ DESIGN TOKENS ============ */
+:root{
+  color-scheme: light;
+  --page:#f6f6f4; --surface:#ffffff; --surface-2:#fbfbfa;
+  --ink:#111110; --ink-2:#52514e; --muted:#6f6e68;
+  --grid:#e6e5df; --axis:#c9c8c0; --border:rgba(17,17,16,.10);
+  --accent:#4338ca;            /* NFG indigo highlight */
+  --accent-soft:#e7e5fb;
+  --rest:#a9a8a1;              /* recessive "everyone else" bar */
+  --rest-soft:#deddd6;
+  /* sequential blue ramp (heat) */
+  --seq0:#f2f4f8; --seq1:#cde2fb; --seq2:#9ec5f4; --seq3:#5598e7; --seq4:#2a78d6; --seq5:#1c5cab; --seq6:#104281;
+  /* status */
+  --good:#0ca30c; --good-ink:#0a7a08;
+  --warning:#b4790a; --warning-bg:#fdf3dd;
+  --serious:#c05a2b; --serious-bg:#fbeadf;
+  --critical:#c0322f; --critical-bg:#fbe4e3;
+  /* categorical (intent donut) */
+  --cat1:#2a78d6; --cat2:#eb6834; --cat3:#1baf7a; --cat4:#4a3aa7;
+  --shadow:0 1px 2px rgba(17,17,16,.05),0 4px 16px rgba(17,17,16,.06);
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --page:#0d0d0c; --surface:#1a1a19; --surface-2:#201f1e;
+  --ink:#f4f3ee; --ink-2:#c3c2b7; --muted:#9b9a92;
+  --grid:#2c2c2a; --axis:#3a3a37; --border:rgba(255,255,255,.12);
+  --accent:#6d68e0; --accent-soft:#26244a; --rest:#6f6e68; --rest-soft:#3a3a37;
+  --seq0:#20232a; --seq1:#153055; --seq2:#1c5cab; --seq3:#2a78d6; --seq4:#5598e7; --seq5:#86b6ef; --seq6:#b7d3f6;
+  --good:#0ca30c; --good-ink:#2fd02f; --warning:#fab219; --warning-bg:#332a12;
+  --serious:#ec835a; --serious-bg:#3a2418; --critical:#e56a67; --critical-bg:#3a1e1d;
+  --cat1:#3987e5; --cat2:#d95926; --cat3:#199e70; --cat4:#9085e9;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--page); color:var(--ink);
+  font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent)}
+h1,h2,h3{line-height:1.2;margin:0 0 .4em}
+h2{font-size:1.45rem;letter-spacing:-.01em}
+h3{font-size:1.05rem}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+
+/* ============ HEADER ============ */
+header.masthead{background:var(--surface);border-bottom:1px solid var(--border)}
+.masthead .wrap{padding:22px 20px 18px}
+.brandrow{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:12px}
+.logo .mark{width:40px;height:40px;border-radius:9px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;letter-spacing:.02em}
+.logo .mark span{display:block;transform:translateY(-1px)}
+h1{font-size:1.5rem;margin:0}
+.sub{color:var(--ink-2);font-size:.9rem;margin-top:2px}
+.meta{font-size:.8rem;color:var(--muted);margin-top:2px}
+.caveat{margin-top:12px;font-size:.8rem;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--warning);border-radius:6px;padding:8px 12px}
+.toggle{border:1px solid var(--border);background:var(--surface-2);color:var(--ink-2);border-radius:20px;padding:6px 14px;font-size:.8rem;cursor:pointer;font-family:inherit}
+.toggle:hover{color:var(--ink)}
+
+/* ============ TAB NAV ============ */
+nav.tabs{position:sticky;top:0;z-index:30;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:0 1px 0 var(--border)}
+nav.tabs .wrap{display:flex;gap:2px;overflow-x:auto;padding:0 12px}
+.tab-btn{appearance:none;border:0;background:none;font-family:inherit;font-size:.86rem;color:var(--ink-2);
+  padding:13px 14px;cursor:pointer;white-space:nowrap;border-bottom:2.5px solid transparent;font-weight:500}
+.tab-btn:hover{color:var(--ink)}
+.tab-btn[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tab-btn .n{opacity:.55;font-variant-numeric:tabular-nums;margin-right:5px}
+
+/* ============ PANELS ============ */
+main .wrap{padding:26px 20px 60px}
+.panel{display:none;animation:fade .25s ease}
+.panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.lead{color:var(--ink-2);max-width:70ch;margin:0 0 20px;font-size:.98rem}
+
+/* cards / grid */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:880px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.section-title{display:flex;align-items:baseline;gap:10px;margin:30px 0 12px}
+.section-title:first-child{margin-top:4px}
+.section-title small{color:var(--muted);font-weight:400;font-size:.8rem}
+
+/* finding cards */
+.finding{border-left:4px solid var(--rest);position:relative}
+.finding.crit{border-left-color:var(--critical)}
+.finding.warn{border-left-color:var(--warning)}
+.finding.info{border-left-color:var(--accent)}
+.finding.good{border-left-color:var(--good)}
+.finding .ic{width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;margin-bottom:8px}
+.finding.crit .ic{background:var(--critical-bg);color:var(--critical)}
+.finding.warn .ic{background:var(--warning-bg);color:var(--warning)}
+.finding.info .ic{background:var(--accent-soft);color:var(--accent)}
+.finding.good .ic{background:var(--surface-2);color:var(--good-ink)}
+.finding h3{margin:.1em 0 .3em;font-size:1rem}
+.finding p{margin:0;color:var(--ink-2);font-size:.86rem}
+.tagline{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+.tag-crit{color:var(--critical)} .tag-warn{color:var(--warning)} .tag-good{color:var(--good-ink)} .tag-info{color:var(--accent)}
+
+/* KPI scorecard tiles */
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+.kpi .lab{font-size:.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.kpi .val{font-size:1.7rem;font-weight:700;margin:2px 0;letter-spacing:-.02em}
+.kpi .cmp{font-size:.78rem;color:var(--ink-2)}
+.rankpill{display:inline-block;font-size:.72rem;font-weight:700;border-radius:20px;padding:2px 9px;margin-top:6px}
+.rank-good{background:var(--surface-2);color:var(--good-ink);border:1px solid var(--border)}
+.rank-bad{background:var(--critical-bg);color:var(--critical)}
+.rank-mid{background:var(--warning-bg);color:var(--warning)}
+
+/* tables */
+.tblwrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;background:var(--surface);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;font-size:.83rem}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--grid);white-space:nowrap}
+thead th{background:var(--surface-2);color:var(--ink-2);font-weight:600;position:sticky;top:0;font-size:.76rem;text-transform:uppercase;letter-spacing:.03em}
+th.sortable{cursor:pointer;user-select:none}
+th.sortable:hover{color:var(--ink)}
+th.sortable::after{content:" ⇅";opacity:.35;font-size:.8em}
+th.sortable.asc::after{content:" ↑";opacity:.9}
+th.sortable.desc::after{content:" ↓";opacity:.9}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:hover{background:var(--surface-2)}
+tr.nfg-row{background:var(--accent-soft)!important;font-weight:600}
+tr.nfg-row td{border-bottom-color:var(--border)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.star{color:var(--accent);font-weight:700}
+
+/* badges */
+.badge{display:inline-block;font-size:.7rem;font-weight:700;border-radius:5px;padding:2px 7px;letter-spacing:.02em;border:1px solid transparent}
+.b-regional{background:var(--accent-soft);color:var(--accent)}
+.b-content{background:#e3f3ec;color:#0a7a55}
+.b-outreach{background:#e4eefb;color:#1c5cab}
+.b-disavow{background:var(--critical-bg);color:var(--critical)}
+:root[data-theme="dark"] .b-content{background:#12332a;color:#3fd0a0}
+:root[data-theme="dark"] .b-outreach{background:#16304f;color:#7db4ef}
+.b-quick{background:var(--warning-bg);color:var(--warning)}
+.eff{font-size:.72rem;font-weight:700}
+.eff-L{color:var(--good-ink)} .eff-M{color:var(--warning)} .eff-H{color:var(--serious)}
+
+/* chart chrome */
+.chart-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;gap:10px}
+.chart-h h3{margin:0;font-size:.98rem}
+.chart-h .hint{font-size:.75rem;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:.78rem;color:var(--ink-2)}
+.legend .li{display:flex;align-items:center;gap:6px}
+.legend .sw{width:12px;height:12px;border-radius:3px;flex:none}
+svg{display:block;max-width:100%;height:auto}
+svg text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.axislab{fill:var(--muted);font-size:11px}
+.vallab{fill:var(--ink);font-size:11px;font-weight:600}
+.vallab-2{fill:var(--ink-2);font-size:11px}
+.gridline{stroke:var(--grid);stroke-width:1}
+.baseline{stroke:var(--axis);stroke-width:1.5}
+
+/* disavow split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.split{grid-template-columns:1fr}}
+.discard{border-radius:12px;padding:18px;border:1px solid var(--border)}
+.discard.hard{background:var(--critical-bg);border-color:var(--critical)}
+.discard.review{background:var(--warning-bg);border-color:var(--warning)}
+.discard .big{font-size:2.4rem;font-weight:800;letter-spacing:-.02em;line-height:1}
+.discard .hd{display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:8px}
+.discard .ic2{width:26px;height:26px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;font-size:15px}
+.discard.hard .ic2{background:var(--critical);color:#fff}
+.discard.review .ic2{background:var(--warning);color:#241a05}
+.discard p{font-size:.84rem;color:var(--ink-2);margin:.5em 0 0}
+.discard .verdict{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-top:10px}
+
+/* pills / notes */
+.note{font-size:.8rem;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:10px 13px;margin-top:14px}
+.note b{color:var(--ink)}
+ul.tight{margin:.4em 0;padding-left:1.15em}
+ul.tight li{margin:.2em 0;color:var(--ink-2);font-size:.86rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{font-size:.74rem;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:2px 9px;color:var(--ink-2)}
+.chip.seed{font-variant-numeric:tabular-nums}
+.owned{color:var(--good-ink);font-weight:600}
+.gap{color:var(--critical);font-weight:600}
+
+/* tooltip */
+#tt{position:fixed;pointer-events:none;z-index:100;background:var(--ink);color:var(--page);
+  font-size:.76rem;padding:6px 9px;border-radius:6px;opacity:0;transition:opacity .1s;max-width:240px;box-shadow:var(--shadow)}
+#tt.on{opacity:1}
+#tt b{color:#fff}
+:root[data-theme="dark"] #tt{background:#000;color:#f4f3ee}
+
+footer{border-top:1px solid var(--border);background:var(--surface);color:var(--muted);font-size:.78rem}
+footer .wrap{padding:22px 20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media print{
+  nav.tabs,.toggle{display:none!important}
+  .panel{display:block!important;page-break-inside:avoid;break-inside:avoid}
+  .panel+.panel{page-break-before:always}
+  body{background:#fff;font-size:11px}
+  .card,.kpi,.tblwrap{box-shadow:none}
+  header.masthead{border:0}
+}
+.region-whitespace{outline:2px solid var(--critical);outline-offset:-2px}
+.hfound-note{font-size:.72rem;color:var(--muted);margin-top:4px;font-style:italic}
+</style>
+</head>
+<body>
+<div id="tt" role="tooltip"></div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="brandrow">
+      <div class="logo">
+        <div class="mark"><span>NFG</span></div>
+        <div>
+          <h1>Month-1 Foundation Audit</h1>
+          <div class="sub">National Fostering Group — Off-Page &amp; Keyword Landscape</div>
+          <div class="meta">Semrush data · UK · snapshot 2026-09-22 · Authority Score (AS) = Semrush 0–100</div>
+        </div>
+      </div>
+      <button class="toggle" id="themeBtn" type="button">◐ Theme</button>
+    </div>
+    <div class="caveat">
+      <b>Read me:</b> Figures are Semrush modelled estimates (not Google-truth) from a single snapshot dated 2026-09-22; regional
+      classification and target-quality are analyst judgement. Backlink reports are global, so UK framing is interpretive. Full audited data lives in
+      <i>NFG_Month1_Foundation_Audit_2026-09-22_v1.xlsx</i>.
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Report sections">
+  <div class="wrap" id="tabnav" role="tablist"></div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+  <!-- ================= 1. OVERVIEW ================= -->
+  <section class="panel" id="p1" role="tabpanel">
+    <h2>Executive summary</h2>
+    <p class="lead">NFG's headline "Authority Score 36 / rank 2-of-10" is <b>recency-inflated</b>, not earned. The real Month-1 story is a
+      young, spike-driven backlink profile with a live toxicity problem, a genuine referring-domain deficit, an <b>informational</b> keyword gap
+      (NFG already owns the money terms), and two regions of pure whitespace.</p>
+
+    <h3 class="section-title">The four headline findings</h3>
+    <div class="grid g4">
+      <div class="card finding crit">
+        <div class="ic" aria-hidden="true">!</div>
+        <div class="tagline tag-crit">Critical · Toxicity</div>
+        <h3>Backlink toxicity is the real story</h3>
+        <p>~8-month-old profile with a Feb-2026 spike (ref domains +512%: 24→147; backlinks +1,636%: 28→486). 67% toxic tail, live PBN/link-selling anchors, IP clusters. Needs a disavow review.</p>
+      </div>
+      <div class="card finding crit">
+        <div class="ic" aria-hidden="true">↓</div>
+        <div class="tagline tag-crit">Critical · Authority</div>
+        <h3>Genuine authority deficit</h3>
+        <p>Referring domains rank <b>9/10</b> — 420 vs field median 821.5, a gap of <b>−401.5</b>. Off-site breadth, not on-site, is the primary constraint. This is the number that frames Month-2+.</p>
+      </div>
+      <div class="card finding info">
+        <div class="ic" aria-hidden="true">◎</div>
+        <div class="tagline tag-info">Opportunity · Keywords</div>
+        <h3>The keyword gap is informational</h3>
+        <p>NFG owns money terms (fostering agencies p4, foster carer salary p5). The gap is SEND/EHCP (~34k/mo, winnable), FASD (~29k), kinship (~12k), therapeutic parenting.</p>
+      </div>
+      <div class="card finding warn">
+        <div class="ic" aria-hidden="true">◧</div>
+        <div class="tagline tag-warn">Opportunity · Regional</div>
+        <h3>Regional whitespace</h3>
+        <p>Zero/near-zero links in <b>Yorkshire &amp; Humber</b> and <b>North East</b> — both proven attainable by peers and inside NFG's real geography (NFA North, Reach Out Care).</p>
+      </div>
+    </div>
+
+    <h3 class="section-title">KPI scorecard <small>NFG vs field median &amp; best · rank of 10</small></h3>
+    <div class="grid g4" id="kpiTiles"></div>
+
+    <h3 class="section-title">At a glance</h3>
+    <div class="grid g2">
+      <div class="card">
+        <div class="chart-h"><h3>Competitive strength — all 10 domains</h3><span class="hint">Composite 0–1 · NFG highlighted</span></div>
+        <div id="chartComposite"></div>
+        <div class="legend">
+          <div class="li"><span class="sw" style="background:var(--accent)"></span> National Fostering Group</div>
+          <div class="li"><span class="sw" style="background:var(--rest)"></span> Competitor field</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="chart-h"><h3>NFG vs field median</h3><span class="hint">Indexed, field median = 100</span></div>
+        <div id="chartKpiIndex"></div>
+        <div class="legend">
+          <div class="li"><span class="sw" style="background:var(--accent)"></span> NFG</div>
+          <div class="li"><span class="sw" style="background:var(--rest)"></span> Field median (=100)</div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div class="chart-h"><h3>Referring-domain velocity — the spike</h3><span class="hint">Ref domains over time · a near-vertical Feb-2026 rise = campaign signature</span></div>
+      <div id="chartVelocity"></div>
+      <div class="note">Flat at ~21 referring domains from early-2024 through Jan-2026, then <b>147</b> in Feb-2026 (AS 2→10) and on to <b>420</b> by the snapshot. Net +399 domains in 8 months — the "rank-2 AS" rests on this recent, not earned, breadth.</div>
+    </div>
+  </section>
+
+  <!-- ================= 2. BENCHMARK ================= -->
+  <section class="panel" id="p2" role="tabpanel">
+    <h2>Competitor benchmark</h2>
+    <p class="lead">Ten domains at one Semrush snapshot. NFG's high AS sits on the smallest-but-one referring-domain base. Capstone's 127,526 backlinks are a volume-inflation outlier — score on AS + referring domains, not raw backlink count.</p>
+    <div class="tblwrap">
+      <table id="benchTable">
+        <thead><tr>
+          <th class="num sortable" data-k="rank" data-t="n">Rank</th>
+          <th class="sortable" data-k="domain" data-t="s">Domain</th>
+          <th class="sortable" data-k="tag" data-t="s">Type</th>
+          <th class="num sortable" data-k="as" data-t="n">AS</th>
+          <th class="num sortable" data-k="rd" data-t="n">Ref domains</th>
+          <th class="num sortable" data-k="bl" data-t="n">Backlinks</th>
+          <th class="num sortable" data-k="follow" data-t="n">Follow %</th>
+          <th class="num sortable" data-k="ips" data-t="n">Ref IPs</th>
+          <th class="num sortable" data-k="bpd" data-t="n">BL/domain</th>
+          <th class="num sortable" data-k="tox" data-t="n">Toxic tail %</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="note">Toxic tail % = referring domains at AS 0–10 ÷ total. Lower is better. Cleanest profiles: theFosteringNetwork (45.5%) and theFCA (42.3%); NFG's 67.1% is 2nd-worst of the non-inflated peers.</div>
+  </section>
+
+  <!-- ================= 3. CLIENT AUDIT ================= -->
+  <section class="panel" id="p3" role="tabpanel">
+    <h2>Client audit — NFG backlinks &amp; keywords</h2>
+
+    <h3 class="section-title">Backlink toxicity flags</h3>
+    <div class="grid g3">
+      <div class="card finding crit"><div class="ic">!</div><div class="tagline tag-crit">RED · velocity</div><h3>~8-month-old profile</h3><p>Flat ~21 domains until Jan-2026, then near-vertical: +399 ref domains in 8 months. Bought/aggressive-campaign signature.</p></div>
+      <div class="card finding crit"><div class="ic">!</div><div class="tagline tag-crit">RED · toxic tail</div><h3>67.1% AS 0–10</h3><p>AS-2 band alone = 127 domains. Distribution spikes at AS 0–6, not a healthy pyramid; trusted mid-band is thin.</p></div>
+      <div class="card finding crit"><div class="ic">!</div><div class="tagline tag-crit">RED · anchors</div><h3>PBN / link-selling footprint</h3><p>"…premium pbn network service… buy backlinks online cheap" (59 domains) + "manual outreach backlinks" (18). ~84 domain-hits (~21%).</p></div>
+      <div class="card finding crit"><div class="ic">!</div><div class="tagline tag-crit">RED · IPs</div><h3>IP / subnet clusters</h3><p>25 domains on 159.198.75.134 (US), 17 on 195.20.19.178 (MD) = 42 on two IPs; a Singapore 118.139.x subnet holds 23 more.</p></div>
+      <div class="card finding good"><div class="ic">✓</div><div class="tagline tag-good">CLEARED · anchors</div><h3>No money-anchor over-optimisation</h3><p>Money/exact-match anchors ≈1.9% of backlinks — far below the 10–15% single / 35% top-5 thresholds. Risk is spam-tail, not commercial over-opt.</p></div>
+      <div class="card finding warn"><div class="ic">~</div><div class="tagline tag-warn">AMBER · relevance</div><h3>Topical relevance diluted</h3><p>Led by generic buckets (Business &amp; Industrial 58, Arts 43). Fostering-core present but not dominant (Family 18, Social Issues 17).</p></div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="chart-h"><h3>Backlink acquisition velocity</h3><span class="hint">Referring domains &amp; total backlinks, monthly</span></div>
+      <div id="chartVelocity2"></div>
+      <div class="legend">
+        <div class="li"><span class="sw" style="background:var(--accent)"></span> Referring domains</div>
+        <div class="li"><span class="sw" style="background:var(--rest);border-radius:2px;height:3px"></span> Total backlinks (indexed to same axis)</div>
+      </div>
+      <div class="hound-note hfound-note">Backlinks shown scaled to the referring-domain axis (÷4.15) so both curves share one scale — the point is the co-timed Feb-2026 inflection, not the absolute counts.</div>
+    </div>
+
+    <h3 class="section-title">Keyword profile <small>4,028 keywords · 15,906 est. traffic (UK)</small></h3>
+    <div class="grid g2">
+      <div class="card">
+        <div class="chart-h"><h3>Search-intent split</h3><span class="hint">Share of ranking keywords</span></div>
+        <div id="chartIntent"></div>
+        <div class="legend" id="intentLegend"></div>
+        <div class="hfound-note">Informational share is the verified 72%; the remaining split follows the Semrush intent distribution of the profile.</div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:2px">Money terms owned vs the informational gap</h3>
+        <p style="font-size:.84rem;color:var(--ink-2);margin:.2em 0 .8em">NFG already ranks for the commercial terms. The opportunity is not "more money keywords" — it is informational depth.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div>
+            <div class="tagline tag-good" style="margin-bottom:6px">✓ Owned — money terms</div>
+            <ul class="tight">
+              <li><span class="owned">fostering agencies</span> — pos 4</li>
+              <li><span class="owned">foster carer salary</span> — pos 5</li>
+              <li><span class="owned">become a foster carer</span> — pos 9</li>
+              <li><span class="owned">foster carer</span> — pos 18</li>
+            </ul>
+          </div>
+          <div>
+            <div class="tagline tag-crit" style="margin-bottom:6px">◎ Gap — informational</div>
+            <ul class="tight">
+              <li><span class="gap">SEND / EHCP</span> — ~34k/mo</li>
+              <li><span class="gap">FASD</span> — ~29k/mo</li>
+              <li><span class="gap">kinship care</span> — ~12k/mo</li>
+              <li><span class="gap">therapeutic parenting</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="note"><b>Quick-wins (cannibalised, pos 11–14):</b> foster carer pay p11, fostering allowance p11, fostering near me p14 — fix page/cannibalisation to lift into the top 10. 677 NFG keywords sit in positions 11–30.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4. BACKLINK GAP ================= -->
+  <section class="panel" id="p4" role="tabpanel">
+    <h2>Backlink gap — genuine targets</h2>
+    <p class="lead">866 unique gap referring domains found (link ≥1 competitor, not NFG); 712 Semrush-scored; 69 consensus targets (≥4 of 9 competitors). Below are the top 30 <b>genuine editorial / gov-edu / regional-news / charity</b> targets by priority.</p>
+    <div class="tblwrap">
+      <table id="gapTable">
+        <thead><tr>
+          <th class="num sortable" data-k="rank" data-t="n">#</th>
+          <th class="sortable" data-k="domain" data-t="s">Domain</th>
+          <th class="num sortable" data-k="as" data-t="n">AS</th>
+          <th class="num sortable" data-k="comp" data-t="n"># Competitors</th>
+          <th class="sortable" data-k="region" data-t="s">Region</th>
+          <th class="sortable" data-k="tier" data-t="s">Tier</th>
+          <th class="sortable" data-k="quality" data-t="s">Quality / link type</th>
+          <th class="num sortable" data-k="pri" data-t="n">Priority</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="note"><b>Directories &amp; farms are deliberately excluded from these top targets.</b> High-#competitor "consensus" domains such as <i>yell.com</i> (9 comps), <i>thomsonlocal.com</i> (8), <i>siteprice.org</i>, <i>sitelike.org</i> and PR / mommy-blog farms are link schemes competitors used, not editorial wins — 78 directory/hard-spam rows sit out of the ranked list. Full 866-row list is in the workbook (Tab 5).</div>
+  </section>
+
+  <!-- ================= 5. KEYWORD GAP ================= -->
+  <section class="panel" id="p5" role="tabpanel">
+    <h2>Keyword gap</h2>
+    <p class="lead">Where competitors rank and NFG is absent or weak. Addressable volume is overwhelmingly informational — SEND/EHCP and FASD dwarf everything else, and both are winnable (KD 20–43).</p>
+    <div class="card">
+      <div class="chart-h"><h3>Addressable monthly search volume by cluster</h3><span class="hint">Sum of gap-keyword volume</span></div>
+      <div id="chartClusters"></div>
+    </div>
+    <h3 class="section-title">Top gap keywords</h3>
+    <div class="tblwrap">
+      <table id="kwTable">
+        <thead><tr>
+          <th class="num sortable" data-k="rank" data-t="n">#</th>
+          <th class="sortable" data-k="kw" data-t="s">Keyword</th>
+          <th class="num sortable" data-k="vol" data-t="n">Volume/mo</th>
+          <th class="sortable" data-k="intent" data-t="s">Intent</th>
+          <th class="sortable" data-k="cluster" data-t="s">Cluster</th>
+          <th class="sortable" data-k="rival" data-t="s">Best rival</th>
+          <th class="num sortable" data-k="nfg" data-t="n">NFG pos</th>
+          <th class="sortable" data-k="qw" data-t="s">Quick-win</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="note">NFG pos 0 = not ranking. "Quick-win" flags commercial terms already in NFG's 11–30 band (cannibalised) — optimise the existing page rather than build new content. Full 35-row scored list in the workbook (Tab 6).</div>
+  </section>
+
+  <!-- ================= 6. REGIONAL ================= -->
+  <section class="panel" id="p6" role="tabpanel">
+    <h2>Regional whitespace</h2>
+    <p class="lead">Count of each domain's top-100 referring domains by UK region. NFG is strong in the <b>North West (10)</b> and <b>Scotland (5)</b> but shows <b>Yorkshire &amp; Humber (1)</b> and <b>North East (0)</b> whitespace — both proven attainable by theFCA / theFosteringNetwork and both inside NFG's real service geography.</p>
+    <div class="card">
+      <div class="chart-h"><h3>Region × domain link matrix</h3><span class="hint">Darker = more links · NFG column highlighted · red outline = flagged whitespace</span></div>
+      <div id="heatGrid" style="overflow-x:auto"></div>
+      <div class="legend" id="heatLegend"></div>
+    </div>
+    <h3 class="section-title">Per-region seed domains <small>gap targets, not yet linking to NFG</small></h3>
+    <div class="grid g2" id="seedGrid"></div>
+  </section>
+
+  <!-- ================= 7. ANCHORS & TOXICITY ================= -->
+  <section class="panel" id="p7" role="tabpanel">
+    <h2>Anchors, toxicity &amp; disavow</h2>
+    <div class="grid g2">
+      <div class="card">
+        <div class="chart-h"><h3>Anchor-text mix</h3><span class="hint">Share of top-anchor domain-hits</span></div>
+        <div id="chartAnchors"></div>
+        <div class="note">Dominated by <b>branded</b> (NFA/NFG, 54%) and a <b>toxic PBN/link-selling</b> tail (21%). Money/exact-match is negligible (&lt;1%) — commercial over-optimisation is <b>cleared</b>.</div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:2px">IP-cluster evidence <small style="color:var(--muted);font-weight:400">PBN signature</small></h3>
+        <div class="tblwrap" style="box-shadow:none;margin-top:8px">
+          <table>
+            <thead><tr><th>IP</th><th>Geo</th><th class="num">Domains</th><th>Read</th></tr></thead>
+            <tbody id="ipRows"></tbody>
+          </table>
+        </div>
+        <div class="hound-note found-note hfound-note">Two IPs alone carry 42 referring domains (~10% of NFG's base); a Singapore 118.139.x subnet adds 23 across 5 IPs — textbook PBN, time-aligned with the Feb-2026 spike.</div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Disavow triage — hard vs review</h3>
+    <p class="lead" style="margin-bottom:14px">Two distinct actions. Only the explicit-scheme set is a hard disavow; the low-AS tail is a <b>manual review</b> queue, <b>not</b> an auto-disavow — disavowing genuine-but-weak domains destroys value.</p>
+    <div class="split">
+      <div class="discard hard">
+        <div class="hd"><span class="ic2" aria-hidden="true">⊘</span> HARD disavow</div>
+        <div class="big">~84</div>
+        <div class="verdict" style="color:var(--critical)">Domains · action: disavow</div>
+        <p>Explicit PBN / link-selling anchor domains (59 "buy backlinks / premium pbn" + "manual outreach" set) plus the two-IP PBN cluster (42 domains). Overt scheme fingerprints — safe to disavow.</p>
+      </div>
+      <div class="discard review">
+        <div class="hd"><span class="ic2" aria-hidden="true">⚠</span> REVIEW — do NOT auto-disavow</div>
+        <div class="big">127</div>
+        <div class="verdict" style="color:var(--warning)">AS 0–2 domains · action: manual review</div>
+        <p>The low-authority (AS 0–2) tail. Low AS ≠ toxic — many are small but legitimate. Each needs a human check before any disavow decision; auto-nuking this set would remove genuine links.</p>
+      </div>
+    </div>
+    <div class="note"><b>Why the split matters:</b> colour is backed by an icon and an explicit action label so the hard-vs-review distinction never rests on hue alone. The 127 AS-0–2 domains overlap the toxic tail but are a review queue, not a disavow list.</div>
+  </section>
+
+  <!-- ================= 8. PRIORITY ACTIONS ================= -->
+  <section class="panel" id="p8" role="tabpanel">
+    <h2>Priority actions — Month-2 shortlist</h2>
+    <p class="lead">Top 25 unified actions across backlink outreach, content-for-keyword, regional push and disavow. Quick-wins float to the top. Full queue (210 rows) in the workbook (Tab 10).</p>
+    <div class="legend" style="margin:0 0 14px">
+      <div class="li"><span class="badge b-regional">Regional push</span></div>
+      <div class="li"><span class="badge b-content">Content-for-keyword</span></div>
+      <div class="li"><span class="badge b-outreach">Backlink outreach</span></div>
+      <div class="li"><span class="badge b-disavow">Disavow</span></div>
+      <div class="li"><span class="eff eff-L">Effort L</span> / <span class="eff eff-M">M</span> / <span class="eff eff-H">H</span></div>
+    </div>
+    <div class="tblwrap">
+      <table id="prioTable">
+        <thead><tr>
+          <th class="num">#</th>
+          <th>Action type</th>
+          <th>Target</th>
+          <th>Rationale</th>
+          <th>Region</th>
+          <th class="num">Effort</th>
+          <th class="num">Score</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>National Fostering Group — Month-1 Foundation Audit · Prepared by SusoDigital · Semrush data, UK, snapshot 2026-09-22.</div>
+    <div>Estimates &amp; analyst judgement — see caveats. Source workbook: NFG_Month1_Foundation_Audit_2026-09-22_v1.xlsx</div>
+  </div>
+</footer>
+
+<script>
+/* ==================== DATA (all from audited workbook / CSVs) ==================== */
+var TABS=[
+ ["1","Overview"],["2","Benchmark"],["3","Client audit"],["4","Backlink gap"],
+ ["5","Keyword gap"],["6","Regional"],["7","Anchors & disavow"],["8","Priority actions"]
+];
+
+var KPI=[
+ {lab:"Authority Score",val:"36",cmp:"median 29 · best 39",rank:2,pctl:81,good:true},
+ {lab:"Referring domains",val:"420",cmp:"median 821.5 · best 1,892",rank:9,pctl:8,good:false},
+ {lab:"Total backlinks",val:"1,743",cmp:"median 5,883 · best 127,526",rank:7,pctl:0,good:false},
+ {lab:"Organic keywords (UK)",val:"4,028",cmp:"median 2,058 · best 4,766",rank:2,pctl:80,good:true},
+ {lab:"Est. traffic (UK)",val:"15,906",cmp:"median 3,151 · best 17,114",rank:2,pctl:93,good:true},
+ {lab:"Follow % (backlink)",val:"79.3%",cmp:"median 73.8% · best 89.6%",rank:3,pctl:83,good:true},
+ {lab:"Toxic tail % (lower better)",val:"67.1%",cmp:"median 53.6% · best 42.3%",rank:7,pctl:31,good:false},
+ {lab:"Est. per-visit cost",val:"£2.38",cmp:"£37,816 value ÷ 15,906 visits",rank:0,pctl:0,good:null}
+];
+
+var COMPOSITE=[
+ {d:"thefosteringnetwork.org.uk",v:1.000,nfg:false},
+ {d:"nationalfosteringgroup.co.uk",v:0.653,nfg:true},
+ {d:"thefca.co.uk",v:0.601,nfg:false},
+ {d:"capstonefostercare.co.uk",v:0.303,nfg:false},
+ {d:"compassfostering.com",v:0.278,nfg:false},
+ {d:"fosteringpeople.co.uk",v:0.237,nfg:false},
+ {d:"ispfostering.org.uk",v:0.235,nfg:false},
+ {d:"fosterplus.co.uk",v:0.127,nfg:false},
+ {d:"orangegrovefostercare.co.uk",v:0.125,nfg:false},
+ {d:"swiisfostercare.com",v:0.017,nfg:false}
+];
+
+var KPIIDX=[
+ {lab:"Authority Score",nfg:124},
+ {lab:"Referring domains",nfg:51},
+ {lab:"Organic keywords",nfg:196},
+ {lab:"Est. traffic",nfg:505}
+];
+
+/* velocity: chronological monthly ref domains & backlinks (from historical_NFG.csv) */
+var VEL_DOM=[2,2,2,6,7,8,8,9,11,10,11,12,13,15,14,15,19,21,21,21,24,24,147,211,243,269,296,325,358,420];
+var VEL_BL =[2,2,2,6,7,8,8,9,11,10,16,13,14,16,15,16,20,22,22,21,26,28,486,832,1151,1268,1390,1672,1843,1743];
+var VEL_START=[2024,3]; // April 2024 (0-based month)
+
+var BENCH=[
+ {rank:1,domain:"thefosteringnetwork.org.uk",tag:"Sector body",as:39,rd:1892,bl:18972,follow:72.8,ips:1939,bpd:10.0,tox:45.5,nfg:false},
+ {rank:2,domain:"nationalfosteringgroup.co.uk",tag:"Target",as:36,rd:420,bl:1743,follow:79.3,ips:397,bpd:4.2,tox:67.1,nfg:true},
+ {rank:3,domain:"thefca.co.uk",tag:"Sector body",as:33,rd:1726,bl:6556,follow:74.8,ips:1576,bpd:3.8,tox:42.3,nfg:false},
+ {rank:4,domain:"capstonefostercare.co.uk",tag:"Commercial IFA",as:29,rd:813,bl:127526,follow:30.0,ips:825,bpd:156.9,tox:77.1,nfg:false},
+ {rank:5,domain:"ispfostering.org.uk",tag:"Commercial IFA",as:29,rd:633,bl:1635,follow:80.9,ips:532,bpd:2.6,tox:57.2,nfg:false},
+ {rank:6,domain:"compassfostering.com",tag:"Commercial IFA",as:29,rd:818,bl:6731,follow:71.5,ips:853,bpd:8.2,tox:71.4,nfg:false},
+ {rank:7,domain:"fosteringpeople.co.uk",tag:"Commercial IFA",as:28,rd:847,bl:5210,follow:89.6,ips:789,bpd:6.2,tox:49.4,nfg:false},
+ {rank:8,domain:"fosterplus.co.uk",tag:"Commercial IFA",as:24,rd:895,bl:7139,follow:67.6,ips:785,bpd:8.0,tox:50.1,nfg:false},
+ {rank:9,domain:"orangegrovefostercare.co.uk",tag:"Commercial IFA",as:24,rd:825,bl:1150,follow:75.6,ips:733,bpd:1.4,tox:49.8,nfg:false},
+ {rank:10,domain:"swiisfostercare.com",tag:"Commercial IFA",as:23,rd:300,bl:1270,follow:66.1,ips:259,bpd:4.2,tox:78.0,nfg:false}
+];
+
+var INTENT=[
+ {lab:"Informational",v:72,c:"var(--cat1)"},
+ {lab:"Commercial",v:16,c:"var(--cat2)"},
+ {lab:"Navigational",v:8,c:"var(--cat3)"},
+ {lab:"Transactional",v:4,c:"var(--cat4)"}
+];
+
+var GAP=[
+ {rank:1,domain:"freekidsbooks.org",as:39,comp:5,region:"Non-UK/Unknown",tier:1,quality:"Charity-editorial",pri:0.684},
+ {rank:2,domain:"bbc.co.uk",as:100,comp:5,region:"UK-National",tier:3,quality:"Editorial (blog)",pri:0.667},
+ {rank:3,domain:"ox.ac.uk",as:77,comp:1,region:"South East",tier:3,quality:"Gov/Edu-editorial",pri:0.664},
+ {rank:4,domain:"cam.ac.uk",as:74,comp:1,region:"UK-National",tier:3,quality:"Gov/Edu-editorial",pri:0.655},
+ {rank:5,domain:"ucl.ac.uk",as:72,comp:1,region:"London",tier:3,quality:"Gov/Edu-editorial",pri:0.649},
+ {rank:6,domain:"mirror.co.uk",as:81,comp:3,region:"UK-National",tier:3,quality:"Editorial-news",pri:0.643},
+ {rank:7,domain:"blog.gov.uk",as:68,comp:1,region:"UK-National",tier:3,quality:"Gov/Edu-editorial",pri:0.637},
+ {rank:8,domain:"nytimes.com",as:100,comp:1,region:"Non-UK/Unknown",tier:3,quality:"Editorial-news",pri:0.633},
+ {rank:9,domain:"nationalcareers.service.gov.uk",as:66,comp:1,region:"UK-National",tier:3,quality:"Gov/Edu-editorial",pri:0.631},
+ {rank:10,domain:"leeds.ac.uk",as:65,comp:1,region:"Yorkshire & Humber",tier:3,quality:"Gov/Edu-editorial",pri:0.628},
+ {rank:11,domain:"qub.ac.uk",as:53,comp:2,region:"Northern Ireland",tier:3,quality:"Gov/Edu-editorial",pri:0.626},
+ {rank:12,domain:"turn2us.org.uk",as:63,comp:1,region:"UK-National",tier:1,quality:"Charity-editorial",pri:0.622},
+ {rank:13,domain:"kent.gov.uk",as:51,comp:2,region:"South East",tier:3,quality:"Gov/Edu-editorial",pri:0.620},
+ {rank:14,domain:"dailymail.co.uk",as:95,comp:1,region:"UK-National",tier:3,quality:"Editorial-news",pri:0.618},
+ {rank:15,domain:"healthcarebusinesstoday.com",as:28,comp:4,region:"Non-UK/Unknown",tier:2,quality:"Editorial-news",pri:0.617},
+ {rank:16,domain:"motherandbaby.com",as:49,comp:5,region:"Non-UK/Unknown",tier:2,quality:"Editorial (blog)",pri:0.614},
+ {rank:17,domain:"leeds.gov.uk",as:59,comp:1,region:"Yorkshire & Humber",tier:3,quality:"Gov/Edu-editorial",pri:0.610},
+ {rank:18,domain:"stir.ac.uk",as:47,comp:2,region:"Scotland",tier:3,quality:"Gov/Edu-editorial",pri:0.608},
+ {rank:19,domain:"hants.gov.uk",as:57,comp:1,region:"South East",tier:3,quality:"Gov/Edu-editorial",pri:0.604},
+ {rank:20,domain:"bristol.gov.uk",as:57,comp:1,region:"South West",tier:3,quality:"Gov/Edu-editorial",pri:0.604},
+ {rank:21,domain:"express.co.uk",as:79,comp:2,region:"UK-National",tier:3,quality:"Editorial-news",pri:0.604},
+ {rank:22,domain:"qmul.ac.uk",as:56,comp:1,region:"London",tier:3,quality:"Gov/Edu-editorial",pri:0.601},
+ {rank:23,domain:"gla.ac.uk",as:56,comp:1,region:"Scotland",tier:3,quality:"Gov/Edu-editorial",pri:0.601},
+ {rank:24,domain:"wikipedia.org",as:100,comp:3,region:"UK-National",tier:3,quality:"Charity-editorial",pri:0.600},
+ {rank:25,domain:"norfolk.gov.uk",as:55,comp:1,region:"East of England",tier:3,quality:"Gov/Edu-editorial",pri:0.598},
+ {rank:26,domain:"scope.org.uk",as:54,comp:1,region:"UK-National",tier:1,quality:"Charity-editorial",pri:0.595},
+ {rank:27,domain:"liverpool.ac.uk",as:54,comp:1,region:"North West",tier:3,quality:"Gov/Edu-editorial",pri:0.595},
+ {rank:28,domain:"cardiff.ac.uk",as:53,comp:1,region:"Wales",tier:3,quality:"Gov/Edu-editorial",pri:0.592},
+ {rank:29,domain:"northyorks.gov.uk",as:53,comp:1,region:"Yorkshire & Humber",tier:3,quality:"Gov/Edu-editorial",pri:0.592},
+ {rank:30,domain:"lancashire.gov.uk",as:53,comp:1,region:"North West",tier:3,quality:"Gov/Edu-editorial",pri:0.592}
+];
+
+var CLUSTERS=[
+ {lab:"SEND / EHCP",v:33920,kd:"KD 20–43"},
+ {lab:"FASD / health",v:29100,kd:"KD 13–75"},
+ {lab:"Kinship",v:11950,kd:"KD winnable"},
+ {lab:"Attachment / therapeutic",v:9900,kd:"KD 4–39"},
+ {lab:"Eligibility / care",v:5520,kd:"KD 16–36"},
+ {lab:"Autism / health",v:5400,kd:"KD single"},
+ {lab:"Allowance / pay",v:3740,kd:"quick-win"}
+];
+
+var KW=[
+ {rank:1,kw:"ehcp meaning",vol:12100,intent:"info",cluster:"SEND/eligibility",rival:"isp p39",nfg:0,qw:false},
+ {rank:2,kw:"playtime therapy",vol:3600,intent:"info",cluster:"therapeutic",rival:"thefca p28",nfg:0,qw:false},
+ {rank:3,kw:"ehcp plan",vol:8100,intent:"info",cluster:"SEND/eligibility",rival:"isp p14",nfg:0,qw:false},
+ {rank:4,kw:"fetal alcohol syndrome",vol:18100,intent:"info",cluster:"FASD/health",rival:"thefca p13",nfg:0,qw:false},
+ {rank:5,kw:"foetal alcohol syndrome",vol:8100,intent:"info",cluster:"FASD/health",rival:"thefca p15",nfg:0,qw:false},
+ {rank:6,kw:"foster carer pay",vol:1000,intent:"comm",cluster:"allowance/pay",rival:"capstone p13",nfg:11,qw:true},
+ {rank:7,kw:"fostering near me",vol:590,intent:"trans",cluster:"regional/money",rival:"fosterplus p52",nfg:12,qw:true},
+ {rank:8,kw:"what is ehcp",vol:2900,intent:"info",cluster:"SEND/eligibility",rival:"isp p69",nfg:0,qw:false},
+ {rank:9,kw:"autism in girls",vol:5400,intent:"info",cluster:"autism/health",rival:"thefca p8",nfg:0,qw:false},
+ {rank:10,kw:"kinship",vol:5400,intent:"info",cluster:"kinship",rival:"compass p39",nfg:0,qw:false},
+ {rank:12,kw:"foster payments",vol:880,intent:"comm",cluster:"allowance/pay",rival:"capstone p17",nfg:21,qw:true},
+ {rank:14,kw:"ehcps",vol:2400,intent:"info",cluster:"SEND/eligibility",rival:"isp p8",nfg:0,qw:false},
+ {rank:17,kw:"fostering allowance",vol:1600,intent:"info",cluster:"allowance/pay",rival:"fosteringpeople p6",nfg:11,qw:true},
+ {rank:18,kw:"kinship care",vol:2900,intent:"info",cluster:"kinship",rival:"thefosteringnetwork p8",nfg:0,qw:false},
+ {rank:22,kw:"disorganised attachment style",vol:2400,intent:"info",cluster:"attachment/therapeutic",rival:"compass p4",nfg:0,qw:false},
+ {rank:25,kw:"fasd symptoms",vol:2900,intent:"info",cluster:"FASD/health",rival:"thefca p17",nfg:0,qw:false}
+];
+
+var REGION_DOMAINS=["NFG","FCA","FosterNet","Capstone","ISP","FosterPlus","FostPeople","Swiis","Compass","OrangeGr"];
+var REGION_MATRIX=[
+ ["North West",10,1,3,0,1,1,4,2,2,2],
+ ["North East",0,4,1,0,1,0,0,3,0,0],
+ ["Yorkshire & Humber",1,3,5,5,1,1,0,3,0,3],
+ ["East Midlands",1,4,0,1,3,3,2,0,1,2],
+ ["West Midlands",2,1,1,1,3,0,1,0,3,0],
+ ["East of England",2,1,2,0,4,1,0,0,0,0],
+ ["London",0,2,3,0,1,1,2,1,0,1],
+ ["South East",2,1,2,1,8,2,1,0,2,3],
+ ["South West",1,0,2,6,2,2,3,5,1,3],
+ ["Scotland",5,2,5,0,0,4,1,1,0,0],
+ ["Wales",1,2,3,0,1,0,0,0,0,0],
+ ["Northern Ireland",0,5,2,1,0,0,0,0,0,0],
+ ["UK-National",31,30,39,23,30,16,17,19,31,16]
+];
+var WHITESPACE={"Yorkshire & Humber":1,"North East":1};
+
+var SEEDS=[
+ ["North East","(0 links — whitespace)",["newcastle.gov.uk","chroniclelive.co.uk","gazettelive.co.uk","sunderlandecho.com","newcastleworld.com","northumberlandgazette.co.uk"]],
+ ["Yorkshire & Humber","(1 link — whitespace)",["leeds.ac.uk","leeds.gov.uk","northyorks.gov.uk","hull.ac.uk","shu.ac.uk","sheffield.gov.uk","hulldailymail.co.uk"]],
+ ["North West","(10 — strong, extend)",["liverpool.ac.uk","lancashire.gov.uk","salford.ac.uk","liverpool.gov.uk","manchestereveningnews.co.uk"]],
+ ["Scotland","(5 — strong, extend)",["stir.ac.uk","gla.ac.uk","strath.ac.uk","highland.gov.uk","glasgowlive.co.uk"]],
+ ["East Midlands","(1)",["derbytelegraph.co.uk","leicester.gov.uk","nottinghamcity.gov.uk","northamptonchron.co.uk","nottinghampost.com"]],
+ ["West Midlands","(2)",["coventry.gov.uk","warwickshire.gov.uk","birminghammail.co.uk","expressandstar.com","birminghamworld.uk"]],
+ ["East of England","(2)",["norfolk.gov.uk","uea.ac.uk","hertfordshire.gov.uk","essex.gov.uk","cambridge-news.co.uk"]],
+ ["London","(0)",["ucl.ac.uk","qmul.ac.uk","hillingdon.gov.uk","lambeth.gov.uk","camden.gov.uk"]],
+ ["South East","(2)",["ox.ac.uk","kent.gov.uk","hants.gov.uk","surreycc.gov.uk","southampton.gov.uk"]],
+ ["South West","(1)",["bristol.gov.uk","dorsetcouncil.gov.uk","somerset.gov.uk","bristolpost.co.uk","plymouthherald.co.uk"]],
+ ["Wales","(1)",["cardiff.ac.uk","gov.wales","nation.cymru","wales247.co.uk","swanseabaynews.com"]],
+ ["Northern Ireland","(0)",["qub.ac.uk","ulster.ac.uk","familysupportni.gov.uk","belfastlive.co.uk","belfasttelegraph.co.uk"]]
+];
+
+var ANCHORS=[
+ {lab:"Branded (NFA / NFG)",v:53.9,c:"var(--accent)",status:null},
+ {lab:"Toxic PBN / link-selling",v:21.3,c:"var(--critical)",status:"critical"},
+ {lab:'Generic ("website","here")',v:8.4,c:"var(--rest)",status:null},
+ {lab:"Naked URL",v:6.8,c:"var(--rest)",status:null},
+ {lab:"Other",v:4.6,c:"var(--rest)",status:null},
+ {lab:"Empty anchor",v:4.3,c:"var(--rest)",status:null},
+ {lab:"Money / exact-match",v:0.8,c:"var(--good)",status:"good"}
+];
+
+var IPS=[
+ {ip:"159.198.75.134",geo:"US",n:25,read:"Single-IP cluster"},
+ {ip:"195.20.19.178",geo:"MD",n:17,read:"Single-IP cluster"},
+ {ip:"118.139.176.46",geo:"SG",n:8,read:"SG 118.139.x subnet"},
+ {ip:"184.168.115.60",geo:"SG",n:7,read:"SG subnet"},
+ {ip:"118.139.178.200",geo:"SG",n:6,read:"SG 118.139.x subnet"},
+ {ip:"118.139.181.85",geo:"SG",n:5,read:"SG 118.139.x subnet"}
+];
+
+var PRIO=[
+ {r:1,type:"Regional push",t:"North East cluster",why:"Close whitespace: 0 NFG vs theFCA 4 / swiis 3. Map to Reach Out Care + 'Fostering in Newcastle'.",region:"North East",eff:"M",score:94},
+ {r:2,type:"Regional push",t:"Yorkshire & Humber cluster",why:"Close whitespace: 1 NFG vs FosteringNetwork 5 / Capstone 5. Map to NFA North + 'Fostering in York'.",region:"Yorkshire & Humber",eff:"M",score:92},
+ {r:3,type:"Content-for-keyword",t:"foster carer pay (optimize)",why:"NFG pos 11 — quick win; fix cannibalisation.",region:"",eff:"L",score:73,qw:true},
+ {r:4,type:"Content-for-keyword",t:"become a foster carer (optimize)",why:"NFG pos 9 — quick win; fix cannibalisation.",region:"",eff:"L",score:73,qw:true},
+ {r:5,type:"Content-for-keyword",t:"fostering allowance (optimize)",why:"NFG pos 11 — quick win; fix cannibalisation.",region:"",eff:"L",score:68,qw:true},
+ {r:6,type:"Content-for-keyword",t:"fostering allowance per week",why:"NFG pos 11 — quick win; fix cannibalisation.",region:"",eff:"L",score:68,qw:true},
+ {r:7,type:"Content-for-keyword",t:"how much is fostering allowance",why:"NFG pos 11 — quick win; fix cannibalisation.",region:"",eff:"L",score:68,qw:true},
+ {r:8,type:"Content-for-keyword",t:"foster allowance",why:"NFG pos 12 — quick win; fix cannibalisation.",region:"",eff:"L",score:68,qw:true},
+ {r:9,type:"Backlink outreach",t:"hulldailymail.co.uk",why:"Genuine regional news; links 2 competitors, not NFG. AS 56.",region:"Yorkshire & Humber",eff:"M",score:64.2},
+ {r:10,type:"Backlink outreach",t:"thestar.co.uk",why:"Genuine regional news; links 2 competitors, not NFG. AS 55.",region:"Yorkshire & Humber",eff:"M",score:64},
+ {r:11,type:"Backlink outreach",t:"yorkshireeveningpost.co.uk",why:"Genuine regional news; links 2 competitors, not NFG. AS 55.",region:"Yorkshire & Humber",eff:"M",score:64},
+ {r:12,type:"Content-for-keyword",t:"ehcp meaning",why:"SEND/eligibility gap; best rival isp p39 (NFG absent). Vol 12,100/mo, KD 21.",region:"",eff:"M",score:63.8},
+ {r:13,type:"Content-for-keyword",t:"foster carer pay",why:"allowance/pay gap; rival capstone p13 — NFG already 11–30 (quick win).",region:"",eff:"L",score:63,qw:true},
+ {r:14,type:"Backlink outreach",t:"chroniclelive.co.uk",why:"Genuine regional news; links 1 competitor, not NFG. AS 67.",region:"North East",eff:"M",score:61.6},
+ {r:15,type:"Disavow",t:"PBN IP-cluster (159.198.75.134 + 195.20.19.178)",why:"Defensive: 42 domains on 2 IPs, PBN footprint aligned to Feb-2026 spike.",region:"",eff:"M",score:60},
+ {r:16,type:"Backlink outreach",t:"gazettelive.co.uk",why:"Genuine regional news; links 1 competitor, not NFG. AS 56.",region:"North East",eff:"M",score:59.9},
+ {r:17,type:"Backlink outreach",t:"freekidsbooks.org",why:"Genuine charity; links 5 competitors, not NFG. AS 39.",region:"",eff:"L",score:59.9},
+ {r:18,type:"Backlink outreach",t:"leeds.ac.uk",why:"Genuine gov/edu; links 1 competitor, not NFG. AS 65.",region:"Yorkshire & Humber",eff:"H",score:59.2},
+ {r:19,type:"Backlink outreach",t:"sunderlandecho.com",why:"Genuine regional news; links 1 competitor, not NFG. AS 50.",region:"North East",eff:"M",score:59},
+ {r:20,type:"Backlink outreach",t:"leeds.gov.uk",why:"Genuine gov/edu; links 1 competitor, not NFG. AS 59.",region:"Yorkshire & Humber",eff:"H",score:58.3},
+ {r:21,type:"Disavow",t:"'buy backlinks / premium pbn' anchor domains",why:"Defensive: 59 domains with explicit link-selling anchor (~21% of top-50 anchors).",region:"",eff:"M",score:58},
+ {r:22,type:"Backlink outreach",t:"newcastleworld.com",why:"Genuine regional news; links 1 competitor, not NFG. AS 43.",region:"North East",eff:"M",score:57.9},
+ {r:23,type:"Backlink outreach",t:"northumberlandgazette.co.uk",why:"Genuine regional news; links 1 competitor, not NFG. AS 41.",region:"North East",eff:"M",score:57.6},
+ {r:24,type:"Content-for-keyword",t:"foster payments",why:"allowance/pay gap; rival capstone p17 — NFG already 11–30 (quick win).",region:"",eff:"L",score:57.5,qw:true},
+ {r:25,type:"Backlink outreach",t:"rotherhamadvertiser.co.uk",why:"Genuine regional news; links 1 competitor, not NFG. AS 40.",region:"Yorkshire & Humber",eff:"M",score:57.4}
+];
+
+/* ==================== SHARED HELPERS ==================== */
+var SVGNS="http://www.w3.org/2000/svg";
+function el(tag,attrs,txt){var e=document.createElementNS(SVGNS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(txt!=null)e.textContent=txt;return e;}
+function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+var tt=document.getElementById("tt");
+function showTT(html,ev){tt.innerHTML=html;tt.classList.add("on");moveTT(ev);}
+function moveTT(ev){var x=ev.clientX+14,y=ev.clientY+14;if(x+250>innerWidth)x=ev.clientX-250;tt.style.left=x+"px";tt.style.top=y+"px";}
+function hideTT(){tt.classList.remove("on");}
+function hookTT(node,html){node.style.cursor="default";node.addEventListener("mousemove",function(e){showTT(html,e);});node.addEventListener("mouseleave",hideTT);}
+function fmt(n){return n.toLocaleString("en-GB");}
+
+/* ---- horizontal highlight bar chart ---- */
+function barH(mount,rows,opts){
+  opts=opts||{};
+  var W=560,rowH=opts.rowH||30,padL=opts.padL||188,padR=64,padT=8,padB=8;
+  var H=padT+padB+rows.length*rowH;
+  var max=opts.max||Math.max.apply(null,rows.map(function(r){return r.value;}));
+  var svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H,role:"img"});
+  var plotW=W-padL-padR;
+  rows.forEach(function(r,i){
+    var y=padT+i*rowH, bh=rowH-10;
+    var w=Math.max(2,plotW*(r.value/max));
+    var col=r.highlight?"var(--accent)":"var(--rest)";
+    // label
+    var lab=el("text",{x:padL-10,y:y+bh/2+4,"text-anchor":"end",class:r.highlight?"vallab":"vallab-2"},r.label);
+    lab.setAttribute("font-weight",r.highlight?"700":"400");
+    svg.appendChild(lab);
+    var rect=el("rect",{x:padL,y:y+2,width:w,height:bh,rx:4,fill:col});
+    hookTT(rect,"<b>"+r.label+"</b><br>"+(opts.vlabel||"Value")+": "+r.disp);
+    svg.appendChild(rect);
+    svg.appendChild(el("text",{x:padL+w+7,y:y+bh/2+4,class:"vallab"},r.disp));
+  });
+  mount.appendChild(svg);
+}
+
+/* ---- grouped bar (NFG vs 100 baseline) ---- */
+function kpiIndex(mount,rows){
+  var W=560,rowH=46,padL=150,padR=54,padT=10,padB=24;
+  var H=padT+padB+rows.length*rowH;
+  var max=Math.max.apply(null,rows.map(function(r){return r.nfg;}));max=Math.max(max,120);
+  var svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
+  var plotW=W-padL-padR;
+  // baseline (=100) gridline
+  var bx=padL+plotW*(100/max);
+  svg.appendChild(el("line",{x1:bx,y1:padT,x2:bx,y2:H-padB,class:"gridline","stroke-dasharray":"3 3"}));
+  svg.appendChild(el("text",{x:bx,y:H-8,"text-anchor":"middle",class:"axislab"},"median = 100"));
+  rows.forEach(function(r,i){
+    var y=padT+i*rowH;
+    svg.appendChild(el("text",{x:padL-10,y:y+22,"text-anchor":"end",class:"vallab-2"},r.lab));
+    // median bar (rest, to 100)
+    var wm=plotW*(100/max);
+    svg.appendChild(el("rect",{x:padL,y:y+6,width:wm,height:12,rx:4,fill:"var(--rest)"}));
+    // nfg bar
+    var wn=plotW*(r.nfg/max);
+    var rc=el("rect",{x:padL,y:y+22,width:Math.max(2,wn),height:12,rx:4,fill:"var(--accent)"});
+    hookTT(rc,"<b>"+r.lab+"</b><br>NFG index: "+r.nfg+" (median=100)");
+    svg.appendChild(rc);
+    var over=r.nfg>=100;
+    svg.appendChild(el("text",{x:padL+wn+7,y:y+32,class:"vallab",fill:over?"var(--good-ink)":"var(--critical)"},r.nfg));
+  });
+  mount.appendChild(svg);
+}
+
+/* ---- velocity line ---- */
+function velocity(mount,series,opts){
+  opts=opts||{};
+  var W=880,H=opts.H||240,padL=48,padR=20,padT=18,padB=42;
+  var svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
+  var n=series[0].data.length;
+  var allmax=0;series.forEach(function(s){s.data.forEach(function(v){if(v>allmax)allmax=v;});});
+  var yMax=Math.ceil(allmax/100)*100;
+  function X(i){return padL+(W-padL-padR)*(i/(n-1));}
+  function Y(v){return padT+(H-padT-padB)*(1-v/yMax);}
+  // y grid
+  for(var g=0;g<=4;g++){var v=yMax*g/4,y=Y(v);
+    svg.appendChild(el("line",{x1:padL,y1:y,x2:W-padR,y2:y,class:"gridline"}));
+    svg.appendChild(el("text",{x:padL-8,y:y+4,"text-anchor":"end",class:"axislab"},fmt(v)));
+  }
+  // x labels (month)
+  var mon=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  for(var i=0;i<n;i+=6){
+    var mi=(VEL_START[1]+i)%12, yr=VEL_START[0]+Math.floor((VEL_START[1]+i)/12);
+    svg.appendChild(el("text",{x:X(i),y:H-24,"text-anchor":"middle",class:"axislab"},mon[mi]+" "+String(yr).slice(2)));
+  }
+  svg.appendChild(el("line",{x1:padL,y1:H-padB,x2:W-padR,y2:H-padB,class:"baseline"}));
+  // spike marker (Feb-2026 index 22)
+  var sx=X(22);
+  svg.appendChild(el("line",{x1:sx,y1:padT,x2:sx,y2:H-padB,stroke:"var(--critical)","stroke-width":1.5,"stroke-dasharray":"4 3",opacity:.7}));
+  svg.appendChild(el("text",{x:sx+5,y:padT+12,class:"axislab",fill:"var(--critical)","font-weight":"700"},"Feb-2026 spike"));
+  series.forEach(function(s){
+    var d="";s.data.forEach(function(v,i){d+=(i?"L":"M")+X(i).toFixed(1)+" "+Y(v).toFixed(1);});
+    svg.appendChild(el("path",{d:d,fill:"none",stroke:s.color,"stroke-width":s.w||2.5,"stroke-linejoin":"round","stroke-dasharray":s.dash||"none"}));
+  });
+  // markers + hover on primary
+  var prim=series[0];
+  prim.data.forEach(function(v,i){
+    var c=el("circle",{cx:X(i),cy:Y(v),r:i===n-1||i===22?4.5:2.6,fill:prim.color,stroke:"var(--surface)","stroke-width":1.5});
+    var mi=(VEL_START[1]+i)%12, yr=VEL_START[0]+Math.floor((VEL_START[1]+i)/12);
+    hookTT(c,"<b>"+mon[mi]+" "+yr+"</b><br>Ref domains: "+fmt(v)+(series[1]?"<br>Backlinks: "+fmt(VEL_BL[i]):""));
+    svg.appendChild(c);
+  });
+  mount.appendChild(svg);
+}
+
+/* ---- donut ---- */
+function donut(mount,rows,legendMount){
+  var W=300,H=220,cx=110,cy=110,rO=88,rI=52;
+  var svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
+  var total=rows.reduce(function(a,r){return a+r.v;},0),ang=-Math.PI/2;
+  rows.forEach(function(r){
+    var frac=r.v/total, a2=ang+frac*2*Math.PI, gap=0.03;
+    var aa=ang+gap/2, bb=a2-gap/2;
+    var large=(bb-aa)>Math.PI?1:0;
+    function pt(rad,a){return[(cx+rad*Math.cos(a)).toFixed(2),(cy+rad*Math.sin(a)).toFixed(2)];}
+    var p1=pt(rO,aa),p2=pt(rO,bb),p3=pt(rI,bb),p4=pt(rI,aa);
+    var d="M"+p1+" A"+rO+" "+rO+" 0 "+large+" 1 "+p2+" L"+p3+" A"+rI+" "+rI+" 0 "+large+" 0 "+p4+" Z";
+    var path=el("path",{d:d,fill:r.c,stroke:"var(--surface)","stroke-width":2});
+    hookTT(path,"<b>"+r.lab+"</b><br>"+r.v+"% of keywords");
+    svg.appendChild(path);
+    // direct label for slices >=6%
+    if(frac>=0.06){var mid=(aa+bb)/2,lr=(rO+rI)/2,lx=cx+lr*Math.cos(mid),ly=cy+lr*Math.sin(mid);
+      var t=el("text",{x:lx,y:ly+4,"text-anchor":"middle","font-size":"12","font-weight":"700",fill:"#fff"},r.v+"%");
+      svg.appendChild(t);}
+    ang=a2;
+  });
+  svg.appendChild(el("text",{x:cx,y:cy-4,"text-anchor":"middle","font-size":"22","font-weight":"800",fill:"var(--ink)"},"72%"));
+  svg.appendChild(el("text",{x:cx,y:cy+14,"text-anchor":"middle","font-size":"11",fill:"var(--muted)"},"informational"));
+  mount.appendChild(svg);
+  if(legendMount){rows.forEach(function(r){var d=document.createElement("div");d.className="li";
+    d.innerHTML='<span class="sw" style="background:'+r.c+'"></span>'+r.lab+' · '+r.v+'%';legendMount.appendChild(d);});}
+}
+
+/* ---- vertical cluster bars ---- */
+function clusterBars(mount,rows){
+  var W=880,H=300,padL=14,padR=14,padT=16,padB=64,n=rows.length;
+  var svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
+  var max=Math.max.apply(null,rows.map(function(r){return r.v;}));
+  var plotW=W-padL-padR,plotH=H-padT-padB,bw=plotW/n*0.6,step=plotW/n;
+  rows.forEach(function(r,i){
+    var x=padL+i*step+step*0.2, bh=Math.max(2,plotH*(r.v/max)), y=padT+plotH-bh;
+    var col=i<2?"var(--accent)":"var(--seq4)";
+    var rc=el("rect",{x:x,y:y,width:bw,height:bh,rx:4,fill:col});
+    hookTT(rc,"<b>"+r.lab+"</b><br>"+fmt(r.v)+" searches/mo<br>"+r.kd);
+    svg.appendChild(rc);
+    svg.appendChild(el("text",{x:x+bw/2,y:y-6,"text-anchor":"middle",class:"vallab"},fmt(r.v)));
+    // wrapped label (two lines max)
+    var ly=padT+plotH+16,tx=x+bw/2;
+    var tnode=el("text",{x:tx,y:ly,"text-anchor":"middle",class:"axislab"});
+    var l1=r.lab.length>13?r.lab.slice(0,r.lab.lastIndexOf(" ",13)):r.lab;
+    var l2=r.lab.length>13?r.lab.slice(l1.length+1):"";
+    tnode.appendChild(el("tspan",{x:tx,dy:"0"},l1));
+    if(l2)tnode.appendChild(el("tspan",{x:tx,dy:"12"},l2));
+    svg.appendChild(tnode);
+  });
+  svg.appendChild(el("line",{x1:padL,y1:padT+plotH,x2:W-padR,y2:padT+plotH,class:"baseline"}));
+  mount.appendChild(svg);
+}
+
+/* ---- anchor mix horizontal bars ---- */
+function anchorBars(mount,rows){
+  var W=560,rowH=30,padL=176,padR=44,padT=6,padB=6;
+  var H=padT+padB+rows.length*rowH,max=Math.max.apply(null,rows.map(function(r){return r.v;}));
+  var svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
+  var plotW=W-padL-padR;
+  rows.forEach(function(r,i){
+    var y=padT+i*rowH,bh=rowH-10,w=Math.max(2,plotW*(r.v/max));
+    var lab=el("text",{x:padL-10,y:y+bh/2+4,"text-anchor":"end",class:"vallab-2"},r.lab);
+    svg.appendChild(lab);
+    var rc=el("rect",{x:padL,y:y+2,width:w,height:bh,rx:4,fill:r.c});
+    hookTT(rc,"<b>"+r.lab+"</b><br>"+r.v+"% of anchor domain-hits");
+    svg.appendChild(rc);
+    var vt=el("text",{x:padL+w+7,y:y+bh/2+4,class:"vallab"},r.v+"%");
+    if(r.status==="critical")vt.setAttribute("fill","var(--critical)");
+    if(r.status==="good")vt.setAttribute("fill","var(--good-ink)");
+    svg.appendChild(vt);
+    // status marker (icon + colour, never colour alone) for flagged rows
+    if(r.status){
+      var glyph=r.status==="critical"?"⚠":"✓"; // warning / check
+      svg.appendChild(el("text",{x:padL+w+34,y:y+bh/2+4,"font-size":"12",
+        fill:r.status==="critical"?"var(--critical)":"var(--good-ink)","font-weight":"700"},glyph));
+    }
+  });
+  mount.appendChild(svg);
+}
+
+/* ---- regional heat grid ---- */
+function heatGrid(mount,legendMount){
+  var cols=REGION_DOMAINS,rows=REGION_MATRIX;
+  var cellW=62,cellH=30,labW=140,headH=54;
+  var W=labW+cols.length*cellW+10,H=headH+rows.length*cellH+6;
+  var svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
+  var max=0;rows.forEach(function(r){for(var i=1;i<r.length;i++)if(r[i]>max)max=r[i];});
+  var seq=["--seq0","--seq1","--seq2","--seq3","--seq4","--seq5","--seq6"];
+  function colFor(v){if(v===0)return"var(--seq0)";var t=v/max,idx=Math.min(seq.length-1,1+Math.floor(t*(seq.length-1)));return"var("+seq[idx]+")";}
+  // column headers
+  cols.forEach(function(c,ci){
+    var x=labW+ci*cellW+cellW/2,isNfg=ci===0;
+    var t=el("text",{x:x,y:headH-24,"text-anchor":"start",class:"axislab",transform:"rotate(-42 "+x+" "+(headH-24)+")"},c);
+    if(isNfg){t.setAttribute("fill","var(--accent)");t.setAttribute("font-weight","700");}
+    svg.appendChild(t);
+  });
+  // NFG column highlight background
+  svg.appendChild(el("rect",{x:labW-2,y:headH-2,width:cellW+4,height:rows.length*cellH+4,fill:"none",stroke:"var(--accent)","stroke-width":2,rx:4}));
+  rows.forEach(function(r,ri){
+    var y=headH+ri*cellH,name=r[0],ws=WHITESPACE[name];
+    var lt=el("text",{x:labW-8,y:y+cellH/2+4,"text-anchor":"end",class:"vallab-2"},name);
+    if(ws){lt.setAttribute("fill","var(--critical)");lt.setAttribute("font-weight","700");}
+    svg.appendChild(lt);
+    for(var ci=0;ci<cols.length;ci++){
+      var v=r[ci+1],x=labW+ci*cellW;
+      var rc=el("rect",{x:x+1,y:y+1,width:cellW-2,height:cellH-2,rx:3,fill:colFor(v)});
+      hookTT(rc,"<b>"+cols[ci]+"</b> × "+name+"<br>"+v+" referring domain"+(v===1?"":"s"));
+      svg.appendChild(rc);
+      var dark=v/max>0.55;
+      svg.appendChild(el("text",{x:x+cellW/2,y:y+cellH/2+4,"text-anchor":"middle","font-size":"11","font-weight":ci===0?"700":"500",
+        fill:dark?"#fff":(v===0?"var(--muted)":"var(--ink)")},v));
+    }
+    // whitespace outline on NFG cell
+    if(ws){svg.appendChild(el("rect",{x:labW+1,y:y+1,width:cellW-2,height:cellH-2,rx:3,fill:"none",stroke:"var(--critical)","stroke-width":2}));}
+  });
+  mount.appendChild(svg);
+  if(legendMount){
+    var steps=[["0","var(--seq0)"],["1–2","var(--seq1)"],["3–5","var(--seq3)"],["6+","var(--seq5)"],["max","var(--seq6)"]];
+    steps.forEach(function(s){var d=document.createElement("div");d.className="li";
+      d.innerHTML='<span class="sw" style="background:'+s[1]+';border:1px solid var(--border)"></span>'+s[0];legendMount.appendChild(d);});
+    var w=document.createElement("div");w.className="li";
+    w.innerHTML='<span class="sw" style="background:none;border:2px solid var(--critical)"></span>Flagged whitespace';legendMount.appendChild(w);
+  }
+}
+
+/* ==================== TABLE BUILDERS ==================== */
+function buildKpiTiles(){
+  var m=document.getElementById("kpiTiles");
+  KPI.forEach(function(k){
+    var d=document.createElement("div");d.className="kpi";
+    var pill="";
+    if(k.rank>0){var cls=k.good===true?"rank-good":(k.good===false?"rank-bad":"rank-mid");
+      pill='<div class="rankpill '+cls+'">Rank '+k.rank+'/10 · '+k.pctl+'th pct</div>';}
+    d.innerHTML='<div class="lab">'+k.lab+'</div><div class="val">'+k.val+'</div><div class="cmp">'+k.cmp+'</div>'+pill;
+    m.appendChild(d);
+  });
+}
+function buildBench(){
+  var tb=document.querySelector("#benchTable tbody");
+  BENCH.forEach(function(r){
+    var tr=document.createElement("tr");if(r.nfg)tr.className="nfg-row";
+    tr.innerHTML='<td class="num">'+r.rank+'</td><td>'+(r.nfg?'<span class="star">★ </span>':'')+r.domain+'</td>'+
+      '<td>'+r.tag+'</td><td class="num">'+r.as+'</td><td class="num">'+fmt(r.rd)+'</td><td class="num">'+fmt(r.bl)+'</td>'+
+      '<td class="num">'+r.follow.toFixed(1)+'%</td><td class="num">'+fmt(r.ips)+'</td><td class="num">'+r.bpd.toFixed(1)+'</td>'+
+      '<td class="num">'+r.tox.toFixed(1)+'%</td>';
+    tb.appendChild(tr);
+  });
+  makeSortable("benchTable",BENCH,function(r){return r;});
+}
+function qualDot(q){
+  var c="var(--seq4)";
+  if(/Gov\/Edu/.test(q))c="var(--seq5)";else if(/news/.test(q))c="var(--cat2)";
+  else if(/Charity/.test(q))c="var(--cat3)";else if(/blog/.test(q))c="var(--muted)";
+  return '<span class="dot" style="background:'+c+'"></span>'+q;
+}
+function buildGap(){
+  var tb=document.querySelector("#gapTable tbody");
+  GAP.forEach(function(r){
+    var tr=document.createElement("tr");
+    tr.innerHTML='<td class="num">'+r.rank+'</td><td>'+r.domain+'</td><td class="num">'+r.as+'</td>'+
+      '<td class="num">'+r.comp+'</td><td>'+r.region+'</td><td class="num">'+r.tier+'</td>'+
+      '<td>'+qualDot(r.quality)+'</td><td class="num">'+r.pri.toFixed(3)+'</td>';
+    tb.appendChild(tr);
+  });
+  makeSortable("gapTable",GAP,function(r){return r;});
+}
+function buildKw(){
+  var tb=document.querySelector("#kwTable tbody");
+  var im={info:"Informational",comm:"Commercial",trans:"Transactional",nav:"Navigational"};
+  KW.forEach(function(r){
+    var tr=document.createElement("tr");
+    tr.innerHTML='<td class="num">'+r.rank+'</td><td>'+r.kw+'</td><td class="num">'+fmt(r.vol)+'</td>'+
+      '<td>'+(im[r.intent]||r.intent)+'</td><td>'+r.cluster+'</td><td>'+r.rival+'</td>'+
+      '<td class="num">'+(r.nfg===0?'—':r.nfg)+'</td>'+
+      '<td>'+(r.qw?'<span class="badge b-quick">Quick-win</span>':'')+'</td>';
+    tb.appendChild(tr);
+  });
+  makeSortable("kwTable",KW,function(r){return r;});
+}
+function buildSeeds(){
+  var m=document.getElementById("seedGrid");
+  SEEDS.forEach(function(s){
+    var ws=WHITESPACE[s[0]];
+    var d=document.createElement("div");d.className="card";
+    var chips=s[2].map(function(x){return '<span class="chip">'+x+'</span>';}).join("");
+    d.innerHTML='<h3 style="margin:.1em 0 .2em">'+s[0]+' '+(ws?'<span style="color:var(--critical);font-size:.8rem;font-weight:700">'+s[1]+'</span>':'<span style="color:var(--muted);font-size:.8rem;font-weight:400">'+s[1]+'</span>')+'</h3><div class="chips">'+chips+'</div>';
+    m.appendChild(d);
+  });
+}
+function buildIP(){
+  var tb=document.getElementById("ipRows");
+  IPS.forEach(function(r){
+    var tr=document.createElement("tr");
+    tr.innerHTML='<td style="font-variant-numeric:tabular-nums">'+r.ip+'</td><td>'+r.geo+'</td><td class="num">'+r.n+'</td><td>'+r.read+'</td>';
+    tb.appendChild(tr);
+  });
+}
+function buildPrio(){
+  var tb=document.querySelector("#prioTable tbody");
+  var bmap={"Regional push":"b-regional","Content-for-keyword":"b-content","Backlink outreach":"b-outreach","Disavow":"b-disavow"};
+  PRIO.forEach(function(r){
+    var tr=document.createElement("tr");
+    var badge='<span class="badge '+(bmap[r.type]||'')+'">'+r.type+'</span>';
+    if(r.qw)badge+=' <span class="badge b-quick">QW</span>';
+    tr.innerHTML='<td class="num">'+r.r+'</td><td>'+badge+'</td><td style="white-space:normal;max-width:230px"><b>'+r.t+'</b></td>'+
+      '<td style="white-space:normal;max-width:320px;color:var(--ink-2)">'+r.why+'</td>'+
+      '<td>'+(r.region||'—')+'</td><td class="num"><span class="eff eff-'+r.eff+'">'+r.eff+'</span></td>'+
+      '<td class="num"><b>'+r.score+'</b></td>';
+    tb.appendChild(tr);
+  });
+}
+
+/* ---- generic sortable ---- */
+function makeSortable(tableId,data,rowRender){
+  var table=document.getElementById(tableId);
+  var ths=table.querySelectorAll("th.sortable");
+  var state={k:null,dir:1};
+  ths.forEach(function(th){
+    th.addEventListener("click",function(){
+      var k=th.getAttribute("data-k"),t=th.getAttribute("data-t");
+      if(state.k===k)state.dir*=-1;else{state.k=k;state.dir=1;}
+      ths.forEach(function(o){o.classList.remove("asc","desc");});
+      th.classList.add(state.dir===1?"asc":"desc");
+      data.sort(function(a,b){var x=a[k],y=b[k];
+        if(t==="n"){return (x-y)*state.dir;}
+        return String(x).localeCompare(String(y))*state.dir;});
+      var tb=table.querySelector("tbody");tb.innerHTML="";
+      // re-render by re-dispatch: rebuild rows
+      rebuild(tableId,data);
+    });
+  });
+}
+function rebuild(id,data){
+  if(id==="benchTable"){document.querySelector("#benchTable tbody").innerHTML="";var tb=document.querySelector("#benchTable tbody");
+    data.forEach(function(r){var tr=document.createElement("tr");if(r.nfg)tr.className="nfg-row";
+      tr.innerHTML='<td class="num">'+r.rank+'</td><td>'+(r.nfg?'<span class="star">★ </span>':'')+r.domain+'</td><td>'+r.tag+'</td><td class="num">'+r.as+'</td><td class="num">'+fmt(r.rd)+'</td><td class="num">'+fmt(r.bl)+'</td><td class="num">'+r.follow.toFixed(1)+'%</td><td class="num">'+fmt(r.ips)+'</td><td class="num">'+r.bpd.toFixed(1)+'</td><td class="num">'+r.tox.toFixed(1)+'%</td>';tb.appendChild(tr);});}
+  if(id==="gapTable"){var tb2=document.querySelector("#gapTable tbody");tb2.innerHTML="";
+    data.forEach(function(r){var tr=document.createElement("tr");
+      tr.innerHTML='<td class="num">'+r.rank+'</td><td>'+r.domain+'</td><td class="num">'+r.as+'</td><td class="num">'+r.comp+'</td><td>'+r.region+'</td><td class="num">'+r.tier+'</td><td>'+qualDot(r.quality)+'</td><td class="num">'+r.pri.toFixed(3)+'</td>';tb2.appendChild(tr);});}
+  if(id==="kwTable"){var tb3=document.querySelector("#kwTable tbody");tb3.innerHTML="";var im={info:"Informational",comm:"Commercial",trans:"Transactional",nav:"Navigational"};
+    data.forEach(function(r){var tr=document.createElement("tr");
+      tr.innerHTML='<td class="num">'+r.rank+'</td><td>'+r.kw+'</td><td class="num">'+fmt(r.vol)+'</td><td>'+(im[r.intent]||r.intent)+'</td><td>'+r.cluster+'</td><td>'+r.rival+'</td><td class="num">'+(r.nfg===0?'—':r.nfg)+'</td><td>'+(r.qw?'<span class="badge b-quick">Quick-win</span>':'')+'</td>';tb3.appendChild(tr);});}
+}
+
+/* ==================== CHART RENDER (re-runnable for theme) ==================== */
+function renderCharts(){
+  ["chartComposite","chartKpiIndex","chartVelocity","chartVelocity2","chartIntent","intentLegend","chartClusters","chartAnchors","heatGrid","heatLegend"]
+    .forEach(function(id){var e=document.getElementById(id);if(e)e.innerHTML="";});
+  barH(document.getElementById("chartComposite"),COMPOSITE.map(function(r){return{label:r.d.replace(".co.uk","").replace(".org.uk","").replace(".com",""),value:r.v,disp:r.v.toFixed(3),highlight:r.nfg};}),{vlabel:"Composite",max:1});
+  kpiIndex(document.getElementById("chartKpiIndex"),KPIIDX);
+  velocity(document.getElementById("chartVelocity"),[{data:VEL_DOM,color:"var(--accent)"}]);
+  velocity(document.getElementById("chartVelocity2"),[
+    {data:VEL_DOM,color:"var(--accent)"},
+    {data:VEL_BL.map(function(v){return v/4.15;}),color:"var(--rest)",dash:"5 4",w:2}
+  ]);
+  donut(document.getElementById("chartIntent"),INTENT,document.getElementById("intentLegend"));
+  clusterBars(document.getElementById("chartClusters"),CLUSTERS);
+  anchorBars(document.getElementById("chartAnchors"),ANCHORS);
+  heatGrid(document.getElementById("heatGrid"),document.getElementById("heatLegend"));
+}
+
+/* ==================== TABS ==================== */
+function buildTabs(){
+  var nav=document.getElementById("tabnav");
+  TABS.forEach(function(t,i){
+    var b=document.createElement("button");b.className="tab-btn";b.setAttribute("role","tab");
+    b.setAttribute("aria-selected",i===0?"true":"false");b.dataset.idx=i+1;
+    b.innerHTML='<span class="n">'+t[0]+'</span>'+t[1];
+    b.addEventListener("click",function(){selectTab(i+1);});
+    nav.appendChild(b);
+  });
+}
+function selectTab(idx){
+  document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active");});
+  document.getElementById("p"+idx).classList.add("active");
+  document.querySelectorAll(".tab-btn").forEach(function(b){b.setAttribute("aria-selected",b.dataset.idx==idx?"true":"false");});
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ==================== THEME ==================== */
+document.getElementById("themeBtn").addEventListener("click",function(){
+  var cur=document.documentElement.getAttribute("data-theme");
+  document.documentElement.setAttribute("data-theme",cur==="dark"?"light":"dark");
+  renderCharts();
+});
+if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){
+  document.documentElement.setAttribute("data-theme","dark");
+}
+
+/* ==================== INIT ==================== */
+buildTabs();
+buildKpiTiles();
+buildBench();
+buildGap();
+buildKw();
+buildSeeds();
+buildIP();
+buildPrio();
+renderCharts();
+selectTab(1);
+</script>
+</body>
+</html>
