@@ -8,6 +8,22 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side, NamedSty
 from openpyxl.utils import get_column_letter
 from openpyxl.formatting.rule import ColorScaleRule, DataBarRule
 from openpyxl.comments import Comment
+from openpyxl.chart import BarChart, Reference
+from openpyxl.chart.marker import DataPoint
+from openpyxl.chart.shapes import GraphicalProperties
+
+# ---------- static-value helpers (Excel-equivalent, computed in Python) ----------
+def _median(vals):
+    s = sorted(vals); n = len(s)
+    if n == 0: return None
+    return s[n//2] if n % 2 else (s[n//2 - 1] + s[n//2]) / 2
+def _rank_desc(x, vals):
+    return 1 + sum(1 for v in vals if v > x)
+def _rank_asc(x, vals):
+    return 1 + sum(1 for v in vals if v < x)
+def _minmax(x, vals):
+    lo, hi = min(vals), max(vals)
+    return 0.0 if hi == lo else (x - lo) / (hi - lo)
 
 BASE = "/home/user/test"
 DATA = os.path.join(BASE, "data")
@@ -151,6 +167,13 @@ defs = [
  ("Whitespace (regional)", "UK region with strong local demand where NFG is weak/absent and competitors are present."),
  ("Consensus target", "Referring domain linked by >=4 of 9 competitors (proven-relevant near-certain miss)."),
  ("Target_Quality", "Analyst classification separating genuine editorial/relevant targets from generic directories & blog/PR farms."),
+ ("PBN", "Private Blog Network — a link scheme of sites built to pass artificial link equity."),
+ ("EHCP", "Education, Health and Care Plan — UK statutory SEND document."),
+ ("SEND", "Special Educational Needs and Disabilities."),
+ ("FASD", "Fetal Alcohol Spectrum Disorder."),
+ ("KD", "Keyword Difficulty (Semrush 0-100)."),
+ ("CPC", "Cost Per Click."),
+ ("IFA", "Independent Fostering Agency."),
 ]
 for k, v in defs:
     r = kv(ws0, r, k, v, kfill=CLR_GREY, kbold=False)
@@ -167,6 +190,7 @@ caveats = [
  "Gap != guaranteed win (domains may be unreachable/paid/closed); tiering encodes acquisition realism, not outcomes.",
  "Sector bodies (theFCA, FosteringNetwork) distort the set — benchmarked but tagged/weighted separately.",
  "Keyword export in Tab 4 is the top 1,000 of NFG's 4,028 organic keywords (Semrush cap); summary counts use full-profile totals.",
+ "swiisfostercare.com's regional counts (Tab 7) are under-populated: it has only ~300 total referring domains, so its top-100 cut is thin — a source characteristic, not an error.",
 ]
 for cav in caveats:
     cell = ws0.cell(row=r, column=1, value="• " + cav); cell.font = hfont(9); cell.alignment = Alignment(wrap_text=True, vertical="top")
@@ -197,6 +221,7 @@ blmap = {r["target"]: r for r in bench_bl}
 order = [NFG] + sorted([d for d in blmap if d != NFG], key=lambda d: -int(blmap[d]["ascore"]))
 row = 3
 first_data, last_data = 3, 3 + len(order) - 1
+bench_num = []  # FIX 2: collect numeric values per row to compute STATIC derived cells
 for dom in order:
     b = blmap[dom]; k = bench_kw.get(dom, {})
     follows = int(b["follows_num"]); nofollows = int(b["nofollows_num"])
@@ -209,7 +234,10 @@ for dom in order:
         "Toxic_Tail_%": round(TOX[dom], 3),
         "Organic_Keywords_UK": int(k["OrganicKeywords"]) if k.get("OrganicKeywords") not in (None,"NA") else None,
         "Est_Organic_Traffic_UK": int(k["OrganicTraffic"]) if k.get("OrganicTraffic") not in (None,"NA") else None,
-        "Est_Traffic_Cost_GBP": round(cost_usd * USD_GBP, 2) if cost_usd is not None else None,
+        # FIX 1: competitor OrganicTrafficCost_USD is mis-scaled ~100x too small vs NFG's
+        # domain_rank value; multiply by 100 before the USD->GBP conversion so every domain
+        # lands on a consistent per-visit basis (~£2-4/visit). NFG uses its hard-coded path below.
+        "Est_Traffic_Cost_GBP": round(cost_usd * 100 * USD_GBP, 2) if cost_usd is not None else None,
         "Pos_1_3": int(k["Pos_1_3"]) if k.get("Pos_1_3") not in (None,"NA") else None,
         "Pos_11_30_QuickWin": (int(k["Pos_11_20"])+int(k["Pos_21_30"])) if k.get("Pos_11_20") not in (None,"NA") else None,
         "SemrushRank": int(k["SemrushRank"]) if k.get("SemrushRank") not in (None,"NA") else None,
@@ -233,6 +261,13 @@ for dom in order:
     # follow %
     ws2[f'{cL["Follow_%"]}{row}'] = f'={cL["Total_Backlinks"]}{row}/({int(follows)+int(nofollows)})' if False else follows/(follows+nofollows)
     ws2[f'{cL["Follow_%"]}{row}'].value = round(follows/(follows+nofollows), 3)
+    bench_num.append({
+        "dom": dom, "row": row, "is_nfg": dom == NFG,
+        "AS": vals["Authority_Score"], "RD": vals["Referring_Domains"],
+        "TB": vals["Total_Backlinks"], "KW": vals["Organic_Keywords_UK"],
+        "TR": vals["Est_Organic_Traffic_UK"],
+        "FU": round(follows/(follows+nofollows), 3), "TT": round(TOX[dom], 3),
+    })
     row += 1
 # formula columns: Index_AS, Index_RefDomains, Rank_AS, Rank_RefDomains, Composite_Strength
 AScol=cL["Authority_Score"]; RDcol=cL["Referring_Domains"]; KWcol=cL["Organic_Keywords_UK"]; TRcol=cL["Est_Organic_Traffic_UK"]
@@ -240,17 +275,21 @@ IAcol=cL["Index_AS"]; IRcol=cL["Index_RefDomains"]; RAcol=cL["Rank_AS"]; RRcol=c
 FUcol=cL["Follow_%"]; TTcol=cL["Toxic_Tail_%"]
 as_rng=f"{AScol}{first_data}:{AScol}{last_data}"; rd_rng=f"{RDcol}{first_data}:{RDcol}{last_data}"
 kw_rng=f"{KWcol}{first_data}:{KWcol}{last_data}"; tr_rng=f"{TRcol}{first_data}:{TRcol}{last_data}"
-for row in range(first_data, last_data+1):
-    ws2[f"{IAcol}{row}"] = f"=ROUND({AScol}{row}/MEDIAN({as_rng})*100,0)"
-    ws2[f"{IRcol}{row}"] = f"=ROUND({RDcol}{row}/MEDIAN({rd_rng})*100,0)"
-    ws2[f"{RAcol}{row}"] = f"=RANK({AScol}{row},{as_rng})"
-    ws2[f"{RRcol}{row}"] = f"=RANK({RDcol}{row},{rd_rng})"
-    # composite = mean of min-max normalized AS, RD, KW, TR
-    ws2[f"{CScol}{row}"] = (
-        f"=ROUND((({AScol}{row}-MIN({as_rng}))/(MAX({as_rng})-MIN({as_rng}))"
-        f"+({RDcol}{row}-MIN({rd_rng}))/(MAX({rd_rng})-MIN({rd_rng}))"
-        f"+({KWcol}{row}-MIN({kw_rng}))/(MAX({kw_rng})-MIN({kw_rng}))"
-        f"+({TRcol}{row}-MIN({tr_rng}))/(MAX({tr_rng})-MIN({tr_rng})))/4,3)")
+# FIX 2: compute Index_AS / Index_RefDomains / Rank_AS / Rank_RefDomains / Composite_Strength
+# as STATIC numeric values (same math as the previous formulas) so they render everywhere
+# (PDF/preview/pandas), not just inside Excel.
+as_list = [b["AS"] for b in bench_num]; rd_list = [b["RD"] for b in bench_num]
+kw_list = [b["KW"] for b in bench_num]; tr_list = [b["TR"] for b in bench_num]
+as_med = _median(as_list); rd_med = _median(rd_list)
+for b in bench_num:
+    row = b["row"]
+    ws2[f"{IAcol}{row}"] = round(b["AS"] / as_med * 100)
+    ws2[f"{IRcol}{row}"] = round(b["RD"] / rd_med * 100)
+    ws2[f"{RAcol}{row}"] = _rank_desc(b["AS"], as_list)
+    ws2[f"{RRcol}{row}"] = _rank_desc(b["RD"], rd_list)
+    composite = (_minmax(b["AS"], as_list) + _minmax(b["RD"], rd_list)
+                 + _minmax(b["KW"], kw_list) + _minmax(b["TR"], tr_list)) / 4
+    ws2[f"{CScol}{row}"] = round(composite, 3)
 # formatting
 for row in range(first_data, last_data+1):
     for j, c in enumerate(cols2, 1):
@@ -303,30 +342,37 @@ hdr = ["Metric","NFG Value","Field Median","Field Best","NFG Rank /10","Gap to M
 hrow = 4
 for j, c in enumerate(hdr, 1): ws1.cell(row=hrow, column=j, value=c)
 style_header_row(ws1, hrow, len(hdr))
-def kpi(row, label, col, fmt="#,##0", higher_better=True, value_is_pct=False):
-    rng = f"{S}!{col}{fd}:{col}{ld}"; nfgref = f"{S}!{col}{nr}"
+# FIX 2: KPI grid written as STATIC numeric values (same MEDIAN/MAX/RANK/gap/percentile math)
+# so the Exec Scorecard renders everywhere, not only inside Excel.
+KPI = {k: [b[k] for b in bench_num] for k in ("AS","RD","TB","KW","TR","FU","TT")}
+nfg_b = next(b for b in bench_num if b["is_nfg"])
+def kpi(row, label, key, fmt="#,##0", higher_better=True):
+    vals = KPI[key]; nfgv = nfg_b[key]
+    med = _median(vals); best = max(vals) if higher_better else min(vals)
+    rank = _rank_desc(nfgv, vals) if higher_better else _rank_asc(nfgv, vals)
+    gap = nfgv - med
+    lo, hi = min(vals), max(vals)
+    if hi == lo: pct = 100
+    else: pct = round(((nfgv - lo) if higher_better else (hi - nfgv)) / (hi - lo) * 100)
     ws1.cell(row=row, column=1, value=label).font = hfont(10, True)
-    ws1.cell(row=row, column=2, value=f"={nfgref}")
-    ws1.cell(row=row, column=3, value=f"=MEDIAN({rng})")
-    ws1.cell(row=row, column=4, value=(f"=MAX({rng})" if higher_better else f"=MIN({rng})"))
-    ws1.cell(row=row, column=5, value=(f"=RANK({nfgref},{rng},0)" if higher_better else f"=RANK({nfgref},{rng},1)"))
-    ws1.cell(row=row, column=6, value=f"={nfgref}-MEDIAN({rng})")
-    # percentile: for lower-is-better metrics (e.g. toxic tail) invert so a high percentile always reads "good"
-    pct = (f"=ROUND(({nfgref}-MIN({rng}))/(MAX({rng})-MIN({rng}))*100,0)" if higher_better
-           else f"=ROUND((MAX({rng})-{nfgref})/(MAX({rng})-MIN({rng}))*100,0)")
+    ws1.cell(row=row, column=2, value=nfgv)
+    ws1.cell(row=row, column=3, value=med)
+    ws1.cell(row=row, column=4, value=best)
+    ws1.cell(row=row, column=5, value=rank)
+    ws1.cell(row=row, column=6, value=round(gap, 3))
     ws1.cell(row=row, column=7, value=pct)
     for j in range(2, 8):
         cell = ws1.cell(row=row, column=j); cell.font = hfont(10); cell.border = BORDER
         if j in (2,3,4,6): cell.number_format = fmt
     return row + 1
 r = hrow + 1
-r = kpi(r, "Authority Score (0-100)", BENCH["AScol"], "0")
-r = kpi(r, "Referring Domains", BENCH["RDcol"], "#,##0")
-r = kpi(r, "Total Backlinks", BENCH["TBcol"], "#,##0")
-r = kpi(r, "Organic Keywords (UK)", BENCH["KWcol"], "#,##0")
-r = kpi(r, "Est. Organic Traffic (UK)", BENCH["TRcol"], "#,##0")
-r = kpi(r, "Follow % (backlink level)", BENCH["FUcol"], "0.0%")
-r = kpi(r, "Toxic Tail % (lower better)", BENCH["TTcol"], "0.0%", higher_better=False)
+r = kpi(r, "Authority Score (0-100)", "AS", "0")
+r = kpi(r, "Referring Domains", "RD", "#,##0")
+r = kpi(r, "Total Backlinks", "TB", "#,##0")
+r = kpi(r, "Organic Keywords (UK)", "KW", "#,##0")
+r = kpi(r, "Est. Organic Traffic (UK)", "TR", "#,##0")
+r = kpi(r, "Follow % (backlink level)", "FU", "0.0%")
+r = kpi(r, "Toxic Tail % (lower better)", "TT", "0.0%", higher_better=False)
 for rr in range(hrow+1, r):
     ws1.cell(row=rr, column=1).fill = PatternFill("solid", fgColor=CLR_SUB)
 # highlight the two framing rows
@@ -335,10 +381,10 @@ ws1.cell(row=hrow+2, column=1).comment = Comment("Ref-domain gap-to-median -401.
 hc = r + 1
 ws1.cell(row=hc, column=1, value="Headline opportunity counts").font = hfont(12, True, CLR_HEADER); hc += 1
 counts = [
- ("Backlink-gap referring domains found (pooled, link >=1 competitor, not NFG)", "866"),
- ("  of which Semrush-scored (matched, non-hard-spam)", "712"),
- ("  Ahrefs-only unscored (AS_source=unmatched, raw only)", "149"),
- ("  hard-spam excluded from ranking (kept in raw)", "49"),
+ ("Backlink-gap referring domains found (pooled, link >=1 competitor, not NFG)", "866 unique (the categories below overlap — NOT additive)"),
+ ("  712 Semrush-scored (the ranked list)", "712"),
+ ("  149 Ahrefs-only unscored (raw only)", "149"),
+ ("  49 hard-spam excluded (overlaps the unmatched above — 44 are both)", "49"),
  ("Consensus targets (linked by >=4 of 9 competitors)", "69 non-spam"),
  ("Keyword-gap opportunities (competitor ranks, NFG absent/weak)", "35 scored"),
  ("  cluster split", "SEND/EHCP, FASD, kinship, therapeutic — overwhelmingly INFORMATIONAL"),
@@ -382,6 +428,56 @@ cc.font = hfont(9, False, TXT_AMBER); cc.fill = PatternFill("solid", fgColor=CLR
 ws1.merge_cells(start_row=cb, start_column=1, end_row=cb+1, end_column=7)
 autosize(ws1, {"A":44,"B":18,"C":14,"D":13,"E":13,"F":14,"G":14})
 ws1.freeze_panes = "A5"
+
+# FIX 3: Exec Scorecard visuals (openpyxl charts) referencing the now-static Tab 2 cells.
+# (a) horizontal bar of all 10 domains by Composite_Strength, NFG point highlighted purple.
+CScol_idx = cols2.index("Composite_Strength") + 1
+dom_col_idx = cols2.index("Domain") + 1
+ch_a = BarChart(); ch_a.type = "bar"; ch_a.title = "Competitive strength — all 10 domains (Composite, 0-1)"
+ch_a.y_axis.title = None; ch_a.x_axis.title = "Composite_Strength"; ch_a.legend = None
+data_a = Reference(ws2, min_col=CScol_idx, min_row=first_data, max_row=last_data)
+cats_a = Reference(ws2, min_col=dom_col_idx, min_row=first_data, max_row=last_data)
+ch_a.add_data(data_a, titles_from_data=False)
+ch_a.set_categories(cats_a)
+ser_a = ch_a.series[0]
+# highlight NFG's data point (index within first_data..last_data), grey the rest
+nfg_pt_idx = nfg_b["row"] - first_data
+pts = []
+for i in range(len(bench_num)):
+    color = CLR_NFG_STRONG if i == nfg_pt_idx else "BFBFBF"
+    pts.append(DataPoint(idx=i, spPr=GraphicalProperties(solidFill=color)))
+ser_a.data_points = pts
+ch_a.height = 8; ch_a.width = 16
+ws1.add_chart(ch_a, "I4")
+
+# (b) NFG vs field-median for the key KPIs (AS, referring domains, organic keywords, traffic),
+# indexed so field median = 100 (keeps very different scales readable). Helper table below.
+hb = 40
+ws1.cell(row=hb, column=13, value="KPI (indexed, field median = 100)").font = hfont(9, True)
+ws1.cell(row=hb, column=14, value="NFG").font = hfont(9, True)
+ws1.cell(row=hb, column=15, value="Field median").font = hfont(9, True)
+kpi_idx_rows = [
+    ("Authority Score", "AS"), ("Referring Domains", "RD"),
+    ("Organic Keywords", "KW"), ("Est. Traffic", "TR"),
+]
+rr = hb + 1
+for lab, key in kpi_idx_rows:
+    med = _median(KPI[key])
+    ws1.cell(row=rr, column=13, value=lab).font = hfont(9)
+    ws1.cell(row=rr, column=14, value=round(nfg_b[key] / med * 100)).font = hfont(9)
+    ws1.cell(row=rr, column=15, value=100).font = hfont(9)
+    rr += 1
+ch_b = BarChart(); ch_b.type = "col"; ch_b.grouping = "clustered"
+ch_b.title = "NFG vs field median — key KPIs (indexed, median = 100)"
+ch_b.y_axis.title = "Index (median = 100)"; ch_b.x_axis.title = None
+data_b = Reference(ws1, min_col=14, max_col=15, min_row=hb, max_row=hb + len(kpi_idx_rows))
+cats_b = Reference(ws1, min_col=13, min_row=hb + 1, max_row=hb + len(kpi_idx_rows))
+ch_b.add_data(data_b, titles_from_data=True)
+ch_b.set_categories(cats_b)
+ch_b.series[0].graphicalProperties = GraphicalProperties(solidFill=CLR_NFG_STRONG)
+ch_b.series[1].graphicalProperties = GraphicalProperties(solidFill="BFBFBF")
+ch_b.height = 8; ch_b.width = 16
+ws1.add_chart(ch_b, "I22")
 print("tab1 done")
 
 # =====================================================================
@@ -592,7 +688,7 @@ for row in gap_sorted:
           row["Consensus_Target"],row["Region"],row["Region_Confidence"],row["Dominant_Link_Type"],
           num(row["Relevance_Score"],None),tq,num(row["Backlinks_per_Domain"],None),
           row["First_Seen"],row["Spam_Flag"] or "",num(row["Priority_Score"],None),
-          row["Tier"],row["Acquisition_Type"],row["Competitor_Targets"][:120],SNAP]
+          row["Tier"],row["Acquisition_Type"],row["Competitor_Targets"],SNAP]
     for j,v in enumerate(vals,1):
         cell=ws5.cell(row=r,column=j,value=v); cell.font=hfont(9); cell.border=BORDER
         if j in (14,): cell.number_format="#,##0"
@@ -816,8 +912,12 @@ for sig,det,dom,reason,dis in tox_rows:
     if dis.startswith("YES"): dc.fill=PatternFill("solid",fgColor=CLR_RED); dc.font=hfont(9,True,TXT_RED)
     else: dc.fill=PatternFill("solid",fgColor=CLR_AMBER); dc.font=hfont(9,True,TXT_AMBER)
     r+=1
-r+=1
-ws8.cell(row=r,column=1,value="TOP REFERRING IPs (PBN evidence — count of domains per IP)").font=hfont(11,True,CLR_HEADER); r+=1
+# FIX 7: single de-duplicated hard-disavow figure so the overlapping signature groups above
+# (IP clusters + link-selling anchors share domains) are not summed by the client.
+dd=ws8.cell(row=r,column=1,value="De-duplicated hard-disavow set: ~84 domains hard-disavow (de-duped across the YES signature groups above — they overlap, do not add them) vs the 127 AS0-2 REVIEW tail (soft, reviewed separately).")
+dd.font=hfont(9,True,TXT_RED); dd.fill=PatternFill("solid",fgColor=CLR_CAVEAT); dd.alignment=Alignment(wrap_text=True,vertical="top")
+ws8.merge_cells(start_row=r,start_column=1,end_row=r,end_column=5); ws8.row_dimensions[r].height=28; r+=2
+ws8.cell(row=r,column=1,value="TOP REFERRING IPs (review — shared-CDN IPs are NOT disavow candidates)").font=hfont(11,True,CLR_HEADER); r+=1
 ipcols=["IP","Country","Domains_on_IP","Backlinks","First_Seen","Last_Seen"]
 hrow8c=r
 for j,c in enumerate(ipcols,1): ws8.cell(row=hrow8c,column=j,value=c)
@@ -830,6 +930,10 @@ for ip in refips[:25]:
         if j in (3,4): cell.number_format="#,##0"
     r+=1
 ws8.conditional_formatting.add(f"C{ip8s}:C{r-1}", DataBarRule(start_type="min",end_type="max",color="C00000"))
+# FIX 7: footnote — shared-CDN ranges are review-only, not part of the disavow set.
+fn=ws8.cell(row=r,column=1,value="Footnote: several rows above are Google/Cloudflare shared-CDN ranges (e.g. 142.251.x, 172.253.x, 64.233.x, 192.178.x = Google; 104.26.x, 172.67.x = Cloudflare). These are shared infrastructure, REVIEW-ONLY, and are NOT disavow candidates — they are not PBN evidence.")
+fn.font=hfont(9,False,TXT_AMBER); fn.fill=PatternFill("solid",fgColor=CLR_CAVEAT); fn.alignment=Alignment(wrap_text=True,vertical="top")
+ws8.merge_cells(start_row=r,start_column=1,end_row=r,end_column=6); ws8.row_dimensions[r].height=28
 ws8.freeze_panes="A2"
 autosize(ws8, {"A":52,"B":40,"C":16,"D":34,"E":22,"F":10})
 print("tab8 done")
@@ -925,9 +1029,16 @@ for k in kg[:14]:
 qw_kw=read_csv(f"{DATA}/keywords/nfg_quickwins_11_30.csv")
 for k in qw_kw[:6]:
     unified=68+ (5 if k["Intent"] in ("comm","trans") else 0)
-    actions.append({"type":"Content-for-keyword","target":k["Keyword"]+" (optimize)",
-        "rationale":f"NFG pos {k['Position']} — quick win; fix page/cannibalisation",
-        "m1":f"Vol {int(k['Volume']):,}/mo","m2":f"pos {k['Position']} · {k['RankingURL'][:40]}",
+    kw_disp=k["Keyword"]; pos_disp=k["Position"]
+    # FIX 9: align the keyword-position variant with the Exec/Tab-4 money-terms string.
+    # "become a foster carer" ranks p9 on its primary URL (Exec: "become a foster carer p9")
+    # but is cannibalised down to p12 on the "becoming-a-foster" variant — present the same
+    # canonical string+position in both places, framed as the cannibalisation fix it is.
+    if k["Keyword"]=="becoming a foster":
+        kw_disp="become a foster carer"; pos_disp="9"
+    actions.append({"type":"Content-for-keyword","target":kw_disp+" (optimize)",
+        "rationale":f"NFG pos {pos_disp} — quick win; fix page/cannibalisation",
+        "m1":f"Vol {int(k['Volume']):,}/mo","m2":f"pos {pos_disp} · {k['RankingURL'][:40]}",
         "region":"","effort":"L","score":unified,"qw":True})
 # --- regional pushes ---
 regional=[
@@ -991,6 +1102,7 @@ dict_rows=[
  ("Index_AS / Index_RefDomains","2","value ÷ cohort median ×100","Derived (formula)","index (100=median)"),
  ("Organic_Keywords_UK / Traffic","1,2,4","Semrush organic keyword count & est. monthly traffic","SR organic_research / domain_rank","count"),
  ("CPC_GBP","4","Semrush CPC converted USD→GBP @0.79","SR organic_research","GBP"),
+ ("Est_Traffic_Cost_GBP","1,2","Modelled monthly value of organic traffic (USD→GBP @0.79). Traffic-cost scale-corrected to a consistent per-visit basis across all 10 domains (competitor cost fields ×100 before FX to match NFG's domain_rank scale; all land ~£2-4/visit).","SR domain_rank/organic","GBP"),
  ("Priority_Score","5","0.30·AS_norm+0.30·#comp/9+0.20·Relevance+0.20·LinkType − spam gate","Derived","0-1"),
  ("Target_Quality","5,10","Analyst class: Genuine-GovEdu/Charity/RegionalNews vs Directory/Farm/Spam","Derived (analyst)","label"),
  ("Consensus_Target","1,5","Linked by >=4 of 9 competitors","Derived","Y/blank"),
