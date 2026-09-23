@@ -1,10 +1,6 @@
 # Disavow file for nationalfosteringgroup.co.uk
-# Prepared by SUSO Digital. Semrush backlink data, snapshot 2026-09-22.
-# Basis: DOFOLLOW links only (nofollow links pass no equity and are not disavowed).
-# Each domain sends a dofollow link whose anchor is explicit link-selling / PBN spam
-# (buy backlinks, premium PBN network, seo authority backlinks) or is a known SEO farm.
-# The Client's own / redirected domains (nfa.co.uk etc.) are excluded.
-# Review before submitting to Google Search Console. domain: disavows the whole site.
+# SUSO Digital, Semrush data, snapshot 2026-09-22.
+# DOFOLLOW spam links only (nofollow passes no equity, not disavowed). Client own/redirected domains excluded.
 domain:aloysionunes.com
 domain:archive-hu.com
 domain:australianwebdirectory.shop

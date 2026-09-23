@@ -248,7 +248,11 @@ def norm_url(u):
 
 # ---- link-level classification (Keep / Review / Disavow) ----
 _DIS_ANCHOR = ["backlink","pbn","buy backlinks","premium pbn","seo service",
- "dofollow backlinks da","manual outreach backlinks","seo authority backlinks"]
+ "dofollow backlinks da","manual outreach backlinks","seo authority backlinks",
+ "guest post","on-page seo","on page seo","local seo","dr/da","da/tf","tf boost",
+ "link velocity","niche edit","tiered link","citation flow","white hat","higher da",
+ "prospect selection","top rank","page one","seo master","domain rating","link building",
+ "measurable dr","search traffic","rank first","outrank your competitor"]
 _DIS_DOMKW = ["goooogla","factmags","kingranks","heavenarticle","seodomains","blinks"]
 _PARK_TLD = (".monster",".sbs",".cfd",".homes",".shop")
 _SHORT_TLD = (".top",".icu",".website",".party",".fyi",".world",".space",".mom",".store",".xyz",".cloud")
@@ -270,12 +274,10 @@ def classify_link(anchor, source_url, page_as, nofollow):
         or "/domain/domain/part" in (source_url or "").lower()
         or (any(host.endswith(t) for t in _SHORT_TLD)
             and re.search(r"/(stats|share|report|domain)/", (source_url or "").lower())))
-    if is_spam:
-        # only a dofollow spam link passes equity and is worth disavowing;
-        # a nofollow link passes no equity, so it is a review note, never a disavow
-        return "Review" if nofollow else "Disavow"
-    if page_as is not None and page_as <= 2 and any(m in host for m in _DIR_MARK):
-        return "Review"
+    # binary: only a DOFOLLOW spam link passes equity and is worth disavowing.
+    # a nofollow spam link passes no equity, so it is left as Keep (no action needed).
+    if is_spam and not nofollow:
+        return "Disavow"
     return "Keep"
 
 # ---- pooled backlinks: Semrush live + Ahrefs-only (deduped by source_url) ----
@@ -315,17 +317,11 @@ def classify_domain(domain, as_val):
     # the Client's own / redirected domain (e.g. nfa.co.uk) is always Keep, never disavowed
     if d in OWN_DOMS:
         return "Keep"
-    # domain action follows its links, which already downgrade nofollow spam to Review
+    # binary: a domain is Disavow only if it sends a dofollow spam link; otherwise Keep
     dis, rev, keep = DOM_LINKS.get(d, [0,0,0])
     tot = dis + rev + keep
     if dis > 0 and (dis >= keep or tot <= 2):
         return "Disavow"
-    if rev > 0:
-        return "Review"
-    if as_val is not None and as_val <= 2 and any(m in d for m in _DIR_MARK):
-        return "Review"
-    if dis > 0:
-        return "Review"
     return "Keep"
 
 # referring-domain traffic (Semrush domain_rank; AS>=12 genuine, tail set 0)
@@ -719,7 +715,7 @@ ws3 = wb.create_sheet("3 NFG Referring Domains")
 ws3.sheet_properties.tabColor = TAB_ANALYST
 ov = read_csv(f"{DATA}/backlinks/overview_NFG.csv")[0]
 ws3.cell(row=1, column=1, value="NFG Referring Domains: every site that links to the Client (Semrush, 2026-09-22)").font = hfont(13, True, CLR_HEADER)
-ws3.cell(row=2, column=1, value="These are referring domains, the external websites that link to the Client, not the individual links. The individual links, each with its own anchor text, are on the NFG Backlinks tab. Backlinks from domain is how many links that site sends. Organic Traffic is the Semrush estimated monthly UK organic traffic of that referring site (the low authority tail, Authority Score under 12, is spam with negligible traffic and is shown as 0). Recommended Action is the analyst call (Keep, Review or Disavow); Your Decision is yours to fill in. Summary and the AS band distribution are in the labelled panel to the right, from column L onward.").font = hfont(9, False, "6E6E6E")
+ws3.cell(row=2, column=1, value="These are referring domains, the external websites that link to the Client, not the individual links. The individual links, each with its own anchor text, are on the NFG Backlinks tab. Backlinks from domain is how many links that site sends. Organic Traffic is the Semrush estimated monthly UK organic traffic of that referring site (the low authority tail, Authority Score under 12, is spam with negligible traffic and is shown as 0). Recommended Action is the analyst call (Keep or Disavow, no Review category); Your Decision is yours to fill in. Summary and the AS band distribution are in the labelled panel to the right, from column L onward.").font = hfont(9, False, "6E6E6E")
 
 # ---- DATA TABLE at top-left; ALL referring domains from the live pull ----
 rd = read_csv(f"{BLF}/refdomains_all.csv", delim=";")
@@ -922,15 +918,19 @@ gap = read_csv(f"{DATA}/gap/backlink_gap_targetlist.csv")
 GENERIC_DIR = {"yell.com","thomsonlocal.com","siteprice.org","sitelike.org","misterwhat.co.uk","companycheck.co.uk","endole.co.uk","crunchbase.com","patsnap.com","contactout.com","neverbounce.com","dentons.net","yudu.com","grokipedia.com","voucherix.co.uk"}
 def target_quality(row):
     dom=row["Referring_Domain"]; lt=row["Dominant_Link_Type"] or ""; reg=row["Region"]; spam=row["Spam_Flag"]; rel=num(row["Relevance_Score"],0)
+    asv=num(row["Authority_Score"],0) or 0
     if spam=="hard": return "Excluded-Spam"
-    if dom in GENERIC_DIR: return "Directory-Generic (low value)"
     if "gov/edu" in lt: return "Genuine-GovEdu"
     if "charity" in lt: return "Genuine-Charity"
     if "editorial-news" in lt:
-        return "Genuine-RegionalNews" if reg not in ("Non-UK/Unknown","UK-National") else "Editorial-News-National"
+        return "Genuine-RegionalNews" if reg not in ("Non-UK/Unknown","UK-National") else "Editorial-News"
+    # a high Authority Score site is a genuine target regardless of its link type or region.
+    # only genuinely low-authority sites get a low-value label.
+    if asv>=40: return "Strong-Authority"
+    if dom in GENERIC_DIR: return "Directory-Generic"
     if "directory" in lt: return "Directory-Citation"
     if "blog" in lt:
-        return "Blog/PR-farm (low value)" if reg=="Non-UK/Unknown" else "Blog-UK"
+        return "Low-Authority-Blog" if asv<20 else "Blog"
     if spam=="soft": return "Soft-flagged"
     if rel>=1: return "Relevant-editorial"
     return "Other/Adjacent"
@@ -963,9 +963,9 @@ for row in gap_sorted:
         if j in (10,): cell.number_format="#,##0"
     # colour target quality (Target_Quality column 9 = I) — paired with the text label in the cell
     tqcell=ws5.cell(row=r,column=9)
-    if "Genuine" in tq or "Relevant" in tq: tqcell.fill=PatternFill("solid",fgColor=CLR_GREEN); tqcell.font=hfont(9,False,TXT_GREEN)
-    elif "Excluded" in tq or "farm" in tq or "Generic" in tq: tqcell.fill=PatternFill("solid",fgColor=CLR_RED); tqcell.font=hfont(9,False,TXT_RED)
-    elif "Directory" in tq or "Soft" in tq or "National" in tq: tqcell.fill=PatternFill("solid",fgColor=CLR_AMBER); tqcell.font=hfont(9,False,TXT_AMBER)
+    if "Genuine" in tq or "Relevant" in tq or "Strong" in tq: tqcell.fill=PatternFill("solid",fgColor=CLR_GREEN); tqcell.font=hfont(9,False,TXT_GREEN)
+    elif "Excluded" in tq: tqcell.fill=PatternFill("solid",fgColor=CLR_RED); tqcell.font=hfont(9,False,TXT_RED)
+    elif "Directory" in tq or "Soft" in tq or "Blog" in tq or "Editorial" in tq: tqcell.fill=PatternFill("solid",fgColor=CLR_AMBER); tqcell.font=hfont(9,False,TXT_AMBER)
     if row["Consensus_Target"]=="Y":
         ws5.cell(row=r,column=4).fill=PatternFill("solid",fgColor=CLR_SUB); ws5.cell(row=r,column=4).font=hfont(9,True)
     r+=1
@@ -1253,7 +1253,7 @@ print("tab8 done")
 ws_bl = wb.create_sheet("4 NFG Backlinks")
 ws_bl.sheet_properties.tabColor = TAB_ANALYST
 ws_bl.cell(row=1,column=1,value="NFG Backlinks: every individual link to the Client, with its anchor and recommended action").font=hfont(13,True,CLR_HEADER)
-ws_bl.cell(row=2,column=1,value="Each row is one backlink (a single link on a source page), each with its own anchor text; the sites those links come from are on the NFG Referring Domains tab. Disavow is decided at the link level, mainly from the anchor and the source domain. Rows are grouped Disavow first, then Review, then Keep, and within each group by Page Authority Score. Recommended Action is the analyst call; type your own call in Your Decision. This tab is long and scrolls. Semrush is the metric source; Ahrefs was used only to widen the link list.").font=hfont(9,False,"666666")
+ws_bl.cell(row=2,column=1,value="Each row is one backlink (a single link on a source page), each with its own anchor text; the sites those links come from are on the NFG Referring Domains tab. Disavow is decided at the link level, mainly from the anchor and the source domain. Rows are grouped Disavow first, then Keep, and within each group by Page Authority Score. Only dofollow spam is Disavow; nofollow spam passes no equity and is left as Keep. Recommended Action is the analyst call; type your own call in Your Decision. This tab is long and scrolls. Semrush is the metric source; Ahrefs was used only to widen the link list.").font=hfont(9,False,"666666")
 blcols=["Source_URL","Referring_Domain","Anchor","Target_Page","Follow","Page_Authority_Score","First_Seen","Last_Seen","Recommended_Action","Your_Decision"]
 hb=3
 for j,c in enumerate(blcols,1): ws_bl.cell(row=hb,column=j,value=c)
@@ -1348,7 +1348,7 @@ for row in gap:
     if row["Spam_Flag"]=="hard": continue
     tq=target_quality(row); as_val=num(row["Authority_Score"],None)
     if as_val is None: continue
-    if not ("Genuine" in tq or "Relevant" in tq or "Directory-Citation" in tq): continue
+    if not ("Genuine" in tq or "Relevant" in tq or "Strong" in tq or "Directory-Citation" in tq): continue
     reg=row["Region"]; ncomp=int(row["Num_Competitors_Linking"])
     effort="L" if row["Tier"]=="1" else ("M" if row["Tier"]=="2" else "H")
     comp_word="competitor" if ncomp==1 else "competitors"
