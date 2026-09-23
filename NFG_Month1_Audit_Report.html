@@ -4,41 +4,45 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>National Fostering Group: Off Site SEO Audit</title>
+<link rel="stylesheet" href="assets/nfg-fonts.css">
 <style>
   :root{
     color-scheme: light;
-    --page:#f9f9f7; --surface:#fcfcfb; --surface-2:#ffffff;
-    --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
-    --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,0.10);
-    --accent:#4a3aa7; --accent-soft:#eceafb;
-    --series:#2a78d6; --series-soft:#d6e5f8;
-    --warm:#eb6834; --warm-soft:#fbe3d7;
-    --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --critical:#d03b3b;
-    --neutral-bar:#c9c8c1;
+    --page:#ffffff; --surface:#FBFCFE; --surface-2:#ffffff;
+    --ink:#181823; --ink-2:#4D4F59; --muted:#666E84;
+    --grid:#E7ECF3; --axis:#C6CCD6; --border:rgba(24,24,35,0.11);
+    --accent:#5C248C; --accent-soft:#F0EAF7;
+    --hi:#FB0077; --hi-dark:#E00066; --hi-soft:#FFF2F8;
+    --series:#3980F6; --series-soft:#DFEEFF;
+    --warm:#E07A00; --warm-soft:#FFF0D6;
+    --good:#00946E; --warn:#FFA81D; --serious:#E07A00; --critical:#E5484D;
+    --neutral-bar:#C3C9D4;
     --maxw:1080px;
   }
   :root[data-theme="dark"]{
     color-scheme: dark;
-    --page:#0d0d0d; --surface:#1a1a19; --surface-2:#201f1e;
-    --ink:#ffffff; --ink-2:#c3c2b7; --muted:#9a998f;
-    --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,0.12);
-    --accent:#9085e9; --accent-soft:#26224a;
-    --series:#3987e5; --series-soft:#173156;
-    --warm:#d95926; --warm-soft:#40241a;
-    --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --critical:#d03b3b;
-    --neutral-bar:#4a4a46;
+    --page:#12121a; --surface:#1c1c26; --surface-2:#22222e;
+    --ink:#ffffff; --ink-2:#C6CAD6; --muted:#9AA0B2;
+    --grid:#2b2b38; --axis:#3a3a48; --border:rgba(255,255,255,0.12);
+    --accent:#B79AD8; --accent-soft:#2a2140;
+    --hi:#FF4FA0; --hi-dark:#FF7DBB; --hi-soft:#3a1226;
+    --series:#5C97F8; --series-soft:#16294d;
+    --warm:#FFB43A; --warm-soft:#3a2a13;
+    --good:#20B58C; --warn:#FFA81D; --serious:#FFB43A; --critical:#F26A6E;
+    --neutral-bar:#4a4a58;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{
     background:var(--page); color:var(--ink);
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    line-height:1.6; font-size:17px;
+    font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height:1.6; font-size:16px; letter-spacing:0.2px;
     -webkit-font-smoothing:antialiased;
   }
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
   a{color:var(--accent); text-decoration:none}
-  h1,h2,h3{line-height:1.15; letter-spacing:-0.01em; font-weight:700}
+  h1,h2,h3{line-height:1.14; letter-spacing:-0.022em; font-weight:800}
+  .rec h3{font-weight:700}
 
   /* top bar */
   .topbar{
@@ -88,9 +92,10 @@
   /* hero */
   .hero{padding:76px 0 40px}
   .eyebrow{
-    display:inline-block; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase;
-    color:var(--accent); font-weight:700; margin-bottom:22px;
-    padding:6px 12px; border:1px solid var(--border); border-radius:999px; background:var(--surface);
+    display:inline-block; font-family:"Permanent Marker", cursive;
+    font-size:22px; letter-spacing:0.01em; text-transform:none;
+    color:var(--hi); font-weight:400; margin-bottom:16px;
+    padding:0; border:0; background:none;
   }
   .hero h1{font-size:clamp(34px,5.4vw,60px); margin:0 0 22px; max-width:16ch}
   .hero .stand{font-size:clamp(18px,2.2vw,23px); color:var(--ink-2); max-width:60ch; margin:0}
@@ -98,7 +103,7 @@
 
   /* sections */
   section{padding:52px 0; border-top:1px solid var(--border)}
-  .kicker{font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); font-weight:700; margin:0 0 12px}
+  .kicker{font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--hi-dark); font-weight:700; margin:0 0 12px}
   section h2{font-size:clamp(26px,3.4vw,38px); margin:0 0 18px; max-width:22ch}
   .lead{font-size:19px; color:var(--ink-2); max-width:66ch; margin:0 0 8px}
   p.body{max-width:66ch}
@@ -164,19 +169,64 @@
   #tip b{font-weight:700}
   .bar-mark{cursor:pointer}
   .bar-mark:hover{filter:brightness(1.06)}
+  /* brand logo in topbar (screen) */
+  .brand-logo{height:26px; width:auto; display:block}
+
+  /* cover page */
+  .cover{margin:0; padding:70px 64px 64px; min-height:100vh; overflow:hidden;
+    display:flex; flex-direction:column; position:relative;
+    background:
+      radial-gradient(130% 80% at 88% 8%, #FFF2F8 0%, rgba(255,242,248,0) 46%),
+      linear-gradient(180deg, #ffffff 55%, #F6F1FB 100%);}
+  .cover::after{content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(circle at 91% 86%, rgba(251,0,119,0.12) 0 70px, transparent 72px),
+      radial-gradient(circle at 80% 93%, rgba(92,36,140,0.10) 0 40px, transparent 42px),
+      radial-gradient(circle at 97% 74%, rgba(2,202,177,0.12) 0 26px, transparent 28px),
+      radial-gradient(circle at 71% 82%, rgba(191,209,15,0.14) 0 16px, transparent 18px);}
+  .cover > *{position:relative; z-index:1}
+  .cover-logo{width:320px; max-width:66%; height:auto; margin-bottom:auto}
+  .cover-body{margin-top:44px}
+  .cover-label{font-family:"Permanent Marker", cursive; font-size:30px; color:var(--hi); display:inline-block; line-height:1}
+  .cover-underline{display:block; width:250px; height:13px; margin:3px 0 24px}
+  .cover-title{font-size:clamp(40px,6.2vw,70px); font-weight:800; letter-spacing:-0.03em; line-height:1.04; margin:0 0 20px; max-width:17ch; color:var(--ink)}
+  .cover-sub{font-size:20px; color:var(--ink-2); max-width:58ch; margin:0}
+  .cover-meta{display:flex; gap:12px; flex-wrap:wrap; margin-top:38px; align-items:center}
+  .cover-pill{font-weight:700; font-size:14px; border-radius:30px; padding:12px 24px; letter-spacing:0.01em}
+  .cover-pill.solid{background:var(--accent); color:#fff}
+  .cover-pill.tint{background:var(--hi-soft); color:var(--hi-dark)}
+
   @media print{
     .topbar,.tabbar,.toggle,#tip{display:none}
     .tabpanel{display:block !important; border-top:1px solid var(--border)}
     section,figure{break-inside:avoid}
     body{font-size:12pt}
+    .cover{min-height:246mm; break-after:page; page-break-after:always; padding-top:8mm}
+    .hero{padding-top:8px}
   }
 </style>
 </head>
 <body>
 
+<section class="cover">
+  <img class="cover-logo" src="assets/nfg-logo-pink.png" alt="National Fostering Group">
+  <div class="cover-body">
+    <span class="cover-label">Off site SEO report</span>
+    <svg class="cover-underline" viewBox="0 0 250 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M3 8.5C40 4 90 3.4 128 4.2C168 5 212 7.4 247 5.6" stroke="#FB0077" stroke-width="4.5" stroke-linecap="round"/>
+    </svg>
+    <h1 class="cover-title">Search visibility and backlink audit</h1>
+    <p class="cover-sub">Where National Fostering Group stands in organic search today, the health of its backlink profile, and the priorities to act on next.</p>
+  </div>
+  <div class="cover-meta">
+    <span class="cover-pill solid">Prepared for National Fostering Group</span>
+    <span class="cover-pill tint">September 2026</span>
+  </div>
+</section>
+
 <div class="topbar">
   <div class="wrap row">
-    <div class="brand">National Fostering Group</div>
+    <img class="brand-logo" src="assets/nfg-logo-pink.png" alt="National Fostering Group">
     <span class="topbar-tag">Off site SEO audit</span>
     <button class="toggle" id="themeBtn" aria-label="Switch colour theme">
       <span id="themeIcon">&#9789;</span><span id="themeTxt">Dark</span>
@@ -592,7 +642,7 @@ function renderVelocity(){
   var c=clear('velocity'); if(!c) return;
   var W=560,H=300,padL=42,padR=16,padT=16,padB=46;
   var ink=cssv('--ink'),ink2=cssv('--ink-2'),muted=cssv('--muted'),grid=cssv('--grid'),axis=cssv('--axis');
-  var series=cssv('--series'),soft=cssv('--series-soft'),warm=cssv('--warm');
+  var series=cssv('--hi'),soft=cssv('--hi-soft'),warm=cssv('--warm');
   var svg=el('svg',{viewBox:"0 0 "+W+" "+H,role:"img","aria-label":"Line chart of referring domains by month, flat near 24 until February 2026 then rising steeply to 420"});
   var maxV=450, plotW=W-padL-padR, plotH=H-padT-padB;
   function x(i){ return padL + plotW*(i/(VEL.length-1)); }
@@ -723,7 +773,7 @@ function renderClusters(){
 function renderRegional(){
   var c=clear('regional'); if(!c) return;
   var muted=cssv('--muted'),grid=cssv('--grid'),ink=cssv('--ink'),ink2=cssv('--ink-2');
-  var series=cssv('--series'),neutral=cssv('--neutral-bar'),critical=cssv('--critical'),surface=cssv('--surface');
+  var series=cssv('--hi'),neutral=cssv('--neutral-bar'),critical=cssv('--critical'),surface=cssv('--surface');
   var W=560, rowH=42, padL=150, padR=40, padT=30, padB=18;
   var H=padT+padB+REGION.length*rowH;
   var maxV=10, barW=W-padL-padR;
@@ -764,7 +814,7 @@ function renderRegional(){
 
 function panel(metric,title,fmtFn){
   var muted=cssv('--muted'),grid=cssv('--grid'),ink=cssv('--ink');
-  var accent=cssv('--accent'),neutral=cssv('--neutral-bar'),surface=cssv('--surface');
+  var accent=cssv('--hi'),neutral=cssv('--neutral-bar'),surface=cssv('--surface');
   var rows=COMP.slice().sort(function(a,b){ return b[metric]-a[metric]; });
   var W=520, rowH=25, padL=180, padR=64, padT=34, padB=8;
   var H=padT+padB+rows.length*rowH;
