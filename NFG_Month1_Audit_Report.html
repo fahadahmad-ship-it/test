@@ -199,10 +199,17 @@
   @media print{
     .topbar,.tabbar,.toggle,#tip{display:none}
     .tabpanel{display:block !important; border-top:1px solid var(--border)}
-    section,figure{break-inside:avoid}
-    body{font-size:12pt}
+    body{font-size:11.5pt}
+    /* keep visual blocks whole, but let prose flow to fill pages */
+    figure,.rec,.tile,.callout{break-inside:avoid}
+    h1,h2,h3,.kicker,.lead,.fhead,.ftitle{break-after:avoid; break-inside:avoid}
+    p{orphans:2; widows:2}
+    /* tighter vertical rhythm in print */
+    section{padding:26px 0}
+    .hero{padding:10px 0 6px}
+    .closing{padding:30px 0 20px}
+    figure{margin-top:16px}
     .cover{min-height:246mm; break-after:page; page-break-after:always; padding-top:8mm}
-    .hero{padding-top:8px}
   }
 </style>
 </head>
@@ -392,7 +399,7 @@
         <figcaption>Count of NFG's strongest local links per UK region, with the best single competitor's count marked for reference. Regions flagged below are open ground.</figcaption>
         <div class="chart" id="regional"></div>
         <div class="legend">
-          <span class="k"><span class="swatch" style="background:var(--series)"></span>NFG</span>
+          <span class="k"><span class="swatch" style="background:var(--hi)"></span>NFG</span>
           <span class="k"><span class="swatch" style="background:var(--neutral-bar)"></span>Best competitor in region</span>
           <span class="k"><span style="color:var(--critical);font-weight:800">&#9679;</span>Whitespace, NFG near zero</span>
         </div>
@@ -419,12 +426,12 @@
 <section id="compare" class="wrap tabpanel" role="tabpanel" aria-labelledby="tab-compare" tabindex="0">
   <p class="kicker">05 &middot; The competitive field</p>
   <h2>How NFG compares.</h2>
-  <p class="lead">The same ten fostering websites, ranked on the four measures that matter. NFG, shown in indigo, is top tier on three of them and last but one on the fourth. That fourth measure, referring domains, is the whole story in one picture.</p>
+  <p class="lead">The same ten fostering websites, ranked on the four measures that matter. NFG, shown in pink, is top tier on three of them and last but one on the fourth. That fourth measure, referring domains, is the whole story in one picture.</p>
 
   <div class="cols" style="grid-template-columns:1fr">
     <figure>
       <div class="fhead"><span class="ftitle">The four measures across all ten websites</span></div>
-      <figcaption>Each panel ranks the ten websites on one measure. NFG is highlighted in indigo, competitors in grey. Hover any bar for the exact figure.</figcaption>
+      <figcaption>Each panel ranks the ten websites on one measure. NFG is highlighted in pink, competitors in grey. Hover any bar for the exact figure.</figcaption>
       <div class="chart" id="compareGrid"></div>
       <p class="lnote">Organic traffic is estimated monthly visits from unpaid search. Referring domains counts the separate websites that link in.</p>
       
@@ -640,7 +647,7 @@ function clear(id){ var c=document.getElementById(id); if(c) c.innerHTML=''; ret
 
 function renderVelocity(){
   var c=clear('velocity'); if(!c) return;
-  var W=560,H=300,padL=42,padR=16,padT=16,padB=46;
+  var W=560,H=264,padL=42,padR=16,padT=14,padB=42;
   var ink=cssv('--ink'),ink2=cssv('--ink-2'),muted=cssv('--muted'),grid=cssv('--grid'),axis=cssv('--axis');
   var series=cssv('--hi'),soft=cssv('--hi-soft'),warm=cssv('--warm');
   var svg=el('svg',{viewBox:"0 0 "+W+" "+H,role:"img","aria-label":"Line chart of referring domains by month, flat near 24 until February 2026 then rising steeply to 420"});
@@ -719,7 +726,7 @@ function renderIntent(){
   var c=clear('intent'); if(!c) return;
   var muted=cssv('--muted'),grid=cssv('--grid'),ink=cssv('--ink'),ink2=cssv('--ink-2');
   var series=cssv('--series'),warm=cssv('--warm'),surface=cssv('--surface');
-  var W=560, rowH=30, padL=210, padR=52, padT=16, padB=16;
+  var W=560, rowH=26, padL=210, padR=52, padT=12, padB=12;
   var H=padT+padB+INTENT.length*rowH;
   var svg=el('svg',{viewBox:"0 0 "+W+" "+H,role:"img","aria-label":"Horizontal bar chart of headline search terms; a longer bar means a stronger ranking. NFG is strong on commercial terms and largely absent on informational terms"});
   var trackW=W-padL-padR;
@@ -749,7 +756,7 @@ function renderIntent(){
 function renderClusters(){
   var c=clear('clusters'); if(!c) return;
   var muted=cssv('--muted'),grid=cssv('--grid'),ink=cssv('--ink'),series=cssv('--series');
-  var W=560, rowH=44, padL=250, padR=70, padT=10, padB=14;
+  var W=560, rowH=38, padL=250, padR=70, padT=8, padB=12;
   var H=padT+padB+CLUSTERS.length*rowH;
   var maxV=Math.max.apply(null,CLUSTERS.map(function(d){return d.v;}));
   var barW=W-padL-padR;
@@ -774,7 +781,7 @@ function renderRegional(){
   var c=clear('regional'); if(!c) return;
   var muted=cssv('--muted'),grid=cssv('--grid'),ink=cssv('--ink'),ink2=cssv('--ink-2');
   var series=cssv('--hi'),neutral=cssv('--neutral-bar'),critical=cssv('--critical'),surface=cssv('--surface');
-  var W=560, rowH=42, padL=150, padR=40, padT=30, padB=18;
+  var W=560, rowH=31, padL=150, padR=40, padT=24, padB=14;
   var H=padT+padB+REGION.length*rowH;
   var maxV=10, barW=W-padL-padR;
   var svg=el('svg',{viewBox:"0 0 "+W+" "+H,role:"img","aria-label":"Paired bar chart of strong local links by UK region, an NFG bar above a best competitor bar per region. NFG leads in North West with ten and holds Scotland with five, and is near zero in London, North East, Northern Ireland and Yorkshire and Humber"});
