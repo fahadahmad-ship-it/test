@@ -640,7 +640,7 @@ function renderVelocity(){
   /* table */
   var t='<table class="dt"><tr><th>Month</th><th>Referring domains</th></tr>';
   VEL.forEach(function(p){ t+='<tr><td>'+p.m+'</td><td>'+fmt(p.v)+'</td></tr>'; });
-  t+='</table>'; document.getElementById('velocityTable').innerHTML=t;
+  t+='</table>'; var _e=document.getElementById('velocityTable');if(_e)_e.innerHTML=t;
 }
 
 function renderAscore(){
@@ -728,7 +728,7 @@ function renderClusters(){
   c.appendChild(svg);
   var t='<table class="dt"><tr><th>Cluster</th><th>Approx monthly searches</th></tr>';
   CLUSTERS.forEach(function(d){ t+='<tr><td>'+d.c+'</td><td>'+fmt(d.v)+'</td></tr>'; });
-  t+='</table>'; document.getElementById('clustersTable').innerHTML=t;
+  t+='</table>'; var _e=document.getElementById('clustersTable');if(_e)_e.innerHTML=t;
 }
 
 function renderRegional(){
@@ -765,7 +765,7 @@ function renderRegional(){
   c.appendChild(svg);
   var t='<table class="dt"><tr><th>Region</th><th>NFG</th><th>Best competitor</th></tr>';
   REGION.forEach(function(d){ t+='<tr'+(d.white?' class="hi"':'')+'><td>'+d.r+'</td><td>'+d.nfg+'</td><td>'+d.best+' ('+d.bestName+')</td></tr>'; });
-  t+='</table>'; document.getElementById('regionalTable').innerHTML=t;
+  t+='</table>'; var _e=document.getElementById('regionalTable');if(_e)_e.innerHTML=t;
 }
 
 function panel(metric,title,fmtFn){
@@ -811,7 +811,7 @@ function renderCompareGrid(){
   /* table */
   var t='<table class="dt"><tr><th>Website</th><th>Authority</th><th>Ref domains</th><th>Traffic</th><th>Keywords</th></tr>';
   COMP.forEach(function(r){ t+='<tr'+(r.nfg?' class="hi"':'')+'><td>'+r.d+'</td><td>'+r.as+'</td><td>'+fmt(r.rd)+'</td><td>'+fmt(r.tr)+'</td><td>'+fmt(r.kw)+'</td></tr>'; });
-  t+='</table>'; document.getElementById('compareTable').innerHTML=t;
+  t+='</table>'; var _e=document.getElementById('compareTable');if(_e)_e.innerHTML=t;
 }
 function renderComposite(){
   var c=clear('composite'); if(!c) return;
