@@ -185,9 +185,9 @@
 </div>
 
 <header class="hero wrap">
-  <span class="eyebrow">National Fostering Group &middot; Month 1 off site SEO audit</span>
+  <span class="eyebrow">National Fostering Group &middot; Off site SEO audit</span>
   <h1>Strong in search, thin in links.</h1>
-  <p class="stand">This off site audit looks at what search engines see beyond NFG's own website. It covers the backlink profile and its health, how NFG compares with nine competitors, the referring domains and link opportunities worth pursuing, and the search terms where competitors currently win. It sets out where NFG stands today and the four priorities for the next phase.</p>
+  <p class="stand">This off site audit looks at what search engines see beyond NFG's own website. It covers the backlink profile and its health, how NFG compares with nine competitors, the referring domains and link opportunities worth pursuing, and the search terms where competitors currently win. It sets out where NFG stands today and the four priorities to act on next.</p>
   
 </header>
 
@@ -381,18 +381,11 @@
     </figure>
   </div>
 
-  <div class="cols two" style="margin-top:8px">
+  <div class="cols" style="grid-template-columns:1fr; margin-top:8px">
     <div>
-      <figure>
-        <div class="fhead"><span class="ftitle">Composite strength, all four measures combined</span></div>
-        <figcaption>A single blended score per website. Higher is stronger overall.</figcaption>
-        <div class="chart" id="composite"></div>
-      </figure>
-    </div>
-    <div>
-      <h3 style="font-size:21px; margin:26px 0 10px">Reading the composite</h3>
-      <p class="body">Composite strength is the average of the four measures, each rescaled to a 0 to 1 range across the ten websites, so no single large number dominates. NFG scores <span class="em">0.653</span>.</p>
-      <p class="body">Underneath that headline, NFG is strong on Authority Score (0.81), Organic Keywords (0.80) and Organic Traffic (0.93), but very weak on Referring Domains (0.08). Three strong pillars and one weak one. That one weak pillar is the deficit, and closing it is the highest leverage work available.</p>
+      <h3 style="font-size:21px; margin:6px 0 10px">Reading the field</h3>
+      <p class="body">The pattern is the same across every panel. NFG sits in the top tier on Authority Score, Organic Keywords and Organic Traffic, but near the bottom on Referring Domains. Three strong pillars and one weak one.</p>
+      <p class="body">That single weak pillar, referring domains, is the deficit. Closing it is the highest leverage work available, because the other three measures are already competitive.</p>
     </div>
   </div>
 </section>
@@ -400,7 +393,7 @@
 <!-- 6. WHAT NEXT -->
 <section id="next" class="wrap closing tabpanel" role="tabpanel" aria-labelledby="tab-next" tabindex="0">
   <p class="kicker">06 &middot; The plan</p>
-  <h2>What the next phase should focus on.</h2>
+  <h2>What to focus on next.</h2>
   <p class="lead">Four moves follow directly from the findings. They are sequenced so the defensive clean up protects the base while the growth work builds on it. Together they turn a fragile, narrow profile into a durable one.</p>
 
   <div class="reccards">
@@ -413,7 +406,7 @@
     <div class="rec">
       <div class="no">MOVE 02</div>
       <h3>Earn real regional links in Yorkshire and the North East</h3>
-      <p>Target local news, councils and universities such as chroniclelive.co.uk, leeds.ac.uk and leeds.gov.uk, anchored to genuine presence through NFA North and Reach Out Care. This closes the clearest regional whitespace and grows the referring domain count that the composite score depends on.</p>
+      <p>Target local news, councils and universities such as chroniclelive.co.uk, leeds.ac.uk and leeds.gov.uk, anchored to genuine presence through NFA North and Reach Out Care. This closes the clearest regional whitespace and grows the referring domain count where NFG is weakest.</p>
       <span class="tag">Highest leverage</span>
     </div>
     <div class="rec">
@@ -845,7 +838,6 @@ function render(){
   renderClusters();
   renderRegional();
   renderCompareGrid();
-  renderComposite();
 }
 render();
 var rt;
