@@ -525,10 +525,10 @@ var VEL=[
 ];
 /* authority score band distribution for NFG */
 var ASBANDS=[
-  {b:"0",n:13,tox:true},{b:"2",n:127,tox:true},{b:"3",n:18,tox:true},{b:"4",n:30,tox:true},
-  {b:"5",n:55,tox:true},{b:"6",n:26,tox:true},{b:"7",n:5,tox:true},{b:"8",n:5,tox:true},
-  {b:"9",n:1,tox:true},{b:"10",n:5,tox:true},{b:"11 to 20",n:35,tox:false},
-  {b:"21 to 30",n:41,tox:false},{b:"31+",n:59,tox:false}
+  {b:"0 to 10",n:285,tox:true},
+  {b:"11 to 20",n:35,tox:false},
+  {b:"21 to 30",n:41,tox:false},
+  {b:"31 and above",n:59,tox:false}
 ];
 /* intent scale: position (0 = absent/beyond 60) */
 var INTENT=[
@@ -640,24 +640,26 @@ function renderAscore(){
   var c=clear('ascore'); if(!c) return;
   var muted=cssv('--muted'),grid=cssv('--grid'),ink=cssv('--ink');
   var series=cssv('--series'),critical=cssv('--critical'),surface=cssv('--surface');
-  var W=560,H=280,padL=36,padR=14,padT=14,padB=40;
+  var W=560,H=280,padL=40,padR=14,padT=20,padB=48;
   var maxV=Math.max.apply(null,ASBANDS.map(function(b){return b.n;}));
+  var niceMax=Math.ceil(maxV/100)*100;
   var plotW=W-padL-padR,plotH=H-padT-padB, n=ASBANDS.length;
-  var gap=6, bw=(plotW/n)-gap;
-  var svg=el('svg',{viewBox:"0 0 "+W+" "+H,role:"img","aria-label":"Bar chart of referring domains by Authority Score band, spiking at score 2 with 127 domains in the low trust tail"});
-  [0,50,100].forEach(function(gv){
-    var yy=padT+plotH*(1-gv/130);
+  var gap=30, bw=(plotW/n)-gap;
+  var svg=el('svg',{viewBox:"0 0 "+W+" "+H,role:"img","aria-label":"Bar chart of referring domains by Authority Score trust band. The weakest band, score 0 to 10, holds 285 of 420 domains."});
+  var ticks=[]; for(var gv=0; gv<=niceMax; gv+=100) ticks.push(gv);
+  ticks.forEach(function(gv){
+    var yy=padT+plotH*(1-gv/niceMax);
     svg.appendChild(el('line',{x1:padL,y1:yy,x2:W-padR,y2:yy,stroke:grid,"stroke-width":1}));
     svg.appendChild(el('text',{x:padL-6,y:yy+4,"text-anchor":"end","font-size":10,fill:muted},gv));
   });
   ASBANDS.forEach(function(b,i){
-    var h=plotH*(b.n/130), xx=padL+i*(bw+gap), yy=padT+plotH-h;
+    var h=plotH*(b.n/niceMax), xx=padL+i*(bw+gap)+gap/2, yy=padT+plotH-h;
     var col=b.tox?critical:series;
     var rect=el('rect',{x:xx,y:yy,width:bw,height:Math.max(h,1),rx:3,fill:col,class:"bar-mark"});
     attachTip(rect,"<b>Authority Score "+b.b+"</b><br>"+fmt(b.n)+" referring domains"+(b.tox?"<br>Low trust tail":""));
     svg.appendChild(rect);
-    svg.appendChild(el('text',{x:xx+bw/2,y:H-padB+16,"text-anchor":"middle","font-size":9.5,fill:muted},b.b));
-    if(b.n>=40){ svg.appendChild(el('text',{x:xx+bw/2,y:yy-5,"text-anchor":"middle","font-size":11,fill:ink,"font-weight":700},b.n)); }
+    svg.appendChild(el('text',{x:xx+bw/2,y:H-padB+18,"text-anchor":"middle","font-size":11,fill:muted},b.b));
+    svg.appendChild(el('text',{x:xx+bw/2,y:yy-6,"text-anchor":"middle","font-size":12,fill:ink,"font-weight":700},b.n));
   });
   svg.appendChild(el('text',{x:padL,y:H-6,"font-size":10.5,fill:muted},"Authority Score band"));
   c.appendChild(svg);
