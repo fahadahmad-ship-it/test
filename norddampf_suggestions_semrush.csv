@@ -1,22 +1,20 @@
-Website,Angle,Semrush AS,DE Organic Traffic,TF (sheet),Price ($),Verdict
-oberberg-aktuell.de,Regional news,44,179820,50,880,Buy
-drwindows.de,Tech,44,70045,51,810,Buy
-urbanite.net,City lifestyle/events,39,70664,26,1650,Buy (pricey)
-windows-faq.de,Tech how-to,38,46170,27,365,Buy
-forschung-und-wissen.de,Science (harm-reduction angle),41,42257,33,650,Buy
-ostseemagazin.net,North Germany lifestyle/news,38,35513,55,760,Buy
-funpot.net,Entertainment,26,26647,19,420,Maybe
-rhein-wied-news.com,Regional news,41,21008,64,660,Buy
-tuningblog.eu,Car/tuning lifestyle,39,17864,27,300,Buy
-pcmasters.de,Tech/hardware,39,17351,38,985,Maybe
-gotha-aktuell.info,Local news,34,16878,26,270,Buy
-theclubmap.com,Nightlife,34,16549,31,560,Buy
-regiomanager.de,Regional business,34,15505,35,550,Maybe
-stadtleben.de,City lifestyle,29,12412,34,480,Maybe
-gamezoom.net,Gaming,36,8939,27,210,Buy (cheap)
-milwaukee-vtwin.de,Biker lifestyle,26,6975,39,180,Buy (cheap)
-wndn.de,Regional news,28,5237,25,350,Skip/low
-news.de,National news,51,176498,33,3210,Premium only
-vaping360.com,Vape niche (EN; US traffic),59,175719 (US),30,1376,Topical authority
-planetofthevapes.co.uk,Vape niche (EN; UK traffic),37,12255 (UK),19,592,Topical (check competitor)
-vapebeat.com,Vape reviews (EN; US traffic),32,10704 (US),25,359,Topical
+Website,Angle,Semrush AS,DE Organic Traffic,TF (sheet),Price ($),Accepts vape? (evidence),Verdict
+oberberg-aktuell.de,Regional news,44,179820,50,880,YES - dofollow links to westfalendampf.de; vapeglobe.de; kafasmoke.de (2025-26),Buy
+forschung-und-wissen.de,Science (harm reduction),41,42257,33,650,YES - owl-dampfer.de; elfbar600.de; exsmokers.eu; many CBD,Buy
+drwindows.de,Tech,44,70045,51,810,YES - dampfi.ch (2026); vapebazar.de (2025); liquidmods.de,Buy
+regiomanager.de,Regional business,34,15505,35,550,YES - tabakguru.de; dampfi.ch; vapebazar.de (2026),Buy
+theclubmap.com,Nightlife,34,16549,31,560,YES - vape-laden.de (2026); liquid-freaks.com; vapebazar.de,Buy
+gotha-aktuell.info,Local news,34,16878,26,270,YES - 15+ vape/shisha shops incl. e-zigarette24; spardampfer (heavy seller),Buy (cheap)
+urbanite.net,City lifestyle/events,39,70664,26,1650,LIKELY - dofollow dampfi.ch; cbddiscounter.de (2026); older tobacco links nofollow,Ask about link tagging
+gamezoom.net,Gaming,36,8939,27,210,YES but spammy - links to *.xyz vape/CBD sites; randmxvape.de,Low priority
+ostseemagazin.net,North Germany lifestyle,38,35513,55,760,ALREADY LINKS TO NORDDAMPF (since Aug 2025),Already built - skip
+rhein-wied-news.com,Regional news,41,21008,64,660,ALREADY LINKS TO NORDDAMPF (since Dec 2025),Already built - skip
+windows-faq.de,Tech how-to,38,46170,27,365,NO evidence,Ask vendor first
+tuningblog.eu,Car/tuning lifestyle,39,17864,27,300,NO evidence,Ask vendor first
+funpot.net,Entertainment,26,26647,19,420,NO evidence,Ask vendor first
+stadtleben.de,City lifestyle,29,12412,34,480,NO evidence,Ask vendor first
+pcmasters.de,Tech/hardware,39,17351,38,985,UNLIKELY - only old nofollow links (2018-22),Skip
+milwaukee-vtwin.de,Biker lifestyle,26,6975,39,180,UNLIKELY - old nofollow tobacco links only,Skip
+vaping360.com,Vape niche (EN; US traffic),59,175719 (US),30,1376,YES - vape publication,Topical authority
+planetofthevapes.co.uk,Vape niche (EN; UK traffic),37,12255 (UK),19,592,YES - vape site (possible competitor),Topical
+vapebeat.com,Vape reviews (EN; US traffic),32,10704 (US),25,359,YES - vape site,Topical
