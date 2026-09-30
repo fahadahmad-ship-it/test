@@ -89,3 +89,79 @@ Best basket for ~$400:
 - Category labels in the supplied sheet are unreliable on some rows (`ulladullatimes.com.au` tagged "Food & Drink", `theadvocate.com.au` tagged "General, Cats"). Verify the site before ordering.
 - AS/TF/traffic figures are the sheet's own, not re-verified in Ahrefs per domain.
 - Nitrous oxide is a regulated product in Australia. Screen each publisher's content policy before outreach — some AU mastheads and all charity/health domains (e.g. `fundraise.beyondblue.org.au`, which the filters surfaced and I excluded) are inappropriate placements.
+
+---
+
+# Batch 2 — 36 more under $400
+
+File: `nangwizard-prospects-under-400-batch2.csv`. None of these overlap Batch 1 or the 868 already-built domains.
+
+### D. Australian regional mastheads (10 sites, $3,434)
+
+Australian Community Media titles. **Trust Flow 33–51** — the highest-trust AU inventory
+on the sheet at this price — but traffic is small (800–4,000). Buy these for AU geo-relevance
+and trust, not referral traffic.
+
+| Domain | Price | AS | TF | Traffic |
+|---|---|---|---|---|
+| farmonline.com.au | $336 | 33 | 51 | 3,563 |
+| ausgolf.com.au | $350 | 35 | 47 | 10,717 |
+| cowraguardian.com.au | $394 | 27 | 45 | 818 |
+| parkeschampionpost.com.au | $368 | 29 | 45 | 1,953 |
+| tenterfieldstar.com.au | $293 | 27 | 43 | 1,113 |
+| singletonargus.com.au | $330 | 29 | 43 | 2,672 |
+| youngwitness.com.au | $325 | 26 | 42 | 968 |
+| muswellbrookchronicle.com.au | $321 | 27 | 41 | 1,122 |
+| wellingtontimes.com.au | $318 | 27 | 40 | 3,005 |
+| areanews.com.au | $399 | 32 | 33 | 4,324 |
+
+### E. Australian niche & local (12 sites, $1,816)
+
+| Domain | Price | AS | TF | Traffic | Note |
+|---|---|---|---|---|---|
+| nationaldirectory.com.au | $50 | 28 | 25 | 6,069 | Restaurants & hospitality directory |
+| businessfranchiseaustralia.com.au | $91 | 29 | 25 | 2,404 | |
+| smbtech.au | $93 | 34 | 27 | 7,946 | |
+| pet-friendlyaccommodation.com.au | $110 | 26 | 25 | 3,120 | |
+| mediaman.com.au | $112 | 26 | 36 | 1,070 | |
+| jimsit.com.au | $115 | 29 | 20 | 13,195 | Home & garden |
+| kidsonthecoast.com.au | $125 | 30 | 23 | 8,503 | AU parenting/local |
+| gotreequotes.com.au | $147 | 25 | 22 | 2,392 | Home & garden |
+| brideonline.com.au | $175 | 29 | 28 | 1,920 | **Weddings + food & drink — strong party fit** |
+| aussietheatre.com.au | $218 | 32 | 31 | 7,613 | |
+| kiddipedia.com.au | $250 | 32 | 28 | 5,534 | AU parenting |
+| perfectmoment.net.au | $330 | 27 | 19 | 2,028 | AU weddings |
+
+### F. Food, drink & weddings — English markets (14 sites, $3,627)
+
+| Domain | Price | AS | TF | Traffic | Note |
+|---|---|---|---|---|---|
+| restaurantwebx.com | $50 | 31 | 25 | 7,105 | Food & drink business |
+| bestforbride.com | $150 | 32 | 51 | 9,407 | TF 51 for $150 |
+| restovisio.com | $150 | 33 | 46 | 11,608 | Restaurants/reviews |
+| burlapandblue.com | $175 | 35 | 24 | 21,591 | DIY, home decor, party printables |
+| angsarap.net | $237 | 44 | 21 | 105,037 | **Pure food & recipes, 105k traffic** |
+| weddingplanner.co.uk | $250 | 31 | 44 | 9,251 | |
+| boho-weddings.com | $250 | 35 | 26 | 13,658 | |
+| thehkhub.com | $283 | 32 | 32 | 9,095 | Food & recipes |
+| elegantwedding.ca | $285 | 35 | 32 | 7,806 | |
+| guidesforbrides.co.uk | $350 | 37 | 35 | 25,597 | Wedding venues & suppliers |
+| thefitchen.com | $352 | 37 | 26 | 12,911 | Food & recipes |
+| cakejournal.com | $355 | 28 | 34 | 3,227 | **Baking/cake recipes — closest product fit on the sheet** |
+| therooftopguide.com | $360 | 48 | 29 | 204,436 | **Rooftop bars/restaurants, 204k traffic — best nightlife fit** |
+| wineandcountrylife.com | $380 | 34 | 27 | 14,350 | Wine & food |
+
+## Batch 2 standouts
+
+1. **therooftopguide.com** ($360) — AS 48, 204k traffic, bars/restaurants/nightlife.
+2. **angsarap.net** ($237) — AS 44, 105k traffic, pure recipes.
+3. **cakejournal.com** ($355) — baking and cake decorating; the tightest product match for cream chargers.
+4. **bestforbride.com** ($150) — TF 51, the strongest trust-per-dollar in Batch 2.
+5. **brideonline.com.au** ($175) — the only AU site combining weddings *and* food & drink.
+
+## Excluded on judgement
+
+`fundraise.beyondblue.org.au` ($245, AS 59, 327k traffic) scores well but is a mental-health
+charity fundraising domain — inappropriate for a nitrous oxide retailer. `horsedeals.com.au`,
+`racingandsports.com.au` and the `.ua`/`.ru`/`.it` local-news inventory were dropped for
+zero topical or geographic relevance.
