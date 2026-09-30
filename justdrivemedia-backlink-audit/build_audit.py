@@ -127,6 +127,31 @@ def map_domain(h):
 bl["Referring Domain"] = bl["Referring Domain"].map(map_domain)
 bl = bl[bl["Referring Domain"].isin(known)].reset_index(drop=True)
 
+# Links to mightypr.com: it 301 redirects to justdrivemedia.com, so these links pass on to the client too
+mfiles = sorted(glob.glob(str(RAW / "mightypr_bl_p*.csv")))
+mraw = pd.concat([pd.read_csv(f) for f in mfiles]).drop_duplicates(["url_from", "url_to", "anchor"]) if mfiles else pd.DataFrame()
+if len(mraw):
+    col = lambda c: mraw[c] if c in mraw.columns else pd.Series([None] * len(mraw), index=mraw.index)
+    mbl = pd.DataFrame({
+        "Tool": "Ahrefs (via mightypr.com)",
+        "Referring Domain": mraw["name_source"].str.removeprefix("www.").map(map_domain),
+        "Linking Page URL": mraw["url_from"],
+        "Linking Page Title": mraw["title"],
+        "Target URL": mraw["url_to"],
+        "Anchor Text": mraw["anchor"],
+        "Link Type": mraw["is_dofollow"].astype(bool).map({True: "Dofollow", False: "Nofollow"}),
+        "Outbound Links on Page": mraw["links_external"],
+        "Page Category": col("page_category_source").fillna("").astype(str).str.split(",").str[0].str.strip("/").str.replace("_", " "),
+        "Text Around Link": (col("snippet_left").fillna("").astype(str).str[-80:] + " [LINK] "
+                             + col("snippet_right").fillna("").astype(str).str[:80]).str.strip().replace("[LINK]", ""),
+        "First Seen": pd.to_datetime(mraw["first_seen_link"].str[:10]),
+    })
+    seen_keys = set(zip(bl["Linking Page URL"], bl["Anchor Text"].fillna("")))
+    mbl = mbl[[(u, a if isinstance(a, str) else "") not in seen_keys for u, a in zip(mbl["Linking Page URL"], mbl["Anchor Text"])]]
+    bl = pd.concat([bl, mbl], ignore_index=True)
+extra_domains = set(bl["Referring Domain"]) - known
+known_all = known | extra_domains
+
 # ---------------------------------------------------------------- anchor classification
 A_EMPTY = "Empty or image"
 A_CASINO = "Spam: casino, pharma or exam dump"
@@ -456,8 +481,15 @@ def rw(d, field, text):
     return rewrites.get((d, field), text)
 
 
+# Careful anchor review of brand anchor only domains and mightypr.com only domains (review/anchors)
+anchor_dec = {}
+if (REVIEW / "anchors" / "final_decisions.json").exists():
+    for r in json.load(open(REVIEW / "anchors" / "final_decisions.json")):
+        anchor_dec[r["domain"].strip().lower()] = r
+
 S_SPAM, S_KEEP, S_KEEP_LOW, S_OWN = "Spam (Disavow)", "Keep", "Keep (Low Confidence)", "Own Site"
-ORDER = [S_SPAM, S_KEEP_LOW, S_KEEP, S_OWN]
+S_SPAM_NF = "Spam (Nofollow, No Action)"
+ORDER = [S_SPAM, S_SPAM_NF, S_KEEP_LOW, S_KEEP, S_OWN]
 
 
 def fallback_note(auto, ev):
@@ -469,7 +501,13 @@ def fallback_note(auto, ev):
 
 
 rows = []
-for d in sorted(known):
+link_first = bl.groupby("Referring Domain")["First Seen"].min().to_dict()
+dof_links = bl[bl["Link Type"] == "Dofollow"].groupby("Referring Domain").size().to_dict()
+nof_links = bl[bl["Link Type"] == "Nofollow"].groupby("Referring Domain").size().to_dict()
+targets = bl.assign(_t=bl["Target URL"].map(lambda u: "mightypr.com (redirect)" if "mightypr.com" in str(u) else "justdrivemedia.com")) \
+            .groupby("Referring Domain")["_t"].agg(lambda t: " and ".join(sorted(set(t))) if len(set(t)) > 1 else next(iter(t))).to_dict()
+
+for d in sorted(known_all):
     a = ah.loc[d] if d in ah.index else None
     s = se.loc[d] if d in se.index else None
     an = dom_anchor.get(d)
@@ -506,13 +544,28 @@ for d in sorted(known):
         status = {"Spam": S_SPAM, "Own Site": S_OWN}.get(dd["final_status"], S_KEEP_LOW if conf == "Low" else S_KEEP)
         deep_check = "Verified by two skeptics" if dd.get("verified") else "Investigated with live data"
         reviewed = "Manual review, second check and deep live check"
+    ar = anchor_dec.get(d)
+    anchor_check = ""
+    if ar and ar.get("status") in ("Spam", "Keep"):
+        conf = (ar.get("confidence") or conf).title()
+        note = no_dash(ar.get("note") or note)
+        status = S_SPAM if ar["status"] == "Spam" else (S_KEEP_LOW if conf == "Low" else S_KEEP)
+        anchor_check = "Checked and challenged" if ar.get("verified") else "Checked"
+        if d in extra_domains:
+            reviewed = "Anchor review (links via mightypr.com)"
+    n_dof, n_nof = int(dof_links.get(d, 0)), int(nof_links.get(d, 0))
+    if a is not None:
+        n_dof = max(n_dof, int(a["dofollow"]))
+    has_dofollow = n_dof > 0 or (n_dof == 0 and n_nof == 0)
+    if status == S_SPAM and not has_dofollow:
+        status = S_SPAM_NF
     de = dict(deep_ev.get(d, {}))
     for k in ("own_backlink_profile", "top_pages", "links_to_client"):
         if de.get(k):
             de[k] = rw(d, k, de[k])
     note = rw(d, "note", note)
     first = min(x for x in [a["first_seen"] if a is not None else None,
-                            s["first_seen"] if s is not None else None] if x is not None)
+                            s["first_seen"] if s is not None else None, link_first.get(d)] if x is not None and not pd.isna(x))
     sl = sem_live.get(d, {})
     sem_as = to_int(sl.get("authority_score"))
     if sem_as is None and s is not None:
@@ -525,7 +578,7 @@ for d in sorted(known):
         "Status": status,
         "Note (why)": note,
         "Confidence": conf,
-        "Spam Network": cluster(d, s["ip"] if s is not None else None) if status == S_SPAM else "",
+        "Spam Network": cluster(d, s["ip"] if s is not None else None) if status in (S_SPAM, S_SPAM_NF) else "",
         "Semrush Authority Score": sem_as,
         "Semrush Backlinks": sem_bl,
         "Semrush Referring Domains": to_int(sl.get("referring_domains")),
@@ -535,6 +588,9 @@ for d in sorted(known):
         "Evidence Found": no_dash(("; ".join(ev) + ". " if ev else "No spam signals. ") + metric_txt + "."),
         "Spam Signals": len(ev),
         "In Disavow File": "Yes" if status == S_SPAM else "No",
+        "Links Point To": targets.get(d, "justdrivemedia.com"),
+        "Dofollow Links": n_dof,
+        "Nofollow Links": n_nof,
         "First Seen": first,
         "Top Anchor Text": an["top_anchor"] if an else "No live backlink returned by either tool",
         "Anchor Mix": an["anchor_mix"] if an else "",
@@ -559,6 +615,7 @@ for d in sorted(known):
         "Country": (s["country"].upper() if isinstance(s["country"], str) else "") if s is not None else "",
         "Semrush Last Seen": s["last_seen"] if s is not None else None,
         "Deep Check": deep_check,
+        "Anchor Review": anchor_check,
         "Automated First Pass": auto,
         "Second Check": second,
         "Reviewed By": reviewed,
@@ -591,9 +648,11 @@ df["Disavow Line"] = [("domain:" + disavow_target(d, n)) if st == S_SPAM else ""
                       for d, st, n in zip(df["Domain"], df["Status"], df["Spam Network"])]
 dis = df[df["Status"] == S_SPAM].sort_values("Domain")
 lines = [
-    "# Disavow file for justdrivemedia.com",
+    "# Disavow file for justdrivemedia.com and mightypr.com",
     f"# Prepared {PULL_DATE} from Ahrefs and Semrush referring domain and backlink exports",
-    "# Scope: every referring domain confirmed as spam by manual review (all dates)",
+    "# Scope: every spam referring domain with at least one dofollow link (all dates). Nofollow only spam is not included.",
+    "# mightypr.com 301 redirects to justdrivemedia.com, so upload this SAME file to BOTH Search Console properties:",
+    "# justdrivemedia.com and mightypr.com.",
     f"# {len(dis)} domains",
     "# Upload at https://search.google.com/search-console/disavow-links (Domain property).",
     "# NOTE: uploading REPLACES any existing disavow file, so merge with the current one first.",
@@ -603,9 +662,9 @@ lines = [
 
 # ---------------------------------------------------------------- workbook helpers
 FONT = "Arial"
-FILL = {S_SPAM: "F4C7C3", S_KEEP_LOW: "FCE8B2", S_KEEP: "B7E1CD", S_OWN: "C9DAF8",
+FILL = {S_SPAM: "F4C7C3", S_SPAM_NF: "F9E3E1", S_KEEP_LOW: "FCE8B2", S_KEEP: "B7E1CD", S_OWN: "C9DAF8",
         "Spam anchor": "F4C7C3", "Unrelated brand anchor": "FCE8B2", "Normal anchor": "B7E1CD"}
-INK = {S_SPAM: "9C0006", S_KEEP_LOW: "7F6000", S_KEEP: "274E13", S_OWN: "1C4587",
+INK = {S_SPAM: "9C0006", S_SPAM_NF: "B45F06", S_KEEP_LOW: "7F6000", S_KEEP: "274E13", S_OWN: "1C4587",
        "Spam anchor": "9C0006", "Unrelated brand anchor": "7F6000", "Normal anchor": "274E13"}
 FILLS = {k: PatternFill("solid", start_color=v) for k, v in FILL.items()}
 HDR_FILL = PatternFill("solid", start_color="1F3864")
@@ -673,7 +732,8 @@ sm["A2"] = (f"Data pulled {PULL_DATE} from Ahrefs and Semrush: {len(df):,} uniqu
 sm["A2"].font = Font(name=FONT, size=10, italic=True, color="595959")
 
 MEANING = {
-    S_SPAM: "Confirmed spam. Included in the disavow file.",
+    S_SPAM: "Confirmed spam with at least one dofollow link. Included in the disavow file.",
+    S_SPAM_NF: "Spam, but every link is nofollow and passes no ranking value, so no disavow is needed (standard practice).",
     S_KEEP_LOW: "Kept to be safe. Not disavowed, but worth a quick manual look.",
     S_KEEP: "Genuine or harmless link. Keep.",
     S_OWN: "Client owned property or sister brand. Keep.",
@@ -698,7 +758,7 @@ for c, v in enumerate(["Total", len(df), len(bl), 1.0, ""], 1):
 r += 2
 sm.cell(row=r, column=1, value="What the manual review changed").font = H2
 auto_spam = df["Automated First Pass"] == "Spam"
-final_spam = df["Status"] == S_SPAM
+final_spam = df["Status"].isin([S_SPAM, S_SPAM_NF])
 changes = [
     f"Moved from spam to keep (protected): {int((auto_spam & ~final_spam).sum())} domains.",
     f"Moved from keep to spam (newly caught): {int((~auto_spam & final_spam).sum())} domains.",
@@ -708,6 +768,8 @@ changes = [
     f"{int((df['Deep Check'] == 'Verified by two skeptics').sum())} doubtful spam verdicts were also verified by two skeptics.",
     f"Riskiest spam calls given an independent second check: {int((df['Second Check'] != '').sum())}, of which "
     f"{int((df['Second Check'] == 'Overturned to keep').sum())} were overturned to keep.",
+    f"Domains whose links use only plain brand anchors (Mighty PR, Just Drive Media) given a careful anchor review: "
+    f"{int((df['Anchor Review'] != '').sum())}, judged only on the linking page because brand anchors are normal.",
 ]
 for t in changes:
     r += 1
@@ -719,9 +781,14 @@ spam_bl = bl[bl["Anchor Type"].isin(SPAMMY_ANCHORS)]
 sep_new = int((df["First Seen"].dt.strftime("%Y%m") == "202609").sum())
 since_apr = df["First Seen"] >= pd.Timestamp("2026-04-01")
 healthy_n = int(df.Status.isin([S_KEEP, S_KEEP_LOW, S_OWN]).sum())
+n_nf = int((df.Status == S_SPAM_NF).sum())
+n_mighty = int(df["Links Point To"].str.contains("mightypr").sum())
 findings = [
-    f"{n_spam:,} of the {len(df):,} referring domains ({n_spam / len(df):.0%}) are spam and go in the disavow file. "
-    f"{int((final_spam & since_apr).sum()):,} of them appeared since April 2026 and {int((final_spam & ~since_apr).sum()):,} before that.",
+    f"{int(final_spam.sum()):,} of the {len(df):,} referring domains are spam. {n_spam:,} of them have at least one dofollow "
+    f"link and go in the disavow file; the other {n_nf:,} only have nofollow links, which pass no ranking value, so they "
+    "need no action (standard practice).",
+    f"mightypr.com 301 redirects to justdrivemedia.com, so its links pass on to the client. {n_mighty:,} referring domains "
+    "link through mightypr.com, which is why the same disavow file must be uploaded to both Search Console properties.",
     f"justdrivemedia.com is the target of a large negative SEO link attack that sped up sharply in September 2026, "
     f"with {sep_new:,} new referring domains in that month alone, almost all auto generated spam.",
     f"{len(spam_bl):,} of {len(bl):,} backlinks ({len(spam_bl) / len(bl):.0%}) use keyword stuffed sales copy as anchor "
@@ -768,7 +835,9 @@ steps = [
     "1. Download the current disavow file from Google Search Console (if one exists) and merge it with the disavow text file delivered with this audit.",
     "2. Upload the merged file in the Disavow Links tool in Google Search Console for the justdrivemedia.com property.",
     "3. Optionally glance at the Keep (Low Confidence) domains. They are not disavowed, so nothing is lost by leaving them.",
-    "4. Re run this audit every month while the attack continues, because new spam domains are still appearing daily.",
+    "   Spam (Nofollow, No Action) domains can be added to the file if you prefer, but it is not needed.",
+    "4. Upload the same merged file to the mightypr.com property as well, because mightypr.com redirects to justdrivemedia.com.",
+    "5. Re run this audit every month while the attack continues, because new spam domains are still appearing daily.",
 ]
 for t in steps:
     r += 1
@@ -837,7 +906,8 @@ write_table(wbl, bl[bcols],
 
 # ---------------------------------------------------------------- Disavow List
 dl = dis[
-    ["Disavow Line", "Domain", "Status", "Note (why)", "Confidence", "Spam Network", "First Seen",
+    ["Disavow Line", "Domain", "Status", "Note (why)", "Confidence", "Spam Network", "Links Point To", "Dofollow Links",
+     "Nofollow Links", "First Seen",
      "Semrush Authority Score", "Semrush Backlinks", "Semrush Referring Domains", "Semrush Organic Traffic",
      "Semrush Organic Keywords", "Top Anchor Text", "Links To Client (summary)", "Its Own Backlink Profile",
      "Its Top Pages", "Sites It Links Out To", "Ahrefs DR", "Ahrefs Organic Traffic", "Evidence Found", "Deep Check"]]
@@ -882,10 +952,17 @@ method = [
                                 "ranks with, and every link it sends to the client. Any spam verdict with the slightest doubt "
                                 "was then given to two independent skeptics (one judging the site, one judging the link) "
                                 "who tried to prove it genuine; if either succeeded, the domain was kept."),
+    ("Mighty PR redirect", "Just Drive Media acquired Mighty PR, and mightypr.com 301 redirects to justdrivemedia.com, so links "
+                           "to mightypr.com pass on to the client. They were pulled from Ahrefs and included. Plain Mighty PR "
+                           "anchors are treated as normal branded anchors, never as a spam signal; domains whose links use only "
+                           "brand anchors were reviewed again on the linking page alone, with a skeptic on every doubtful call."),
+    ("Dofollow rule", "Only spam domains with at least one dofollow link go in the disavow file, which is standard practice: "
+                      "nofollow links pass no ranking value. Nofollow only spam is labelled Spam (Nofollow, No Action)."),
     ("Protection rule", "No genuine link is disavowed. Real sites with real traffic, recognised brands, company profile "
                         "sites, PR and news sites, and real personal or business sites are kept even when the link is low "
                         "value or nofollow. When a reviewer was unsure, the domain was kept and marked Keep (Low Confidence)."),
-    ("Statuses", "Spam (Disavow): confirmed spam, in the disavow file. Keep: genuine or harmless. Keep (Low Confidence): "
+    ("Statuses", "Spam (Disavow): confirmed spam with a dofollow link, in the disavow file. Spam (Nofollow, No Action): "
+                 "spam with only nofollow links, not in the file. Keep: genuine or harmless. Keep (Low Confidence): "
                  "kept to be safe, worth a quick look. Own Site: client owned property or sister brand."),
     ("Anchor types", "Branded (Just Drive Media or sister brand Mighty PR), Naked URL, Generic (for example website), "
                      "Empty or image, Contextual, Other URL, Third party brand, Foreign language, Spam: keyword stuffed "
@@ -895,7 +972,8 @@ method = [
                      "spam sub domain of an otherwise ordinary domain, only that sub domain is disavowed."),
     ("Coverage", f"Anchor level evidence was available for {cov:,} of {len(df):,} domains. The rest are domains the tools "
                  "list as referring but returned no live backlink row for, so they were judged on domain level data."),
-    ("Upload warning", "Google's disavow upload REPLACES the existing file, so merge with any current file before uploading."),
+    ("Upload warning", "Google's disavow upload REPLACES the existing file, so merge with any current file before uploading, "
+                       "and upload it to both the justdrivemedia.com and the mightypr.com properties."),
     ("No formulas", "All figures are stored as values, so the workbook opens the same way, with no errors, in any spreadsheet app."),
 ]
 for i, (k, v) in enumerate(method, start=3):
