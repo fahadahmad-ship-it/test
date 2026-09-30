@@ -1,0 +1,402 @@
+[
+{
+"domain": "backlinker.shop",
+"field": "links_to_client",
+"status": "Spam (Disavow)",
+"text": "1 nofollow link on a backlink seller page with about 9,500 outbound links. The anchor is SEO sales copy about guest posts and DR rises that also promotes another SEO seller.",
+"semrush_as": 3,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "crawlvilo.shop",
+"field": "own_backlink_profile",
+"status": "Spam (Disavow)",
+"text": "Ahrefs counts only 2 referring sites; those listed are spam flagged SEO sales and link store sites with zero traffic. Anchors are SEO Express PBN ads, SEO service templates and fake Fiverr DR stories.",
+"semrush_as": 0,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "domainrankacademy.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Cloned fake SEO agency site with an inflated rating, zero traffic and nearly 8,000 links per page; anchors are keyword stuffed sales copy.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "domainrankpartners.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Cloned fake SEO agency site with an inflated rating, zero traffic and nearly 8,000 links per page; anchors are keyword stuffed sales copy.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "domainrankteam.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Cloned fake SEO agency site with an inflated rating, zero traffic and nearly 8,000 links per page; anchors are keyword stuffed sales copy.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "linkcollective.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Fake SEO agency link farm with an inflated rating but no visitors; the links are keyword stuffed sales copy abusing the client brand.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "linkcollective.shop",
+"field": "links_to_client",
+"status": "Spam (Disavow)",
+"text": "Three nofollow links with keyword stuffed sales copy offering guest posts, backlinks and DR boosts for the client and its sister brand, on fake SEO agency pages with about 7,700 to 7,950 outbound links.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "linkdepot.shop",
+"field": "links_to_client",
+"status": "Spam (Disavow)",
+"text": "Four nofollow links with keyword stuffed sales copy promising page one rankings and DR gains for the client and its sister brand, on fake case study pages with about 9,600 to 9,800 outbound links.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "linkfinds.shop",
+"field": "links_to_client",
+"status": "Spam (Disavow)",
+"text": "Three nofollow links with keyword stuffed sales copy selling backlinks and DR growth for the client and its sister brand, on fake SEO journey pages with about 9,600 to 9,800 outbound links.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "linkharvest.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Cloned link farm created days ago with a fake rating and no visitors. Its page lists over 7,000 sites with sales copy anchors.",
+"semrush_as": 0,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "linklivo.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Cloned link farm created days ago with a fake rating and no visitors. Its page lists over 7,000 sites with sales copy anchors.",
+"semrush_as": 0,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "linklora.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Cloned link farm created days ago with a fake rating and no visitors. Its page lists over 7,000 sites with sales copy anchors.",
+"semrush_as": 0,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "linkmexa.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Cloned link farm created days ago with a fake rating and no visitors. Its page lists over 7,000 sites with sales copy anchors.",
+"semrush_as": 0,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "linkmiro.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Cloned link farm created days ago with a fake rating and no visitors. Its page lists over 7,000 sites with sales copy anchors.",
+"semrush_as": 0,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "linknaro.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Cloned link farm created days ago with a fake rating and no visitors. Its page lists over 7,000 sites with sales copy anchors.",
+"semrush_as": 0,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "linkqano.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Cloned link farm created days ago with a fake rating and no visitors. Its page lists over 7,000 sites with sales copy anchors.",
+"semrush_as": 0,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "linkqaro.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Cloned link farm created days ago with a fake rating and no visitors. Its page lists over 7,000 sites with sales copy anchors.",
+"semrush_as": 0,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "linkqira.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Cloned link farm created days ago with a fake rating and no visitors. Its page lists over 7,000 sites with sales copy anchors.",
+"semrush_as": 0,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "linkrankpro.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Fake link building agency farm with an inflated rating and no visitors. Its pages list about 9,500 sites each with sales copy anchors.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "linkrivo.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Cloned link farm created days ago with a fake rating and no visitors. Its page lists over 7,000 sites with sales copy anchors.",
+"semrush_as": 0,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "pageseopartners.shop",
+"field": "own_backlink_profile",
+"status": "Spam (Disavow)",
+"text": "Linked only by other spam: numbered xyz sites, an Outrank HQ store site, sister link farms. Inbound anchors are SEOExpress PBN sales copy, DR boost pitches and random gibberish.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "pageseoresults.shop",
+"field": "own_backlink_profile",
+"status": "Spam (Disavow)",
+"text": "Linked only by other spam: numbered xyz sites, an Outrank HQ store site, sister link farms. Inbound anchors are SEOExpress PBN sales copy, DR boost pitches and random gibberish.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "pageseoservice.shop",
+"field": "own_backlink_profile",
+"status": "Spam (Disavow)",
+"text": "Linked only by other spam: numbered xyz sites, an Outrank HQ store site, sister link farms. Inbound anchors are SEOExpress PBN sales copy, DR boost pitches and random gibberish.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "searchrankbuilders.shop",
+"field": "links_to_client",
+"status": "Spam (Disavow)",
+"text": "Three nofollow links with keyword stuffed service lists (backlinks, guest posts, DR boosts) naming both client brands, on fake case study pages carrying about 7,700 to 8,000 outbound links.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "searchrankcentral.shop",
+"field": "links_to_client",
+"status": "Spam (Disavow)",
+"text": "Three nofollow links with keyword stuffed service lists (guest posts, backlinks, DR and DA gains) naming both client brands, on spam strategy pages carrying about 7,700 to 7,900 outbound links.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "searchrankexperts.shop",
+"field": "links_to_client",
+"status": "Spam (Disavow)",
+"text": "Three nofollow links with keyword stuffed service lists (guest posts, backlinks, DR, DA and TF gains) naming both client brands, on fake case study pages carrying about 7,700 to 7,900 outbound links.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "searchrankgroup.shop",
+"field": "links_to_client",
+"status": "Spam (Disavow)",
+"text": "Three nofollow links with keyword stuffed service lists (guest posts, contextual backlinks, DR gains) naming both client brands, on fake blueprint pages carrying about 7,700 to 8,000 outbound links.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "searchrankinsights.shop",
+"field": "links_to_client",
+"status": "Spam (Disavow)",
+"text": "Two nofollow links, both keyword stuffed service copy (backlinks, guest posts, DR gains) naming the sister brand, on a spam traffic services page carrying about 7,900 outbound links.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "seoboostsystems.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Spam network site made only to host links. Its DR is inflated, it has zero visitors and thousands of outbound links.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "seogrowthpipeline.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Fake SEO agency in a shop domain link farm. Its DR is artificial, with zero traffic and keyword stuffed anchors.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "seogrowthresults.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Link farm with an inflated DR but no organic traffic. Its pages carry thousands of links in keyword stuffed sales copy.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "seolinkpro.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Its high rating is fake; it has no visitors and exists only to list thousands of links, including sales copy aimed at the client.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "seorankflow.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Its high rating is fake; it has no visitors and exists only to list thousands of links, including sales copy aimed at the client.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "siterankacademy.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Link farm with an inflated rating, zero traffic and hundreds of millions of outbound links. Its links to the client are injected SEO sales copy.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "siterankbuilders.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Link farm with an inflated rating, zero traffic and hundreds of millions of outbound links. Its links to the client are injected SEO sales copy.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "siterankexpress.shop",
+"field": "own_backlink_profile",
+"status": "Spam (Disavow)",
+"text": "Hundreds of zero traffic spam sites link to it, such as numbered .xyz domains and fake SEO seller sites. Anchors are SEO Express PBN price lists, DR boost pitches and random letter strings.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "siterankprovider.shop",
+"field": "own_backlink_profile",
+"status": "Spam (Disavow)",
+"text": "Hundreds of zero traffic spam sites link to it, such as numbered .xyz domains and Outrank HQ .store pages. Anchors are SEO Express PBN package prices, DR boost pitches and random letters.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "siteranksolutions.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Link farm with an inflated rating, zero traffic and over 150 million outbound links. Its links to the client are injected SEO sales copy.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "siteranktoolkit.shop",
+"field": "own_backlink_profile",
+"status": "Spam (Disavow)",
+"text": "Hundreds of zero traffic spam sites link to it, such as numbered .xyz domains and Outrank HQ .store pages. Anchors are SEO Express PBN package prices, DR boost pitches and random letters.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "toprankacademy.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Link farm site with an inflated rating but no visitors; its anchors are keyword stuffed SEO sales copy using the client brands.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "webrankinsights.shop",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Fake SEO site that links to hundreds of millions of domains using keyword stuffed sales copy. Its rating is artificial and it has no visitors.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "aligow.com",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Auto generated website list page with about 5,000 unrelated links on a shared spam server. Inflated rating with zero real visitors.",
+"semrush_as": 4,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "apsoz.com",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Auto generated website list page with about 7,000 unrelated links on a shared spam server. Inflated rating with zero real visitors.",
+"semrush_as": 4,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "dotpim.com",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Auto generated website list page with about 7,000 unrelated links on a shared spam server. Inflated rating with zero real visitors.",
+"semrush_as": 4,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "fduty.com",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Expired domain reused as an auto generated website list with about 7,000 unrelated links. Inflated rating with zero real visitors.",
+"semrush_as": 4,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "gigbic.com",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Auto generated website list page with about 7,000 unrelated links on a shared spam server. Inflated rating with zero real visitors.",
+"semrush_as": 4,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "hotfri.com",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Auto generated website list page with about 7,000 unrelated links on a shared spam server. Inflated rating with zero real visitors.",
+"semrush_as": 4,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "mantaw.com",
+"field": "note",
+"status": "Spam (Disavow)",
+"text": "Auto generated website list page with about 7,000 unrelated links on a shared spam server. Inflated rating with zero real visitors.",
+"semrush_as": 4,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "alexpron.blogspot.com",
+"field": "own_backlink_profile",
+"status": "Spam (Disavow)",
+"text": "No referring domains and no backlinks of its own. The high rating is only inherited from the Blogspot platform, not earned by this blog.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+},
+{
+"domain": "alkzbare.blogspot.com",
+"field": "own_backlink_profile",
+"status": "Spam (Disavow)",
+"text": "No referring domains and no backlinks of its own. The high rating is only inherited from the Blogspot platform, not earned by this blog.",
+"semrush_as": 2,
+"semrush_organic_traffic": 0
+}
+]

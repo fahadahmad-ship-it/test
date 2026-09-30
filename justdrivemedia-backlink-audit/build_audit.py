@@ -345,7 +345,7 @@ def assess(d):
     if an and an["all_404"]:
         ev.append("linking pages are fake error pages")
     if inflated_dr:
-        ev.append("high looking Ahrefs rating but zero organic traffic (fake authority)")
+        ev.append("fake authority: looks strong in link tools but has zero organic traffic")
     if bad_tld and no_traffic:
         ev.append("cheap spam TLD with no organic traffic")
 
@@ -445,6 +445,17 @@ def to_int(v):
         return None
 
 
+# Rewrites that express authority with Semrush AS instead of DR (review/rewrites_final.json)
+rewrites = {}
+if (REVIEW / "rewrites_final.json").exists():
+    for r in json.load(open(REVIEW / "rewrites_final.json")):
+        rewrites[(r["domain"].strip().lower(), r["field"])] = no_dash(r["text"])
+
+
+def rw(d, field, text):
+    return rewrites.get((d, field), text)
+
+
 S_SPAM, S_KEEP, S_KEEP_LOW, S_OWN = "Spam (Disavow)", "Keep", "Keep (Low Confidence)", "Own Site"
 ORDER = [S_SPAM, S_KEEP_LOW, S_KEEP, S_OWN]
 
@@ -495,7 +506,11 @@ for d in sorted(known):
         status = {"Spam": S_SPAM, "Own Site": S_OWN}.get(dd["final_status"], S_KEEP_LOW if conf == "Low" else S_KEEP)
         deep_check = "Verified by two skeptics" if dd.get("verified") else "Investigated with live data"
         reviewed = "Manual review, second check and deep live check"
-    de = deep_ev.get(d, {})
+    de = dict(deep_ev.get(d, {}))
+    for k in ("own_backlink_profile", "top_pages", "links_to_client"):
+        if de.get(k):
+            de[k] = rw(d, k, de[k])
+    note = rw(d, "note", note)
     first = min(x for x in [a["first_seen"] if a is not None else None,
                             s["first_seen"] if s is not None else None] if x is not None)
     sl = sem_live.get(d, {})
@@ -851,7 +866,7 @@ method = [
     ("Step 1: automated check", "Every domain was scored on 11 spam signals: SEO or link words in the domain name, numbered "
                                 "throwaway .xyz domain, keyword stuffed or casino anchors, anchors for unrelated brands, "
                                 "linking page with 500+ outbound links, Ahrefs spam flag, spam network hosting IP, "
-                                "throwaway Blogspot blog, fake error pages, high looking Ahrefs rating with zero traffic, and cheap spam TLD "
+                                "throwaway Blogspot blog, fake error pages, fake authority with zero traffic, and cheap spam TLD "
                                 "with no traffic."),
     ("Step 2: manual review", "Eight reviewers then checked every one of the domains by hand, using the metrics, every "
                               "anchor text, the linking pages and their outbound link counts, and challenged the automated "
