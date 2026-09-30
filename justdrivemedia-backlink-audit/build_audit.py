@@ -482,6 +482,21 @@ bl["Note (why)"] = bl["Referring Domain"].map(note_of)
 bl = bl.sort_values(["Referring Domain", "Tool", "First Seen"]).reset_index(drop=True)
 
 # ---------------------------------------------------------------- disavow file (all dates)
+# If every live link from a domain comes from one subdomain and the root domain itself is not
+# a spam name, disavow only that subdomain so a genuine main site is never touched.
+bl["_host"] = bl["Linking Page URL"].map(host)
+hosts = bl[bl["Status"] == S_SPAM].groupby("Referring Domain")["_host"].agg(lambda h: sorted(set(h)))
+
+
+def disavow_target(d, net):
+    hs = hosts.get(d, [])
+    if len(hs) == 1 and hs[0] != d and hs[0].endswith("." + d) and not SPAM_WORDS.search(d) and net != C_STORE:
+        return hs[0]
+    return d
+
+
+df["Disavow Line"] = [("domain:" + disavow_target(d, n)) if st == S_SPAM else ""
+                      for d, st, n in zip(df["Domain"], df["Status"], df["Spam Network"])]
 dis = df[df["Status"] == S_SPAM].sort_values("Domain")
 lines = [
     "# Disavow file for justdrivemedia.com",
@@ -491,7 +506,7 @@ lines = [
     "# Upload at https://search.google.com/search-console/disavow-links (Domain property).",
     "# NOTE: uploading REPLACES any existing disavow file, so merge with the current one first.",
     "",
-] + [f"domain:{d}" for d in dis["Domain"]]
+] + list(dis["Disavow Line"])
 (HERE / "justdrivemedia-disavow.txt").write_text("\n".join(lines) + "\n")
 
 # ---------------------------------------------------------------- workbook helpers
@@ -722,7 +737,7 @@ write_table(wbl, bl[bcols],
             color_col="Status", fmt={"First Seen": DATE, "Outbound Links on Page": NUM})
 
 # ---------------------------------------------------------------- Disavow List
-dl = dis.assign(**{"Disavow Line": "domain:" + dis["Domain"]})[
+dl = dis[
     ["Disavow Line", "Domain", "Status", "Note (why)", "Confidence", "Spam Network", "First Seen",
      "Top Anchor Text", "Evidence Found"]]
 wdl = wb.create_sheet("Disavow List")
@@ -761,7 +776,8 @@ method = [
                      "Empty or image, Contextual, Other URL, Third party brand, Foreign language, Spam: keyword stuffed "
                      "SEO sales copy, Spam: casino, pharma or exam dump."),
     ("Disavow file", "Domain level entries (domain:example.com) for every domain with status Spam (Disavow). Blogspot "
-                     "spam is disavowed per sub domain, never blogspot.com itself."),
+                     "spam is disavowed per sub domain, never blogspot.com itself. Where every live link comes from one "
+                     "spam sub domain of an otherwise ordinary domain, only that sub domain is disavowed."),
     ("Coverage", f"Anchor level evidence was available for {cov:,} of {len(df):,} domains. The rest are domains the tools "
                  "list as referring but returned no live backlink row for, so they were judged on domain level data."),
     ("Upload warning", "Google's disavow upload REPLACES the existing file, so merge with any current file before uploading."),

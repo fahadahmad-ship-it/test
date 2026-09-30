@@ -564,7 +564,7 @@ domain:domaindachecker.site
 domain:domaindachecker.space
 domain:domaindapachecker.online
 domain:domaindexer.com
-domain:domaineye.com
+domain:pr-new.domaineye.com
 domain:domainlinkprofile.site
 domain:domainmetricschecker.space
 domain:domainmetricschecker.store
@@ -810,7 +810,7 @@ domain:indians.cc
 domain:instant-webpage-seoexpress-consultants.store
 domain:instantseogrowth.com
 domain:itsyourgold.com
-domain:jake.eu
+domain:sites.jake.eu
 domain:jobsapp.info
 domain:juaralaundry.com
 domain:junip.shop
@@ -1432,7 +1432,7 @@ domain:techbumppy.com
 domain:tehsmed.blogspot.com
 domain:tfchecker.online
 domain:thebacklinks.shop
-domain:thecloudherald.com
+domain:webs.thecloudherald.com
 domain:thedocmag.com
 domain:theface.in
 domain:theforbestimes.com
@@ -1614,7 +1614,7 @@ domain:yexhub.com
 domain:ylutag.com
 domain:youseotools.com
 domain:youtoo.in
-domain:zhinengdaohang.com
+domain:pr.zhinengdaohang.com
 domain:zipzyx.com
 domain:zlutag.com
 domain:zomatt.com
