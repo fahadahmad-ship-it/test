@@ -4,7 +4,8 @@
 # mightypr.com 301 redirects to justdrivemedia.com, so upload this SAME file to BOTH Search Console properties:
 # justdrivemedia.com and mightypr.com.
 # 874 domains
-# Upload at https://search.google.com/search-console/disavow-links (Domain property).
+# Upload at https://search.google.com/search-console/disavow-links using a URL prefix property
+# (the tool does not support Domain properties). Upload to every version that exists (https and http).
 # NOTE: uploading REPLACES any existing disavow file, so merge with the current one first.
 
 domain:1000.co.in

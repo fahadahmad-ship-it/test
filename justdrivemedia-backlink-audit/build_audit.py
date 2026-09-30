@@ -664,7 +664,8 @@ lines = [
     "# mightypr.com 301 redirects to justdrivemedia.com, so upload this SAME file to BOTH Search Console properties:",
     "# justdrivemedia.com and mightypr.com.",
     f"# {len(dis)} domains",
-    "# Upload at https://search.google.com/search-console/disavow-links (Domain property).",
+    "# Upload at https://search.google.com/search-console/disavow-links using a URL prefix property",
+    "# (the tool does not support Domain properties). Upload to every version that exists (https and http).",
     "# NOTE: uploading REPLACES any existing disavow file, so merge with the current one first.",
     "",
 ] + list(dis["Disavow Line"])
@@ -843,10 +844,10 @@ r += 2
 sm.cell(row=r, column=1, value="Next steps").font = H2
 steps = [
     "1. Download the current disavow file from Google Search Console (if one exists) and merge it with the disavow text file delivered with this audit.",
-    "2. Upload the merged file in the Disavow Links tool in Google Search Console for the justdrivemedia.com property.",
+    "2. Upload the merged file in the Disavow Links tool for the justdrivemedia.com URL prefix property (the tool does not work with Domain properties).",
     "3. Optionally glance at the Keep (Low Confidence) domains. They are not disavowed, so nothing is lost by leaving them.",
     "   Spam (Nofollow, No Action) domains can be added to the file if you prefer, but it is not needed.",
-    "4. Upload the same merged file to the mightypr.com property as well, because mightypr.com redirects to justdrivemedia.com.",
+    "4. Upload the same merged file to a mightypr.com URL prefix property too (verify it by DNS record if needed), because it redirects to justdrivemedia.com.",
     "5. Re run this audit every month while the attack continues, because new spam domains are still appearing daily.",
 ]
 for t in steps:
