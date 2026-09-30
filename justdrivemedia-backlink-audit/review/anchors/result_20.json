@@ -1,0 +1,26 @@
+[
+ {
+  "domain": "webs.businessvocal.com",
+  "status": "Spam",
+  "confidence": "High",
+  "has_dofollow": false,
+  "links_to_mightypr": true,
+  "semrush_as": 2,
+  "could_be_genuine": false,
+  "anchor_assessment": "Branded call to action anchor for Mighty PR is normal, but it sits on an auto generated page listing about ten thousand unrelated links.",
+  "page_assessment": "Randomly named auto generated page on a subdomain linking out to nearly 98 million domains, with zero search traffic. A mass link dump, not a real article.",
+  "note": "Auto generated link dump page with thousands of unrelated links and no real visitors. Semrush Authority Score 2. Part of the attack."
+ },
+ {
+  "domain": "white-hat-and-link-building-prime-marketplace.store",
+  "status": "Spam",
+  "confidence": "High",
+  "has_dofollow": false,
+  "links_to_mightypr": true,
+  "semrush_as": 2,
+  "could_be_genuine": false,
+  "anchor_assessment": "Brand name sits inside a long spun SEO sales story used as link text, typical of the 2026 attack sites.",
+  "page_assessment": "Throwaway store site selling links, with a spun sales story page holding about five thousand outbound links and zero search traffic.",
+  "note": "Link selling store site with spun sales copy and thousands of unrelated links, no real audience. Semrush Authority Score 2. Part of the attack."
+ }
+]

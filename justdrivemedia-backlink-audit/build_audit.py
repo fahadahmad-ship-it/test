@@ -560,7 +560,7 @@ for d in sorted(known_all):
         status = S_SPAM if ar["status"] == "Spam" else (S_KEEP_LOW if conf == "Low" else S_KEEP)
         anchor_check = "Checked and challenged" if ar.get("verified") else "Checked"
         if d in extra_domains:
-            reviewed = "Anchor review (links via mightypr.com)"
+            reviewed = "Manual anchor review (links via mightypr.com)"
     n_dof, n_nof = int(dof_links.get(d, 0)), int(nof_links.get(d, 0))
     if a is not None:
         n_dof = max(n_dof, int(a["dofollow"]))
@@ -578,6 +578,8 @@ for d in sorted(known_all):
     sem_as = to_int(sl.get("authority_score"))
     if sem_as is None and s is not None:
         sem_as = int(s["domain_ascore"])
+    if sem_as is None and ar and ar.get("semrush_as") is not None:
+        sem_as = int(ar["semrush_as"])
     sem_bl = to_int(sl.get("backlinks"))
     if sem_bl is None and s is not None:
         sem_bl = int(s["backlinks_num"])
