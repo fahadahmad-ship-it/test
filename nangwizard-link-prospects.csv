@@ -1,0 +1,123 @@
+Tier,Domain,Category,AS,TF,CF,Traffic,RD,Price ($),Relevance tags,Fit score,Value score
+1 - AU food/drink/party,gourmettraveller.com.au,"English: Food & Drink, Travel, Lifestyle, News, Entertainment",50,32,36,220714,6453,6690,food+home+lifestyle+AU,289.2,2.28
+1 - AU food/drink/party,newidea.com.au,"English: Entertainment, Celebrity, Royals, Lifestyle, Food & Drink, Shopping",50,24,38,140626,10554,6690,food+home+lifestyle+AU,283.5,2.23
+1 - AU food/drink/party,bhg.com.au,"English: Home & Garden, Food & Drink, DIY, Lifestyle, Entertainment",44,27,37,148178,12492,6690,food+home+lifestyle+AU,282.5,2.22
+1 - AU food/drink/party,womensweekly.com.au,"English: News, Lifestyle, Entertainment, Health & Fitness, Food & Drink, Travel",49,25,34,315155,3443,6690,food+home+lifestyle+AU,280.3,2.21
+1 - AU food/drink/party,womensweeklyfood.com.au,"English: Food & Drink, Recipes, Lifestyle",45,25,30,197966,2273,6690,food+home+lifestyle+AU,276.2,2.17
+1 - AU food/drink/party,brideonline.com.au,"English: Weddings, Lifestyle, Photography, Beauty & Fashion, Food & Drink, Entertainment",29,28,32,1920,705,175,food+party+home+lifestyle+AU,272.8,15.93
+1 - AU food/drink/party,signatureluxurytravel.com.au,"English: Travel, Luxury, Lifestyle, Food & Drink, Cruises",38,31,37,30970,1752,1005,food+home+lifestyle+AU,270.4,6.04
+1 - AU food/drink/party,winecompass.com.au,"English: Travel, Food & Drink, Lifestyle, Events",30,18,20,4084,616,120,food+party+home+lifestyle+AU,267.7,19.24
+1 - AU food/drink/party,thatslife.com.au,"English: News, True Crime, Lifestyle, Inspirational, Health & Fitness, Food & Drink",37,24,30,16601,2154,6690,food+home+lifestyle+AU,261.0,2.05
+1 - AU food/drink/party,sydneychic.com.au,"English: Lifestyle, Travel, Food & Drink, Entertainment, Events",22,23,18,1728,316,285,food+party+home+lifestyle+AU,260.5,11.63
+1 - AU food/drink/party,familiesmagazine.com.au,"English: Parenting, Family Activities, Education, Travel, Food & Drink, Health & Fitness",31,23,40,13232,3360,1545,food+parent+lifestyle+AU,251.2,4.43
+1 - AU food/drink/party,dailyaddict.com.au,"English: Food & Drink, Travel, Technology, Lifestyle, Pets, Entertainment",31,22,27,9115,540,990,food+home+lifestyle+AU,247.9,5.58
+1 - AU food/drink/party,oceanroadmagazine.com.au,"English: Lifestyle, Entertainment, Food & Drink, Business, Education, Health & Fitness",30,23,33,4793,1046,1515,food+home+lifestyle+AU,247.1,4.4
+1 - AU food/drink/party,bluemountainsgazette.com.au,"English: Local News, Community Events, Lifestyle",34,46,44,8784,3710,900,party+home+lifestyle+AU,242.3,5.75
+1 - AU food/drink/party,ulladullatimes.com.au,"Food & Drink, Food, Recipes",30,41,44,3074,843,321,food+AU,235.5,9.85
+1 - AU food/drink/party,morsels.com.au,"English: Food & Drink, Travel, Lifestyle",26,13,14,4702,588,795,food+home+lifestyle+AU,233.4,5.93
+1 - AU food/drink/party,exploringsouthaustralia.com.au,"English: Travel, Tourism, Accommodation, Food & Drink, Lifestyle",22,16,29,4035,227,270,food+home+lifestyle+AU,229.7,10.57
+1 - AU food/drink/party,nationaldirectory.com.au,"English: Business Directory, Home Services & Trades, Restaurants & Hospitality, Retail & Shopping, Health & Medical, Legal & Financial, Automotive, Education, Travel & Accommodation, Arts & Entertainment",28,25,45,6069,3352,50,party+home+lifestyle+AU,217.1,25.25
+1 - AU food/drink/party,xpressmag.com.au,"Music, Culture, Events, Australia",34,28,23,9413,4002,250,party+lifestyle+AU,209.2,10.04
+1 - AU food/drink/party,smudgeeats.com.au,"Food & Drink, Food, Recipes",24,17,6,2355,161,36,food+AU,203.4,28.34
+1 - AU food/drink/party,brightonsavoy.com.au,"Weddings, Events, Accommodation",30,23,19,11332,2003,145,party+AU,193.2,12.51
+1 - AU food/drink/party,perfectmoment.net.au,Wedding,27,19,29,2028,552,330,party+AU,175.3,7.22
+2 - AU media & lifestyle,theage.com.au,"English: News, Business, World, Sport, Lifestyle",66,74,63,1928379,96937,17500,home+lifestyle+AU,279.1,1.29
+2 - AU media & lifestyle,examiner.com.au,"Fashion & Lifestyle, Fashion, Lifestyle",46,53,49,105462,7339,915,home+lifestyle+AU,243.2,5.72
+2 - AU media & lifestyle,canberratimes.com.au,General,56,63,69,481903,35748,1148,AU,237.2,4.92
+2 - AU media & lifestyle,elle.com.au,"English: Fashion, Beauty, Celebrity, Lifestyle, Culture, Shopping",54,33,41,346414,10197,6690,home+lifestyle+AU,231.8,1.82
+2 - AU media & lifestyle,holidayswithkids.com.au,"English: Travel, Family, Lifestyle",41,33,28,49042,2912,1265,home+parent+lifestyle+AU,228.0,4.49
+2 - AU media & lifestyle,nowtolove.com.au,"English: Entertainment, Celebrity, Royals, Lifestyle, Puzzles",54,28,43,330001,11070,6690,home+lifestyle+AU,227.6,1.79
+2 - AU media & lifestyle,houzz.com.au,"Home & Garden, Home, Decor",50,37,42,202204,8831,36,home+AU,224.7,31.3
+2 - AU media & lifestyle,thecourier.com.au,"News & Media, Media, Journalism",44,51,51,98552,9841,909,lifestyle+AU,223.3,5.27
+2 - AU media & lifestyle,who.com.au,"English: Entertainment, Celebrity, Pop Culture, Lifestyle, Fashion, Beauty",48,26,31,152566,9284,6690,home+lifestyle+AU,221.0,1.74
+2 - AU media & lifestyle,illawarramercury.com.au,General,46,55,55,117815,9581,914,AU,220.8,5.19
+2 - AU media & lifestyle,brisbanekids.com.au,"Family, Parenting, Kids",42,44,39,162588,6446,698,parent+AU,219.4,5.99
+2 - AU media & lifestyle,standard.net.au,"News & Media, Media, Journalism",44,48,47,90710,6338,910,lifestyle+AU,218.9,5.16
+2 - AU media & lifestyle,wellbeing.com.au,"English: Health & Fitness, Lifestyle, Education",37,44,45,22522,2449,1515,home+lifestyle+AU,218.4,3.89
+2 - AU media & lifestyle,newcastleherald.com.au,"News & Media, Media, Journalism",46,43,59,135839,10045,954,lifestyle+AU,217.7,5.0
+2 - AU media & lifestyle,bendigoadvertiser.com.au,"News & Media, Media, Journalism",43,49,47,71300,5897,915,lifestyle+AU,217.7,5.12
+2 - AU media & lifestyle,homestolove.com.au,"English: Home Decor, Renovating, Lifestyle",45,25,41,93688,8424,6690,home+lifestyle+AU,217.4,1.71
+2 - AU media & lifestyle,hotcopper.com.au,"Finance, Money, Investing",55,46,61,388177,4444,914,AU,216.7,5.1
+2 - AU media & lifestyle,racingandsports.com.au,"English: Sports, Entertainment, News",47,43,57,183030,5630,790,lifestyle+AU,216.6,5.52
+2 - AU media & lifestyle,beautyheaven.com.au,"English: Beauty, Health & Fitness, Lifestyle",42,34,36,32845,4261,6690,home+lifestyle+AU,216.3,1.7
+2 - AU media & lifestyle,fashionjournal.com.au,"English: Fashion, Lifestyle, Beauty",43,26,35,149409,5923,2550,home+lifestyle+AU,216.2,2.89
+2 - AU media & lifestyle,ibtimes.com.au,"Technology, Tech, Innovation",55,42,51,87384,10558,1586,AU,215.1,3.74
+2 - AU media & lifestyle,theadvocate.com.au,"General, Cats",46,49,47,127112,7590,910,AU,214.7,5.06
+2 - AU media & lifestyle,ellaslist.com.au,"English: Parenting, Family Activities, Kids Activities, Travel, Lifestyle",33,26,42,25497,3086,1290,home+parent+lifestyle+AU,213.1,4.15
+2 - AU media & lifestyle,bordermail.com.au,"General, AI",43,52,49,52641,7150,915,AU,212.1,4.99
+2 - AU media & lifestyle,westernweekender.com.au,"English: News, Sports, Entertainment, Travel, Lifestyle",34,42,43,10183,3041,315,home+lifestyle+AU,211.3,8.93
+2 - AU media & lifestyle,fundraise.beyondblue.org.au,"Health & Fitness, Health, Wellness, AI",59,32,27,327577,876,245,lifestyle+AU,209.4,10.16
+2 - AU media & lifestyle,centralwesterndaily.com.au,"Arts & Entertainment, Entertainment, Culture",39,48,53,31015,4092,913,lifestyle+AU,208.9,4.92
+2 - AU media & lifestyle,homebeautiful.com.au,"English: Home Decor, Interior Design, Renovation, Lifestyle",37,26,31,56559,3742,6690,home+lifestyle+AU,207.8,1.64
+2 - AU media & lifestyle,photoreview.com.au,"English: Photography, Technology, Education, Reviews",42,48,44,79147,3580,1395,AU,207.6,3.87
+2 - AU media & lifestyle,theleader.com.au,"Marketing & Advertising, Marketing, Advertising",40,53,60,26366,6799,940,AU,207.4,4.8
+2 - AU media & lifestyle,starcommunity.com.au,"English: Community, News, Lifestyle",36,36,42,11519,2142,2020,home+lifestyle+AU,206.8,3.15
+2 - AU media & lifestyle,dailyliberal.com.au,"Arts & Entertainment, Entertainment, Culture",37,47,51,20045,8192,915,lifestyle+AU,206.7,4.86
+2 - AU media & lifestyle,filmink.com.au,"Art, English, Entertainment, Fashion, Features, Interviews, Movie, Movienews, Movies, Music, News, Reviews, Videos",45,33,38,82037,7211,250,lifestyle+AU,206.0,9.89
+2 - AU media & lifestyle,sen.com.au,"Arts & Entertainment, Entertainment, Culture",49,28,34,169614,7186,771,lifestyle+AU,205.2,5.3
+2 - AU media & lifestyle,atn.com.au,"Travelling, Travel, Tourism",33,53,47,12946,3159,172,lifestyle+AU,204.3,12.04
+3 - Global food/drink authority,visitdevon.co.uk,"English: Travel, Tourism, Accommodation, Food & Drink, Events, Lifestyle",48,58,46,203111,3014,465,food+party+home+lifestyle,280.2,9.56
+3 - Global food/drink authority,sandiegouniontribune.com,"English: News, Sports, Food & Drink, Business, Real Estate, Lifestyle",59,63,67,379061,93114,3450,food+home+lifestyle,270.5,3.06
+3 - Global food/drink authority,maxim.com,"English: Entertainment, Lifestyle, Fashion, Travel, Food & Drink, Luxury",47,63,50,144581,29628,12990,food+home+lifestyle,262.1,1.43
+3 - Global food/drink authority,windstream.net,"English: Food & Drink, Lifestyle, Travel, Events",47,34,32,275221,4970,130,food+party+home+lifestyle,259.4,17.83
+3 - Global food/drink authority,miaminewtimes.com,"English: News, Business, Food & Drink, Arts & Culture, Sports, Lifestyle",50,59,53,66233,39334,1850,food+home+lifestyle,258.6,4.13
+3 - Global food/drink authority,pghcitypaper.com,"Local News, Arts, Culture, Events, Food, Music",43,57,48,34460,10495,1575,food+party+lifestyle,257.0,4.48
+3 - Global food/drink authority,dallasobserver.com,"English: News, Entertainment, Food & Drink, Arts & Culture, Sports, Lifestyle",45,59,51,87736,30352,2450,food+home+lifestyle,256.5,3.51
+3 - Global food/drink authority,ocregister.com,"English: News, Sports, Food & Drink, Business, Real Estate, Entertainment",56,69,63,422956,99154,2950,food+lifestyle,256.3,3.16
+3 - Global food/drink authority,galvnews.com,"English: News, Business, Sports, Lifestyle, Food & Drink, Health & Fitness",46,58,48,78798,11255,4860,food+home+lifestyle,254.1,2.38
+3 - Global food/drink authority,gardenweb.com,"English: Home & garden forum, Kitchen & dining ideas, Living room & family room, Gardening, Decoration",39,61,44,35244,12568,70,food+home+parent,253.4,24.49
+3 - Global food/drink authority,presstelegram.com,"English: News, Sports, Business, Entertainment, Lifestyle, Food & Drink",43,61,54,35514,20383,1340,food+home+lifestyle,252.6,4.81
+3 - Global food/drink authority,washingtoncitypaper.com,"English: News, Local News, Arts & Culture, Food & Drink, Sports, Lifestyle",57,42,45,112509,32188,2600,food+home+lifestyle,250.2,3.31
+3 - Global food/drink authority,mindbodygreen.com,"English: Lifestyle, Health & Fitness, Food & Drink, Mindfulness, Relationships, Environment",64,36,64,1206191,59624,12990,food+home+lifestyle,249.7,1.36
+3 - Global food/drink authority,londontheinside.com,"English: London Events, Lifestyle, Culture, Music, Food",40,34,32,39633,3670,1630,food+party+home+lifestyle,249.1,4.26
+3 - Global food/drink authority,dailyhive.com,"English: News, Entertainment, Lifestyle, Food & Drink, Sports, Travel",52,43,48,447469,54159,4565,food+home+lifestyle,247.6,2.4
+3 - Global food/drink authority,modernluxury.com,"English: Lifestyle, Fashion, Travel, Food & Drink, Entertainment, Real Estate",42,51,52,72606,32044,1225,food+home+lifestyle,246.3,4.93
+3 - Global food/drink authority,sgvtribune.com,"English: News, Sports, Entertainment, Business, Lifestyle, Food & Drink",44,55,55,31527,13522,2940,food+home+lifestyle,246.2,3.05
+3 - Global food/drink authority,ibelieve.com,"English: Religion, Lifestyle, Food & Drink",46,50,50,204038,4628,1620,food+home+lifestyle,245.4,4.21
+3 - Global food/drink authority,sixescricket.com,"English: Sports, Entertainment, Food & Drink, Events, Lifestyle",40,29,41,46556,2415,625,food+party+home+lifestyle,244.1,7.08
+3 - Global food/drink authority,yorkmix.com,"English: News, Entertainment, Music, Events, Lifestyle, Food & Drink",39,29,32,32677,4096,550,food+party+home+lifestyle,243.3,7.57
+3 - Global food/drink authority,sandiegoreader.com,"English: Local News, Arts & Culture, Food & Drink, Music, Events, Neighborhoods, Opinion, Guides",44,37,46,40290,30406,600,food+party+lifestyle,242.3,7.18
+3 - Global food/drink authority,chowhound.com,"Food & Drink, Food, Recipes",58,60,52,552108,20859,2526,food,242.1,3.26
+3 - Global food/drink authority,phoenixnewtimes.com,"English: News, Entertainment, Food & Drink, Arts & Culture, Music, Sports",51,59,51,68810,33610,1950,food+lifestyle,242.0,3.75
+3 - Global food/drink authority,houstonpress.com,"English: Local news & culture (Houston, Texas), Arts & entertainment, Food & lifestyle",49,41,39,62339,26587,1350,food+home+lifestyle,241.4,4.58
+3 - Global food/drink authority,glasgowlive.co.uk,"English: News, Sports, Travel, Food & Drink, Lifestyle, Entertainment",49,39,52,655661,16525,3290,food+home+lifestyle,241.4,2.81
+3 - Global food/drink authority,westword.com,"English: News, Business, Sports, Food & Drink, Arts & Culture, Music",46,59,53,139165,37591,2150,food+lifestyle,240.3,3.53
+3 - Global food/drink authority,lasvegasmagazine.com,"English: Travel, Entertainment, Food & Drink, Nightlife, Lifestyle, News",38,33,26,7765,5601,1920,food+party+home+lifestyle,240.3,3.76
+3 - Global food/drink authority,cheese.com,"Cheese Varieties, Cheese Recipes, Cheese Guides, Food",53,64,52,360035,8470,400,food,239.7,8.88
+3 - Global food/drink authority,supermarketnews.com,"English: News, Business, Food & Drink",51,54,55,94070,19872,2900,food+lifestyle,239.0,2.98
+3 - Global food/drink authority,604now.com,"English: News, Events, Food & Drink, Travel, Lifestyle, Real Estate",34,30,38,18703,4926,3046,food+party+home+lifestyle,238.6,2.9
+3 - Global food/drink authority,abouttimemagazine.co.uk,"English: Travel, Food & Drink, Nightlife, Lifestyle, Health & Fitness, Beauty & Wellness",38,25,32,39133,2425,870,food+party+home+lifestyle,238.3,5.76
+3 - Global food/drink authority,chronicleonline.com,"English: News, Business, Sports, Lifestyle, Entertainment, Food & Drink",44,46,41,42904,8013,1030,food+home+lifestyle,238.0,5.24
+3 - Global food/drink authority,greatbritishlife.co.uk,"Lifestyle, Culture, Travel, Food",45,41,41,87752,8959,1750,food+home+lifestyle,237.9,3.92
+3 - Global food/drink authority,mspmag.com,"English: Lifestyle, Food & Drink, Travel, Health & Fitness, Entertainment",50,35,39,228933,12001,4820,food+home+lifestyle,237.6,2.24
+3 - Global food/drink authority,oakcliff.advocatemag.com,"English: News, Local News, Lifestyle, Food & Drink, Real Estate, Events",36,30,24,17868,2099,4260,food+party+home+lifestyle,237.2,2.39
+3 - Global food/drink authority,hawaii-aloha.com,"English: Travel, Lifestyle, Food & Drink",42,49,39,56959,2433,750,food+home+lifestyle,237.0,6.22
+3 - Global food/drink authority,newsonjapan.com,"Business, Education, Entertainment, Food & Drinks, General, Japan, Japanese, News, Politics, Sports, Technology, Travel, Culture, International, Lifestyle",40,55,50,17030,4221,130,food+home+lifestyle,236.9,16.29
+3 - Global food/drink authority,houstoniamag.com,"English: News, Lifestyle, Food & Drink, Arts & Culture, Travel, Real Estate",49,35,48,140520,11319,2555,food+home+lifestyle,236.7,3.16
+3 - Global food/drink authority,orlandoweekly.com,"English: News, Arts & Culture, Music, Food & Drink, Entertainment, Lifestyle",47,38,40,54868,20589,2025,food+home+lifestyle,236.7,3.6
+3 - Global food/drink authority,visitsouthdevon.co.uk,"English: Travel, Tourism, Food & Drink, Lifestyle",46,41,36,168468,2990,260,food+home+lifestyle,235.9,11.08
+4 - High value / low cost,artnews.com,"Art, Art & entertainment, Arts, English, Entertainment, Event, Exhibitions, General, Music, Music & movies, News, Travel",52,50,50,185355,40706,84,party+lifestyle,201.4,17.61
+4 - High value / low cost,mymmanews.com,"Bjj, Boxing, Business, English, Entertainment, Eventguide, Fitness, General, Health, Health and fitness, Homeimpv, Karate, Lifestyle, Mma, Mmagear, Newblog, News, Opinion, Opinions, Related, Socialmedia, Sport, Sports, Tech, Travel, Wrestling",39,24,30,17898,6688,75,party+home+lifestyle,175.0,16.28
+4 - High value / low cost,wine.co.za,"English: Food & Drink, Travel, Lifestyle, Shopping",41,49,46,36776,2394,145,food+home+lifestyle,234.2,15.16
+4 - High value / low cost,winepricetoday.com,"English: Food & Drink, Shopping, Lifestyle",33,20,31,26785,651,135,food+home+lifestyle,197.0,13.27
+4 - High value / low cost,e-architect.com,"Architects, Architectsbycountryandcity, Architecture, Architecturewalkingtours, Articles, Books, Business, Competitions, Construction, English, Events, Home, Homeimprovement, Interiordesign, Jobs, Jobs&career, Linkinsertion, Map, Products, Property, Realestate, Site, Tours, Worldbuildings",42,37,58,34148,12163,125,party+home,186.2,13.08
+4 - High value / low cost,leca-palmeira.com,"Local News, Community, Events",34,41,35,30445,1471,110,party+lifestyle,167.2,12.6
+4 - High value / low cost,techguide.com.au,"English: Technology News, Reviews, Gadgets, Mobile Phones, Computers",38,26,42,34265,5177,140,lifestyle+AU,189.6,12.52
+4 - High value / low cost,sassarioggi.it,"Italian, News, Events, Sport, Economy, Chronicle, Obituary, Publicity, Business, Sports, Technology & Gadgets, News & Media, Health and Fitness, Festival & Events, Economy & Politics, Italian, English",32,25,42,19656,1174,90,party+lifestyle,148.6,12.51
+4 - High value / low cost,fameimpact.com,"Culture, Festivals, UK",40,26,42,24208,1297,100,party+lifestyle,156.4,12.42
+4 - High value / low cost,beontheroad.com,"Travel, Adventure, Food, Lifestyle",34,26,37,32581,782,165,food+home+lifestyle,204.6,12.34
+4 - High value / low cost,valdelsa.net,"Local News, Events, Culture, Politics",35,36,44,32905,2275,120,party+lifestyle,165.1,11.86
+4 - High value / low cost,touren-schwarzwald.info,"English: Travel, Outdoors, Sports, Food & Drink, Lifestyle",32,27,25,18678,822,180,food+home+lifestyle,201.6,11.59
+4 - High value / low cost,theworldonmynecklace.com,"Travel, Adventure, Tips, Food, Destinations",40,23,23,81024,1077,175,food+lifestyle,193.9,11.32
+4 - High value / low cost,pulse.ng,"Business, Celebrities, Culture, English, Entertainment, Event, Fashion, General, Health & Fitness, Lifestyle, Movies, Music, News, News & Media, Politics, Sport, Sports, Tourism, TV",46,27,42,52215,18628,170,party+home+lifestyle,190.8,11.32
+4 - High value / low cost,evite.com,"English: Events, Lifestyle, Entertainment",58,67,49,988100,22070,260,party+home+lifestyle,238.4,11.2
+4 - High value / low cost,pinoyadventurista.com,"Adventure, Beaches, Blogs, English, Food, Food & Drinks, Hotel, Hotels, Outdoor, Resorts, Travel, Travel or Food",36,24,36,55321,2119,180,food+lifestyle,192.3,11.05
+4 - High value / low cost,corporatekeysaustralia.com.au,"Marketing & Advertising, Marketing, Advertising",32,44,43,36524,2155,187,AU,191.8,10.8
+4 - High value / low cost,marketingtrips.com,"English: Food & Drink, Travel, Lifestyle",36,23,37,30260,1125,210,food+home+lifestyle,204.0,10.78
+4 - High value / low cost,vickyflipfloptravels.com,"English: Travel, Lifestyle, Food & Drink, Entertainment",37,27,26,21422,3223,230,food+home+lifestyle,209.9,10.55
+4 - High value / low cost,loudandclearreviews.com,"Movie Reviews, Film Festivals, Entertainment News",41,26,42,79977,3392,150,party+lifestyle,165.7,10.53
+4 - High value / low cost,rockaxis.com,"Art, Concerts, English, Entertainment, Events, Interviews, Movies, Music",38,48,39,45035,3328,180,party+lifestyle,180.6,10.39
+4 - High value / low cost,statoquotidiano.it,"Local News, Events, Culture, Politics",42,26,32,78262,3513,160,party+lifestyle,166.4,10.21
+4 - High value / low cost,varesesport.com,"Sports, Varese, News, Events",39,27,30,39445,1713,150,party+lifestyle,159.8,10.16
+4 - High value / low cost,thebierkeller.com,"English: Food & Drink, Nightlife, Entertainment",39,22,17,123172,774,270,food+party+lifestyle,219.8,10.11
+4 - High value / low cost,burlapandblue.com,"English: DIY crafts, Home decor, Printables and templates, Party and holidays, Gift ideas, Lifestyle tips",35,24,38,21591,4116,175,party+home+lifestyle,171.6,10.02
