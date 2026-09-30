@@ -146,6 +146,10 @@ if len(mraw):
                              + col("snippet_right").fillna("").astype(str).str[:80]).str.strip().replace("[LINK]", ""),
         "First Seen": pd.to_datetime(mraw["first_seen_link"].str[:10]),
     })
+    # Ahrefs shows a redirected link in the justdrivemedia.com report with the final URL as target;
+    # a link that also appears in the mightypr.com report actually points at mightypr.com
+    mkeys = set(zip(mraw["url_from"], mraw["anchor"].fillna("")))
+    bl["_via_mighty"] = [(u, a if isinstance(a, str) else "") in mkeys for u, a in zip(bl["Linking Page URL"], bl["Anchor Text"])]
     seen_keys = set(zip(bl["Linking Page URL"], bl["Anchor Text"].fillna("")))
     mbl = mbl[[(u, a if isinstance(a, str) else "") not in seen_keys for u, a in zip(mbl["Linking Page URL"], mbl["Anchor Text"])]]
     bl = pd.concat([bl, mbl], ignore_index=True)
@@ -504,7 +508,11 @@ rows = []
 link_first = bl.groupby("Referring Domain")["First Seen"].min().to_dict()
 dof_links = bl[bl["Link Type"] == "Dofollow"].groupby("Referring Domain").size().to_dict()
 nof_links = bl[bl["Link Type"] == "Nofollow"].groupby("Referring Domain").size().to_dict()
-targets = bl.assign(_t=bl["Target URL"].map(lambda u: "mightypr.com (redirect)" if "mightypr.com" in str(u) else "justdrivemedia.com")) \
+bl["_via_mighty"] = bl.get("_via_mighty", False)
+bl["_via_mighty"] = bl["_via_mighty"].fillna(False).astype(bool) | bl["Target URL"].astype(str).str.contains("mightypr.com")
+bl.loc[bl["_via_mighty"] & ~bl["Target URL"].astype(str).str.contains("mightypr.com"), "Target URL"] = \
+    bl["Target URL"].astype(str) + " (via mightypr.com redirect)"
+targets = bl.assign(_t=bl["_via_mighty"].map(lambda v: "mightypr.com (redirect)" if v else "justdrivemedia.com")) \
             .groupby("Referring Domain")["_t"].agg(lambda t: " and ".join(sorted(set(t))) if len(set(t)) > 1 else next(iter(t))).to_dict()
 
 for d in sorted(known_all):
