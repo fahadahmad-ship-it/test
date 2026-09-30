@@ -668,7 +668,8 @@ n_spam = int((df.Status == S_SPAM).sum())
 sm["A1"] = "justdrivemedia.com Backlink Audit"
 sm["A1"].font = TITLE
 sm["A2"] = (f"Data pulled {PULL_DATE} from Ahrefs and Semrush: {len(df):,} unique referring domains and "
-            f"{len(bl):,} backlinks. Every domain was checked twice: an automated first pass, then a manual review.")
+            f"{len(bl):,} backlinks. Every domain went through an automated check, a manual review and a deep live check "
+            "with Semrush and Ahrefs data; doubtful spam calls were also verified by independent skeptics.")
 sm["A2"].font = Font(name=FONT, size=10, italic=True, color="595959")
 
 MEANING = {
