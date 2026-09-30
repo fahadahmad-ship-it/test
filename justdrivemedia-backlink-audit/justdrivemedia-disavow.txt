@@ -1,7 +1,7 @@
 # Disavow file for justdrivemedia.com
-# Prepared 2026-09-29 from Ahrefs + Semrush referring-domain exports
+# Prepared 2026-09-30 from Ahrefs + Semrush referring-domain and backlink exports
 # Scope: spam referring domains first seen on or after 2026-04-01
-# 1413 domains
+# 1446 domains
 # Upload at https://search.google.com/search-console/disavow-links (Domain property).
 # NOTE: uploading REPLACES any existing disavow file - merge with the current one first.
 
@@ -249,6 +249,7 @@ domain:baclinkchecker.online
 domain:baclinkchecker.shop
 domain:baclinkchecker.website
 domain:batchbacklinkchecker.shop
+domain:bazerdaily.com
 domain:best-keyword-seoexpress-portal.store
 domain:best-seo-domains.com
 domain:best-seoexpress-off-page-network.store
@@ -306,6 +307,7 @@ domain:boldseolink.shop
 domain:booastrankingwithbacklinks.com
 domain:boosttraffic.site
 domain:bramo.shop
+domain:breachviews.com
 domain:brightboosthub.shop
 domain:brightlinkpro.shop
 domain:brightseohub.shop
@@ -373,6 +375,7 @@ domain:checkerdapa.store
 domain:checkerseo.store
 domain:checkwebsitedapa.shop
 domain:chordmp3.net
+domain:cindylaup.com
 domain:cinto.shop
 domain:cinvo.shop
 domain:cleanboosthub.shop
@@ -387,7 +390,9 @@ domain:clearseohub.shop
 domain:clearseolink.shop
 domain:click-through-link-equity-and-authority-link-services.store
 domain:clicktobuybacklinks.com
+domain:clifflisting.com
 domain:cluster-rank-forge-academy.store
+domain:cmocheatsheets.com
 domain:coho.lol
 domain:competitionchecker.site
 domain:competitionchecker.store
@@ -395,6 +400,7 @@ domain:competitorchecker.site
 domain:content-marketing-search-rank-and-search-rank-syndicate.store
 domain:contentreach.shop
 domain:contextual-link-baron-services.store
+domain:coruzants.com
 domain:corvio.shop
 domain:cralto.shop
 domain:crawl-budget-organic-traffic-and-contextual-link-central.store
@@ -452,6 +458,7 @@ domain:dadomainchecker.online
 domain:dadomainchecker.space
 domain:dadrchecker.website
 domain:dadrpachecker.website
+domain:daechul.co.com
 domain:dafreechecker.shop
 domain:dailymusings.top
 domain:dapabacklinkchecker.shop
@@ -582,11 +589,13 @@ domain:epic-webpage-rank-forge-academy.store
 domain:erythromycinonline.site
 domain:exclusive-link-baron-search-syndicate.store
 domain:exclusive-traffic-experts-seoexpress.store
+domain:exotichealths.com
 domain:expert-domain-seoexpress-specialists.store
 domain:expert-organic-seoexpress.store
 domain:expert-partners-for-niche-edit-and-authority-link.store
 domain:expert-search-seoexpress-team.store
 domain:expert-seoexpress-authority-directory.store
+domain:expresskitchendesigns.com
 domain:externallinkchecker.shop
 domain:fashionclothingnews.com
 domain:fastboosthub.shop
@@ -605,9 +614,11 @@ domain:findrp.com
 domain:fioro.shop
 domain:first-class-seoexpress-keyword-exchange.store
 domain:firstguestpost.com
+domain:fittyfoody.com
 domain:flagship-digital-pr-and-editorial-link-central.store
 domain:flagship-niche-edit-and-link-building-services.store
 domain:flenro.shop
+domain:fletcherrld.com
 domain:forbesstories.com
 domain:forum-provider-link-baron.store
 domain:forvi.shop
@@ -661,7 +672,10 @@ domain:get-top-rankings.com
 domain:getranked.site
 domain:getseotips.com
 domain:getseotips.link
+domain:ggmap.co.com
+domain:ggmap.us.com
 domain:gigbic.com
+domain:gladeflowers.com
 domain:global-digital-seoexpress-portal.store
 domain:go4seo.info
 domain:go4seo.link
@@ -702,6 +716,7 @@ domain:highseo.shop
 domain:highseoranking.shop
 domain:homesforsaleoldgreenwichct.com
 domain:hotfri.com
+domain:hotonlinegaming.com
 domain:huntob.com
 domain:increasewebtrafficwithlinks.com
 domain:indexaward.com
@@ -728,6 +743,7 @@ domain:indiabacklink.com
 domain:instant-webpage-seoexpress-consultants.store
 domain:instantseogrowth.com
 domain:itsyourgold.com
+domain:juaralaundry.com
 domain:junip.shop
 domain:juvex.shop
 domain:kawaiishop.shop
@@ -797,10 +813,13 @@ domain:livebacklinkchecker.space
 domain:localranking.site
 domain:luminko.shop
 domain:luxury-niche-edit-seoexpress-services.store
+domain:lydiaroyrealestate.com
 domain:m98ufa.com
 domain:mailbat.com
 domain:mantaw.com
+domain:marinasone.com
 domain:marketsseo.com
+domain:masihnyata.com
 domain:massbacklinkchecker.shop
 domain:massdachecker.store
 domain:massdachecker.website
@@ -811,9 +830,11 @@ domain:master-rank-forge-pbn-league.store
 domain:master-seoexpress-guest-post-partners.store
 domain:master-seoexpress-search-agency.store
 domain:matrivo.shop
+domain:mediaboooster.com
 domain:mediazonedirectory.com
 domain:mervi.shop
 domain:metamagic.top
+domain:missburrg.com
 domain:modern-guest-post-consultants-seoexpress.store
 domain:modern-link-baron-marketing-portal.store
 domain:modern-studio-outrank-hq-blogger.store
@@ -825,10 +846,12 @@ domain:multipledachecker.shop
 domain:murvi.shop
 domain:murvix.shop
 domain:mylisthero.com
+domain:mymarketpost.com
 domain:mysky-shop.shop
 domain:nelpa.shop
 domain:newblogerseo.com
 domain:newsbacklinks.info
+domain:newsblogsports.site
 domain:newwebsiteslist.com
 domain:nexabacklinks.shop
 domain:nexlyp.com
@@ -860,8 +883,10 @@ domain:onlinegamblingbonus.online
 domain:onlinepadachecker.shop
 domain:onlinerankchecker.online
 domain:onlineseochecker.website
+domain:onlineshoppingidea.com
 domain:onlinesitechecker.space
 domain:onlinesitechecker.website
+domain:onvaxs.com
 domain:optimal-website-outrank-hq.store
 domain:optimizeflow.top
 domain:organic-traffic-and-outreach-pro-authority-services.store
@@ -914,6 +939,7 @@ domain:pageseoresults.shop
 domain:pageseoservice.shop
 domain:pamto.shop
 domain:paramount-collective-outrank-hq-dr-90.store
+domain:phanerosart.com
 domain:piolo.shop
 domain:plako.shop
 domain:plavo.shop
@@ -1040,6 +1066,8 @@ domain:rapidseolink.shop
 domain:rarebacklinks.com
 domain:realwinningonlinecasino.online
 domain:review-link-system-link-baron.store
+domain:rjcentinc.com
+domain:royaldb.us.com
 domain:s-tribe.net
 domain:sabns.com
 domain:sahammurah.com
@@ -1243,11 +1271,14 @@ domain:smartboosthub.shop
 domain:smartranklab.shop
 domain:smartseohub.shop
 domain:smartseolink.shop
+domain:smartstimer.com
 domain:solidboosthub.shop
 domain:solidlinkpro.shop
 domain:solidranklab.shop
 domain:solidseohub.shop
 domain:solidseolink.shop
+domain:soulvocable.com
+domain:southfwb.com
 domain:souwika.blogspot.com
 domain:steadyboosthub.shop
 domain:steadylinkpro.shop
@@ -1277,12 +1308,14 @@ domain:techbumppy.com
 domain:tehsmed.blogspot.com
 domain:tfchecker.online
 domain:thebacklinks.shop
+domain:thedocmag.com
 domain:theface.in
 domain:theforbestimes.com
 domain:theguestposts.shop
 domain:thehighrankseo.shop
 domain:thehighseoranking.shop
 domain:themasterdirectory.com
+domain:themicrodigits.com
 domain:themumbai.in
 domain:therankboostseo.shop
 domain:therankinghighseo.shop
