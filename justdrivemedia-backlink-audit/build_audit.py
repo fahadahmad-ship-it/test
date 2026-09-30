@@ -14,6 +14,7 @@ value (no formulas), and all statuses, notes and labels are written without hyph
 """
 import csv
 import glob
+import json
 import re
 from collections import Counter
 from pathlib import Path
@@ -398,6 +399,31 @@ for f in sorted(glob.glob(str(REVIEW / "verify_*.csv"))):
                                "confidence": (row.get("confidence") or "").strip().title(),
                                "note": no_dash(row.get("note") or "")}
 
+# Final consistency overrides decided after comparing reviewers (review/overrides.csv)
+overrides = {}
+for f in sorted(glob.glob(str(REVIEW / "overrides.csv"))):
+    with open(f, newline="", encoding="utf-8") as fh:
+        for row in csv.DictReader(fh):
+            overrides[row["domain"].strip().lower()] = {"status": row["status"].strip(),
+                                                        "confidence": row["confidence"].strip().title(),
+                                                        "note": no_dash(row["note"])}
+
+# Deep live check (review/deep): investigator evidence per domain + final decisions after skeptic verification
+DEEP = REVIEW / "deep"
+deep_ev = {}
+for f in sorted(glob.glob(str(DEEP / "result_*.json"))):
+    try:
+        data = json.load(open(f))
+    except (ValueError, OSError):
+        continue
+    for r in data if isinstance(data, list) else data.get("results", []):
+        if isinstance(r, dict) and r.get("domain"):
+            deep_ev[r["domain"].strip().lower()] = r
+deep_dec = {}
+if (DEEP / "final_decisions.json").exists():
+    for r in json.load(open(DEEP / "final_decisions.json")):
+        deep_dec[r["domain"].strip().lower()] = r
+
 S_SPAM, S_KEEP, S_KEEP_LOW, S_OWN = "Spam (Disavow)", "Keep", "Keep (Low Confidence)", "Own Site"
 ORDER = [S_SPAM, S_KEEP_LOW, S_KEEP, S_OWN]
 
@@ -435,6 +461,20 @@ for d in sorted(known):
             status, second = (S_KEEP_LOW if conf == "Low" else S_KEEP), "Overturned to keep"
         else:
             status, second = S_SPAM, "Confirmed spam"
+    ov = overrides.get(d)
+    if ov:
+        conf, note = ov["confidence"], ov["note"]
+        status = {"Spam": S_SPAM, "Own Site": S_OWN}.get(ov["status"], S_KEEP_LOW if conf == "Low" else S_KEEP)
+        second = "Overturned to keep" if status != S_SPAM and auto == "Spam" else second
+    dd = deep_dec.get(d)
+    deep_check = ""
+    if dd and dd.get("final_status") in ("Spam", "Keep", "Own Site"):
+        conf = (dd.get("final_confidence") or conf).title()
+        note = no_dash(dd.get("final_note") or note)
+        status = {"Spam": S_SPAM, "Own Site": S_OWN}.get(dd["final_status"], S_KEEP_LOW if conf == "Low" else S_KEEP)
+        deep_check = "Verified by two skeptics" if dd.get("verified") else "Investigated with live data"
+        reviewed = "Manual review, second check and deep live check"
+    de = deep_ev.get(d, {})
     first = min(x for x in [a["first_seen"] if a is not None else None,
                             s["first_seen"] if s is not None else None] if x is not None)
     rows.append({
@@ -467,6 +507,16 @@ for d in sorted(known):
         "Semrush Last Seen": s["last_seen"] if s is not None else None,
         "IP": s["ip"] if s is not None else "",
         "Country": (s["country"].upper() if isinstance(s["country"], str) else "") if s is not None else "",
+        "Live DR": de.get("dr"),
+        "Live Referring Domains": de.get("refdomains"),
+        "Live Backlinks": de.get("backlinks"),
+        "Live Organic Traffic": de.get("org_traffic"),
+        "Live Organic Keywords": de.get("org_keywords"),
+        "Sites It Links Out To": de.get("linked_domains"),
+        "Its Own Backlink Profile": no_dash(de["own_backlink_profile"]) if de.get("own_backlink_profile") else "",
+        "Its Top Pages": no_dash(de["top_pages"]) if de.get("top_pages") else "",
+        "Links To Client (summary)": no_dash(de["links_to_client"]) if de.get("links_to_client") else "",
+        "Deep Check": deep_check,
         "Automated First Pass": auto,
         "Second Check": second,
         "Reviewed By": reviewed,
@@ -611,6 +661,8 @@ changes = [
     f"Moved from keep to spam (newly caught): {int((~auto_spam & final_spam).sum())} domains.",
     f"Unchanged: {int((auto_spam == final_spam).sum()):,} domains.",
     f"Domains checked by manual review: {int(df['Reviewed By'].str.startswith('Manual').sum()):,} of {len(df):,}.",
+    f"Domains given the deep live check: {int((df['Deep Check'] != '').sum()):,}, of which "
+    f"{int((df['Deep Check'] == 'Verified by two skeptics').sum())} doubtful spam verdicts were also verified by two skeptics.",
     f"Riskiest spam calls given an independent second check: {int((df['Second Check'] != '').sum())}, of which "
     f"{int((df['Second Check'] == 'Overturned to keep').sum())} were overturned to keep.",
 ]
@@ -670,8 +722,8 @@ for t, rec in at.iterrows():
 r += 2
 sm.cell(row=r, column=1, value="Next steps").font = H2
 steps = [
-    "1. Download the current disavow file from Google Search Console (if one exists) and merge it with justdrivemedia-disavow.txt.",
-    "2. Upload the merged file at search.google.com/search-console/disavow-links for the justdrivemedia.com property.",
+    "1. Download the current disavow file from Google Search Console (if one exists) and merge it with the disavow text file delivered with this audit.",
+    "2. Upload the merged file in the Disavow Links tool in Google Search Console for the justdrivemedia.com property.",
     "3. Optionally glance at the Keep (Low Confidence) domains. They are not disavowed, so nothing is lost by leaving them.",
     "4. Re run this audit every month while the attack continues, because new spam domains are still appearing daily.",
 ]
@@ -698,9 +750,11 @@ write_table(
     widths={"Domain": 36, "Status": 20, "Note (why)": 60, "Confidence": 11, "Spam Network": 34,
             "Evidence Found": 70, "Spam Signals": 9, "In Disavow File": 10, "First Seen": 12,
             "Top Anchor Text": 45, "Anchor Mix": 42, "Example Linking Page": 45, "Linking Page Title": 40,
-            "Page Category": 30, "IP": 15, "Automated First Pass": 12, "Second Check": 16, "Reviewed By": 18},
-    color_col="Status", wrap_cols=("Note (why)", "Evidence Found"),
-    fmt={"First Seen": DATE, "Semrush Last Seen": DATE, "Ahrefs Organic Traffic": NUM,
+            "Page Category": 30, "IP": 15, "Automated First Pass": 12, "Second Check": 16, "Reviewed By": 18,
+            "Its Own Backlink Profile": 60, "Its Top Pages": 45, "Links To Client (summary)": 60, "Deep Check": 20},
+    color_col="Status", wrap_cols=("Note (why)", "Evidence Found", "Its Own Backlink Profile", "Links To Client (summary)"),
+    fmt={"First Seen": DATE, "Semrush Last Seen": DATE, "Ahrefs Organic Traffic": NUM, "Live Backlinks": NUM,
+         "Live Referring Domains": NUM, "Live Organic Traffic": NUM, "Live Organic Keywords": NUM, "Sites It Links Out To": NUM,
          "Ahrefs Ranking Keywords": NUM, "Max Outbound Links on Page": NUM, "Semrush Backlinks": NUM},
 )
 
@@ -739,11 +793,16 @@ write_table(wbl, bl[bcols],
 # ---------------------------------------------------------------- Disavow List
 dl = dis[
     ["Disavow Line", "Domain", "Status", "Note (why)", "Confidence", "Spam Network", "First Seen",
-     "Top Anchor Text", "Evidence Found"]]
+     "Top Anchor Text", "Links To Client (summary)", "Its Own Backlink Profile", "Its Top Pages", "Live DR",
+     "Live Referring Domains", "Live Organic Traffic", "Live Organic Keywords", "Sites It Links Out To",
+     "Evidence Found", "Deep Check"]]
 wdl = wb.create_sheet("Disavow List")
 write_table(wdl, dl, widths={"Disavow Line": 44, "Domain": 38, "Status": 16, "Note (why)": 60, "Confidence": 11,
-                             "Spam Network": 34, "Top Anchor Text": 45, "Evidence Found": 70},
-            color_col="Status", wrap_cols=("Note (why)", "Evidence Found"), fmt={"First Seen": DATE})
+                             "Spam Network": 34, "Top Anchor Text": 45, "Links To Client (summary)": 60,
+                             "Its Own Backlink Profile": 60, "Its Top Pages": 45, "Evidence Found": 70, "Deep Check": 20},
+            color_col="Status", wrap_cols=("Note (why)", "Evidence Found", "Links To Client (summary)", "Its Own Backlink Profile"),
+            fmt={"First Seen": DATE, "Live Referring Domains": NUM, "Live Organic Traffic": NUM,
+                 "Live Organic Keywords": NUM, "Sites It Links Out To": NUM})
 
 # ---------------------------------------------------------------- Methodology
 wm = wb.create_sheet("Methodology")
@@ -767,6 +826,12 @@ method = [
                              "anchor text, or where the first reviewer was not highly confident) were given to two more "
                              "reviewers whose only job was to try to prove each one genuine, using live Ahrefs data. "
                              "Anything they could show to be genuine was overturned to keep."),
+    ("Step 4: deep live check", "Before anything was disavowed, every domain was checked again with live Ahrefs data: "
+                                "its own metrics (DR, referring domains, backlinks, organic traffic and keywords, how many "
+                                "sites it links out to), the anchors of its own backlinks, who links to it, what pages it "
+                                "ranks with, and every link it sends to the client. Any spam verdict with the slightest doubt "
+                                "was then given to two independent skeptics (one judging the site, one judging the link) "
+                                "who tried to prove it genuine; if either succeeded, the domain was kept."),
     ("Protection rule", "No genuine link is disavowed. Real sites with real traffic, recognised brands, company profile "
                         "sites, PR and news sites, and real personal or business sites are kept even when the link is low "
                         "value or nofollow. When a reviewer was unsure, the domain was kept and marked Keep (Low Confidence)."),

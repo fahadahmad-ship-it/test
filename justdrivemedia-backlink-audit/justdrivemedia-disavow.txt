@@ -1,7 +1,7 @@
 # Disavow file for justdrivemedia.com
 # Prepared 30 Sep 2026 from Ahrefs and Semrush referring domain and backlink exports
 # Scope: every referring domain confirmed as spam by manual review (all dates)
-# 1613 domains
+# 1608 domains
 # Upload at https://search.google.com/search-console/disavow-links (Domain property).
 # NOTE: uploading REPLACES any existing disavow file, so merge with the current one first.
 
@@ -547,7 +547,6 @@ domain:dirgop.com
 domain:dironu.com
 domain:diversifiedseo.com
 domain:dltech.forum
-domain:dnbolt.com
 domain:domain.com.lc
 domain:domainanalysis.org
 domain:domainbacklinkreport.shop
@@ -634,7 +633,6 @@ domain:epic-link-baron-hub.store
 domain:epic-syndicate-link-baron-keyword.store
 domain:epic-webpage-rank-forge-academy.store
 domain:erythromycinonline.site
-domain:example3.com
 domain:exclusive-link-baron-search-syndicate.store
 domain:exclusive-traffic-experts-seoexpress.store
 domain:exotichealths.com
@@ -924,7 +922,6 @@ domain:mostrankdirectory.com
 domain:mostrankingdirectory.com
 domain:mp3fresh.net
 domain:mrstheoeducation.com
-domain:ms-studio.co
 domain:multidachecker.store
 domain:multipledachecker.online
 domain:multipledachecker.shop
@@ -1060,7 +1057,6 @@ domain:primeseohub.shop
 domain:primeseolink.shop
 domain:primesolodirectory.com
 domain:procycling.org
-domain:productitems.store
 domain:professional-seoexpress-marketing-studio.store
 domain:profitsurgeseo.com
 domain:proven-backlink-pro-and-outreach-pro-partners.store
@@ -1614,7 +1610,6 @@ domain:yexhub.com
 domain:ylutag.com
 domain:youseotools.com
 domain:youtoo.in
-domain:pr.zhinengdaohang.com
 domain:zipzyx.com
 domain:zlutag.com
 domain:zomatt.com

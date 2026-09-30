@@ -1,0 +1,2 @@
+domain,status,confidence,note,reason
+productitems.store,Keep,Low,"Scraped copy of a real partner page that names the client. Not part of the attack, so kept to be safe.","Consistency with ms-studio.co, which hosts the same copied TechTarget partner page and was kept by the second check"
