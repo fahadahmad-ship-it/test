@@ -345,15 +345,19 @@ def assess(d):
     if an and an["all_404"]:
         ev.append("linking pages are fake error pages")
     if inflated_dr:
-        ev.append(f"DR {dr:g} but zero organic traffic (fake authority)")
+        ev.append("high looking Ahrefs rating but zero organic traffic (fake authority)")
     if bad_tld and no_traffic:
         ev.append("cheap spam TLD with no organic traffic")
 
     metrics = []
+    sl = sem_live.get(d, {})
+    as_live = to_int(sl.get("authority_score"))
+    as_show = as_live if as_live is not None else (int(ascore) if ascore is not None else None)
+    if as_show is not None:
+        st = to_int(sl.get("organic_traffic"))
+        metrics.append(f"Semrush Authority Score {as_show}" + (f", Semrush organic traffic {st:,} a month" if st is not None else ""))
     if a is not None:
-        metrics.append(f"DR {dr:g}, {int(traffic):,} organic visits a month, {int(a['kw']):,} ranking keywords")
-    if s is not None:
-        metrics.append(f"Semrush Authority Score {int(ascore)}")
+        metrics.append(f"Ahrefs organic traffic {int(traffic):,} a month, {int(a['kw']):,} ranking keywords")
     metric_txt = "; ".join(metrics) or "no metrics reported"
 
     if d in OWN:
@@ -424,6 +428,23 @@ if (DEEP / "final_decisions.json").exists():
     for r in json.load(open(DEEP / "final_decisions.json")):
         deep_dec[r["domain"].strip().lower()] = r
 
+# Live Semrush metrics for every domain (review/semrush): primary authority and traffic source
+sem_live = {}
+for f in sorted(glob.glob(str(REVIEW / "semrush" / "semrush_*.csv"))):
+    with open(f, newline="", encoding="utf-8") as fh:
+        for row in csv.DictReader(fh):
+            dom = (row.get("domain") or "").strip().lower()
+            if dom:
+                sem_live[dom] = row
+
+
+def to_int(v):
+    try:
+        return int(float(v))
+    except (TypeError, ValueError):
+        return None
+
+
 S_SPAM, S_KEEP, S_KEEP_LOW, S_OWN = "Spam (Disavow)", "Keep", "Keep (Low Confidence)", "Own Site"
 ORDER = [S_SPAM, S_KEEP_LOW, S_KEEP, S_OWN]
 
@@ -477,12 +498,25 @@ for d in sorted(known):
     de = deep_ev.get(d, {})
     first = min(x for x in [a["first_seen"] if a is not None else None,
                             s["first_seen"] if s is not None else None] if x is not None)
+    sl = sem_live.get(d, {})
+    sem_as = to_int(sl.get("authority_score"))
+    if sem_as is None and s is not None:
+        sem_as = int(s["domain_ascore"])
+    sem_bl = to_int(sl.get("backlinks"))
+    if sem_bl is None and s is not None:
+        sem_bl = int(s["backlinks_num"])
     rows.append({
         "Domain": d,
         "Status": status,
         "Note (why)": note,
         "Confidence": conf,
         "Spam Network": cluster(d, s["ip"] if s is not None else None) if status == S_SPAM else "",
+        "Semrush Authority Score": sem_as,
+        "Semrush Backlinks": sem_bl,
+        "Semrush Referring Domains": to_int(sl.get("referring_domains")),
+        "Semrush Organic Traffic": to_int(sl.get("organic_traffic")),
+        "Semrush Organic Keywords": to_int(sl.get("organic_keywords")),
+        "Semrush Main Market": (sl.get("top_database") or "").upper(),
         "Evidence Found": no_dash(("; ".join(ev) + ". " if ev else "No spam signals. ") + metric_txt + "."),
         "Spam Signals": len(ev),
         "In Disavow File": "Yes" if status == S_SPAM else "No",
@@ -491,31 +525,24 @@ for d in sorted(known):
         "Anchor Mix": an["anchor_mix"] if an else "",
         "Spam Anchors": an["spam_anchors"] if an else 0,
         "Backlinks Analysed": an["backlinks"] if an else 0,
+        "Links To Client (summary)": no_dash(de["links_to_client"]) if de.get("links_to_client") else "",
         "Example Linking Page": an["sample_url"] if an else "",
         "Linking Page Title": an["sample_title"] if an else "",
         "Max Outbound Links on Page": an["max_outbound"] if an else None,
         "Page Category": an["category"] if an else "",
-        "Source": "Both" if (a is not None and s is not None) else ("Ahrefs" if a is not None else "Semrush"),
-        "Ahrefs DR": float(a["dr"]) if a is not None else None,
-        "Ahrefs Links": int(a["links"]) if a is not None else None,
-        "Ahrefs Dofollow Links": int(a["dofollow"]) if a is not None else None,
-        "Ahrefs Spam Flag": ("Yes" if int(a["is_spam"]) else "No") if a is not None else "",
-        "Ahrefs Organic Traffic": int(a["traffic"]) if a is not None else None,
-        "Ahrefs Ranking Keywords": int(a["kw"]) if a is not None else None,
-        "Semrush Authority Score": int(s["domain_ascore"]) if s is not None else None,
-        "Semrush Backlinks": int(s["backlinks_num"]) if s is not None else None,
-        "Semrush Last Seen": s["last_seen"] if s is not None else None,
-        "IP": s["ip"] if s is not None else "",
-        "Country": (s["country"].upper() if isinstance(s["country"], str) else "") if s is not None else "",
-        "Live DR": de.get("dr"),
-        "Live Referring Domains": de.get("refdomains"),
-        "Live Backlinks": de.get("backlinks"),
-        "Live Organic Traffic": de.get("org_traffic"),
-        "Live Organic Keywords": de.get("org_keywords"),
-        "Sites It Links Out To": de.get("linked_domains"),
         "Its Own Backlink Profile": no_dash(de["own_backlink_profile"]) if de.get("own_backlink_profile") else "",
         "Its Top Pages": no_dash(de["top_pages"]) if de.get("top_pages") else "",
-        "Links To Client (summary)": no_dash(de["links_to_client"]) if de.get("links_to_client") else "",
+        "Sites It Links Out To": de.get("linked_domains"),
+        "Ahrefs DR": de.get("dr") if de.get("dr") is not None else (float(a["dr"]) if a is not None else None),
+        "Ahrefs Referring Domains": de.get("refdomains"),
+        "Ahrefs Backlinks": de.get("backlinks"),
+        "Ahrefs Organic Traffic": de.get("org_traffic") if de.get("org_traffic") is not None else (int(a["traffic"]) if a is not None else None),
+        "Ahrefs Ranking Keywords": de.get("org_keywords") if de.get("org_keywords") is not None else (int(a["kw"]) if a is not None else None),
+        "Ahrefs Spam Flag": ("Yes" if int(a["is_spam"]) else "No") if a is not None else "",
+        "Source": "Both" if (a is not None and s is not None) else ("Ahrefs" if a is not None else "Semrush"),
+        "IP": s["ip"] if s is not None else "",
+        "Country": (s["country"].upper() if isinstance(s["country"], str) else "") if s is not None else "",
+        "Semrush Last Seen": s["last_seen"] if s is not None else None,
         "Deep Check": deep_check,
         "Automated First Pass": auto,
         "Second Check": second,
@@ -751,10 +778,12 @@ write_table(
             "Evidence Found": 70, "Spam Signals": 9, "In Disavow File": 10, "First Seen": 12,
             "Top Anchor Text": 45, "Anchor Mix": 42, "Example Linking Page": 45, "Linking Page Title": 40,
             "Page Category": 30, "IP": 15, "Automated First Pass": 12, "Second Check": 16, "Reviewed By": 18,
-            "Its Own Backlink Profile": 60, "Its Top Pages": 45, "Links To Client (summary)": 60, "Deep Check": 20},
+            "Its Own Backlink Profile": 60, "Its Top Pages": 45, "Links To Client (summary)": 60, "Deep Check": 20,
+            "Semrush Authority Score": 11, "Semrush Main Market": 10},
     color_col="Status", wrap_cols=("Note (why)", "Evidence Found", "Its Own Backlink Profile", "Links To Client (summary)"),
-    fmt={"First Seen": DATE, "Semrush Last Seen": DATE, "Ahrefs Organic Traffic": NUM, "Live Backlinks": NUM,
-         "Live Referring Domains": NUM, "Live Organic Traffic": NUM, "Live Organic Keywords": NUM, "Sites It Links Out To": NUM,
+    fmt={"First Seen": DATE, "Semrush Last Seen": DATE, "Ahrefs Organic Traffic": NUM, "Ahrefs Backlinks": NUM,
+         "Ahrefs Referring Domains": NUM, "Semrush Referring Domains": NUM, "Semrush Organic Traffic": NUM,
+         "Semrush Organic Keywords": NUM, "Sites It Links Out To": NUM,
          "Ahrefs Ranking Keywords": NUM, "Max Outbound Links on Page": NUM, "Semrush Backlinks": NUM},
 )
 
@@ -793,16 +822,17 @@ write_table(wbl, bl[bcols],
 # ---------------------------------------------------------------- Disavow List
 dl = dis[
     ["Disavow Line", "Domain", "Status", "Note (why)", "Confidence", "Spam Network", "First Seen",
-     "Top Anchor Text", "Links To Client (summary)", "Its Own Backlink Profile", "Its Top Pages", "Live DR",
-     "Live Referring Domains", "Live Organic Traffic", "Live Organic Keywords", "Sites It Links Out To",
-     "Evidence Found", "Deep Check"]]
+     "Semrush Authority Score", "Semrush Backlinks", "Semrush Referring Domains", "Semrush Organic Traffic",
+     "Semrush Organic Keywords", "Top Anchor Text", "Links To Client (summary)", "Its Own Backlink Profile",
+     "Its Top Pages", "Sites It Links Out To", "Ahrefs DR", "Ahrefs Organic Traffic", "Evidence Found", "Deep Check"]]
 wdl = wb.create_sheet("Disavow List")
 write_table(wdl, dl, widths={"Disavow Line": 44, "Domain": 38, "Status": 16, "Note (why)": 60, "Confidence": 11,
                              "Spam Network": 34, "Top Anchor Text": 45, "Links To Client (summary)": 60,
                              "Its Own Backlink Profile": 60, "Its Top Pages": 45, "Evidence Found": 70, "Deep Check": 20},
             color_col="Status", wrap_cols=("Note (why)", "Evidence Found", "Links To Client (summary)", "Its Own Backlink Profile"),
-            fmt={"First Seen": DATE, "Live Referring Domains": NUM, "Live Organic Traffic": NUM,
-                 "Live Organic Keywords": NUM, "Sites It Links Out To": NUM})
+            fmt={"First Seen": DATE, "Semrush Backlinks": NUM, "Semrush Referring Domains": NUM,
+                 "Semrush Organic Traffic": NUM, "Semrush Organic Keywords": NUM, "Sites It Links Out To": NUM,
+                 "Ahrefs Organic Traffic": NUM})
 
 # ---------------------------------------------------------------- Methodology
 wm = wb.create_sheet("Methodology")
@@ -813,11 +843,15 @@ method = [
     ("Data sources", f"Ahrefs Site Explorer (live referring domains and all {len(abl):,} live backlinks) and Semrush "
                      f"Backlink Analytics (referring domains and {len(sbl):,} backlinks), pulled {PULL_DATE}. Domains "
                      "were merged and de duplicated, and www or sub domain variants were mapped to the referring domain."),
+    ("Metrics used", "Semrush is the primary source: Semrush Authority Score (AS), Semrush backlinks, referring domains and "
+                     "organic traffic and keywords (main market) are shown for every domain. Ahrefs figures are shown "
+                     "alongside as a second opinion. Semrush visit data (Traffic Analytics) is not included in the "
+                     "account's Semrush plan, so organic search traffic is used instead."),
     ("Scope", "All referring domains and all backlinks, from every date. The disavow file is not limited to recent links."),
     ("Step 1: automated check", "Every domain was scored on 11 spam signals: SEO or link words in the domain name, numbered "
                                 "throwaway .xyz domain, keyword stuffed or casino anchors, anchors for unrelated brands, "
                                 "linking page with 500+ outbound links, Ahrefs spam flag, spam network hosting IP, "
-                                "throwaway Blogspot blog, fake error pages, high DR with zero traffic, and cheap spam TLD "
+                                "throwaway Blogspot blog, fake error pages, high looking Ahrefs rating with zero traffic, and cheap spam TLD "
                                 "with no traffic."),
     ("Step 2: manual review", "Eight reviewers then checked every one of the domains by hand, using the metrics, every "
                               "anchor text, the linking pages and their outbound link counts, and challenged the automated "
@@ -827,7 +861,7 @@ method = [
                              "reviewers whose only job was to try to prove each one genuine, using live Ahrefs data. "
                              "Anything they could show to be genuine was overturned to keep."),
     ("Step 4: deep live check", "Before anything was disavowed, every domain was checked again with live Ahrefs data: "
-                                "its own metrics (DR, referring domains, backlinks, organic traffic and keywords, how many "
+                                "its own metrics (referring domains, backlinks, organic traffic and keywords, how many "
                                 "sites it links out to), the anchors of its own backlinks, who links to it, what pages it "
                                 "ranks with, and every link it sends to the client. Any spam verdict with the slightest doubt "
                                 "was then given to two independent skeptics (one judging the site, one judging the link) "
