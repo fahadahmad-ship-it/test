@@ -1,0 +1,105 @@
+Market,Type,Cluster,Suggested Page,Page Status,Keyword,SV (Semrush UK),KD (Semrush),CPC (USD),Priority,Notes
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-waste-collection/,CREATE,commercial waste collection,3600,25,27.22,P1,Primary target. businesswaste.co.uk ranks p5
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-waste-collection/,CREATE,commercial waste disposal,3600,34,12.54,P1,businesswaste.co.uk ranks p5
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-waste-collection/,CREATE,commercial waste management,2900,33,20.90,P1,Consolidate existing /commercial-waste-management/ here
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-waste-collection/,CREATE,commercial waste,1600,26,21.58,P1,businesswaste.co.uk ranks p6
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-waste-collection/,CREATE,business waste disposal,1300,37,12.20,P1,businesswaste.co.uk ranks p2
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-waste-collection/,CREATE,trade waste,1300,26,13.08,P1,
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-bins/,CREATE,commercial waste bins,880,44,22.36,P2,Highest KD in cluster
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-waste-collection/,CREATE,commercial recycling,880,41,6.12,P2,
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-waste-collection/,CREATE,small business waste collection,720,34,17.07,P1,businesswaste.co.uk ranks p4
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-bins/,CREATE,commercial bin collection,720,33,37.18,P1,Highest CPC in cluster
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-waste-collection/,CREATE,commercial waste removal,590,29,17.56,P2,
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-waste-collection/,CREATE,trade waste collection,480,22,20.48,P1,Lowest KD in cluster
+UK,Service,A - Core commercial,https://betterwaste.co.uk/office-waste-management/,CREATE,office waste collection,390,34,14.33,P2,
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-waste-collection/,CREATE,commercial rubbish removal,320,18,17.56,P1,Low KD high CPC
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-bins/,CREATE,business bin collection,260,31,36.62,P2,
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-waste-collection/,CREATE,commercial waste services,260,52,17.33,P3,Currently /areas-we-cover/ p54 - wrong page
+UK,Service,A - Core commercial,https://betterwaste.co.uk/commercial-bins/,CREATE,commercial bin hire,170,28,24.14,P2,
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/confidential-waste/,CREATE,confidential waste disposal,3600,25,3.64,P1,No page exists
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/clinical-waste/,CREATE,clinical waste disposal,2900,22,10.04,P1,businesswaste.co.uk p6. Ahrefs KD 0
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/weee-recycling/,CREATE,weee recycling,2400,41,1.90,P2,
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/clinical-waste/,CREATE,clinical waste collection,1900,22,10.40,P1,Ahrefs KD 3 / TP 4700
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/hazardous-waste/,CREATE,hazardous waste disposal,1900,35,2.88,P2,
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/clinical-waste/,CREATE,clinical waste,1600,30,8.92,P1,
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/sanitary-waste/,CREATE,sanitary waste disposal,1300,10,11.43,P1,BEST ROI - lowest KD highest value. businesswaste p3
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/sanitary-waste/,CREATE,sanitary waste collection,1300,17,16.56,P1,businesswaste.co.uk p4
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/hazardous-waste/,CREATE,hazardous waste collection,1300,23,3.56,P2,
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/confidential-waste/,CREATE,confidential waste collection,1000,13,7.38,P1,Very low KD
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/confidential-waste/,CREATE,confidential shredding,1000,16,4.13,P1,
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/industrial-waste/,CREATE,industrial waste disposal,720,28,6.31,P2,businesswaste p2 / wastemanaged p9
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/construction-waste/,CREATE,construction waste disposal,590,28,2.02,P3,
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/weee-recycling/,CREATE,electrical waste disposal,590,24,1.31,P2,
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/weee-recycling/,CREATE,it equipment disposal,590,37,7.22,P3,
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/industrial-waste/,CREATE,industrial waste collection,390,41,11.52,P3,
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/wood-waste/,CREATE,wood waste collection,390,9,1.92,P2,Very low KD
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/cooking-oil-collection/,CREATE,used cooking oil collection,320,15,2.98,P3,Pairs with existing food waste pages
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/construction-waste/,CREATE,construction waste collection,260,27,3.67,P3,
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/metal-waste/,CREATE,metal waste collection,260,24,0.95,P3,
+UK,Waste Type,B - Missing streams,https://betterwaste.co.uk/coffee-cup-recycling/,CREATE,coffee cup recycling,260,16,1.16,P3,Pairs with existing cafe page
+UK,Waste Type,B - EXCLUDED,n/a,EXCLUDE,bulky waste collection,9900,21,1.71,EXCLUDE,SERP is council pages / residential intent - do not target
+UK,Waste Type,B - EXCLUDED,n/a,EXCLUDE,green waste collection,1300,30,1.43,EXCLUDE,Residential/council intent. Use commercial garden waste instead
+UK,Informational,C - Bin specs,https://betterwaste.co.uk/binpedia/1100-litre-bin/,CREATE,1100 litre bin,720,8,3.85,P1,/binpedia/ already p39 for waste container
+UK,Informational,C - Bin specs,https://betterwaste.co.uk/binpedia/660-litre-bin/,CREATE,660 litre bin,720,8,3.73,P1,
+UK,Informational,C - Bin specs,https://betterwaste.co.uk/binpedia/240-litre-bin/,CREATE,240 litre bin,590,11,1.23,P1,
+UK,Informational,C - Bin specs,https://betterwaste.co.uk/binpedia/commercial-wheelie-bin/,CREATE,commercial wheelie bin,320,8,7.28,P1,
+UK,Informational,C - Bin specs,https://betterwaste.co.uk/binpedia/wheelie-bin-hire/,CREATE,wheelie bin hire,320,11,4.07,P2,
+UK,Informational,C - Bin specs,https://betterwaste.co.uk/binpedia/eurobin/,CREATE,eurobin,260,9,1.87,P2,
+UK,Informational,C - Bin specs,https://betterwaste.co.uk/binpedia/commercial-bin-sizes/,CREATE,commercial bin sizes,210,7,4.03,P1,Lowest KD on the site
+UK,Informational,C - Bin specs,https://betterwaste.co.uk/binpedia/1100-litre-bin/,CREATE,1100 litre bin dimensions,90,6,0.81,P2,
+UK,Informational,C - Bin specs,https://betterwaste.co.uk/binpedia/,OPTIMISE,waste container,1900,12,2.27,P1,Currently p39 - already ranking
+UK,Informational,C - Bin specs,https://betterwaste.co.uk/binpedia/,OPTIMISE,bin sizes,590,8,1.62,P1,Currently p49 - already ranking
+UK,Informational,C - Bin specs,https://betterwaste.co.uk/binpedia/,OPTIMISE,waste bin dimensions,90,5,1.21,P2,Currently p52
+UK,Informational,D - Compliance,https://betterwaste.co.uk/waste-carriers-licence/,CREATE,waste carriers licence,4400,38,6.04,P2,Link-bait. businesswaste.co.uk p7
+UK,Informational,D - Compliance,https://betterwaste.co.uk/extended-producer-responsibility/,CREATE,extended producer responsibility,3600,46,1.44,P3,Highest KD in cluster
+UK,Informational,D - Compliance,https://betterwaste.co.uk/waste-transfer-note/,CREATE,waste transfer note,1900,16,2.36,P1,Low KD high relevance link target
+UK,Informational,D - Compliance,https://betterwaste.co.uk/simpler-recycling-legislation-for-businesses-in-england-what-you-need-to-know/,OPTIMISE,simpler recycling,1000,22,2.11,P1,CURRENTLY P14 - cheapest win on the site
+UK,Informational,D - Compliance,https://betterwaste.co.uk/extended-producer-responsibility/,CREATE,epr packaging,320,34,1.44,P3,
+UK,Informational,D - Compliance,https://betterwaste.co.uk/waste-transfer-note/,CREATE,duty of care waste transfer note,320,20,2.29,P2,
+UK,Informational,D - Compliance,https://betterwaste.co.uk/waste-transfer-note/,CREATE,waste duty of care,170,29,0.00,P3,
+UK,Informational,D - Compliance,https://betterwaste.co.uk/simpler-recycling-legislation-for-businesses-in-england-what-you-need-to-know/,OPTIMISE,simpler recycling regulations,140,22,0.59,P2,
+UK,Sector,E - New sectors,https://betterwaste.co.uk/care-home-waste-management/,CREATE,care home waste management,480,9,7.40,P1,wastemanaged.co.uk p10. Very low KD
+UK,Sector,E - New sectors,https://betterwaste.co.uk/dental-waste-disposal/,CREATE,dental waste disposal,480,13,8.84,P1,wastemanaged.co.uk p9
+UK,Sector,E - New sectors,https://betterwaste.co.uk/office-waste-management/,CREATE,office waste management,390,13,8.68,P1,
+UK,Sector,E - New sectors,https://betterwaste.co.uk/hotel-waste-management/,CREATE,hotel waste management,320,16,7.27,P2,
+UK,Sector,E - New sectors,https://betterwaste.co.uk/school-waste-management/,CREATE,school waste management,260,10,0.00,P2,
+UK,Sector,E - New sectors,https://betterwaste.co.uk/retail-waste-management/,CREATE,retail waste management,260,17,0.00,P2,
+UK,Sector,E - New sectors,https://betterwaste.co.uk/butchers-waste-collection/,CREATE,butchers waste collection,260,7,13.19,P1,wastemanaged.co.uk p4. Lowest KD highest CPC
+UK,Sector,E - Existing push,https://betterwaste.co.uk/hair-salon-waste-management/,OPTIMISE,salon waste management,260,6,0.00,P1,Currently p21
+UK,Sector,E - Existing push,https://betterwaste.co.uk/cafe-waste-management/,OPTIMISE,cafe waste collection,210,9,0.00,P1,Currently p19
+UK,Sector,E - Existing push,https://betterwaste.co.uk/cafe-waste-management/,OPTIMISE,cafe waste management,210,10,0.00,P1,Currently p22
+UK,Sector,E - Existing push,https://betterwaste.co.uk/bakery-waste-management/,OPTIMISE,bakery waste management,210,18,0.00,P2,Currently p25
+UK,Sector,E - Existing push,https://betterwaste.co.uk/restaurant-waste-management/,OPTIMISE,restaurant waste disposal,170,12,15.68,P1,Currently p27
+UK,Sector,E - Existing push,https://betterwaste.co.uk/takeaway-waste-management/,OPTIMISE,takeaway waste collection,170,8,13.02,P1,Currently p15
+UK,Sector,E - Existing push,https://betterwaste.co.uk/pub-waste-management/,OPTIMISE,pub waste management,140,9,0.00,P1,Currently p13
+UK,Sector,E - Existing push,https://betterwaste.co.uk/restaurant-waste-management/,OPTIMISE,restaurant waste collection,140,9,20.50,P1,Currently p26
+UK,Sector,E - Existing push,https://betterwaste.co.uk/restaurant-waste-management/,OPTIMISE,restaurant waste removal,110,10,15.68,P2,Currently p25
+UK,Location,F - Locations,https://betterwaste.co.uk/areas-we-cover/london/,OPTIMISE,commercial waste collection london,720,31,22.80,P1,Not in sheet at this volume
+UK,Location,F - Locations,https://betterwaste.co.uk/areas-we-cover/manchester/,FIX,commercial waste collection manchester,320,13,21.86,P1,Currently ranking p20 on /areas-we-cover-old/manchester/
+UK,Location,F - Locations,https://betterwaste.co.uk/areas-we-cover/leeds/,OPTIMISE,commercial waste collection leeds,260,17,28.90,P1,
+UK,Location,F - Locations,https://betterwaste.co.uk/areas-we-cover/liverpool/,CREATE,commercial waste collection liverpool,260,18,31.31,P1,No page exists
+UK,Location,F - Locations,https://betterwaste.co.uk/areas-we-cover/birmingham/,OPTIMISE,commercial waste collection birmingham,140,20,26.18,P2,Currently p28
+UK,Location,F - Locations,https://betterwaste.co.uk/areas-we-cover/sheffield/,OPTIMISE,commercial waste collection sheffield,110,15,35.20,P1,Highest-CPC city term
+UK,Location,F - Locations,https://betterwaste.co.uk/areas-we-cover/bristol/,CREATE,commercial waste collection bristol,90,22,20.05,P2,No page exists
+UK,Location,F - Locations,https://betterwaste.co.uk/areas-we-cover/nottingham/,CREATE,commercial waste collection nottingham,90,16,22.55,P2,No page exists
+UK,Location,F - Locations,https://betterwaste.co.uk/areas-we-cover/glasgow/,CREATE,commercial waste collection glasgow,70,0,35.56,P2,No page exists. Highest CPC
+UK,Location,F - Locations,https://betterwaste.co.uk/areas-we-cover/leicester/,OPTIMISE,commercial waste collection leicester,50,0,35.47,P2,
+UK,Location,F - Locations,https://betterwaste.co.uk/areas-we-cover/,OPTIMISE,commercial waste collection near me,260,25,30.99,P2,Local intent
+UK,Location,F - Locations,https://betterwaste.co.uk/areas-we-cover/,OPTIMISE,business waste collection near me,170,31,28.76,P3,Local intent
+UK,Location,F - Long tail,https://betterwaste.co.uk/areas-we-cover/manchester/,FIX,commercial rubbish collection near longsight manchester,720,17,0.00,P2,Currently p16 on the -old URL
+UK,Location,F - Long tail,https://betterwaste.co.uk/areas-we-cover/birmingham/,OPTIMISE,commercial rubbish collection near handsworth birmingham,590,15,0.00,P2,Currently p21
+UK,Location,F - Long tail,https://betterwaste.co.uk/areas-we-cover/manchester/,FIX,commercial rubbish collection near longsight manchester city centre,590,20,0.00,P2,Currently p11 on the -old URL
+UK,Location,F - Long tail,https://betterwaste.co.uk/areas-we-cover/manchester/,FIX,commercial rubbish collection near manchester,480,12,0.00,P2,Currently p18 on the -old URL
+UK,Location,F - Long tail,https://betterwaste.co.uk/areas-we-cover/london/,OPTIMISE,commercial rubbish collection near peckham london,480,23,0.00,P3,Currently p28
+UK,Location,F - Long tail,https://betterwaste.co.uk/areas-we-cover/london/,OPTIMISE,commercial recycling london,390,20,0.00,P2,Currently p28
+UK,Location,F - Long tail,https://betterwaste.co.uk/areas-we-cover/manchester/,FIX,commercial rubbish collection near fallowfield manchester,390,16,0.00,P3,Currently p13 on the -old URL
+UK,Location,F - Long tail,https://betterwaste.co.uk/areas-we-cover/birmingham/,OPTIMISE,commercial dump collection service birmingham,390,22,0.00,P3,Currently p27
+UK,Waste Type,Sheet gap,https://betterwaste.co.uk/glass-waste/,OPTIMISE,commercial glass collection,480,17,0.00,P1,Not in sheet. Currently p30 - closest to top 10 of all waste-type terms
+UK,Waste Type,Sheet gap,https://betterwaste.co.uk/paper-and-cardboard-waste/,OPTIMISE,business cardboard recycling,390,16,10.49,P2,Not in sheet. Currently p63
+UK,Waste Type,Sheet gap,https://betterwaste.co.uk/food-waste/,OPTIMISE,commercial food waste recycling,260,26,9.86,P2,Not in sheet. Currently p55
+UK,Waste Type,Sheet gap,https://betterwaste.co.uk/paper-and-cardboard-waste/,OPTIMISE,commercial paper recycling,260,16,0.00,P2,Not in sheet. Currently p73
+UK,Waste Type,Sheet gap,https://betterwaste.co.uk/dry-mixed-recycling-waste/,OPTIMISE,mixed dry recycling,210,6,0.00,P2,Not in sheet. Currently p46
+UK,Waste Type,Sheet gap,https://betterwaste.co.uk/paper-and-cardboard-waste/,OPTIMISE,commercial cardboard collection,210,18,10.03,P2,Not in sheet. Currently p36
+UK,Waste Type,Sheet gap,https://betterwaste.co.uk/food-waste/,OPTIMISE,commercial kitchen waste management,140,11,0.00,P2,Not in sheet. Currently p37
+UK,Waste Type,Sheet gap,https://betterwaste.co.uk/paper-and-cardboard-waste/,OPTIMISE,cardboard recycling for businesses,140,15,10.56,P3,Not in sheet. Currently p63
+UK,Waste Type,Sheet gap,https://betterwaste.co.uk/dry-mixed-recycling-waste/,OPTIMISE,mixed recycling collection,110,21,2.49,P3,Not in sheet. Currently p57
