@@ -1,7 +1,12 @@
 # Critical re-check: what is genuinely easy, what is hard, and on what evidence
 
-**Date:** 1 October 2026 · **Better Waste DR: 26** (Ahrefs)
-**Volumes / KD / CPC:** Semrush UK. **DR of ranking competitors:** Ahrefs (DR only — no Ahrefs KD used).
+> **v2 — re-graded on Semrush Authority Score.** The first version of this document
+> used Ahrefs Domain Rating. It now uses Semrush AS throughout, matching the toolset
+> you work in. Cost-per-click has been removed from all deliverables. See §"AS vs DR" for the
+> four grades this changed.
+
+**Date:** 1 October 2026 · **Better Waste Authority Score: 20** (Semrush)
+**All metrics Semrush UK:** search volume, KD, and the Authority Score of every ranking competitor.
 
 ---
 
@@ -35,18 +40,18 @@ are marked ⚠️ below.
 
 ## 🟢 EASY — strong grounds, build these first
 
-| Keyword | SV | CPC | DR of weak sites ranking | Evidence |
-|---|---|---|---|---|
-| **commercial waste collection leeds** | 260 | $28.90 | **0, 8, 0, 13** | sensawaste.com **DR 0 at #1**; liliwaste DR 8 (#4); lsswaste DR 0 (#6); thewasteteam DR 13 (#8) |
-| **confidential waste collection** | 1,000 | $7.38 | **25, 1, 0, 1** | simply-shredding DR 25 (#3); prioritywaste DR 1 (#6); shredalert DR 0 (#9); doxbond DR 1 (#10) |
-| **sanitary waste collection** | 1,300 | $16.56 | **7, 8, 0, 31** | trusthygiene **DR 7 at #1**; anwaywashrooms DR 8 (#6); cleaningservicesbirmingham DR 0 (#8) |
-| **it equipment disposal** | 590 | $7.22 | **16, 25, 19, 19, 26, 2** | Six sub-30 sites in the top 10. greenitdisposal DR 16 (#2), mghscotland DR 2 (#10) |
-| **used cooking oil collection** | 320 | $2.98 | **20, 0, 0, 0, 17, 0** | watersidefoods DR 20 at #1; oilcollector DR 0 holds two slots; ulevo DR 0 (#7) |
-| **wood waste collection** | 390 | $1.92 | **0, 26, 23, 9** | londonrubbishcollection **DR 0 at #1**; cshenvironmental DR 23 (#9); bodensgroup DR 9 (#10) |
-| **commercial bin sizes** | 210 | $4.03 | **12, 29, 14, 31** | wheeliebinsolutions DR 12 (#5); ashwasteservices DR 29 (#6); gwrwastemanagement DR 14 (#9) |
-| **business cardboard recycling** | 390 | $10.49 | **10, 8, 9** | ecogenrecycling DR 10 (#3); highlandersecurityshredding DR 8 (#9); inspirewaste DR 9 (#10) |
-| **butchers waste collection** | 260 | $13.19 | n/a — all small specialists | jgpears, affordablewastemanagement, wheeldonbrothers, martlands, easywaste. One council, zero national brands |
-| **office waste management** | 390 | $8.68 | **8, 26** | SERP is stale — half the results are `http://`, one is a US state agency (calrecycle.ca.gov). Weak incumbents |
+| Keyword | SV | DR of weak sites ranking | Evidence |
+|---|---|---|---|
+| **commercial waste collection leeds** | 260 | **0, 8, 0, 13** | sensawaste.com **DR 0 at #1**; liliwaste DR 8 (#4); lsswaste DR 0 (#6); thewasteteam DR 13 (#8) |
+| **confidential waste collection** | 1,000 | **25, 1, 0, 1** | simply-shredding DR 25 (#3); prioritywaste DR 1 (#6); shredalert DR 0 (#9); doxbond DR 1 (#10) |
+| **sanitary waste collection** | 1,300 | **7, 8, 0, 31** | trusthygiene **DR 7 at #1**; anwaywashrooms DR 8 (#6); cleaningservicesbirmingham DR 0 (#8) |
+| **it equipment disposal** | 590 | **16, 25, 19, 19, 26, 2** | Six sub-30 sites in the top 10. greenitdisposal DR 16 (#2), mghscotland DR 2 (#10) |
+| **used cooking oil collection** | 320 | **20, 0, 0, 0, 17, 0** | watersidefoods DR 20 at #1; oilcollector DR 0 holds two slots; ulevo DR 0 (#7) |
+| **wood waste collection** | 390 | **0, 26, 23, 9** | londonrubbishcollection **DR 0 at #1**; cshenvironmental DR 23 (#9); bodensgroup DR 9 (#10) |
+| **commercial bin sizes** | 210 | **12, 29, 14, 31** | wheeliebinsolutions DR 12 (#5); ashwasteservices DR 29 (#6); gwrwastemanagement DR 14 (#9) |
+| **business cardboard recycling** | 390 | **10, 8, 9** | ecogenrecycling DR 10 (#3); highlandersecurityshredding DR 8 (#9); inspirewaste DR 9 (#10) |
+| **butchers waste collection** | 260 | n/a — all small specialists | jgpears, affordablewastemanagement, wheeldonbrothers, martlands, easywaste. One council, zero national brands |
+| **office waste management** | 390 | **8, 26** | SERP is stale — half the results are `http://`, one is a US state agency (calrecycle.ca.gov). Weak incumbents |
 
 ⚠️ **Corrections in this tier:**
 - **confidential waste collection** and **sanitary waste collection** — I graded both
@@ -60,18 +65,18 @@ are marked ⚠️ below.
 
 ## 🟡 MEDIUM — winnable, but needs a strong page plus some links
 
-| Keyword | SV | CPC | DR ≤ 30 present | Evidence |
-|---|---|---|---|---|
-| commercial waste collection london | 720 | $22.80 | 13, 28 | greenlineenvironmental DR 13 (#6); envirowastemanagement DR 28 (#9). Rest are DR 60–81 councils |
-| commercial waste collection manchester | 320 | $21.86 | 28, 33 | kennywastemanagement DR 28 (#7); fswaste DR 33 (#9); bandmwaste DR 47 (#5) |
-| commercial waste collection sheffield | 110 | $35.20 | sensawaste (#2) | Same pattern as Leeds but Biffa holds #3 and there are two sheffield.gov.uk slots |
-| dental waste disposal | 480 | $8.84 | 2, 31 | wgswaste DR 2 (#10); stericycle DR 31 (#3). But the SERP is informational — BDA, nature.com, YouTube, Instagram all rank |
-| confidential waste disposal | 3,600 | $3.64 | homeshreduk, secure-shred | Mid-size shredders, no councils. Higher volume than the collection variant but more established incumbents |
-| commercial glass collection | 480 | — | small operators | gaskellswaste, daygroup, coastaluk rank alongside Grundon/Veolia. Existing page already p30 |
-| care home waste management | 480 | $7.40 | busybins, bwsl | Stericycle and PHS hold two slots; two small operators at #6 and #9 |
-| school waste management | 260 | — | weak SERP | Two PDFs, a headteacher magazine and the World Economic Forum in the top 10. Soft, but Informational intent — lead-gen, not conversion |
-| commercial rubbish removal | 320 | $17.56 | junkwize, chuckit | The only reachable term in Cluster A |
-| simpler recycling | 1,000 | $2.11 | pearce-group (#10) | gov.uk holds #1 and #4. Realistic target is p8–10, not top 3 — Better Waste is already p14 |
+| Keyword | SV | DR ≤ 30 present | Evidence |
+|---|---|---|---|
+| commercial waste collection london | 720 | 13, 28 | greenlineenvironmental DR 13 (#6); envirowastemanagement DR 28 (#9). Rest are DR 60–81 councils |
+| commercial waste collection manchester | 320 | 28, 33 | kennywastemanagement DR 28 (#7); fswaste DR 33 (#9); bandmwaste DR 47 (#5) |
+| commercial waste collection sheffield | 110 | sensawaste (#2) | Same pattern as Leeds but Biffa holds #3 and there are two sheffield.gov.uk slots |
+| dental waste disposal | 480 | 2, 31 | wgswaste DR 2 (#10); stericycle DR 31 (#3). But the SERP is informational — BDA, nature.com, YouTube, Instagram all rank |
+| confidential waste disposal | 3,600 | homeshreduk, secure-shred | Mid-size shredders, no councils. Higher volume than the collection variant but more established incumbents |
+| commercial glass collection | 480 | small operators | gaskellswaste, daygroup, coastaluk rank alongside Grundon/Veolia. Existing page already p30 |
+| care home waste management | 480 | busybins, bwsl | Stericycle and PHS hold two slots; two small operators at #6 and #9 |
+| school waste management | 260 | weak SERP | Two PDFs, a headteacher magazine and the World Economic Forum in the top 10. Soft, but Informational intent — lead-gen, not conversion |
+| commercial rubbish removal | 320 | junkwize, chuckit | The only reachable term in Cluster A |
+| simpler recycling | 1,000 | pearce-group (#10) | gov.uk holds #1 and #4. Realistic target is p8–10, not top 3 — Better Waste is already p14 |
 
 ---
 
@@ -79,14 +84,14 @@ are marked ⚠️ below.
 
 | Keyword | SV | KD | Lowest DR in top 10 | Why it's hard |
 |---|---|---|---|---|
-| **commercial waste collection** | 3,600 | 25 | DR 14 at **#10 only** | 6 council/gov slots. Biffa, Veolia, Suez hold 3 more. One reachable position, at the bottom |
-| **commercial waste disposal** | 3,600 | 34 | — | 5 council/gov in top 10 |
-| **commercial waste management** | 2,900 | 33 | — | 4 council/gov + Biffa + Veolia + Suez |
-| **trade waste collection** | 480 | 22 | — | **6 council/gov** — the most blocked SERP checked |
-| **small business waste collection** | 720 | 34 | — | 4 council/gov + Biffa ×2 + Veolia ×2 |
-| **waste transfer note** | 1,900 | 16 | **DR 45** | Nothing below DR 45 ranks. gov.uk holds #2 and #6, NetRegs DR 64, Natural Resources Wales DR 78 |
-| **waste carriers licence** | 4,400 | 38 | DR 29 at #8 | Environment Agency, gov.uk, SEPA, NRW — statutory registers. One reachable slot |
-| **coffee cup recycling** | 260 | 16 | **DR 45** | recyclenow DR 82, Veolia DR 71, Keep Scotland Beautiful DR 69, Welsh Govt DR 53. All institutional |
+| **commercial waste collection** | 3,600 | DR 14 at **#10 only** | 6 council/gov slots. Biffa, Veolia, Suez hold 3 more. One reachable position, at the bottom |
+| **commercial waste disposal** | 3,600 | — | 5 council/gov in top 10 |
+| **commercial waste management** | 2,900 | — | 4 council/gov + Biffa + Veolia + Suez |
+| **trade waste collection** | 480 | — | **6 council/gov** — the most blocked SERP checked |
+| **small business waste collection** | 720 | — | 4 council/gov + Biffa ×2 + Veolia ×2 |
+| **waste transfer note** | 1,900 | **DR 45** | Nothing below DR 45 ranks. gov.uk holds #2 and #6, NetRegs DR 64, Natural Resources Wales DR 78 |
+| **waste carriers licence** | 4,400 | DR 29 at #8 | Environment Agency, gov.uk, SEPA, NRW — statutory registers. One reachable slot |
+| **coffee cup recycling** | 260 | **DR 45** | recyclenow DR 82, Veolia DR 71, Keep Scotland Beautiful DR 69, Welsh Govt DR 53. All institutional |
 
 ⚠️ **Corrections in this tier:**
 - **waste transfer note** — I graded it Medium and called it a link-earning asset.
@@ -150,3 +155,83 @@ that strong a signal.
   existence is inferred from indexed-URL data. The Better Waste doc states eleven
   sector pages already exist — if correct, several `CREATE` rows should read
   `OPTIMISE`, which makes them cheaper than scored here.
+
+---
+
+# v2 — Re-graded on Semrush Authority Score
+
+Everything above was graded on Ahrefs DR. Re-run on Semrush AS, which is the metric
+you actually work in. Two things changed materially.
+
+## Better Waste is AS 20, not DR 26
+
+The benchmark moved. The test is now:
+
+> **How many sites at Authority Score ≤ 25 — at or below Better Waste — currently rank
+> in the top 10?**
+
+| Grade | Rule |
+|---|---|
+| 🟢 EASY | 3+ ranking sites at AS ≤ 25, and fewer than 4 council/gov slots |
+| 🟡 MEDIUM | 1–2 at AS ≤ 25, **or** lowest AS is 26–30 with fewer than 4 council/gov slots |
+| 🔴 HARD | Nothing at AS ≤ 25, or 4+ council/gov slots |
+| ⛔ AVOID | SERP intent is not commercial waste service |
+| ⚪ UNVERIFIED | Insufficient AS data to grade honestly |
+
+## AS vs DR — where the two metrics disagreed
+
+Mostly they agreed. Four grades moved:
+
+| Keyword | On DR | On AS | Why |
+|---|---|---|---|
+| **commercial bin sizes** | 🟢 Easy | 🟡 **Medium** | DR showed four sub-30 sites (12, 29, 14, 31). AS shows only **one** at ≤25 (gwrwastemanagement AS 22); wheeliebinsolutions is DR 12 but **AS 33** |
+| **commercial waste collection sheffield** | 🟢 Easy | 🟡 **Medium** | Only sensawaste (AS 24) is at or below Better Waste; Biffa AS 46 holds #3 |
+| **school waste management** | 🟢 Easy | ⚪ **Unverified** | Only one of ten results is a lookup-able domain — the rest are PDFs, the WEF and trade press. Not enough data to grade |
+| **simpler recycling** | 🟡 Medium | 🔴 **Hard** | Lowest AS in the top 10 is 41. Top 3 is unreachable — though Better Waste is already p14, so p8–10 remains a realistic partial win |
+
+The biggest single divergence is **sensawaste.com**: Ahrefs DR 0, Semrush AS 24. On DR
+it looked like a zero-authority site ranking #1; on AS it's a normal small competitor,
+roughly level with Better Waste. The Leeds conclusion holds either way — four other
+sites there are AS 13–25 — but the headline is less dramatic than I made it.
+
+## 🟢 EASY — confirmed on Authority Score
+
+| Keyword | SV | Competing sites at AS ≤ 25 |
+|---|---|---|
+| commercial waste collection leeds | 260 | **13, 21, 21, 24, 25** — five |
+| it equipment disposal | 590 | **8, 19, 19, 20, 20** — five |
+| used cooking oil collection | 320 | **2, 6, 7, 19, 19** — five |
+| confidential waste collection | 1,000 | **6, 9, 10, 16** — four |
+| sanitary waste collection | 1,300 | **9, 9, 13, 21** — four |
+| wood waste collection | 390 | **9, 11, 18, 22** — four |
+| business cardboard recycling | 390 | **16, 18, 20** — three |
+| butchers waste collection | 260 | **10, 10, 24** — three |
+| office waste management | 390 | AS 24, plus a stale SERP (half the top 10 are `http://`, one is a US state agency) |
+
+## 🔴 HARD — confirmed, and the gap is wider than DR suggested
+
+| Keyword | SV | Lowest AS in top 10 | Council/gov slots |
+|---|---|---|---|
+| commercial waste collection | 3,600 | 6 |
+| commercial waste disposal | 3,600 | 5 |
+| commercial waste management | 2,900 | 4 |
+| trade waste collection | 480 | 6 |
+| small business waste collection | 720 | 4 |
+| waste carriers licence | 4,400 | 6 |
+| coffee cup recycling | 260 | 5 |
+| waste transfer note | 1,900 | 4 |
+| simpler recycling | 1,000 | 4 |
+
+## Final totals
+
+| Grade | Keywords | SV | Page segments |
+|---|---|---|---|
+| 🟢 EASY | 32 | 10,960 | **22** |
+| 🟡 MEDIUM | 27 | 13,480 | 14 |
+| 🔴 HARD | 22 | 30,610 | 5 |
+| ⚪ UNVERIFIED | 8 | 5,470 | 4 |
+| ⛔ AVOID | 15 | 25,720 | 9 |
+
+**31 keywords carry a direct AS check**, 66 inherit from a directly-checked keyword on
+the same SERP family (the evidence cell names which), 7 are unverified. Authority
+Scores were pulled for 85 ranking domains.

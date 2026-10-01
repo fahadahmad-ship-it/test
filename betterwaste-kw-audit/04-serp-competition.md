@@ -75,7 +75,7 @@ Six of ten are councils or gov.uk. Biffa, Veolia and Suez hold three more. That 
 all follow the same shape.
 
 **This is a real reversal of my earlier recommendation.** I had Cluster A as P1 on the
-basis of volume and CPC. The SERP data says the Better Waste doc's instinct to defer
+basis of volume and commercial value. The SERP data says the Better Waste doc's instinct to defer
 these was right, and I'd now sequence them later. The one exception is
 `commercial rubbish removal` (320 SV, KD 18) — junkwize.com, chuckit.co.uk and
 ukcommercialgroup.co.uk all rank, so that one is live.
@@ -118,7 +118,7 @@ holding top-10 slots.
 
 This is the clearest proof in the whole dataset that **a dedicated, properly-built
 city page wins at Better Waste's authority level.** The city terms have lower volume
-(110–260) but $28–$35 CPC and a demonstrably open SERP.
+(110–260) but high commercial value and a demonstrably open SERP.
 
 ### 🟢 Sector pages are soft
 
@@ -187,7 +187,7 @@ Based on SERP openness rather than KD alone:
 
 **Tier 3 — defer until DR improves**
 10. Cluster A head terms (`commercial waste collection`, `commercial waste management`,
-    `commercial waste disposal`, `trade waste collection`, `small business waste collection`)
+ `commercial waste disposal`, `trade waste collection`, `small business waste collection`)
 
 **Dropped**
 - `clinical waste collection`, `hazardous waste collection` — household/council intent
