@@ -11,7 +11,7 @@ UK,Waste Type,https://betterwaste.co.uk/paper-and-cardboard-waste/,OPTIMISE,EASY
 ,,,,,,commercial cardboard collection,210,Commercial,18,EASY,"inherited from ""business cardboard recycling"": AS 16, 18, 20 at or below Better Waste (AS 20)",inherited,P2
 ,,,,,,cardboard recycling for businesses,140,Informational,15,EASY,"inherited from ""business cardboard recycling"": AS 16, 18, 20 at or below Better Waste (AS 20)",inherited,P3
 ,,,,,,,,,,,,,
-UK,Service,https://betterwaste.co.uk/office-waste-management/,CREATE,EASY,780,office waste collection,390,Commercial,34,EASY,"inherited from ""office waste management"": stale SERP: half the top 10 are http:// URLs, one is a US state agency; AS 24 at or below Better Waste (AS 20); 1 council/gov slots",inherited,P2
+UK,Service,https://betterwaste.co.uk/office-waste-management/,OPTIMISE,EASY,780,office waste collection,390,Commercial,34,EASY,"inherited from ""office waste management"": stale SERP: half the top 10 are http:// URLs, one is a US state agency; AS 24 at or below Better Waste (AS 20); 1 council/gov slots",inherited,P2
 ,,,,,,office waste management,390,Commercial,13,EASY,"stale SERP: half the top 10 are http:// URLs, one is a US state agency; AS 24 at or below Better Waste (AS 20); 1 council/gov slots",direct AS check,P1
 ,,,,,,,,,,,,,
 UK,Waste Type,https://betterwaste.co.uk/weee-recycling/,CREATE,EASY,590,it equipment disposal,590,Commercial,37,EASY,"AS 8, 19, 19, 20, 20 at or below Better Waste (AS 20)",direct AS check,P3
@@ -34,7 +34,7 @@ UK,Waste Type,https://betterwaste.co.uk/dry-mixed-recycling-waste/,OPTIMISE,EASY
 ,,,,,,,,,,,,,
 UK,Waste Type,https://betterwaste.co.uk/metal-waste/,CREATE,EASY,260,metal waste collection,260,Commercial,24,EASY,"AS 9, 11, 15, 17, 20 at or below Better Waste (AS 20) - five scrap merchants. CHECK SERVICE MODEL: these sites buy scrap, they do not sell collection",direct AS check,P3
 ,,,,,,,,,,,,,
-UK,Sector,https://betterwaste.co.uk/retail-waste-management/,CREATE,EASY,260,retail waste management,260,Informational,17,EASY,"inherited from ""office waste management"": stale SERP: half the top 10 are http:// URLs, one is a US state agency; AS 24 at or below Better Waste (AS 20); 1 council/gov slots",inherited,P2
+UK,Sector,https://betterwaste.co.uk/retail-waste-management/,OPTIMISE,EASY,260,retail waste management,260,Informational,17,EASY,"inherited from ""office waste management"": stale SERP: half the top 10 are http:// URLs, one is a US state agency; AS 24 at or below Better Waste (AS 20); 1 council/gov slots",inherited,P2
 ,,,,,,,,,,,,,
 UK,Sector,https://betterwaste.co.uk/butchers-waste-collection/,CREATE,EASY,260,butchers waste collection,260,Informational + Transactional,7,EASY,"AS 10, 10, 24 at or below Better Waste (AS 20); 1 council/gov slots",direct AS check,P1
 ,,,,,,,,,,,,,
@@ -50,15 +50,15 @@ UK,Sector,https://betterwaste.co.uk/takeaway-waste-management/,OPTIMISE,EASY,170
 ,,,,,,,,,,,,,
 UK,Sector,https://betterwaste.co.uk/pub-waste-management/,OPTIMISE,EASY,140,pub waste management,140,Informational,9,EASY,"inherited from ""butchers waste collection"": AS 10, 10, 24 at or below Better Waste (AS 20); 1 council/gov slots",inherited,P1
 ,,,,,,,,,,,,,
-UK,Location,https://betterwaste.co.uk/areas-we-cover/bristol/,CREATE,EASY,90,commercial waste collection bristol,90,Commercial,22,EASY,"inherited from ""commercial waste collection leeds"": AS 13, 21, 21, 24, 25 at or below Better Waste (AS 20); 2 council/gov slots",inherited,P2
+UK,Location,https://betterwaste.co.uk/areas-we-cover/bristol/,OPTIMISE,EASY,90,commercial waste collection bristol,90,Commercial,22,EASY,"inherited from ""commercial waste collection leeds"": AS 13, 21, 21, 24, 25 at or below Better Waste (AS 20); 2 council/gov slots",inherited,P2
 ,,,,,,,,,,,,,
-UK,Location,https://betterwaste.co.uk/areas-we-cover/nottingham/,CREATE,EASY,90,commercial waste collection nottingham,90,Commercial,16,EASY,"inherited from ""commercial waste collection leeds"": AS 13, 21, 21, 24, 25 at or below Better Waste (AS 20); 2 council/gov slots",inherited,P2
+UK,Location,https://betterwaste.co.uk/areas-we-cover/nottingham/,OPTIMISE,EASY,90,commercial waste collection nottingham,90,Commercial,16,EASY,"inherited from ""commercial waste collection leeds"": AS 13, 21, 21, 24, 25 at or below Better Waste (AS 20); 2 council/gov slots",inherited,P2
 ,,,,,,,,,,,,,
 UK,Location,https://betterwaste.co.uk/areas-we-cover/glasgow/,CREATE,EASY,70,commercial waste collection glasgow,70,n/a,0,EASY,"inherited from ""commercial waste collection leeds"": AS 13, 21, 21, 24, 25 at or below Better Waste (AS 20); 2 council/gov slots",inherited,P2
 ,,,,,,,,,,,,,
 UK,Location,https://betterwaste.co.uk/areas-we-cover/leicester/,OPTIMISE,EASY,50,commercial waste collection leicester,50,n/a,0,EASY,"inherited from ""commercial waste collection leeds"": AS 13, 21, 21, 24, 25 at or below Better Waste (AS 20); 2 council/gov slots",inherited,P2
 ,,,,,,,,,,,,,
-UK,Service,https://betterwaste.co.uk/commercial-waste-collection/,CREATE,MEDIUM,17550,commercial waste removal,590,Commercial,29,MEDIUM,"inherited from ""commercial rubbish removal"": AS 10 at or below Better Waste (AS 20)",inherited,P2
+UK,Service,https://betterwaste.co.uk/commercial-waste-collection/,OPTIMISE,MEDIUM,17550,commercial waste removal,590,Commercial,29,MEDIUM,"inherited from ""commercial rubbish removal"": AS 10 at or below Better Waste (AS 20)",inherited,P2
 ,,,,,,commercial rubbish removal,320,Commercial,18,MEDIUM,AS 10 at or below Better Waste (AS 20),direct AS check,P1
 ,,,,,,commercial waste collection,3600,Commercial,25,HARD,no ranking site at AS<=25 (lowest AS 31); 6 council/gov slots,direct AS check,P1
 ,,,,,,commercial waste disposal,3600,Informational,34,HARD,no ranking site at AS<=25 (lowest AS 29); 5 council/gov slots,direct AS check,P1
@@ -77,7 +77,7 @@ UK,Location,https://betterwaste.co.uk/areas-we-cover/manchester/,FIX,MEDIUM,2500
 ,,,,,,commercial rubbish collection near fallowfield manchester,390,Informational,16,MEDIUM,"inherited from ""commercial waste collection manchester"": BORDERLINE: no site at AS<=25, but lowest is AS 27 (kennywastemanagement) vs Better Waste AS 20; only 2 council/gov slots",inherited,P3
 ,,,,,,commercial waste collection manchester,320,Commercial,13,MEDIUM,"BORDERLINE: no site at AS<=25, but lowest is AS 27 (kennywastemanagement) vs Better Waste AS 20; only 2 council/gov slots",direct AS check,P1
 ,,,,,,,,,,,,,
-UK,Service,https://betterwaste.co.uk/commercial-bins/,CREATE,MEDIUM,2030,commercial bin hire,170,Commercial,28,MEDIUM,"inherited from ""commercial bin sizes"": AS 22 at or below Better Waste (AS 20); 3 council/gov slots",inherited,P2
+UK,Service,https://betterwaste.co.uk/commercial-bin-collections/,OPTIMISE,MEDIUM,2030,commercial bin hire,170,Commercial,28,MEDIUM,"inherited from ""commercial bin sizes"": AS 22 at or below Better Waste (AS 20); 3 council/gov slots",inherited,P2
 ,,,,,,commercial waste bins,880,Commercial,44,HARD,"inherited from ""commercial waste collection"": no ranking site at AS<=25 (lowest AS 31); 6 council/gov slots",inherited,P2
 ,,,,,,commercial bin collection,720,Commercial,33,HARD,"inherited from ""commercial waste collection"": no ranking site at AS<=25 (lowest AS 31); 6 council/gov slots",inherited,P1
 ,,,,,,business bin collection,260,Informational,31,HARD,"inherited from ""commercial waste collection"": no ranking site at AS<=25 (lowest AS 31); 6 council/gov slots",inherited,P2
@@ -112,9 +112,9 @@ UK,Location,https://betterwaste.co.uk/areas-we-cover/,OPTIMISE,MEDIUM,430,commer
 UK,Waste Type,https://betterwaste.co.uk/food-waste/,OPTIMISE,MEDIUM,400,commercial food waste recycling,260,Informational,26,MEDIUM,"inherited from ""commercial glass collection"": AS 24 at or below Better Waste (AS 20); 3 council/gov slots",inherited,P2
 ,,,,,,commercial kitchen waste management,140,Informational,11,MEDIUM,"inherited from ""commercial glass collection"": AS 24 at or below Better Waste (AS 20); 3 council/gov slots",inherited,P2
 ,,,,,,,,,,,,,
-UK,Sector,https://betterwaste.co.uk/hotel-waste-management/,CREATE,MEDIUM,320,hotel waste management,320,Informational,16,MEDIUM,"inherited from ""care home waste management"": AS 10, 22 at or below Better Waste (AS 20)",inherited,P2
+UK,Sector,https://betterwaste.co.uk/hotel-waste-disposal/,OPTIMISE,MEDIUM,320,hotel waste management,320,Informational,16,MEDIUM,"inherited from ""care home waste management"": AS 10, 22 at or below Better Waste (AS 20)",inherited,P2
 ,,,,,,,,,,,,,
-UK,Sector,https://betterwaste.co.uk/school-waste-management/,CREATE,MEDIUM,260,school waste management,260,Informational,10,MEDIUM,"AS 19 (unyfi), 20 (aegissupportservices) at or below Better Waste; hills-waste AS 26, samsic AS 28. Informational intent",direct AS check,P2
+UK,Sector,https://betterwaste.co.uk/school-waste-management/,OPTIMISE,MEDIUM,260,school waste management,260,Informational,10,MEDIUM,"AS 19 (unyfi), 20 (aegissupportservices) at or below Better Waste; hills-waste AS 26, samsic AS 28. Informational intent",direct AS check,P2
 ,,,,,,,,,,,,,
 UK,Informational,https://betterwaste.co.uk/binpedia/commercial-bin-sizes/,CREATE,MEDIUM,210,commercial bin sizes,210,Informational,7,MEDIUM,AS 22 at or below Better Waste (AS 20); 3 council/gov slots,direct AS check,P1
 ,,,,,,,,,,,,,
@@ -134,7 +134,7 @@ UK,Informational,https://betterwaste.co.uk/simpler-recycling-legislation-for-bus
 ,,,,,,,,,,,,,
 UK,Waste Type,https://betterwaste.co.uk/coffee-cup-recycling/,CREATE,HARD,260,coffee cup recycling,260,Informational,16,HARD,no ranking site at AS<=25 (lowest AS 26); 5 council/gov slots,direct AS check,P3
 ,,,,,,,,,,,,,
-UK,Waste Type,https://betterwaste.co.uk/clinical-waste/,CREATE,AVOID,0,clinical waste disposal,2900,Informational,22,AVOID,"inherited from ""clinical waste collection"": 6 council/gov slots; intent is household not commercial",inherited,P1
+UK,Waste Type,https://betterwaste.co.uk/clinical-waste-disposal-clinical-waste-collection-companies/,OPTIMISE,AVOID,0,clinical waste disposal,2900,Informational,22,AVOID,"inherited from ""clinical waste collection"": 6 council/gov slots; intent is household not commercial",inherited,P1
 ,,,,,,clinical waste collection,1900,Informational,22,AVOID,6 council/gov slots; intent is household not commercial,direct AS check,P1
 ,,,,,,clinical waste,1600,Informational,30,AVOID,"inherited from ""clinical waste collection"": 6 council/gov slots; intent is household not commercial",inherited,P1
 ,,,,,,,,,,,,,
@@ -144,16 +144,16 @@ UK,Waste Type,https://betterwaste.co.uk/hazardous-waste/,CREATE,AVOID,0,hazardou
 UK,Waste Type,n/a,EXCLUDE,AVOID,0,bulky waste collection,9900,Informational,21,AVOID,"inherited from ""clinical waste collection"": 6 council/gov slots; intent is household not commercial",inherited,EXCLUDE
 ,,,,,,green waste collection,1300,Informational,30,AVOID,"inherited from ""clinical waste collection"": 6 council/gov slots; intent is household not commercial",inherited,EXCLUDE
 ,,,,,,,,,,,,,
-UK,Informational,https://betterwaste.co.uk/binpedia/1100-litre-bin/,CREATE,AVOID,0,1100 litre bin,720,Informational,8,AVOID,0 council/gov slots; intent is household not commercial,direct AS check,P1
+UK,Informational,https://betterwaste.co.uk/bins/1100l-bin/,OPTIMISE,AVOID,0,1100 litre bin,720,Informational,8,AVOID,0 council/gov slots; intent is household not commercial,direct AS check,P1
 ,,,,,,1100 litre bin dimensions,90,Informational,6,AVOID,"inherited from ""1100 litre bin"": 0 council/gov slots; intent is household not commercial",inherited,P2
 ,,,,,,,,,,,,,
-UK,Informational,https://betterwaste.co.uk/binpedia/660-litre-bin/,CREATE,AVOID,0,660 litre bin,720,Informational,8,AVOID,"inherited from ""1100 litre bin"": 0 council/gov slots; intent is household not commercial",inherited,P1
+UK,Informational,https://betterwaste.co.uk/bins/660l-bin/,OPTIMISE,AVOID,0,660 litre bin,720,Informational,8,AVOID,"inherited from ""1100 litre bin"": 0 council/gov slots; intent is household not commercial",inherited,P1
 ,,,,,,,,,,,,,
-UK,Informational,https://betterwaste.co.uk/binpedia/240-litre-bin/,CREATE,AVOID,0,240 litre bin,590,Informational + Commercial,11,AVOID,"inherited from ""1100 litre bin"": 0 council/gov slots; intent is household not commercial",inherited,P1
+UK,Informational,https://betterwaste.co.uk/bins/240l-bin/,OPTIMISE,AVOID,0,240 litre bin,590,Informational + Commercial,11,AVOID,"inherited from ""1100 litre bin"": 0 council/gov slots; intent is household not commercial",inherited,P1
 ,,,,,,,,,,,,,
-UK,Informational,https://betterwaste.co.uk/binpedia/commercial-wheelie-bin/,CREATE,AVOID,0,commercial wheelie bin,320,Commercial,8,AVOID,"inherited from ""1100 litre bin"": 0 council/gov slots; intent is household not commercial",inherited,P1
+UK,Informational,https://betterwaste.co.uk/bins/1100l-bin/,OPTIMISE,AVOID,0,commercial wheelie bin,320,Commercial,8,AVOID,"inherited from ""1100 litre bin"": 0 council/gov slots; intent is household not commercial",inherited,P1
 ,,,,,,,,,,,,,
-UK,Informational,https://betterwaste.co.uk/binpedia/wheelie-bin-hire/,CREATE,AVOID,0,wheelie bin hire,320,Commercial,11,AVOID,"inherited from ""1100 litre bin"": 0 council/gov slots; intent is household not commercial",inherited,P2
+UK,Informational,https://betterwaste.co.uk/bins/1100l-bin/,OPTIMISE,AVOID,0,wheelie bin hire,320,Commercial,11,AVOID,"inherited from ""1100 litre bin"": 0 council/gov slots; intent is household not commercial",inherited,P2
 ,,,,,,,,,,,,,
-UK,Informational,https://betterwaste.co.uk/binpedia/eurobin/,CREATE,AVOID,0,eurobin,260,Informational,9,AVOID,"inherited from ""1100 litre bin"": 0 council/gov slots; intent is household not commercial",inherited,P2
+UK,Informational,https://betterwaste.co.uk/bins/fel-container/,OPTIMISE,AVOID,0,eurobin,260,Informational,9,AVOID,"inherited from ""1100 litre bin"": 0 council/gov slots; intent is household not commercial",inherited,P2
 ,,,,,,,,,,,,,

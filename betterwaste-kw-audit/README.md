@@ -11,6 +11,7 @@
 | `04-serp-competition.md` | Live top-10 SERP check on 24 decision-critical keywords — who actually ranks, which SERPs are council/gov-blocked, and a revised priority order |
 | `05-difficulty-verdict.md` | **Start here.** Every difficulty call graded on the Semrush Authority Score of the sites actually ranking. States the test used, the easy/medium/hard split, and the build order |
 | `06-segmented-plan.csv` | The full plan segmented by page (same block layout as the client tracker): one block per target URL, each keyword with intent, SV, KD, difficulty grade and the Authority Score evidence behind it |
+| `07-page-inventory.md` | **Correction.** Full crawled-URL check of what actually exists on the site. 15 pages I had scored as CREATE already exist, and the Manchester redirect direction was backwards |
 | `03-fix-list.csv` | Technical / mapping fixes found during the audit, with the evidence URL and position |
 
 All volumes, KD and competitor Authority Scores are **Semrush UK** throughout. CPC is not included. Ahrefs is used only for the indexed-URL evidence behind the www / non-www finding.
