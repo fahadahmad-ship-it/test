@@ -1,0 +1,159 @@
+Market,Type,Page,Page Status,Page Difficulty,Segment SV,Keyword,SV,Intent,KD,CPC,Difficulty,Evidence Source,Evidence,Priority
+UK,Waste Type,https://betterwaste.co.uk/confidential-waste/,CREATE,EASY,5600,confidential waste collection,1000,Commercial,13,7.38,EASY,direct,"DR 25, 1, 0, 1 - four sub-30 sites",P1
+,,,,,,confidential shredding,1000,Commercial,16,4.13,EASY,inherited,"inherited from ""confidential waste collection"": DR 25, 1, 0, 1 - four sub-30 sites",P1
+,,,,,,confidential waste disposal,3600,Commercial,25,3.64,MEDIUM,semrush-only,"Mid-size shredders, no councils. More established than collection variant",P1
+,,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/weee-recycling/,CREATE,EASY,590,weee recycling,2400,Navigational,41,1.90,UNVERIFIED,not checked,Own SERP not checked - different SERP family to the graded siblings,P2
+,,,,,,electrical waste disposal,590,Commercial,24,1.31,UNVERIFIED,not checked,Own SERP not checked - different SERP family to the graded siblings,P2
+,,,,,,it equipment disposal,590,Commercial,37,7.22,EASY,direct,"DR 16, 25, 19, 19, 26, 2 - six sub-30 sites",P3
+,,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/sanitary-waste/,CREATE,EASY,2600,sanitary waste disposal,1300,Informational,10,11.43,EASY,inherited,"inherited from ""sanitary waste collection"": DR 7 (#1 trusthygiene), 8, 0, 31",P1
+,,,,,,sanitary waste collection,1300,Commercial,17,16.56,EASY,direct,"DR 7 (#1 trusthygiene), 8, 0, 31",P1
+,,,,,,,,,,,,,,
+UK,Informational,https://betterwaste.co.uk/binpedia/,OPTIMISE,EASY,680,bin sizes,590,Informational,8,1.62,EASY,inherited,"inherited from ""commercial bin sizes"": DR 12, 29, 14, 31 - four sub-32 sites",P1
+,,,,,,waste bin dimensions,90,Informational,5,1.21,EASY,inherited,"inherited from ""commercial bin sizes"": DR 12, 29, 14, 31 - four sub-32 sites",P2
+,,,,,,waste container,1900,Informational,12,2.27,AVOID,inherited,"inherited from ""1100 litre bin"": Retail SERP - wheeliebinwarehouse, bigdug, bin-shop",P1
+,,,,,,,,,,,,,,
+UK,Service,https://betterwaste.co.uk/commercial-bins/,CREATE,HARD,980,commercial bin hire,170,Commercial,28,24.14,UNVERIFIED,not checked,Own SERP not checked - different SERP family to the graded siblings,P2
+,,,,,,commercial waste bins,880,Commercial,44,22.36,UNVERIFIED,not checked,Own SERP not checked - different SERP family to the graded siblings,P2
+,,,,,,commercial bin collection,720,Commercial,33,37.18,HARD,inherited,"inherited from ""commercial waste collection"": 6 council/gov slots. Lowest DR 14 at #10 only",P1
+,,,,,,business bin collection,260,Informational,31,36.62,HARD,inherited,"inherited from ""commercial waste collection"": 6 council/gov slots. Lowest DR 14 at #10 only",P2
+,,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/paper-and-cardboard-waste/,OPTIMISE,EASY,1000,business cardboard recycling,390,Informational,16,10.49,EASY,direct,"DR 10, 8, 9 - three sub-11 sites",P2
+,,,,,,commercial paper recycling,260,Informational,16,0.00,EASY,inherited,"inherited from ""business cardboard recycling"": DR 10, 8, 9 - three sub-11 sites",P2
+,,,,,,commercial cardboard collection,210,Commercial,18,10.03,EASY,inherited,"inherited from ""business cardboard recycling"": DR 10, 8, 9 - three sub-11 sites",P2
+,,,,,,cardboard recycling for businesses,140,Informational,15,10.56,EASY,inherited,"inherited from ""business cardboard recycling"": DR 10, 8, 9 - three sub-11 sites",P3
+,,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/construction-waste/,CREATE,UNVERIFIED,0,construction waste disposal,590,Commercial,28,2.02,UNVERIFIED,not checked,Own SERP not checked - different SERP family to the graded siblings,P3
+,,,,,,construction waste collection,260,Commercial,27,3.67,UNVERIFIED,not checked,Own SERP not checked - different SERP family to the graded siblings,P3
+,,,,,,,,,,,,,,
+UK,Service,https://betterwaste.co.uk/office-waste-management/,CREATE,EASY,780,office waste collection,390,Commercial,34,14.33,EASY,inherited,"inherited from ""office waste management"": DR 8, 26. Stale SERP (http:// URLs, US state agency)",P2
+,,,,,,office waste management,390,Commercial,13,8.68,EASY,direct,"DR 8, 26. Stale SERP (http:// URLs, US state agency)",P1
+,,,,,,,,,,,,,,
+UK,Sector,https://betterwaste.co.uk/cafe-waste-management/,OPTIMISE,EASY,420,cafe waste collection,210,Informational,9,0.00,EASY,inherited,"inherited from ""butchers waste collection"": All small specialists, 1 council, 0 national brands",P1
+,,,,,,cafe waste management,210,Informational,10,0.00,EASY,inherited,"inherited from ""butchers waste collection"": All small specialists, 1 council, 0 national brands",P1
+,,,,,,,,,,,,,,
+UK,Sector,https://betterwaste.co.uk/restaurant-waste-management/,OPTIMISE,EASY,420,restaurant waste disposal,170,Informational,12,15.68,EASY,inherited,"inherited from ""butchers waste collection"": All small specialists, 1 council, 0 national brands",P1
+,,,,,,restaurant waste collection,140,Informational,9,20.50,EASY,inherited,"inherited from ""butchers waste collection"": All small specialists, 1 council, 0 national brands",P1
+,,,,,,restaurant waste removal,110,Commercial,10,15.68,EASY,inherited,"inherited from ""butchers waste collection"": All small specialists, 1 council, 0 national brands",P2
+,,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/wood-waste/,CREATE,EASY,390,wood waste collection,390,Commercial,9,1.92,EASY,direct,"DR 0 (#1 londonrubbishcollection), 26, 23, 9",P2
+,,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/cooking-oil-collection/,CREATE,EASY,320,used cooking oil collection,320,Commercial,15,2.98,EASY,direct,"DR 20 (#1), 0, 0, 0, 17, 0",P3
+,,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/dry-mixed-recycling-waste/,OPTIMISE,EASY,320,mixed dry recycling,210,Informational,6,0.00,EASY,inherited,"inherited from ""business cardboard recycling"": DR 10, 8, 9 - three sub-11 sites",P2
+,,,,,,mixed recycling collection,110,Informational,21,2.49,EASY,inherited,"inherited from ""business cardboard recycling"": DR 10, 8, 9 - three sub-11 sites",P3
+,,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/metal-waste/,CREATE,UNVERIFIED,0,metal waste collection,260,Commercial,24,0.95,UNVERIFIED,not checked,Own SERP not checked - different SERP family to the graded siblings,P3
+,,,,,,,,,,,,,,
+UK,Sector,https://betterwaste.co.uk/school-waste-management/,CREATE,EASY,260,school waste management,260,Informational,10,0.00,EASY,semrush-only,"Weak SERP: 2 PDFs, trade magazine, WEF. Informational intent",P2
+,,,,,,,,,,,,,,
+UK,Sector,https://betterwaste.co.uk/retail-waste-management/,CREATE,UNVERIFIED,0,retail waste management,260,Informational,17,0.00,UNVERIFIED,not checked,Own SERP not checked - different SERP family to the graded siblings,P2
+,,,,,,,,,,,,,,
+UK,Sector,https://betterwaste.co.uk/butchers-waste-collection/,CREATE,EASY,260,butchers waste collection,260,Informational + Transactional,7,13.19,EASY,semrush-only,"All small specialists, 1 council, 0 national brands",P1
+,,,,,,,,,,,,,,
+UK,Sector,https://betterwaste.co.uk/hair-salon-waste-management/,OPTIMISE,EASY,260,salon waste management,260,Informational,6,0.00,EASY,inherited,"inherited from ""butchers waste collection"": All small specialists, 1 council, 0 national brands",P1
+,,,,,,,,,,,,,,
+UK,Location,https://betterwaste.co.uk/areas-we-cover/leeds/,OPTIMISE,EASY,260,commercial waste collection leeds,260,Commercial,17,28.90,EASY,direct,"DR 0 (#1 sensawaste), 8, 0, 13 - four sub-30 sites",P1
+,,,,,,,,,,,,,,
+UK,Location,https://betterwaste.co.uk/areas-we-cover/liverpool/,CREATE,EASY,260,commercial waste collection liverpool,260,Commercial,18,31.31,EASY,inherited,"inherited from ""commercial waste collection leeds"": DR 0 (#1 sensawaste), 8, 0, 13 - four sub-30 sites",P1
+,,,,,,,,,,,,,,
+UK,Informational,https://betterwaste.co.uk/binpedia/commercial-bin-sizes/,CREATE,EASY,210,commercial bin sizes,210,Informational,7,4.03,EASY,direct,"DR 12, 29, 14, 31 - four sub-32 sites",P1
+,,,,,,,,,,,,,,
+UK,Sector,https://betterwaste.co.uk/bakery-waste-management/,OPTIMISE,EASY,210,bakery waste management,210,Informational,18,0.00,EASY,inherited,"inherited from ""butchers waste collection"": All small specialists, 1 council, 0 national brands",P2
+,,,,,,,,,,,,,,
+UK,Sector,https://betterwaste.co.uk/takeaway-waste-management/,OPTIMISE,EASY,170,takeaway waste collection,170,Informational,8,13.02,EASY,inherited,"inherited from ""butchers waste collection"": All small specialists, 1 council, 0 national brands",P1
+,,,,,,,,,,,,,,
+UK,Sector,https://betterwaste.co.uk/pub-waste-management/,OPTIMISE,EASY,140,pub waste management,140,Informational,9,0.00,EASY,inherited,"inherited from ""butchers waste collection"": All small specialists, 1 council, 0 national brands",P1
+,,,,,,,,,,,,,,
+UK,Location,https://betterwaste.co.uk/areas-we-cover/bristol/,CREATE,EASY,90,commercial waste collection bristol,90,Commercial,22,20.05,EASY,inherited,"inherited from ""commercial waste collection leeds"": DR 0 (#1 sensawaste), 8, 0, 13 - four sub-30 sites",P2
+,,,,,,,,,,,,,,
+UK,Location,https://betterwaste.co.uk/areas-we-cover/nottingham/,CREATE,EASY,90,commercial waste collection nottingham,90,Commercial,16,22.55,EASY,inherited,"inherited from ""commercial waste collection leeds"": DR 0 (#1 sensawaste), 8, 0, 13 - four sub-30 sites",P2
+,,,,,,,,,,,,,,
+UK,Location,https://betterwaste.co.uk/areas-we-cover/glasgow/,CREATE,EASY,70,commercial waste collection glasgow,70,n/a,0,35.56,EASY,inherited,"inherited from ""commercial waste collection leeds"": DR 0 (#1 sensawaste), 8, 0, 13 - four sub-30 sites",P2
+,,,,,,,,,,,,,,
+UK,Location,https://betterwaste.co.uk/areas-we-cover/leicester/,OPTIMISE,EASY,50,commercial waste collection leicester,50,n/a,0,35.47,EASY,inherited,"inherited from ""commercial waste collection leeds"": DR 0 (#1 sensawaste), 8, 0, 13 - four sub-30 sites",P2
+,,,,,,,,,,,,,,
+UK,Service,https://betterwaste.co.uk/commercial-waste-collection/,CREATE,MEDIUM,16670,commercial waste removal,590,Commercial,29,17.56,MEDIUM,inherited,"inherited from ""commercial rubbish removal"": junkwize, chuckit, ukcommercialgroup rank. Only reachable Cluster A term",P2
+,,,,,,commercial rubbish removal,320,Commercial,18,17.56,MEDIUM,semrush-only,"junkwize, chuckit, ukcommercialgroup rank. Only reachable Cluster A term",P1
+,,,,,,commercial waste collection,3600,Commercial,25,27.22,HARD,direct,6 council/gov slots. Lowest DR 14 at #10 only,P1
+,,,,,,commercial waste disposal,3600,Informational,34,12.54,HARD,semrush-only,5 council/gov in top 10,P1
+,,,,,,commercial waste management,2900,Commercial,33,20.90,HARD,semrush-only,4 council/gov + Biffa + Veolia + Suez,P1
+,,,,,,commercial waste,1600,Informational,26,21.58,HARD,inherited,"inherited from ""commercial waste collection"": 6 council/gov slots. Lowest DR 14 at #10 only",P1
+,,,,,,business waste disposal,1300,Commercial,37,12.20,HARD,inherited,"inherited from ""commercial waste disposal"": 5 council/gov in top 10",P1
+,,,,,,trade waste,1300,Commercial,26,13.08,HARD,inherited,"inherited from ""trade waste collection"": 6 council/gov - most blocked SERP checked",P1
+,,,,,,commercial recycling,880,Commercial,41,6.12,UNVERIFIED,not checked,Own SERP not checked - different SERP family to the graded siblings,P2
+,,,,,,small business waste collection,720,Commercial,34,17.07,HARD,semrush-only,4 council/gov + Biffa x2 + Veolia x2,P1
+,,,,,,trade waste collection,480,Commercial,22,20.48,HARD,semrush-only,6 council/gov - most blocked SERP checked,P1
+,,,,,,commercial waste services,260,Commercial,52,17.33,HARD,inherited,"inherited from ""commercial waste management"": 4 council/gov + Biffa + Veolia + Suez",P3
+,,,,,,,,,,,,,,
+UK,Location,https://betterwaste.co.uk/areas-we-cover/manchester/,FIX,MEDIUM,2500,commercial rubbish collection near longsight manchester,720,Informational,17,0.00,MEDIUM,inherited,"inherited from ""commercial waste collection manchester"": DR 28 (#7), 33 (#9), 47 (#5)",P2
+,,,,,,commercial rubbish collection near longsight manchester city centre,590,Informational,20,0.00,MEDIUM,inherited,"inherited from ""commercial waste collection manchester"": DR 28 (#7), 33 (#9), 47 (#5)",P2
+,,,,,,commercial rubbish collection near manchester,480,Commercial,12,0.00,MEDIUM,inherited,"inherited from ""commercial waste collection manchester"": DR 28 (#7), 33 (#9), 47 (#5)",P2
+,,,,,,commercial rubbish collection near fallowfield manchester,390,Informational,16,0.00,MEDIUM,inherited,"inherited from ""commercial waste collection manchester"": DR 28 (#7), 33 (#9), 47 (#5)",P3
+,,,,,,commercial waste collection manchester,320,Commercial,13,21.86,MEDIUM,direct,"DR 28 (#7), 33 (#9), 47 (#5)",P1
+,,,,,,,,,,,,,,
+UK,Location,https://betterwaste.co.uk/areas-we-cover/london/,OPTIMISE,MEDIUM,1590,commercial waste collection london,720,Commercial,31,22.80,MEDIUM,direct,"DR 13 (#6), 28 (#9). Rest DR 60-81",P1
+,,,,,,commercial rubbish collection near peckham london,480,Informational,23,0.00,MEDIUM,inherited,"inherited from ""commercial waste collection london"": DR 13 (#6), 28 (#9). Rest DR 60-81",P3
+,,,,,,commercial recycling london,390,Commercial,20,0.00,MEDIUM,inherited,"inherited from ""commercial waste collection london"": DR 13 (#6), 28 (#9). Rest DR 60-81",P2
+,,,,,,,,,,,,,,
+UK,Informational,https://betterwaste.co.uk/simpler-recycling-legislation-for-businesses-in-england-what-you-need-to-know/,OPTIMISE,MEDIUM,1140,simpler recycling,1000,Informational,22,2.11,MEDIUM,semrush-only,gov.uk #1 and #4. Realistic target p8-10. Already p14,P1
+,,,,,,simpler recycling regulations,140,Informational,22,0.59,MEDIUM,inherited,"inherited from ""simpler recycling"": gov.uk #1 and #4. Realistic target p8-10. Already p14",P2
+,,,,,,,,,,,,,,
+UK,Location,https://betterwaste.co.uk/areas-we-cover/birmingham/,OPTIMISE,MEDIUM,1120,commercial rubbish collection near handsworth birmingham,590,Informational,15,0.00,MEDIUM,inherited,"inherited from ""commercial waste collection manchester"": DR 28 (#7), 33 (#9), 47 (#5)",P2
+,,,,,,commercial dump collection service birmingham,390,Commercial,22,0.00,MEDIUM,inherited,"inherited from ""commercial waste collection manchester"": DR 28 (#7), 33 (#9), 47 (#5)",P3
+,,,,,,commercial waste collection birmingham,140,Commercial,20,26.18,MEDIUM,inherited,"inherited from ""commercial waste collection manchester"": DR 28 (#7), 33 (#9), 47 (#5)",P2
+,,,,,,,,,,,,,,
+UK,Sector,https://betterwaste.co.uk/care-home-waste-management/,CREATE,MEDIUM,480,care home waste management,480,Informational,9,7.40,MEDIUM,semrush-only,"busybins #6, bwsl #9; Stericycle + PHS hold two",P1
+,,,,,,,,,,,,,,
+UK,Sector,https://betterwaste.co.uk/dental-waste-disposal/,CREATE,MEDIUM,480,dental waste disposal,480,Informational,13,8.84,MEDIUM,direct,"DR 2 (#10), 31 (#3). SERP informational-heavy",P1
+,,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/glass-waste/,OPTIMISE,MEDIUM,480,commercial glass collection,480,Informational,17,0.00,MEDIUM,semrush-only,gaskellswaste/daygroup/coastaluk alongside Grundon+Veolia,P1
+,,,,,,,,,,,,,,
+UK,Location,https://betterwaste.co.uk/areas-we-cover/,OPTIMISE,MEDIUM,430,commercial waste collection near me,260,Transactional,25,30.99,MEDIUM,inherited,"inherited from ""commercial waste collection manchester"": DR 28 (#7), 33 (#9), 47 (#5)",P2
+,,,,,,business waste collection near me,170,Transactional,31,28.76,MEDIUM,inherited,"inherited from ""commercial waste collection manchester"": DR 28 (#7), 33 (#9), 47 (#5)",P3
+,,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/food-waste/,OPTIMISE,MEDIUM,400,commercial food waste recycling,260,Informational,26,9.86,MEDIUM,inherited,"inherited from ""commercial glass collection"": gaskellswaste/daygroup/coastaluk alongside Grundon+Veolia",P2
+,,,,,,commercial kitchen waste management,140,Informational,11,0.00,MEDIUM,inherited,"inherited from ""commercial glass collection"": gaskellswaste/daygroup/coastaluk alongside Grundon+Veolia",P2
+,,,,,,,,,,,,,,
+UK,Sector,https://betterwaste.co.uk/hotel-waste-management/,CREATE,UNVERIFIED,0,hotel waste management,320,Informational,16,7.27,UNVERIFIED,not checked,Own SERP not checked - different SERP family to the graded siblings,P2
+,,,,,,,,,,,,,,
+UK,Location,https://betterwaste.co.uk/areas-we-cover/sheffield/,OPTIMISE,MEDIUM,110,commercial waste collection sheffield,110,Commercial,15,35.20,MEDIUM,semrush-only,sensawaste #2; Biffa #3 + 2 council slots,P1
+,,,,,,,,,,,,,,
+UK,Informational,https://betterwaste.co.uk/waste-carriers-licence/,CREATE,HARD,4400,waste carriers licence,4400,Commercial,38,6.04,HARD,direct,"Statutory registers (EA, gov.uk, SEPA, NRW). DR 29 at #8 only",P2
+,,,,,,,,,,,,,,
+UK,Informational,https://betterwaste.co.uk/extended-producer-responsibility/,CREATE,HARD,3920,extended producer responsibility,3600,Informational,46,1.44,HARD,inherited,"inherited from ""waste carriers licence"": Statutory registers (EA, gov.uk, SEPA, NRW). DR 29 at #8 only",P3
+,,,,,,epr packaging,320,Informational,34,1.44,HARD,inherited,"inherited from ""waste carriers licence"": Statutory registers (EA, gov.uk, SEPA, NRW). DR 29 at #8 only",P3
+,,,,,,,,,,,,,,
+UK,Informational,https://betterwaste.co.uk/waste-transfer-note/,CREATE,HARD,2390,waste transfer note,1900,Informational,16,2.36,HARD,direct,Lowest DR 45. Nothing below DR 45 ranks,P1
+,,,,,,duty of care waste transfer note,320,Informational,20,2.29,HARD,inherited,"inherited from ""waste transfer note"": Lowest DR 45. Nothing below DR 45 ranks",P2
+,,,,,,waste duty of care,170,Informational,29,0.00,HARD,inherited,"inherited from ""waste transfer note"": Lowest DR 45. Nothing below DR 45 ranks",P3
+,,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/industrial-waste/,CREATE,UNVERIFIED,0,industrial waste disposal,720,Informational,28,6.31,UNVERIFIED,not checked,Own SERP not checked - different SERP family to the graded siblings,P2
+,,,,,,industrial waste collection,390,Commercial,41,11.52,UNVERIFIED,not checked,Own SERP not checked - different SERP family to the graded siblings,P3
+,,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/coffee-cup-recycling/,CREATE,HARD,260,coffee cup recycling,260,Informational,16,1.16,HARD,direct,"Lowest DR 45. recyclenow 82, Veolia 71, all institutional",P3
+,,,,,,,,,,,,,,
+UK,Waste Type,n/a,EXCLUDE,AVOID,0,bulky waste collection,9900,Informational,21,1.71,AVOID,inherited,"inherited from ""clinical waste collection"": 6 council/gov. gov.uk result is a household request form",EXCLUDE
+,,,,,,green waste collection,1300,Informational,30,1.43,AVOID,inherited,"inherited from ""clinical waste collection"": 6 council/gov. gov.uk result is a household request form",EXCLUDE
+,,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/clinical-waste/,CREATE,AVOID,0,clinical waste disposal,2900,Informational,22,10.04,AVOID,inherited,"inherited from ""clinical waste collection"": 6 council/gov. gov.uk result is a household request form",P1
+,,,,,,clinical waste collection,1900,Informational,22,10.40,AVOID,direct,6 council/gov. gov.uk result is a household request form,P1
+,,,,,,clinical waste,1600,Informational,30,8.92,AVOID,inherited,"inherited from ""clinical waste collection"": 6 council/gov. gov.uk result is a household request form",P1
+,,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/hazardous-waste/,CREATE,AVOID,0,hazardous waste disposal,1900,Commercial,35,2.88,AVOID,inherited,"inherited from ""hazardous waste collection"": 6 council/gov. Household hazardous waste intent",P2
+,,,,,,hazardous waste collection,1300,Commercial,23,3.56,AVOID,direct,6 council/gov. Household hazardous waste intent,P2
+,,,,,,,,,,,,,,
+UK,Informational,https://betterwaste.co.uk/binpedia/1100-litre-bin/,CREATE,AVOID,0,1100 litre bin,720,Informational,8,3.85,AVOID,direct,"Retail SERP - wheeliebinwarehouse, bigdug, bin-shop",P1
+,,,,,,1100 litre bin dimensions,90,Informational,6,0.81,AVOID,inherited,"inherited from ""1100 litre bin"": Retail SERP - wheeliebinwarehouse, bigdug, bin-shop",P2
+,,,,,,,,,,,,,,
+UK,Informational,https://betterwaste.co.uk/binpedia/660-litre-bin/,CREATE,AVOID,0,660 litre bin,720,Informational,8,3.73,AVOID,inherited,"inherited from ""1100 litre bin"": Retail SERP - wheeliebinwarehouse, bigdug, bin-shop",P1
+,,,,,,,,,,,,,,
+UK,Informational,https://betterwaste.co.uk/binpedia/240-litre-bin/,CREATE,AVOID,0,240 litre bin,590,Informational + Commercial,11,1.23,AVOID,inherited,"inherited from ""1100 litre bin"": Retail SERP - wheeliebinwarehouse, bigdug, bin-shop",P1
+,,,,,,,,,,,,,,
+UK,Informational,https://betterwaste.co.uk/binpedia/commercial-wheelie-bin/,CREATE,AVOID,0,commercial wheelie bin,320,Commercial,8,7.28,AVOID,inherited,"inherited from ""1100 litre bin"": Retail SERP - wheeliebinwarehouse, bigdug, bin-shop",P1
+,,,,,,,,,,,,,,
+UK,Informational,https://betterwaste.co.uk/binpedia/wheelie-bin-hire/,CREATE,AVOID,0,wheelie bin hire,320,Commercial,11,4.07,AVOID,inherited,"inherited from ""1100 litre bin"": Retail SERP - wheeliebinwarehouse, bigdug, bin-shop",P2
+,,,,,,,,,,,,,,
+UK,Informational,https://betterwaste.co.uk/binpedia/eurobin/,CREATE,AVOID,0,eurobin,260,Informational,9,1.87,AVOID,inherited,"inherited from ""1100 litre bin"": Retail SERP - wheeliebinwarehouse, bigdug, bin-shop",P2
+,,,,,,,,,,,,,,
