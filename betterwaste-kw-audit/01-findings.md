@@ -22,7 +22,7 @@ actually competing — so adding more keywords to the same pages will not move r
 | Positions 4–10 | 19 |
 | Positions 11–20 | 26 |
 | Positions 21–30 | 51 |
-| Ahrefs DR | 26 |
+| Semrush Authority Score | 20 |
 
 Where the sheet's own targets actually sit today (Semrush UK):
 
@@ -92,24 +92,24 @@ for those terms. Re-map them.
 
 Semrush organic competitors (UK), sorted by relevance to betterwaste:
 
-| Domain | Relevance | Common KWs | Organic KWs | Organic traffic | Ahrefs DR |
+| Domain | Relevance | Common KWs | Organic KWs | Organic traffic | Authority Score |
 |---|---|---|---|---|---|
-| **businesswaste.co.uk** | 0.02 | 27 | 8,718 | 19,353 | 72 |
-| **wastemanaged.co.uk** | 0.02 | 13 | 6,291 | 9,074 | — |
-| **thefirstmile.co.uk** | 0.02 | 19 | 5,434 | 20,361 | — |
-| **direct365.co.uk** | 0.01 | 14 | 7,369 | 12,827 | — |
-| biffa.co.uk | 0.01 | 32 | 11,238 | 83,402 | 68 |
-| suez.co.uk | 0.01 | 17 | 6,331 | 39,492 | 58 |
-| veolia.co.uk | 0.00 | 26 | 34,744 | 176,463 | 71 |
-| kennywastemanagement.co.uk | **0.13** | 11 | 451 | 4,920 | — |
-| sensawaste.com | 0.09 | 14 | 1,285 | 1,319 | — |
-| ashwasteservices.co.uk | 0.08 | 14 | 1,183 | 8,203 | 29 |
-| bandmwaste.com | 0.07 | 12 | 1,299 | 6,929 | — |
+| **businesswaste.co.uk** | 0.02 | 27 | 8,718 | 19,353 | 41 |
+| **wastemanaged.co.uk** | 0.02 | 13 | 6,291 | 9,074 | 37 |
+| **thefirstmile.co.uk** | 0.02 | 19 | 5,434 | 20,361 | 39 |
+| **direct365.co.uk** | 0.01 | 14 | 7,369 | 12,827 | 32 |
+| biffa.co.uk | 0.01 | 32 | 11,238 | 83,402 | 46 |
+| suez.co.uk | 0.01 | 17 | 6,331 | 39,492 | 40 |
+| veolia.co.uk | 0.00 | 26 | 34,744 | 176,463 | 48 |
+| kennywastemanagement.co.uk | **0.13** | 11 | 451 | 4,920 | 27 |
+| sensawaste.com | 0.09 | 14 | 1,285 | 1,319 | 24 |
+| ashwasteservices.co.uk | 0.08 | 14 | 1,183 | 8,203 | 26 |
+| bandmwaste.com | 0.07 | 12 | 1,299 | 6,929 | 29 |
 
 **The realistic benchmark is businesswaste.co.uk and wastemanaged.co.uk**, not Biffa
 or Veolia. Both are broker/aggregator models like Better Waste, both sit at
-5,000–9,000 keywords vs Better Waste's 341. Biffa/Veolia/Suez are DR 58–71 asset
-operators — not winnable head-on at DR 26.
+5,000–9,000 keywords vs Better Waste's 341. Biffa/Veolia/Suez are AS 40–48 asset
+operators — not winnable head-on at AS 20.
 
 **What businesswaste.co.uk ranks top-10 for that Better Waste has no page for at all:**
 
@@ -333,7 +333,7 @@ expand on the businesswaste.co.uk model: Liverpool, Glasgow, Bristol, Nottingham
 then borough-level for London/Birmingham/Manchester.
 
 **Phase 6 — simultaneously, authority**
-At DR 26 vs businesswaste.co.uk's DR 72, content alone caps out. Cluster D
+At AS 20 vs businesswaste.co.uk's AS 41, content alone caps out. Cluster D
 (compliance/legislation) is the natural link target — `waste transfer note` and
 `waste carriers licence` pages earn links in this vertical.
 
@@ -343,7 +343,7 @@ At DR 26 vs businesswaste.co.uk's DR 72, content alone caps out. Cluster D
 
 - All SV / KD / Authority Score in the tables and CSVs are **Semrush UK**. CPC is not
   included, and no Ahrefs keyword difficulty is quoted anywhere in this pack.
-- Ahrefs was used only for Domain Rating and for the indexed-URL evidence behind the
+- Ahrefs was used only for the indexed-URL evidence behind the
  www / non-www duplication finding.
 - Several keywords in your sheet have materially different Semrush volumes than
  listed (`dry mixed recycling bins` 320 → 1,000; `commercial cardboard waste`

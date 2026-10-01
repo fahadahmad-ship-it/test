@@ -15,8 +15,8 @@ UK,Service,https://betterwaste.co.uk/office-waste-management/,CREATE,EASY,780,of
 ,,,,,,office waste management,390,Commercial,13,EASY,"stale SERP: half the top 10 are http:// URLs, one is a US state agency; AS 24 at or below Better Waste (AS 20); 1 council/gov slots",direct AS check,P1
 ,,,,,,,,,,,,,
 UK,Waste Type,https://betterwaste.co.uk/weee-recycling/,CREATE,EASY,590,it equipment disposal,590,Commercial,37,EASY,"AS 8, 19, 19, 20, 20 at or below Better Waste (AS 20)",direct AS check,P3
-,,,,,,weee recycling,2400,Navigational,41,UNVERIFIED,SERP not checked,not checked,P2
-,,,,,,electrical waste disposal,590,Commercial,24,UNVERIFIED,SERP not checked,not checked,P2
+,,,,,,weee recycling,2400,Navigational,41,AVOID,no site at AS<=25 (lowest AS 29); 3 council/gov slots plus the recycleyourelectricals.org.uk consumer scheme at #1 and Amazon at #6 - household electricals intent,direct AS check,P2
+,,,,,,electrical waste disposal,590,Commercial,24,AVOID,"6 council/gov and national-scheme slots (recycleyourelectricals AS 49 at #1, recyclenow AS 54, Nottingham/Islington/Oxford councils) - household intent",direct AS check,P2
 ,,,,,,,,,,,,,
 UK,Sector,https://betterwaste.co.uk/cafe-waste-management/,OPTIMISE,EASY,420,cafe waste collection,210,Informational,9,EASY,"inherited from ""butchers waste collection"": AS 10, 10, 24 at or below Better Waste (AS 20); 1 council/gov slots",inherited,P1
 ,,,,,,cafe waste management,210,Informational,10,EASY,"inherited from ""butchers waste collection"": AS 10, 10, 24 at or below Better Waste (AS 20); 1 council/gov slots",inherited,P1
@@ -31,6 +31,8 @@ UK,Waste Type,https://betterwaste.co.uk/cooking-oil-collection/,CREATE,EASY,320,
 ,,,,,,,,,,,,,
 UK,Waste Type,https://betterwaste.co.uk/dry-mixed-recycling-waste/,OPTIMISE,EASY,320,mixed dry recycling,210,Informational,6,EASY,"inherited from ""business cardboard recycling"": AS 16, 18, 20 at or below Better Waste (AS 20)",inherited,P2
 ,,,,,,mixed recycling collection,110,Informational,21,EASY,"inherited from ""business cardboard recycling"": AS 16, 18, 20 at or below Better Waste (AS 20)",inherited,P3
+,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/metal-waste/,CREATE,EASY,260,metal waste collection,260,Commercial,24,EASY,"AS 9, 11, 15, 17, 20 at or below Better Waste (AS 20) - five scrap merchants. CHECK SERVICE MODEL: these sites buy scrap, they do not sell collection",direct AS check,P3
 ,,,,,,,,,,,,,
 UK,Sector,https://betterwaste.co.uk/retail-waste-management/,CREATE,EASY,260,retail waste management,260,Informational,17,EASY,"inherited from ""office waste management"": stale SERP: half the top 10 are http:// URLs, one is a US state agency; AS 24 at or below Better Waste (AS 20); 1 council/gov slots",inherited,P2
 ,,,,,,,,,,,,,
@@ -88,6 +90,12 @@ UK,Location,https://betterwaste.co.uk/areas-we-cover/birmingham/,OPTIMISE,MEDIUM
 ,,,,,,commercial dump collection service birmingham,390,Commercial,22,MEDIUM,"inherited from ""commercial waste collection manchester"": BORDERLINE: no site at AS<=25, but lowest is AS 27 (kennywastemanagement) vs Better Waste AS 20; only 2 council/gov slots",inherited,P3
 ,,,,,,commercial waste collection birmingham,140,Commercial,20,MEDIUM,"inherited from ""commercial waste collection manchester"": BORDERLINE: no site at AS<=25, but lowest is AS 27 (kennywastemanagement) vs Better Waste AS 20; only 2 council/gov slots",inherited,P2
 ,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/industrial-waste/,CREATE,MEDIUM,1110,industrial waste disposal,720,Informational,28,MEDIUM,"AS 14 (envirocraft), 18 (oatesenvironmental) at or below Better Waste (AS 20); 3 gov slots incl. hse.gov.uk",direct AS check,P2
+,,,,,,industrial waste collection,390,Commercial,41,MEDIUM,"inherited from ""industrial waste disposal"": AS 14 (envirocraft), 18 (oatesenvironmental) at or below Better Waste (AS 20); 3 gov slots incl. hse.gov.uk",inherited,P3
+,,,,,,,,,,,,,
+UK,Waste Type,https://betterwaste.co.uk/construction-waste/,CREATE,MEDIUM,850,construction waste disposal,590,Commercial,28,MEDIUM,"AS 20 (cirecoscotland) at or below Better Waste; Powerday AS 29, Bywaters AS 32, Biffa AS 46 hold the rest",direct AS check,P3
+,,,,,,construction waste collection,260,Commercial,27,MEDIUM,"inherited from ""construction waste disposal"": AS 20 (cirecoscotland) at or below Better Waste; Powerday AS 29, Bywaters AS 32, Biffa AS 46 hold the rest",inherited,P3
+,,,,,,,,,,,,,
 UK,Informational,https://betterwaste.co.uk/binpedia/,OPTIMISE,MEDIUM,680,bin sizes,590,Informational,8,MEDIUM,"inherited from ""commercial bin sizes"": AS 22 at or below Better Waste (AS 20); 3 council/gov slots",inherited,P1
 ,,,,,,waste bin dimensions,90,Informational,5,MEDIUM,"inherited from ""commercial bin sizes"": AS 22 at or below Better Waste (AS 20); 3 council/gov slots",inherited,P2
 ,,,,,,waste container,1900,Informational,12,AVOID,"inherited from ""1100 litre bin"": 0 council/gov slots; intent is household not commercial",inherited,P1
@@ -106,6 +114,8 @@ UK,Waste Type,https://betterwaste.co.uk/food-waste/,OPTIMISE,MEDIUM,400,commerci
 ,,,,,,,,,,,,,
 UK,Sector,https://betterwaste.co.uk/hotel-waste-management/,CREATE,MEDIUM,320,hotel waste management,320,Informational,16,MEDIUM,"inherited from ""care home waste management"": AS 10, 22 at or below Better Waste (AS 20)",inherited,P2
 ,,,,,,,,,,,,,
+UK,Sector,https://betterwaste.co.uk/school-waste-management/,CREATE,MEDIUM,260,school waste management,260,Informational,10,MEDIUM,"AS 19 (unyfi), 20 (aegissupportservices) at or below Better Waste; hills-waste AS 26, samsic AS 28. Informational intent",direct AS check,P2
+,,,,,,,,,,,,,
 UK,Informational,https://betterwaste.co.uk/binpedia/commercial-bin-sizes/,CREATE,MEDIUM,210,commercial bin sizes,210,Informational,7,MEDIUM,AS 22 at or below Better Waste (AS 20); 3 council/gov slots,direct AS check,P1
 ,,,,,,,,,,,,,
 UK,Location,https://betterwaste.co.uk/areas-we-cover/sheffield/,OPTIMISE,MEDIUM,110,commercial waste collection sheffield,110,Commercial,15,MEDIUM,AS 24 at or below Better Waste (AS 20); 2 council/gov slots,direct AS check,P1
@@ -123,16 +133,6 @@ UK,Informational,https://betterwaste.co.uk/simpler-recycling-legislation-for-bus
 ,,,,,,simpler recycling regulations,140,Informational,22,HARD,"inherited from ""simpler recycling"": no site at AS<=25 (lowest AS 41); 4 council/gov slots. Top 3 unreachable - but Better Waste is already p14, so p8-10 is a realistic partial win",inherited,P2
 ,,,,,,,,,,,,,
 UK,Waste Type,https://betterwaste.co.uk/coffee-cup-recycling/,CREATE,HARD,260,coffee cup recycling,260,Informational,16,HARD,no ranking site at AS<=25 (lowest AS 26); 5 council/gov slots,direct AS check,P3
-,,,,,,,,,,,,,
-UK,Waste Type,https://betterwaste.co.uk/industrial-waste/,CREATE,UNVERIFIED,0,industrial waste disposal,720,Informational,28,UNVERIFIED,SERP not checked,not checked,P2
-,,,,,,industrial waste collection,390,Commercial,41,UNVERIFIED,SERP not checked,not checked,P3
-,,,,,,,,,,,,,
-UK,Waste Type,https://betterwaste.co.uk/construction-waste/,CREATE,UNVERIFIED,0,construction waste disposal,590,Commercial,28,UNVERIFIED,SERP not checked,not checked,P3
-,,,,,,construction waste collection,260,Commercial,27,UNVERIFIED,SERP not checked,not checked,P3
-,,,,,,,,,,,,,
-UK,Waste Type,https://betterwaste.co.uk/metal-waste/,CREATE,UNVERIFIED,0,metal waste collection,260,Commercial,24,UNVERIFIED,SERP not checked,not checked,P3
-,,,,,,,,,,,,,
-UK,Sector,https://betterwaste.co.uk/school-waste-management/,CREATE,UNVERIFIED,0,school waste management,260,Informational,10,UNVERIFIED,"only 1 of 10 results is a lookup-able domain (rest are PDFs, WEF, trade press) - insufficient AS data to grade",direct AS check,P2
 ,,,,,,,,,,,,,
 UK,Waste Type,https://betterwaste.co.uk/clinical-waste/,CREATE,AVOID,0,clinical waste disposal,2900,Informational,22,AVOID,"inherited from ""clinical waste collection"": 6 council/gov slots; intent is household not commercial",inherited,P1
 ,,,,,,clinical waste collection,1900,Informational,22,AVOID,6 council/gov slots; intent is household not commercial,direct AS check,P1

@@ -1,3 +1,7 @@
+> **Superseded by `05-difficulty-verdict.md`**, which re-grades everything on Semrush
+> Authority Score. Kept for the SERP composition detail (which results are council,
+> incumbent or open) that the verdict document summarises.
+
 # SERP competition check — who actually ranks, and what's realistically winnable
 
 **Date:** 1 October 2026 · **Source:** Semrush UK, live top-10 organic per keyword
@@ -20,7 +24,7 @@ I've scored each keyword by what's actually in the top 10:
 - **Open slots** — small and mid-size specialists (the ones Better Waste can displace)
 
 A SERP with 5+ open slots and a visible small-operator presence is genuinely winnable
-at DR 26. A SERP with 0–2 open slots is not, whatever the KD says.
+at AS 20. A SERP with 0–2 open slots is not, whatever the KD says.
 
 ---
 
@@ -70,7 +74,7 @@ at DR 26. A SERP with 0–2 open slots is not, whatever the KD says.
 > 8. suez.co.uk · 9. **dudley.gov.uk** · 10. **preston.gov.uk**
 
 Six of ten are councils or gov.uk. Biffa, Veolia and Suez hold three more. That leaves
-**one** slot, held by businesswaste.co.uk at DR 72. `commercial waste management`,
+**one** slot, held by businesswaste.co.uk at AS 41. `commercial waste management`,
 `commercial waste disposal`, `trade waste collection` and `small business waste collection`
 all follow the same shape.
 
@@ -162,9 +166,8 @@ bigdug.co.uk, bin-shop.co.uk, officebins.co.uk — people buying a bin, not hiri
 collection service. Easy to rank, low commercial value.
 
 **But `commercial bin sizes` is different and genuinely good:** businesswaste.co.uk is
-#1, and **gwrwastemanagement.co.uk (DR 14)** is #3 with ashwasteservices.co.uk (DR 29)
-at #5. A DR 14 site ranking top-3 is the strongest "this is winnable" signal in the
-dataset. Build the bin-sizes guide; skip the individual product-spec pages.
+#1, and **gwrwastemanagement.co.uk (AS 22)** is #3 with ashwasteservices.co.uk (AS 26)
+at #5 — both at or near Better Waste's own AS 20. Build the bin-sizes guide; skip the individual product-spec pages.
 
 ---
 
@@ -174,7 +177,7 @@ Based on SERP openness rather than KD alone:
 
 **Tier 1 — build now (open SERPs, proven small-operator presence)**
 1. City pages: Leeds, Sheffield, Liverpool, Nottingham, Bristol — sensawaste proves the model
-2. `commercial bin sizes` guide — a DR 14 site ranks top-3
+2. `commercial bin sizes` guide — gwrwastemanagement at AS 22 ranks top-3
 3. Sector pages: butchers, care home, office
 4. `wood waste collection` — ten open slots
 
@@ -185,7 +188,7 @@ Based on SERP openness rather than KD alone:
 8. `waste transfer note` and `simpler recycling` — link-earning assets
 9. `commercial rubbish removal` — the one open term in Cluster A
 
-**Tier 3 — defer until DR improves**
+**Tier 3 — defer until authority improves**
 10. Cluster A head terms (`commercial waste collection`, `commercial waste management`,
  `commercial waste disposal`, `trade waste collection`, `small business waste collection`)
 

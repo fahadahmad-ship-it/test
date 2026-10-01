@@ -1,6 +1,6 @@
 # betterwaste.co.uk — KWR review & new opportunity analysis
 
-**Date:** 1 Oct 2026 · **Market:** UK · **Primary data:** Semrush (UK database) · **Cross-check:** Ahrefs (GB, Domain Rating + indexed URLs only)
+**Date:** 1 Oct 2026 · **Market:** UK · **Primary data:** Semrush (UK database) · **Cross-check:** Ahrefs (indexed URLs only)
 
 ## Files
 
@@ -9,7 +9,7 @@
 | `01-findings.md` | Full write-up: current state, structural problems, competitor analysis, opportunity clusters, prioritised roadmap |
 | `02-new-keywords.csv` | 104 recommended keywords, in the same column format as the client sheet (Market / Type / Mapped URL / Keyword / SV), plus Semrush search intent, KD, difficulty grade, page status and priority |
 | `04-serp-competition.md` | Live top-10 SERP check on 24 decision-critical keywords — who actually ranks, which SERPs are council/gov-blocked, and a revised priority order |
-| `05-difficulty-verdict.md` | Critical re-check of every difficulty call, graded on the DR of sites actually ranking. States the test used, and flags every correction to my earlier grading |
+| `05-difficulty-verdict.md` | **Start here.** Every difficulty call graded on the Semrush Authority Score of the sites actually ranking. States the test used, the easy/medium/hard split, and the build order |
 | `06-segmented-plan.csv` | The full plan segmented by page (same block layout as the client tracker): one block per target URL, each keyword with intent, SV, KD, difficulty grade and the Authority Score evidence behind it |
 | `03-fix-list.csv` | Technical / mapping fixes found during the audit, with the evidence URL and position |
 
