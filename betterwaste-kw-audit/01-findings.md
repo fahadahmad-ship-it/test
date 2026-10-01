@@ -1,7 +1,8 @@
 # betterwaste.co.uk — KWR review & new keyword opportunities
 
 **Date:** 1 October 2026 · **Market:** UK
-**Primary metrics:** Semrush UK database. **Secondary:** Ahrefs GB (Difficulty, Traffic Potential, DR).
+**All keyword metrics (SV, KD, CPC):** Semrush UK database.
+Ahrefs is used only for Domain Rating and indexed-URL evidence — no Ahrefs keyword difficulty is quoted.
 
 ---
 
@@ -182,39 +183,38 @@ for these terms.
 Better Waste covers general / DMR / paper & cardboard / food / glass. Competitors
 cover 8–12 streams. Each missing stream is a page that converts.
 
-| Keyword | SV | KD | CPC | Ahrefs KD |
-|---|---|---|---|---|
-| confidential waste disposal | 3,600 | 25 | $3.64 | 14 |
-| clinical waste disposal | 2,900 | 22 | $10.04 | 0 |
-| weee recycling | 2,400 | 41 | $1.90 | — |
-| clinical waste collection | 1,900 | 22 | $10.40 | 3 |
-| hazardous waste disposal | 1,900 | 35 | $2.88 | 0 |
-| clinical waste | 1,600 | 30 | $8.92 | 2 |
-| sanitary waste disposal | 1,300 | **10** | $11.43 | 0 |
-| sanitary waste collection | 1,300 | 17 | **$16.56** | 0 |
-| hazardous waste collection | 1,300 | 23 | $3.56 | 0 |
-| confidential waste collection | 1,000 | **13** | $7.38 | 0 |
-| confidential shredding | 1,000 | 16 | $4.13 | — |
-| industrial waste disposal | 720 | 28 | $6.31 | 34 |
-| construction waste disposal | 590 | 28 | $2.02 | 0 |
-| electrical waste disposal | 590 | 24 | $1.31 | — |
-| it equipment disposal | 590 | 37 | $7.22 | — |
-| industrial waste collection | 390 | 41 | $11.52 | — |
-| wood waste collection | 390 | **9** | $1.92 | — |
-| used cooking oil collection | 320 | 15 | $2.98 | — |
-| construction waste collection | 260 | 27 | $3.67 | — |
-| metal waste collection | 260 | 24 | $0.95 | — |
-| coffee cup recycling | 260 | 16 | $1.16 | — |
+| Keyword | SV | KD | CPC |
+|---|---|---|---|
+| confidential waste disposal | 3,600 | 25 | $3.64 |
+| clinical waste disposal | 2,900 | 22 | $10.04 |
+| weee recycling | 2,400 | 41 | $1.90 |
+| clinical waste collection | 1,900 | 22 | $10.40 |
+| hazardous waste disposal | 1,900 | 35 | $2.88 |
+| clinical waste | 1,600 | 30 | $8.92 |
+| sanitary waste disposal | 1,300 | **10** | $11.43 |
+| sanitary waste collection | 1,300 | 17 | **$16.56** |
+| hazardous waste collection | 1,300 | 23 | $3.56 |
+| confidential waste collection | 1,000 | **13** | $7.38 |
+| confidential shredding | 1,000 | 16 | $4.13 |
+| industrial waste disposal | 720 | 28 | $6.31 |
+| construction waste disposal | 590 | 28 | $2.02 |
+| electrical waste disposal | 590 | 24 | $1.31 |
+| it equipment disposal | 590 | 37 | $7.22 |
+| industrial waste collection | 390 | 41 | $11.52 |
+| wood waste collection | 390 | **9** | $1.92 |
+| used cooking oil collection | 320 | 15 | $2.98 |
+| construction waste collection | 260 | 27 | $3.67 |
+| metal waste collection | 260 | 24 | $0.95 |
+| coffee cup recycling | 260 | 16 | $1.16 |
 
 **~26,000 SV.** `sanitary waste collection` (KD 17, CPC $16.56) and
 `confidential waste collection` (KD 13) are the standout ROI plays — low difficulty,
 high commercial value, and Better Waste has no page.
 
 > ⚠️ **One exclusion:** `bulky waste collection` (9,900, KD 21) looks tempting but the
-> SERP is dominated by council pages and the intent is residential/free-council-collection.
-> Ahrefs confirms it — `free bulky waste collection` has 12,000 traffic potential but
-> the ranking pages are all local authorities. **Do not target.** Noted in the CSV as
-> excluded with reason.
+> SERP is dominated by council pages and the intent is residential/free-council-collection
+> — the ranking pages for `free bulky waste collection` are all local authorities.
+> **Do not target.** Noted in the CSV as excluded with reason.
 
 ### Cluster C — Bin specification terms (fastest wins on the whole site)
 
@@ -344,12 +344,10 @@ At DR 26 vs businesswaste.co.uk's DR 72, content alone caps out. Cluster D
 
 ## 6. Notes on data
 
-- All SV / CPC / KD in the tables and CSVs are **Semrush UK**, per your preference.
-- Ahrefs was used to cross-check Difficulty and Traffic Potential, and to supply DR
-  and the duplicate-URL evidence. Ahrefs reports far lower absolute volumes than
-  Semrush for this vertical (e.g. `commercial waste bin`: Ahrefs 350 vs Semrush 880) —
-  the two indexes disagree on magnitude but agree on ranking order, so the
-  prioritisation holds either way.
+- All SV / CPC / KD in the tables and CSVs are **Semrush UK**. No Ahrefs keyword
+  difficulty is quoted anywhere in this pack.
+- Ahrefs was used only for Domain Rating and for the indexed-URL evidence behind the
+  www / non-www duplication finding.
 - Several keywords in your sheet have materially different Semrush volumes than
   listed (`dry mixed recycling bins` 320 → 1,000; `commercial cardboard waste`
   110 → 480; `commercial food waste disposal` 210 → 480). Worth refreshing the sheet.
