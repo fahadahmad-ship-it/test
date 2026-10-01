@@ -2,7 +2,7 @@
 
 **Date:** 1 October 2026 · **Market:** UK
 **All keyword metrics (SV, KD, competitor Authority Score):** Semrush UK database. CPC is not included.
-Ahrefs is used only for Domain Rating and indexed-URL evidence — no Ahrefs keyword difficulty is quoted.
+Ahrefs is used only for page existence and indexed-URL evidence — no Ahrefs metric is quoted.
 
 ---
 
