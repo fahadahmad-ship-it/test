@@ -393,3 +393,139 @@ this domain at all, then commit to the programme if they do.
 **Measure at 12 weeks:** any non-brand keyword appearing at all, and `/promotion`
 entering the top 100 for `casino sin deposito`. The site has zero non-brand
 rankings today, so the first one is the signal that matters.
+
+---
+
+# PART 9 — SEMRUSH-ONLY VALIDATION (REVISION 2) — SUPERSEDES PARTS 5 AND 8
+
+Client standard is Semrush. All Ahrefs-derived reasoning re-tested in Semrush
+(Authority Score, page-level backlink data, Semrush SERPs). **The core
+recommendation in Part 8 does not survive.**
+
+## 9.1 Are the target URLs actually in SERPs? — NO
+
+Semrush organic pages report for `ricobet.com.mx` (MX), complete:
+
+| URL | Keywords | Traffic |
+|---|---|---|
+| `https://www.ricobet.com.mx/` | 6 | 1,392 |
+| `https://www.ricobet.com.mx/login` | 1 | 0 |
+| `https://www.ricobet.com.mx/provider` | 1 | 0 |
+
+**Only three URLs rank for anything at all, and only the homepage earns traffic.**
+
+`/promotion`, `/register`, `/livecasino`, `/slots` and `/crashs` — **four of the
+five link targets in Part 8 — do not appear in any SERP for any keyword.** They
+rank for nothing, anywhere.
+
+## 9.2 Semrush domain authority — the gap is wider than Ahrefs showed
+
+| Domain | **Authority Score** | Backlinks | Ref domains | Follow |
+|---|---|---|---|---|
+| **ricobet.com.mx** | **17** | 4,320 | 1,224 | 1,515 |
+| versusbet.mx | 26 | 6,390 | 1,119 | 378 |
+| playdoit.mx | 37 | 26,718 | 2,813 | 3,800 |
+| strendus.com.mx | 36 | 53,008 | 4,211 | 11,245 |
+| winner.mx | 39 | 41,657 | 3,697 | 6,110 |
+| winpot.mx | 40 | 73,901 | 3,797 | 40,540 |
+
+In Ahrefs the gap read as DR 27 vs 42–56. **In Semrush it is AS 17 vs 36–40 —
+proportionally worse.** Even `versusbet.mx`, the weakest site ranking in the target
+SERP, sits at AS 26, nine points above ricobet.
+
+## 9.3 THE FINDING THAT KILLS THE PART 8 PLAN
+
+Part 8 argued the lever was **page-level referring domains** (149–366 on ranking
+pages) and recommended concentrating two links on `/promotion`. Semrush page-level
+data says that is wrong:
+
+| Page | AS | Backlinks | Ref domains | **Follow** | Ranks? |
+|---|---|---|---|---|---|
+| **ricobet.com.mx/promotion** | 18 | 423 | **221** | **44** | **Nothing** |
+| **ricobet.com.mx/register** | 1 | 386 | **223** | **2** | **Nothing** |
+| **ricobet.com.mx/** | 19 | 466 | 289 | 20 | 6 keywords |
+| **ricobet.com.mx/livecasino** | — | **no data** | **0** | **0** | Nothing |
+| winner.mx/promociones/bono-nuevos-usuarios | 33 | 2,491 | 286 | **17** | **#1 — 34,445 traffic** |
+| winpot.mx/promotions | 30 | 1,887 | 379 | 94 | #4 |
+| versusbet.mx/promos | **0** | 40 | **40** | **0** | **#10** |
+
+Read those rows together:
+
+1. **`/promotion` already has 221 referring domains and 44 follow links — more
+   follow links than the page ranking #1 (17) — and it ranks for nothing.**
+2. **`versusbet.mx/promos` ranks #10 with 40 referring domains and ZERO follow
+   links.**
+3. `/register` carries 223 referring domains and 2 follow links. Also nothing.
+
+**Adding two more links to `/promotion` cannot be justified.** The page is already
+at or above link parity with the #1 result and does not rank. Its 221 referring
+domains are almost certainly the Telegram vendor spam documented in §3.1 — note
+379 of its 423 backlinks are nofollow, and the `@seo_anomaly` anchors explicitly
+target deep paths (`/minigame`, `/slotsgame`, `/freespin`).
+
+**Page-level link volume is not the gate. Domain-level Authority Score is** — and
+possibly indexation, which should be confirmed in Search Console.
+
+## 9.4 REVISED 5 BACKLINKS — allocate by marginal value
+
+Since deep pages are already saturated with junk links, place links where an
+additional *quality* link actually changes something: pages with few or no follow
+links, and the homepage, which carries domain authority.
+
+| # | Complete target URL | Anchor text | Purpose | Existing follow links |
+|---|---|---|---|---|
+| 1 | `https://www.ricobet.com.mx/` | **Ricobet** | Domain AS + brand entity | 20 |
+| 2 | `https://www.ricobet.com.mx/livecasino` | **casino en vivo Ricobet** | **Zero links today** — highest marginal value; $14.37 CPC | **0** |
+| 3 | `https://www.ricobet.com.mx/promotion` | **bono sin depósito Ricobet** | Best keyword (6,600/KD60); one *quality* follow link | 44 (spam) |
+| 4 | `https://www.ricobet.com.mx/register` | **giros gratis sin depósito** | 223 refdomains but only **2 follow** — needs follow equity | 2 |
+| 5 | `https://www.ricobet.com.mx/` | **casino online Ricobet** | Domain AS + category association | 20 |
+
+**3 distinct URLs · anchors: 1 branded · 3 brand-qualified partial · 1 pure partial.**
+
+### What changed and why
+- **Two links to `/promotion` reduced to one.** It is already link-saturated.
+- **`/livecasino` promoted.** It has **zero** backlinks, so link #2 is the only one
+  of the five with genuinely uncontested marginal value.
+- **Two links to the homepage.** Domain AS 17 is the gate; homepage links are the
+  most direct way to raise it.
+- **`/slots` and `/crashs` remain dropped** — `tragamonedas` is an informational
+  SERP and `juegos crash` returns **"NOTHING FOUND"** in Semrush, independently
+  confirming the Part 8 rejection.
+
+## 9.5 IS IT WORTH IT? — REVISED VERDICT
+
+**Weaker than I said in Part 8, and the reason matters.**
+
+The Part 8 case rested on "page-level links are the gate, and a DR 12 site ranks."
+Semrush shows `/promotion` already holds more follow links than the #1 page while
+ranking nowhere, and `versusbet.mx/promos` ranks #10 on 40 referring domains and
+zero follow links. **Link count — at page level — is demonstrably not what decides
+this SERP.**
+
+What remains true:
+- The market is legitimate and the CPCs are real ($1.94–$14.37).
+- The pages are correctly built and Spanish keyword-matched.
+- The brand is owned at #1.
+- `casino sin deposito` is a real, operator-friendly SERP.
+
+What is now clear:
+- The binding constraint is **domain Authority Score 17 vs 26–40**, not deep-page
+  links.
+- **Four of five intended targets have never ranked for anything**, so this is a
+  from-zero build, not an improvement of existing positions.
+- Deep pages are already carrying hundreds of junk links that have produced
+  nothing — so link *quality and kind*, not quantity, is the whole game.
+
+**Verdict: worth funding as a 5-link quality test, but do not expect ranking
+movement.** The realistic target is lifting domain AS from 17 toward 26 — the
+level at which the weakest competitor in the SERP ranks — and that is a
+domain-level, multi-month job.
+
+**Before placing anything, confirm in Search Console that `/promotion`,
+`/register` and `/livecasino` are indexed.** If they are not, the entire link
+order is void and indexation is the actual problem — which would cost nothing to
+fix and explain every finding above.
+
+**Measure at 12 weeks:** (a) are the target pages indexed, (b) has domain AS moved
+off 17, (c) has any non-brand keyword appeared. If AS has not moved and nothing is
+indexed, stop and re-diagnose rather than ordering more links.
