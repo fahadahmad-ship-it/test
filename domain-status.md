@@ -96,3 +96,77 @@ and are cloaking it. Worth ruling out before you trust the 200.
 Status chains from `curl -sSIL` following redirects, browser User-Agent.
 DNS via the system resolver (apex and `www` resolve identically for all six).
 `check-redirects.sh` in this repo reproduces the status column.
+
+---
+
+# Batch 2 — second domain set
+
+Checked 2026-10-02. DNS from the session resolver; HTTP captured from an
+unrestricted network.
+
+## The table
+
+| # | Domain | Status | Where it resolves / redirects |
+|---|--------|--------|-------------------------------|
+| 1 | https://angryziber.com/ | **No status — DNS does not resolve** | Name exists, **no A/AAAA record**. Nothing to connect to. |
+| 2 | https://bomarinterconnect.com/ | **No status — DNS does not resolve** | Name exists, **no A/AAAA record**. Nothing to connect to. |
+| 3 | https://kristinkreuk.net/ | **200** (parking lander) | `13.248.169.48` (AWS Global Accelerator) — **parked**, JS redirect to `/lander` |
+| 4 | https://mornfall.net/ | **200** (parking lander) | `76.223.54.146` (AWS Global Accelerator) — **parked**, byte-identical to #3 |
+| 5 | http://sc29.org/ | **405** to HEAD; `server: Parking/1.0` | `64.190.63.222` — **parked**. HTTPS fails: no cert for the hostname. |
+
+**No 301s and no 302s anywhere in this batch.** Nothing here redirects at the
+HTTP level. This set is entirely dead or parked — the opposite profile from
+batch 1.
+
+## What each one actually is
+
+**angryziber.com, bomarinterconnect.com — dead.**
+The names resolve as names but carry no address record, so no TCP connection is
+possible and no status code can exist. Any backlinks currently point into a void.
+(`angryziber.com` was the home of Angry IP Scanner, which now lives at
+`angryip.org` — the old domain was simply abandoned.)
+
+**kristinkreuk.net, mornfall.net — parked, same operator.**
+Both serve exactly 114 bytes, byte-for-byte identical:
+
+```html
+<!DOCTYPE html><html><head><script>window.onload=function(){window.location.href="/lander"}</script></head></html>
+```
+
+That is a parking lander: a **JavaScript** redirect to `/lander`, not an HTTP
+redirect. The AWS Global Accelerator IPs plus an identical payload confirm a
+single parking provider holding both.
+
+**sc29.org — parked, and misconfigured on top.**
+`server: Parking/1.0` is an explicit parking banner. HTTPS fails with a TLS
+`unrecognized name` alert, meaning the server holds no certificate for this
+hostname — it is reachable over plain HTTP only.
+
+## Two measurement caveats
+
+**The 405 is an artifact of the method, not the domain's real status.**
+`curl -I` sends `HEAD`, and this parking server does not allow it. A normal `GET`
+will almost certainly return `200` with a parking page. Confirm with:
+
+```bash
+curl -sSL -o /dev/null -w 'GET status=%{http_code}\n' -A "Mozilla/5.0" "http://sc29.org/"
+```
+
+**A 200 here does not mean a live site.**
+All three reachable domains return a success status while serving nothing of
+substance. Status code alone would have been misleading on this batch — the
+body is what distinguished them.
+
+## SEO consequence
+
+A JavaScript `window.location` redirect is **not** a 301. It passes no link
+equity in the way a server-side 301 does, and Google treats parking pages as
+thin content. For all five domains, any historical authority is currently
+going nowhere:
+
+- Two cannot be reached at all.
+- Three serve parking pages.
+
+If these are acquisition candidates, none is live, so there is nothing to
+preserve — only a historical backlink profile to evaluate on its own merits.
+That is a different question from the status check and needs a backlink tool.
