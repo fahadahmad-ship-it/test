@@ -108,8 +108,8 @@ unrestricted network.
 
 | # | Domain | Status | Where it resolves / redirects |
 |---|--------|--------|-------------------------------|
-| 1 | https://angryziber.com/ | **No status — DNS does not resolve** | Name exists, **no A/AAAA record**. Nothing to connect to. |
-| 2 | https://bomarinterconnect.com/ | **No status — DNS does not resolve** | Name exists, **no A/AAAA record**. Nothing to connect to. |
+| 1 | https://angryziber.com/ | **No status — DNS does not resolve** | **No address record.** Browser reports NXDOMAIN. Nothing to connect to. |
+| 2 | https://bomarinterconnect.com/ | **No status — DNS does not resolve** | **No address record.** Browser reports NXDOMAIN. Nothing to connect to. |
 | 3 | https://kristinkreuk.net/ | **200** (parking lander) | `13.248.169.48` (AWS Global Accelerator) — **parked**, JS redirect to `/lander` |
 | 4 | https://mornfall.net/ | **200** (parking lander) | `76.223.54.146` (AWS Global Accelerator) — **parked**, byte-identical to #3 |
 | 5 | http://sc29.org/ | **405** to HEAD; `server: Parking/1.0` | `64.190.63.222` — **parked**. HTTPS fails: no cert for the hostname. |
@@ -121,10 +121,27 @@ batch 1.
 ## What each one actually is
 
 **angryziber.com, bomarinterconnect.com — dead.**
-The names resolve as names but carry no address record, so no TCP connection is
-possible and no status code can exist. Any backlinks currently point into a void.
+No address record, so no TCP connection is possible and no status code can
+exist. Any backlinks currently point into a void.
 (`angryziber.com` was the home of Angry IP Scanner, which now lives at
 `angryip.org` — the old domain was simply abandoned.)
+
+Whether these are *unregistered* or *registered but unpointed* is not yet
+settled. The session resolver returned "no address associated with hostname"
+(which normally implies the name exists with other record types), while a
+browser reports `DNS_PROBE_FINISHED_NXDOMAIN` (which implies the name does not
+exist at all). Chrome shows that same error for both cases, so it does not
+distinguish them. This does:
+
+```bash
+nslookup -type=NS angryziber.com
+whois angryziber.com | grep -iE 'domain status|registrar|expir|creation'
+```
+
+Nameservers, or a registrar and expiry date, mean registered but unpointed —
+not available. `No match` / `NOT FOUND` means unregistered and open to
+registration. The difference decides whether these are buyable at registration
+cost or need an acquisition.
 
 **kristinkreuk.net, mornfall.net — parked, same operator.**
 Both serve exactly 114 bytes, byte-for-byte identical:
@@ -141,6 +158,22 @@ single parking provider holding both.
 `server: Parking/1.0` is an explicit parking banner. HTTPS fails with a TLS
 `unrecognized name` alert, meaning the server holds no certificate for this
 hostname — it is reachable over plain HTTP only.
+
+## Why "no status" is the correct entry, not a number
+
+DNS resolution precedes any HTTP request. When the lookup fails the browser
+never opens a TCP connection, never sends a request, and the server never
+replies — so no status code is ever generated:
+
+```
+DNS lookup          <- angryziber.com, bomarinterconnect.com fail here
+  -> TCP connect
+    -> TLS handshake  <- sc29.org fails here (no cert for the hostname)
+      -> HTTP request -> status code   <- 200/301/302 exist only at this layer
+```
+
+A status column entry of "404" or "0" for these would be wrong. The accurate
+value is "does not resolve".
 
 ## Two measurement caveats
 
