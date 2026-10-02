@@ -268,3 +268,123 @@ The answer changes the plan materially:
 Until that is answered, links 1, 2 and 4 are safe to place now — they target
 validated non-brand commercial terms on existing pages and are not wasted under
 either scenario. **I'd place those three and hold links 3 and 5.**
+
+---
+
+## PART 6 — PROSPECTING (verified live) AND A FOURTH DOMAIN
+
+### 6.1 There is a FOURTH 3king domain, and it ranks above you
+
+Live Ahrefs SERP for `3kinggame` (VN):
+
+| Pos | URL | DR | Traffic |
+|---|---|---|---|
+| 1 | **3king-game.com** | **0.0** | 429 |
+| 2 | **3king-game-mobile.com** | **3.0** | 614 |
+| 3 | **3king.cc** | **19** | **66** |
+| 4 | hu.gravatar.com/3kingvip | 97 | 7 |
+| 5 | youtube.com | 99 | 33 |
+| 6 | 3king-game-mobile.com/khuyen-mai-3/ | 3.0 | 26 |
+| 8 | 3king.cc/no-hu | 19 | 23 |
+
+**A DR 0 domain holds #1 on the brand term.** 3king.cc takes 89 of ~1,198 brand
+visits on this SERP — about **7%**. A Gravatar profile titled "3KING ⭐️ 33KING.VIP"
+outranks nothing here but is on page 1 of the brand SERP and is not client-controlled.
+
+Portfolio count is now at least ten: 3king.win, .cc, .app, .game, .live, .dev,
+.online, .games, 3kinggames.net, 3kingslot.com, 3kingapp.net,
+3king-game-mobile.com, **3king-game.com**.
+
+### 6.2 The decisive proof that links are not the lever
+
+`topnohu.com` ranks **#3** for `game nổ hũ đổi thưởng uy tín` at DR 42. Its
+referring domains, pulled live:
+
+| Domain | DR | Traffic |
+|---|---|---|
+| pinterest.com | 97 | 683,873,856 |
+| twitch.tv | 93 | 15,076,358 |
+| linktr.ee | 94 | 5,426,186 |
+| behance.net | 94 | 5,158,338 |
+| **pages.dev** | 93 | 5,108,578 |
+| qiita.com | 87 | 3,335,033 |
+| docker.com | 92 | 2,806,798 |
+| replit.com | 88 | 870,779 |
+| **voz.vn** | **60** | **807,949** |
+| **za.com** | 89 | 518,563 |
+
+This is the **same class of junk already in 3king.cc's profile** — `pages.dev`,
+`za.com`, UGC profile farms. It ranks anyway. Competitors are not out-linking
+3king.cc; they are ranking on content and entity clarity with equally worthless
+profiles.
+
+### 6.3 Verified prospect list
+
+**Tier A — confirmed competitor link sources (they already link to `topnohu.com`):**
+
+| Domain | DR | VN traffic | Note |
+|---|---|---|---|
+| **voz.vn** | 60 | 807,949 | **Verified linking to topnohu.com.** VN's largest forum. Moderates gambling aggressively — assume ~50% removal risk. |
+| forumketqua.net | 45 | ~97,000 | Lottery/results community, near-exact audience match |
+
+**Tier B — ranking vertical portals (buy their SERP position, not their authority):**
+`topnohu.com` (DR 42, ranks #3) · `kqbd.mobi` (DR 38, ~20,000 VN traffic) ·
+`topgamebai.co` (DR 35) · `gamenohuuytin.net` (DR 32) ·
+`gamebaidoithuong.ac` (DR 30) · `blognohu.com` (ranks #2 at DR 2)
+
+**Tier C — app aggregators (self-verifiable, vendor fraud structurally impossible):**
+`apkpure.com` (DR 85, ~425,000 VN visits) · `apkcombo.com` (DR 73, ~37,000 VN visits) ·
+`apkfab.com` · `apkmirror.com` · `uptodown.com`
+
+Both apkpure and apkcombo already appear as 3king.cc's **organic competitors** in
+Semrush — they rank for the client's own terms.
+
+### 6.4 BLACKLIST — do not buy at any price
+
+- **Compromised VN government / university sites** reported ranking via injected
+  `/Android/` spam paths: `thanhtra.bvhttdl.gov.vn`, `qlditich.dsvh.gov.vn`,
+  `chuyentrang.viendinhduong.vn`, `dangkyhoc.tuaf.edu.vn`. This is the dominant
+  playbook in the vertical. It is unauthorised access to Vietnamese state systems,
+  carries criminal exposure, and the pages are removed on detection. **If a vendor
+  offers ".gov.vn DR 70" placements, this is what they are selling — terminate them.**
+- **Hacked-injection cluster** on `3king-game-mobile.com`'s profile: `gsu.edu`,
+  `uandes.cl`, `footcaremd.org`, `mychildsmuseum.org`, `pdsdc.org`,
+  `associationforjewishstudies.org` — nearly all first seen in a single week
+  (2025-10-19 → 2025-10-26). A compromised-CMS run, not outreach.
+  *(Flagged as reported by the placement review; I did not independently verify
+  the first_seen clustering.)*
+- Named vendor networks already in the profile: `backlinker.shop`,
+  `buybacklinks.agency`, `rank-your.site`, `rankva.com`, `rank-top.click`,
+  `factmags.com`, `temp-site.link`, `hol.es`.
+- The entire previous vendor's inventory.
+
+### 6.5 Payment structure — the control that prevents a repeat
+
+The previous vendor was **paid on claim of delivery**. That is the whole failure
+mechanism: 541 billed, 17 verified.
+
+| Milestone | Payment |
+|---|---|
+| Vendor claims delivery | **0%** |
+| Day 14 — live, correct anchor/target/rel, indexed | 40% |
+| Day 60 — persistence re-audit passed | 30% |
+| Day 90 — persistence re-audit passed | 30% |
+
+Price per **verified placement** — never per "campaign", "package" or "report".
+The vendor never supplies the evidence; every check is run client-side against
+the live web. A vendor screenshot or spreadsheet is not evidence.
+
+**Day-0 audit (within 24h of any delivery claim):** fetch the live URL from a VN
+IP, confirm the raw HTML contains `3king.cc` **before JS execution**, record exact
+`href` / anchor / full `rel`, confirm the `<a>` is in the main article container
+and not in any element whose class matches `footer|sidebar|widget|comment|author|partner`,
+count outbound external links, archive screenshot + raw HTML to client storage.
+
+**Running this on day 0 would have caught 524 of the 541 failures immediately.**
+
+### 6.6 Recover the money first
+
+Run the day-0 audit against all 541 historical rows and issue a formal recovery
+demand for the ~524 undelivered placements. The client's own verification crawl
+is already sufficient evidence. **This is the highest-ROI action in this document
+and involves no link building at all.**
