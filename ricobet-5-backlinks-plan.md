@@ -249,3 +249,147 @@ suggests — brand owned, pages well-built, legitimate market, closable DR gap. 
 problem is that it has never been linked to properly. Unlike a contaminated or
 parasite-blocked site, **here links are genuinely the right lever.** 5 is a
 sensible test; 8–12/month for 6 months is what actually closes a 15–29 point DR gap.
+
+---
+
+# PART 8 — CRITICAL SERP VALIDATION (REVISION 1) — SUPERSEDES PART 5
+
+Every keyword re-tested against live Ahrefs MX SERPs with **page-level** authority
+(DR alone is not the gate — the ranking *page's* referring domains are).
+**Two of the five picks failed.**
+
+## 8.1 PASS — `casino sin deposito` (6,600 / KD 60 / $2.58)
+
+| Pos | URL | DR | Page refdomains | Traffic |
+|---|---|---|---|---|
+| 1 | winner.mx/promociones/bono-nuevos-usuarios | **36** | 182 | **34,445** |
+| 2 | codere.mx/library/freespins.html | 56 | 196 | 14,451 |
+| 4 | winpot.mx/promotions | 56 | 366 | 8,620 |
+| 5 | playdoit.mx/campaigns/registro-bono-casino | 41 | 358 | 6,617 |
+| 6 | legalbet.mx/bonos/... | 51 | 150 | 3,161 |
+| 10 | **versusbet.mx/promos** | **12** | 149 | 1,145 |
+
+**This is the strongest validation in either account.** Three findings:
+
+1. **`versusbet.mx` ranks #10 at DR 12 — below ricobet's DR 27.** Domain authority
+   is not the gate here.
+2. **`winner.mx` holds #1 at DR 36**, only 9 points above ricobet.
+3. **The actual lever is page-level referring domains: 149–366 on every ranking
+   page.** Ricobet's `/promotion` has effectively none.
+
+5 of the top 6 are **operator promo pages** — precisely ricobet's page type, not
+affiliate listicles it cannot imitate. And #1 pulls **34,445 visits/mo**, far above
+the 6,600 headline volume, because the page ranks for the whole bonus cluster.
+
+**Verdict: genuinely winnable, and the single best target in the account.**
+
+## 8.2 FAIL — `tragamonedas` (5,400 / KD 60)
+
+| Pos | URL |
+|---|---|
+| 1 | diariodeavisos.elespanol.com — *article on the **history** of slot machines* |
+| 2 | facebook.com/TereJimenezAgs — *"las máquinas tragamonedas **son ilegales**"* (a politician's post) |
+| 3 | youtube.com |
+| 5 | **en.wiktionary.org/wiki/tragamonedas** — *a dictionary entry* |
+| 6 | mdzol.com — news feature |
+| 8 | **howstuffworks.com/slot-machine.htm** |
+
+Wiktionary and HowStuffWorks ranking means Google reads `tragamonedas` as
+**"what is a slot machine"**, not as a commercial query — with regulatory/"illegal"
+content mixed in. Semrush's view of the same SERP (Amazon, MercadoLibre, Wikipedia,
+Play Store) agrees: informational and shopping intent, not commercial.
+
+**Verdict: rejected. No commercial slot exists.** `/slots` has no viable search
+target at this authority — `slots mexico` is 260/KD62 and `tragamonedas online`
+320/KD78. This is an honest gap: the slots category is not addressable via search
+right now, despite being the core product.
+
+## 8.3 FAIL — `juegos crash` (1,600 / KD 48)
+
+Live MX SERP: `mx.ebay.com`, `gamerant.com`, **`creepypasto.fandom.com`**,
+`mercadolibre.com.mx`, and a Facebook video about *"todos los juegos de crash de
+PSOne"*.
+
+**In Mexico, "juegos crash" means Crash Bandicoot.** KD 48 reflects competition
+from retro-gaming and marketplace pages, not an open casino slot. I previously
+called this the most likely of the five to rank — that was wrong.
+
+Casino-intent variants (`casino aviator`, `aviator casino`, `juego aviator`,
+`aviator apuestas`) all return **no Semrush data**. The crash/Aviator vertical has
+no addressable search demand in MX yet.
+
+## 8.4 CONDITIONAL PASS — `casino en vivo` (3,600 / KD 76 / **$14.37**)
+
+| Pos | URL | DR | Page refdomains | Traffic |
+|---|---|---|---|---|
+| 1 | betway.mx/.../live-casino | 50 | 161 | 3,187 |
+| 3 | codere.mx/casino | 56 | 461 | 52,436 |
+| 5 | **playuzu.mx/casino-en-vivo/** | 42 | **61** | **66** |
+| 7 | **lasvegasenvivo.com** | **0** | 1,292 | 1,110 |
+
+Winnable at page level — `playuzu.mx` holds #5 with only **61 page refdomains**,
+and a **DR 0** domain holds #7. But note the traffic column: positions 5–8 earn
+66, 290 and 12 visits. **The payoff is concentrated in the top 3.** Keep it for
+the $14.37 CPC, but expect a long climb and little traffic until top 3.
+
+---
+
+## 8.5 REVISED 5 BACKLINKS
+
+Firepower concentrated on the one SERP that validated strongly, since the lever
+there is **page-level referring domains** and ricobet's `/promotion` has none.
+
+| # | Complete target URL | Anchor text | Keyword | Vol | KD | CPC |
+|---|---|---|---|---|---|---|
+| 1 | `https://www.ricobet.com.mx/promotion` | **bono sin depósito Ricobet** | casino sin deposito | 6,600 | 60 | $2.58 |
+| 2 | `https://www.ricobet.com.mx/promotion` | **bonos y promociones de casino** | casino sin deposito (support) | 6,600 | 60 | $2.58 |
+| 3 | `https://www.ricobet.com.mx/register` | **giros gratis sin depósito** | giros gratis sin deposito | 1,000 | **44** | $1.94 |
+| 4 | `https://www.ricobet.com.mx/livecasino` | **casino en vivo Ricobet** | casino en vivo | 3,600 | 76 | **$14.37** |
+| 5 | `https://www.ricobet.com.mx/` | **Ricobet** | brand defence | 1,600 | 19 | $2.45 |
+
+**4 distinct URLs · 11,200/mo addressed volume.**
+**Anchors: 1 branded · 2 brand-qualified partial · 2 pure partial. No bare
+exact-match, no naked URLs.**
+
+### Changes from Part 5
+- **Dropped `/slots` / `tragamonedas`** — informational SERP (8.2).
+- **Dropped `/crashs` / `juegos crash`** — Crash Bandicoot SERP (8.3).
+- **Added a second link to `/promotion`** (different anchor) — competitors need
+  149–366 page-level refdomains to hold that SERP; one link will not register.
+- **Added `/register` / `giros gratis sin deposito`** — **lowest KD with correct
+  commercial intent in the whole account (44)**, and `/register` is already titled
+  "Bono de MX$18,000 + **325 Giros Gratis**".
+
+---
+
+## 8.6 IS IT WORTH IT? — DIRECT ANSWER
+
+**Yes — more clearly than for the Vietnamese site, but with the scope corrected.**
+
+**The case for:**
+- `casino sin deposito` is winnable at DR 27. A **DR 12** site holds #10 and a
+  **DR 36** site holds #1. The gate is page-level links, which is exactly what a
+  link campaign buys.
+- Position 1 on that one SERP is worth **34,445 visits/mo**. Against a current
+  total of 1,392, even a top-10 entry is material.
+- CPCs of $1.94–$14.37 mean the traffic has real commercial value — the site's 8
+  branded keywords are already worth $3,670/mo.
+- The pages are correctly built and the market is legitimate. **Nothing structural
+  is blocking this site. It has simply never been linked to properly.**
+
+**The case against / what was oversold:**
+- The addressable set is **smaller than Part 5 claimed: ~11,200/mo, not 18,800** —
+  two of the five keywords had no commercial SERP.
+- `/slots` — the core product — currently has **no viable search target at all**.
+- 5 links is ~0.5% of a 1,063-domain profile, and competitors hold **149–366
+  referring domains on a single page**. Five links will not take that SERP.
+
+**Honest verdict:** worth doing, and the right lever — but 5 links is a *test*,
+not a campaign. Realistically, moving `/promotion` into the top 10 for
+`casino sin deposito` needs on the order of **40–80 quality page-level links**,
+which at 8–12/month is a 6-month programme. Fund the 5 to validate that links move
+this domain at all, then commit to the programme if they do.
+
+**Measure at 12 weeks:** any non-brand keyword appearing at all, and `/promotion`
+entering the top 100 for `casino sin deposito`. The site has zero non-brand
+rankings today, so the first one is the signal that matters.
