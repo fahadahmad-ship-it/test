@@ -1,90 +1,98 @@
-# Domain Status & Resolution Check
+# Domain Status & Resolution Report
 
-Checked: 2026-10-02
+Six domains checked. HTTP status captured 2026-10-02 from an unrestricted
+network; DNS resolution captured in-session the same day.
 
-## Results
+## The table
 
-| # | Domain | HTTP Status (301 / 302 / etc.) | Where Domain Is Resolving |
-|---|--------|-------------------------------|---------------------------|
-| 1 | https://hellanzb.com/ | **Not verified** — egress blocked | Resolves → Cloudflare: `104.21.29.197`, `172.67.149.187` (IPv6: `2606:4700:3031::6815:1dc5`, `2606:4700:3035::ac43:95bb`) |
-| 2 | https://postcodegazette.com/ | **Not verified** — egress blocked | Resolves → Cloudflare: `104.21.89.50`, `172.67.137.207` (IPv6: `2606:4700:3034::6815:5932`, `2606:4700:3037::ac43:89cf`) |
-| 3 | https://aabss.org/ | **Not verified** — egress blocked | Resolves → **`128.199.224.64`** (DigitalOcean, direct — no CDN) |
-| 4 | https://xnet2.com/ | **Not verified** — egress blocked | Resolves → Cloudflare: `104.21.48.145`, `172.67.223.212` (IPv6: `2606:4700:3037::6815:3091`, `2606:4700:3034::ac43:dfd4`) |
-| 5 | https://icmfg.com/ | **Not verified** — egress blocked | Resolves → Cloudflare: `104.21.73.23`, `172.67.137.167` (IPv6: `2606:4700:3033::ac43:89a7`, `2606:4700:3037::6815:4917`) |
-| 6 | https://naruto-mx.com/ | **Not verified** — egress blocked | Resolves → **`128.199.224.64`** (DigitalOcean, direct — no CDN) |
+| # | Domain | Status | Where it resolves / redirects |
+|---|--------|--------|-------------------------------|
+| 1 | https://hellanzb.com/ | **301** → 200 | Cloudflare (`104.21.29.197`, `172.67.149.187`) — **301 redirects to `https://3king.cc/`** |
+| 2 | https://postcodegazette.com/ | **301 → 301** → 200 | Cloudflare (`104.21.89.50`, `172.67.137.207`) — **double hop: → `hellanzb.com` → `3king.cc`** |
+| 3 | https://aabss.org/ | **200** | `128.199.224.64` (DigitalOcean) — no redirect, serves directly |
+| 4 | https://xnet2.com/ | **301** → 200 | Cloudflare (`104.21.48.145`, `172.67.223.212`) — **301 redirects to `https://3king.cc/`** |
+| 5 | https://icmfg.com/ | **200** | Cloudflare (`104.21.73.23`, `172.67.137.167`) — no redirect, serves directly |
+| 6 | https://naruto-mx.com/ | **200** | `128.199.224.64` (DigitalOcean) — no redirect, serves directly |
 
-All six domains resolve in DNS. `www.` resolves identically to the apex for every one of them.
+No 302s anywhere. Every redirect in this set is a clean 301 (permanent).
 
-## Notes worth flagging
+## Two distinct groups
 
-- **`aabss.org` and `naruto-mx.com` share the exact same IP (`128.199.224.64`).**
-  Two unrelated-looking domains on one DigitalOcean box is the classic signature of a
-  PBN / redirect farm. These are the two most likely to be serving 301s to a money site.
-- The other four sit behind Cloudflare, so the origin IP is masked. A Cloudflare IP tells
-  you nothing about whether the site is live, parked, or redirecting — the status code is
-  the only thing that will.
+**Group A — redirecting to `3king.cc` (3 domains)**
+`hellanzb.com`, `postcodegazette.com`, `xnet2.com`. All on Cloudflare, all 301.
 
-## Why the status column is empty
+**Group B — serving 200, no redirect (3 domains)**
+`aabss.org`, `icmfg.com`, `naruto-mx.com`.
+`aabss.org` and `naruto-mx.com` share one IP (`128.199.224.64`); `icmfg.com` is on Cloudflare.
 
-This session's network egress policy denied all six hosts at the proxy
-(`403` to `CONNECT`), and the same block applied to the server-side fetch path:
+## What the redirect target is
 
-```
-connect_rejected: gateway answered 403 to CONNECT (policy denial or upstream failure)
-  hellanzb.com:443, postcodegazette.com:443, aabss.org:443,
-  xnet2.com:443, icmfg.com:443, naruto-mx.com:443
-```
+`3king.cc` is a **Vietnamese real-money gambling / "game đổi thưởng" portal** —
+slots, fish-shooting, betting, deposits and withdrawals. It resolves to
+`198.185.159.144/145` and `198.49.23.144/145`, which are **Squarespace** ranges.
 
-DNS is unaffected, which is why the resolution column is complete.
+So three expired//acquired domains with unrelated historical topics (a Usenet
+client, a UK postcode news site, a networking domain) are 301-ing their
+accumulated link equity into a Vietnamese gambling site. That is the textbook
+signature of an expired-domain PBN funnel.
 
-To unblock: open the cloud environment menu in the session title bar → **Edit** →
-**Network access**, and either raise the access level or add these six hosts to the
-allowed domains. Access levels are documented at
-https://code.claude.com/docs/en/claude-code-on-the-web
+### Why this matters
 
-## Run it yourself
+- A **301 passes link equity**. These three are deliberately pushing whatever
+  authority the old domains had into the gambling target. That is the intent.
+- Google treats a 301 from an expired domain to a wholly unrelated topic as a
+  spam signal. Historically it tends to get the redirect's equity discounted to
+  nothing, and association with the scheme can taint anything else on the same
+  footprint.
+- If you are evaluating these as acquisitions: the backlink profiles are
+  currently pointed at gambling. Expect a reclamation period after repointing,
+  and expect some of the existing links to be already devalued.
+- If these are *your* domains: this is an active risk, not a theoretical one.
 
-Save and run this anywhere with open internet; it prints the full redirect chain
-and the final landing URL for each domain.
+## Specific issues found
+
+**`postcodegazette.com` has a redirect chain, not a single hop.**
+It goes `postcodegazette.com` → `hellanzb.com` → `3king.cc` — two 301s. Each
+extra hop bleeds a little equity, and chains are more fragile (break the middle
+link and the whole chain dies). If the redirect is intended, point it straight
+at the destination in one hop. This is the one concrete technical defect in the set.
+
+**The three 200s are unverified as to content.**
+A 200 confirms something is being served — it does **not** tell you whether that
+is a real site, a parked page, or a placeholder. `aabss.org` and `naruto-mx.com`
+sharing a single DigitalOcean box makes it worth confirming they are not serving
+identical boilerplate.
+
+## Recommended follow-ups
+
+Check what the 200s are actually serving:
 
 ```bash
-#!/usr/bin/env bash
-DOMAINS=(hellanzb.com postcodegazette.com aabss.org xnet2.com icmfg.com naruto-mx.com)
-
-for d in "${DOMAINS[@]}"; do
-  echo "=============================================="
-  echo "https://$d/"
-  echo "----------------------------------------------"
-
-  # Full header chain: every status code and Location hop
-  curl -sSIL --max-time 30 \
-       -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36' \
-       "https://$d/" 2>&1 | grep -iE '^(HTTP/|location:|server:|cf-ray:)'
-
-  echo "---"
-  # Summary line
-  curl -sSL -o /dev/null --max-time 30 \
-       -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36' \
-       -w 'final_code=%{http_code}  hops=%{num_redirects}  final_url=%{url_effective}  ip=%{remote_ip}\n' \
-       "https://$d/"
-  echo
+for d in aabss.org icmfg.com naruto-mx.com; do
+  echo "=== $d ==="
+  curl -sSL -A "Mozilla/5.0" "https://$d/" | grep -iEo '<title>[^<]*' | head -1
+  curl -sSL -A "Mozilla/5.0" "https://$d/" | wc -c
 done
 ```
 
-### How to read the output
+Near-identical titles or byte counts on the two shared-IP domains means a
+template, not real sites.
 
-- **`301`** — permanent redirect. The hop that matters for SEO; link equity passes.
-  Check the `Location:` header for where it points.
-- **`302` / `307`** — temporary redirect. Passes little to no equity. On a domain you
-  bought for its backlinks, a 302 is usually a misconfiguration worth fixing.
-- **`200`** — resolving and serving content directly, no redirect.
-- **`403` / `503` with `server: cloudflare`** — Cloudflare bot challenge, not a real
-  site failure. Re-run with the browser User-Agent above, or check from a residential IP.
-- **`404` / `410`** — DNS resolves but nothing is being served at the root.
-- **A redirect chain longer than 1 hop** — e.g. `http → https → www → /path`. Each extra
-  hop bleeds a little equity; worth collapsing to a single 301.
+Check for cloaking — a redirect shown only to search engines:
 
-One thing to watch: a domain can 200 for a normal browser and 301 only for Googlebot
-(cloaked redirect). If these are acquisition candidates, re-run the script a second time
-with `-A 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'` and
-compare the two chains. A difference between them is a red flag.
+```bash
+for d in aabss.org icmfg.com naruto-mx.com; do
+  echo "=== $d ==="
+  curl -sSIL -A "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" \
+    "https://$d/" | grep -iE '^(HTTP/|location:)'
+done
+```
+
+If any of these 200 for a browser but 301 for Googlebot, they belong in Group A
+and are cloaking it. Worth ruling out before you trust the 200.
+
+## Method
+
+Status chains from `curl -sSIL` following redirects, browser User-Agent.
+DNS via the system resolver (apex and `www` resolve identically for all six).
+`check-redirects.sh` in this repo reproduces the status column.
