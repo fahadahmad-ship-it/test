@@ -388,3 +388,135 @@ Run the day-0 audit against all 541 historical rows and issue a formal recovery
 demand for the ~524 undelivered placements. The client's own verification crawl
 is already sufficient evidence. **This is the highest-ROI action in this document
 and involves no link building at all.**
+
+---
+
+# PART 7 — SEMRUSH VALIDATION (REVISION 2) — SUPERSEDES PART 4
+
+Client reports on Semrush, so all 5 keywords were re-validated in the Semrush VN
+database with live SERP pulls. **Four of my five original picks failed.** The
+corrected set is at 7.3.
+
+## 7.1 Semrush keyword metrics
+
+| Keyword | Volume | KD | CPC | Intent | Verdict |
+|---|---|---|---|---|---|
+| nổ hũ đổi thưởng | 12,100 | 68 | $1.50 | Commercial | **FAIL — parasite SERP** |
+| bắn cá đổi thưởng | 27,100 | 80 | — | Transactional | **FAIL — app-store SERP** |
+| cổng game đổi thưởng uy tín | **no data** | — | — | — | **FAIL — not in Semrush** |
+| bí quyết nổ hũ | **no data** | — | — | — | **FAIL — not in Semrush** |
+| cách chơi nổ hũ | 1,600 | 34 | — | Info/Nav | PASS (conditional) |
+| **game bắn cá đổi thưởng** | **8,100** | **49** | **$2.16** | Transactional | **PASS — best non-brand** |
+| 3king | 9,900 | 70 | $1.50 | Navigational | PASS (brand) |
+| 3king tặng 30k | 1,900 | 53 | $0.41 | Transactional | PASS (brand) |
+| tải game 3king | 9,900 | 62 | $0.62 | Nav/Transactional | PASS (brand) |
+| game đổi thưởng | 18,100 | 47 | $2.12 | Transactional | **FAIL — parasite SERP** |
+| game nổ hũ đổi thưởng | 1,000 | 27 | $0.46 | Commercial | **FAIL — parasite SERP** |
+| cổng game xanh chín | 20 | 0 | $1.03 | — | FAIL — no volume |
+
+## 7.2 The SERP evidence — why the nổ hũ/đổi thưởng family is unusable
+
+**`nổ hũ đổi thưởng` (12,100, KD 68)** — my original #1 pick:
+
+| Pos | URL |
+|---|---|
+| 1 | armavirdc.org |
+| 2 | 1xbet888.net**/vi-vn/** |
+| 3 | nohu.sbs**/vi-vn/** |
+| 4,5,8,9,10 | youtube.com ×5 |
+| 6 | www-bet365.co.com |
+| 7 | praca.uk.com |
+
+**`game nổ hũ đổi thưởng` (1,000, KD 27)** — 8 of 10 are hacked foreign domains
+serving `/vi-vn/`: `shutup.world`, `goodwatches.co`, **`ielts.tips`**,
+**`cbdguide.io`**, `mittnyahus.tv`, `benpetersen.net`, `myshopper.io`. An IELTS
+tutoring site and a CBD guide ranking for Vietnamese slots is compromised hosting.
+
+**`game đổi thưởng` (18,100, KD 47)** — `glendalee.tv/vi-vn/`,
+`hgkids.com.tw/vi-vn/`, `designwizard.io/vi-vn/`, `autos.us.org`,
+`www-bet365.co.com`, plus **`ifbaiano.edu.br`** (a hacked Brazilian federal
+institute).
+
+**`bắn cá đổi thưởng` (27,100, KD 80)** — `turbomex.io` #1, then Play Store ×3,
+`cctv.in.net` #5. App-store SERP; a landing page cannot enter it.
+*(This also settles the flagged claim: the specialist reported docs.google.com in
+the top 3. That was wrong — but the conclusion stands for a different reason.)*
+
+**Conclusion: the entire nổ hũ / đổi thưởng head-and-mid family is
+parasite-occupied in Semrush's VN index.** These are not SERPs a legitimate
+operator site can enter, at any DR, with any number of links.
+
+## 7.3 THE CORRECTED 5 LINKS — full target URLs
+
+| # | Keyword (Semrush) | Vol | KD | Full target URL | Anchor | Anchor type |
+|---|---|---|---|---|---|---|
+| 1 | **game bắn cá đổi thưởng** | 8,100 | 49 | `https://3king.cc/ban-ca` | `game bắn cá đổi thưởng 3King` | Partial-match, brand-qualified |
+| 2 | **3king** | 9,900 | 70 | `https://3king.cc/` | `3King` | Branded |
+| 3 | **3king tặng 30k** | 1,900 | 53 | `https://3king.cc/su-kien-khuyen-mai` | `khuyến mãi 3King – tặng 30k` | Branded + descriptor |
+| 4 | **tải game 3king** | 9,900 | 62 | `https://3king.cc/` | `tải game 3King` | Branded + transactional |
+| 5 | **cách chơi nổ hũ** | 1,600 | 34 | `https://3king.cc/thong-tin/bi-quyet-no-hu-thang-dam` | `cách chơi nổ hũ` | Partial-match, informational |
+
+Total addressed volume: **31,500/mo (Semrush VN).**
+
+### Why each one survives
+
+**1 — `game bắn cá đổi thưởng` → `https://3king.cc/ban-ca`**
+The **only** non-brand commercial term in the entire dataset whose SERP contains
+legitimate ranking sites: `gamevui.vn` (#6), `gameshub.com/vn/nha-cai-ban-ca-uy-tin/`
+(#7), `ica.net.vn` (#10). Highest CPC in the set at **$2.16**. KD 49 is reachable.
+**This reverses my earlier advice to retire `/ban-ca`** — the page failed before
+because its 6 links came from off-vertical English US sites, not because the
+target was wrong. The term is also distinct from `bắn cá đổi thưởng` (KD 80,
+app-store SERP), which stays rejected.
+
+**2 — `3king` → `https://3king.cc/`**
+A **DR 0** domain (`3king-game.com`) holds #1 on your own brand name. Anchor is
+the brand word, never the string `3king.cc`.
+
+**3 — `3king tặng 30k` → `https://3king.cc/su-kien-khuyen-mai`**
+Your own promotion, 1,900/mo, KD 53, and `3king-game-mobile.com/khuyen-mai-3/`
+ranks for it while your existing promo page (UR 4.8, correctly titled
+"Đăng ký 3King nhận ngay ưu đãi") does not.
+*Caveat: Ahrefs puts this at 10/mo vs Semrush 1,900 — a 190× spread. Treat the
+prize as a range.*
+
+**4 — `tải game 3king` → `https://3king.cc/`**
+Download intent, 9,900/mo in Semrush. The clone holds #1 with 279 referring
+domains on this exact anchor.
+*Caveat: Ahrefs says 300/mo. Largest tool disagreement in the account.*
+
+**5 — `cách chơi nổ hũ` → `https://3king.cc/thong-tin/bi-quyet-no-hu-thang-dam`**
+The SERP is Amazon Music podcasts, `colab.research.google.com`, `irepod.com`,
+`poddar.se` and forum threads. That is weak UGC spam rather than hacked
+infrastructure — **a genuine Vietnamese guide can displace it**, unlike the
+`/vi-vn/` hacked SERPs which rotate weekly. Page already exists at UR 4.5.
+Lowest conviction of the five; cut first if budget tightens.
+
+### Anchor distribution
+3 branded / 1 brand-qualified partial / 1 informational partial.
+**Zero bare exact-match, zero naked URLs.**
+
+### Target distribution
+`https://3king.cc/` ×2 · `https://3king.cc/ban-ca` ×1 ·
+`https://3king.cc/su-kien-khuyen-mai` ×1 ·
+`https://3king.cc/thong-tin/bi-quyet-no-hu-thang-dam` ×1
+**All five pages already exist and are indexed.**
+
+## 7.4 The tension this creates — stated openly
+
+The corrected set is **3 of 5 brand**. That directly contradicts the
+brand-reclamation analysis in Part 1, which argued for **zero** brand links on
+the grounds that 3king.cc and the clone both funnel to 3king.win, making the
+brand SERP an internal contest.
+
+Both positions are evidence-based and the conflict is real:
+- **Against brand:** winning it may move traffic between two properties in the
+  same portfolio — commercially near-zero.
+- **For brand:** every non-brand SERP in this vertical is parasite-occupied. If
+  brand is excluded, there is almost nothing left to target that a legitimate
+  site can actually win.
+
+**Resolution: the ownership question in Part 5 must be answered before links
+2, 3 and 4 are placed.** If the portfolio is one operator's, consolidate instead
+of competing. Link 1 (`game bắn cá đổi thưởng`) and link 5 are safe to place
+immediately under either scenario.
