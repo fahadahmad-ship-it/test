@@ -1,98 +1,122 @@
 # Link Prospects — vapesuperstore.co.uk /collections/nicotine-pouch
-**Cycle:** October '26 · **Budget:** $880 / 4 links
-**Sources:** Reachgorilla inventory (03/10, 11,020 sites) + Ahrefs live API (DR, UK organic traffic, outbound-link profile, existing backlink check)
+**Cycle:** October '26 · **Budget:** $1,000 / 4 links · **Metrics: Semrush (live API, 05/10)**
+**Method:** Reachgorilla inventory (11,020 sites) → exclusion check vs live backlink profile → Semrush AS + UK organic traffic → **existing vape/nicotine content audit per site**
+
+> All Authority Scores below are **live Semrush AS**. Ahrefs DR is not used.
+> Sheet AS cross-checked against live and found accurate (e.g. islandecho sheet 45 / live 46).
 
 ---
 
-## TL;DR — recommended buy
+## 1. Headline reversal from last round: esports-news.co.uk is OUT
 
-| # | Domain | Price | DR | UK organic | Ref. domains | Outbound dofollow domains | Why |
-|---|--------|-------|----|-----------|--------------|---------------------------|-----|
-| 1 | **islandecho.co.uk** | $91 | 58 | **90,803** | 3,748 | **22** | Highest UK traffic in the pool, near-virgin outbound profile, **already links to a UK vape retailer** |
-| 2 | **dorsetecho.co.uk** | $52 | **71** | 59,459 | 6,629 | 1,953 (genuine local directory) | Newsquest regional daily; proven to sell in regulated verticals |
-| 3 | **eveningnews24.co.uk** | $51 | 68 | 53,192 | 6,518 | 410 | Norwich daily; very clean outbound for a title this size |
-| 4 | **esports-news.co.uk** | $331 | **74** | 53,712 | **23,491** | **14** | Best raw link equity available — see compliance flag |
-| | **TOTAL** | **$525** | | **257,146** | | | **$355 under budget** |
+Last round I ranked it #4 on Ahrefs DR 74. On Semrush it collapses:
 
----
+| Metric | Value | Read |
+|---|---|---|
+| Authority Score | **41** | vs Ahrefs DR 74 — a 33-point gap |
+| Total backlinks | **103,566,842** | from only 29,046 domains |
+| Links per referring domain | **~3,566** | sitewide/widget injection, not editorial links |
+| Organic cost vs traffic | $244,597 cost on 80,247 traffic | gambling/casino keyword skew |
 
-## 1. What I removed from your "already built" list
-
-Your sheet is not the full picture. I pulled the live referring-domain profile and found **two sites you were about to re-buy**:
-
-- **planetofthevapes.co.uk** — $572 in the sheet. Already links to you **45,764 times**, first seen 2015-10-24. It's a UK vape forum with a huge existing footprint. Buying this would be ~65% of the budget for literally zero new referring domain. **Hard exclude.**
-- **britainreviews.co.uk** — $243. Already linking since 2024-06-05 (5 links). Not on your sheet. **Exclude.**
-
-Exclusion set used: your 84 listed domains + the live refdomain profile (324 domains total).
+A profile that inflates DR via sitewide links while Semrush AS stays at 41 is exactly the pattern Semrush AS is designed to discount. **Dropped**, which also removes the under-18 audience problem I flagged. Good outcome.
 
 ---
 
-## 2. Acceptance evidence (the "will they take this category" question)
+## 2. Recommended 4 — $525 of $1,000
 
-I didn't guess from the category column — I checked what each site **actually links out to**:
+| # | Domain | Price | **AS** | UK organic | Ref. domains | Existing vape content | Verdict |
+|---|---|---|---|---|---|---|---|
+| 1 | **dorsetecho.co.uk** | $52 | **50** | **238,239** | 7,145 | 2 editorial pages (national syndication) | Buy |
+| 2 | **eveningnews24.co.uk** | $51 | **50** | **226,494** | 7,023 | 3 pages incl. **Evapo vape shop openings** | Buy |
+| 3 | **islandecho.co.uk** | $91 | 46 | **176,011** | 6,077 | **Zero** ranking vape pages, but dofollows `apevapes.co.uk` | Buy |
+| 4 | **film-news.co.uk** | $116 | 42 | 40,959 | 2,440 | Zero | Buy |
+| | **TOTAL** | **$310** | | **681,703** | | | |
 
-- **islandecho.co.uk** → links to **`apevapes.co.uk`** (UK vape retailer), 9 dofollow links, live since Apr 2025. Its entire outbound profile is 22 domains: socials + Isle of Wight local businesses + one vape shop. This is the single strongest acceptance signal in the pool, on the cleanest site.
-- **dorsetecho.co.uk** → dofollow links to **non-GamStop casino sites** (`nongamcasino.co`, `nogamstopcasinos.co`, `notgamstopcasino.co`), placed June 2026. If they'll sell gambling placements they'll sell nicotine. Outbound is otherwise a real Dorset business directory, not a farm.
-- **eveningnews24.co.uk** → only 410 outbound dofollow domains against 6,518 refdomains. Same Newsquest commercial team as Dorset Echo.
-- **esports-news.co.uk** → 14 outbound dofollow domains against 23,491 refdomains. Almost nothing sold historically, which is exactly why a link here carries weight.
-
----
-
-## 3. What I rejected, and why
-
-**Nofollow-only — zero link equity:**
-- `luxurylifestylemag.co.uk` ($195, DR71) — 2 outbound dofollow domains, 4 total dofollow links. Everything is nofollowed.
-- `wiltshire999s.co.uk` ($163) — 0 outbound dofollow links.
-- `cultbox.co.uk` ($370) — 0 outbound dofollow links.
-
-**Link-farm outbound footprint (equity diluted to nothing):**
-- `aboutmanchester.co.uk` ($160) — 10,563 outbound dofollow domains vs 3,051 refdomains.
-- `honeysucklemag.com` ($182) — 8,091 outbound domains, 2,465 total traffic.
-- `cannabis.net` ($478, DR75) — 25,133 outbound domains, 2,906 traffic. DR is a facade.
-- `theupcoming.co.uk` — 16,377 outbound domains (note: already built Jul '26 anyway).
-- `bedfordindependent.co.uk` ($274) — 2,739 outbound domains vs 2,136 refdomains; sells more than it earns.
-
-**Wrong geo for a UK retailer:**
-- `lookyweed.com` ($206) — 43,966 US traffic, 60 CA, effectively 0 UK.
-- `420magazine.com` ($436) — 42,779 US vs 1,881 GB.
-- `the420.in` ($195) — India. `voddler.co.uk` ($115) — despite the .co.uk, 26,959 US vs **56 GB**.
-- `smokerolla.com` ($245) — DR28, 71 GB visits.
-
-**Structural/quality rejects:** the `*.vitalfootball.co.uk` subdomain farm (30+ listings, all one site), the ClickDo PBN cluster (`tech./news./business./education.clickdo.co.uk`), `.ac.uk`/`.edu` (will not take nicotine), and parenting/family sites — wrong audience and a brand-safety problem for an age-restricted product.
+That's four links for **$310** against a $1,000 budget. See §5 before you decide to spend the rest.
 
 ---
 
-## 4. Risk flags — read before you pay
+## 3. The content drill-down (your core question)
 
-**(a) esports-news.co.uk — audience age.** Best link equity on the board, but esports audiences skew under-18. UK CAP/ASA rules restrict marketing nicotine products where the audience isn't predominantly adult. Only proceed if the placement is informational/non-promotional and the site can evidence an adult audience split. **If you're not comfortable, swap it** — see alternates below. This is the one pick I'd want a human decision on.
+I queried each site's **indexed, ranking pages** for vape/nicotine URL patterns. This separates three very different situations:
 
-**(b) The $51–52 Newsquest prices are below market.** DR68–71 UK regional dailies normally run $300–800. Before paying, confirm: link is **dofollow**, page is **indexable** (not `/sponsored/` noindex), and placement is editorial, not a syndicated partner-content template. The sheet's "AS 50" vs real DR 68–71 gap suggests its metrics are stale — verify on the live URL.
+### (a) Editorial coverage, no commercial footprint — **best case**
+The site covers vaping as news. Proves the topic isn't banned, no guest-post spam cluster to sit inside.
 
-**(c) Network overlap.** Dorset Echo and Evening News 24 are both Newsquest titles, likely the same reseller deal and possibly the same content template. Separate domains with distinct DR/traffic so it's acceptable, but don't buy a third Newsquest title this cycle.
+- **eveningnews24.co.uk** — 3 pages, all genuine Norwich local retail news:
+  - `/24399747.evapo-vape-shop-opened-haymarket-norwich-city/`
+  - `/24376715.evapo-vape-shop-set-former-h-js-haymarket-norwich/`
+  - `/24391612.vape-shops-norwich-spark-outcry-angry-locals/`
+  - They cover **Evapo** (UK vape chain) store openings as straight business news. Zero `nicotine` pages — no competing content, clean slate for a pouch piece.
+- **dorsetecho.co.uk** — 2 vaping pages, both Newsquest national syndication (`vaping-indoors-cause-mould-stains-wall`, `vaping-banned-uk-amid-safety-concerns-users`), plus one legacy `nicotine` page from the archive. Health-angle, not commercial. No guest-post cluster.
+
+### (b) Proven paid placement, low saturation — **good, but priced in**
+- **mayfair-london.co.uk** — has `/luxury-vaping-trends/`. That slug is a textbook paid guest post. Acceptance is *proven*, and at exactly one such page it isn't saturated. AS 38, 8,488 UK traffic, $336.
+
+### (c) Hostile editorial stance — **avoid, and this is the one that surprised me**
+- **coventryobserver.co.uk** ($283) — 7 vape pages, **every single one negative**:
+  - `coventry-shop-shut-down-for-third-time-over-illegal-tobacco-and-vape-sales`
+  - `coventry-shop-shuttered-after-being-caught-selling-illegal-tobacco-and-vapes`
+  - `coventry-mini-market-closed-for-three-months-after-selling-illegal-vapes`
+  - `coventry-store-ordered-to-close-for-selling-illegal-cigarettes-and-vapes`
+  - `uk-tobacco-and-vapes-bill-approved-amid-concerns-over-erosion-of-personal-choice`
+  - `teen-vaping-linked-to-1970s-era-smoking-rates-raising-gateway-concerns`
+  - This masthead's entire vape output is trading-standards enforcement and teen-gateway reporting. A commercial pouch placement would sit directly alongside it — bad brand context, and a realistic chance of editorial rejection after you've paid. **I'd have recommended this last round on metrics alone. The content audit killed it.**
+- **solihullobserver.co.uk** ($240) — same Bullivant Media group, same pattern (`teens-guilty-of-marston-green-vape-shop-murder`). Treat `bromsgrovestandard` / `leamingtonobserver` as the same network and the same risk until checked.
+
+### (d) Clean slate, zero vape history — neutral
+Confirmed **no** ranking vape/nicotine pages: `islandecho`, `film-news`, `geektown`, `yourharrogate`, `cornish-times`, `nufcblog`, `tothe92`, `therugbypaper`, `greencarguide`, `thereviewmag`, `esports-news`.
+Unproven acceptance — pitch before you pay. For islandecho this is less of a worry because its **outbound** profile already dofollows `apevapes.co.uk` (9 links, live since Apr 2025) even though no vape article ranks.
 
 ---
 
-## 5. Alternates (all verified not-yet-built, clean)
+## 4. Full bench — 16 verified options, all confirmed NOT already linking
 
-| Domain | Price | DR | UK organic | Outbound dofollow domains | Note |
-|--------|-------|----|-----------|---------------------------|------|
-| `geektown.co.uk` | $300 | 45 | 32,504 | 1,432 | Matches your existing Nerdly/Gigwise pattern |
-| `yourharrogate.co.uk` | $364 | 41 | 9,217 | 28 | Cleanest alternate; low traffic for the price |
-| `cornish-times.co.uk` | $330 | 48 | 6,824 | 93 | Tindle regional, clean |
-| `nufcblog.co.uk` | $159 | 36 | 5,919 | 13 | Adult-male football audience — strong demographic fit for pouches |
-| `greencarguide.co.uk` | $133 | 44 | **118,773** | 1,391 | Huge UK traffic, but automotive — weak topical fit |
-| `coventryobserver.co.uk` | $283 | 53 | 18,253 | 2,371 | Heavier sponsored footprint |
+Ranked by Semrush AS. Every one checked against the live referring-domain profile.
 
-**If you want to spend the full $880** (swapping out the esports compliance risk):
-`islandecho` $91 + `dorsetecho` $52 + `eveningnews24` $51 + `geektown` $300 = **$494**, then add `nufcblog` $159 as a 5th = **$653** for 5 links.
-Or straight 4-link max-quality-no-compliance-risk: `islandecho` + `dorsetecho` + `geektown` + `yourharrogate` = **$807**.
+| Domain | Price | **AS** | UK organic | Ref. dom. | Vape content | Note |
+|---|---|---|---|---|---|---|
+| dorsetecho.co.uk | $52 | 50 | 238,239 | 7,145 | 2 editorial | **Pick 1** |
+| eveningnews24.co.uk | $51 | 50 | 226,494 | 7,023 | 3 editorial (Evapo) | **Pick 2** |
+| islandecho.co.uk | $91 | 46 | 176,011 | 6,077 | 0 (links to apevapes) | **Pick 3** |
+| film-news.co.uk | $116 | 42 | 40,959 | 2,440 | 0 | **Pick 4** |
+| esports-news.co.uk | $331 | 41 | 80,247 | 29,046 | 0 | ❌ sitewide-link inflation |
+| nufcblog.co.uk | $159 | 40 | 50,574 | 3,049 | 0 | Strong sub — adult male football |
+| geektown.co.uk | $300 | 39 | 50,010 | 3,888 | 0 | Solid sub |
+| greencarguide.co.uk | $133 | 39 | 102,366 | 3,620 | 0 | High traffic, weak topical fit |
+| southernstar.ie | $450 | 39 | 1,995 | 3,900 | — | ❌ Irish, negligible UK traffic |
+| mayfair-london.co.uk | $336 | 38 | 8,488 | 5,707 | **1 paid guest post** | Acceptance proven |
+| fulhamish.co.uk | $131 | 36 | 12,407 | 1,287 | 0 | Cheap football sub |
+| therugbypaper.co.uk | $150 | 36 | 11,084 | 4,291 | 0 | 56% nofollow profile |
+| coventryobserver.co.uk | $283 | 34 | 15,090 | 3,392 | **7, all negative** | ❌ hostile stance |
+| cornish-times.co.uk | $330 | 34 | 11,793 | 1,414 | 0 | Overpriced for AS 34 |
+| yourharrogate.co.uk | $364 | 34 | 19,305 | 1,737 | 0 | Overpriced |
+| tothe92.co.uk | $199 | 33 | 48,270 | 3,729 | 0 | Good traffic-per-dollar |
+| thereviewmag.co.uk | $254 | 33 | 8,139 | 800 | 0 | Thin ref. profile |
+| golftoday.co.uk | $162 | 33 | 6,392 | 2,836 | — | Adult male, low traffic |
+| solihullobserver.co.uk | $240 | 31 | 6,843 | 2,685 | 1 negative | ❌ Bullivant network |
+| menswearstyle.co.uk | $145 | 33 | **1,869** | 2,276 | — | ❌ sheet claims 6,353 traffic — inflated |
 
-My recommendation stands at the **$525 four** — the extra $355 buys measurably worse links. Bank it or roll it into November.
+**Already built / excluded:** `planetofthevapes.co.uk` ($572 — already links **45,764** times since 2015), `britainreviews.co.uk` ($243 — linking since Jun 2024, absent from your sheet).
+
+**Rejected on profile quality:** `luxurylifestylemag.co.uk` (nofollows everything — 4 dofollow links total), `cultbox.co.uk` and `wiltshire999s.co.uk` (zero dofollow outbound), `aboutmanchester.co.uk`, `honeysucklemag.com`, `cannabis.net`, `bedfordindependent.co.uk` (sell more links than they earn). Wrong geo: `lookyweed.com`, `420magazine.com`, `the420.in`, `voddler.co.uk` (56 UK visits despite .co.uk).
 
 ---
 
-## 6. Anchor / placement notes
+## 5. Spending the rest of the $1,000
 
-- Your existing profile is heavy on vape-niche sites (`ecigone`, `ecigator`, `myvapereview`, `gypsyvapes`, `softsecrets`) and UK regional news. The gap is **high-DR UK editorial with clean outbound** — that's what this buy targets.
-- Lead with the regional-news angle on islandecho/dorsetecho/eveningnews24: UK smoking-cessation and "swap to pouches" framing travels well in local press and justifies an editorial link to the category page.
-- Keep anchors mixed — the pouch category is new enough that exact-match "nicotine pouches" on all four would be a visible pattern. Suggest 1 exact, 2 partial/branded, 1 URL/brand.
+My four picks come to **$310**. Options for the remaining $690:
+
+- **Recommended — don't.** Nothing between AS 41–34 beats what you're already getting at $51–116. The next-best additions (`nufcblog` $159, `tothe92` $199) are genuinely decent but they're *fifth and sixth* links, not upgrades to the four.
+- **If the budget must be spent this cycle:** add `nufcblog.co.uk` ($159) and `tothe92.co.uk` ($199) as links 5 and 6 → **$668 for six links**. Both are adult-male football audiences, a strong demographic match for pouches, both zero vape history and clean profiles.
+- **If you want proven acceptance over price:** swap in `mayfair-london.co.uk` ($336) for `film-news.co.uk` ($116) → $730 for four. You're paying $220 extra purely to de-risk the pitch.
+
+---
+
+## 6. Pre-payment checks
+
+1. **The $51–52 Newsquest prices are far below market** for AS 50 / 230k UK traffic titles (normally $300–800). Confirm before paying: link is **dofollow**, page is **indexable** (not a noindex `/sponsored/` path), and placement is editorial rather than a syndicated partner-content template.
+2. **Dorset Echo + Evening News 24 are both Newsquest.** Two titles is fine; don't add a third this cycle.
+3. **Pitch angle matters more than usual here.** Dorset Echo's existing vape coverage is health-risk framed and Coventry Observer's is enforcement-framed. For the Newsquest titles, lead with a **smoking-cessation / tobacco-harm-reduction** angle rather than product promotion — it matches their editorial register and survives review.
+4. **islandecho is the one to brief carefully.** Its outbound profile is just 22 domains: socials, Isle of Wight local businesses, and one vape retailer. That cleanliness is the whole value — a generic SEO guest post will look out of place. Pitch it as local-interest or cessation-angle content.
+5. Keep anchors mixed across the four — 1 exact ("nicotine pouches"), 2 partial/branded, 1 URL/brand.
