@@ -64,3 +64,21 @@
 
 ### Traffic-reliability flags (Semrush all-traffic vs Ahrefs, >5x disagreement)
 prague-now.com 13.8x · travelshoebum.com 11.1x · visitsouthdevon.co.uk 7.8x · dailyscandinavian.com 7.2x — all rejected on other grounds too.
+
+## Round 2 — user removed 4 as not relevant
+makemeacocktail.com, thecakegirls.com, californiawineryadvisor.com, pubclub.com
+→ brief re-set toward general news/media/magazine, which matches the client's existing built profile.
+
+## Link sellers caught by content inspection (clean metrics, bought top pages)
+| Domain | Price | Top organic page |
+|---|---|---|
+| timesdaily.com | $160 | "Verified LinkedIn Profiles: What Happens During Additional Verification" (49,978 traffic) outranking its own newsroom |
+| moviemaker.com | $259 | "Best Online Pokies Australia 2026: 5 Top Real Money Pokies Casinos" — its AU traffic is casino-affiliate, not editorial |
+| artdaily.com | $30 | "GB WhatsApp Download APK", "7 123movies Alternatives", "Best YouTube Downloaders" |
+
+All three pass the numeric gates. Only a top-pages check exposes them.
+
+## Rejected on nofollow-to-external-domains
+- eveningnews24.co.uk $51 — **best editorial fit found** (Norwich daily with a things-to-do section) but only 9.7% of linked domains get dofollow
+- horrornews.net $213 — 6.5% dofollow; traffic driver is celebrity photo galleries
+- mid-day.com $185 — 54.3% (kept with caveat; strongest publisher found)
