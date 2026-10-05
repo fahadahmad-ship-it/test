@@ -63,6 +63,8 @@ drivespark (99% India, only 55 of 1,367 outbound domains get dofollow — placem
 [{"field":"refdomain","operation":"contains","sign":"+","value":"<domain>"}]
 ```
 
+The filter must also be passed as a **real JSON array**, not a JSON-encoded string — a string returns `internal: cannot unmarshal string into []reports.BacklinksResearchDisplayFilter`. Watch for substring false positives too (a query for `car.blog` matches `topcar.blog` and `wannabeacar.blogspot.com`).
+
 Validated on every batch against `speedwaymedia` — a known-built link for this client (anchor "best used SUV under $30K" → /best-used-suv-under-30000/).
 
 **2. Ahrefs alone is not sufficient for duplication.** Its OR-filter refdomain check returned zero rows for pickuptrucktalk.com and hometownstation.com; corrected Semrush found both already linking.
@@ -70,3 +72,53 @@ Validated on every batch against `speedwaymedia` — a known-built link for this
 **3. The live index under-reports built links — the client order list is authoritative.** theautochannel.com was ordered Oct '25 and returns ERROR 50 NOTHING FOUND on a verified-working Semrush filter. Nine domains cleared by both tools were already on the client's list. Never clear a domain on live data alone.
 
 **4. Numbers do not catch link sellers; top pages do.** Nine of the rejects above cleared AS, traffic, dofollow % and out:in ratio. Every one was caught by reading what the site actually publishes.
+
+---
+
+## Sub-$150 round — 39 domains vetted, 6 usable
+
+| Site | AS | TF | All traffic | US | Price | Note |
+|---|----|----|------|----|----|------|
+| **johnsoncountypost.com** | 37 | 29 | 35,450 | 95% | **$34** | Overland Park/Olathe KS local news. 99.9% dofollow. Two sponsored pages, both genuine local advertorials. out:in 1.96 (just under flag), 5.3x traffic gap |
+| **sanangelolive.com** | 41 | 31 | 46,790 | **98.5%** | **$34** | Genuine West TX local news. Best geo of any candidate; ranch/oilfield audience is strong truck overlap. Clean on all 7 sponsored/PR probes. Ask for `/news/`, not `/members/` — open registration there is abused (indexed pirate + cialis spam, contained to that path). 8.1x traffic gap |
+| **nativenewsonline.net** | 41 | 31 | 34,500 | 89% | **$96** | Clean — 99.6% dofollow, out:in 0.67, sponsored section passed every silo test. Relevance-light: Indian Country policy. 125k of 130k traffic sits in two evergreen pages |
+| **newschannelnebraska.com** | 45 | 32 | 96,529 | 96% | **$108** | Rural NE, zero sponsored silo. Confirm dofollow |
+| **thedailynewsonline.com** | 44 | 45 | 115,300 | 94% | **$127** | Batavia NY. Only candidate where Ahrefs and Semrush agree within 1.1x. 83% of traffic on one evergreen page (Declaration of Independence) — price it as a ~20k paper. Insist on `/news/`, not `/online_features/press_releases/` |
+| **carplaylife.com** | 30 | 24 | 17,900 | 80% | **$137** | Real CarPlay/Android Auto publication, no silo, nofollows its own affiliate links. 72% of traffic on one adapter roundup. Infotainment, not off-road |
+
+**Conditional:** `morningagclips.com` ($68, AS 35, TF 34, 20,800, 81% US) — genuine agriculture journalism, same rural logic as agdaily. But Ahrefs reports **zero outbound external links sitewide** across four separate query methods. Buy only if the vendor supplies a live sample URL with a crawlable dofollow external link.
+
+### Yield
+39 sub-$150 domains vetted, 6 usable — ~15%, against roughly 30% in the $175-$306 tier. The rented silos concentrate at the low end because that is what a small paper monetises with when it cannot sell real advertising.
+
+---
+
+## Newspaper chains — reject by chain, not by site
+
+Two chains resell the **same silo vendor**. Identify the fingerprint once and you can reject the whole group without re-vetting.
+
+**Boone Newsmedia** — URL pattern `/sponsored-content/<slug>-<hash>` (mixed numeric and hex suffixes, one silo mid-migration). Confirmed on **austindailyherald.com, albertleatribune.com, lagrangenews.com, natchezdemocrat.com, suffolknewsherald.com**. Inventory: EssayPro essay-writing, buy-YouTube-views, buy-TikTok-followers, buy-Google-reviews, 1win casino (CA/MY/PK), Melbet betting, kratom, payday loans, personal-injury PR. Note lagrangenews sells *"finding a reliable used car on a budget"* inside that silo — the automotive slot they would sell you. DR 61-64 on these is sitewide-template inflation (~143-171 links per referring domain), not earned authority.
+
+**Sample News Group** — TownNews BLOX CMS (`article_<uuid>.html`, `/site/about.html`), `/sponsored/` path. Confirmed on **rutlandherald.com, newsitem.com, thedailyreview.com, oswegocountynewsnow.com**. Same vendor mix: casino/betting, attorney PR, essay writing, escort listings. thedailyreview shows no indexed sponsored pages only because it is too weak to rank them.
+
+## Additional rejects from the sub-$150 round
+
+| Site | Price | Tell |
+|---|---|---|
+| ediblemanhattan.com | $145 | **Trap of the round** — highest AS in its batch (46). Food brand is dead; all 9 top pages are a celebrity/utility farm (Blooket codes, Chase Stokes, net-worth pages). Its legitimate legacy advertorial is what makes it a parasite on an expired brand |
+| roadfood.com | $30 | Audience fit was genuinely good (top keyword "p&h truck stop menu"). Hijacked author accounts: `/author/lucky99-slot-gacor-maxwin/`, `/author/boy303-casino-review/`, plus an essay mill and APK injection |
+| porchdrinking.com | $135 | Live injected Polish casino spam on 2025-2026 dates, `-2` suffixes meaning repeat placements. out:in 5.6:1 |
+| triad-city-beat.com | $131 | `pressservices.` PR mill (Gamstop slots, sports betting). Main domain is now "50 famous memes" and lunch-box affiliate |
+| washingtonbeerblog.com | $55 | Casino bonus page outranks its own homepage; hosts `/author/casino-and-gambling-blog/` |
+| theenterpriseworld.com | $78 | jeetbuzz/betvisa casino aimed at BD/IN, 41% dofollow |
+| digitaljournal.com | $30 | `/pr/` mill, sequential IDs to 1,843,116 |
+| car.blog | $80 | Six-language subdomain farm — Algerian free-Visa-card spam, Turkish pirate streaming, Vietnamese taxi service. **Blacklist `driveonline.car.blog` and `autoworldz.car.blog` too** |
+
+### Invisible-link rejects (near-zero outbound — placement would not be crawled)
+`zerofatalities.com` (Utah DOT campaign, 2 outgoing links sitewide; top pages include teen crash memorials — brand-safety problem on its own terms) · `dailyuw.com` (29 outbound domains) · `michiganscouting.org` (Boy Scout council, publishes no outside editorial)
+
+### Honest sites, wrong audience
+greencarguide.co.uk (1.4% US) · businessmotoring.co.uk (2.2% US, UK fleet/BIK tax) · mercedesblog.com (single-marque German luxury, and sells links quietly)
+
+### Do not buy the newschannelnebraska subdomains
+`northeast.` `southeast.` `panhandle.` `metro.newschannelnebraska.com` at $30 each are regional skins of one newsroom — a single global story-ID sequence interleaves across all four and statewide content republishes to every region. They are also subdomains of the root already on order at $108, so equity consolidates. `metro.` is effectively dead (best page: 14 visits/month).
