@@ -82,8 +82,8 @@ Validated on every batch against `speedwaymedia` — a known-built link for this
 | **johnsoncountypost.com** | 37 | 29 | 35,450 | 95% | **$34** | Overland Park/Olathe KS local news. 99.9% dofollow. Two sponsored pages, both genuine local advertorials. out:in 1.96 (just under flag), 5.3x traffic gap |
 | **sanangelolive.com** | 41 | 31 | 46,790 | **98.5%** | **$34** | Genuine West TX local news. Best geo of any candidate; ranch/oilfield audience is strong truck overlap. Clean on all 7 sponsored/PR probes. Ask for `/news/`, not `/members/` — open registration there is abused (indexed pirate + cialis spam, contained to that path). 8.1x traffic gap |
 | **nativenewsonline.net** | 41 | 31 | 34,500 | 89% | **$96** | Clean — 99.6% dofollow, out:in 0.67, sponsored section passed every silo test. Relevance-light: Indian Country policy. 125k of 130k traffic sits in two evergreen pages |
-| **newschannelnebraska.com** | 45 | 32 | 96,529 | 96% | **$108** | Rural NE, zero sponsored silo. Confirm dofollow |
-| **thedailynewsonline.com** | 44 | 45 | 115,300 | 94% | **$127** | Batavia NY. Only candidate where Ahrefs and Semrush agree within 1.1x. 83% of traffic on one evergreen page (Declaration of Independence) — price it as a ~20k paper. Insist on `/news/`, not `/online_features/press_releases/` |
+| ~~newschannelnebraska.com~~ | 45 | 32 | 96,529 | 96% | ~~$108~~ | **WITHDRAWN — see correction below** |
+| ~~thedailynewsonline.com~~ | 44 | 45 | 115,300 | 94% | ~~$127~~ | **WITHDRAWN — see correction below** |
 | **carplaylife.com** | 30 | 24 | 17,900 | 80% | **$137** | Real CarPlay/Android Auto publication, no silo, nofollows its own affiliate links. 72% of traffic on one adapter roundup. Infotainment, not off-road |
 
 **Conditional:** `morningagclips.com` ($68, AS 35, TF 34, 20,800, 81% US) — genuine agriculture journalism, same rural logic as agdaily. But Ahrefs reports **zero outbound external links sitewide** across four separate query methods. Buy only if the vendor supplies a live sample URL with a crawlable dofollow external link.
@@ -122,3 +122,30 @@ greencarguide.co.uk (1.4% US) · businessmotoring.co.uk (2.2% US, UK fleet/BIK t
 
 ### Do not buy the newschannelnebraska subdomains
 `northeast.` `southeast.` `panhandle.` `metro.newschannelnebraska.com` at $30 each are regional skins of one newsroom — a single global story-ID sequence interleaves across all four and statewide content republishes to every region. They are also subdomains of the root already on order at $108, so equity consolidates. `metro.` is effectively dead (best page: 14 visits/month).
+
+
+---
+
+## CORRECTION — two sub-$150 passes withdrawn
+
+Both were recommended above and both are rejects on re-inspection. The original audits searched `/sponsored/` paths; **these sellers inject at the domain root, outside the editorial taxonomy**, which that method does not reach.
+
+**thedailynewsonline.com ($127) — REJECT.** Three injected root-level pages, verified directly:
+- `/best-essay-writing-service-2026/article_a457e826-2a3f-4f24-b355-51b7e73ded0c.html`
+- `/esports-betting-with-map-winner-combos/article_87a58be1-75df-4bc1-a203-8a410545bbee.html`
+- `/inside-las-vegas-sands-record-breaking-quarter-what-it-means-for-the-global-casino-market/article_f015b1e4-f80d-46f0-85c3-1169f4006a8b.html`
+
+**The UUID version is the proof.** Genuine articles on this TownNews install carry **v5** UUIDs (third group begins `5`, e.g. `article_c1483847-ae82-5e16-...` for a real essay-contest story). The three above carry **v4** UUIDs (`-4f24-`, `-4bc1-`, `-46f0-`). Different generator, recent injection. Note the site legitimately covers Batavia Downs, so casino coverage alone is not a tell — the UUID version and root-level path are.
+
+**newschannelnebraska.com ($108) — REJECT.** Sequential-ID syndicated PR with no Nebraska connection, e.g. `/story/49603468/strategy-execution-management-solution-market-research-2023-2030` and `/47175764/copper-indium-selenide-sputtering-target-market-size-2022-...`. Its own error handler leaks the operation: `/our-apologies?url=` pages carrying batched spam URL lists mixing LinkedIn-pulse market-research spam with the site's own story IDs. Dofollow 68.7%, below gate. Also split across subdomains (`central.`, `southeast.`, `northeast.`, `rivercountry.`), so a placement lands on a subdomain.
+
+### Revised sub-$150 list
+| Site | AS | TF | All traffic | US | Price |
+|---|----|----|------|----|----|
+| **johnsoncountypost.com** | 37 | 29 | 35,450 | 95% | **$34** |
+| **sanangelolive.com** | 41 | 31 | 46,790 | 98.5% | **$34** — insist on `/news/`, not `/members/` |
+| **nativenewsonline.net** | 41 | 31 | 34,500 | 89% | **$96** |
+| **carplaylife.com** | 30 | 24 | 17,900 | 80% | **$137** |
+
+### Method addition — root-level injection check
+Searching `/sponsored/`, `/sponsored-content/` and `/commercial/` is not sufficient. Also search crawled pages for the substrings `essay`, `casino`, `betting`, `kratom`, `apk`, `buy-youtube`, `buy-tiktok`, `payday`, `downloader` **anywhere in the URL**, then judge each hit — a paper covering its local casino or a school essay contest is legitimate; a root-level commercial page is not. On TownNews/BLOX installs, compare UUID versions. Check `/our-apologies?url=`-style error handlers, which can expose the placement network outright.

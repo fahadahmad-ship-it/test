@@ -99,3 +99,34 @@ Three domains on the client's order list fail the standards applied to new candi
 Of four order-list domains checked live, three (homebusinessmag, e-architect, amazingarchitecture) appeared in both tools, but **fancyhouse-design.com — the newest order, Sept '26 — returned ERROR 50 NOTHING FOUND in Semrush and was absent from Ahrefs**, on a control-validated filter. The index misses the newest links specifically, so the client's order list is authoritative and live duplication is a secondary check only.
 
 Semrush `display_filter` must be a real JSON array with the `sign` key: `[{"field":"refdomain","operation":"contains","sign":"+","value":"<domain>"}]`. A JSON-encoded string errors; omitting `sign` silently returns an unfiltered dump that reads as "no match". Control for this client: `homebusinessmag` (→ `/expired-listings`, anchor "expired listing leads", dofollow).
+
+
+---
+
+## Sub-$300 round — 1 clear buy from 9
+
+| Site | AS | DR | All traffic | US | Price | Verdict |
+|---|----|----|------|----|----|---|
+| **johnsoncountypost.com** | 37 | 60 | 35,447 | 95.1% | **$34** | **BUY** |
+| sanangelolive.com | 41 | 58 | 46,786 | 98.5% | $34 | Conditional on placement path |
+| beycome.com | 33 | 45 | 10,312 | 91.4% | $210 | Caution — competitive conflict |
+
+**johnsoncountypost.com — best fit found for this client.** Runs two standing real-estate columns: *"Your Home"* (archive) and a current *"Homebody"* personal-finance column (`/2026/07/28/homebody-finance-down-payment-assistance-programs-for-kansas-city-buyers-210950/`). Ranks for "johnson county home builders" and covers its local market directly (`prairie-village-real-estate-market-value-home-sales-price`). A "why listings expire in the KC metro" piece slots into an existing format with no contrivance. Clean: every casino/payday URL hit is genuine journalism — the FTC payday-lending prosecutions of actual Johnson County residents (Scott Tucker, Richard Moseley) and Kansas sports-betting legalization. Publishes a sponsored-post transparency page. out:in 1.96 and a 5.2x traffic gap are both benign for a 15-year local archive at 99.9% dofollow.
+
+**sanangelolive.com — conditional.** Real *"Real Estate Guide"* editorial series (2018-21) and an open-house classifieds section ranking #3 for "san angelo open houses". But `/members/` is colonised: `/members/brawl-stars-mod-apk-all-skins`, `/members/getting-best-seat-live-casino-roulette-table`. `/news/` is clean and structurally separate. **At $34 on an AS 41 outlet, `/members/` is the likely destination — get the URL in writing before paying.**
+
+**beycome.com — technically sound, strategically awkward.** Real FSBO/flat-fee-MLS brokerage ranking on competitive non-branded terms ("how to sell house by owner", "list on mls without realtor"). Clean crawl, 87.6% dofollow, 91.4% US. But its entire proposition is helping sellers list *without* an agent, while this client sells agents tools to prospect those same FSBO sellers. Google won't care; the editorial incoherence tells you how freely the site sells placements. 70% of budget for one link.
+
+### Rejected
+| Site | Price | Reason |
+|---|---|---|
+| thedailynewsonline.com | $127 | Root-level v4-UUID injected pages — EssayPro (dated 2026), esports betting, Las Vegas Sands casino |
+| newschannelnebraska.com | $108 | Sequential-ID PR mill; `/our-apologies?url=` leaks batched spam URLs; 68.7% dofollow |
+| propertywire.com | $282 | Real UK property trade press — but **1.7% US**, and a `/category/sponsored/` silo to page 9 |
+| loftway.com | $135 | Genuinely on-topic blog (`/blog/changing-agents-wont-fix-an-overpriced-listing`), completely clean — but AS 25 vs client AS 23 is no gain, and the blog's best page gets 34 visits |
+| middleclasshomes.net | $100 | Link farm — 8 organic keywords against 5,219 traffic, all navigational-branded; AI author `/author/qyndarix-thalendros/`; 1,110 dofollow linked domains |
+| homerocketrealty.com | $47 | Dead brand / farm. `/guest-post-write-for-us/` live, six separate "contact" pages, **28.4% US** (India/France dominant) |
+| activerain.com | $65 | Entire live outbound graph = **15 links to 3 domains** (its owner Brivity + wordpress.org). Member-post links absent from the link graph. `/blogsview/` spammed with escort, sequential-ID kratom, casino. Legacy links to this client last confirmed **March 2019** |
+| retipster.com | $1,535 | Honest and clean, but investor/land audience, zero third-party editorial outbound, and the worst value on the list. Arguable at ~$400 |
+| designrush.com | $820 | **0.61% dofollow** (480 of 79,110 linked domains) — the purchase would be a nofollow |
+| goodcall.com | $500 | Clean mechanics, but SMB buyers; traffic carried by templated `/<NNN>-area-code` pages, 26% Canada |
