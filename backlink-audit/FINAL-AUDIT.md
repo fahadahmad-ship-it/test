@@ -68,9 +68,12 @@ those domains*. That question is unanswered and gates everything.
 
 **Two metrics from the earlier draft are withdrawn:**
 
-- **Subnet clustering is not evidence.** The "1,141 IPs across 428 class-C subnets" line was
-  measuring **Cloudflare's address allocation** — 861 of 1,232 referring domains (**69.9%**) are
-  Cloudflare-fronted. Struck.
+- **Subnet clustering as stated is not evidence.** The "1,141 IPs across 428 class-C subnets" line
+  was measuring **Cloudflare's address allocation** — 861 of 1,232 referring domains (**69.9%**)
+  are Cloudflare-fronted, and the subnets they span are CDN artifacts. Struck.
+  **Three real host clusters do exist** and are the version to cite: `118.139.181.85`
+  (29 domains / 727 links, Singapore stats farms), `203.161.54.114` (27 domains, the DR 59–60
+  link-seller block), `195.20.19.178` (19 domains, Moldova shortener network).
 - **"886 domains at Authority Score 2" is withdrawn.** It is a rounding artifact of an integer
   score on a log scale; Ahrefs returns continuous DR 0.0–2.0 across the same band.
 
@@ -146,10 +149,26 @@ stricter one.
 **Authority is anti-correlated with manipulation in this profile.** Any DR or AS threshold would
 produce false positives one way and miss DR 65+ vendors the other.
 
-**The delivered disavow file contains 66 domains**, each line carrying its shared path slug, exact
-anchor string and dofollow status. **1,159 domains are excluded by design** as insufficient
-evidence. Removed as false positives: `csswinner.com` (DR 75), `factmags.com` (DR 75),
-`eurekster.com` (DR 53).
+**The delivered disavow file contains 33 domains**, and they are not of equal strength:
+
+| | Entries | Grounds | Strength |
+|---|---|---|---|
+| **Section 1 — criterion 1** | **5** | Vendor anchor **observed** + dofollow **observed** + shared slug, **and points at ngwindows.com directly** | Fully evidenced |
+| Section 2 — criterion 3 | 28 | Link-selling domain name + shared host `203.161.54.114` + uniform DR 59–60 | Anchors and routing **unverified** |
+
+**For a strictly defensible submission, Section 2 can be dropped, leaving 5 lines.** That is
+flagged in the file itself. The uniform DR 59–60 across 27 co-hosted sellers is itself an
+authority-inflation signature, which is why name character was admitted as a criterion at all.
+
+**1,159 domains are excluded by design** as insufficient evidence — including 360 carrying Network
+A's naming convention, 284 of which first appeared in the 14 days to 6 Oct. Likely the same
+network; likely is not evidence, so they are out.
+
+Removed as false positives: `csswinner.com` (DR 75), `eurekster.com` (DR 53), and `factmags.com`
+(grounds were co-hosting rather than its own anchor, and two passes disagree on its authority —
+DR 60 vs DR 75; conflicting evidence excludes by default).
+
+**Anchor-verified coverage: 73 of 1,232 referring domains (5.9%). 94.1% is unverified.**
 
 ---
 
@@ -204,7 +223,8 @@ and links you are responsible for.
 
 **3. Disavow — only if step 2 shows a manual action, or step 1 confirms links were bought.**
 Scope: the **~283 links hitting ngwindows.com directly**. Everything redirect-borne is resolved by
-step 1 and must not be disavowed. Use the 66-domain evidenced file as-is; extend it after
+step 1 and must not be disavowed. Use the 33-domain evidenced file as-is — or its 5-line Section 1
+alone if you want only fully-evidenced entries; extend it after
 **25 Oct 2026** per the procedure documented in the file header.
 
 **4. Reclaim two lost links — worth more than the entire disavow exercise.**
@@ -236,6 +256,8 @@ Exact-match commercial is 3.2% — far below any risk band. **Leave commercial a
 - **Anchor evidence for 1,159 referring domains** (94% of the profile). API exhausted.
 - **No Ahrefs cross-check of any kind.** Resets 25 Oct 2026.
 - **Whether the Sep/Oct escalation has cost rankings.** October data does not exist yet.
+- **The campaign is still running.** Newest spam link first seen **6 Oct 2026 15:01 UTC** — the
+  audit date. Any disavow built today is a snapshot of a moving target.
 - **Whether AI Overviews explain the 2025 collapse.** Needs GSC impressions-vs-clicks.
 
 ## 8. Monitoring
