@@ -227,7 +227,7 @@ Placement taxonomy, with counts:
 | **Marketplace inventory listing** | 53 | 26 | ngwindows.com inside a scraped alphabetical run: `ngwind.com ngwindow.com │ **ngwindows.com** │ ngwindsong.com ngwindsongk.com` |
 | **City-permutation doorway directory** | 133 | 1 | `whosmypro.com`, 133 `Doors & Windows Near <CITY>, GA` pages, anchor `↗ Go to company website` |
 | **Fabricated-geography directory** | 4 | 1 | `homeownerideas.com`, *"North Georgia Replacement Windows **Roswell New Mexico**"* |
-| **Topical injection into unrelated articles** | 24 | 4 | *China's economy* → "Window Replacement Company Atlanta"; *Monetary History of the World 1154-1470* → "Windows Atlanta"; *Makita power tools*; *Artie Lange*; a comment page |
+| **Topical injection into unrelated articles** | 24 | 4 | *China's economy* → "Window Replacement Company Atlanta"; *Monetary History of the World 1154-1470* → "Windows Atlanta"; *Makita power tools*; *Artie Lange*; comment spam counted separately below |
 | **Comment spam** | 1 | 1 | `dreamscometroup.com/bio/1428-2/comment-page-41` |
 
 Note the last two rows are **all nofollow** and therefore excluded. The behaviourally most damning
