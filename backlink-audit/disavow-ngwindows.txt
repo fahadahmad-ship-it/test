@@ -1,130 +1,217 @@
 # Disavow file - ngwindows.com
-# Prepared 2026-10-06 from Semrush Backlink Analytics
+# Prepared 2026-10-06. Source: Semrush Backlink Analytics (refdomains + backlinks reports).
 # Submit at: https://search.google.com/search-console/disavow-links
 #
 # IMPORTANT - READ BEFORE SUBMITTING
-# 1. This is a DRAFT built from a SAMPLE (top ~110 referring domains by authority
-#    and by link volume) of 1,225 total referring domains. Export the full
-#    referring-domain list from Semrush AND from Ahrefs (after API units reset on
-#    2026-10-25) and extend this file before submitting.
-# 2. Review every line. Disavowing a good link costs real rankings.
-# 3. All entries are domain-level. The networks below are too large for URL-level.
+# 1. Review every line. Disavowing a good link costs real rankings.
+# 2. All entries are domain-level. The networks below are too large for URL-level.
+# 3. EVIDENCE STANDARD USED: a domain appears below ONLY if this audit directly
+#    observed (a) the anchor text it used linking to ngwindows.com, AND
+#    (b) rel=nofollow absent (i.e. the link is dofollow and passes PageRank), AND
+#    (c) a shared structural fingerprint placing it in a named network.
+#    Low Authority Score / Domain Rating is NOT used as grounds for any entry.
+# 4. COVERAGE LIMIT: anchor-level evidence could be retrieved for 73 of 1,232
+#    referring domains before the Semrush API unit balance hit zero mid-audit
+#    (Ahrefs Site Explorer was already unavailable; units reset 2026-10-25).
+#    Everything not evidenced is deliberately EXCLUDED - see the final section.
 
 # =====================================================================
-# NETWORK A - "DA/PA checker" PBN directory network
-# Dofollow links from /dir/ pages with SEO-vendor sales-copy anchors.
-# HIGHEST PRIORITY.
+# NETWORK A - shared-slug '/dir/' link-vendor network
+# Fingerprint: every domain below serves the SAME directory page path with the
+# SAME numeric id across unrelated registrations, carrying the SAME SEO sales-copy
+# anchor. Identical slug + identical anchor across independent domains cannot occur
+# organically. All links observed DOFOLLOW (rel=nofollow absent).
 # =====================================================================
-domain:dacheckertoolonline.site
-domain:rankwebsitechecker.website
-domain:onlinewebsitechecker.space
-domain:padacheckertools.shop
-domain:onlinedapachecker.site
-domain:backlinkrankchecker.shop
-domain:dapafreechecker.website
-domain:padachecker.site
-domain:goodbacklinkchecker.space
-domain:seoblogchecker.store
-domain:freesiterankchecker.online
-domain:linkaudit.space
-domain:trustflowchecker.space
+
+# --- cluster backlink-seo-experts-211287 (15 domains) ---
+# shared page path: /dir/backlink-seo-experts-211287
+# shared anchor   : "Professional thermalprowindows.com SEO Backlinks for Stronger Website Authority"
+# link status     : dofollow
 domain:bestseochecker.shop
-domain:big-easy-seo.com
-domain:seostrengthchecker.online
-domain:dacheckerbulkfree.online
-domain:backlinkscheckerbulk.space
-domain:domainmetricschecker.store
-domain:highdachecker.space
-domain:blogseochecker.online
-domain:bulkbacklinkanalysis.website
-domain:backlinkcheckers.online
-domain:backlinkcheckerseo.online
-domain:livebacklinkchecker.online
-domain:dapacheckermultiple.website
-domain:dapacheckerfree.site
-domain:bulkpachecker.online
-domain:dabacklinks.website
-domain:siteseocheckerfree.shop
 domain:dacheckeronline.store
+domain:dapacheckerfree.site
+domain:domainmetricschecker.store
+domain:domainwebsitechecker.website
+domain:drdachecker.store
+domain:freeseochecker.store
+domain:freesiterankchecker.online
+domain:livebacklinkchecker.online
+domain:padacheckertools.shop
+domain:seoanalysischecker.website
+domain:seoblogchecker.store
+domain:seopadachecker.shop
+domain:sitebacklinkchecker.space
+domain:trustflowchecker.space
+
+# --- cluster seo-ranking-links-170322 (10 domains) ---
+# shared page path: /dir/seo-ranking-links-170322
+# shared anchor   : "Expert Backlink Building Services to Grow qualitypluswindows.com Website Rankings"
+# link status     : dofollow
+domain:backlinkcheckerseo.online
+domain:backlinkscheckerbulk.space
+domain:bulkpachecker.online
+domain:dacheckertoolonline.site
+domain:dapacheckerbulk.online
+domain:dapacheckermultiple.website
+domain:dapafreechecker.website
+domain:linkaudit.space
+domain:siteseocheckerfree.shop
+domain:urlbacklinkschecker.space
+
+# --- cluster professional-seo-links-148030 (10 domains) ---
+# shared page path: /dir/professional-seo-links-148030
+# shared anchor   : "ngawindows.com Premium Link Building Experts for Website Ranking Growth"
+# link status     : dofollow
+domain:blogseochecker.online
+domain:dacheckers.online
+domain:domainlinkprofile.site
+domain:drcheckerfree.shop
+domain:goodbacklinkchecker.space
+domain:onlinedapachecker.site
+domain:rankwebsitechecker.website
+domain:sitebacklinkchecker.site
+domain:topseobacklink.info
 domain:whatisdapachecker.space
 
+# --- cluster trusted-seo-backlinks-150104 (10 domains) ---
+# shared page path: /dir/trusted-seo-backlinks-150104
+# shared anchor   : "northpointwindows.com Premium SEO Links for Higher Search Engine Rankings"
+# link status     : dofollow
+domain:backlinkcheckers.online
+domain:backlinkrankchecker.shop
+domain:big-easy-seo.com
+domain:bulkbacklinkanalysis.website
+domain:dacheckerbulkfree.online
+domain:freeseochecker.website
+domain:highdachecker.space
+domain:linkbacklinkchecker.online
+domain:padachecker.site
+domain:siterankingchecker.online
+
+# --- cluster ethical-seo-backlinks-160633 (9 domains) ---
+# shared page path: /dir/ethical-seo-backlinks-160633
+# shared anchor   : "performingwindows.com Premium SEO Backlinks for Higher Google Rankings and Organic Traffic"
+# link status     : dofollow
+domain:backlinkcheckerseo.space
+domain:bestdapachecker.site
+domain:checkbacklinks.site
+domain:checkdaandpa.online
+domain:dabacklinks.website
+domain:freepadachecker.website
+domain:padacheckertool.website
+domain:rankcheckerseo.store
+domain:rankcheckertool.space
+
+# --- cluster quality-authority-backlinks-148096 (5 domains) ---
+# shared page path: /dir/quality-authority-backlinks-148096
+# shared anchor   : "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+# link status     : dofollow
+domain:backlinksseochecker.space
+domain:dapaseochecker.online
+domain:onlinewebsitechecker.space
+domain:seostrengthchecker.online
+domain:siteseocheckerfree.store
+
 # =====================================================================
-# NETWORK B - Fake guest-post / "niche edit" vendor network
-# Dofollow, money anchors, fake testimonials. HIGH PRIORITY.
+# NETWORK B - 'guest post / niche edit' vendor network
+# Fingerprint: machine-generated long-form URLs under a selling-path segment
+# (/dofollow-index/, /guest-post-network/, /crawl-index-network/, /link-building-hub/,
+# /organic-growth-links/, /niche-relevance-hub/, /seo-authority-links/, /serp-growth-network/)
+# ending in a 6-hex-character id, with templated link-selling anchor copy that
+# substitutes a rotating client-domain name. All links observed DOFOLLOW.
 # =====================================================================
-domain:ggmap.co.com
-domain:newearthsummit.org
-domain:nivira.shop
-domain:mertio.shop
+# bestseoquill.site - path segment /seo-authority-links/...<6-hex>.html ; dofollow
+#   anchor: "Premium Guest Post Service for performingwindows.com Designed to Improve DA, DR and TF. Build Lasting Authority, for Competitive SERP Results."
 domain:bestseoquill.site
-domain:seonix.agency
-domain:backlinkhouse.com
-domain:backlinkstree.com
-domain:seodomains.website
-domain:goooogla.com
+# ggmap.co.com - path segment /dofollow-index/...<6-hex>.html ; dofollow
+#   anchor: "Premium White Hat SEO Links for qualitypluswindows.com to Improve Citation Flow. Strengthen Website Reputation, with Full Placement Reporting."
+domain:ggmap.co.com
+# mertio.shop - path segment /organic-growth-links/...<6-hex>.html ; dofollow
+#   anchor: "Trusted Contextual Link Placements for ngawindows.com to Boost Domain Authority. Grow Search Traffic, for Long Term SEO Results."
+domain:mertio.shop
+# mervi.shop - path segment /link-building-hub/...<6-hex>.html ; dofollow
+#   anchor: "High Quality Tiered Link Building for thermatrustwindows.com to Strengthen Your Link Profile. Increase Organic Visibility, Across Every Niche and Market."
+domain:mervi.shop
+# newearthsummit.org - path segment /guest-post-network/...<6-hex>.html ; dofollow
+#   anchor: "Reliable Manual Outreach Backlinks for northgeorgiawindows.net Designed to Improve DA, DR and TF. Grow Search Traffic, for Long Term SEO Results."
+domain:newearthsummit.org
+# nimbra.shop - path segment /niche-relevance-hub/...<6-hex>.html ; dofollow
+#   anchor: "High Quality Tiered Link Building for thermatrustwindows.com to Strengthen Your Link Profile. Increase Organic Visibility, Across Every Niche and Market."
+domain:nimbra.shop
+# nivira.shop - path segment /crawl-index-network/...<6-hex>.html ; dofollow
+#   anchor: "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service northpointwindows.com Rank First Page Google Fast SEO Link Building Buy Backli"
+domain:nivira.shop
+
+# TOTAL DISAVOW ENTRIES: 66
 
 # =====================================================================
-# NETWORK C - Auto-generated domain-stats / "website worth" scrapers
-# Mostly Singapore-hosted, Authority Score 2-4. Low direct risk but
-# heavy profile bloat. SECOND PRIORITY.
+# NOT DISAVOWED - vendor anchor present but link is NOFOLLOW (2 domains)
+# These are link-vendor pages, but the links carry rel="nofollow" and pass no
+# PageRank, so they fail the dofollow test. Listed for the record only.
 # =====================================================================
-domain:domainanalysis.org
-domain:allwebsitesdirectory.com
-domain:domainsc.com
-domain:wallpapers.pro
-domain:bestwebstats.com
-domain:domain.com.lc
-domain:linksnatcher.com
-domain:getwebsiteworth.com
-domain:globalecommerce.org
-domain:websiterace.com
-domain:webworthchecker.cv
-domain:indexaward.com
-domain:pagesearch.net
-domain:egyptiandirectory.com
-domain:alljobs.info
-domain:tunca.org
-domain:way2check.cv
-domain:way2check.art
-domain:pudhe.com
-domain:wonvision.com
-domain:ycm.info
-domain:read.org.in
-domain:procycling.org
-domain:taxies.biz
-domain:theface.in
-domain:tyres.pro
-domain:homefinance.co.in
-domain:preparation.co.in
-domain:indians.cc
-domain:takes.sbs
-domain:knows.sbs
-domain:knows.monster
-domain:blinks.monster
-domain:wants.cfd
-domain:seol.store
-domain:takes.homes
-domain:bizscoreai.com
-domain:factmags.com
-domain:eurekster.com
+# seo-rank-boost.shop  - anchor "Niche edits on qualitypluswindows.com helped us rank
+#                        in the top 3 for key terms" ; rel=nofollow
+# seonix.agency        - anchor "After hiring northgeorgiawindows.net for niche edits,
+#                        my sales doubled within 1 month" ; rel=nofollow
+#                        (Ahrefs DR 65. Fake-testimonial link-vendor site, but nofollow.)
 
 # =====================================================================
-# Blogspot spam subdomains
+# NOT DISAVOWED - benign anchors observed (5 domains)
+# Anchor text observed is a bare domain name / bare URL / brand mention, not
+# vendor sales copy. These are scraper and stats-farm pages. Per the red-team
+# finding, the bare sister-domain anchor cluster pre-dates the link blast by a
+# year and is ~34% nofollow; it is NOT the PBN and is NOT disavowed.
 # =====================================================================
-domain:burnersgamershitasd.blogspot.com
-domain:oozeas.blogspot.com
-domain:innocyscx.blogspot.com
+# domainsc.com      - anchor "ngwindows.com" (bare URL) ; dofollow
+# getonline.co.in   - anchor "northpointwindows.com" (bare domain) ; dofollow
+# theface.in        - anchor "e2windows.com" (bare domain) ; dofollow
+# godsbook.net      - anchor "performingwindows.com" (bare domain) ; rel=nofollow
+# disgustingmen.com - anchor "Window Replacement Company" ; rel=nofollow
+
+# =====================================================================
+# REMOVED FROM THE EARLIER DRAFT - false positives
+# These were in the previous draft on authority/pattern grounds only. No
+# per-domain anchor evidence exists for them, and all three are high-DR.
+# =====================================================================
+# csswinner.com   - Ahrefs DR 75. Design-award directory. REMOVED.
+# factmags.com    - Ahrefs DR 75. REMOVED. (Note: shares host 203.161.54.114 with
+#                   27 "buy backlinks"-named domains - worth a human look, but
+#                   co-hosting alone is not evidence of a manipulated link.)
+# eurekster.com   - Ahrefs DR 53. REMOVED.
 
 # =====================================================================
 # REVIEW MANUALLY - do NOT disavow without checking
 # =====================================================================
-# derchidoor.com      (AS 23, 134 links) - door industry site, may be a
+# derchidoor.com      (134 links, Ahrefs DR 18) - door industry site, may be a
 #                     genuine partner or a sitewide footer link. Verify.
-# csswinner.com       (AS 29, 65 links, SG) - design award directory.
+# csswinner.com       (65 links, Ahrefs DR 75, SG) - design award directory.
 #                     Probably a real award listing. Verify.
-# atlantahomeimprovement.com (AS 24, 90 links) - local, on-topic, linking
+# atlantahomeimprovement.com (90 links, Ahrefs DR 45) - local, on-topic, linking
 #                     since 2023. Almost certainly a GENUINE link. KEEP.
-# constantcontact.com (AS 47, 394 links) - the client's own newsletter
+# constantcontact.com (394 links, Ahrefs DR 92) - the client's own newsletter
 #                     archive. KEEP.
-# 24-7pressrelease.com (AS 40, 11 links) - paid PR distribution. Low value
+# 24-7pressrelease.com (11 links, Ahrefs DR 80) - paid PR distribution. Low value
 #                     but not toxic. Leave unless a manual action names it.
+
+# =====================================================================
+# INSUFFICIENT EVIDENCE - NOT DISAVOWED (1,159 referring domains)
+# =====================================================================
+# 1,232 referring domains were enumerated in full. Anchor-level evidence could be
+# retrieved for only 73 of them before the Semrush API unit balance reached zero.
+# The remaining 1,159 domains are NOT in this file, by design: without the anchor
+# text and the dofollow status for a specific domain there is no defensible
+# ground to disavow it.
+#
+# Of those 1,159, a large subset shares the Network A naming convention
+# (360 domains carry "dachecker" / "dapachecker" / "backlinkchecker" /
+# "seochecker" / "rankchecker" / "serpchecker" style names, and 284 of them
+# first appeared within the last 14 days). They are LIKELY the same network,
+# but "likely" is not evidence, and they are excluded until their anchors are
+# confirmed.
+#
+# TO COMPLETE THIS FILE: after the Semrush API units reset (and Ahrefs Site
+# Explorer units on 2026-10-25), re-run the `backlinks` report with
+# export_columns = source_url, anchor, nofollow and a display_filter on
+# anchor contains "Backlink" / "SEO Links" / "Link Building" / "Guest Post",
+# paginating to exhaustion. Add only domains whose anchor + dofollow status
+# is directly observed, using the same per-line evidence format as above.

@@ -13,6 +13,12 @@
 > blocked by this environment's egress proxy**, and `whois` is not installed. So every statement
 > below about redirects and site content is inferred from **Semrush's crawl data**, not from a
 > first-hand HTTP request. See §7 for exactly what that leaves unverified.
+>
+> **The Semrush API unit balance was exhausted during the §6A link-level pull** (500-row
+> `backlinks` pages cost ~48,000 units each). §6A therefore rests on 878 of the 1,225 referring
+> domains, with authority measured by Ahrefs DR rather than Semrush Authority Score; its limits
+> are set out in §6A.1. Everything in §1–§6 was completed before the balance ran out and is
+> unaffected.
 
 ---
 
@@ -227,6 +233,16 @@ Measured and estimated figures are marked throughout.
 | **SPAM-vendor copy naming ngwindows.com directly** + Telegram handles | 243 | **263** | **3.5%** | measured |
 | Spam in the long tail (`itxoft.com links for northgeorgiawindows.net`, `visit performingwindows.com for latest info`, fake testimonials, `quality contextual backlinks`) | ~15 | ~20 | ~0.3% | estimated |
 | **— TOTAL SPAM —** | — | **~5,098** | **~68.5%** | — |
+
+> **Refinement from §6A.** Counting all 2,757 bare-sister-domain links as "spam" is too blunt.
+> At link level that bucket is **52% dofollow / 48% nofollow**, and the nofollow half is
+> stats-farm scraping (`knows.sbs`, `takes.sbs`, `seol.store`, `blinks.monster`) that indexed the
+> shell domains — background noise, not an attack. It is also a *separate and earlier* event:
+> the bare-domain cluster first appears Jul 2025, a year before the PBN blast of 29 Jun 2026.
+> The two should not be conflated. Either way these links are removed at source by cutting the
+> redirects, so the remediation is unchanged; but "68.5% spam" overstates the *hostile* share.
+> The dofollow vendor-sales-copy campaign — ~2,321 links, buckets (a)+(c) above — is the part
+> that is unambiguously manipulative.
 | Naked URL (ngwindows.com in all casings/paths) | ~258 | ~789 | 10.6% | mostly measured |
 | Page-title / editorial-context anchors | — | ~378 | 5.1% | estimated |
 | Generic CTA / navigational (`read more`, `contact us now`, `visit website`, `\|`, bare digits) | — | ~370 | 5.0% | mostly measured |
@@ -291,6 +307,150 @@ correspondingly starker.
 
 ---
 
+## 6A. The low-authority band: what are those anchors actually saying?
+
+Requested follow-up. The client does not want anything disavowed merely for being low-authority —
+correctly. So the question is what the ~1,011 Authority-Score-0–5 referring domains are *doing*.
+
+### 6A.1 Method, and its limits
+
+Link-level data was pulled with `backlinks` sorted `page_authority_score_asc`, which front-loads
+the low-authority band. **2,532 unique links across 878 distinct referring domains** were
+retrieved and classified. Each domain was assigned its *dominant* anchor bucket.
+
+Authority was then measured with the **Ahrefs free DR endpoint** on a stratified random sample of
+**206 of those 878 domains** (~45 per bucket), and the per-bucket DR 0–5 rate extrapolated to the
+full 878.
+
+Four honest caveats, all of which widen the error bars:
+
+1. **Coverage is 878 of 1,225 referring domains (72%).** Pagination stopped early because
+   **the Semrush API unit balance hit zero** during this pull (500-row link pages cost ~48,000
+   units each). Two pages also failed on a malformed row. The missing ~347 domains are, by the
+   sort order, weighted toward *higher* authority — so the low-authority band is better covered
+   than 72%, but coverage is not complete and the exact figure is unknown.
+2. **The authority metric is substituted.** The band was defined by Semrush Authority Score;
+   I measured **Ahrefs DR** because Semrush units were gone. DR 0–5 and AS 0–5 are conceptually
+   equivalent but not identical, and the two tools disagree on individual domains.
+3. **Per-bucket DR rates come from samples of 12–44 domains.** Bucket (e) in particular rests on
+   12 usable observations. Treat its figure as indicative only.
+4. **Hosted subdomains were excluded from the DR calculation.** The free endpoint returns the
+   *platform root* DR for `*.blogspot.com` (95), `*.wordpress.com` (96) and `*.pages.dev` (93).
+   Those are artifacts, not site authority — and many of those subdomains
+   (`glassreplacementkaev.blogspot.com`, `carwindowreplacementznali.blogspot.com`,
+   `fiberglassdoorpantai.blogspot.com` …) are auto-generated spam blogs.
+
+### 6A.2 Anchor buckets across the 878 sampled referring domains, by follow status
+
+Link-level, all 2,532 classified links:
+
+| Bucket | Links | Dofollow | Nofollow | % dofollow |
+|---|---|---|---|---|
+| **(a) Vendor sales-copy** (`High Quality Dofollow Backlinks DA 50 PA 40…`, `Premium White Hat SEO Links for…`, Telegram handles) | **1,342** | **1,320** | 22 | **98%** |
+| **(b) Bare sister-domain name** (`roiwindows.com`, `performingwindows.com`, `https://thermalprowindows.com/`) | 753 | 391 | 362 | **52%** |
+| **(c) Naked URL / brand** (`ngwindows.com`, `www.ngwindows.com`, `north georgia replacement windows`) | 239 | 91 | 148 | 38% |
+| **(d) Empty / image / generic** (`<EmptyAnchor>`, `visit website`, `read more`) | 102 | 64 | 38 | 63% |
+| **(e) Genuinely topical** (`replacement windows`, `window replacement atlanta`, `windows and doors`) | 81 | 50 | 31 | 62% |
+| (f) Other / unclassifiable | 15 | 14 | 1 | 93% |
+
+This **confirms the red-team pass's separation of the two events.** Bucket (a) is 98% dofollow —
+a deliberate PageRank-passing campaign. Bucket (b) is 52% dofollow / 48% nofollow, a mixed
+population consistent with stats-farm scrapers (`knows.sbs`, `takes.sbs`, `seol.store`,
+`blinks.monster` — all nofollow) sitting alongside dofollow directory spam. They are not the same
+operation and should not be conflated.
+
+### 6A.3 Cross-cut by authority (DR sample, hosted subdomains excluded)
+
+| Bucket | Domains (of 878) | DR sampled | of which DR 0–5 | DR 0–5 rate | Est. DR 0–5 domains |
+|---|---|---|---|---|---|
+| **(a) Vendor sales-copy** | 633 | 44 | 42 | **95%** | **~604** |
+| (b) Bare sister-domain | 100 | 38 | 25 | 66% | ~66 |
+| (c) Naked URL / brand | 74 | 33 | 7 | **21%** | ~16 |
+| (d) Empty / generic | 34 | 32 | 18 | 56% | ~19 |
+| (e) Topical | 33 | 12 | 5 | 42% | ~14 |
+| (f) Other | 4 | 3 | 2 | — | ~3 |
+| | | | | | **~721** |
+
+### 6A.4 Answer: the low-authority band is **not** mostly benign
+
+> **Estimated composition of the low-authority band (~721 domains in the sampled 878):**
+>
+> | | Share |
+> |---|---|
+> | **(a) Vendor sales-copy — manipulative on its face, 98% dofollow** | **~84%** |
+> | (b) Bare sister-domain name | ~9% |
+> | (d) Empty / generic | ~3% |
+> | (c) Naked URL / brand | ~2% |
+> | (e) Genuinely topical | ~2% |
+> | **Benign buckets (b)+(c)+(d)+(e) combined** | **~16%** |
+
+**This does not support the working suspicion, and I am reporting it as measured.** The hypothesis
+was that the AS 0–5 band would be mostly (b)+(c)+(d) background noise with a minority of (a).
+The data says the reverse by a wide margin: roughly **five out of six low-authority referring
+domains are carrying explicit link-vendor sales copy on a dofollow link.** That is the defining
+characteristic of the band, not an edge case within it.
+
+The reason is structural: the June–October 2026 blast added ~640 referring domains in two months
+(draft audit §5), and essentially all of them are Network A `/dir/` template sites. They swamp the
+pre-existing low-authority population. The benign low-authority domains the client rightly wants
+protected do exist — there are roughly **115 of them in the sample** — but they are now a minority
+of the band.
+
+### 6A.5 The finding that matters more: **neither test alone is safe**
+
+The strategic premise — *don't disavow on authority, disavow on behaviour* — is right. But the
+data shows the anchor-behaviour test has serious false negatives in **both** directions:
+
+**False negatives (spam that looks benign).** Bucket (c) — "naked URL / brand", the bucket the
+client most wants left alone — contains a cluster of **high-DR commercial link sellers** linking
+with an innocuous bare `ngwindows.com` anchor:
+
+`allbaclinks.com` (DR 60) · `atozbacklinks.com` (DR 60) · `bestsitesbacklinks.com` (DR 60) ·
+`booastrankingwithbacklinks.com` (DR 60) · `friendlybacklinksbuy.com` (DR 60) ·
+`increasewebtrafficwithlinks.com` (DR 60) · `99backlinksbuy.com` (DR 59) ·
+`bestrankbacklinks.com` (DR 59) · `buytopqualitybacklinks.com` (DR 59) ·
+`best-seo-domains.com` (DR 59) · `backlinks-checker.com` (DR 42)
+
+A rule of "benign anchor → leave alone" lets all of these through. A rule of "low authority →
+disavow" *also* lets them through, because they are DR 59–60.
+
+**False positives (legitimate sites that look disposable).** Conversely, buckets (c), (d) and (e)
+contain genuinely good links that an authority-threshold sweep would destroy:
+
+`castbox.fm` (DR 87) · `barbend.com` (DR 75) · `brightside.me` (DR 75) · `csswinner.com` (DR 75) ·
+`moneytalksnews.com` (DR 74) · `bizhwy.com` (DR 71) · `members.williamsonchamber.com` (DR 49) ·
+`disgustingmen.com` (DR 46) · `atlantahomeimprovement.com` (DR 45) · `nerdymamma.com` (DR 45) ·
+`contractorsnearme.ai` (DR 44) · `roswell365.com` (DR 39) · `jeffslist.com` (DR 38) ·
+`acraftedpassion.com` (DR 34) · `disunplugged.com` (DR 34) · `houseandhomeonline.com` (DR 32) ·
+`atlantaglow.org` (DR 30)
+
+— plus real low-DR local sites that are perfectly legitimate and must be kept:
+`forsythcounty.com` (DR 3.6), `georgiashutters.com` (DR 2.2), `alpharettatoprated.com` (DR 10),
+`chattanoogatoprated.com` (DR 10), `windowdigest.com` (DR 15), `homerenoworld.com` (DR 16),
+`athomepros.com` (DR 18), `fairviewwindows.co.uk` (DR 20), `koalatyremodel.com` (DR 27),
+`gnpmilton.com` (DR 26), `lombardohomegroup.com` (DR 13), `thehomefixitpage.com` (DR 13),
+`crowdyhome.com` (DR 12), `1stcallglasscare.com` (DR 3).
+
+**Conclusion: build the disavow on domain character — what the site is — using anchor behaviour as
+the primary screen and authority as no more than a tiebreaker.** The clean decision rule the data
+supports:
+
+| Signal | Action |
+|---|---|
+| Vendor sales-copy anchor (bucket a), dofollow | **Disavow.** ~604 domains, 95% of them DR 0–5, zero legitimate sites found in the sample |
+| Domain name is itself a link-selling brand (`*backlinks*`, `*seo*`, `*dachecker*`, `*rankchecker*`) **regardless of anchor or DR** | **Disavow.** Catches the DR 59–60 vendors bucket (a) misses |
+| Bare sister-domain anchor (bucket b) | **Do not disavow — remove the redirect instead.** These disappear at source (§8, Action 1) |
+| Naked URL / brand / generic / topical anchor from a site that is a real publisher, directory, chamber or local business | **Leave alone**, at any DR. ~115 such domains in the low-authority band alone |
+
+### 6A.6 Does this shrink the remediation scope?
+
+**Yes — but through the redirects, not through the low-authority band.** The band is mostly
+genuine spam, so a behaviour-based disavow there is still large. What shrinks the scope is §8
+Action 1: ~94% of the spam arrives through the 14 redirects, and the redirect-borne bucket (b)
+population never needs disavowing at all. The two findings are complementary, not alternatives.
+
+---
+
 ## 7. What is NOT established — stated plainly
 
 Being explicit about the limits of this analysis:
@@ -352,11 +512,23 @@ your DNS?"* The answer resolves Hypothesis A vs. B in one sentence. If the clien
 these domains are, escalate immediately — that is a live negative SEO incident and a possible DNS
 compromise.
 
-### Action 3 — Disavow only the ~283 direct links
+### Action 3 — Disavow on domain character, not on authority
 
-Once the redirects are gone, the residual problem is small: the Network A `/dir/quality-authority-
-backlinks-148096` campaign and the Telegram-handle links that point straight at ngwindows.com.
-Disavow those at **domain level**. The scraper farms (Network C) are optional hygiene.
+Once the redirects are gone, the residual direct problem is the Network A
+`/dir/quality-authority-backlinks-148096` campaign and the Telegram-handle links that point
+straight at ngwindows.com. Disavow at **domain level**, using the §6A.5 decision rule:
+
+- **Disavow** any domain whose dominant anchor is vendor sales-copy on a dofollow link
+  (bucket a — 95% of these are DR 0–5, and no legitimate site appeared among 44 sampled).
+- **Also disavow** domains whose *name* is a link-selling brand (`*backlinks*`, `*seo*`,
+  `*dachecker*`, `*rankchecker*`) **even at DR 59–60** — §6A.5 lists eleven that a benign-anchor
+  rule or a low-authority rule would both miss.
+- **Do not disavow** bucket (b) bare-sister-domain links. They vanish when the redirects go.
+- **Do not disavow on low authority alone.** ~115 legitimate domains in the sampled
+  low-authority band — local chambers, directories, real publishers and small contractors —
+  would be destroyed by an authority threshold. §6A.5 names them.
+
+The Network C scraper farms are optional hygiene and carry no urgency.
 
 ### Action 4 — Rebuild branded anchors
 
