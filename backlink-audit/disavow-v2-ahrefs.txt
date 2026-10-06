@@ -32,7 +32,7 @@
 #   NOT COVERED: 894 Semrush-only domains minus the 117 listed here have no anchor
 #     evidence naming ngwindows.com and are deliberately excluded (default-to-exclusion).
 #
-# TOTAL ENTRIES: 458  (was 460; Section 5 withdrawn - both false positives)
+# TOTAL ENTRIES: 462  (460 -2 Section 5 false positives +4 Sections 7-8 additions)
 # ==========================================================================
 
 
@@ -481,6 +481,40 @@ domain:youtoo.in  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: A
 # Withdrawn (NOT disavowed): whosmypro.com, homeownerideas.com
 
 # ==========================================================================
+# =====================================================================
+# SECTION 7 - NETWORK D: topical injection on compromised hosts, dofollow.
+# 3 domains / 6 links.  Grounds (a)+(b)+(c)+(d).
+# NOT FOUND BY ANY EARLIER PASS. Ahrefs Is spam=FALSE on all - this is the
+# classifier under-firing, so the flag is NOT a ground here.
+#   (c) beihaishitrade.com and nextndt.com serve the SAME article.php script -
+#       the only occurrence of that filename anywhere in the 2,665-row export -
+#       under random short directories, with the IDENTICAL nonsense page title
+#       "rebecca fitoussi caps" and the IDENTICAL anchor.
+#   (d) beihaishitrade.com's copy sits in /wp-content/uploads/2023/5p6kj/ -
+#       a PHP script inside a WordPress media directory, i.e. the host is
+#       COMPROMISED, not cooperating.
+#   (a) anchor "Our Family | North Georgia Replacement Windows" / "Windows &
+#       Doors Roswell GA | North GA Replacement Windows" - the client's own page
+#       titles, injected into pages about French TV presenters and NFL
+#       touchdown statistics. Topical impossibility.
+#   (b) dofollow on all 6.
+# This file's own standard calls topically-impossible injection its strongest
+# behavioural evidence, and excluded five such cases ONLY because they were
+# nofollow. These are the same behaviour, dofollow. Mandatory by that logic.
+# =====================================================================
+
+domain:beihaishitrade.com  # /wp-content/uploads/2023/5p6kj/article.php | title "rebecca fitoussi caps" | anchor "Our Family | North Georgia Replacement Windows" | dofollow | WordPress compromise
+domain:nextndt.com  # /puk5eu9/article.php?id=rebecca-fitoussi-caps | same script, title and anchor | dofollow
+domain:matyesz.hu  # /p14abe/receiving-touchdown-leaders-2021 + /ptcas-application-2021-2022 | anchor "Windows & Doors Roswell GA | North GA Replacement Windows" injected into NFL/college-admissions pages | dofollow
+
+# =====================================================================
+# SECTION 8 - Vendor-path domains missed by the anchor-only sweep. 1 domain.
+# Grounds (b)+(d). Section 6 was built by matching vendor ANCHOR copy; this
+# host's vendor character is in its PATH, so the sweep missed it.
+# =====================================================================
+
+domain:backlinksolutions.info  # /seo-link-building-packages-259/ | anchor "ngwindows.com" (word-boundary) | dofollow | path is link-vendor sales copy
+
 # SECTION 6 - SEMRUSH-ONLY. 117 domains Ahrefs has never crawled.
 # Grounds (a)+(b) from links_raw.tsv (commit 6f5f407), which carries anchor and
 # nofollow but NO target_url column. Each entry below has at least one row where

@@ -370,22 +370,29 @@ vendor character sits in the path.
 
 ## 5. Recommended total entry count
 
-Current file: **460**.
+**Baseline note:** the file changed on disk during this review (a parallel pass withdrew Section 5 —
+`whosmypro.com` and `homeownerideas.com` — as false positives). Header now reads
+`TOTAL ENTRIES: 458`. Verified against the current file: 458 `domain:` lines, no duplicates, split
+258 / 43 / 14 / **26** / 117 across Sections 1, 2, 3, 4, 6. **Section 4 is unchanged**, so every
+finding above stands as written. Counts below use 458.
 
 | | Entries | Conditional on Section 4? |
 |---|---|---|
-| Current file | 460 | — |
+| Current file (post Section-5 withdrawal) | 458 | — |
 | §3.1 marketplace fingerprint hosts | +20 | yes |
 | §3.2 listing-path kit | +3 | yes |
 | §3.3 `newsblogsports.site` | +1 | no |
 | §3.4 Network D injection | +3 | no |
 | §3.5 `backlinksolutions.info` | +1 | no |
 
-- **Recommended (keep Section 4, add all): 488 entries.**
-- If the reviewer drops Section 4 instead: 460 − 26 − 0 + 5 = **439 entries**, and §3.1/§3.2 must be
+- **Recommended (keep Section 4, add all): 486 entries.**
+- If the reviewer drops Section 4 instead: 458 − 26 + 5 = **437 entries**, and §3.1/§3.2 must be
   dropped with it.
-- **Minimum defensible floor, whatever happens to Section 4: 465** — the five unconditional
+- **Minimum defensible floor, whatever happens to Section 4: 463** — the five unconditional
   additions in §3.3–§3.5 are mandatory on the file's own stated grounds and should go in regardless.
+
+I did not evaluate the Section 5 withdrawal; it is outside this brief. Note only that §3.4 creates a
+new Section 7, so the next free section number is 7 whether or not Section 5 is reinstated.
 
 Section placement for the additions: §3.1 and §3.2 extend **Section 4** (restate its counts as
 49 domains / ~75 dofollow links); §3.3 extends **Section 2**; §3.5 extends **Section 6**; §3.4 needs a
