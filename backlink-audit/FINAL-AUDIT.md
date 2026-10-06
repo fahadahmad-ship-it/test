@@ -27,9 +27,13 @@ explicitly in §4.
 
 ---
 
-> **UPDATE 2026-10-06:** `northgeorgiawindows.net` **confirmed as a redirect** by the client. The
-> 301-shell mechanism is now verified directly, not only inferred. Remaining verifications are
-> listed in **`OPEN-CHECKS.md`**.
+> **UPDATE 2026-10-06 — redirect model CONFIRMED by direct testing.** Client-run checks on all 15
+> domains split perfectly along the campaign-ID line: the **8 domains carrying vendor campaigns
+> all redirect** (2,587 anchor rows), and the **6 carrying no campaign do not** (206 anchor rows,
+> incidental scraper mentions). `ngwind.com` is unregistered. Three independent variables — IP
+> pair, redirect status, campaign presence — align 8/8 and 6/6 with no exceptions. The mechanism
+> is no longer inferred. See **`REDIRECT-TEST-RESULTS.md`**; remaining items in
+> **`OPEN-CHECKS.md`**.
 
 ## 1. Executive summary
 
