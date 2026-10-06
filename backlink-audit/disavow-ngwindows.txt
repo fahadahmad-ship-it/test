@@ -1,0 +1,130 @@
+# Disavow file - ngwindows.com
+# Prepared 2026-10-06 from Semrush Backlink Analytics
+# Submit at: https://search.google.com/search-console/disavow-links
+#
+# IMPORTANT - READ BEFORE SUBMITTING
+# 1. This is a DRAFT built from a SAMPLE (top ~110 referring domains by authority
+#    and by link volume) of 1,225 total referring domains. Export the full
+#    referring-domain list from Semrush AND from Ahrefs (after API units reset on
+#    2026-10-25) and extend this file before submitting.
+# 2. Review every line. Disavowing a good link costs real rankings.
+# 3. All entries are domain-level. The networks below are too large for URL-level.
+
+# =====================================================================
+# NETWORK A - "DA/PA checker" PBN directory network
+# Dofollow links from /dir/ pages with SEO-vendor sales-copy anchors.
+# HIGHEST PRIORITY.
+# =====================================================================
+domain:dacheckertoolonline.site
+domain:rankwebsitechecker.website
+domain:onlinewebsitechecker.space
+domain:padacheckertools.shop
+domain:onlinedapachecker.site
+domain:backlinkrankchecker.shop
+domain:dapafreechecker.website
+domain:padachecker.site
+domain:goodbacklinkchecker.space
+domain:seoblogchecker.store
+domain:freesiterankchecker.online
+domain:linkaudit.space
+domain:trustflowchecker.space
+domain:bestseochecker.shop
+domain:big-easy-seo.com
+domain:seostrengthchecker.online
+domain:dacheckerbulkfree.online
+domain:backlinkscheckerbulk.space
+domain:domainmetricschecker.store
+domain:highdachecker.space
+domain:blogseochecker.online
+domain:bulkbacklinkanalysis.website
+domain:backlinkcheckers.online
+domain:backlinkcheckerseo.online
+domain:livebacklinkchecker.online
+domain:dapacheckermultiple.website
+domain:dapacheckerfree.site
+domain:bulkpachecker.online
+domain:dabacklinks.website
+domain:siteseocheckerfree.shop
+domain:dacheckeronline.store
+domain:whatisdapachecker.space
+
+# =====================================================================
+# NETWORK B - Fake guest-post / "niche edit" vendor network
+# Dofollow, money anchors, fake testimonials. HIGH PRIORITY.
+# =====================================================================
+domain:ggmap.co.com
+domain:newearthsummit.org
+domain:nivira.shop
+domain:mertio.shop
+domain:bestseoquill.site
+domain:seonix.agency
+domain:backlinkhouse.com
+domain:backlinkstree.com
+domain:seodomains.website
+domain:goooogla.com
+
+# =====================================================================
+# NETWORK C - Auto-generated domain-stats / "website worth" scrapers
+# Mostly Singapore-hosted, Authority Score 2-4. Low direct risk but
+# heavy profile bloat. SECOND PRIORITY.
+# =====================================================================
+domain:domainanalysis.org
+domain:allwebsitesdirectory.com
+domain:domainsc.com
+domain:wallpapers.pro
+domain:bestwebstats.com
+domain:domain.com.lc
+domain:linksnatcher.com
+domain:getwebsiteworth.com
+domain:globalecommerce.org
+domain:websiterace.com
+domain:webworthchecker.cv
+domain:indexaward.com
+domain:pagesearch.net
+domain:egyptiandirectory.com
+domain:alljobs.info
+domain:tunca.org
+domain:way2check.cv
+domain:way2check.art
+domain:pudhe.com
+domain:wonvision.com
+domain:ycm.info
+domain:read.org.in
+domain:procycling.org
+domain:taxies.biz
+domain:theface.in
+domain:tyres.pro
+domain:homefinance.co.in
+domain:preparation.co.in
+domain:indians.cc
+domain:takes.sbs
+domain:knows.sbs
+domain:knows.monster
+domain:blinks.monster
+domain:wants.cfd
+domain:seol.store
+domain:takes.homes
+domain:bizscoreai.com
+domain:factmags.com
+domain:eurekster.com
+
+# =====================================================================
+# Blogspot spam subdomains
+# =====================================================================
+domain:burnersgamershitasd.blogspot.com
+domain:oozeas.blogspot.com
+domain:innocyscx.blogspot.com
+
+# =====================================================================
+# REVIEW MANUALLY - do NOT disavow without checking
+# =====================================================================
+# derchidoor.com      (AS 23, 134 links) - door industry site, may be a
+#                     genuine partner or a sitewide footer link. Verify.
+# csswinner.com       (AS 29, 65 links, SG) - design award directory.
+#                     Probably a real award listing. Verify.
+# atlantahomeimprovement.com (AS 24, 90 links) - local, on-topic, linking
+#                     since 2023. Almost certainly a GENUINE link. KEEP.
+# constantcontact.com (AS 47, 394 links) - the client's own newsletter
+#                     archive. KEEP.
+# 24-7pressrelease.com (AS 40, 11 links) - paid PR distribution. Low value
+#                     but not toxic. Leave unless a manual action names it.
