@@ -1,3 +1,14 @@
+> # ⚠️ CORRECTED — figures in this file do not reproduce
+>
+> Re-derivation found this analysis understated its own result and overstated its
+> independence. Its 84.3% re-derives to **87.4%** (the input was missing ~143 links),
+> and the "sample A / sample B agreement" cited elsewhere is an artifact: **sample A
+> is a strict subset of sample B**. On genuinely new observations the vendor share is
+> **47.0%**, and the defensible band-wide estimate is **~66% (62–83%)**.
+>
+> The script and method are sound; the inputs and the independence claim were not.
+> **See `recheck-numbers.md` and `FINAL-AUDIT.md` §4 for the corrected figures.**
+
 # AS 0–5 Band: Anchor-Text Evidence Review
 
 **Question asked:** do not disavow any link purely for being low authority. What are the

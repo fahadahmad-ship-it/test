@@ -78,7 +78,7 @@ If it returns `qualitypluswindows.com`, the redirect model is confirmed. If it r
 | Semrush Authority Score | 30 |
 | Ahrefs Domain Rating | 27 |
 | Total backlinks | 7,444–7,547 (drifts daily; blast is live) |
-| Referring domains | **1,232** (full enumeration) |
+| Referring domains | **1,232** (full enumeration; 1,225 / 1,227 elsewhere are same-metric counter reads on other days) |
 | Follow / nofollow | 5,624 / 1,896 |
 | Text / image links | 6,819 / 186 |
 | Topical categories | Doors & Windows, Home Improvement, Construction — correctly classified |
@@ -89,7 +89,8 @@ If it returns `qualitypluswindows.com`, the redirect model is confirmed. If it r
   was measuring **Cloudflare's address allocation** — 861 of 1,232 referring domains (**69.9%**)
   are Cloudflare-fronted, and the subnets they span are CDN artifacts. Struck.
   **Three real host clusters do exist** and are the version to cite: `118.139.181.85`
-  (29 domains / 727 links, Singapore stats farms), `203.161.54.114` (27 domains, a link-seller
+  (29 domains / 727 links, Singapore stats farms — note a **fourth** shell IP, `3.33.152.147`,
+  hosts `choiceviewwindows.com` and is named in no earlier document), `203.161.54.114` (27 domains, a link-seller
   block — **note: the "uniform DR 59–60" fingerprint is false**; 25 of 27 measure 59–60,
   `factmags.com` is 75 and `goooogla.com` is 29), `195.20.19.178` (19 domains, Moldova shorteners).
 - **"886 domains at Authority Score 2" is withdrawn.** It is a rounding artifact of an integer
@@ -138,18 +139,39 @@ Cheap"* — and anchors containing Telegram link-selling handles (`t.me/s/darksi
 **Operative rule, applied throughout: no link is disavowed for being low authority. Ever.**
 The grounds must be cited anchor text plus dofollow status, or link-selling domain character.
 
-Three measurements of the AS 0–5 band, which must not be conflated:
+**Both of the earlier readings of this band were wrong, in opposite directions.**
 
-| Measurement | Finding | Basis |
-|---|---|---|
-| Independent sample A | 84.3% vendor sales copy, 15.7% benign | 485 domains, 1,000 links |
-| Independent sample B | ~84% vendor sales copy, 98% dofollow | 878 domains, 2,532 links |
-| **Individually evidenced** | **6.3%** (64 of 1,015 domains) | 73 domains, 76 links |
+An earlier draft reported "two independent samples agreeing at ~84%". **They were not
+independent** — sample A is a strict *subset* of sample B, supplying 620 of its 805 AS 0–5
+domains. Agreement between a set and its own superset is not corroboration. Sample A's own figure
+also fails to reproduce: re-running its script gives **87.4%**, not 84.3%, because its input was
+missing ~143 links.
 
-The first two agree closely and are the honest *estimate*: roughly five in six low-authority
-referring domains carry vendor sales copy. **But only 6.3% can be documented domain-by-domain**,
-because the API ran dry. Those are different claims and the disavow file is built to the second,
-stricter one.
+Restricting to the **185 AS 0–5 domains observed only in the second block** — the genuinely new
+observations — vendor share is **47.0%**.
+
+| Measurement | Finding |
+|---|---|
+| Sample A (re-derived; subset of B) | 87.4% vendor |
+| New observations only (185 domains) | **47.0%** vendor |
+| **Defensible band-wide estimate** | **~66%, bounded 62–83%** |
+
+**"Five in six low-authority domains are spam" must not be used.** The defensible claim is roughly
+two-thirds, with a wide interval.
+
+**And the opposite error was larger.** The disavow file was capped at 5 entries on the explicit
+grounds that only "6.3% (64 of 1,015)" could be individually evidenced. **That premise is false.**
+`links_raw.tsv` — already in this repo's git history — individually evidences **617 AS 0–5 domains
+(60.8% of the band)** by the audit's own criterion 1. A **9.6× understatement**. Network A is
+**501 `/dir/` domains**, not "59 evidenced + 360 likely".
+
+The scoping decision therefore needs re-taking on the real evidence. (The separate argument — that
+redirect-borne links should be fixed at the redirect rather than disavowed — still stands, and is
+why the file was not simply expanded to ~620 lines.)
+
+**The most reliable table in the entire document set** is the follow/nofollow split, which
+re-derived to the unit: vendor spam **1,320 dofollow / 19 nofollow = 98.6%**; bare sister-domain
+cluster **391 / 360 = 52.1%**. Two genuinely different populations.
 
 **The finding that matters most: neither test is safe alone.**
 
