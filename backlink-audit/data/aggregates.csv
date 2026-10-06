@@ -1,0 +1,74 @@
+# Semrush aggregate reports for ngwindows.com, pulled 2026-10-06.
+# Preserved here because these existed only as prose in the audit documents.
+# Semrush is at zero units until reset; these cannot be re-pulled.
+report,key,value_1,value_2
+backlinks_overview,ascore,30,
+backlinks_overview,total_backlinks,7444,
+backlinks_overview,domains_num,1225,
+backlinks_overview,urls_num,4581,
+backlinks_overview,ips_num,1141,
+backlinks_overview,ipclassc_num,428,
+backlinks_overview,follows_num,5624,
+backlinks_overview,nofollows_num,1896,
+backlinks_overview,sponsored_num,0,
+backlinks_overview,ugc_num,30,
+backlinks_overview,texts_num,6819,
+backlinks_overview,images_num,186,
+backlinks_overview,trust_score,30,
+backlinks_historical,2026-10,7444,1225
+backlinks_historical,2026-09,6910,849
+backlinks_historical,2026-08,5561,583
+backlinks_historical,2026-07,5113,535
+backlinks_historical,2026-06,4921,590
+backlinks_historical,2026-05,4827,585
+backlinks_historical,2026-04,4435,575
+backlinks_historical,2026-03,3932,562
+backlinks_historical,2026-02,3243,535
+backlinks_historical,2026-01,3154,560
+backlinks_historical,2025-12,3906,572
+backlinks_historical,2025-11,3685,534
+backlinks_historical,2025-10,3424,523
+backlinks_historical,2025-09,3323,434
+backlinks_historical,2025-08,3240,416
+backlinks_historical,2025-07,3266,418
+backlinks_historical,2025-06,3089,412
+backlinks_historical,2025-05,2845,364
+backlinks_historical,2025-04,2089,358
+backlinks_historical,2025-03,1845,335
+backlinks_historical,2025-02,1713,323
+backlinks_historical,2025-01,1705,338
+backlinks_historical,2024-12,1765,359
+backlinks_historical,2024-11,1786,359
+backlinks_historical,2024-10,1877,376
+backlinks_historical,2024-09,1862,376
+backlinks_historical,2024-08,2145,395
+backlinks_historical,2024-07,2325,409
+backlinks_historical,2024-06,2450,377
+backlinks_historical,2024-05,2573,379
+backlinks_geo,Singapore,70,2133
+backlinks_geo,United States,246,1391
+backlinks_geo,Moldova,19,263
+backlinks_geo,France,15,66
+backlinks_geo,India,5,12
+backlinks_geo,Germany,8,12
+backlinks_geo,Canada,7,9
+backlinks_geo,United Kingdom,5,8
+backlinks_geo,Netherlands,4,4
+backlinks_tld,com,494,3980
+backlinks_tld,shop,118,368
+backlinks_tld,online,84,229
+backlinks_tld,info,77,374
+backlinks_tld,space,66,139
+backlinks_tld,site,64,124
+backlinks_tld,link,60,171
+backlinks_tld,store,58,120
+backlinks_tld,website,57,119
+backlinks_tld,org,19,256
+backlinks_tld,net,16,170
+backlinks_tld,in,15,342
+backlinks_categories_profile,/Business & Industrial,86,
+backlinks_categories_profile,/Arts & Entertainment,62,
+backlinks_categories_profile,/Home & Garden,62,
+backlinks_categories_profile,/Home & Garden/Home Improvement,56,
+backlinks_categories_profile,/Internet & Telecom,50,
+backlinks_categories_profile,/Home & Garden/Home Improvement/Doors & Windows,38,
