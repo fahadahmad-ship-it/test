@@ -5,10 +5,10 @@ refrens.com $284, toolshero.com $260, xoxoday.com $260, docsumo.com $280,
 aboutchromebooks.com $282) and 1 already built (applemagazine.com $99 — live
 dofollow link, anchor "Medical device cybersecurity").
 
-37 remain. All 29 were duplication-checked against bluegoatcyber.com with a
+37 remain. All 37 were duplication-checked against bluegoatcyber.com with a
 control-validated filter. None of them currently links to you.
 
-Outbound dofollow ratio is unmeasured on all 29 (Ahrefs only, back 2026-10-25).
+Outbound dofollow ratio is unmeasured on all 37 (Ahrefs only, back 2026-10-25).
 TF is the vendor sheet (Majestic). Traffic is all Semrush regional databases.
 
 | Site | AS | TF | All traffic | US% | Price | Observation |
