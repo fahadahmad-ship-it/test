@@ -32,7 +32,7 @@
 #   NOT COVERED: 894 Semrush-only domains minus the 117 listed here have no anchor
 #     evidence naming ngwindows.com and are deliberately excluded (default-to-exclusion).
 #
-# TOTAL ENTRIES: 460
+# TOTAL ENTRIES: 458  (was 460; Section 5 withdrawn - both false positives)
 # ==========================================================================
 
 
@@ -446,26 +446,39 @@ domain:wonvision.com  # path /61a37460a2eed245244c9bc59896bc7b-l/ | ground: Ahre
 domain:ycm.info  # path /61a37460a2eed245244c9bc59896bc7b-l/ | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
 domain:youtoo.in  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: Ahrefs Is spam=true, + fingerprint
 
-# ==========================================================================
-# SECTION 5 - Auto-generated directory injection, dofollow. 2 domains / 137 links.
-# Grounds (b)+(c)+(e). These two are individually argued; read both before acting.
-# ==========================================================================
-domain:whosmypro.com
-#   133 dofollow links from one DR-0.4 host. (c) structural fingerprint: 133
-#   near-identical "Doors & Windows Near <CITY>, GA" pages (Druid Hills, Peachtree,
-#   Acworth, Austell, ...) each carrying the same anchor "- Go to company website"
-#   to the same target. City-permutation doorway pages, not 133 editorial mentions.
-#   Page type "Listing collection > Business". (e) Ahrefs Is spam=true.
-#   CHALLENGEABLE: legitimate local directories also build city pages. The
-#   distinguishing facts are the volume (133 dofollow to one business) and that
-#   every page is a permutation of one template.
-domain:homeownerideas.com
-#   4 dofollow links. (c) fabricated geography: the page title is "North Georgia
-#   Replacement Windows Roswell NEW MEXICO - Home Owner Ideas Directory" for a
-#   Georgia company. A directory that invents a location is generating listings
-#   programmatically, not recording a real business. Anchor is the bare URL
-#   "https://www.ngwindows.com/". (e) Ahrefs Is spam=true.
-
+# =====================================================================
+# SECTION 5 - WITHDRAWN IN FULL (was 2 domains / 137 links)
+# =====================================================================
+# BOTH ENTRIES WERE FALSE POSITIVES. Verified against the Ahrefs export:
+#
+# whosmypro.com - A REAL, OPERATING DIRECTORY. Do not disavow.
+#   - 72 distinct pages, NOT '133 near-identical pages'. 61 carry two links
+#     each. The structural claim was overstated by 85%.
+#   - 105-223 external links to 41-84 external domains PER PAGE. The client is
+#     one of ~80 businesses listed, not the purpose of the page.
+#   - Paths are real Georgia cities (/doors-windows/acworth-ga/, /atlanta-ga/,
+#     /alpharetta-ga/...). Geography is correct, not permuted. The client
+#     publicly serves the whole state.
+#   - Anchor is the standard directory CTA '# Go to company website', not
+#     vendor copy.
+#   - DECISIVE: 72 of 133 rows target
+#     https://www.ngwindows.com/%3Futm_source%3Dgoogle%26utm_medium%3Dorganic%26utm_campaign%3Dgbp
+#     - the CLIENT'S OWN Google Business Profile URL with the client's own UTM
+#     tags. This is a scraped GBP citation, unsolicited and outside the
+#     client's control. Disavowing it would have been a clear error.
+#   - Real company (Whos My Pro LLC) with ToS, privacy policy and a documented
+#     listing-removal process. If unwanted, request removal - do not disavow.
+#
+# homeownerideas.com - REAL nationwide contractor directory, DR 23, free
+#   listing submission. The 'fabricated geography' ground does not hold:
+#   'Roswell New Mexico' is a Roswell GA / Roswell NM disambiguation bug, the
+#   most famous US city-name collision, not an invented location. Anchor on all
+#   4 rows is the bare URL - the least optimised anchor possible, which is
+#   evidence AGAINST manipulation. Only Ahrefs' flag remained, which this file's
+#   own standard forbids as a sole ground. Its 3 duplicate listing pages warrant
+#   a removal request, not a disavow.
+#
+# Withdrawn (NOT disavowed): whosmypro.com, homeownerideas.com
 
 # ==========================================================================
 # SECTION 6 - SEMRUSH-ONLY. 117 domains Ahrefs has never crawled.
