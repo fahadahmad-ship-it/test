@@ -27,6 +27,10 @@ explicitly in §4.
 
 ---
 
+> **UPDATE 2026-10-06:** `northgeorgiawindows.net` **confirmed as a redirect** by the client. The
+> 301-shell mechanism is now verified directly, not only inferred. Remaining verifications are
+> listed in **`OPEN-CHECKS.md`**.
+
 ## 1. Executive summary
 
 There is a real, large, ongoing link-spam campaign pointed at this property. But four findings
