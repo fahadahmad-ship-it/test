@@ -1,3 +1,16 @@
+> # ⛔ SUPERSEDED — DO NOT SEND TO THE CLIENT
+>
+> This was the first draft. Verification passes refuted several of its central
+> claims. It is kept only because later documents are written as commentary on it.
+> **Read `FINAL-AUDIT.md` instead.**
+>
+> Known wrong in this file: the 66% spam share (folded a low-risk scraper cluster
+> into a critical total); "886 domains at Authority Score 2" as the headline
+> evidence (a rounding artifact); the negative-SEO attribution (the spam targets
+> redirect shells, not this domain); the subnet clustering (it measures Cloudflare);
+> the action ordering (it puts a disavow submission ahead of the manual-action
+> check); and it names two legitimate DR-75 directories for disavowal.
+
 # Backlink Audit — ngwindows.com (North Georgia Replacement Windows)
 
 **Audit date:** 6 October 2026

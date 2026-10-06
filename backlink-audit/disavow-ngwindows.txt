@@ -47,77 +47,56 @@ domain:seostrengthchecker.online
 domain:siteseocheckerfree.store
 
 # =====================================================================
-# SECTION 2 - CRITERION 3: link-selling brands by domain name
-# Every domain below is literally named for the sale of backlinks. Supporting
-# fingerprint: all 27 resolve to the SAME host 203.161.54.114, and all return
-# an Ahrefs DR of 59-60 - a uniform DR block across 27 unrelated registrations
-# is itself a signature of artificially inflated seller sites.
-# CAVEAT: anchor text and redirect routing for these could NOT be retrieved
-# (Semrush units exhausted). They qualify on name character, not on anchor.
-# If you want a minimal file, drop this section - it is the weaker half.
+# SECTION 2 - WITHDRAWN IN FULL (was 28 entries)
 # =====================================================================
-# 99backlinksbuy.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 59 ; 3 links
-domain:99backlinksbuy.com
-# allbaclinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:allbaclinks.com
-# atozbacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:atozbacklinks.com
-# bestrankbacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:bestrankbacklinks.com
-# bestseobacklinkforsite.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:bestseobacklinkforsite.com
-# bestsitesbacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:bestsitesbacklinks.com
-# booastrankingwithbacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:booastrankingwithbacklinks.com
-# buyfairbacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:buyfairbacklinks.com
-# buyrankbacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:buyrankbacklinks.com
-# buytopqualitybacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:buytopqualitybacklinks.com
-# clicktobuybacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:clicktobuybacklinks.com
-# eliteseobacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:eliteseobacklinks.com
-# friendlybacklinksbuy.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:friendlybacklinksbuy.com
-# goooogla.com - CRITERION 4 (co-hosting), NOT a link-selling name. Grounds: shares
-#   host 203.161.54.114 with 27 link-selling domains above. Weaker than criteria 1-3;
-#   drop this line if you want a strictly defensible file. Ahrefs DR 60 ; 35 links
-domain:goooogla.com
-# increasewebtrafficwithlinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:increasewebtrafficwithlinks.com
-# quickseolinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:quickseolinks.com
-# rarebacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:rarebacklinks.com
-# superbqualitybacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:superbqualitybacklinks.com
-# topratedbacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:topratedbacklinks.com
-# trafficboosterlinkseo.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:trafficboosterlinkseo.com
-# viralbacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:viralbacklinks.com
-# webbacklinkskbuy.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:webbacklinkskbuy.com
-# webrankingsolutionbacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:webrankingsolutionbacklinks.com
-# welinkbacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:welinkbacklinks.com
-# worldtopbacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:worldtopbacklinks.com
-# wowqualitybacklinks.com - link-selling brand name ; host 203.161.54.114 ; Ahrefs DR 60 ; 3 links
-domain:wowqualitybacklinks.com
-
-# Two further name-character sellers on other hosts:
-# best-seo-domains.com - link-selling brand name ; host 172.67.164.229 ; Ahrefs DR 59 ; 12 links
-domain:best-seo-domains.com
-# backlinks-checker.com - link-selling brand name ; host 195.20.19.178 ; Ahrefs DR 42 ; 11 links
-domain:backlinks-checker.com
-
-# TOTAL DISAVOW ENTRIES: 34
+# These 28 entries were removed after verification against the full
+# link-level data (3,499 rows, 878 domains) that was already in the repo.
+# They were admitted on domain-name character plus shared hosting on
+# 203.161.54.114. On the real evidence:
+#   - 14 of the 28 have ZERO link rows to this client in the raw data.
+#   - The other 14 link, but are 100% rel=nofollow - excluded by this
+#     file's own criterion 2.
+#   - The 'uniform DR 59-60 block' fingerprint is false: 25 of 27 measure
+#     59-60, factmags.com is 75, goooogla.com is 29.
+#   - goooogla.com had been admitted under a 'co-hosting' criterion that
+#     this file's own evidence standard forbids ('shared IP alone' is
+#     listed as NOT grounds). Shared hosting turned out to have NEGATIVE
+#     predictive value here: it selected only for nofollow links.
+# Withdrawn domains, for the record (NOT disavowed):
+#   99backlinksbuy.com
+#   allbaclinks.com
+#   atozbacklinks.com
+#   bestrankbacklinks.com
+#   bestseobacklinkforsite.com
+#   bestsitesbacklinks.com
+#   booastrankingwithbacklinks.com
+#   buyfairbacklinks.com
+#   buyrankbacklinks.com
+#   buytopqualitybacklinks.com
+#   clicktobuybacklinks.com
+#   eliteseobacklinks.com
+#   friendlybacklinksbuy.com
+#   goooogla.com
+#   increasewebtrafficwithlinks.com
+#   quickseolinks.com
+#   rarebacklinks.com
+#   superbqualitybacklinks.com
+#   topratedbacklinks.com
+#   trafficboosterlinkseo.com
+#   viralbacklinks.com
+#   webbacklinkskbuy.com
+#   webrankingsolutionbacklinks.com
+#   welinkbacklinks.com
+#   worldtopbacklinks.com
+#   wowqualitybacklinks.com
+#   best-seo-domains.com
+#   backlinks-checker.com
+#
+# A separate pass identifies ~87 further domains that DO meet criterion 1
+# (dofollow + vendor sales-copy anchor naming ngwindows.com + shared slug).
+# They are NOT added here yet: routing is inferred from anchor text because
+# the committed export has no target_url column. Confirm that field after
+# 2026-10-25 before extending this file. See recheck-disavow.md.
 
 # =====================================================================
 # DO NOT DISAVOW - RESOLVE BY DELETING THE REDIRECT

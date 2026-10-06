@@ -36,10 +36,14 @@ reverse the obvious reading of it:
    301 redirect shells** that funnel into ngwindows.com. Semrush follows the redirect and credits
    the client. The "competitor domain names" in the anchor text are not anchors naming rivals —
    **they are the actual link targets.**
-2. **This is therefore almost certainly a purchased campaign, not a negative SEO attack**
-   (~85% confidence). The shells have per-target vendor campaign IDs, no content, no history, and
-   climbed in lockstep from Nov 2024. **Registrant identity is unverified** — the proxy blocked
-   WHOIS.
+2. **The infrastructure is one operator's; the attribution is not settled.** All 14 shells share
+   the identical GoDaddy nameserver pair (`ns23`/`ns24.domaincontrol.com`) across both IP groups
+   and both registration waves, on GoDaddy Domain Forwarding — a feature only the registrant can
+   configure. A control domain at the same registrar gets a different pair, so this is **one
+   registrar account (~92%)**. **But who holds that account is unknown:** client-commissioned ~45%,
+   an SEO vendor or lead-gen partner the client cannot control ~30%, negative SEO via
+   attacker-owned 301s ~15%, domain monetiser ~10%. Property-side ≈75%, **not 85%** — and only
+   the ~45% branch supports deleting anything.
 3. **The spam did not cause the client's traffic collapse.** Organic traffic fell **−87.7%**
    (40,569/mo Aug 2024 → 4,971/mo Sep 2026), and the collapse ran **Jun 2025 → May 2026** — the
    first PBN link is dated **29 Jun 2026**, twelve months later. Since the blast began, traffic is
@@ -48,9 +52,22 @@ reverse the obvious reading of it:
    referring domains than its local rivals and gets the same traffic as Window World Atlanta from
    75% more referring domains.
 
-**The single highest-value action is not a disavow.** It is deleting 14 redirect records, which
-severs ~4,815 toxic links at source with no Google process involved — *if the client controls
-those domains*. That question is unanswered and gates everything.
+**The highest-value action is a question, not a change.** Ask the client **who owns the GoDaddy
+account holding all 14 domains.** It takes minutes and resolves every branch above.
+
+**Do not delete the redirects as a first step.** Two reasons. First, the claim that the spam
+*targets the shells* rests on **anchor text alone** — the committed export has no `target_url`
+column, and vendor anchors interpolate whichever domain the campaign was ordered under. If the
+links point at ngwindows.com directly, deleting the redirects severs **zero** toxic links and is
+pure downside. Second, 5 of the 14 are brand variants for a company trading since 2003 with live
+legacy citations (Houzz, BBB, GuildQuality, Therma-Tru dealer directory); deleting them breaks
+real referral paths and is hard to reverse.
+
+**The cheapest decisive test — 30 seconds, no API units, needs only an unrestricted machine:**
+fetch a spam source page and read the `href`.
+`curl -sL https://urlbacklinkschecker.space/dir/seo-ranking-links-170322 | grep -o 'href="[^"]*windows[^"]*"'`
+If it returns `qualitypluswindows.com`, the redirect model is confirmed. If it returns
+`ngwindows.com`, **this entire finding collapses.**
 
 ---
 
@@ -72,8 +89,9 @@ those domains*. That question is unanswered and gates everything.
   was measuring **Cloudflare's address allocation** — 861 of 1,232 referring domains (**69.9%**)
   are Cloudflare-fronted, and the subnets they span are CDN artifacts. Struck.
   **Three real host clusters do exist** and are the version to cite: `118.139.181.85`
-  (29 domains / 727 links, Singapore stats farms), `203.161.54.114` (27 domains, the DR 59–60
-  link-seller block), `195.20.19.178` (19 domains, Moldova shortener network).
+  (29 domains / 727 links, Singapore stats farms), `203.161.54.114` (27 domains, a link-seller
+  block — **note: the "uniform DR 59–60" fingerprint is false**; 25 of 27 measure 59–60,
+  `factmags.com` is 75 and `goooogla.com` is 29), `195.20.19.178` (19 domains, Moldova shorteners).
 - **"886 domains at Authority Score 2" is withdrawn.** It is a rounding artifact of an integer
   score on a log scale; Ahrefs returns continuous DR 0.0–2.0 across the same band.
 
@@ -139,8 +157,8 @@ stricter one.
   plain bare `ngwindows.com` anchor: `allbaclinks.com` (DR 60), `atozbacklinks.com` (60),
   `bestsitesbacklinks.com` (60), `friendlybacklinksbuy.com` (60), `99backlinksbuy.com` (59),
   `best-seo-domains.com` (59). An authority rule also lets them through — they're DR 59–60.
-  `factmags.com` (DR 75) is co-hosted with 27 domains literally named `buyfairbacklinks.com`,
-  `clicktobuybacklinks.com`.
+  **However**, verification showed every one of these links to this client is `rel=nofollow`, so
+  none of them was disavowable in the first place (see §4).
 - **Legitimate sites an authority sweep would destroy** — `forsythcounty.com` (DR 3.6),
   `georgiashutters.com` (2.2), `1stcallglasscare.com` (3), `alpharettatoprated.com` (10),
   `lombardohomegroup.com` (13), `windowdigest.com` (15), `homerenoworld.com` (16),
@@ -149,24 +167,35 @@ stricter one.
 **Authority is anti-correlated with manipulation in this profile.** Any DR or AS threshold would
 produce false positives one way and miss DR 65+ vendors the other.
 
-**The delivered disavow file contains 33 domains**, and they are not of equal strength:
+**The delivered disavow file now contains 5 domains.** It briefly held 33; the other 28 have been
+**withdrawn in full** after verification against data that was already in the repo.
 
-| | Entries | Grounds | Strength |
-|---|---|---|---|
-| **Section 1 — criterion 1** | **5** | Vendor anchor **observed** + dofollow **observed** + shared slug, **and points at ngwindows.com directly** | Fully evidenced |
-| Section 2 — criterion 3 | 28 | Link-selling domain name + shared host `203.161.54.114` + uniform DR 59–60 | Anchors and routing **unverified** |
+The withdrawal matters because it exposes a process failure, not just a bad call. The earlier pass
+reported anchor evidence for only "73 of 1,232 domains (5.9%)" and sized everything to that
+scarcity. The committed export actually holds **3,499 link rows covering 878 domains (71.3%)**.
+Against the real data:
 
-**For a strictly defensible submission, Section 2 can be dropped, leaving 5 lines.** That is
-flagged in the file itself. The uniform DR 59–60 across 27 co-hosted sellers is itself an
-authority-inflation signature, which is why name character was admitted as a criterion at all.
+- **14 of the 28 have zero link rows to this client at all.**
+- **The other 14 are 100% `rel=nofollow`** — excluded by the file's own stated criterion.
+- The **"uniform DR 59–60 block" fingerprint is false** (25 of 27; `factmags.com` 75,
+  `goooogla.com` 29).
+- `goooogla.com` had been admitted under a **co-hosting criterion this file's own evidence
+  standard forbids**. Shared hosting turned out to have *negative* predictive value here: it
+  selected exclusively for nofollow links. Criterion struck.
+
+**A separate pass identifies ~87 further domains that do meet criterion 1** (dofollow + vendor
+sales-copy anchor naming ngwindows.com + shared slug). They are **not added yet**: routing is
+inferred from anchor text, for the same missing-`target_url` reason as §1. Confirm that field
+after 2026-10-25, then extend. The honest range for a final file is **5 to ~92 entries**, and
+which end depends on one unread HTML attribute.
 
 **1,159 domains are excluded by design** as insufficient evidence — including 360 carrying Network
 A's naming convention, 284 of which first appeared in the 14 days to 6 Oct. Likely the same
 network; likely is not evidence, so they are out.
 
-Removed as false positives: `csswinner.com` (DR 75), `eurekster.com` (DR 53), and `factmags.com`
-(grounds were co-hosting rather than its own anchor, and two passes disagree on its authority —
-DR 60 vs DR 75; conflicting evidence excludes by default).
+Removed as false positives: `csswinner.com` (DR 75) and `eurekster.com` (DR 53). `factmags.com`
+is also out, but the earlier stated reason here was wrong: there was no DR conflict — it measures
+**DR 75** and no pass ever said 60. It is excluded because **all 76 of its links are nofollow**.
 
 **Anchor-verified coverage: 73 of 1,232 referring domains (5.9%). 94.1% is unverified.**
 
@@ -181,9 +210,32 @@ DR 60 vs DR 75; conflicting evidence excludes by default).
 | **Jun 2026** | **3,420** | trough — *blast begins* |
 | Sep 2026 | **4,971** | **+45% since the blast started** |
 
-The decline **pre-dates the spam by twelve months**. Keywords are flat; Semrush Rank improved
-23.5%. The Sep/Oct escalation is too recent to have been scored, so remediation is justified as
-**preventive risk management, not emergency triage**.
+**Both reassurances in that table failed verification and are withdrawn.**
+
+- **The exoneration does not hold.** "First spam link 29 Jun 2026" quoted the later of two dates
+  in the audit's own anchor table. The bare sister-domain cluster is **2,579 links dated Jul 2025
+  onward** — ~3× larger, and landing in the exact break month. Vendor-named domains
+  (`backlinksolutions.info`, `rankvanceseo.info`) appear Jul–Sep 2025, and AS 0–5 inflow ramps
+  from Oct 2025. `refdomains.csv` is also a **live-links snapshot** — removed links are absent —
+  so it cannot date a "first" link in either direction.
+- **"+45% since the blast" is seasonality.** Indexing Jun→Aug at Jun=100: **2024 = 147,
+  2026 = 150**. Same company, same summer lift, two independent years. It is already rolling over
+  (Aug 5,139 → Sep 4,971). Strike it from any client summary.
+
+**The best-dated explanation is one nobody had considered: Google core and spam updates.** Every
+step-down month lands in or just after a confirmed update — March 2025 core → Apr −41%;
+**June 2025 core (30 Jun – 17 Jul), which literally spans the −36.5% break**; Aug 2025 spam;
+Dec 2025 core; Mar 2026 spam+core; **May 2026 core (21 May – 2 Jun) → the Jun 2026 trough**.
+Ranked primary at **60–65%**.
+
+**The AI Overview hypothesis is demoted to a contributing factor (~40%, not primary).** Its stated
+timing evidence was backwards: AIO launched to all US users **13–14 May 2024, three months before
+this site's all-time peak**. And 907 keywords / 225 visits is ordinary long-tail distribution, not
+an anomaly.
+
+**Untested, not excluded:** a 2025 site migration, redesign or technical break. Both the live site
+and archive.org were proxy-blocked here. **Diffing May vs August 2025 Wayback snapshots is the
+highest-priority outstanding check** and takes ten minutes on an unrestricted browser.
 
 **Likely actual cause (hypothesis, needs GSC confirmation):** AI Overviews absorbing informational
 blog traffic. `/blog/standard-door-sizes` holds **907 ranking keywords and earns 225 visits**. The
@@ -198,8 +250,14 @@ Timing matches the AI Overview rollout, not any link event. **Verify with GSC im
 | **AS ≥30 domains** | **65** | **34** | **51** |
 | Organic traffic | 4,971 | 4,758 | 2,932 |
 
-ngwindows leads its peer group on quality links and gets the same traffic as Window World Atlanta
-from 75% more referring domains. **The gap is commercial, not authority:** homepage + GBP = 60.6%
+**Caveat the earlier draft omitted:** this is not like-for-like. Window World Atlanta is a
+franchisee of `windowworld.com` (**DR 61**) and inherits national brand demand. The comparison is
+also taken at the moment a falling line crosses a flat one — at peak, ngwindows beat WWA ~8.5:1 on
+traffic with a similar link profile, which is itself evidence its traffic was never link-driven.
+The "links are not the bottleneck" reading is still the most likely, but it was the most
+reassuring of three available readings and was adopted without testing the others.
+
+**The gap is commercial, not authority:** homepage + GBP = 60.6%
 of organic traffic, almost all branded; `/windows` doesn't crack the top 20 pages; and
 **`window replacement atlanta` (720/mo, $41.02 CPC) sits at position 15** — the page-two band where
 targeted links do pay.
@@ -208,14 +266,18 @@ targeted links do pay.
 
 ## 6. Action plan, in priority order
 
-**1. Ask the client who controls the 14 redirect domains.** Run WHOIS and compare nameservers
-against ngwindows.com. This gates everything and takes five minutes. *(Blocked here — proxy
-denied outbound WHOIS/HTTP.)*
-- **Client controls them →** delete the 301s. ~4,815 toxic links vanish at source. Preserve
-  WHOIS/DNS/Semrush snapshots first. Park the 5 defensive typo-variants on a holding page rather
-  than letting them expire and be re-registered.
-- **Client does not →** this is an attack; the snapshots become the evidence file and the
-  negative-SEO hypothesis returns.
+**1. Read one `href`, and ask one question. Neither changes anything, and together they decide
+everything else.**
+- **The href test** (30 seconds, unrestricted machine):
+  `curl -sL https://urlbacklinkschecker.space/dir/seo-ranking-links-170322 | grep -o 'href="[^"]*windows[^"]*"'`
+  Returns a shell domain → the redirect model holds. Returns `ngwindows.com` → the model collapses
+  and the ~87 candidate domains all become directly disavowable.
+- **The ownership question:** who holds the GoDaddy account for the 14 domains? All share
+  nameservers `ns23`/`ns24.domaincontrol.com`, so it is one account.
+- Only if **both** come back "client-controlled shells" should deleting the redirects be
+  considered — and then preserve DNS/WHOIS/Semrush snapshots first, and park the 5 brand variants
+  on a holding page rather than letting them lapse and be re-registered. **Deleting them is not
+  the default and must not be done on the current evidence.**
 
 **2. Check Google Search Console for a manual action.** Free, 90 seconds, and it determines
 whether a disavow is warranted at all. Google's current guidance limits the tool to manual actions
@@ -227,18 +289,42 @@ step 1 and must not be disavowed. Use the 33-domain evidenced file as-is — or 
 alone if you want only fully-evidenced entries; extend it after
 **25 Oct 2026** per the procedure documented in the file header.
 
-**4. Reclaim two lost links — worth more than the entire disavow exercise.**
-- **`gnpmilton.com`** — local podcast, *"Ep 37 North Georgia Replacement Windows with Ted Kirk"*.
-  Dofollow, hyperlocal, on-topic. The best editorial link the profile ever had. **Lost.**
-- **`atlantahomeimprovement.com`** (DR 45) — local, on-topic, linking since 2023. **Lost.**
-Two emails.
+**4. Lost links — one is real, one was a false alarm.**
+- **`atlantahomeimprovement.com` is NOT lost.** It has **90 links** and the **highest `last_seen`
+  value in the entire 1,232-domain file** — seen on the final day of the crawl. It is the client's
+  strongest referring domain by link count. Emailing to "reclaim" it would have been embarrassing.
+- **`gnpmilton.com` is genuinely lost** (last seen 2026-05-06 while 1,200 other domains kept being
+  seen) — but it is **DR 26, 2 links**, on a podcast network that runs a paid "Book Your Interview"
+  model. The original placement was likely bought, so reclaiming it means paying again. Worth
+  doing, not worth leading with.
 
-**5. Fix the zero-Georgia-chamber problem.** The only chamber citation is Williamson County,
-**Tennessee**. Named, competitor-proven targets: `gnfcc.com` (Greater North Fulton Chamber, DR 44 —
-covers Alpharetta, Roswell, Milton, Johns Creek exactly), `guildquality.com` (DR 75,
-Atlanta-headquartered), `trustdale.com` (DR 62), the **Marvin (DR 76) and Infinity (DR 54) dealer
-locators** — the dealership is live but the locator link is unclaimed — and `appenmedia.com`
-(DR 61, publishes the Alpharetta-Roswell and Forsyth Heralds).
+**5. Fix the zero-Georgia-chamber problem — confirmed true, and worse than first stated.** There
+is no Georgia chamber anywhere in the profile; the only chamber link is Williamson County,
+**Tennessee**, ~250 miles away. There are also **no Georgia municipal or county government links
+at all** (`alpharetta.ga.us` DR 68, `roswellgov.com` 70, `johnscreekga.gov` 69,
+`cityofmiltonga.us` 44 — all absent).
+
+**Verified targets, reordered by value-per-effort:**
+1. **`businessradiox.com`** (DR 71) — North Fulton studio physically in Alpharetta, confirmed
+   **"no pay to play"**. Best ratio available.
+2. **`gachamber.com`** (DR 62) — the *real* Georgia Chamber. An earlier draft excluded it after
+   measuring `georgiachamber.com` / `gachamber.org`, which are different domains.
+3. **`nariatlanta.org`** (DR 39) — real NARI Atlanta chapter, open membership, transparent $760.
+4. **`tribuneledgernews.com`** (DR 60) and **`forsythnews.com`** (61) — local press.
+5. **Warm reclaims:** `qualifiedremodeler.com` (71) and `wsbtv.com` (81) have **already published
+   about this client** but neither appears in the referring-domain file.
+
+**Struck from the earlier plan:** `guildquality.com` — **already held** (8,670 survey responses,
+Guildmaster Awards; absent from the file only because the profile link is nofollow, so audit the
+attribute rather than chase the link). `marvin.com` — **unobtainable**; Marvin runs separate
+networks and replacement contractors sit on `infinitywindows.com`, where this client is already
+Infinity's exclusive Georgia contractor. `gnfcc.com` dues are unpublished — **phone before
+committing**.
+
+**Two things nobody had flagged:** the company has **rebranded to "NG Windows"**, so outreach and
+citation cleanup must cover both trading names or listings will fragment. And **Yelp and Houzz are
+absent from the referring-domain file but have live profiles** — they are nofollow, so reporting
+them as missing citations would be wrong.
 
 **6. Put the budget into commercial pages, not link volume.** There is nothing to catch up to
 locally. `/windows` and the service-area pages are the gap.
@@ -263,7 +349,10 @@ Exact-match commercial is 3.2% — far below any risk band. **Leave commercial a
 ## 8. Monitoring
 
 Re-run after 25 Oct 2026 against both tools and extend the disavow to the union. Key healing
-signal: **Trust Score crossing above Authority Score** (currently tied at 30/30). Escalation
+signal: movement in the AS ≥30 referring-domain count (currently 65). **Note:** an earlier draft
+set "Trust Score above Authority Score" as the healing KPI. That was retracted in review — the two
+being equal is the norm, not a defect — and it should not appear in any client-facing plan.
+Escalation
 trigger: **if branded queries start sliding, that is site-level demotion** and the posture changes.
 If referring domains keep climbing *after* the redirects are cut, the spam is direct and ongoing —
 revisit the negative-SEO hypothesis.
