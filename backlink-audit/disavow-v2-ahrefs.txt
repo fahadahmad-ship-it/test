@@ -678,9 +678,24 @@ domain:websiterankchecker.website  # 1 dofollow | "Increase Google Visibility wi
 #     (ngwindow.com's 49 raw string hits are all alphabetical domain-list context
 #     on the Section 4 marketplace pages; qualitypluswindows.com's single hit is
 #     a URL path segment on justgotlive.com.)
-#     => The prior pass's "279 redirect-borne dofollow domains" has NO support in
-#     Ahrefs data. Either the shells do not 301 into ngwindows.com, or Ahrefs does
-#     not credit shell-borne links to it. Unresolved; do not act on it from here.
+#     The ambiguity (shells don't redirect vs Ahrefs doesn't follow them) is
+#     SETTLED by the campaign-ID partition. The vendor stamps one ID per brand:
+#       148030=ngawindows  211287=thermalprowindows  170322=qualitypluswindows
+#       160633=performingwindows  150104=northpointwindows  178285=roiwindows
+#       211290=thermatrustwindows  148096=ngwindows.com
+#     8 campaigns, 8 brands, zero crossover. On the 45 /dir/ hosts BOTH tools
+#     crawled, Semrush returns rows from all 8 campaigns in an ngwindows.com
+#     export; Ahrefs returns 148096 and nothing else, 45 of 45 - and all 516
+#     /dir/ rows in the whole Ahrefs export carry that one ID. Same hosts, so
+#     this is an attribution difference, not a coverage difference: Semrush
+#     follows the shells' 301s and credits the destination; Ahrefs does not.
+#     => The redirect mechanism is CONFIRMED (~95%; no Location: header was read
+#     directly). This makes exposure SMALLER: the ~279 "redirect-borne" domains
+#     link to the SHELLS, not to ngwindows.com, so a disavow filed under
+#     ngwindows.com cannot act on them. They stay excluded under [4].
+#     No entry in this file depends on which way the question went - Section 6
+#     admits only anchors naming ngwindows.com under word-boundary matching,
+#     i.e. campaign 148096 only.
 #
 # ==========================================================================
 # HIGH-DR SPAM - the entries a reviewer will challenge hardest

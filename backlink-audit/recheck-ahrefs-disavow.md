@@ -261,7 +261,7 @@ pointless as well as unjustified.
 **The remaining 785 chains are ngwindows.com's own canonicalisation** — 759 a single `301`, 26 a
 `301, 301` (http→https then non-www→www). No third party involved.
 
-### 6.1 The 14 shells do not appear
+### 6.1 The 14 shells do not appear in any Ahrefs chain — and that settles the model
 
 `ngawindows.com` · `roiwindows.com` · `thermalprowindows.com` · `qualitypluswindows.com` ·
 `northpointwindows.com` · `performingwindows.com` · `thermatrustwindows.com` ·
@@ -269,19 +269,56 @@ pointless as well as unjustified.
 `ngwindow.com` · `northgawindows.com` · `northgeorgiawindow.com`
 
 **Zero occurrences in any `Redirect Chain URLs` value.** Raw string matches across the whole file:
-12 of the 14 return 0. `ngwindow.com` returns 49, all of which are alphabetical domain-list context
-on the Section 4 marketplace pages. `qualitypluswindows.com` returns 1, a URL *path segment* on
+12 of the 14 return 0. `ngwindow.com` returns 49, all alphabetical domain-list context on the
+Section 4 marketplace pages. `qualitypluswindows.com` returns 1, a URL *path segment* on
 `justgotlive.com/es/site/qualitypluswindows.com`.
 
-**Consequence.** `FINAL-AUDIT.md` §5 and `recheck-disavow.md` §3.2 rest on Semrush crediting
-shell-borne links to `ngwindows.com` via 301. Ahrefs resolves redirect chains and publishes them,
-and credits **none**. Either the shells do not redirect into `ngwindows.com`, or Ahrefs does not
-follow them for attribution. Both readings are consistent with this export; it cannot distinguish
-them. Either way the prior pass's **"~279 redirect-borne dofollow domains"** and the
-**"delete the redirects"** recommendation have **no corroboration in the better dataset**. Flagged
-as unresolved in the file; nothing has been acted on.
+Read alone, that is ambiguous: either the shells do not redirect into `ngwindows.com`, or Ahrefs
+does not follow them for attribution. The **campaign-ID partition resolves it**, and I verified it
+independently rather than taking it on trust.
 
----
+The vendor stamps a campaign ID into each `/dir/` URL. Across the 501 `/dir/` hosts in Semrush's
+`links_raw.tsv` there are **8 campaign IDs**, and the brand named in the anchor partitions across
+them **perfectly — 8 campaigns, 8 brands, zero crossover**:
+
+| campaign ID | Semrush hosts | brand named in every one of its anchors |
+|---|---|---|
+| `professional-seo-links-148030` | 138 | `ngawindows.com` |
+| `backlink-seo-experts-211287` | 127 | `thermalprowindows.com` |
+| `seo-ranking-links-170322` | 117 | `qualitypluswindows.com` |
+| `ethical-seo-backlinks-160633` | 116 | `performingwindows.com` |
+| `trusted-seo-backlinks-150104` | 96 | `northpointwindows.com` |
+| **`quality-authority-backlinks-148096`** | **87** | **`ngwindows.com`** |
+| `authority-focused-backlinks-178285` | 63 | `roiwindows.com` |
+| `manual-link-building-services-211290` | 31 | `thermatrustwindows.com` |
+
+Now compare the two tools on the **45 `/dir/` hosts both crawled**:
+
+- **Semrush** returns rows from **all 8 campaigns** in an export for `ngwindows.com`, including
+  campaigns whose anchors name only a shell. 16 of the 45 carry more than one campaign.
+- **Ahrefs** returns `quality-authority-backlinks-148096` and nothing else — **45 of 45**, and
+  **all 516 `/dir/` rows in the entire Ahrefs export carry that single ID**.
+
+A crawler-coverage explanation cannot produce that. Both tools crawled the same 45 hosts; the
+difference is purely in *what they attribute*. The only mechanism that explains Semrush seeing
+seven other brands' campaigns in a `ngwindows.com` export is that it **follows the shells' 301s and
+credits shell-borne links to the redirect destination**, while Ahrefs does not.
+
+**Verdict: the redirect mechanism is confirmed at roughly 95 % confidence.** The residual 5 % is
+that no `Location:` header was observed directly — the inference is from attribution behaviour, not
+from the wire. Resolve it by fetching any one shell and reading the header.
+
+**What this changes, and what it does not.** It *reverses the direction* of the prior pass's
+conclusion. Confirming the mechanism makes exposure **smaller**, not larger: the ~279 "redirect-borne
+dofollow domains" link to the **shells**, not to `ngwindows.com`. A disavow filed under
+`ngwindows.com` cannot act on a link whose target is `roiwindows.com`. They are correctly excluded
+(file section NOT-DISAVOWED [4], 777 domains) and the prior "delete the redirects" recommendation is
+about the shells' owners, not this client's disavow file.
+
+**It changes no entry in `disavow-v2-ahrefs.txt`.** Section 6 admits a Semrush-only domain only when
+its anchor names `ngwindows.com` under word-boundary matching — i.e. only campaign `148096` — so the
+file is identical under either reading of the shell question. That was the point of the
+word-boundary correction in §2.
 
 ## 7. High-DR spam (Task 5)
 
@@ -334,9 +371,9 @@ Fallback positions, in order of conservatism, should the reviewer want to trim:
 
 ### Carried-forward open items
 
-1. The redirect-shell model (§6.1) is unresolved and cannot be resolved from committed data.
-   Re-run after 2026-10-25 with Site Explorer, or fetch the 14 shells directly and record the
-   `Location:` header.
+1. The redirect-shell model (§6.1) is confirmed at ~95 % from attribution behaviour, not from a
+   directly observed `Location:` header. Close the last 5 % by fetching any one shell. This does not
+   block the file: no entry depends on it.
 2. No page was fetched at build time. Liveness is as of each export's last-seen date.
 3. `missfrugalmommy.com` is proof the classifier mislabels genuine editorial content. If any
    Section 1–3 entry is ever challenged individually, re-read its own quoted anchor before
