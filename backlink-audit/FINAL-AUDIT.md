@@ -36,24 +36,47 @@ reverse the obvious reading of it:
    301 redirect shells** that funnel into ngwindows.com. Semrush follows the redirect and credits
    the client. The "competitor domain names" in the anchor text are not anchors naming rivals —
    **they are the actual link targets.**
-2. **The infrastructure is one operator's; the attribution is not settled.** All 14 shells share
+2. **CONFIRMED (~95%) by the Ahrefs cross-check — on new evidence, and it reverses the action.**
+   The vendor stamps a campaign ID into every URL (`/dir/<slug>-<id>`), and those IDs partition
+   **perfectly** by brand across 8 campaigns, zero crossings. On the **45 `/dir/` domains both
+   tools crawled** — so coverage is controlled by construction — Semrush credits this client from
+   all 8 campaigns (17.2% client share) while Ahrefs credits it from **one campaign only, the
+   client's `148096`, on 45 of 45 domains (100%)**. Across the whole Ahrefs export, **516 of 516
+   `/dir/` rows carry `148096`**. The split falls exactly on the campaign-ID line, not randomly.
+   The crawler-coverage alternative is excluded, not merely unsupported.
+   *(Two earlier arguments for this conclusion are void and should not be repeated: the "all
+   shells are DR 0" point — DR 0 is the expected reading for any domain fed by DR-0 sources, so it
+   discriminates nothing — and the "297 missing domains" point, which both readings predict.)*
+3. **Who owns the shells is still unknown, and it gates everything.** All 14 share
    the identical GoDaddy nameserver pair (`ns23`/`ns24.domaincontrol.com`) across both IP groups
    and both registration waves, on GoDaddy Domain Forwarding — a feature only the registrant can
    configure. A control domain at the same registrar gets a different pair, so this is **one
    registrar account (~92%)**. **But who holds that account is unknown:** client-commissioned ~45%,
    an SEO vendor or lead-gen partner the client cannot control ~30%, negative SEO via
-   attacker-owned 301s ~15%, domain monetiser ~10%. Property-side ≈75%, **not 85%** — and only
-   the ~45% branch supports deleting anything.
-3. **The spam did not cause the client's traffic collapse.** Organic traffic fell **−87.7%**
+   attacker-owned 301s ~15%, domain monetiser ~10%. **Ask the client — it is a one-line question.**
+   A 15th variant, **`ngwind.com`**, was found late and belongs on the same list.
+4. **The spam did not cause the client's traffic collapse.** Organic traffic fell **−87.7%**
    (40,569/mo Aug 2024 → 4,971/mo Sep 2026), and the collapse ran **Jun 2025 → May 2026** — the
    first PBN link is dated **29 Jun 2026**, twelve months later. Since the blast began, traffic is
-   **+45%**.
-4. **Links are not the competitive bottleneck.** ngwindows.com already holds more quality
+   **+45%**. *(Both halves of this were later refuted — see §5. Retained here only because the
+   conclusion "the spam is not the cause" survives for a different reason.)*
+5. **Links are not the competitive bottleneck.** ngwindows.com already holds more quality
    referring domains than its local rivals and gets the same traffic as Window World Atlanta from
    75% more referring domains.
 
-**The highest-value action is a question, not a change.** Ask the client **who owns the GoDaddy
-account holding all 14 domains.** It takes minutes and resolves every branch above.
+**Confirming the mechanism made the client's problem SMALLER, not bigger.** Most of the campaign
+targets the shells — and **a disavow filed on ngwindows.com cannot touch links pointing at another
+property**. The client's actual evidenced exposure is **campaign `148096`: 258 domains / 516
+links**, all dofollow, all spam-flagged, 99.7% homepage. That is the whole of it.
+
+**Deleting the redirects is still the wrong move, and the confirmation strengthens that.** It
+removes **zero** spam links — they would still point at the shells, now dead — while destroying
+legacy brand-variant equity for a company trading since 2003 with live citations (Houzz, BBB,
+GuildQuality, Therma-Tru dealer directory).
+
+**Two free actions outrank everything else:** ask the client who owns the GoDaddy account, and
+**pull Google Search Console link data — never once consulted in this audit, free, and available
+right now**, unlike both paid APIs.
 
 **Do not delete the redirects as a first step.** Two reasons. First, the claim that the spam
 *targets the shells* rests on **anchor text alone** — the committed export has no `target_url`
@@ -126,6 +149,14 @@ near-exact brand variants of the client. All are **Ahrefs DR 0**.
 **Where the links land:** ~100% on the **homepage**, much of it on `http://`/non-`www` variants that
 301 again. Every service page, service-area page and blog post is clean. This materially lowers
 severity — the money pages were never touched.
+
+**⚠️ Anchor counts in this audit are overstated and need re-deriving.** `performingwindows.com`
+**ends with the literal string `ngwindows.com`** (perfor-mi-*ngwindows.com*), so naive substring
+matching counts that shell's links as the client's. Measured on the raw export: naive matching
+gives **762** client-anchor rows, word-boundary matching gives **385** — a **98% overstatement**.
+Any figure derived with `in`-style matching must be recomputed with
+`(?<![a-z0-9.-])ngwindows\.com`. This also mis-assigned campaign `160633` to the client in the
+forensics document; it is performingwindows.com's.
 
 **Anchor character:** the vendor spam is **98% dofollow**, with literal sales copy —
 *"High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service … Buy Backlinks Online

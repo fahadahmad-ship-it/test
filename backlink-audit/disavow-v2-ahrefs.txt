@@ -1,0 +1,715 @@
+# ==========================================================================
+# DISAVOW v2 - ngwindows.com   (REBUILD ON AHREFS EVIDENCE)
+# Built 2026-10-06. Supersedes nothing automatically - for reconciliation only.
+# DO NOT UPLOAD until reconciled against disavow-ngwindows.txt / FINAL-AUDIT.md.
+# ==========================================================================
+#
+# EVIDENCE BASE
+#   Ahrefs live backlinks export : 2,665 links / 1,357 referring domains
+#   Semrush refdomains + links_raw: 1,232 domains / 3,499 anchor rows (commit 6f5f407)
+#   Tool overlap: 338 domains. Semrush-only 894. Ahrefs-only 1,019.
+#   APIs unavailable (Semrush ERROR 132; Ahrefs Site Explorer locked to 2026-10-25),
+#   so NOTHING below was re-fetched live. All evidence is from the committed exports.
+#
+# DISAVOW GROUNDS USED (per the standing constraint, NO authority-based grounds):
+#   (a) observed manipulative anchor text naming ngwindows.com in link-vendor copy
+#   (b) observed dofollow (PageRank-passing) status on that link
+#   (c) structural fingerprint: byte-identical page path / campaign ID / page-ID
+#       replicated across otherwise unrelated hosts
+#   (d) link-selling domain character stated in the referring page's own title
+#   (e) Ahrefs' own `Is spam` classification - corroborating only, NEVER the sole ground
+#
+# EXPLICITLY NOT USED AS GROUNDS ANYWHERE IN THIS FILE:
+#   Domain Rating, Authority Score, traffic, thin content, TLD, country, hosting IP,
+#   subnet clustering. No entry below depends on any of them.
+#
+# COVERAGE AND WHAT IS UNVERIFIED
+#   VERIFIED: every entry has at least one quoted anchor/title/path from a committed
+#     export, and dofollow status read from that export's own Nofollow column.
+#   UNVERIFIED: no page was fetched or rendered at build time; link liveness is as of
+#     each export's Last-seen date, not today. Semrush rows carry no target_url column,
+#     so Semrush-side entries are evidenced by anchor text naming ngwindows.com only.
+#   NOT COVERED: 894 Semrush-only domains minus the 117 listed here have no anchor
+#     evidence naming ngwindows.com and are deliberately excluded (default-to-exclusion).
+#
+# TOTAL ENTRIES: 460
+# ==========================================================================
+
+
+# ==========================================================================
+# SECTION 1 - STRONGEST. Vendor campaign 148096, direct-named, dofollow.
+# 258 domains / 516 links.
+# Grounds (a)+(b)+(c)+(e), all four present on every entry.
+#   (a) anchor, byte-identical on all 516 links:
+#       "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+#   (b) Nofollow=false on all 516.
+#   (c) path, byte-identical on all 516 across 258 unrelated hosts:
+#       /dir/quality-authority-backlinks-148096
+#       (1 unique path, 1 unique page title across the whole cluster - a single
+#        vendor campaign ID mirrored onto 258 throwaway hosts)
+#   (d) referring page title states the business: "High Quality SEO Link Building
+#       Experts Helping Websites Gain Powerful Backlinks..."
+#   (e) Ahrefs Is spam=true on 258/258.
+# This is the same cluster the prior Semrush pass found; Ahrefs independently
+# confirms it and raises the domain count from 87 to 258.
+# ==========================================================================
+
+domain:24rankings.link
+domain:7-seo.link
+domain:aiseochecker.website
+domain:allbacklinkchecker.shop
+domain:backlinkanalysis.shop
+domain:backlinkanalysistool.shop
+domain:backlinkanalyzer.website
+domain:backlinkcheckerbest.site
+domain:backlinkcheckerbest.website
+domain:backlinkcheckerseo.store
+domain:backlinkcheckertool.store
+domain:backlinkcountchecker.site
+domain:backlinkfindertool.shop
+domain:backlinkfindertool.website
+domain:backlinkfreechecker.online
+domain:backlinkfreeseo.link
+domain:backlinkindia.link
+domain:backlinklinkchecker.store
+domain:backlinklookuptool.shop
+domain:backlinklookuptool.site
+domain:backlinkrankchecker.website
+domain:backlinkreport.store
+domain:backlinkschecker.site
+domain:backlinkscheckerfree.shop
+domain:backlinkscheckers.website
+domain:backlinkscheckerseo.space
+domain:backlinkscheckerseo.store
+domain:backlinkscheckersite.shop
+domain:backlinksfreechecker.site
+domain:backlinksreport.online
+domain:backlinksseochecker.space
+domain:backlinktoolchecker.shop
+domain:backlinktoolchecker.store
+domain:backlinkurlchecker.space
+domain:backlinkurlchecker.website
+domain:baclinkchecker.online
+domain:baclinkchecker.space
+domain:bestbacklinkchecker.shop
+domain:bestdachecker.website
+domain:bestdapachecker.site
+domain:bestfreeseochecker.shop
+domain:blogbacklinkchecker.online
+domain:blogpostbacklinks.online
+domain:blogseochecker.site
+domain:bulkbacklinkanalyzer.space
+domain:bulkbacklinkreport.space
+domain:bulkbacklinkreport.store
+domain:bulkbacklinkschecker.shop
+domain:bulkdacheckerfree.online
+domain:bulkdacheckeronline.website
+domain:bulkdacheckertool.site
+domain:bulkdacheckertools.space
+domain:bulkdadrchecker.online
+domain:bulkdapachecker.site
+domain:bulkdapachecker.store
+domain:bulkdapacheckerfree.shop
+domain:bulkdrcheckerfree.website
+domain:bulkfreedapachecker.shop
+domain:bulklinkchecker.site
+domain:bulklinkchecker.store
+domain:bulkpachecker.space
+domain:bulkpadacheckertool.shop
+domain:checkbacklinks.site
+domain:checkdomainauthority.space
+domain:checkdomainbacklinks.space
+domain:checkerbacklink.website
+domain:checkerdapa.store
+domain:checkurlbacklinks.site
+domain:competitionchecker.site
+domain:competitorchecker.shop
+domain:daandpacheckertool.site
+domain:daandpacheckertool.store
+domain:dabacklinkchecker.shop
+domain:dabacklinkchecker.site
+domain:dabulkchecker.store
+domain:dacheckerforfree.online
+domain:dacheckerforfree.space
+domain:dacheckerforfree.website
+domain:dacheckerfree.website
+domain:dacheckerofwebsite.site
+domain:dacheckerpro.shop
+domain:dacheckers.website
+domain:dacheckerseo.store
+domain:dacheckertool.website
+domain:dacheckertoolonline.store
+domain:dacheckerwebsite.shop
+domain:dadomainchecker.website
+domain:dadpchecker.shop
+domain:dadrcheckerfree.shop
+domain:dadrpachecker.shop
+domain:dadrpachecker.website
+domain:dafreechecker.shop
+domain:dapacheckerbulk.space
+domain:dapacheckerfree.site
+domain:dapacheckerguest.site
+domain:dapacheckerguest.store
+domain:dapacheckermass.space
+domain:dapacheckermultiple.site
+domain:dapacheckeronline.store
+domain:dapacheckeronline.website
+domain:dapacheckersoftware.online
+domain:dapacheckersoftware.store
+domain:dapadomainchecker.shop
+domain:dapaonlinechecker.site
+domain:dapaonlinechecker.space
+domain:darankingchecker.shop
+domain:dascorechecker.online
+domain:dascorechecker.shop
+domain:dawebsitechecker.site
+domain:dawebsitechecker.store
+domain:dawebsitechecker.website
+domain:domainbacklinkreport.store
+domain:domaincheckerda.site
+domain:domaindachecker.space
+domain:domaindapachecker.store
+domain:domainlinkprofile.space
+domain:domainmetricschecker.shop
+domain:domainpadachecker.space
+domain:domainqualitychecker.online
+domain:domainrankchecker.online
+domain:domainseochecker.site
+domain:findbacklinks.space
+domain:findbacklinks.store
+domain:findwebsitebacklinks.online
+domain:freebacklinkcheckers.site
+domain:freebulkdachecker.shop
+domain:freedaandpachecker.website
+domain:freedacheckertools.site
+domain:freedacheckertools.website
+domain:freedadrchecker.space
+domain:freedrchecker.shop
+domain:freepaanddachecker.store
+domain:freepachecker.site
+domain:freepachecker.space
+domain:freerankchecker.online
+domain:freerankingchecker.shop
+domain:freeseoauditchecker.website
+domain:freeseocheckertools.online
+domain:freeseorankchecker.shop
+domain:freeseorankchecker.store
+domain:freeseoscorechecker.store
+domain:freeseositechecker.shop
+domain:freesiterankchecker.website
+domain:freewebsitechecker.space
+domain:gofreebacklinks.link
+domain:greatseolinks.link
+domain:guestbacklink.link
+domain:highdapachecker.store
+domain:linkcheckertools.site
+domain:linkingdomainchecker.shop
+domain:linkseochecker.website
+domain:massdachecker.website
+domain:massdapachecker.space
+domain:multidachecker.store
+domain:multidachecker.website
+domain:multidapachecker.shop
+domain:multidapachecker.space
+domain:multipledachecker.shop
+domain:multipledapachecker.store
+domain:newbacklinkchecker.online
+domain:newbacklinkschecker.online
+domain:oneclickseochecker.shop
+domain:onlinerankchecker.site
+domain:onlinerankchecker.website
+domain:onlineserpchecker.shop
+domain:onlinewebsitechecker.space
+domain:openbacklinkchecker.store
+domain:organicrankchecker.online
+domain:organicrankchecker.site
+domain:outgoinglinkchecker.site
+domain:pachecker.online
+domain:pacheckerfree.website
+domain:pacheckeronline.online
+domain:pacheckertool.website
+domain:padachecker.shop
+domain:padachecker.site
+domain:padachecker.store
+domain:padachecker.website
+domain:padacheckeronline.store
+domain:padafreechecker.website
+domain:pageauthoritylookup.space
+domain:pagebacklinkchecker.space
+domain:pagedachecker.store
+domain:pageseochecker.website
+domain:quickseochecker.space
+domain:rankchecker.space
+domain:rankcheckerfree.shop
+domain:rankcheckerfree.site
+domain:rankcheckerfree.store
+domain:rankcheckertool.space
+domain:rankcheckerwebsite.site
+domain:rankcheckerwebsite.space
+domain:rankingcheckerfree.space
+domain:rankingschecker.store
+domain:rankwebsitechecker.online
+domain:seoanalysischecker.online
+domain:seoanalysischecker.website
+domain:seocheckerforfree.site
+domain:seocheckerfree.website
+domain:seocheckeronline.online
+domain:seocheckers.space
+domain:seocheckertools.store
+domain:seocheckerwebsite.store
+domain:seodomainchecker.website
+domain:seofreechecker.site
+domain:seometricschecker.online
+domain:seoonlinechecker.store
+domain:seoonlinechecker.website
+domain:seorankcheckerfree.space
+domain:seorankcheckertool.website
+domain:seorankingschecker.space
+domain:seorankingschecker.store
+domain:seoscorechecker.store
+domain:seoscorechecker.website
+domain:seostatschecker.site
+domain:seostrengthchecker.store
+domain:seotoolchecker.online
+domain:seourlchecker.online
+domain:seourlchecker.space
+domain:seowebsitechecker.store
+domain:serpcheckerfree.store
+domain:serpcheckeronline.shop
+domain:serpcheckers.website
+domain:serpfreechecker.site
+domain:serpfreechecker.store
+domain:serppositionchecker.website
+domain:sitecheckerfree.space
+domain:sitecheckerfree.store
+domain:sitecheckerseo.shop
+domain:sitedachecker.online
+domain:sitelinkchecker.shop
+domain:siterankcheckerfree.shop
+domain:siterankingchecker.space
+domain:sitestatschecker.shop
+domain:sitevisitschecker.store
+domain:sitevisitschecker.website
+domain:topseochecker.shop
+domain:trustflowchecker.shop
+domain:urlbacklinkanalysis.store
+domain:urlbacklinkchecker.site
+domain:urlrankchecker.site
+domain:urlrankchecker.store
+domain:urlrankingchecker.shop
+domain:webbacklinkschecker.website
+domain:webpagerankchecker.shop
+domain:webrankchecker.store
+domain:webrankingchecker.site
+domain:webseochecker.site
+domain:websiteauditchecker.shop
+domain:websitedachecker.online
+domain:websitedachecker.website
+domain:websiteinboundlinks.online
+domain:websiteprchecker.shop
+domain:websiteserpchecker.online
+domain:websiteserpchecker.website
+domain:websitestatschecker.shop
+domain:websitestatschecker.store
+domain:whatisdapachecker.store
+
+# ==========================================================================
+# SECTION 2 - PBN service pages, direct-named, dofollow. 43 domains / 90 links.
+# Grounds (a)+(b)+(d)+(e).
+#   (a) anchor: "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network
+#       Service ngwindows.com Rank First Page Google" - the anchor itself advertises
+#       a PBN and names the target.
+#   (b) Nofollow=false on all 90.
+#   (d) page titles are link-vendor sales copy, e.g.
+#       "Proven PBN Backlinks to Increase Trust Flow. Drive Qualified Visitors."
+#       "Trusted PBN Backlinks to Improve Citation Flow."
+#       and the recurring literal title: "Boost your Google rankings with Premium
+#       PBN & Link Building" (22 hosts share this exact title; 18 share the exact
+#       path /all/2066/26.html - structural fingerprint (c) on that subset).
+#   (e) Ahrefs Is spam=true on all.
+# ==========================================================================
+
+domain:archive-hu.com
+domain:betulcrime.com
+domain:blogerreviewers.com
+domain:bramo.shop
+domain:brilko.shop
+domain:brinto.shop
+domain:bripto.shop
+domain:canadapsilocybin.com
+domain:cartermanageus.com
+domain:cgpa2percentag.com
+domain:cinvo.shop
+domain:cripio.shop
+domain:cvillico.com
+domain:dapio.shop
+domain:digitalchatni.com
+domain:dupurgeniefr.com
+domain:fashionclothingnews.com
+domain:fastlifesite.com
+domain:fralto.shop
+domain:homesforsaleoldgreenwichct.com
+domain:juvex.shop
+domain:kkinsider.com
+domain:lawyerinjeddah.com
+domain:libyanatravel.com
+domain:m98ufa.com
+domain:mervi.shop
+domain:mokra.shop
+domain:mylisthero.com
+domain:newblogerseo.com
+domain:nivira.shop
+domain:orvelo.shop
+domain:plavo.shop
+domain:plrdownloadshub.com
+domain:plumeriamarketing.com
+domain:plurio.shop
+domain:primenewsartical.com
+domain:quotesblom.com
+domain:s-tribe.net
+domain:sahammurah.com
+domain:thedocmag.com
+domain:theforbestimes.com
+domain:uncledspizza.com
+domain:wecelebrities.com
+
+# ==========================================================================
+# SECTION 3 - "High DA backlinks" vendor pages, direct-named, dofollow.
+# 14 domains / 28 links. Grounds (a)+(b)+(d)+(e).
+#   (a) anchor: "Trusted High DA Backlinks for ngwindows.com to Raise Domain
+#       Rating. Improve Google Rankings, Across Every Niche and Market."
+#   (b) Nofollow=false on all 28.
+#   (d) titles are the same generated vendor-copy family as Section 2, e.g.
+#       "Trusted White Hat SEO Links to Raise Domain Rating."
+#       "Effective Niche Edit Links to Boost Domain Authority."
+#   (e) Ahrefs Is spam=true on all.
+# ==========================================================================
+
+domain:bitproperty.online
+domain:canlisohbethatlari.online
+domain:cinto.shop
+domain:corvio.shop
+domain:crinto.shop
+domain:flenro.shop
+domain:murvi.shop
+domain:murvix.shop
+domain:nimbra.shop
+domain:nimto.shop
+domain:nokvio.shop
+domain:pamto.shop
+domain:plenko.shop
+domain:tokyopush188.online
+
+# ==========================================================================
+# SECTION 4 - Aged-domain / backlink marketplace listings, dofollow.
+# 26 domains / 53 dofollow links.
+# Grounds (b)+(c)+(d). AHREFS' FLAG IS NOT THE GROUND HERE - it flagged only
+# 9 of these 26; the other 17 are included on (c)+(d) alone, independently of it.
+#   (d) the referring page's own title states it sells links:
+#       "Where to buy aged domains and backlinks" / "Top Domains - Page 168196"
+#   (c) two page-IDs are replicated byte-for-byte across unrelated hosts:
+#         /page-34962c4ce6e04e66bc6683ce26dd6c07.html  (ID 3496-2460, 16 hosts)
+#         /61a37460a2eed245244c9bc59896bc7b-l/         (ID 6137-4602, 8 hosts)
+#       Left/right context shows ngwindows.com sitting inside a scraped
+#       alphabetical domain list: "ngwind.com ngwindow.com | ngwindows.com |
+#       ngwindsong.com ngwindsongk.com" - an inventory listing, not a citation.
+#   (b) Nofollow=false on every link counted here.
+# NOTE FOR THE REVIEWER: this is a weaker-MOTIVE tier (the operator is selling
+# domains, not necessarily boosting ngwindows.com) but the behavioural evidence
+# is strong. It is the cleanest section to drop wholesale if you want to.
+# ==========================================================================
+
+domain:alljobs.info  # path /61a37460a2eed245244c9bc59896bc7b-l/ | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:allwebsitesdirectory.com  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:backlinkon.com  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:backlinksbank.com  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:backlinkstree.com  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:bestwebstats.com  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:domain.com.lc  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: Ahrefs Is spam=true, + fingerprint
+domain:domainanalysis.org  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: Ahrefs Is spam=true, + fingerprint
+domain:domains.com.bz  # path /page/168196/ | ground: Ahrefs Is spam=true, + fingerprint
+domain:domainsc.com  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: Ahrefs Is spam=true, + fingerprint
+domain:homefinance.co.in  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:indexaward.com  # path /61a37460a2eed245244c9bc59896bc7b-l/ | ground: Ahrefs Is spam=true, + fingerprint
+domain:indians.cc  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:itsyourgold.com  # path /page/168196/ | ground: Ahrefs Is spam=true, + fingerprint
+domain:linksnatcher.com  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:pagesearch.net  # path /61a37460a2eed245244c9bc59896bc7b-l/ | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:prashikshan.in  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: Ahrefs Is spam=true, + fingerprint
+domain:theface.in  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:tunca.org  # path /61a37460a2eed245244c9bc59896bc7b-l/ | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:tyre.pro  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:wallpapers.pro  # path /61a37460a2eed245244c9bc59896bc7b-l/ | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:way2check.cv  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:websiterace.com  # path /61a37460a2eed245244c9bc59896bc7b-l/ | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:wonvision.com  # path /61a37460a2eed245244c9bc59896bc7b-l/ | ground: Ahrefs Is spam=true, + fingerprint
+domain:ycm.info  # path /61a37460a2eed245244c9bc59896bc7b-l/ | ground: fingerprint + page title ONLY (Ahrefs did NOT flag it)
+domain:youtoo.in  # path /page-34962c4ce6e04e66bc6683ce26dd6c07.html | ground: Ahrefs Is spam=true, + fingerprint
+
+# ==========================================================================
+# SECTION 5 - Auto-generated directory injection, dofollow. 2 domains / 137 links.
+# Grounds (b)+(c)+(e). These two are individually argued; read both before acting.
+# ==========================================================================
+domain:whosmypro.com
+#   133 dofollow links from one DR-0.4 host. (c) structural fingerprint: 133
+#   near-identical "Doors & Windows Near <CITY>, GA" pages (Druid Hills, Peachtree,
+#   Acworth, Austell, ...) each carrying the same anchor "- Go to company website"
+#   to the same target. City-permutation doorway pages, not 133 editorial mentions.
+#   Page type "Listing collection > Business". (e) Ahrefs Is spam=true.
+#   CHALLENGEABLE: legitimate local directories also build city pages. The
+#   distinguishing facts are the volume (133 dofollow to one business) and that
+#   every page is a permutation of one template.
+domain:homeownerideas.com
+#   4 dofollow links. (c) fabricated geography: the page title is "North Georgia
+#   Replacement Windows Roswell NEW MEXICO - Home Owner Ideas Directory" for a
+#   Georgia company. A directory that invents a location is generating listings
+#   programmatically, not recording a real business. Anchor is the bare URL
+#   "https://www.ngwindows.com/". (e) Ahrefs Is spam=true.
+
+
+# ==========================================================================
+# SECTION 6 - SEMRUSH-ONLY. 117 domains Ahrefs has never crawled.
+# Grounds (a)+(b) from links_raw.tsv (commit 6f5f407), which carries anchor and
+# nofollow but NO target_url column. Each entry below has at least one row where
+#   nofollow=false  AND  the anchor names ngwindows.com (word-boundary matched,
+#   so "performingwindows.com" does NOT count) inside link-vendor copy.
+# These cannot be corroborated by Ahrefs because Ahrefs does not list the domain
+# at all - absence of Ahrefs evidence here is absence of coverage, not exoneration.
+# Format: domain  # <dofollow rows> | <quoted anchor>
+# ==========================================================================
+
+domain:100ranking.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:100ranking.link  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:1seoservices.com  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:1seoservices.info  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:7-seo.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:adcreativevideo.com  # 2 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:advanced-seo.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:agentbetting.online  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:aloysionunes.com  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:backlinkanalyzer.site  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinkcheckersite.store  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinkfreeseo.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinkgenerator.org  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinkmaker.info  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinkmaker.link  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinkocean.info  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinksboost.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinksboost.info  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinkscheckersite.space  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinksindia.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinksindia.info  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinksindia.link  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinkspace.info  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinkspace.link  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinkspulse.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:backlinkspulse.info  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:bazerdaily.com  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:bestirishcasinoonline.online  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:bestnz-poker-casinoslot.com  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:bestonlinecasinogamescanada.online  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:bestonlinecasinomexico.online  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:bestseosuite.com  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:betwinnermirror.com  # 2 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:bigassstadiumtourmerch.store  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:blog-backlinks.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:blogdachecker.website  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:breachviews.com  # 2 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:burpio.shop  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:casinogamingsites.online  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:casinooftheking.com  # 2 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:casinoonlinecrazytime.online  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:casinopopular.online  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:chordmp3.net  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:cindylaup.com  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:clifflisting.com  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:cmocheatsheets.com  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:competitorchecker.store  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:coruzants.com  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:daandpacheckerfree.shop  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:dacheckeronline.shop  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:dadpchecker.online  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:dadpchecker.site  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:daechul.co.com  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:dapaseochecker.online  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:darankingchecker.site  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:diversifiedseo.com  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:domainauthority.website  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:domainlinkprofile.site  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:drchecker.site  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:drchecker.store  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:drobo.shop  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:expresskitchendesigns.com  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:findbacklinks.website  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:fioro.shop  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:fittyfoody.com  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:fletcherrld.com  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:freerankcheckertool.shop  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:geobacklinks.link  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:getseotips.link  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:ggmap.co.com  # 3 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:ggmap.us.com  # 2 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:gladeflowers.com  # 2 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:go4seo.com  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:go4seo.info  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:gofreebacklinks.info  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:goldbacklinks.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:goldbacklinks.info  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:goodbacklinkchecker.website  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:gumushaneescorton.shop  # 2 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:hotonlinegaming.com  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:liveserpchecker.website  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:marinasone.com  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:marketsseo.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:mertio.shop  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:missburrg.com  # 2 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:ninko.shop  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:onlineseochecker.website  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:onlineshoppingidea.com  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:perfectwebseo.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:plendo.shop  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:proseobacklinks.link  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:rankcheckerseo.online  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:rankingschecker.site  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:rjcentinc.com  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:seo-asia.link  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:seo-enterprise.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:seo-expert-1.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:seocheckerrank.site  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:seofastranks.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:seorankingschecker.online  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:seostrengthchecker.online  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:seostrengthchecker.site  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:seotoolslike.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:seowebsitechecker.site  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:seozens.com  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:serprankingchecker.site  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:sidarma88gacor.shop  # 1 dofollow | "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Acr"
+domain:siteseocheckerfree.store  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:stormbacklink.com  # 2 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:techbumppy.com  # 1 dofollow | "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First"
+domain:technicalseochecker.space  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:thebulkdachecker.website  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:urlbacklinkchecker.store  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:websiteauditchecker.space  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:websitepageschecker.space  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:websiterankchecker.space  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+domain:websiterankchecker.website  # 1 dofollow | "Increase Google Visibility with High Quality Backlinks ngwindows.com"
+
+# ==========================================================================
+# NOT DISAVOWED - deliberate exclusions, with counts and reasons
+# ==========================================================================
+#
+# [1] 1,129 Ahrefs links that are Is spam=true but Nofollow=TRUE.
+#     Reason: nofollow passes no PageRank. Disavowing them changes nothing and
+#     inflates the file. This is where nearly all the high-authority spam lives:
+#     of 632 spam-flagged domains at DR>=30, only 7 have ANY dofollow link.
+#     Largest excluded nofollow networks, each with a clean fingerprint:
+#       577 hosts sharing the path /after-years-of-struggling-with-low-engagement-
+#            i-found-seoexpresscom-... (the "SEOExpress.org" testimonial network,
+#            DR 44-52, anchor "There was a time when ngwindows.com struggled...")
+#        65 hosts sharing /ysh5qk2-what-29-campaigns-built-local-citations-...
+#        24 hosts titled "Directory Pages Index"
+#        19 hosts sharing /bibiacseo/ ; 15 /buytfnseo/ ; 15 /ashgeoseo/
+#        11 hosts titled "Domain Report" / "Website Stats" (/report/97119-20,
+#            /stats/97119-20) ; 3 hosts "Dark Side Links - Dark/White Hat Link
+#            Building Services"
+#     Topically impossible injections also excluded here BECAUSE they are nofollow:
+#       intermeritocracy.com  "Thriving Economy of China" -> anchor "Window
+#                             Replacement Company Atlanta" (6 links)
+#       monetaryhistoryofworld.com  "Monetary History of the World, 1154-1470"
+#                             -> anchor "Windows Atlanta" (12 links)
+#       worldbusinesspromote.com  "Makita: A Global Leader in Power Tools" (4)
+#       marketingexperts.click  "Artie Lange: Laughter, Pain..." (2)
+#       dreamscometroup.com   blog comment page 41 (1)
+#     If you later want a belt-and-braces file, these five are the first additions:
+#     their evidence is behaviourally the strongest in the whole dataset.
+#
+# [2] 10 Ahrefs-flagged DOFOLLOW domains judged FALSE POSITIVES of Ahrefs'
+#     classifier. Excluded because no manipulative behaviour is observable:
+#       100xrecruiting.com     - jobs/company profile listing
+#       brandfetch.com         - brand-asset directory, auto-indexes every domain; editorial-neutral aggregator
+#       clientsbee.com         - tech-stack lookup page, auto-generated for every domain
+#       hghomeclub.com         - podcast episode page featuring the business by name
+#       missfrugalmommy.com    - genuine editorial how-to article (Article > How-to), in-copy citation
+#       nearmelisting.com      - local reviews listing, correct Decatur GA geography
+#       prosgrade.com          - consumer reviews aggregator with correct Alpharetta GA geography
+#       prospeo.io             - B2B email-format lookup, auto-indexes every company
+#       robuta.com             - search-engine SERP mirror for "marietta georgia"
+#       struvia.co             - subcontractor profile carrying the real phone number (770) 888-1604
+#
+# [3] 218 domains with Ahrefs Is spam=false (the keep-list), incl. bbb.org,
+#     crunchbase.com, glassdoor.com, yellowpages.com, expertise.com, fixr.com,
+#     qualifiedremodeler.com, housedigest.com, moneytalksnews.com, dexknows.com.
+#     Sanity-checked: 23 of them carry SEO-vendor vocabulary. 17 of those are the
+#     aged-domain marketplace and WERE PROMOTED into Section 4 above. The other 6
+#     (seo-high-ranking.shop, kawaiishop.shop, thehighseoranking.shop,
+#      verified-digital-firm-seoexpress.store, revan-me.com, sblmerchant.com) are
+#     link-vendor pages but every link is nofollow -> excluded under [1].
+#     bizlistusa.com / businesslistus.com (shared path /business/5067660.htm,
+#     3 hosts, dofollow) were checked and KEPT: correct Roswell GA geography,
+#     ordinary subdomain city structure, image link with empty anchor.
+#
+# [4] 777 Semrush-only domains with no dofollow anchor naming ngwindows.com.
+#     Excluded under default-to-exclusion. Many carry vendor anchors naming a
+#     DIFFERENT target (ngawindows.com, roiwindows.com, performingwindows.com,
+#     qualitypluswindows.com, thermalprowindows.com, northpointwindows.com,
+#     thermatrustwindows.com). Those are not evidence against ngwindows.com
+#     unless the redirect model holds - and see [5].
+#
+# [5] THE 14 REDIRECT SHELLS - NOT DISAVOWED, AND THE MODEL IS NOT CONFIRMED.
+#     Ahrefs' export has a Redirect Chain URLs column. Across all 2,665 links it
+#     contains exactly TWO third-party hosts, and NEITHER is a shell:
+#       atlantabestmedia.com (22 links) - a local Atlanta awards/press site using
+#         an outbound CLICK-TRACKER: https://atlantabestmedia.com/?post_id=12205
+#         &goto=<token> -> 303 -> http://ngwindows.com/ -> 301 -> https://.
+#         Is spam=false, dofollow, anchor "ngwindows.com", page "my-woodstock-
+#         canton-best-of-2025". This is a tracked editorial link. KEEP.
+#       bizhwy.com (5 links) - business directory interstitial:
+#         https://www.bizhwy.com/visit.php?biz=7329&state=Georgia -> 302.
+#         Is spam=false and NOFOLLOW. Passes nothing. KEEP.
+#     The remaining 785 chains are ngwindows.com's OWN canonicalisation
+#     (http->https, non-www->www; 759 are a single 301).
+#     NONE of ngawindows.com, roiwindows.com, thermalprowindows.com,
+#     qualitypluswindows.com, northpointwindows.com, performingwindows.com,
+#     thermatrustwindows.com, northgeorgiawindows.net, thermalastwindows.com,
+#     e2windows.com, choiceviewwindows.com, ngwindow.com, northgawindows.com or
+#     northgeorgiawindow.com appears in ANY redirect chain in the Ahrefs export.
+#     (ngwindow.com's 49 raw string hits are all alphabetical domain-list context
+#     on the Section 4 marketplace pages; qualitypluswindows.com's single hit is
+#     a URL path segment on justgotlive.com.)
+#     => The prior pass's "279 redirect-borne dofollow domains" has NO support in
+#     Ahrefs data. Either the shells do not 301 into ngwindows.com, or Ahrefs does
+#     not credit shell-borne links to it. Unresolved; do not act on it from here.
+#
+# ==========================================================================
+# HIGH-DR SPAM - the entries a reviewer will challenge hardest
+# Only 3 of the 343 Ahrefs-side entries are DR>=30. DR is NOT the reason any
+# of them is listed; they are listed on the quoted evidence below. Stated here
+# only so the reviewer is not ambushed.
+# ==========================================================================
+#   m98ufa.com (DR 50) - 2 dofollow link(s)
+#     page : https://m98ufa.com/all/947/16.html
+#     title: "🏆🏆Boost your Google rankings with Premium PBN & Link Building🏆🏆"
+#     anchor: "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First Pag"
+#     ground: (a) anchor names ngwindows.com in PBN/link-vendor copy; (b) dofollow;
+#             (d) page title is vendor sales copy; (e) Ahrefs Is spam=true. Not DR.
+#   tokyopush188.online (DR 42) - 2 dofollow link(s)
+#     page : https://tokyopush188.online/backlink-network/powerful-tiered-link-building-to-raise-domain-rating-se
+#     title: "Powerful Tiered Link Building to Raise Domain Rating. Secure First Page Positions, Across Ev"
+#     anchor: "Trusted High DA Backlinks for ngwindows.com to Raise Domain Rating. Improve Google Rankings, Across "
+#     ground: (a) anchor names ngwindows.com in PBN/link-vendor copy; (b) dofollow;
+#             (d) page title is vendor sales copy; (e) Ahrefs Is spam=true. Not DR.
+#   betulcrime.com (DR 40) - 2 dofollow link(s)
+#     page : https://betulcrime.com/all/2066/26.html
+#     title: "🏆🏆Boost your Google rankings with Premium PBN & Link Building🏆🏆"
+#     anchor: "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ngwindows.com Rank First Pag"
+#     ground: (a) anchor names ngwindows.com in PBN/link-vendor copy; (b) dofollow;
+#             (d) page title is vendor sales copy; (e) Ahrefs Is spam=true. Not DR.
+#
+#   Also note: domains.com.bz (DR 28) in Section 4 is the highest-DR entry there;
+#   its ground is the shared page-ID fingerprint and the title "Top Domains -
+#   Page 168196", identical to itsyourgold.com (DR 0). Same page, two hosts.
+#
+# END OF FILE
+
