@@ -220,7 +220,12 @@ cluster **391 / 360 = 52.1%**. Two genuinely different populations.
 **Authority is anti-correlated with manipulation in this profile.** Any DR or AS threshold would
 produce false positives one way and miss DR 65+ vendors the other.
 
-**The delivered disavow file now contains 5 domains.** It briefly held 33; the other 28 have been
+> **SUPERSEDED BY `disavow-v2-ahrefs.txt` — 460 entries.** The Ahrefs data rebuilt this from a
+> far larger evidence base. The 5-entry file below was correct given Semrush alone; it was 99%
+> incomplete. Both the 5 entries and all 87 earlier candidates **survive** re-testing. See the
+> summary at the end of this section.
+
+**The earlier Semrush-only file contained 5 domains.** It briefly held 33; the other 28 have been
 **withdrawn in full** after verification against data that was already in the repo.
 
 The withdrawal matters because it exposes a process failure, not just a bad call. The earlier pass
@@ -239,8 +244,42 @@ Against the real data:
 **A separate pass identifies ~87 further domains that do meet criterion 1** (dofollow + vendor
 sales-copy anchor naming ngwindows.com + shared slug). They are **not added yet**: routing is
 inferred from anchor text, for the same missing-`target_url` reason as §1. Confirm that field
-after 2026-10-25, then extend. The honest range for a final file is **5 to ~92 entries**, and
-which end depends on one unread HTML attribute.
+after 2026-10-25, then extend.
+
+### The rebuilt file: 460 entries
+
+The Ahrefs exports replaced guesswork with measurement. `disavow-v2-ahrefs.txt`, six sections
+strongest-first:
+
+| Section | Entries | Grounds |
+|---|---|---|
+| Campaign `148096` | **258** | Dofollow + vendor anchor naming the client + campaign-ID fingerprint |
+| PBN vendor | 43 | Vendor anchor + dofollow |
+| High-DA vendor | 14 | Link-selling page title + dofollow |
+| Aged-domain marketplace | 26 | Shared page path + "Where to buy aged domains and backlinks" title |
+| Directory injection | 2 | Fabricated geography |
+| Semrush-only | 117 | Word-boundary anchor match + dofollow in the Semrush export |
+
+Fallbacks detach cleanly at **434** (drop §4) and **432** (drop §5).
+
+**Error rates were measured, not assumed — in both directions.** Ahrefs' spam flag **over-fires at
+3.0%** on the slice that governs the file; all 10 false positives are excluded by name
+(`brandfetch.com`, `prospeo.io`, `missfrugalmommy.com` — a genuine how-to article — and others).
+**Under-firing is the bigger problem at 10.6%**, including a **65% miss on one aged-domain
+network**; its 17 dofollow members are included on fingerprint and title alone, each annotated
+*"Ahrefs did NOT flag it"*.
+
+**Where both tools see a domain they agree 31 of 31**, which is why 77 Ahrefs-blind Semrush entries
+are retained: silence is non-coverage, not exoneration.
+
+**Refinement to the high-DR finding.** 632 flagged domains are DR ≥30 — but **only 7 carry any
+dofollow link**. The high-authority spam is almost entirely nofollow (the 577-host SEOExpress
+network at DR 44–52 passes nothing), so only **3 entries in the whole file are DR ≥30**. The
+"authority is anti-correlated with manipulation" point still stands as a reason never to filter on
+DR, but its practical weight is much smaller than first reported.
+
+**No entry depends on the redirect question resolving either way** — the client-campaign section
+admits only word-boundary matches on ngwindows.com.
 
 **1,159 domains are excluded by design** as insufficient evidence — including 360 carrying Network
 A's naming convention, 284 of which first appeared in the 14 days to 6 Oct. Likely the same
@@ -337,6 +376,7 @@ whether a disavow is warranted at all. Google's current guidance limits the tool
 and links you are responsible for.
 
 **3. Disavow — only if step 2 shows a manual action, or step 1 confirms links were bought.**
+Use **`disavow-v2-ahrefs.txt` (460 entries)**, not the 5-entry Semrush-only file.
 Scope: the **~283 links hitting ngwindows.com directly**. Everything redirect-borne is resolved by
 step 1 and must not be disavowed. Use the 33-domain evidenced file as-is — or its 5-line Section 1
 alone if you want only fully-evidenced entries; extend it after
