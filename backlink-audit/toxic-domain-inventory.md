@@ -20,22 +20,34 @@
 ## 1. Scoring methodology (stated explicitly)
 
 This inventory **does not use Authority Score, Domain Rating, Trust Score, TLD, country
-or hosting as grounds for disavowal.** Those signals are descriptive, not probative: a
-DR-0 domain can be a legitimate small local site, and a DR-75 domain can be a link
-vendor (both occur in this dataset — see §5).
+or hosting as grounds for disavowal.** Those signals are descriptive, not probative, and in
+this dataset they point the wrong way in both directions: 27 link sellers here hold Ahrefs
+**DR 59–60**, while genuine local businesses such as `forsythcounty.com` and
+`georgiashutters.com` sit at **DR 3.6 and 2.2**.
 
-A domain is classified **TOXIC-CRITICAL (disavow)** only when all three conditions are
-directly observed in the Semrush `backlinks` report:
+A domain is disavowed only on per-domain evidence, under one of two qualifying criteria,
+behind one gate:
 
-| # | Condition | Why it is probative |
+| | Criterion | Why it is probative |
 |---|---|---|
-| 1 | **Anchor text is link-vendor sales copy** — the anchor advertises an SEO/backlink service rather than describing the destination | Anchor text is author-controlled and intentional. Vendor sales copy as anchor is self-identifying manipulation. |
-| 2 | **`rel="nofollow"` is absent** (link is dofollow) | A nofollow link passes no PageRank and cannot be the mechanism of a link-based penalty. Nofollow vendor links are recorded but **not** disavowed. |
-| 3 | **Shared structural fingerprint** — the same URL path slug, with the same numeric/hex id, recurs across otherwise unrelated registrations | Independent sites do not coincidentally publish `/dir/backlink-seo-experts-211287`. Identical slug + identical anchor across many domains is a single operator. |
+| **1** | **Observed vendor sales-copy anchor** + **shared structural fingerprint** (same path slug with the same numeric id recurring across unrelated registrations) | Anchor text is author-controlled. Independent sites do not coincidentally publish `/dir/backlink-seo-experts-211287` with identical anchor copy. |
+| **gate** | **`rel="nofollow"` must be absent** | A nofollow link passes no PageRank and cannot be the mechanism of a link penalty. Vendor links that are nofollow are recorded but never disavowed. |
+| **3** | **Domain-name character** — the registrable domain is itself a link-selling brand (`*backlink*`, `*buybacklinks*`, `*seolinks*`, `*dachecker*`, `*rankchecker*`) | Criterion 1 alone misses high-DR sellers that use benign bare-URL anchors. The name is a declaration of purpose independent of any one link. |
 
-Everything that fails any of the three goes into **NOT DISAVOWED**, sub-bucketed by the
-reason it failed. Where a domain was never covered by the one page of anchor data, it is
-**EXCLUDED FOR INSUFFICIENT EVIDENCE** regardless of how suspicious its name looks.
+**Criterion 3 exists because criterion 1 is not sufficient on its own.** The 27 domains on
+host 203.161.54.114 — `99backlinksbuy.com`, `buyfairbacklinks.com`,
+`clicktobuybacklinks.com`, `webrankingsolutionbacklinks.com` and the rest — would pass both
+an anchor test and any DR threshold. Verified on the Ahrefs free endpoint, **all 27 return
+DR 59–60**. A uniform DR block across 27 unrelated registrations on one IP is itself a
+signature of artificially inflated seller sites.
+
+### The scope rule that matters more than any of the above
+
+**~94% of this spam campaign does not point at ngwindows.com at all.** It points at 14
+content-free domains that 301-redirect into ngwindows.com. Those links are removed **at
+source** by deleting the redirects, which is strictly better than disavowing them. The
+disavow file is therefore scoped to the **~283 directly-pointing links only**; everything
+redirect-borne is routed to a remediation section instead.
 
 ---
 
@@ -43,15 +55,24 @@ reason it failed. Where a domain was never covered by the one page of anchor dat
 
 | Bucket | Domains | Basis |
 |---|---:|---|
-| **TOXIC-CRITICAL — disavowed** | **66** | Observed vendor anchor + observed dofollow + shared slug fingerprint |
-| NOT DISAVOWED — vendor anchor but **nofollow** | 2 | Observed anchor is vendor copy; `rel=nofollow` present |
-| NOT DISAVOWED — **benign anchor observed** | 5 | Anchor is a bare domain/URL or generic phrase |
-| **INSUFFICIENT EVIDENCE — excluded** | **1,159** | No anchor/dofollow data retrievable before API units hit zero |
+| **TOXIC-CRITICAL — disavowed (criterion 1, direct target)** | **5** | Observed vendor anchor naming ngwindows.com itself + dofollow + shared slug |
+| **TOXIC-CRITICAL — disavowed (criterion 3, name character)** | **29** | Link-selling brand name; 27 of them share host 203.161.54.114 at DR 59–60 |
+| **Total disavow entries** | **34** | |
+| TOXIC — evidenced but **redirect-borne**, resolved by deleting the 301 | 61 | Vendor anchor + dofollow + shared slug, but anchor targets a shell domain |
+| Operator-controlled **301 redirect shells** — delete, do not disavow | 14 | Content-free redirect domains; destination of ~94% of the campaign |
+| NOT DISAVOWED — vendor anchor but **nofollow** | 2 | Fails the dofollow gate |
+| NOT DISAVOWED — **benign anchor observed** | 5 | Bare domain/URL or generic phrase |
+| **PROTECTED** — explicit exclusion list for any future sweep | 15 | Legitimate local/trade sites, several at DR 2–18 |
+| **INSUFFICIENT EVIDENCE — excluded** | **1,159** | No anchor/dofollow/routing data retrievable |
 | **Total referring domains enumerated** | **1,232** | |
 
-Two of the 66 disavowed domains (`urlbacklinkschecker.space`, `backlinkcheckerseo.space`)
+Two of the evidenced domains (`urlbacklinkschecker.space`, `backlinkcheckerseo.space`)
 appear in the `backlinks` report but **not** in the 1,232-row `backlinks_refdomains` list —
-Semrush's own two endpoints disagree. Both are evidenced and both are included.
+Semrush's own two endpoints disagree.
+
+**The disavow file shrank from 66 entries to 34, and that is the correct direction.** 61 of
+the 66 were evidenced manipulative links that nonetheless should not be disavowed, because
+they are placed against redirect shells the operator controls and can simply delete.
 
 ### The AS 0–5 band, answered directly
 
@@ -61,7 +82,9 @@ page of anchor data:
 
 | Sub-bucket of AS 0–5 | Domains | Share of the 1,015 |
 |---|---:|---:|
-| (a) vendor sales-copy anchor, **dofollow** | 64 | 6.3% |
+| (a) vendor sales-copy anchor, **dofollow** — of which: | 64 | 6.3% |
+| &nbsp;&nbsp;→ targets ngwindows.com directly → **disavowed** | 5 | 0.5% |
+| &nbsp;&nbsp;→ targets a 301 redirect shell → **delete the redirect instead** | 59 | 5.8% |
 | (a-nf) vendor sales-copy anchor, nofollow | 2 | 0.2% |
 | (b) bare domain-name / bare-URL anchor | 4 | 0.4% |
 | (c) empty / image anchor | 0 observed | — |
@@ -71,13 +94,17 @@ page of anchor data:
 **This is the honest answer and it is mostly a gap.** 93% of the AS 0–5 band has no anchor
 evidence either way. The prior draft treated the whole band as toxic; that was an unsupported
 inference, and the corrected position is that **only 64 of 1,015 AS 0–5 domains (6.3%) can
-currently be shown to be manipulative.**
+currently be shown to be manipulative — and only 5 of those 1,015 (0.5%) are both
+manipulative and pointing at ngwindows.com directly.**
 
 ---
 
 ## 3. The two evidenced networks
 
 ### Network A — shared-slug `/dir/` vendor network (59 domains, all dofollow)
+
+Only **one of the six clusters targets ngwindows.com directly**; the other five name a
+redirect shell in their anchor and are resolved by deleting that shell's 301.
 
 Six distinct page slugs, each reused verbatim across many unrelated domains, each carrying
 one fixed anchor string:
@@ -89,7 +116,7 @@ one fixed anchor string:
 | `/dir/professional-seo-links-148030` | 10 | "ngawindows.com Premium Link Building Experts for Website Ranking Growth" |
 | `/dir/trusted-seo-backlinks-150104` | 10 | "northpointwindows.com Premium SEO Links for Higher Search Engine Rankings" |
 | `/dir/ethical-seo-backlinks-160633` | 9 | "performingwindows.com Premium SEO Backlinks for Higher Google Rankings and Organic Traffic" |
-| `/dir/quality-authority-backlinks-148096` | 5 | "Increase Google Visibility with High Quality Backlinks ngwindows.com" |
+| `/dir/quality-authority-backlinks-148096` | 5 | "Increase Google Visibility with High Quality Backlinks ngwindows.com" — **DIRECT, disavowed** |
 
 Naming convention is uniform: `dachecker*`, `dapachecker*`, `backlinkchecker*`,
 `seochecker*`, `rankchecker*`, `serpchecker*` on `.site/.space/.shop/.store/.website/.online`.
@@ -147,22 +174,33 @@ quite different (§5).
 
 ## 5. Three findings the draft audit got wrong or missed
 
-### 5.1 The 17 "other window companies" are a brand-variant cluster on three shared IPs
+### 5.1 The spam is not aimed at ngwindows.com — it is aimed at 14 redirect shells
 
 The draft read anchors like `ngawindows.com`, `roiwindows.com`, `thermalprowindows.com` as
-proof of a vendor blasting a scraped list, with ngwindows.com as a bystander. The hosting
-data points elsewhere. Seventeen window-company domains that **link to ngwindows.com** sit on
-just three AWS Global Accelerator IPs — and several are near-exact brand variants of the
-client: `ngwindow.com`, `northgawindows.com`, `northgeorgiawindow.com`,
-`northgeorgiawindows.net` alongside `ngwindows.com`.
+proof of a vendor blasting a scraped list of window companies, with ngwindows.com an
+innocent bystander. The `redirect_url` field shows the opposite: those domain names in the
+anchors are not *mentions*, they are the **link targets**. Fourteen content-free domains
+301-redirect into ngwindows.com, and ~94% of the campaign lands on them:
 
-These domains first appeared in **July 2024 – July 2025**, a full year before the link blast
-(late June 2026), and the red-team pass found the cluster is ~34% nofollow. That is not a
-PBN blast profile. **Inference, clearly labelled:** this looks like a portfolio of brand
-variants and lead-gen microsites under common control rather than a third-party attack.
-It is excluded from the disavow file and flagged as the single most important thing to put
-to the client directly: *do you own or control these domains?* The answer changes the whole
-framing of the audit.
+`ngawindows.com` · `roiwindows.com` · `thermalprowindows.com` · `qualitypluswindows.com` ·
+`northpointwindows.com` · `performingwindows.com` · `thermatrustwindows.com` ·
+`northgeorgiawindows.net` · `thermalastwindows.com` · `e2windows.com` ·
+`choiceviewwindows.com` · `ngwindow.com` · `northgawindows.com` · `northgeorgiawindow.com`
+
+Four of the fourteen are near-exact brand variants of the client. They cluster on three AWS
+Global Accelerator IPs (15.197.225.128, 15.197.142.173, 3.33.251.168) and first appeared
+Jul 2024 – Jul 2025, a year before the blast.
+
+Two consequences, and they are the whole remediation plan:
+
+1. **This reframes attribution.** A negative-SEO attacker does not build 14 redirect shells
+   into the victim. This reads as a purchased or managed campaign run on behalf of the
+   ngwindows.com property. The residual uncertainty is registrant identity, which could not
+   be checked from this environment — **put it to the client directly**.
+2. **Deleting the redirects beats disavowing.** It severs ~94% of the spam at source, removes
+   it from Google's view entirely rather than merely asking Google to ignore it, and requires
+   no Search Console submission. The disavow file is left covering only the ~283 links that
+   hit ngwindows.com directly.
 
 ### 5.2 The draft's class-C subnet evidence does not survive contact with the data
 
@@ -184,8 +222,8 @@ Direct counter-examples from the Ahrefs free DR endpoint:
   evidence of manipulation → removed.
 - `eurekster.com` — **DR 53** — same, removed.
 
-Conversely the 66 disavowed domains include several at DR 0 **and** the evidence against
-them has nothing to do with their DR. Any AS/DR threshold applied to this profile would have
+Conversely the disavowed domains include several at DR 0 **and** the evidence against them
+has nothing to do with their DR. Any AS/DR threshold applied to this profile would have
 produced roughly 8% false positives in one direction and missed DR-65+ vendors in the other.
 
 ---
@@ -200,6 +238,12 @@ produced roughly 8% false positives in one direction and missed DR-65+ vendors i
   2026-10-06 15:01 UTC, the audit date itself. Whatever is produced now will be stale within
   weeks; the disavow file needs re-running monthly until new-domain velocity returns to
   baseline.
+- **Section 2 of the disavow file (29 name-character entries) has unverified anchors and
+  unverified redirect routing.** It rests on domain-name character plus the shared-host /
+  uniform-DR-60 fingerprint. It is the weaker half of the file and can be dropped if a
+  minimal submission is preferred.
+- Registrant identity of the 14 redirect shells could not be checked from this environment.
+  That single fact decides whether this is a cleanup or a defence.
 - No `rel="sponsored"` or UGC breakdown could be re-verified at the link level.
 - Ahrefs' crawler finds links Semrush misses. The disavow should eventually cover the union
   of both tools. Re-run after **2026-10-25**.
@@ -208,7 +252,16 @@ produced roughly 8% false positives in one direction and missed DR-65+ vendors i
 
 ## 7. Deliverable
 
-`/home/user/test/backlink-audit/disavow-ngwindows.txt` — 66 `domain:` entries, every one
-carrying its own inline evidence (shared path slug, exact anchor string, dofollow status),
-grouped by network, with explicit NOT-DISAVOWED and INSUFFICIENT-EVIDENCE sections and the
-preserved manual-review notes.
+`/home/user/test/backlink-audit/disavow-ngwindows.txt` — **34** `domain:` entries, each
+carrying its own inline evidence (shared path slug + exact anchor + dofollow status, or
+link-selling brand name + shared host + verified Ahrefs DR), with:
+
+- an explicit scope statement that the file covers direct links only;
+- a **"DO NOT DISAVOW — RESOLVE BY DELETING THE REDIRECT"** section naming the 14 shells and
+  all 61 redirect-borne vendor domains, so the evidence is preserved without being actioned;
+- a **PROTECTED** list of 15 legitimate low-DR local and trade sites that any future
+  authority-threshold sweep must exclude;
+- the carried-forward manual-review notes on `derchidoor.com`, `csswinner.com`,
+  `atlantahomeimprovement.com`, `constantcontact.com` and `24-7pressrelease.com`;
+- a closing coverage statement: **5.9% of referring domains anchor-verified, 94.1%
+  unverified and deliberately excluded.**
