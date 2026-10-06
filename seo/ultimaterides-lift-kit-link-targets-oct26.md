@@ -149,3 +149,31 @@ Both were recommended above and both are rejects on re-inspection. The original 
 
 ### Method addition — root-level injection check
 Searching `/sponsored/`, `/sponsored-content/` and `/commercial/` is not sufficient. Also search crawled pages for the substrings `essay`, `casino`, `betting`, `kratom`, `apk`, `buy-youtube`, `buy-tiktok`, `payday`, `downloader` **anywhere in the URL**, then judge each hit — a paper covering its local casino or a school essay contest is legitimate; a root-level commercial page is not. On TownNews/BLOX installs, compare UUID versions. Check `/our-apologies?url=`-style error handlers, which can expose the placement network outright.
+
+---
+
+## CORRECTION — sanangelolive.com WITHDRAWN (2026-10-06)
+
+**Do not buy. Earlier "conditional on /news/ placement" verdict is withdrawn.**
+
+Re-checked with the most-linked-pages diagnostic rather than the keyword/URL
+sweep alone. Seven `/members/` profile shells carry 850-1,338 referring
+domains each:
+
+- `/members/pharmaceuticals` — 882 refdomains
+- `/members/canadianpharmaceuticalsonlineusa` — 850 refdomains
+- `/members/mm88-review-features-tools-and-user-benefits`
+- `/members/crypto-wallet`
+- `/members/sdzfdterytyujhg` — gibberish shell ranking #2 for the site's
+  own brand term, 577 traffic
+
+Best genuine news article on the site: 96 refdomains.
+
+The spam outweighs the journalism on the domain's own link profile by more
+than 10:1. That is domain-level contamination, so insisting on a `/news/`
+URL does not avoid it. Withdrawn for all clients.
+
+Why it was missed: only the keyword/URL injection sweep was run. Member and
+author profile shells are link targets that do not rank organically, so that
+sweep cannot see them. `/members/` and `/author/` are now on the silo
+watchlist and the most-linked-pages check runs on every domain.

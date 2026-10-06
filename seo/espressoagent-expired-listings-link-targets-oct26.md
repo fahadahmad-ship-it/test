@@ -130,3 +130,31 @@ Semrush `display_filter` must be a real JSON array with the `sign` key: `[{"fiel
 | retipster.com | $1,535 | Honest and clean, but investor/land audience, zero third-party editorial outbound, and the worst value on the list. Arguable at ~$400 |
 | designrush.com | $820 | **0.61% dofollow** (480 of 79,110 linked domains) — the purchase would be a nofollow |
 | goodcall.com | $500 | Clean mechanics, but SMB buyers; traffic carried by templated `/<NNN>-area-code` pages, 26% Canada |
+
+---
+
+## CORRECTION — sanangelolive.com WITHDRAWN (2026-10-06)
+
+**Do not buy. Earlier "conditional on /news/ placement" verdict is withdrawn.**
+
+Re-checked with the most-linked-pages diagnostic rather than the keyword/URL
+sweep alone. Seven `/members/` profile shells carry 850-1,338 referring
+domains each:
+
+- `/members/pharmaceuticals` — 882 refdomains
+- `/members/canadianpharmaceuticalsonlineusa` — 850 refdomains
+- `/members/mm88-review-features-tools-and-user-benefits`
+- `/members/crypto-wallet`
+- `/members/sdzfdterytyujhg` — gibberish shell ranking #2 for the site's
+  own brand term, 577 traffic
+
+Best genuine news article on the site: 96 refdomains.
+
+The spam outweighs the journalism on the domain's own link profile by more
+than 10:1. That is domain-level contamination, so insisting on a `/news/`
+URL does not avoid it. Withdrawn for all clients.
+
+Why it was missed: only the keyword/URL injection sweep was run. Member and
+author profile shells are link targets that do not rank organically, so that
+sweep cannot see them. `/members/` and `/author/` are now on the silo
+watchlist and the most-linked-pages check runs on every domain.
