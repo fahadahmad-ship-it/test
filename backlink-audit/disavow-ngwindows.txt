@@ -1,292 +1,467 @@
 # Disavow file - ngwindows.com
-# Prepared 2026-10-06. Source: Semrush Backlink Analytics; Ahrefs free DR endpoint.
-# Submit at: https://search.google.com/search-console/disavow-links
+# Generated 2026-10-07 from Ahrefs + Semrush backlink exports.
 #
-# ===================== SCOPE - READ FIRST =====================
-# This file covers ONLY links that point at ngwindows.com DIRECTLY.
+# Grounds used, per entry: manipulative anchor text naming ngwindows.com,
+# dofollow status, shared structural fingerprint (identical path / campaign ID),
+# link-selling page title. Authority metrics (DR, Authority Score), traffic,
+# TLD, country and hosting were NOT used as grounds anywhere in this file.
 #
-# ~94% of the spam campaign does NOT point at ngwindows.com. It points at 14
-# content-free domains that 301-redirect into ngwindows.com. Those links are
-# removed AT SOURCE by deleting the redirects - which is strictly better than
-# disavowing them, because it also removes them from every other tool and from
-# Google's view entirely. They are listed below under 'DO NOT DISAVOW - RESOLVE
-# BY DELETING THE REDIRECT' and are deliberately NOT in the disavow set.
-# Disavow scope collapses to roughly 283 directly-pointing links.
+# 437 domains. This is the file to upload.
 #
-# ===================== EVIDENCE STANDARD =====================
-# A domain is disavowed only on per-domain evidence. Three qualifying criteria;
-# a domain needs criterion 1 or criterion 3.
-#  1. OBSERVED vendor sales-copy anchor text AND rel=nofollow absent (dofollow)
-#     AND a shared structural fingerprint (same path slug + same numeric id
-#     recurring across unrelated registrations).
-#  2. (gate, not a ground) nofollow links are NEVER disavowed - they pass no
-#     PageRank and cannot be the mechanism of a link penalty.
-#  3. DOMAIN-NAME CHARACTER: the registrable domain name is itself a
-#     link-selling brand (*backlink*, *buybacklinks*, *seolinks*, *dachecker*,
-#     *dapachecker*, *rankchecker*). This criterion exists because criterion 1
-#     alone misses high-DR sellers that use benign bare-URL anchors.
+# 25 further domains were considered and deliberately LEFT OUT: their only
+# evidence is anchor text, with no campaign ID or shared-path fingerprint to
+# confirm they target this site. Re-check them after 2026-10-25 if wanted.
 #
-# NOT grounds for any entry in this file: low Authority Score, low Domain
-# Rating, cheap TLD, foreign hosting, thin content, shared IP alone.
-# Low authority is NOT evidence of toxicity and is not used anywhere below.
-#
-# All entries are domain-level. Review every line before submitting.
+# NOTE: this file covers links aimed at ngwindows.com only. Links aimed at the
+# seven redirect domains are not reachable by a disavow filed for this property.
 
-# =====================================================================
-# SECTION 1 - CRITERION 1: direct-target vendor links, evidenced
-# Anchor text names ngwindows.com itself, so the link points at the client
-# directly and is NOT removable by deleting a redirect.
-# =====================================================================
-# shared page path: /dir/quality-authority-backlinks-148096
-# shared anchor   : "Increase Google Visibility with High Quality Backlinks ngwindows.com"
-# link status     : dofollow ; target: ngwindows.com (direct)
+# Vendor campaign 148096 - identical path, anchor and dofollow across 258 hosts (258 domains)
+domain:24rankings.link
+domain:7-seo.link
+domain:aiseochecker.website
+domain:allbacklinkchecker.shop
+domain:backlinkanalysis.shop
+domain:backlinkanalysistool.shop
+domain:backlinkanalyzer.website
+domain:backlinkcheckerbest.site
+domain:backlinkcheckerbest.website
+domain:backlinkcheckerseo.store
+domain:backlinkcheckertool.store
+domain:backlinkcountchecker.site
+domain:backlinkfindertool.shop
+domain:backlinkfindertool.website
+domain:backlinkfreechecker.online
+domain:backlinkfreeseo.link
+domain:backlinkindia.link
+domain:backlinklinkchecker.store
+domain:backlinklookuptool.shop
+domain:backlinklookuptool.site
+domain:backlinkrankchecker.website
+domain:backlinkreport.store
+domain:backlinkschecker.site
+domain:backlinkscheckerfree.shop
+domain:backlinkscheckers.website
+domain:backlinkscheckerseo.space
+domain:backlinkscheckerseo.store
+domain:backlinkscheckersite.shop
+domain:backlinksfreechecker.site
+domain:backlinksreport.online
 domain:backlinksseochecker.space
-domain:dapaseochecker.online
+domain:backlinktoolchecker.shop
+domain:backlinktoolchecker.store
+domain:backlinkurlchecker.space
+domain:backlinkurlchecker.website
+domain:baclinkchecker.online
+domain:baclinkchecker.space
+domain:bestbacklinkchecker.shop
+domain:bestdachecker.website
+domain:bestdapachecker.site
+domain:bestfreeseochecker.shop
+domain:blogbacklinkchecker.online
+domain:blogpostbacklinks.online
+domain:blogseochecker.site
+domain:bulkbacklinkanalyzer.space
+domain:bulkbacklinkreport.space
+domain:bulkbacklinkreport.store
+domain:bulkbacklinkschecker.shop
+domain:bulkdacheckerfree.online
+domain:bulkdacheckeronline.website
+domain:bulkdacheckertool.site
+domain:bulkdacheckertools.space
+domain:bulkdadrchecker.online
+domain:bulkdapachecker.site
+domain:bulkdapachecker.store
+domain:bulkdapacheckerfree.shop
+domain:bulkdrcheckerfree.website
+domain:bulkfreedapachecker.shop
+domain:bulklinkchecker.site
+domain:bulklinkchecker.store
+domain:bulkpachecker.space
+domain:bulkpadacheckertool.shop
+domain:checkbacklinks.site
+domain:checkdomainauthority.space
+domain:checkdomainbacklinks.space
+domain:checkerbacklink.website
+domain:checkerdapa.store
+domain:checkurlbacklinks.site
+domain:competitionchecker.site
+domain:competitorchecker.shop
+domain:daandpacheckertool.site
+domain:daandpacheckertool.store
+domain:dabacklinkchecker.shop
+domain:dabacklinkchecker.site
+domain:dabulkchecker.store
+domain:dacheckerforfree.online
+domain:dacheckerforfree.space
+domain:dacheckerforfree.website
+domain:dacheckerfree.website
+domain:dacheckerofwebsite.site
+domain:dacheckerpro.shop
+domain:dacheckers.website
+domain:dacheckerseo.store
+domain:dacheckertool.website
+domain:dacheckertoolonline.store
+domain:dacheckerwebsite.shop
+domain:dadomainchecker.website
+domain:dadpchecker.shop
+domain:dadrcheckerfree.shop
+domain:dadrpachecker.shop
+domain:dadrpachecker.website
+domain:dafreechecker.shop
+domain:dapacheckerbulk.space
+domain:dapacheckerfree.site
+domain:dapacheckerguest.site
+domain:dapacheckerguest.store
+domain:dapacheckermass.space
+domain:dapacheckermultiple.site
+domain:dapacheckeronline.store
+domain:dapacheckeronline.website
+domain:dapacheckersoftware.online
+domain:dapacheckersoftware.store
+domain:dapadomainchecker.shop
+domain:dapaonlinechecker.site
+domain:dapaonlinechecker.space
+domain:darankingchecker.shop
+domain:dascorechecker.online
+domain:dascorechecker.shop
+domain:dawebsitechecker.site
+domain:dawebsitechecker.store
+domain:dawebsitechecker.website
+domain:domainbacklinkreport.store
+domain:domaincheckerda.site
+domain:domaindachecker.space
+domain:domaindapachecker.store
+domain:domainlinkprofile.space
+domain:domainmetricschecker.shop
+domain:domainpadachecker.space
+domain:domainqualitychecker.online
+domain:domainrankchecker.online
+domain:domainseochecker.site
+domain:findbacklinks.space
+domain:findbacklinks.store
+domain:findwebsitebacklinks.online
+domain:freebacklinkcheckers.site
+domain:freebulkdachecker.shop
+domain:freedaandpachecker.website
+domain:freedacheckertools.site
+domain:freedacheckertools.website
+domain:freedadrchecker.space
+domain:freedrchecker.shop
+domain:freepaanddachecker.store
+domain:freepachecker.site
+domain:freepachecker.space
+domain:freerankchecker.online
+domain:freerankingchecker.shop
+domain:freeseoauditchecker.website
+domain:freeseocheckertools.online
+domain:freeseorankchecker.shop
+domain:freeseorankchecker.store
+domain:freeseoscorechecker.store
+domain:freeseositechecker.shop
+domain:freesiterankchecker.website
+domain:freewebsitechecker.space
+domain:gofreebacklinks.link
+domain:greatseolinks.link
+domain:guestbacklink.link
+domain:highdapachecker.store
+domain:linkcheckertools.site
+domain:linkingdomainchecker.shop
+domain:linkseochecker.website
+domain:massdachecker.website
+domain:massdapachecker.space
+domain:multidachecker.store
+domain:multidachecker.website
+domain:multidapachecker.shop
+domain:multidapachecker.space
+domain:multipledachecker.shop
+domain:multipledapachecker.store
+domain:newbacklinkchecker.online
+domain:newbacklinkschecker.online
+domain:oneclickseochecker.shop
+domain:onlinerankchecker.site
+domain:onlinerankchecker.website
+domain:onlineserpchecker.shop
 domain:onlinewebsitechecker.space
+domain:openbacklinkchecker.store
+domain:organicrankchecker.online
+domain:organicrankchecker.site
+domain:outgoinglinkchecker.site
+domain:pachecker.online
+domain:pacheckerfree.website
+domain:pacheckeronline.online
+domain:pacheckertool.website
+domain:padachecker.shop
+domain:padachecker.site
+domain:padachecker.store
+domain:padachecker.website
+domain:padacheckeronline.store
+domain:padafreechecker.website
+domain:pageauthoritylookup.space
+domain:pagebacklinkchecker.space
+domain:pagedachecker.store
+domain:pageseochecker.website
+domain:quickseochecker.space
+domain:rankchecker.space
+domain:rankcheckerfree.shop
+domain:rankcheckerfree.site
+domain:rankcheckerfree.store
+domain:rankcheckertool.space
+domain:rankcheckerwebsite.site
+domain:rankcheckerwebsite.space
+domain:rankingcheckerfree.space
+domain:rankingschecker.store
+domain:rankwebsitechecker.online
+domain:seoanalysischecker.online
+domain:seoanalysischecker.website
+domain:seocheckerforfree.site
+domain:seocheckerfree.website
+domain:seocheckeronline.online
+domain:seocheckers.space
+domain:seocheckertools.store
+domain:seocheckerwebsite.store
+domain:seodomainchecker.website
+domain:seofreechecker.site
+domain:seometricschecker.online
+domain:seoonlinechecker.store
+domain:seoonlinechecker.website
+domain:seorankcheckerfree.space
+domain:seorankcheckertool.website
+domain:seorankingschecker.space
+domain:seorankingschecker.store
+domain:seoscorechecker.store
+domain:seoscorechecker.website
+domain:seostatschecker.site
+domain:seostrengthchecker.store
+domain:seotoolchecker.online
+domain:seourlchecker.online
+domain:seourlchecker.space
+domain:seowebsitechecker.store
+domain:serpcheckerfree.store
+domain:serpcheckeronline.shop
+domain:serpcheckers.website
+domain:serpfreechecker.site
+domain:serpfreechecker.store
+domain:serppositionchecker.website
+domain:sitecheckerfree.space
+domain:sitecheckerfree.store
+domain:sitecheckerseo.shop
+domain:sitedachecker.online
+domain:sitelinkchecker.shop
+domain:siterankcheckerfree.shop
+domain:siterankingchecker.space
+domain:sitestatschecker.shop
+domain:sitevisitschecker.store
+domain:sitevisitschecker.website
+domain:topseochecker.shop
+domain:trustflowchecker.shop
+domain:urlbacklinkanalysis.store
+domain:urlbacklinkchecker.site
+domain:urlrankchecker.site
+domain:urlrankchecker.store
+domain:urlrankingchecker.shop
+domain:webbacklinkschecker.website
+domain:webpagerankchecker.shop
+domain:webrankchecker.store
+domain:webrankingchecker.site
+domain:webseochecker.site
+domain:websiteauditchecker.shop
+domain:websitedachecker.online
+domain:websitedachecker.website
+domain:websiteinboundlinks.online
+domain:websiteprchecker.shop
+domain:websiteserpchecker.online
+domain:websiteserpchecker.website
+domain:websitestatschecker.shop
+domain:websitestatschecker.store
+domain:whatisdapachecker.store
+
+# PBN service pages - anchor advertises a PBN and names the client (43 domains)
+domain:archive-hu.com
+domain:betulcrime.com
+domain:blogerreviewers.com
+domain:bramo.shop
+domain:brilko.shop
+domain:brinto.shop
+domain:bripto.shop
+domain:canadapsilocybin.com
+domain:cartermanageus.com
+domain:cgpa2percentag.com
+domain:cinvo.shop
+domain:cripio.shop
+domain:cvillico.com
+domain:dapio.shop
+domain:digitalchatni.com
+domain:dupurgeniefr.com
+domain:fashionclothingnews.com
+domain:fastlifesite.com
+domain:fralto.shop
+domain:homesforsaleoldgreenwichct.com
+domain:juvex.shop
+domain:kkinsider.com
+domain:lawyerinjeddah.com
+domain:libyanatravel.com
+domain:m98ufa.com
+domain:mervi.shop
+domain:mokra.shop
+domain:mylisthero.com
+domain:newblogerseo.com
+domain:nivira.shop
+domain:orvelo.shop
+domain:plavo.shop
+domain:plrdownloadshub.com
+domain:plumeriamarketing.com
+domain:plurio.shop
+domain:primenewsartical.com
+domain:quotesblom.com
+domain:s-tribe.net
+domain:sahammurah.com
+domain:thedocmag.com
+domain:theforbestimes.com
+domain:uncledspizza.com
+domain:wecelebrities.com
+
+# "High DA backlinks" vendor pages - link-selling page titles (14 domains)
+domain:bitproperty.online
+domain:canlisohbethatlari.online
+domain:cinto.shop
+domain:corvio.shop
+domain:crinto.shop
+domain:flenro.shop
+domain:murvi.shop
+domain:murvix.shop
+domain:nimbra.shop
+domain:nimto.shop
+domain:nokvio.shop
+domain:pamto.shop
+domain:plenko.shop
+domain:tokyopush188.online
+
+# Aged-domain / backlink marketplace - shared page-ID fingerprint (26 domains)
+domain:alljobs.info
+domain:allwebsitesdirectory.com
+domain:backlinkon.com
+domain:backlinksbank.com
+domain:backlinkstree.com
+domain:bestwebstats.com
+domain:domain.com.lc
+domain:domainanalysis.org
+domain:domains.com.bz
+domain:domainsc.com
+domain:homefinance.co.in
+domain:indexaward.com
+domain:indians.cc
+domain:itsyourgold.com
+domain:linksnatcher.com
+domain:pagesearch.net
+domain:prashikshan.in
+domain:theface.in
+domain:tunca.org
+domain:tyre.pro
+domain:wallpapers.pro
+domain:way2check.cv
+domain:websiterace.com
+domain:wonvision.com
+domain:ycm.info
+domain:youtoo.in
+
+# Vendor pages found via Semrush - campaign ID or shared path fingerprint (92 domains)
+domain:100ranking.com
+domain:100ranking.link
+domain:1seoservices.com
+domain:1seoservices.info
+domain:7-seo.com
+domain:advanced-seo.com
+domain:aloysionunes.com
+domain:backlinkanalyzer.site
+domain:backlinkcheckersite.store
+domain:backlinkfreeseo.com
+domain:backlinkgenerator.org
+domain:backlinkmaker.info
+domain:backlinkmaker.link
+domain:backlinkocean.info
+domain:backlinksboost.com
+domain:backlinksboost.info
+domain:backlinkscheckersite.space
+domain:backlinksindia.com
+domain:backlinksindia.info
+domain:backlinksindia.link
+domain:backlinkspace.info
+domain:backlinkspace.link
+domain:backlinkspulse.com
+domain:backlinkspulse.info
+domain:bestnz-poker-casinoslot.com
+domain:bestseosuite.com
+domain:betwinnermirror.com
+domain:blog-backlinks.com
+domain:blogdachecker.website
+domain:breachviews.com
+domain:casinooftheking.com
+domain:clifflisting.com
+domain:competitorchecker.store
+domain:coruzants.com
+domain:daandpacheckerfree.shop
+domain:dacheckeronline.shop
+domain:dadpchecker.online
+domain:dadpchecker.site
+domain:dapaseochecker.online
+domain:darankingchecker.site
+domain:diversifiedseo.com
+domain:domainauthority.website
+domain:domainlinkprofile.site
+domain:drchecker.site
+domain:drchecker.store
+domain:findbacklinks.website
+domain:fletcherrld.com
+domain:freerankcheckertool.shop
+domain:geobacklinks.link
+domain:getseotips.link
+domain:ggmap.co.com
+domain:ggmap.us.com
+domain:gladeflowers.com
+domain:go4seo.com
+domain:go4seo.info
+domain:gofreebacklinks.info
+domain:goldbacklinks.com
+domain:goldbacklinks.info
+domain:goodbacklinkchecker.website
+domain:hotonlinegaming.com
+domain:liveserpchecker.website
+domain:marinasone.com
+domain:marketsseo.com
+domain:missburrg.com
+domain:onlineseochecker.website
+domain:onlineshoppingidea.com
+domain:perfectwebseo.com
+domain:proseobacklinks.link
+domain:rankcheckerseo.online
+domain:rankingschecker.site
+domain:seo-asia.link
+domain:seo-enterprise.com
+domain:seo-expert-1.com
+domain:seocheckerrank.site
+domain:seofastranks.com
+domain:seorankingschecker.online
 domain:seostrengthchecker.online
+domain:seostrengthchecker.site
+domain:seotoolslike.com
+domain:seowebsitechecker.site
+domain:seozens.com
+domain:serprankingchecker.site
 domain:siteseocheckerfree.store
+domain:stormbacklink.com
+domain:techbumppy.com
+domain:technicalseochecker.space
+domain:thebulkdachecker.website
+domain:urlbacklinkchecker.store
+domain:websiteauditchecker.space
+domain:websitepageschecker.space
+domain:websiterankchecker.space
+domain:websiterankchecker.website
 
-# =====================================================================
-# SECTION 2 - WITHDRAWN IN FULL (was 28 entries)
-# =====================================================================
-# These 28 entries were removed after verification against the full
-# link-level data (3,499 rows, 878 domains) that was already in the repo.
-# They were admitted on domain-name character plus shared hosting on
-# 203.161.54.114. On the real evidence:
-#   - 14 of the 28 have ZERO link rows to this client in the raw data.
-#   - The other 14 link, but are 100% rel=nofollow - excluded by this
-#     file's own criterion 2.
-#   - The 'uniform DR 59-60 block' fingerprint is false: 25 of 27 measure
-#     59-60, factmags.com is 75, goooogla.com is 29.
-#   - goooogla.com had been admitted under a 'co-hosting' criterion that
-#     this file's own evidence standard forbids ('shared IP alone' is
-#     listed as NOT grounds). Shared hosting turned out to have NEGATIVE
-#     predictive value here: it selected only for nofollow links.
-# Withdrawn domains, for the record (NOT disavowed):
-#   99backlinksbuy.com
-#   allbaclinks.com
-#   atozbacklinks.com
-#   bestrankbacklinks.com
-#   bestseobacklinkforsite.com
-#   bestsitesbacklinks.com
-#   booastrankingwithbacklinks.com
-#   buyfairbacklinks.com
-#   buyrankbacklinks.com
-#   buytopqualitybacklinks.com
-#   clicktobuybacklinks.com
-#   eliteseobacklinks.com
-#   friendlybacklinksbuy.com
-#   goooogla.com
-#   increasewebtrafficwithlinks.com
-#   quickseolinks.com
-#   rarebacklinks.com
-#   superbqualitybacklinks.com
-#   topratedbacklinks.com
-#   trafficboosterlinkseo.com
-#   viralbacklinks.com
-#   webbacklinkskbuy.com
-#   webrankingsolutionbacklinks.com
-#   welinkbacklinks.com
-#   worldtopbacklinks.com
-#   wowqualitybacklinks.com
-#   best-seo-domains.com
-#   backlinks-checker.com
-#
-# A separate pass identifies ~87 further domains that DO meet criterion 1
-# (dofollow + vendor sales-copy anchor naming ngwindows.com + shared slug).
-# They are NOT added here yet: routing is inferred from anchor text because
-# the committed export has no target_url column. Confirm that field after
-# 2026-10-25 before extending this file. See recheck-disavow.md.
+# Network D - injected into unrelated pages on compromised hosts (3 domains)
+domain:beihaishitrade.com
+domain:matyesz.hu
+domain:nextndt.com
 
-# =====================================================================
-# DO NOT DISAVOW - RESOLVE BY DELETING THE REDIRECT
-# =====================================================================
-# These 14 domains are content-free 301 shells that redirect into
-# ngwindows.com. They are the actual destination of ~94% of the spam campaign.
-# DELETE THE REDIRECTS. That severs the links at source. Do not disavow them -
-# they are operator-controlled assets, not third-party links.
-#   ngawindows.com
-#   roiwindows.com
-#   thermalprowindows.com
-#   qualitypluswindows.com
-#   northpointwindows.com
-#   performingwindows.com
-#   thermatrustwindows.com
-#   northgeorgiawindows.net
-#   thermalastwindows.com
-#   e2windows.com
-#   choiceviewwindows.com
-#   ngwindow.com
-#   northgawindows.com
-#   northgeorgiawindow.com
-#
-# 61 vendor domains were positively evidenced (dofollow + vendor sales-copy
-# anchor + shared slug fingerprint) but their anchors name one of the 14 shells
-# above, not ngwindows.com - i.e. they were placed against a redirect shell.
-# They are therefore EXCLUDED from the disavow set and resolved by deleting the
-# redirect. Listed here so the evidence is not lost:
-#   -- /crawl-index-network/ (1 domains) ; anchor targets northpointwindows.com ; dofollow
-#      nivira.shop
-#   -- /dir/backlink-seo-experts-211287 (15 domains) ; anchor targets thermalprowindows.com ; dofollow
-#      bestseochecker.shop
-#      dacheckeronline.store
-#      dapacheckerfree.site
-#      domainmetricschecker.store
-#      domainwebsitechecker.website
-#      drdachecker.store
-#      freeseochecker.store
-#      freesiterankchecker.online
-#      livebacklinkchecker.online
-#      padacheckertools.shop
-#      seoanalysischecker.website
-#      seoblogchecker.store
-#      seopadachecker.shop
-#      sitebacklinkchecker.space
-#      trustflowchecker.space
-#   -- /dir/ethical-seo-backlinks-160633 (9 domains) ; anchor targets performingwindows.com ; dofollow
-#      backlinkcheckerseo.space
-#      bestdapachecker.site
-#      checkbacklinks.site
-#      checkdaandpa.online
-#      dabacklinks.website
-#      freepadachecker.website
-#      padacheckertool.website
-#      rankcheckerseo.store
-#      rankcheckertool.space
-#   -- /dir/professional-seo-links-148030 (10 domains) ; anchor targets ngawindows.com ; dofollow
-#      blogseochecker.online
-#      dacheckers.online
-#      domainlinkprofile.site
-#      drcheckerfree.shop
-#      goodbacklinkchecker.space
-#      onlinedapachecker.site
-#      rankwebsitechecker.website
-#      sitebacklinkchecker.site
-#      topseobacklink.info
-#      whatisdapachecker.space
-#   -- /dir/seo-ranking-links-170322 (10 domains) ; anchor targets qualitypluswindows.com ; dofollow
-#      backlinkcheckerseo.online
-#      backlinkscheckerbulk.space
-#      bulkpachecker.online
-#      dacheckertoolonline.site
-#      dapacheckerbulk.online
-#      dapacheckermultiple.website
-#      dapafreechecker.website
-#      linkaudit.space
-#      siteseocheckerfree.shop
-#      urlbacklinkschecker.space
-#   -- /dir/trusted-seo-backlinks-150104 (10 domains) ; anchor targets northpointwindows.com ; dofollow
-#      backlinkcheckers.online
-#      backlinkrankchecker.shop
-#      big-easy-seo.com
-#      bulkbacklinkanalysis.website
-#      dacheckerbulkfree.online
-#      freeseochecker.website
-#      highdachecker.space
-#      linkbacklinkchecker.online
-#      padachecker.site
-#      siterankingchecker.online
-#   -- /dofollow-index/ (1 domains) ; anchor targets qualitypluswindows.com ; dofollow
-#      ggmap.co.com
-#   -- /guest-post-network/ (1 domains) ; anchor targets northgeorgiawindows.net ; dofollow
-#      newearthsummit.org
-#   -- /link-building-hub/ (1 domains) ; anchor targets thermatrustwindows.com ; dofollow
-#      mervi.shop
-#   -- /niche-relevance-hub/ (1 domains) ; anchor targets thermatrustwindows.com ; dofollow
-#      nimbra.shop
-#   -- /organic-growth-links/ (1 domains) ; anchor targets ngawindows.com ; dofollow
-#      mertio.shop
-#   -- /seo-authority-links/ (1 domains) ; anchor targets performingwindows.com ; dofollow
-#      bestseoquill.site
-
-# =====================================================================
-# PROTECTED - DO NOT DISAVOW UNDER ANY SWEEP
-# Legitimate local / trade / industry sites. Several have very low Domain
-# Rating; that is NORMAL for small local businesses and is not a defect.
-# Any future authority-threshold sweep must exclude these explicitly.
-# =====================================================================
-#   forsythcounty.com                DR  3.6  county / local
-#   georgiashutters.com              DR  2.2  local trade
-#   1stcallglasscare.com             DR    3  local glass trade
-#   alpharettatoprated.com           DR   10  hyperlocal directory
-#   lombardohomegroup.com            DR   13  local
-#   windowdigest.com                 DR   15  industry
-#   homerenoworld.com                DR   16  home improvement
-#   athomepros.com                   DR   18  home services
-#   koalatyremodel.com               DR   27  local remodeler
-#   atlantahomeimprovement.com       DR   45  local, on-topic since 2023
-#   roswell365.com                   DR   39  hyperlocal
-#   members.williamsonchamber.com    DR   49  local chamber
-#   csswinner.com                    DR   75  design award directory
-#   factmags.com                     DR   75  see note below
-#   eurekster.com                    DR   53  
-#
-# factmags.com is DR 75 but is co-hosted on 203.161.54.114 with the 27 sellers
-# in Section 2. Co-hosting alone is not evidence and its name is not a selling
-# brand, so it is PROTECTED here - but it is the one protected entry that
-# genuinely warrants a human look.
-
-# =====================================================================
-# OTHER MANUAL-REVIEW NOTES (carried forward)
-# =====================================================================
-# derchidoor.com       (134 links, DR 18) - door industry site. May be a genuine
-#                      partner or a sitewide footer link. Verify.
-# factmags.com        (76 links) - REMOVED from the disavow list. Grounds were
-#                     co-hosting on 203.161.54.114 with link-selling domains, but its
-#                     own name is not a seller brand and two passes disagree on its
-#                     authority (DR 60 vs DR 75). Conflicting evidence = exclude by
-#                     default. Re-examine after 2026-10-25 when anchor data is
-#                     retrievable; decide on its actual anchor text, not its host.
-#
-# csswinner.com        (65 links, DR 75) - design award directory. Probably a real
-#                      award listing. Verify. PROTECTED above.
-# atlantahomeimprovement.com (90 links, DR 45) - local, on-topic, linking since
-#                      2023. Almost certainly GENUINE. KEEP.
-# constantcontact.com  (394 links, DR 92) - the client's own newsletter archive. KEEP.
-# 24-7pressrelease.com (11 links, DR 80) - paid PR distribution. Low value but not
-#                      toxic. Leave unless a manual action names it.
-
-# =====================================================================
-# NOT DISAVOWED - failed the dofollow gate (criterion 2)
-# =====================================================================
-# seo-rank-boost.shop  - anchor "Niche edits on qualitypluswindows.com helped us
-#                        rank in the top 3 for key terms" ; rel=nofollow
-# seonix.agency        - anchor "After hiring northgeorgiawindows.net for niche
-#                        edits, my sales doubled within 1 month" ; rel=nofollow
-#                        Ahrefs DR 65. A high-DR link vendor - but nofollow, so
-#                        it passes no PageRank and is not disavowed.
-
-# =====================================================================
-# NOT DISAVOWED - benign anchors observed
-# =====================================================================
-# domainsc.com      - anchor "ngwindows.com" (bare URL) ; dofollow
-# getonline.co.in   - anchor "northpointwindows.com" (bare domain) ; dofollow
-# theface.in        - anchor "e2windows.com" (bare domain) ; dofollow
-# godsbook.net      - anchor "performingwindows.com" (bare domain) ; rel=nofollow
-# disgustingmen.com - anchor "Window Replacement Company" ; rel=nofollow
-# The bare sister-domain anchor cluster (~2,579 links) first appears Jul 2025, a
-# year before the Jun 2026 blast, and is ~34% nofollow. It is stats-farm scraping
-# of the shell domains, NOT the PBN. Not disavowed. Removed by cutting redirects.
-
-# =====================================================================
-# COVERAGE AND WHAT IS UNVERIFIED
-# =====================================================================
-# 1,232 referring domains were enumerated in full (7,547 backlinks).
-# Anchor + dofollow evidence was retrievable for 73 of them (5.9%) before the
-# Semrush API unit balance reached zero mid-audit. Ahrefs Site Explorer was
-# unavailable throughout (units reset 2026-10-25).
-#
-# UNVERIFIED: the anchor text, dofollow status and redirect routing of 1,159
-# referring domains (94.1%). None of them are in this file. 360 of them carry
-# the Section 1 network's naming convention and 284 first appeared in the 14
-# days to 2026-10-06 - they are LIKELY the same network, but likely is not
-# evidence and they are excluded until their anchors are confirmed.
-#
-# UNVERIFIED for Section 2: anchor text and redirect routing. Those 29 entries
-# rest on domain-name character plus the shared-host / uniform-DR fingerprint.
-#
-# TO COMPLETE: after 2026-10-25, re-run Semrush `backlinks` with export_columns
-# = source_url, anchor, nofollow, redirect_url, target_url, filtered on anchor,
-# at SMALL display_limit (a 500-row page costs ~48,000 units). Confirm each
-# domain's anchor, dofollow status AND whether it targets ngwindows.com or a
-# redirect shell before adding it.
+# Vendor sales copy in the URL path (1 domains)
+domain:backlinksolutions.info
