@@ -8,8 +8,7 @@ devices of unknown hygiene, including the ones nobody has patched since
 installation.
 
 That gap between the two views is why threat modeling has moved from a security
-team exercise to a regulatory expectation. The [FDA's current premarket
-guidance](https://bluegoatcyber.com/guides/fda-cybersecurity-guidance),
+team exercise to a regulatory expectation. The FDA's current premarket guidance,
 *Cybersecurity in Medical Devices: Quality Management System Considerations and
 Content of Premarket Submissions*, issued on February 3, 2026, recommends that
 manufacturers use threat modeling to inform cybersecurity risk analysis, apply
@@ -18,9 +17,8 @@ design process rather than attach it at the end. That version superseded the
 June 2025 guidance in order to align with the Quality Management System
 Regulation, which took effect on February 2, 2026, one day before the guidance
 published. The timing is worth noticing. It tells you where the agency has filed
-the subject: [device security is a quality system
-obligation](https://bluegoatcyber.com/blog/the-fdas-new-medical-device-cybersecurity-rules-are-more-than-red-tape/),
-not a security annex.
+the subject: device security is a quality system obligation, not a security
+annex.
 
 What a threat model should actually produce is less obvious than the expectation
 that one exists. It is not a diagram. It is a set of answers to plain questions.
@@ -96,10 +94,8 @@ Would anyone see it? Would a nurse's independent check catch it, and is it
 defensible to rely on that?
 
 This is the step that separates medical device threat modeling from the generic
-kind. The FDA's [2016 postmarket
-guidance](https://bluegoatcyber.com/blog/postmarket-cybersecurity-for-medical-devices-the-fda-roadmap)
-evaluates vulnerabilities by their exploitability and by the severity of the
-patient harm that could result, which
+kind. The FDA's 2016 postmarket guidance evaluates vulnerabilities by their
+exploitability and by the severity of the patient harm that could result, which
 means a flaw in a secondary display and a flaw in medication delivery are not
 the same finding even when they share a severity score.
 
@@ -135,7 +131,9 @@ problem of its own. A lock screen that defends a bedside monitor against a
 plausible adversary and also costs a clinician fifteen seconds during a code is
 not an unambiguous improvement. Security on a medical device competes with
 availability, usability, performance and serviceability, and resolving that
-competition is itself a safety decision. It is also the strongest argument for
+competition is itself a safety decision. It is a version of a wider lesson in
+hospital operations, where [resilience depends as much on workflow as on new
+hardware](https://medicalnewsbulletin.com/why-healthcares-resilience-depends-on-unsung-operational-innovations/). It is also the strongest argument for
 modeling early, because those trade offs are cheap to make in architecture and
 expensive to make in validation.
 
@@ -179,17 +177,16 @@ use it. A product engineer should be able to see which design decisions are
 security relevant. A quality team should see where cybersecurity risk meets the
 rest of risk management. A regulatory reviewer should be able to find the
 evidence behind a claim. A clinician should be able to follow why a given threat
-matters at the bedside.
+matters at the bedside. The problem is familiar from public health, where
+[analysis only changes outcomes once it reaches the people who act on it](https://medicalnewsbulletin.com/how-epidemiologists-turn-research-into-public-health-action).
 
-That is getting harder as devices absorb more software, more connectivity, more
-third party components and machine learning functionality whose failure modes
-are still being worked out, an area the FDA's standards recognition has begun to
+That is getting harder as [devices absorb more software, more connectivity](https://medicalnewsbulletin.com/cutting-edge-breakthroughs-in-medical-technology-the-devices-and-innovations-revolutionizing-healthcare/),
+more third party components and machine learning functionality whose failure
+modes are still being worked out, an area the FDA's standards recognition has begun to
 address separately.
 
-All of which argues for smaller rather than larger. Most of the [published
-methods and
-resources](https://bluegoatcyber.com/blog/top-threat-modeling-resources-for-medical-device-cybersecurity/)
-converge on the same short list of ingredients. A clear architecture diagram, a written statement of what the manufacturer assumes about the
+All of which argues for smaller rather than larger. A clear architecture
+diagram, a written statement of what the manufacturer assumes about the
 environment, a set of scenarios with consequences attached, and mitigations
 traceable to evidence will do more than a hundred pages of security vocabulary.
 The point is not to anticipate every attack, because nobody can. It is to know
