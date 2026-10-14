@@ -1,0 +1,11 @@
+Domain,Price_USD,Sheet_Traffic,Verified_Traffic_Global,Ratio,Ranks_For,Verdict
+broadwayworld.com,100,2811778,3641219,0.00,"broadway world, theatre news",BUY - zero broker anchors; AS71 TF58; best value found this session
+artnews.com,84,120902,150333,0.00,"artnews, art in america",BUY - zero broker anchors; Penske Media legacy art publication
+greencarguide.co.uk,133,117044,167481,0.18,"green car guide, EV reviews UK",BUY - cleanest automotive option; UK EV focus
+bnonews.com,154,50929,54210,0.52,"bno news, breaking news",BUY - real news wire; traffic accurate
+timesargus.com,226,54533,109798,0.70,"times argus, Vermont news",CONSIDER - traffic understated; same owner as rutlandherald
+streettrucksmag.com,295,30513,63657,2.94,"street trucks, obs chevy, chevy obs, pickup ford f100",CONSIDER - perfect topical fit for lifted trucks but poor ratio
+decaturdaily.com,155,29802,63372,0.95,"decatur daily, Alabama news",MARGINAL - same publisher network as timesdaily (ratio 5.7)
+evpowered.co.uk,155,19478,32648,NA,"EV reviews UK",AVOID - hosting casino spam: 'casinos not on gamstop' 293 RD / 106088 backlinks
+drivespark.com,217,370824,514757,NA,"car news India",AVOID - 99% India traffic; useless for US dealer
+motorsport.nextgen-auto.com,295,399648,910117,NA,"motorsport France",AVOID - French audience
