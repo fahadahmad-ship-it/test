@@ -138,11 +138,14 @@ def _f(x):
 import re as _re
 _SPAMIP=_re.compile(r'^(64\.182\.|69\.13\.|94\.46\.|118\.139\.|184\.168\.|185\.|188\.114\.|15\.204\.|51\.81\.)')
 _hold=[AUDD[d] for d in EM_HOLD]
-_q=[SEMT[r['domain']] for r in _hold if r['domain'] in SEMT]
-_nq=len(_q)
+_allheld=[r for r in AUD if r['status'].startswith('Held')]
+_q=[SEMT[r['domain']] for r in _allheld if r['domain'] in SEMT]
+_nq=len(_q); _nheld=len(_allheld)
 _maxtraf=max((_f(t['organic_traffic']) for t in _q),default=0)
+_sumtraf=sum(_f(t['organic_traffic']) for t in _q)
 _notraf=sum(1 for t in _q if _f(t['organic_traffic'])==0)
-_noidx=sum(1 for t in _q if _f(t['organic_keywords'])==0 and _f(t['organic_traffic'])==0)
+_noidx=sum(1 for t in _q if _f(t['organic_keywords'])==0)
+_idxnotraf=sum(1 for t in _q if _f(t['organic_keywords'])>0 and _f(t['organic_traffic'])==0)
 _onip=sum(1 for r in _hold if _SPAMIP.match(r['ip'] or ''))
 _lowas=sum(1 for r in _hold if r['ascore'] and int(r['ascore'])<=2)
 sem=sum(1 for r in AUD if r['source']=='Semrush'); ahr=sum(1 for r in AUD if r['source']=='Ahrefs')
@@ -224,10 +227,11 @@ style(ws,ws.max_row,WHITE,{'B':'#,##0','C':'#,##0'},centre=('B','C'))
 for c in ws[ws.max_row]: c.font=Font(name=F,sz=9,b=True)
 block('What the held domains are actually worth',[
  f"Held does not mean valuable. {_onip} of the {len(EM_HOLD)} domains held for vendor confirmation sit on the same shared hosting ranges that this audit uses to disavow other link network hosts, and {_lowas} of them sit at Semrush Authority Score 2 or below.",
- f"Semrush organic traffic was queried for {_nq} of them as a check. {_notraf} have no measurable organic traffic at all and {_noidx} are not indexed by Semrush on any keyword. The highest traffic found anywhere in that sample is {_maxtraf:,.0f} visits a month. Traffic was not queried for the remaining {len(EM_HOLD)-_nq}, and those rows say so rather than guessing.",
- "Ahrefs reports most of these sites as having no keywords at all. Semrush disagrees and finds between 2 and 466 indexed keywords on the ones checked, so the Ahrefs spam flag and its traffic figures are not used anywhere in this audit. Semrush is the source for every metric shown.",
+ f"Semrush organic traffic was queried for every one of the {_nheld} held domains. {_notraf} of them ({_notraf/_nq*100:.0f} per cent) have no organic traffic at all. {_noidx} are not indexed by Semrush on a single keyword, and a further {_idxnotraf} are indexed but still draw no traffic. The busiest site in the whole held set gets {_maxtraf:,.0f} visits a month.",
+ f"Put together, all {_nheld} of these placements sit on sites drawing {_sumtraf:,.0f} visits a month between them, which is about one visit per site. Whoever was paid for this campaign bought links on sites that nobody reads.",
+ f"Ahrefs reports most of these sites as having no keywords at all. Semrush disagrees and indexes {_nq-_noidx} of them, the largest on {max(int(_f(t['organic_keywords'])) for t in _q):,} keywords, so the Ahrefs spam flag and its traffic figures are not used anywhere in this audit. Semrush is the source for every metric shown.",
  "They are held for one reason only. They carry exact match commercial anchors pointing at specific service and geo pages, concentrated in identifiable bursts rather than spread evenly, which is what a paid campaign looks like. If the client paid for them, the client decides. If the vendor does not claim them, they belong in the disavow file, because on quality alone almost none of them would survive.",
- f"The Exact Match Anchors tab is sorted so the domains needing a decision come first. Semrush keywords and traffic are shown for the {_nq} domains queried; the rest read 'not queried' rather than carrying a figure that was never measured.",
+ "The Exact Match Anchors tab is sorted so the domains needing a decision come first, and every held row carries its Semrush keyword count and monthly traffic as sortable numbers.",
 ])
 block('What to do next, in order',[
  "1. Send this workbook to the previous SEO vendor and give them a deadline. The Exact Match Anchors tab is the only tab they need.",
