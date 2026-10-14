@@ -24,6 +24,9 @@ LINKS=[r for r in LINKS if r['rd']]
 # ---------------- domain-level metrics, Semrush first ----------------
 SEM={r['domain']:r for r in csv.DictReader(open(D+'refdomains.csv'),delimiter=';')}
 AHR={r['domain']:r for r in csv.DictReader(open(D+'ahrefs/ah_refdomains.csv'),delimiter=';')}
+# Semrush metrics fetched in bulk for domains Ahrefs found but Semrush's
+# referring-domain report did not return. Semrush stays the priority source.
+EXTRA={r['domain']:r for r in csv.DictReader(open(D+'semrush_extra.csv'),delimiter=';')}
 TAB03=set(l.strip() for l in open(D+'tab03_named.txt') if l.strip())
 OWN={'shadyvent.com','newimagecanopy.com'}
 KEEP_SEED={'yellowpages.com','grokipedia.com','birdeye.com','scam-detector.com','procore.com','accio.com',
@@ -70,7 +73,7 @@ def anchor_type(a):
     if not a: return 'Empty or image'
     if PBN.search(a): return 'Spam: keyword stuffed SEO sales copy'
     if CANOPY.search(a) and not NAKED.match(a):
-        return 'Exact-match commercial (geo)' if GEO.search(a) else 'Exact-match commercial'
+        return 'Exact match commercial (geo)' if GEO.search(a) else 'Exact match commercial'
     if GENERIC.match(a): return 'Generic'
     if BRAND.search(a) and not NAKED.match(a): return 'Branded'
     if NAKED.match(a) or re.match(r'^[a-z0-9-]+\.(com|net|org|info)/?$',a,re.I): return 'Naked URL'
@@ -86,7 +89,8 @@ for d in ALLDOM:
     rs=by.get(d,[])
     sem,ahr=SEM.get(d),AHR.get(d)
     src='Both' if (sem and ahr) else ('Semrush' if sem else 'Ahrefs')
-    asc=int(num(sem['ascore'])) if sem else ''
+    asc=int(num(sem['ascore'])) if sem else (int(num(EXTRA[d]['ascore'])) if d in EXTRA else '')
+    srd=int(num(EXTRA[d]['domains'])) if d in EXTRA else (int(num(sem['backlinks'])) if sem else '')
     dr=num(ahr['dr']) if ahr else ''
     ip=sem['ip'] if sem else ''
     country=sem['country'] if sem else ''
@@ -98,7 +102,7 @@ for d in ALLDOM:
     anchors=[x['anchor'] for x in rs if (x['anchor'] or '').strip()]
     top=collections.Counter(anchors).most_common(1)[0][0] if anchors else ('(not in link sample)' if not rs else '')
     has_pbn=types['Spam: keyword stuffed SEO sales copy']>0
-    has_exact=types['Exact-match commercial (geo)']+types['Exact-match commercial']>0
+    has_exact=types['Exact match commercial (geo)']+types['Exact match commercial']>0
     casino=any(CASINO.search(d) or CASINO.search(x['anchor'] or '') for x in rs) or CASINO.search(d)
     ah_spam=(ahr or {}).get('is_spam')=='true'
     spam_title=any(SPAMTITLE.search(x['source_title'] or '') for x in rs)
@@ -107,34 +111,35 @@ for d in ALLDOM:
 
     parent='.'.join(d.split('.')[-2:])
     if d in OWN or parent in OWN: status,grp='Own Site','Client owned property'
-    elif d in KEEP_SEED: status,grp='Keep','Genuine / editorial'
+    elif d in KEEP_SEED: status,grp='Keep','Genuine or editorial'
+    elif asc!='' and asc>=20: status,grp='Keep','Genuine site, Semrush Authority Score 20 or above'
     elif parent in KEEP_SEED and parent!=d:
-        status,grp='Keep',f'Genuine / editorial (subdomain of {parent})'
-    elif has_exact and has_pbn: status,grp='HELD - review','Mixes exact-match commercial with link-scheme anchors'
+        status,grp='Keep',f'Genuine or editorial (subdomain of {parent})'
+    elif has_exact and has_pbn: status,grp='Held (Review)','Mixes exact match commercial with link scheme anchors'
     elif has_exact and nof==len(rs) and rs:
-        status,grp='HELD - nofollow','Exact-match commercial anchor, but every link is nofollow - passes no ranking value'
-    elif has_exact: status,grp='HELD - pending partner','Exact-match commercial anchor - confirm who commissioned'
-    elif pr and rs: status,grp='HELD - pending partner','Press-release syndication - confirm who commissioned'
-    elif casino: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Off-topic casino / pharma anchor'
-    elif has_pbn: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Automated PBN / service-advertising anchor network'
+        status,grp='Held (Nofollow, No Action)','Exact match commercial anchor, every link is nofollow and passes no ranking value'
+    elif has_exact: status,grp='Held (Pending Partner)','Exact match commercial anchor, confirm who commissioned'
+    elif pr and rs: status,grp='Held (Pending Partner)','Press release syndication, confirm who commissioned'
+    elif casino: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Off topic casino or pharma anchor'
+    elif has_pbn: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Automated PBN and service advertising anchor network'
     elif not rs:
         if SPAMNAME.search(d) or JUNKTLD.search(d) or SPAMIP.match(ip) or ah_spam or eff_auth<=6:
-            status,grp='Review - no link sample','Spam signature or low authority, no link sample to confirm dofollow'
+            status,grp='Review (No Link Sample)','Spam signature or low authority, no link sample to confirm dofollow'
         else: status,grp='Keep','Genuine or harmless link'
-    elif SPAMNAME.search(d): status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'SEO-tool / link-selling network domain'
-    elif SPAMIP.match(ip) or spam_title: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Link-network host (shared IP / templated page)'
+    elif SPAMNAME.search(d): status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'SEO tool and link selling network domain'
+    elif SPAMIP.match(ip) or spam_title: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Link network host (shared IP, templated page)'
     elif ah_spam and eff_auth<=10: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Flagged spam by Ahrefs, low authority'
-    elif JUNKTLD.search(d) or eff_auth<=2: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Low-authority directory / bookmark placement'
+    elif JUNKTLD.search(d) or eff_auth<=2: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Low authority directory or bookmark placement'
     else: status,grp='Keep','Genuine or harmless link'
 
     if re.search(r'bookmark|bmark|social',d,re.I): st='Social bookmarking site'
-    elif pr: st='PR / news distribution'
-    elif re.search(r'article|blog|content|post|news|magz|diary|writers|story|times|tribune|journal',d,re.I): st='Guest-article / content farm'
+    elif pr: st='PR and news distribution'
+    elif re.search(r'article|blog|content|post|news|magz|diary|writers|story|times|tribune|journal',d,re.I): st='Guest article or content farm'
     elif d in KEEP_SEED or d in OWN: st='Genuine site'
-    else: st='Low-quality web directory'
+    else: st='Low quality web directory'
 
     tools=sorted({x['tool'] for x in rs}) or ([ 'Both' ] if src=='Both' else [src])
-    out.append(dict(domain=d,status=status,group=grp,sitetype=st,ascore=asc,dr=dr,source=src,
+    out.append(dict(domain=d,status=status,group=grp,sitetype=st,ascore=asc,semrush_rd=srd,dr=dr,source=src,
         tool='Both' if len(tools)>1 else tools[0],backlinks=bl,dofollow=dof if rs else '',nofollow=nof if rs else '',
         first_seen=first,ip=ip,country=country,top_anchor=top,
         example_page=rs[0]['source_url'] if rs else '',page_title=rs[0]['source_title'] if rs else '',
@@ -155,17 +160,17 @@ for x in out:
     if not parent or parent==d: continue
     pst=BY[parent]['status']
     if pst in ('Keep','Own Site') and x['status'].startswith('Spam'):
-        x['status']=pst; x['group']=f'Genuine / editorial (subdomain of {parent})'; promoted+=1
+        x['status']=pst; x['group']=f'Genuine or editorial (subdomain of {parent})'; promoted+=1
     elif pst.startswith('Review') and x['status'].startswith('Spam'):
-        x['status']='Review - no link sample'; x['group']=f'Parent {parent} unresolved - client to confirm'; promoted+=1
+        x['status']='Review (No Link Sample)'; x['group']=f'Parent {parent} unresolved, client to confirm'; promoted+=1
     elif pst=='Spam (Disavow)' and x['status']=='Spam (Disavow)':
         x['group']+=f' (covered by domain:{parent})'; x['redundant']='Yes'; redundant+=1
 for x in out:
     if x['status']=='Keep' and x['group'].startswith('Genuine or harmless'):
         a=x['ascore'] if x['ascore']!='' else (x['dr']/10 if x['dr']!='' else 0)
         if a<=6:
-            x['status']='Review - low authority'
-            x['group']='Low-authority site, no editorial signal - client to confirm keep or disavow'; demoted+=1
+            x['status']='Review (Low Authority)'
+            x['group']='Low authority site with no editorial signal, client to confirm keep or disavow'; demoted+=1
 for x in out:
     if x['status']!='Spam (Disavow)': x['disavow_line']=''
 assert not [x for x in out if x['disavow_line'] and x['status']!='Spam (Disavow)']

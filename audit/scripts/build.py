@@ -6,8 +6,8 @@ D='/home/user/test/audit/data/'
 OUT='/home/user/test/New_Image_Canopy_Backlinks_Audit.xlsx'
 NAVY='FF1F3864'; F='Geist'; WHITE='FFFFFFFF'; BLUE='FFD9E2F3'; GREEN='FFE2EFDA'
 FILL={'Spam (Disavow)':'FFEAD1DC','Spam (Nofollow, No Action)':'FFD5A6BD','Keep':'FFC27BA0',
-      'Own Site':'FFA64D79','HELD - pending partner':'FFFFF2CC','HELD - nofollow':'FFFCE4D6',
-      'HELD - review':'FFFFE599','Review - no link sample':'FFF2F2F2','Review - low authority':'FFF2F2F2'}
+      'Own Site':'FFA64D79','Held (Pending Partner)':'FFFFF2CC','Held (Nofollow, No Action)':'FFFCE4D6',
+      'Held (Review)':'FFFFE599','Review (No Link Sample)':'FFF2F2F2','Review (Low Authority)':'FFF2F2F2'}
 thin=Side(style='thin'); BORD=Border(left=thin,right=thin,top=thin,bottom=thin)
 def hdr(ws,row=1,sz=9):
     for c in ws[row]:
@@ -47,12 +47,12 @@ def points_to(rs):
 emrows=[]
 for r in LNK:
     a=(r['anchor'] or '').strip()
-    if not a or not r['atype'].startswith('Exact-match'): continue
+    if not a or not r['atype'].startswith('Exact match'): continue
     rec=AUDD.get(r['rd'],{}); st=rec.get('status','')
     m=GEO.search(a)
-    if st=='Keep': reco='Keep - genuine editorial placement, no confirmation needed'
-    elif st=='HELD - nofollow': reco='No action needed - nofollow, passes no ranking value'
-    elif st=='HELD - review': reco='Review - mixes link-scheme with exact-match anchors'
+    if st=='Keep': reco='Keep, genuine editorial placement, no confirmation needed'
+    elif st=='Held (Nofollow, No Action)': reco='No action needed, nofollow passes no ranking value'
+    elif st=='Held (Review)': reco='Review, mixes link scheme with exact match anchors'
     else: reco='Disavow after confirmation'
     emrows.append(dict(d=r['rd'],a=a,mk=MKT[m.group(1).lower()] if m else 'Non-geo',
         site=rec.get('sitetype','Low-quality web directory'),tool=r['tool'],
@@ -63,8 +63,8 @@ for r in LNK:
 emrows.sort(key=lambda x:(x['d'],x['a']))
 emdoms=collections.Counter(x['d'] for x in emrows)
 EM_DOMS=len(emdoms); EM_LINKS=len(emrows); EM_ANCH=len({x['a'] for x in emrows})
-EM_HOLD=sorted({x['d'] for x in emrows if x['st'].startswith('HELD') and x['st']!='HELD - nofollow'})
-EM_NOFO=sorted({x['d'] for x in emrows if x['st']=='HELD - nofollow'})
+EM_HOLD=sorted({x['d'] for x in emrows if x['st']=='Held (Pending Partner)' or x['st']=='Held (Review)'})
+EM_NOFO=sorted({x['d'] for x in emrows if x['st']=='Held (Nofollow, No Action)'})
 EM_KEEP=sorted({x['d'] for x in emrows if x['st']=='Keep'})
 dis=[r for r in AUD if r['status']=='Spam (Disavow)' and r['redundant']!='Yes']
 redun=[r for r in AUD if r['redundant']=='Yes']
@@ -78,8 +78,8 @@ ws=wb.active; ws.title='Summary'; ws.sheet_view.showGridLines=False
 widths(ws,{'A':48,'B':16.29,'C':17.57,'D':18.71,'E':94})
 ws['A1']='https://newimagecanopy.com/'; ws.merge_cells('A1:B1')
 ws['A1'].font=Font(name=F,sz=16,b=True,color=NAVY); ws['A1'].alignment=Alignment(vertical='center')
-ws.append(['BEFORE YOU UPLOAD: confirm with the previous SEO vendor which of the '
-           f'{len(EM_HOLD)} held domains they commissioned. Nothing on the Exact-Match Anchors tab is in disavow.txt.'])
+ws.append(['Before you upload: confirm with the previous SEO vendor which of the '
+           f'{len(EM_HOLD)} held domains they commissioned. Nothing on the Exact Match Anchors tab is in disavow.txt.'])
 ws.merge_cells(f'A2:E2')
 ws['A2'].font=Font(name=F,sz=10,b=True,color='FF9C0006'); ws['A2'].fill=PatternFill('solid',fgColor='FFFFC7CE')
 ws['A2'].alignment=Alignment(vertical='center',wrap_text=True); ws['A2'].border=BORD
@@ -87,15 +87,15 @@ ws.append([])
 ws.append(['Status','Domains','Backlinks','Share of Domains','What it means'])
 HDRROW=ws.max_row; hdr(ws,HDRROW,sz=10)
 MEAN={'Spam (Disavow)':'Confirmed spam with at least one dofollow link. Included in the disavow file.',
- 'HELD - pending partner':'Exact-match commercial anchor or press-release placement. May have been commissioned. NOT in the disavow file until the previous SEO vendor confirms.',
- 'HELD - nofollow':'Exact-match commercial anchor, but every link is nofollow so it passes no ranking value. No disavow needed either way.',
- 'HELD - review':'Carries both exact-match commercial and link-scheme anchors. Needs a judgement call.',
+ 'Held (Pending Partner)':'Exact match commercial anchor or press release placement. May have been commissioned. Not in the disavow file until the previous SEO vendor confirms.',
+ 'Held (Nofollow, No Action)':'Exact match commercial anchor, but every link is nofollow so it passes no ranking value. No disavow needed either way.',
+ 'Held (Review)':'Carries both exact match commercial and link scheme anchors. Needs a judgement call.',
  'Spam (Nofollow, No Action)':'Spam, but every link is nofollow and passes no ranking value, so no disavow is needed.',
- 'Review - no link sample':'Neither tool returned link-level data, so dofollow cannot be confirmed. Never auto-disavowed.',
- 'Review - low authority':'Low-authority site with no editorial signal. A judgement call, not a fact - client to confirm.',
+ 'Review (No Link Sample)':'Neither tool returned link level data, so dofollow cannot be confirmed. Never disavowed automatically.',
+ 'Review (Low Authority)':'Low authority site with no editorial signal. A judgement call, not a fact, so the client confirms.',
  'Keep':'Genuine or harmless link. Keep.','Own Site':'Client owned property or sister brand. Keep.'}
-ORDER=['Spam (Disavow)','HELD - pending partner','HELD - nofollow','HELD - review',
-       'Spam (Nofollow, No Action)','Review - no link sample','Review - low authority','Keep','Own Site']
+ORDER=['Spam (Disavow)','Held (Pending Partner)','Held (Nofollow, No Action)','Held (Review)',
+       'Spam (Nofollow, No Action)','Review (No Link Sample)','Review (Low Authority)','Keep','Own Site']
 first=ws.max_row+1
 for s in ORDER:
     if not cnt[s]: continue
@@ -129,82 +129,82 @@ semrows=sum(1 for r in AUD if r['ascore']!='')
 tld=sum(1 for r in AUD if re.search(r'\.(shop|online|website|space|store|site)$',r['domain'],re.I))
 money=sum(1 for x in emrows if x['tkind'] in ('Service page','Geo landing page'))
 block('Key findings',sz=10,lines=[
- f"{len(AUD):,} referring domains assessed across both tools: {both:,} found by Semrush and Ahrefs, {sem:,} by Semrush only, {ahr:,} by Ahrefs only. Semrush is the priority source for metrics; Ahrefs contributes additional sites and Domain Rating.",
+ f"{len(AUD):,} referring domains were assessed across both tools. {both:,} were found by Semrush and Ahrefs, {sem:,} by Semrush only and {ahr:,} by Ahrefs only. Semrush is the priority source for metrics and Ahrefs contributes additional sites and Domain Rating.",
  f"{spam:,} of the {len(AUD):,} referring domains are spam. {cnt['Spam (Disavow)']:,} have at least one dofollow link and go in the disavow file; {cnt['Spam (Nofollow, No Action)']:,} are nofollow only and need no action.",
- f"{EM_DOMS} referring domains carry {EM_LINKS} exact-match commercial placements across {EM_ANCH} distinct anchors. {len(EM_HOLD)} are HELD OUT of the disavow file pending vendor confirmation, {len(EM_NOFO)} are nofollow so need no decision, and {len(EM_KEEP)} are genuine editorial placements to keep.",
- f"EVIDENCE THE HELD SET WAS COMMISSIONED: {money} of the {EM_LINKS} exact-match links ({money/EM_LINKS*100:.1f}%) point at deep money pages - /service/canopies/, /service/canopy-lighting/, /service/canopy-repairs/, /service/light-commercial/, /service/imaging/ and the five geo landing pages. By contrast {pbn_home:,} of the {pbnl:,} link-scheme links ({pbn_home/pbnl*100:.0f}%) point at the homepage and nothing else. An automated attack does not build links to /service/canopy-lighting/; deliberate page-level targeting is campaign behaviour.",
- "Ahrefs also revealed a paid press-release campaign Semrush did not index: EIN Presswire (DR 88) syndicated to Nat Law Review (DR 86), WBOC (DR 74), XPR Media, and a large lifestyle.* subdomain network, carrying 'New Image Canopy' and 'gas station canopy repair services' anchors. Almost all are nofollow, so they pass no ranking value - but they are clearly commissioned and must not be disavowed by mistake.",
- f"The largest single anchor, on {tn:,} referring domains, is '{ta}'. The spam copy reuses the client's own brand names (New Image Canopy and the client-owned redirect shadyvent.com / Shady Vent Construction, Inc.) inside link-selling sentences - the signature of an automated negative SEO template, not of anything the client bought.",
- "shadyvent.com is confirmed client-owned: it shares server IP 67.225.152.101 with newimagecanopy.com.",
- f"{low:,} of the {semrows:,} domains Semrush scored sit at Authority Score 0-2 ({low/semrows*100:.1f}%). {tld:,} referring domains are on throwaway TLDs (.shop, .online, .website, .space, .store, .site).",
+ f"{EM_DOMS} referring domains carry {EM_LINKS:,} exact match commercial placements across {EM_ANCH} distinct anchors. {len(EM_HOLD)} are held out of the disavow file pending vendor confirmation, {len(EM_NOFO)} are nofollow so need no decision, and {len(EM_KEEP)} are genuine editorial placements to keep.",
+ f"The target URLs are the strongest evidence that the held set was commissioned. {money:,} of the {EM_LINKS:,} exact match links ({money/EM_LINKS*100:.1f}%) point at deep money pages such as /service/canopies/, /service/canopy-lighting/, /service/canopy-repairs/, /service/light-commercial/, /service/imaging/ and the five geo landing pages. {pbn_home:,} of the {pbnl:,} link scheme links ({pbn_home/pbnl*100:.0f}%) point at the homepage and nothing else. An automated attack does not build links to a lighting service page, so this level of page targeting is campaign behaviour.",
+ "Ahrefs also revealed a paid press release campaign that Semrush did not index. EIN Presswire (Semrush AS 49) was syndicated to Nat Law Review (AS 60), WBOC (AS 51), XPR Media and a large lifestyle subdomain network, carrying the anchors 'New Image Canopy' and 'gas station canopy repair services'. Almost all of them are nofollow so they pass no ranking value, but they are clearly commissioned and must not be disavowed by mistake.",
+ f"The largest single anchor, used on {tn:,} referring domains, is '{ta}'. The spam copy reuses the client's own brand names (New Image Canopy and the client-owned redirect shadyvent.com / Shady Vent Construction, Inc.) inside link-selling sentences - the signature of an automated negative SEO template, not of anything the client bought.",
+ "shadyvent.com is confirmed client owned because it shares server IP 67.225.152.101 with newimagecanopy.com.",
+ f"{low:,} of the {semrows:,} domains Semrush scored sit at Authority Score 0 to 2 ({low/semrows*100:.1f}%). {tld:,} referring domains are on throwaway TLDs (.shop, .online, .website, .space, .store, .site).",
  f"All {len(TAB03)} referring domains named in the client's Tab 03 extract were found in the live index and independently classified as Spam (Disavow). They are flagged 'Yes' in the Tab 03 column of the Domain Audit tab.",
 ])
 block('Authority Score vs competitor set',[])
 ws.append(['Domain','Authority Score','Referring domains','Follow links','Note']); hdr(ws,ws.max_row)
 for d,a,r_,f_,n in [('newimagecanopy.com (client)',9,2445,3589,'Most referring domains, lowest Authority Score'),
- ('austinmohawk.com',16,954,7959,'Named competitor - 2.2x the follow links from a third of the domains'),
+ ('austinmohawk.com',16,954,7959,'Named competitor with 2.2 times the follow links from a third of the domains'),
  ('tfccanopy.com',15,708,838,'Named competitor'),
  ('cscanopy.com',10,1376,1610,'Direct canopy competitor'),
  ('sheltersdirect.com',10,1519,2201,'Direct canopy competitor'),
  ('madisonind.com',10,1237,4172,'Direct canopy competitor'),
- ('shadyvent.com (client redirect)',2,1280,1312,'Client-owned, hit by the same attack - needs its own audit')]:
+ ('shadyvent.com (client redirect)',2,1280,1312,'Client owned, hit by the same attack, needs its own audit')]:
     ws.append([d,a,r_,f_,n]); rr=ws.max_row
     style(ws,rr,'FFF2F2F2' if 'client' in d else WHITE,{'B':'#,##0','C':'#,##0','D':'#,##0'},centre=('B','C','D'))
     ws.cell(rr,5).alignment=Alignment(vertical='center',wrap_text=True)
 block('Note on these figures',[
- f"The competitor table above uses Semrush's own domain-level counters (2,445 referring domains for the client) so the comparison is like-for-like. The status table at the top counts {len(AUD):,} domains because it merges Semrush with Ahrefs, which contributes {ahr:,} sites Semrush never indexed.",
+ f"The competitor table above uses Semrush's own domain level counters, 2,445 referring domains for the client, so the comparison is like for like. The status table at the top counts {len(AUD):,} domains because it merges Semrush with Ahrefs, which contributes {ahr:,} sites that Semrush never indexed.",
 ])
-block('Target URL split - attack vs campaign',[])
+block('Target URL split, attack against campaign',[])
 ws.append(['Link population','Links','Homepage','Deep pages','Reading']); hdr(ws,ws.max_row)
 for nm,tot_,deep_,note in [
-  ('Link-scheme / PBN self-advertising',pbnl,pbnl-pbn_home,'Homepage only. Automated, no page-level targeting - an attack.'),
-  ('Exact-match commercial',EM_LINKS,sum(1 for x in emrows if x['tkind']!='Homepage'),'Deep service and geo landing pages - deliberate targeting, i.e. a campaign.')]:
+  ('Link scheme and PBN self advertising',pbnl,pbnl-pbn_home,'Homepage only. Automated, with no page level targeting, so an attack.'),
+  ('Exact match commercial',EM_LINKS,sum(1 for x in emrows if x['tkind']!='Homepage'),'Deep service and geo landing pages, which is deliberate targeting and therefore a campaign.')]:
     ws.append([nm,tot_,tot_-deep_,deep_,note]); rr=ws.max_row
-    style(ws,rr,FILL['HELD - pending partner'] if 'Exact' in nm else WHITE,{'B':'#,##0','C':'#,##0','D':'#,##0'},centre=('B','C','D'))
+    style(ws,rr,FILL['Held (Pending Partner)'] if 'Exact' in nm else WHITE,{'B':'#,##0','C':'#,##0','D':'#,##0'},centre=('B','C','D'))
     ws.cell(rr,5).alignment=Alignment(vertical='center',wrap_text=True)
-ws.append([]); ws.append(['Target page','Exact-match links','','',''])
+ws.append([]); ws.append(['Target page','Exact match links','','',''])
 hdr(ws,ws.max_row)
 for u,n in collections.Counter(x['tgt'] for x in emrows).most_common(12):
     ws.append([u,n,'','','']); style(ws,ws.max_row,WHITE,{'B':'#,##0'},centre=('B',))
-block('Anchor category - what happens to each',[])
+block('Anchor category and what happens to each',[])
 ws.append(['Anchor category','In disavow.txt','Nofollow / no action','Action','']); hdr(ws,ws.max_row)
 grp=collections.Counter()
 for r in AUD:
     g=re.sub(r' \(covered by.*','',r['group'])
     grp[(g,r['status'])]+=1
-ACT=[('Automated PBN / service-advertising anchor network','Disavow'),
-     ('Link-network host (shared IP / templated page)','Disavow'),
-     ('SEO-tool / link-selling network domain','Disavow'),
+ACT=[('Automated PBN and service advertising anchor network','Disavow'),
+     ('Link network host (shared IP, templated page)','Disavow'),
+     ('SEO tool and link selling network domain','Disavow'),
      ('Flagged spam by Ahrefs, low authority','Disavow'),
-     ('Off-topic casino / pharma anchor','Disavow'),
-     ('Low-authority directory / bookmark placement','Disavow')]
+     ('Off topic casino or pharma anchor','Disavow'),
+     ('Low authority directory or bookmark placement','Disavow')]
 tot_in=tot_no=0
 for g,act in ACT:
     a=grp[(g,'Spam (Disavow)')]; b=grp[(g,'Spam (Nofollow, No Action)')]
     if not(a or b): continue
     tot_in+=a; tot_no+=b
     ws.append([g,a,b,act,'']); style(ws,ws.max_row,WHITE,{'B':'#,##0','C':'#,##0'},centre=('B','C'))
-ws.append(['Exact-match commercial / press-release anchors',0,len(EM_NOFO),'Confirm who commissioned before disavowing',''])
-style(ws,ws.max_row,FILL['HELD - pending partner'],{'B':'#,##0','C':'#,##0'},centre=('B','C'))
+ws.append(['Exact match commercial and press release anchors',0,len(EM_NOFO),'Confirm who commissioned before disavowing',''])
+style(ws,ws.max_row,FILL['Held (Pending Partner)'],{'B':'#,##0','C':'#,##0'},centre=('B','C'))
 ws.append(['Brand, URL and natural anchors',0,0,'Retain','']); style(ws,ws.max_row,WHITE,{'B':'#,##0','C':'#,##0'},centre=('B','C'))
 ws.append(['Total domain: entries in disavow.txt',tot_in,tot_no,'',''])
 style(ws,ws.max_row,WHITE,{'B':'#,##0','C':'#,##0'},centre=('B','C'))
 for c in ws[ws.max_row]: c.font=Font(name=F,sz=9,b=True)
 block('Important caveats',[
- "Semrush Authority Score ignores the disavow file - it is a third-party metric. Submitting this file will NOT move Authority Score from 9 to 15. Disavow is a Google-side safety action. The gap to austinmohawk.com (AS 16) is a link-acquisition problem: they have 7,959 follow links from genuine industry sites. Those are two separate pieces of work.",
- f"Uploading replaces any existing disavow file - it does not append. Download the current file from the Google Search Console disavow tool first and merge, or the previous list is lost. {len(redun)} subdomain lines were deliberately omitted because Google's domain: directive already covers subdomains of a disavowed parent.",
- "shadyvent.com has its own 1,280 referring domains from the same network. Because it redirects into newimagecanopy.com those links pass through to the client, so it needs a parallel audit and its own disavow file. That is OUT OF SCOPE here and is the largest unaudited exposure in this engagement.",
+ "Semrush Authority Score ignores the disavow file because it is a third party metric. Submitting this file will not move Authority Score from 9 to 15. Disavow is a safety action on the Google side. The gap to austinmohawk.com at AS 16 is a link acquisition problem, because they have 7,959 follow links from genuine industry sites. Those are two separate pieces of work.",
+ f"Uploading replaces any existing disavow file and does not append to it. Download the current file from the Google Search Console disavow tool first and merge the two, or the previous list is lost. {len(redun)} subdomain lines were deliberately left out because the domain: directive already covers subdomains of a disavowed parent.",
+ "shadyvent.com has its own 1,280 referring domains from the same network. Because it redirects into newimagecanopy.com those links pass through to the client, so it needs a parallel audit and its own disavow file. That is out of scope here and is the largest unaudited exposure in this engagement.",
  "Do not submit the disavow file to Google Search Console until the previous SEO vendor has confirmed which held domains were commissioned.",
 ])
 block('Method',[
  f"Prepared {datetime.date.today():%d %b %Y}. {len(AUD):,} referring domains and {len(LNK):,} links assessed, merging Semrush (priority source for metrics) with Ahrefs (additional sites and Domain Rating).",
- "Status rules: Own Site = client property. Keep = genuine or editorially harmless. HELD = carries an exact-match commercial or press-release anchor, so it may have been commissioned. Spam (Disavow) = link-scheme, casino/pharma, SEO-tool-network or low-authority placement with at least one dofollow link. Spam (Nofollow, No Action) = the same, but every link is nofollow. Review = insufficient evidence to decide; never auto-disavowed.",
+ "Status rules. Own Site is a client property. Keep is genuine or editorially harmless. Held means the domain carries an exact match commercial or press release anchor, so it may have been commissioned. Spam (Disavow) is a link scheme, casino or pharma, SEO tool network or low authority placement with at least one dofollow link. Spam (Nofollow, No Action) is the same but every link is nofollow. Review means there is not enough evidence to decide, and those are never disavowed automatically.",
 ])
 for r in range(1,ws.max_row+1): ws.row_dimensions[r].height=22.5
 
 # ============ 02 Domain Audit ============
 ws=wb.create_sheet('Domain Audit')
-ws.append(['Domain','Status','Group','Site Type (indicative)','Source','AS (Semrush)','DR (Ahrefs)','Backlinks',
+ws.append(['Domain','Status','Group','Site Type (indicative)','Source','AS (Semrush)','RDs (Semrush)','DR (Ahrefs)','Backlinks',
   'Dofollow Links','Nofollow Links','First Seen','In Disavow','Named in Tab 03','Links Point To','Top Anchor Text',
   'Anchor Types','Example Linking Page','Linking Page Title','IP','Country','Disavow Line']); hdr(ws)
 byd=collections.defaultdict(list)
@@ -212,18 +212,19 @@ for r in LNK: byd[r['rd']].append(r)
 for r in AUD:
     rs=byd.get(r['domain'],[])
     ws.append([r['domain'],r['status'],r['group'],r['sitetype'],r['source'],
-      int(r['ascore']) if r['ascore'] else '', float(r['dr']) if r['dr'] else '',
+      int(r['ascore']) if r['ascore'] else '', int(r['semrush_rd']) if r.get('semrush_rd') else '',
+      float(r['dr']) if r['dr'] else '',
       int(r['backlinks'] or 0),r['dofollow'],r['nofollow'],dt(r['first_seen']),
       'Yes' if (r['status']=='Spam (Disavow)' and r['redundant']!='Yes') else
-      ('Covered by parent' if r['redundant']=='Yes' else ('HELD' if r['status'].startswith('HELD') else 'No')),
+      ('Covered by parent' if r['redundant']=='Yes' else ('Held' if r['status'].startswith('Held') else 'No')),
       r['tab03'],points_to(rs) if rs else '',r['top_anchor'],r['atypes'],r['example_page'],r['page_title'],
       r['ip'],r['country'],r['disavow_line'] if r['redundant']!='Yes' else ''])
     style(ws,ws.max_row,FILL.get(r['status'],WHITE),
-      {'F':'#,##0','G':'0.0','H':'#,##0','I':'#,##0','J':'#,##0','K':'d mmm yyyy'},
-      centre=('E','F','G','H','I','J','K','L','M','T'),valign='top')
-widths(ws,{'A':34,'B':24,'C':46,'D':24,'E':10,'F':11,'G':11,'H':10,'I':12,'J':12,'K':13,'L':14,'M':14,
-           'N':34,'O':46,'P':40,'Q':52,'R':46,'S':16,'T':9,'U':30})
-ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:U{ws.max_row}'; ws.sheet_view.showGridLines=False
+      {'F':'#,##0','G':'#,##0','H':'0.0','I':'#,##0','J':'#,##0','K':'#,##0','L':'d mmm yyyy'},
+      centre=('E','F','G','H','I','J','K','L','M','N','U'),valign='top')
+widths(ws,{'A':34,'B':26,'C':46,'D':24,'E':10,'F':11,'G':13,'H':11,'I':10,'J':12,'K':12,'L':13,'M':14,'N':14,
+           'O':34,'P':46,'Q':40,'R':52,'S':46,'T':16,'U':9,'V':30})
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:V{ws.max_row}'; ws.sheet_view.showGridLines=False
 
 # ============ 03 Anchor Analysis ============
 ws=wb.create_sheet('Anchor Analysis')
@@ -240,14 +241,14 @@ for a,g in sorted(agg.items(),key=lambda x:-x[1]['bl']):
     tg=sorted(g['tgt'])
     ws.append([a,g['type'],g['bl'],g['bl']/len(LNK),len(g['rd']),len(g['spam']),len(g['t3']) or '',
                ' | '.join(tg)[:460],tgt_kind(tg[0]) if len(tg)==1 else 'Mixed',g['src']])
-    style(ws,ws.max_row,FILL['HELD - pending partner'] if g['type'].startswith('Exact-match') else WHITE,
+    style(ws,ws.max_row,FILL['Held (Pending Partner)'] if g['type'].startswith('Exact match') else WHITE,
       {'C':'#,##0','D':'0.00%','E':'#,##0','F':'#,##0'},centre=('C','D','E','F','G','I'))
 widths(ws,{'A':104.57,'B':37.71,'C':14,'D':18,'E':20,'F':22,'G':16,'H':70,'I':20,'J':58})
 ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.showGridLines=False
 
-# ============ 04 Exact-Match Anchors ============
-ws=wb.create_sheet('Exact-Match Anchors')
-ws.append(['Referring domain','Links from this domain','AS (Semrush)','DR (Ahrefs)','Exact-match commercial anchor',
+# ============ 04 Exact Match Anchors ============
+ws=wb.create_sheet('Exact Match Anchors')
+ws.append(['Referring domain','Links from this domain','AS (Semrush)','DR (Ahrefs)','Exact match commercial anchor',
   'Market','Site type (indicative)','Tool','Link Type','Linking Page URL','Linking Page Title','Target URL',
   'Target Page Type','First Seen','Recommendation','Partner confirmed? (Y/N)','Commissioned by','Final decision']); hdr(ws)
 for x in emrows:
@@ -255,9 +256,9 @@ for x in emrows:
       x['a'],x['mk'],x['site'],x['tool'],x['link'],x['src'],x['title'],x['tgt'],x['tkind'],dt(x['fs']),
       x['reco'],'','',''])
     r=ws.max_row
-    base=GREEN if x['st']=='Keep' else (FILL['HELD - nofollow'] if x['st']=='HELD - nofollow' else WHITE)
+    base=GREEN if x['st']=='Keep' else (FILL['Held (Nofollow, No Action)'] if x['st']=='Held (Nofollow, No Action)' else WHITE)
     style(ws,r,base,{'B':'#,##0','C':'#,##0','D':'0.0','N':'d mmm yyyy'},centre=('B','C','D','F','H','I','M','N'))
-    ws.cell(r,5).fill=PatternFill('solid',fgColor=FILL['HELD - pending partner'])   # highlight the ANCHOR only
+    ws.cell(r,5).fill=PatternFill('solid',fgColor=FILL['Held (Pending Partner)'])   # highlight the ANCHOR only
     for col in ('P','Q','R'): ws[f'{col}{r}'].fill=PatternFill('solid',fgColor=BLUE)
 dv=DataValidation(type='list',formula1='"Y,N"',allow_blank=True,showDropDown=False)
 ws.add_data_validation(dv); dv.add(f'P2:P{ws.max_row}')
@@ -270,7 +271,7 @@ ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:R{ws.max_row}'; ws.sheet_view.show
 # ============ 05 Pending Disavow Lines ============
 ws=wb.create_sheet('Pending Disavow Lines')
 ws.append(['Referring domain','Disavow line (append to disavow.txt once confirmed)','Recommendation',
-           'AS (Semrush)','DR (Ahrefs)','Site type','Links','Exact-match anchors','Target pages hit']); hdr(ws)
+           'AS (Semrush)','DR (Ahrefs)','Site type','Links','Exact match anchors','Target pages hit']); hdr(ws)
 bd=collections.defaultdict(list)
 for x in emrows: bd[x['d']].append(x)
 for d in EM_HOLD:
@@ -278,7 +279,7 @@ for d in EM_HOLD:
     ws.append([d,'domain:'+d,'Disavow after confirmation',
       int(rec['ascore']) if rec['ascore'] else '',float(rec['dr']) if rec['dr'] else '',rec['sitetype'],len(rs),
       ' | '.join(sorted({x['a'] for x in rs}))[:460],' | '.join(sorted({x['tgt'] for x in rs}))[:460]])
-    style(ws,ws.max_row,FILL['HELD - pending partner'],{'D':'#,##0','E':'0.0','G':'#,##0'},centre=('D','E','G'))
+    style(ws,ws.max_row,FILL['Held (Pending Partner)'],{'D':'#,##0','E':'0.0','G':'#,##0'},centre=('D','E','G'))
 widths(ws,{'A':32,'B':52,'C':30,'D':11,'E':11,'F':26,'G':8,'H':68,'I':68})
 ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:I{ws.max_row}'; ws.sheet_view.showGridLines=False
 
@@ -296,7 +297,7 @@ ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.show
 
 # ============ 07 Disavow List ============
 ws=wb.create_sheet('Disavow List')
-ws.append(['Disavow Line','Source','AS (Semrush)','DR (Ahrefs)','Backlinks','Dofollow Links','First Seen',
+ws.append(['Disavow Line','Source','AS (Semrush)','RDs (Semrush)','DR (Ahrefs)','Backlinks','Dofollow Links','First Seen',
            'Group','Top Anchor Text','Named in Tab 03']); hdr(ws)
 for r in sorted(dis,key=lambda x:x['domain']):
     ws.append([r['disavow_line'],r['source'],int(r['ascore']) if r['ascore'] else '',
@@ -332,15 +333,15 @@ print("non-conforming cells:",dict(bad) if bad else "none")
 wb.save(OUT)
 
 with open('/home/user/test/disavow.txt','w') as f:
-    f.write("# New Image Canopy (newimagecanopy.com) - disavow file\n")
+    f.write("# New Image Canopy (newimagecanopy.com) disavow file\n")
     f.write(f"# Generated {datetime.date.today():%d %b %Y} from Semrush (priority) merged with Ahrefs.\n")
     f.write(f"# {len(dis):,} domains. Source: New_Image_Canopy_Backlinks_Audit.xlsx, 'Disavow List' tab.\n#\n")
-    f.write(f"# EXCLUDED: {EM_DOMS} referring domains carrying exact-match commercial or press-release\n")
-    f.write(f"# anchors are HELD OUT of this file. {len(EM_HOLD)} need vendor confirmation (see the\n")
-    f.write(f"# 'Exact-Match Anchors' and 'Pending Disavow Lines' tabs); {len(EM_NOFO)} are nofollow and\n")
+    f.write(f"# Excluded: {EM_DOMS} referring domains carrying exact match commercial or press release\n")
+    f.write(f"# anchors are held out of this file. {len(EM_HOLD)} need vendor confirmation (see the\n")
+    f.write(f"# 'Exact Match Anchors' and 'Pending Disavow Lines' tabs); {len(EM_NOFO)} are nofollow and\n")
     f.write(f"# need no decision; {len(EM_KEEP)} are genuine editorial placements to keep.\n#\n")
-    f.write("# Do NOT submit to Google Search Console until that confirmation is complete.\n")
-    f.write("# Uploading REPLACES any existing disavow file - download and merge the current one first.\n#\n")
+    f.write("# Do not submit to Google Search Console until that confirmation is complete.\n")
+    f.write("# Uploading replaces any existing disavow file. Download and merge the current one first.\n#\n")
     bg=collections.defaultdict(list)
     for r in dis: bg[re.sub(r' \(covered by.*','',r['group'])].append(r['disavow_line'])
     for g in sorted(bg,key=lambda k:-len(bg[k])):

@@ -1,17 +1,17 @@
-# New Image Canopy (newimagecanopy.com) - disavow file
+# New Image Canopy (newimagecanopy.com) disavow file
 # Generated 14 Oct 2026 from Semrush (priority) merged with Ahrefs.
-# 2,153 domains. Source: New_Image_Canopy_Backlinks_Audit.xlsx, 'Disavow List' tab.
+# 2,152 domains. Source: New_Image_Canopy_Backlinks_Audit.xlsx, 'Disavow List' tab.
 #
-# EXCLUDED: 636 referring domains carrying exact-match commercial or press-release
-# anchors are HELD OUT of this file. 557 need vendor confirmation (see the
-# 'Exact-Match Anchors' and 'Pending Disavow Lines' tabs); 67 are nofollow and
-# need no decision; 12 are genuine editorial placements to keep.
+# Excluded: 636 referring domains carrying exact match commercial or press release
+# anchors are held out of this file. 556 need vendor confirmation (see the
+# 'Exact Match Anchors' and 'Pending Disavow Lines' tabs); 67 are nofollow and
+# need no decision; 13 are genuine editorial placements to keep.
 #
-# Do NOT submit to Google Search Console until that confirmation is complete.
-# Uploading REPLACES any existing disavow file - download and merge the current one first.
+# Do not submit to Google Search Console until that confirmation is complete.
+# Uploading replaces any existing disavow file. Download and merge the current one first.
 #
 
-# --- Automated PBN / service-advertising anchor network (2,030 domains) ---
+# --- Automated PBN and service advertising anchor network (2,030 domains) ---
 domain:007eaglegaze.online
 domain:100ranking.com
 domain:100ranking.info
@@ -2043,7 +2043,7 @@ domain:wholinkstomysite.space
 domain:wholinkstomysite.store
 domain:youseotools.com
 
-# --- Link-network host (shared IP / templated page) (69 domains) ---
+# --- Link network host (shared IP, templated page) (69 domains) ---
 domain:1000.co.in
 domain:2x9.co
 domain:a1webdirectory.xyz
@@ -2114,7 +2114,7 @@ domain:yourregionaldirectory.com
 domain:yourwebdirectory.xyz
 domain:youtoo.in
 
-# --- Off-topic casino / pharma anchor (27 domains) ---
+# --- Off topic casino or pharma anchor (27 domains) ---
 domain:agentbetting.online
 domain:bestirishcasinoonline.online
 domain:bestnz-poker-casinoslot.com
@@ -2143,7 +2143,7 @@ domain:topratedonlinecasinocanada.online
 domain:topratedonlinecasinousa.online
 domain:ufabettererm4.com
 
-# --- SEO-tool / link-selling network domain (24 domains) ---
+# --- SEO tool and link selling network domain (24 domains) ---
 domain:all-aged-domains.com
 domain:alltopleveldomains.space
 domain:backlinkhouse.com
@@ -2169,7 +2169,6 @@ domain:topleveldomains.space
 domain:webworthchecker.cv
 domain:yesdomains.space
 
-# --- Low-authority directory / bookmark placement (3 domains) ---
+# --- Low authority directory or bookmark placement (2 domains) ---
 domain:buyfaithful.com
 domain:fixhubs.net
-domain:populer.com
