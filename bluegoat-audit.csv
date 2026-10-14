@@ -14,7 +14,11 @@ searchbug.com,246,55122,55122,1.0x,NA,"people search, reverse phone lookup",AVOI
 hackread.com,BUILT,NA,NA,NA,0.36,CONTROL - already built by client,BASELINE - legitimate security publication
 gbhackers.com,BUILT,NA,NA,NA,0.44,CONTROL - already built by client,BASELINE - legitimate security publication
 linuxsecurity.com,BUILT,NA,NA,NA,0.69,CONTROL - already built by client,BASELINE - legitimate security publication
-cybernews.com,582,2057493,NA,NA,NA,"cybersecurity news",ABOVE CAP - strong on-topic option
-medicaldaily.com,1320,30711,NA,NA,NA,"health news",ABOVE CAP - medical angle
-infosecurity-magazine.com,3736,22627,NA,NA,NA,"infosec trade press",ABOVE CAP - gold standard infosec pub
-beckershospitalreview.com,4560,74468,NA,NA,NA,"hospital executive news",ABOVE CAP - best strategic fit for medical device cyber
+cybernews.com,582,2057493,3958898,0.5x (UNDERstated),0.35,"cybersecurity news, data breach coverage","BUY - best value tested; verified 4M traffic, clean ratio, on-topic"
+medicaldaily.com,1320,30711,NA,NA,NA,health news,ABOVE CAP - medical angle
+infosecurity-magazine.com,3736,22627,NA,NA,NA,infosec trade press,ABOVE CAP - gold standard infosec pub
+beckershospitalreview.com,4560,74468,77798,1.0x,0.00,"""becker's hospital review, central pharmacy operations""","BUY (strategic) - ZERO broker anchors, cleanest profile tested, reaches health-system CISOs"
+netlingo.com,109,90104,41073,2.2x,1.9,"""cha, what does 67 mean, foh meaning""",AVOID - slang dictionary; casino article on site has 331 ref domains
+spacedaily.com,189,68509,9849,7.0x,0.50,"""spacedaily, pluto mountains, is there oxygen on mars""",SKIP - clean ratio and real site but 7x inflated and off-topic
+tuaw.com,270,46531,4494,10.4x,0.17,"""tuaw news, does goodwill accept apple pay""","SKIP - cleanest ratio tested but 10.4x inflated, thin affiliate content"
+activeprospect.com,300,11391,9508,1.0x,NA,"""what is the fcc, what is the ftc, trustedform""",AVOID - top 6 anchors are broker ads for 6 OTHER lead-gen domains (1163-1280 RD each)
