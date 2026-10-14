@@ -178,7 +178,6 @@ for d in ALLDOM:
         else: status,grp='Keep','Genuine or harmless link'
     elif SPAMNAME.search(d): status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'SEO tool and link selling network domain'
     elif SPAMIP.match(ip) or spam_title: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Link network host (shared IP, templated page)'
-    elif ah_spam and eff_auth<=10: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Flagged spam by Ahrefs, low authority'
     elif JUNKTLD.search(d) or eff_auth<=2: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Low authority directory or bookmark placement'
     else: status,grp='Keep','Genuine or harmless link'
 

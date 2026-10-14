@@ -26,6 +26,8 @@ def dt(ts):
     try: return datetime.datetime.fromtimestamp(int(ts),datetime.UTC).date()
     except: return ''
 
+AHR={r['domain']:r for r in csv.DictReader(open(D+'ahrefs/ah_refdomains.csv'),delimiter=';')}
+SEMT={r['domain']:r for r in csv.DictReader(open(D+'semrush_traffic.csv'),delimiter=';')}
 AUD=list(csv.DictReader(open(D+'domain_audit.csv'),delimiter=';'))
 LNK=list(csv.DictReader(open(D+'links_all.csv'),delimiter=';'))
 STAT={r['domain']:r['status'] for r in AUD}
@@ -114,16 +116,19 @@ def block(title,lines,sz=11):
         ws.append([t]); rr=ws.max_row; ws.merge_cells(f'A{rr}:E{rr}')
         ws.cell(rr,1).font=Font(name=F,sz=9); ws.cell(rr,1).alignment=Alignment(vertical='center',wrap_text=True)
 
-_AH={r['domain']:r for r in csv.DictReader(open(D+'ahrefs/ah_refdomains.csv'),delimiter=';')}
 def _f(x):
     try: return float(x or 0)
     except: return 0.0
 import re as _re
 _SPAMIP=_re.compile(r'^(64\.182\.|69\.13\.|94\.46\.|118\.139\.|184\.168\.|185\.|188\.114\.|15\.204\.|51\.81\.)')
 _hold=[AUDD[d] for d in EM_HOLD]
-_nolife=sum(1 for r in _hold if not(_AH.get(r['domain']) and (_f(_AH[r['domain']]['traffic'])>0 or _f(_AH[r['domain']]['keywords'])>0)))
-_maxtraf=max((_f(_AH[r['domain']]['traffic']) for r in _hold if r['domain'] in _AH),default=0)
+_q=[SEMT[r['domain']] for r in _hold if r['domain'] in SEMT]
+_nq=len(_q)
+_maxtraf=max((_f(t['organic_traffic']) for t in _q),default=0)
+_notraf=sum(1 for t in _q if _f(t['organic_traffic'])==0)
+_noidx=sum(1 for t in _q if _f(t['organic_keywords'])==0 and _f(t['organic_traffic'])==0)
 _onip=sum(1 for r in _hold if _SPAMIP.match(r['ip'] or ''))
+_lowas=sum(1 for r in _hold if r['ascore'] and int(r['ascore'])<=2)
 sem=sum(1 for r in AUD if r['source']=='Semrush'); ahr=sum(1 for r in AUD if r['source']=='Ahrefs')
 both=sum(1 for r in AUD if r['source']=='Both')
 spam=cnt['Spam (Disavow)']+cnt['Spam (Nofollow, No Action)']
@@ -202,9 +207,11 @@ ws.append(['Total domain: entries in disavow.txt',tot_in,tot_no,'',''])
 style(ws,ws.max_row,WHITE,{'B':'#,##0','C':'#,##0'},centre=('B','C'))
 for c in ws[ws.max_row]: c.font=Font(name=F,sz=9,b=True)
 block('What the held domains are actually worth',[
- f"Held does not mean valuable. Of the {len(EM_HOLD)} domains held for vendor confirmation, {_nolife} have no organic traffic and no keywords that Ahrefs can see, and the highest traffic anywhere in the set is {_maxtraf:,.0f} visits a month. {_onip} of them sit on the same shared hosting ranges that this audit uses to disavow other link network hosts.",
- "They are held for one reason only. They carry exact match commercial anchors pointing at specific service and geo pages in a tight date window, which is what a paid campaign looks like. If the client paid for them, the client should decide. If the vendor does not claim them, they belong in the disavow file, because on quality alone almost none of them would survive.",
- "The Exact Match Anchors tab is sorted so the domains needing a decision come first, and the column 'What the linking site is worth' states the traffic, keywords and Domain Rating for each one.",
+ f"Held does not mean valuable. {_onip} of the {len(EM_HOLD)} domains held for vendor confirmation sit on the same shared hosting ranges that this audit uses to disavow other link network hosts, and {_lowas} of them sit at Semrush Authority Score 2 or below.",
+ f"Semrush organic traffic was queried for {_nq} of them as a check. {_notraf} have no measurable organic traffic at all and {_noidx} are not indexed by Semrush on any keyword. The highest traffic found anywhere in that sample is {_maxtraf:,.0f} visits a month. Traffic was not queried for the remaining {len(EM_HOLD)-_nq}, and those rows say so rather than guessing.",
+ "Ahrefs reports most of these sites as having no keywords at all. Semrush disagrees and finds between 2 and 466 indexed keywords on the ones checked, so the Ahrefs spam flag and its traffic figures are not used anywhere in this audit. Semrush is the source for every metric shown.",
+ "They are held for one reason only. They carry exact match commercial anchors pointing at specific service and geo pages in a tight date window, which is what a paid campaign looks like. If the client paid for them, the client decides. If the vendor does not claim them, they belong in the disavow file, because on quality alone almost none of them would survive.",
+ "The Exact Match Anchors tab is sorted so the domains needing a decision come first, and the column 'What Semrush says the site is worth' states the keywords and traffic for each one.",
 ])
 block('Important caveats',[
  "Semrush Authority Score ignores the disavow file because it is a third party metric. Submitting this file will not move Authority Score from 9 to 15. Disavow is a safety action on the Google side. The gap to austinmohawk.com at AS 16 is a link acquisition problem, because they have 7,959 follow links from genuine industry sites. Those are two separate pieces of work.",
@@ -263,7 +270,6 @@ widths(ws,{'A':104.57,'B':37.71,'C':14,'D':18,'E':20,'F':22,'G':16,'H':70,'I':20
 ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.showGridLines=False
 
 # ============ 04 Exact Match Anchors (the decision tab, one row per domain) ============
-AHR={r['domain']:r for r in csv.DictReader(open(D+'ahrefs/ah_refdomains.csv'),delimiter=';')}
 def fnum(x):
     try: return float(x or 0)
     except: return 0.0
@@ -274,23 +280,21 @@ bd=collections.defaultdict(list)
 for x in emrows: bd[x['d']].append(x)
 
 def quality(d):
-    """Plain statement of what the linking site is actually worth."""
-    a=AHR.get(d); rec=AUDD[d]
-    tr=fnum(a['traffic']) if a else None; kw=fnum(a['keywords']) if a else None
-    dr=fnum(rec['dr']) if rec['dr'] else None
-    if a is None and dr is None: return 'Not measured by either tool'
-    bits=[]
-    bits.append('no organic traffic' if (tr==0 or tr is None) else f'{tr:,.0f} visits a month')
-    bits.append('no keywords' if (kw==0 or kw is None) else f'{kw:,.0f} keywords')
-    if dr is not None: bits.append(f'DR {dr:.0f}')
-    if a and a['is_spam']=='true': bits.append('flagged spam by Ahrefs')
-    return ', '.join(bits)
+    """What the linking site is worth, measured by Semrush."""
+    t=SEMT.get(d); rec=AUDD[d]
+    if not t: return 'Semrush traffic not queried for this domain'
+    kw=fnum(t['organic_keywords']); tr=fnum(t['organic_traffic'])
+    if kw==0 and tr==0: return 'Not indexed by Semrush, no keywords and no traffic'
+    return (f"{kw:,.0f} keywords" if kw else "no keywords")+', '+ \
+           (f"{tr:,.0f} visits a month" if tr else "no measurable traffic")
 def has_life(d):
-    a=AHR.get(d); rec=AUDD[d]
-    return bool(a and (fnum(a['traffic'])>0 or fnum(a['keywords'])>0)) or (rec['dr'] and fnum(rec['dr'])>=10)
+    """Semrush is the priority source. Ahrefs is not used to make this call."""
+    t=SEMT.get(d)
+    if not t: return None                      # not queried, so do not assert
+    return fnum(t['organic_traffic'])>0 or fnum(t['organic_keywords'])>=100
 
 ws=wb.create_sheet('Exact Match Anchors')
-ws.append(['Referring domain','Status','Placements','AS (Semrush)','DR (Ahrefs)','What the linking site is worth',
+ws.append(['Referring domain','Status','Placements','AS (Semrush)','DR (Ahrefs)','What Semrush says the site is worth',
   'Markets','Site type (indicative)','Anchors used','Target pages hit','Found by','Recommendation',
   'Partner confirmed? (Y/N)','Commissioned by','Your order or batch date','Final decision']); hdr(ws)
 dec=[]
@@ -301,14 +305,18 @@ for d in sorted(bd):
     if st_=='Keep': reco='Keep, genuine editorial placement, no confirmation needed'
     elif st_.startswith('Review'): reco='Review, see Domain Audit tab'
     elif st_=='Held (Nofollow, No Action)': reco='No action needed, nofollow passes no ranking value'
-    elif has_life(d): reco='Hold for vendor, the only held sites with any measurable traffic'
-    else: reco='Disavow unless the vendor confirms they bought it'
+    else:
+        hl=has_life(d)
+        if hl is True: reco='Hold for vendor, Semrush shows this site is indexed and ranking'
+        elif hl is False: reco='Disavow unless the vendor confirms, Semrush shows almost nothing indexed'
+        else: reco='Disavow unless the vendor confirms they bought it'
     dec.append((reco,-places,d,rs,rec,places,mk,st_))
-ORDER_R={'Disavow unless the vendor confirms they bought it':0,
-         'Hold for vendor, the only held sites with any measurable traffic':1,
-         'Review, see Domain Audit tab':2,
-         'No action needed, nofollow passes no ranking value':3,
-         'Keep, genuine editorial placement, no confirmation needed':4}
+ORDER_R={'Disavow unless the vendor confirms, Semrush shows almost nothing indexed':0,
+         'Disavow unless the vendor confirms they bought it':1,
+         'Hold for vendor, Semrush shows this site is indexed and ranking':2,
+         'Review, see Domain Audit tab':3,
+         'No action needed, nofollow passes no ranking value':4,
+         'Keep, genuine editorial placement, no confirmation needed':5}
 dec.sort(key=lambda t:(ORDER_R.get(t[0],9),t[1],t[2]))
 for reco,_,d,rs,rec,places,mk,st_ in dec:
     ws.append([d,st_,places,int(rec['ascore']) if rec['ascore'] else 'Not scored',
@@ -347,7 +355,7 @@ ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.show
 # ============ Pending Disavow Lines ============
 ws=wb.create_sheet('Pending Disavow Lines')
 ws.append(['Referring domain','Disavow line (append to disavow.txt once confirmed)','Recommendation',
-           'AS (Semrush)','DR (Ahrefs)','What the linking site is worth','Site type','Placements',
+           'AS (Semrush)','DR (Ahrefs)','What Semrush says the site is worth','Site type','Placements',
            'Exact match anchors','Target pages hit']); hdr(ws)
 for d in EM_HOLD:
     rs=bd[d]; rec=AUDD[d]
