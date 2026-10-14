@@ -1,0 +1,20 @@
+Domain,Price_USD,Sheet_Traffic,Verified_Traffic,Inflation,Broker_Brand_Ratio,Ranks_For,Verdict
+powerdmarc.com,203,71837,14675,4.9x,0.79,"dmarc checker, spf checker, dkim checker, email header analyzer, virus link scanner",BUY - only genuine topical fit under $300; negotiate on inflated traffic
+advanced-television.com,293,20797,20797,1.0x,0.66,"advanced television, sky atlantic on virgin",SKIP - clean profile but broadcast TV, off-topic
+appleworld.today,83,12263,12263,1.0x,low,"applepay, white screen ios, apple tv series",MARGINAL - real Apple news but sold as premium PBN network service
+hostadvice.com,180,92609,92609,1.0x,1.0,"hostinger coupon code, best small business ideas",SKIP - affiliate coupon farm
+coolsmartphone.com,286,19655,19655,1.0x,2.3,"honor 400 lite review, honor magic 8 pro review",SKIP - real reviews but poor ratio, consumer mobile
+root-nation.com,99,64098,3601,17.8x,3.0,"acer aspire go 15 review, acer chromebook 314",AVOID - traffic 17.8x inflated
+bmmagazine.co.uk,134,11528,11528,1.0x,0.86,"casino uk best, torrent torrent torrent, rh amar",AVOID - content compromised
+theenterpriseworld.com,78,27199,27199,1.0x,4.3,"how many sticks of butter is 1 cup, google doodle games",AVOID - content farm, worst ratio tested
+techbullion.com,30,22592,22592,1.0x,0.22,"roblox, lambingan, free music mp3 download",AVOID - junk content despite AS 41
+mobileappdaily.com,137,236153,236153,1.0x,NA,"quizlet, spokeo, gramhir.pro, youtube downloader",AVOID - parasite listicle farm
+cyberpanel.net,259,33283,11428,2.9x,NA,"shein coupon code, temu promo mexico, cyberpanel",AVOID - blog hijacked by coupon spam; TF70 is product footer links
+searchbug.com,246,55122,55122,1.0x,NA,"people search, reverse phone lookup",AVOID - data broker, brand conflict for security firm
+hackread.com,BUILT,NA,NA,NA,0.36,CONTROL - already built by client,BASELINE - legitimate security publication
+gbhackers.com,BUILT,NA,NA,NA,0.44,CONTROL - already built by client,BASELINE - legitimate security publication
+linuxsecurity.com,BUILT,NA,NA,NA,0.69,CONTROL - already built by client,BASELINE - legitimate security publication
+cybernews.com,582,2057493,NA,NA,NA,"cybersecurity news",ABOVE CAP - strong on-topic option
+medicaldaily.com,1320,30711,NA,NA,NA,"health news",ABOVE CAP - medical angle
+infosecurity-magazine.com,3736,22627,NA,NA,NA,"infosec trade press",ABOVE CAP - gold standard infosec pub
+beckershospitalreview.com,4560,74468,NA,NA,NA,"hospital executive news",ABOVE CAP - best strategic fit for medical device cyber
