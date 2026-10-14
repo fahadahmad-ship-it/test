@@ -6,7 +6,7 @@ D='/home/user/test/audit/data/'
 OUT='/home/user/test/New_Image_Canopy_Backlinks_Audit.xlsx'
 NAVY='FF1F3864'; F='Geist'; WHITE='FFFFFFFF'; BLUE='FFD9E2F3'; GREEN='FFE2EFDA'
 FILL={'Spam (Disavow)':'FFEAD1DC','Spam (Nofollow, No Action)':'FFD5A6BD','Keep':'FFC27BA0',
-      'Own Site':'FFA64D79','Held (Pending Partner)':'FFFFF2CC','Held (Nofollow, No Action)':'FFFCE4D6',
+      'Own Site':'FFA64D79','Held (Confirm With Vendor)':'FFFFF2CC','Held (Nofollow, No Action)':'FFFCE4D6',
       'Held (Review)':'FFFFE599','Review (No Link Sample)':'FFF2F2F2','Review (Low Authority)':'FFF2F2F2'}
 thin=Side(style='thin'); BORD=Border(left=thin,right=thin,top=thin,bottom=thin)
 def hdr(ws,row=1,sz=9):
@@ -63,7 +63,7 @@ for r in LNK:
 emrows.sort(key=lambda x:(x['d'],x['a']))
 emdoms=collections.Counter(x['d'] for x in emrows)
 EM_DOMS=len(emdoms); EM_LINKS=len(emrows); EM_ANCH=len({x['a'] for x in emrows})
-EM_HOLD=sorted({x['d'] for x in emrows if x['st']=='Held (Pending Partner)' or x['st']=='Held (Review)'})
+EM_HOLD=sorted({x['d'] for x in emrows if x['st']=='Held (Confirm With Vendor)' or x['st']=='Held (Review)'})
 EM_NOFO=sorted({x['d'] for x in emrows if x['st']=='Held (Nofollow, No Action)'})
 EM_KEEP=sorted({x['d'] for x in emrows if x['st']=='Keep'})
 dis=[r for r in AUD if r['status']=='Spam (Disavow)' and r['redundant']!='Yes']
@@ -87,14 +87,14 @@ ws.append([])
 ws.append(['Status','Domains','Backlinks','Share of Domains','What it means'])
 HDRROW=ws.max_row; hdr(ws,HDRROW,sz=10)
 MEAN={'Spam (Disavow)':'Confirmed spam with at least one dofollow link. Included in the disavow file.',
- 'Held (Pending Partner)':'Exact match commercial anchor or press release placement. May have been commissioned. Not in the disavow file until the previous SEO vendor confirms.',
+ 'Held (Confirm With Vendor)':'Exact match commercial anchor or press release placement. May have been commissioned. Not in the disavow file until the previous SEO vendor confirms.',
  'Held (Nofollow, No Action)':'Exact match commercial anchor, but every link is nofollow so it passes no ranking value. No disavow needed either way.',
  'Held (Review)':'Carries both exact match commercial and link scheme anchors. Needs a judgement call.',
  'Spam (Nofollow, No Action)':'Spam, but every link is nofollow and passes no ranking value, so no disavow is needed.',
  'Review (No Link Sample)':'Neither tool returned link level data, so dofollow cannot be confirmed. Never disavowed automatically.',
  'Review (Low Authority)':'Low authority site with no editorial signal. A judgement call, not a fact, so the client confirms.',
  'Keep':'Genuine or harmless link. Keep.','Own Site':'Client owned property or sister brand. Keep.'}
-ORDER=['Spam (Disavow)','Held (Pending Partner)','Held (Nofollow, No Action)','Held (Review)',
+ORDER=['Spam (Disavow)','Held (Confirm With Vendor)','Held (Nofollow, No Action)','Held (Review)',
        'Spam (Nofollow, No Action)','Review (No Link Sample)','Review (Low Authority)','Keep','Own Site']
 first=ws.max_row+1
 for s in ORDER:
@@ -114,6 +114,16 @@ def block(title,lines,sz=11):
         ws.append([t]); rr=ws.max_row; ws.merge_cells(f'A{rr}:E{rr}')
         ws.cell(rr,1).font=Font(name=F,sz=9); ws.cell(rr,1).alignment=Alignment(vertical='center',wrap_text=True)
 
+_AH={r['domain']:r for r in csv.DictReader(open(D+'ahrefs/ah_refdomains.csv'),delimiter=';')}
+def _f(x):
+    try: return float(x or 0)
+    except: return 0.0
+import re as _re
+_SPAMIP=_re.compile(r'^(64\.182\.|69\.13\.|94\.46\.|118\.139\.|184\.168\.|185\.|188\.114\.|15\.204\.|51\.81\.)')
+_hold=[AUDD[d] for d in EM_HOLD]
+_nolife=sum(1 for r in _hold if not(_AH.get(r['domain']) and (_f(_AH[r['domain']]['traffic'])>0 or _f(_AH[r['domain']]['keywords'])>0)))
+_maxtraf=max((_f(_AH[r['domain']]['traffic']) for r in _hold if r['domain'] in _AH),default=0)
+_onip=sum(1 for r in _hold if _SPAMIP.match(r['ip'] or ''))
 sem=sum(1 for r in AUD if r['source']=='Semrush'); ahr=sum(1 for r in AUD if r['source']=='Ahrefs')
 both=sum(1 for r in AUD if r['source']=='Both')
 spam=cnt['Spam (Disavow)']+cnt['Spam (Nofollow, No Action)']
@@ -160,7 +170,7 @@ for nm,tot_,deep_,note in [
   ('Link scheme and PBN self advertising',pbnl,pbnl-pbn_home,'Homepage only. Automated, with no page level targeting, so an attack.'),
   ('Exact match commercial',EM_LINKS,sum(1 for x in emrows if x['tkind']!='Homepage'),'Deep service and geo landing pages, which is deliberate targeting and therefore a campaign.')]:
     ws.append([nm,tot_,tot_-deep_,deep_,note]); rr=ws.max_row
-    style(ws,rr,FILL['Held (Pending Partner)'] if 'Exact' in nm else WHITE,{'B':'#,##0','C':'#,##0','D':'#,##0'},centre=('B','C','D'))
+    style(ws,rr,FILL['Held (Confirm With Vendor)'] if 'Exact' in nm else WHITE,{'B':'#,##0','C':'#,##0','D':'#,##0'},centre=('B','C','D'))
     ws.cell(rr,5).alignment=Alignment(vertical='center',wrap_text=True)
 ws.append([]); ws.append(['Target page','Exact match links','','',''])
 hdr(ws,ws.max_row)
@@ -170,6 +180,7 @@ block('Anchor category and what happens to each',[])
 ws.append(['Anchor category','In disavow.txt','Nofollow / no action','Action','']); hdr(ws,ws.max_row)
 grp=collections.Counter()
 for r in AUD:
+    if r['redundant']=='Yes': continue      # folded into the parent, not a line in the file
     g=re.sub(r' \(covered by.*','',r['group'])
     grp[(g,r['status'])]+=1
 ACT=[('Automated PBN and service advertising anchor network','Disavow'),
@@ -185,11 +196,16 @@ for g,act in ACT:
     tot_in+=a; tot_no+=b
     ws.append([g,a,b,act,'']); style(ws,ws.max_row,WHITE,{'B':'#,##0','C':'#,##0'},centre=('B','C'))
 ws.append(['Exact match commercial and press release anchors',0,len(EM_NOFO),'Confirm who commissioned before disavowing',''])
-style(ws,ws.max_row,FILL['Held (Pending Partner)'],{'B':'#,##0','C':'#,##0'},centre=('B','C'))
+style(ws,ws.max_row,FILL['Held (Confirm With Vendor)'],{'B':'#,##0','C':'#,##0'},centre=('B','C'))
 ws.append(['Brand, URL and natural anchors',0,0,'Retain','']); style(ws,ws.max_row,WHITE,{'B':'#,##0','C':'#,##0'},centre=('B','C'))
 ws.append(['Total domain: entries in disavow.txt',tot_in,tot_no,'',''])
 style(ws,ws.max_row,WHITE,{'B':'#,##0','C':'#,##0'},centre=('B','C'))
 for c in ws[ws.max_row]: c.font=Font(name=F,sz=9,b=True)
+block('What the held domains are actually worth',[
+ f"Held does not mean valuable. Of the {len(EM_HOLD)} domains held for vendor confirmation, {_nolife} have no organic traffic and no keywords that Ahrefs can see, and the highest traffic anywhere in the set is {_maxtraf:,.0f} visits a month. {_onip} of them sit on the same shared hosting ranges that this audit uses to disavow other link network hosts.",
+ "They are held for one reason only. They carry exact match commercial anchors pointing at specific service and geo pages in a tight date window, which is what a paid campaign looks like. If the client paid for them, the client should decide. If the vendor does not claim them, they belong in the disavow file, because on quality alone almost none of them would survive.",
+ "The Exact Match Anchors tab is sorted so the domains needing a decision come first, and the column 'What the linking site is worth' states the traffic, keywords and Domain Rating for each one.",
+])
 block('Important caveats',[
  "Semrush Authority Score ignores the disavow file because it is a third party metric. Submitting this file will not move Authority Score from 9 to 15. Disavow is a safety action on the Google side. The gap to austinmohawk.com at AS 16 is a link acquisition problem, because they have 7,959 follow links from genuine industry sites. Those are two separate pieces of work.",
  f"Uploading replaces any existing disavow file and does not append to it. Download the current file from the Google Search Console disavow tool first and merge the two, or the previous list is lost. {len(redun)} subdomain lines were deliberately left out because the domain: directive already covers subdomains of a disavowed parent.",
@@ -204,27 +220,27 @@ for r in range(1,ws.max_row+1): ws.row_dimensions[r].height=22.5
 
 # ============ 02 Domain Audit ============
 ws=wb.create_sheet('Domain Audit')
-ws.append(['Domain','Status','Group','Site Type (indicative)','Source','AS (Semrush)','RDs (Semrush)','DR (Ahrefs)','Backlinks',
+ws.append(['Domain','Status','Group','Site Type (indicative)','Source','Found by','AS (Semrush)','RDs (Semrush)','DR (Ahrefs)','Links',
   'Dofollow Links','Nofollow Links','First Seen','In Disavow','Named in Tab 03','Links Point To','Top Anchor Text',
   'Anchor Types','Example Linking Page','Linking Page Title','IP','Country','Disavow Line']); hdr(ws)
 byd=collections.defaultdict(list)
 for r in LNK: byd[r['rd']].append(r)
 for r in AUD:
     rs=byd.get(r['domain'],[])
-    ws.append([r['domain'],r['status'],r['group'],r['sitetype'],r['source'],
-      int(r['ascore']) if r['ascore'] else '', int(r['semrush_rd']) if r.get('semrush_rd') else '',
+    ws.append([r['domain'],r['status'],r['group'],r['sitetype'],r['source'],r['tool'],
+      int(r['ascore']) if r['ascore'] else 'Not scored', int(r['semrush_rd']) if r.get('semrush_rd') else '',
       float(r['dr']) if r['dr'] else '',
-      int(r['backlinks'] or 0),r['dofollow'],r['nofollow'],dt(r['first_seen']),
+      int(r['backlinks'] or 0),int(r['dofollow'] or 0) if r['dofollow'] else '',int(r['nofollow'] or 0) if r['nofollow'] else '',dt(r['first_seen']),
       'Yes' if (r['status']=='Spam (Disavow)' and r['redundant']!='Yes') else
       ('Covered by parent' if r['redundant']=='Yes' else ('Held' if r['status'].startswith('Held') else 'No')),
       r['tab03'],points_to(rs) if rs else '',r['top_anchor'],r['atypes'],r['example_page'],r['page_title'],
       r['ip'],r['country'],r['disavow_line'] if r['redundant']!='Yes' else ''])
     style(ws,ws.max_row,FILL.get(r['status'],WHITE),
-      {'F':'#,##0','G':'#,##0','H':'0.0','I':'#,##0','J':'#,##0','K':'#,##0','L':'d mmm yyyy'},
-      centre=('E','F','G','H','I','J','K','L','M','N','U'),valign='top')
-widths(ws,{'A':34,'B':26,'C':46,'D':24,'E':10,'F':11,'G':13,'H':11,'I':10,'J':12,'K':12,'L':13,'M':14,'N':14,
-           'O':34,'P':46,'Q':40,'R':52,'S':46,'T':16,'U':9,'V':30})
-ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:V{ws.max_row}'; ws.sheet_view.showGridLines=False
+      {'G':'#,##0','H':'#,##0','I':'0.0','J':'#,##0','K':'#,##0','L':'#,##0','M':'d mmm yyyy'},
+      centre=('E','F','G','H','I','J','K','L','M','N','O','V'),valign='top')
+widths(ws,{'A':34,'B':26,'C':46,'D':24,'E':10,'F':10,'G':12,'H':13,'I':11,'J':10,'K':12,'L':12,'M':13,'N':14,
+           'O':14,'P':34,'Q':46,'R':40,'S':52,'T':46,'U':16,'V':9,'W':30})
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:W{ws.max_row}'; ws.sheet_view.showGridLines=False
 
 # ============ 03 Anchor Analysis ============
 ws=wb.create_sheet('Anchor Analysis')
@@ -239,49 +255,110 @@ for r in LNK:
     if r['rd'] in TAB03: g['t3'].add(r['rd'])
 for a,g in sorted(agg.items(),key=lambda x:-x[1]['bl']):
     tg=sorted(g['tgt'])
-    ws.append([a,g['type'],g['bl'],g['bl']/len(LNK),len(g['rd']),len(g['spam']),len(g['t3']) or '',
+    ws.append([a if a!='<EmptyAnchor>' else '(no anchor text)',g['type'],g['bl'],g['bl']/len(LNK),len(g['rd']),len(g['spam']),len(g['t3']) or '',
                ' | '.join(tg)[:460],tgt_kind(tg[0]) if len(tg)==1 else 'Mixed',g['src']])
-    style(ws,ws.max_row,FILL['Held (Pending Partner)'] if g['type'].startswith('Exact match') else WHITE,
+    style(ws,ws.max_row,FILL['Held (Confirm With Vendor)'] if g['type'].startswith('Exact match') else WHITE,
       {'C':'#,##0','D':'0.00%','E':'#,##0','F':'#,##0'},centre=('C','D','E','F','G','I'))
 widths(ws,{'A':104.57,'B':37.71,'C':14,'D':18,'E':20,'F':22,'G':16,'H':70,'I':20,'J':58})
 ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.showGridLines=False
 
-# ============ 04 Exact Match Anchors ============
-ws=wb.create_sheet('Exact Match Anchors')
-ws.append(['Referring domain','Links from this domain','AS (Semrush)','DR (Ahrefs)','Exact match commercial anchor',
-  'Market','Site type (indicative)','Tool','Link Type','Linking Page URL','Linking Page Title','Target URL',
-  'Target Page Type','First Seen','Recommendation','Partner confirmed? (Y/N)','Commissioned by','Final decision']); hdr(ws)
-for x in emrows:
-    ws.append([x['d'],emdoms[x['d']],int(x['asc']) if x['asc'] else '',float(x['dr']) if x['dr'] else '',
-      x['a'],x['mk'],x['site'],x['tool'],x['link'],x['src'],x['title'],x['tgt'],x['tkind'],dt(x['fs']),
-      x['reco'],'','',''])
-    r=ws.max_row
-    base=GREEN if x['st']=='Keep' else (FILL['Held (Nofollow, No Action)'] if x['st']=='Held (Nofollow, No Action)' else WHITE)
-    style(ws,r,base,{'B':'#,##0','C':'#,##0','D':'0.0','N':'d mmm yyyy'},centre=('B','C','D','F','H','I','M','N'))
-    ws.cell(r,5).fill=PatternFill('solid',fgColor=FILL['Held (Pending Partner)'])   # highlight the ANCHOR only
-    for col in ('P','Q','R'): ws[f'{col}{r}'].fill=PatternFill('solid',fgColor=BLUE)
-dv=DataValidation(type='list',formula1='"Y,N"',allow_blank=True,showDropDown=False)
-ws.add_data_validation(dv); dv.add(f'P2:P{ws.max_row}')
-dv2=DataValidation(type='list',formula1='"Keep,Disavow,Undecided"',allow_blank=True,showDropDown=False)
-ws.add_data_validation(dv2); dv2.add(f'R2:R{ws.max_row}')
-widths(ws,{'A':30,'B':11,'C':11,'D':11,'E':62,'F':18,'G':26,'H':10,'I':11,'J':62,'K':50,'L':62,'M':18,'N':13,
-           'O':46,'P':22,'Q':24,'R':20})
-ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:R{ws.max_row}'; ws.sheet_view.showGridLines=False
-
-# ============ 05 Pending Disavow Lines ============
-ws=wb.create_sheet('Pending Disavow Lines')
-ws.append(['Referring domain','Disavow line (append to disavow.txt once confirmed)','Recommendation',
-           'AS (Semrush)','DR (Ahrefs)','Site type','Links','Exact match anchors','Target pages hit']); hdr(ws)
+# ============ 04 Exact Match Anchors (the decision tab, one row per domain) ============
+AHR={r['domain']:r for r in csv.DictReader(open(D+'ahrefs/ah_refdomains.csv'),delimiter=';')}
+def fnum(x):
+    try: return float(x or 0)
+    except: return 0.0
+def canon(u):
+    u=(u or '').strip().lower().split('#')[0]
+    return re.sub(r'^www\.','',re.sub(r'^https?://','',u)).rstrip('/')
 bd=collections.defaultdict(list)
 for x in emrows: bd[x['d']].append(x)
+
+def quality(d):
+    """Plain statement of what the linking site is actually worth."""
+    a=AHR.get(d); rec=AUDD[d]
+    tr=fnum(a['traffic']) if a else None; kw=fnum(a['keywords']) if a else None
+    dr=fnum(rec['dr']) if rec['dr'] else None
+    if a is None and dr is None: return 'Not measured by either tool'
+    bits=[]
+    bits.append('no organic traffic' if (tr==0 or tr is None) else f'{tr:,.0f} visits a month')
+    bits.append('no keywords' if (kw==0 or kw is None) else f'{kw:,.0f} keywords')
+    if dr is not None: bits.append(f'DR {dr:.0f}')
+    if a and a['is_spam']=='true': bits.append('flagged spam by Ahrefs')
+    return ', '.join(bits)
+def has_life(d):
+    a=AHR.get(d); rec=AUDD[d]
+    return bool(a and (fnum(a['traffic'])>0 or fnum(a['keywords'])>0)) or (rec['dr'] and fnum(rec['dr'])>=10)
+
+ws=wb.create_sheet('Exact Match Anchors')
+ws.append(['Referring domain','Status','Placements','AS (Semrush)','DR (Ahrefs)','What the linking site is worth',
+  'Markets','Site type (indicative)','Anchors used','Target pages hit','Found by','Recommendation',
+  'Partner confirmed? (Y/N)','Commissioned by','Your order or batch date','Final decision']); hdr(ws)
+dec=[]
+for d in sorted(bd):
+    rs=bd[d]; rec=AUDD[d]; st_=rec['status']
+    places=len({(canon(x['src']),x['a']) for x in rs})
+    mk=sorted({x['mk'] for x in rs if x['mk']!='Non-geo'})
+    if st_=='Keep': reco='Keep, genuine editorial placement, no confirmation needed'
+    elif st_.startswith('Review'): reco='Review, see Domain Audit tab'
+    elif st_=='Held (Nofollow, No Action)': reco='No action needed, nofollow passes no ranking value'
+    elif has_life(d): reco='Hold for vendor, the only held sites with any measurable traffic'
+    else: reco='Disavow unless the vendor confirms they bought it'
+    dec.append((reco,-places,d,rs,rec,places,mk,st_))
+ORDER_R={'Disavow unless the vendor confirms they bought it':0,
+         'Hold for vendor, the only held sites with any measurable traffic':1,
+         'Review, see Domain Audit tab':2,
+         'No action needed, nofollow passes no ranking value':3,
+         'Keep, genuine editorial placement, no confirmation needed':4}
+dec.sort(key=lambda t:(ORDER_R.get(t[0],9),t[1],t[2]))
+for reco,_,d,rs,rec,places,mk,st_ in dec:
+    ws.append([d,st_,places,int(rec['ascore']) if rec['ascore'] else 'Not scored',
+      round(fnum(rec['dr']),1) if rec['dr'] else 'Not scored',quality(d),
+      ', '.join(mk) if mk else 'No market',rec['sitetype'],
+      ' | '.join(sorted({x['a'] for x in rs}))[:460],
+      ' | '.join(sorted({x['tgt'] for x in rs}))[:460],
+      'Both' if len({x['tool'] for x in rs})>1 else list({x['tool'] for x in rs})[0],
+      reco,'','','',''])
+    r=ws.max_row
+    base=GREEN if st_=='Keep' else (FILL['Held (Nofollow, No Action)'] if st_=='Held (Nofollow, No Action)'
+          else (FILL.get(st_,WHITE) if st_.startswith('Review') else WHITE))
+    style(ws,r,base,{'C':'#,##0','D':'#,##0','E':'0.0'},centre=('C','D','E','G','K'))
+    ws.cell(r,9).fill=PatternFill('solid',fgColor=FILL['Held (Confirm With Vendor)'])
+    for col in ('M','N','O','P'): ws[f'{col}{r}'].fill=PatternFill('solid',fgColor=BLUE)
+dv=DataValidation(type='list',formula1='"Y,N"',allow_blank=True,showDropDown=False)
+ws.add_data_validation(dv); dv.add(f'M2:M{ws.max_row}')
+dv2=DataValidation(type='list',formula1='"Keep,Disavow,Undecided"',allow_blank=True,showDropDown=False)
+ws.add_data_validation(dv2); dv2.add(f'P2:P{ws.max_row}')
+widths(ws,{'A':32,'B':28,'C':12,'D':13,'E':12,'F':52,'G':22,'H':26,'I':70,'J':70,'K':11,'L':50,
+           'M':22,'N':24,'O':24,'P':20})
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:P{ws.max_row}'; ws.sheet_view.showGridLines=False
+EM_DECISION_ROWS=ws.max_row-1
+
+# ============ 05 Exact Match Links (supporting evidence, one row per link) ============
+ws=wb.create_sheet('Exact Match Links')
+ws.append(['Referring domain','Exact match commercial anchor','Market','Link Type','Found by',
+           'Linking Page URL','Linking Page Title','Target URL','Target Page Type','First Seen']); hdr(ws)
+for x in sorted(emrows,key=lambda y:(y['d'],y['a'])):
+    ws.append([x['d'],x['a'],x['mk'] if x['mk']!='Non-geo' else 'No market',x['link'],x['tool'],
+               x['src'],x['title'],x['tgt'],x['tkind'],dt(x['fs'])])
+    style(ws,ws.max_row,FILL['Held (Confirm With Vendor)'],{'J':'d mmm yyyy'},centre=('C','D','E','I','J'))
+widths(ws,{'A':30,'B':64,'C':18,'D':11,'E':11,'F':62,'G':50,'H':62,'I':18,'J':13})
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.showGridLines=False
+
+# ============ Pending Disavow Lines ============
+ws=wb.create_sheet('Pending Disavow Lines')
+ws.append(['Referring domain','Disavow line (append to disavow.txt once confirmed)','Recommendation',
+           'AS (Semrush)','DR (Ahrefs)','What the linking site is worth','Site type','Placements',
+           'Exact match anchors','Target pages hit']); hdr(ws)
 for d in EM_HOLD:
     rs=bd[d]; rec=AUDD[d]
-    ws.append([d,'domain:'+d,'Disavow after confirmation',
-      int(rec['ascore']) if rec['ascore'] else '',float(rec['dr']) if rec['dr'] else '',rec['sitetype'],len(rs),
+    places=len({(canon(x['src']),x['a']) for x in rs})
+    ws.append([d,'domain:'+d,'Append only if the vendor does not claim it',
+      int(rec['ascore']) if rec['ascore'] else 'Not scored',
+      round(fnum(rec['dr']),1) if rec['dr'] else 'Not scored',quality(d),rec['sitetype'],places,
       ' | '.join(sorted({x['a'] for x in rs}))[:460],' | '.join(sorted({x['tgt'] for x in rs}))[:460]])
-    style(ws,ws.max_row,FILL['Held (Pending Partner)'],{'D':'#,##0','E':'0.0','G':'#,##0'},centre=('D','E','G'))
-widths(ws,{'A':32,'B':52,'C':30,'D':11,'E':11,'F':26,'G':8,'H':68,'I':68})
-ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:I{ws.max_row}'; ws.sheet_view.showGridLines=False
+    style(ws,ws.max_row,FILL['Held (Confirm With Vendor)'],{'D':'#,##0','E':'0.0','H':'#,##0'},centre=('D','E','H'))
+widths(ws,{'A':32,'B':52,'C':42,'D':13,'E':12,'F':52,'G':26,'H':12,'I':68,'J':68})
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.showGridLines=False
 
 # ============ 06 All Backlinks ============
 ws=wb.create_sheet('All Backlinks')
@@ -297,16 +374,18 @@ ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.show
 
 # ============ 07 Disavow List ============
 ws=wb.create_sheet('Disavow List')
-ws.append(['Disavow Line','Source','AS (Semrush)','RDs (Semrush)','DR (Ahrefs)','Backlinks','Dofollow Links','First Seen',
+ws.append(['Disavow Line','Source','Found by','AS (Semrush)','RDs (Semrush)','DR (Ahrefs)','Links','Dofollow Links','First Seen',
            'Group','Top Anchor Text','Named in Tab 03']); hdr(ws)
 for r in sorted(dis,key=lambda x:x['domain']):
     ws.append([r['disavow_line'],r['source'],int(r['ascore']) if r['ascore'] else '',
-      float(r['dr']) if r['dr'] else '',int(r['backlinks'] or 0),r['dofollow'],dt(r['first_seen']),
+      int(r['semrush_rd']) if r.get('semrush_rd') else '',float(r['dr']) if r['dr'] else '',
+      int(r['backlinks'] or 0),int(r['dofollow'] or 0) if r['dofollow'] else '',dt(r['first_seen']),
       r['group'],r['top_anchor'],r['tab03']])
     style(ws,ws.max_row,FILL['Spam (Disavow)'],
-      {'C':'#,##0','D':'0.0','E':'#,##0','F':'#,##0','G':'d mmm yyyy'},centre=('B','C','D','E','F','G','J'))
-widths(ws,{'A':40,'B':10,'C':11,'D':11,'E':12,'F':14,'G':13,'H':46,'I':52,'J':16})
-ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.showGridLines=False
+      {'C':'#,##0','D':'#,##0','E':'0.0','F':'#,##0','G':'#,##0','H':'d mmm yyyy'},
+      centre=('B','C','D','E','F','G','H','K'))
+widths(ws,{'A':40,'B':10,'C':11,'D':13,'E':11,'F':12,'G':14,'H':13,'I':46,'J':52,'K':16})
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:K{ws.max_row}'; ws.sheet_view.showGridLines=False
 
 # ---- typography pass, sizes read from Just Drive Media ----
 for name in wb.sheetnames:

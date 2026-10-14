@@ -1,11 +1,11 @@
 # New Image Canopy (newimagecanopy.com) disavow file
 # Generated 14 Oct 2026 from Semrush (priority) merged with Ahrefs.
-# 2,152 domains. Source: New_Image_Canopy_Backlinks_Audit.xlsx, 'Disavow List' tab.
+# 2,149 domains. Source: New_Image_Canopy_Backlinks_Audit.xlsx, 'Disavow List' tab.
 #
-# Excluded: 636 referring domains carrying exact match commercial or press release
-# anchors are held out of this file. 556 need vendor confirmation (see the
+# Excluded: 635 referring domains carrying exact match commercial or press release
+# anchors are held out of this file. 553 need vendor confirmation (see the
 # 'Exact Match Anchors' and 'Pending Disavow Lines' tabs); 67 are nofollow and
-# need no decision; 13 are genuine editorial placements to keep.
+# need no decision; 12 are genuine editorial placements to keep.
 #
 # Do not submit to Google Search Console until that confirmation is complete.
 # Uploading replaces any existing disavow file. Download and merge the current one first.
@@ -2043,7 +2043,7 @@ domain:wholinkstomysite.space
 domain:wholinkstomysite.store
 domain:youseotools.com
 
-# --- Link network host (shared IP, templated page) (69 domains) ---
+# --- Link network host (shared IP, templated page) (68 domains) ---
 domain:1000.co.in
 domain:2x9.co
 domain:a1webdirectory.xyz
@@ -2075,7 +2075,6 @@ domain:linksnatcher.com
 domain:list-your-sites.org
 domain:listedbusiness.com
 domain:listsofindia.com
-domain:magzine.org
 domain:mp3fresh.net
 domain:netlistingz.com
 domain:newwebsiteslist.com
@@ -2168,7 +2167,3 @@ domain:seo-revealed.club
 domain:topleveldomains.space
 domain:webworthchecker.cv
 domain:yesdomains.space
-
-# --- Low authority directory or bookmark placement (2 domains) ---
-domain:buyfaithful.com
-domain:fixhubs.net

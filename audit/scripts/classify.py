@@ -14,12 +14,29 @@ def num(x):
     except: return 0.0
 
 # ---------------- link-level evidence, both tools ----------------
-LINKS=[]
+RAW=[]
 for r in csv.DictReader(open(D+'backlinks_all.csv'),delimiter=';'):
-    r['tool']='Semrush'; r['rd']=host(r['source_url']); LINKS.append(r)
+    r['tool']='Semrush'; r['rd']=host(r['source_url']); r['ltype']='text'; RAW.append(r)
 for r in csv.DictReader(open(D+'ahrefs/ah_backlinks.csv'),delimiter=';'):
-    r['tool']='Ahrefs'; r['rd']=host(r['source_url']); LINKS.append(r)
-LINKS=[r for r in LINKS if r['rd']]
+    r['tool']='Ahrefs'; r['rd']=host(r['source_url']); r['ltype']=r.get('type','text'); RAW.append(r)
+RAW=[r for r in RAW if r['rd']]
+
+def canon(u):
+    u=(u or '').strip().lower().split('#')[0]
+    u=re.sub(r'^https?://','',u); u=re.sub(r'^www\.','',u)
+    return u.rstrip('/')
+# The same physical link is reported by both tools with http/https, www and
+# trailing-slash variations. Counting it twice inflates every figure, so collapse
+# on (source page, target page, anchor) and keep the Semrush row as the priority
+# source, recording which tools saw it.
+LINKS=[]; seen={}
+for r in sorted(RAW,key=lambda x:(x['tool']!='Semrush',)):
+    k=(canon(r['source_url']),canon(r['target_url']),(r['anchor'] or '').strip().lower())
+    if k in seen:
+        seen[k]['seen_in']='Both'
+        continue
+    r['seen_in']=r['tool']; seen[k]=r; LINKS.append(r)
+print(f"links: {len(RAW):,} reported by the two tools, {len(LINKS):,} unique after removing {len(RAW)-len(LINKS):,} duplicates")
 
 # ---------------- domain-level metrics, Semrush first ----------------
 SEM={r['domain']:r for r in csv.DictReader(open(D+'refdomains.csv'),delimiter=';')}
@@ -27,6 +44,12 @@ AHR={r['domain']:r for r in csv.DictReader(open(D+'ahrefs/ah_refdomains.csv'),de
 # Semrush metrics fetched in bulk for domains Ahrefs found but Semrush's
 # referring-domain report did not return. Semrush stays the priority source.
 EXTRA={r['domain']:r for r in csv.DictReader(open(D+'semrush_extra.csv'),delimiter=';')}
+# The Ahrefs refdomains export is registered-domain level, so subdomain hosts find
+# nothing there. Their Domain rating is on the backlink rows instead.
+AHDR={}
+for _r in csv.DictReader(open(D+'ahrefs/ah_backlinks.csv'),delimiter=';'):
+    _h=host(_r['source_url']); _d=_r.get('page_ascore') or ''
+    if _h and _d and _h not in AHDR: AHDR[_h]=_d
 TAB03=set(l.strip() for l in open(D+'tab03_named.txt') if l.strip())
 OWN={'shadyvent.com','newimagecanopy.com'}
 KEEP_SEED={'yellowpages.com','grokipedia.com','birdeye.com','scam-detector.com','procore.com','accio.com',
@@ -40,7 +63,11 @@ KEEP_SEED={'yellowpages.com','grokipedia.com','birdeye.com','scam-detector.com',
 
 PBN  = re.compile(r'(seo authority|seo links|backlink|pbn|buy backlink|da 50|pa 40|rank first page|'
                   r'link building|dofollow|white hat seo|outreach backlinks|premium backlinks|sitetosocial|'
-                  r'link profile|organic visibility|da and dr|safe link velocity|placement reporting)',re.I)
+                  r'link profile|organic visibility|da and dr|safe link velocity|placement reporting|'
+                  r'da boost|tf boost|dr improvement|authority link|sponsored post|anchor text audit|'
+                  r'referring domain|digital pr|page one results|replacement policy|no obvious footprint|'
+                  r'seoexpress|rankzly|landing page design|outrank competitors|metrics-verified|'
+                  r'high-authority|vanity metrics|order placement)',re.I)
 CANOPY=re.compile(r'(station canopy|station island canopy|gas canop|canopy light|canopy led light|'
                   r'canopy repair|canopy design|canopy construction|canopy solutions|canopy services|canopies|'
                   r'gas station re-?imaging|gas station imaging|re-?imaging services|gas pump canopy|'
@@ -67,19 +94,33 @@ SPAMTITLE=re.compile(r'(where to buy .{0,12}aged domains|directory pages index|d
 # Press-release distribution and its syndication footprint
 PRNET=re.compile(r'(einpresswire|presswire|pressrelease|newswire|xpr\.media|prnews|'
                  r'^lifestyle\.|businessesinthenews|newsdirect)',re.I)
+# A linking page whose TITLE names the client is a business listing, citation or
+# editorial mention, not spam. Never disavow one automatically. The SEO sales-copy
+# templates also contain the client name, so those are excluded first.
+CLIENTPAGE=re.compile(r'(shady ?vent|new ?image ?canopy)',re.I)
+SALESCOPY=re.compile(r'(backlink|seo|pbn|dofollow|da 50|pa 40|rank first page|link building|'
+                     r'premium|authority|outreach)',re.I)
 
 def anchor_type(a):
     a=(a or '').strip()
     if not a: return 'Empty or image'
     if PBN.search(a): return 'Spam: keyword stuffed SEO sales copy'
     if CANOPY.search(a) and not NAKED.match(a):
+        # anything this long is a sentence scraped from body copy, not an anchor a
+        # vendor would recognise as a placement they bought
+        if len(a)>120: return 'Contextual or other'
         return 'Exact match commercial (geo)' if GEO.search(a) else 'Exact match commercial'
     if GENERIC.match(a): return 'Generic'
-    if BRAND.search(a) and not NAKED.match(a): return 'Branded'
-    if NAKED.match(a) or re.match(r'^[a-z0-9-]+\.(com|net|org|info)/?$',a,re.I): return 'Naked URL'
+    if NAKED.match(a) or re.match(r'^[a-z0-9.-]+\.(com|net|org|info)/?$',a,re.I): return 'Naked URL'
+    if BRAND.search(a): return 'Branded'
     return 'Contextual or other'
-for r in LINKS: r['atype']=anchor_type(r['anchor'])
+for r in LINKS:
+    r['atype']=anchor_type(r['anchor'])
+    if r['ltype'] in ('image','redirect') and r['atype'].startswith('Exact match'):
+        r['atype']='Empty or image'
 
+SEM_HOSTS={r['rd'] for r in RAW if r['tool']=='Semrush'}
+AHR_HOSTS={r['rd'] for r in RAW if r['tool']=='Ahrefs'}
 by=collections.defaultdict(list)
 for r in LINKS: by[r['rd']].append(r)
 ALLDOM=set(by)|set(SEM)|set(AHR)
@@ -88,10 +129,15 @@ out=[]
 for d in ALLDOM:
     rs=by.get(d,[])
     sem,ahr=SEM.get(d),AHR.get(d)
-    src='Both' if (sem and ahr) else ('Semrush' if sem else 'Ahrefs')
+    # Semrush's referring-domain report is registered-domain level while its link
+    # file carries subdomain hosts, so membership of the link files counts too.
+    in_sem=(d in SEM) or (d in SEM_HOSTS); in_ahr=(d in AHR) or (d in AHR_HOSTS)
+    src='Both' if (in_sem and in_ahr) else ('Semrush' if in_sem else 'Ahrefs')
     asc=int(num(sem['ascore'])) if sem else (int(num(EXTRA[d]['ascore'])) if d in EXTRA else '')
-    srd=int(num(EXTRA[d]['domains'])) if d in EXTRA else (int(num(sem['backlinks'])) if sem else '')
-    dr=num(ahr['dr']) if ahr else ''
+    # Semrush's referring-domain report does not return the referring domain's OWN
+    # referring-domain count, so this is populated only where the bulk fetch supplied it.
+    srd=int(num(EXTRA[d]['domains'])) if (not sem and d in EXTRA) else ''
+    dr=num(ahr['dr']) if ahr else (num(AHDR[d]) if d in AHDR else '')
     ip=sem['ip'] if sem else ''
     country=sem['country'] if sem else ''
     fs=[x for x in [(sem or {}).get('first_seen'),(ahr or {}).get('first_seen')]+[r['first_seen'] for r in rs] if x]
@@ -107,6 +153,8 @@ for d in ALLDOM:
     ah_spam=(ahr or {}).get('is_spam')=='true'
     spam_title=any(SPAMTITLE.search(x['source_title'] or '') for x in rs)
     pr=bool(PRNET.search(d))
+    listed=any(CLIENTPAGE.search(x['source_title'] or '') and not SALESCOPY.search(x['source_title'] or '')
+               for x in rs)
     eff_auth=asc if asc!='' else (dr/10 if dr!='' else 0)   # Semrush AS first, DR as fallback
 
     parent='.'.join(d.split('.')[-2:])
@@ -118,8 +166,10 @@ for d in ALLDOM:
     elif has_exact and has_pbn: status,grp='Held (Review)','Mixes exact match commercial with link scheme anchors'
     elif has_exact and nof==len(rs) and rs:
         status,grp='Held (Nofollow, No Action)','Exact match commercial anchor, every link is nofollow and passes no ranking value'
-    elif has_exact: status,grp='Held (Pending Partner)','Exact match commercial anchor, confirm who commissioned'
-    elif pr and rs: status,grp='Held (Pending Partner)','Press release syndication, confirm who commissioned'
+    elif has_exact: status,grp='Held (Confirm With Vendor)','Exact match commercial anchor, confirm who commissioned'
+    elif pr and rs: status,grp='Held (Confirm With Vendor)','Press release syndication, confirm who commissioned'
+    elif listed and not has_pbn:
+        status,grp='Keep','Business listing or editorial mention naming the client'
     elif casino: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Off topic casino or pharma anchor'
     elif has_pbn: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Automated PBN and service advertising anchor network'
     elif not rs:
@@ -146,6 +196,11 @@ for d in ALLDOM:
         atypes='; '.join(f'{k} x{v}' for k,v in types.most_common()) or '(not in link sample)',
         tab03='Yes' if d in TAB03 else '',redundant='',disavow_line='domain:'+d))
 
+ARTEFACT=re.compile(r'^(ns[0-9]+|demo[0-9]*|mail|web|cpanel|webmail|ftp)\.',re.I)
+for x in out:
+    if ARTEFACT.match(x['domain']) and x['status'].startswith('Held'):
+        x['status']='Review (Host Artefact)'
+        x['group']='Nameserver or demo hostname, an artefact of its parent rather than a placement'
 BY={x['domain']:x for x in out}
 def parent_of(d):
     # walk every suffix, so multi-part TLDs (domain.com.lc, site.co.in) resolve correctly
@@ -162,7 +217,7 @@ for x in out:
     if pst in ('Keep','Own Site') and x['status'].startswith('Spam'):
         x['status']=pst; x['group']=f'Genuine or editorial (subdomain of {parent})'; promoted+=1
     elif pst.startswith('Review') and x['status'].startswith('Spam'):
-        x['status']='Review (No Link Sample)'; x['group']=f'Parent {parent} unresolved, client to confirm'; promoted+=1
+        x['status']='Review (Parent Unresolved)'; x['group']=f'Parent {parent} unresolved, client to confirm'; promoted+=1
     elif pst=='Spam (Disavow)' and x['status']=='Spam (Disavow)':
         x['group']+=f' (covered by domain:{parent})'; x['redundant']='Yes'; redundant+=1
 for x in out:
@@ -180,9 +235,9 @@ out.sort(key=lambda x:(x['status'],-x['backlinks'],x['domain']))
 with open(D+'domain_audit.csv','w',newline='') as f:
     w=csv.DictWriter(f,fieldnames=list(out[0].keys()),delimiter=';'); w.writeheader(); w.writerows(out)
 with open(D+'links_all.csv','w',newline='') as f:
-    w=csv.writer(f,delimiter=';'); w.writerow(['rd','tool','source_url','source_title','target_url','anchor','atype','nofollow','first_seen'])
+    w=csv.writer(f,delimiter=';'); w.writerow(['rd','tool','seen_in','ltype','source_url','source_title','target_url','anchor','atype','nofollow','first_seen'])
     for r in sorted(LINKS,key=lambda x:(x['rd'],x['tool'],x['anchor'] or '')):
-        w.writerow([r['rd'],r['tool'],r['source_url'],r['source_title'],r['target_url'],r['anchor'],r['atype'],r['nofollow'],r['first_seen']])
+        w.writerow([r['rd'],r['tool'],r['seen_in'],r['ltype'],r['source_url'],r['source_title'],r['target_url'],r['anchor'],r['atype'],r['nofollow'],r['first_seen']])
 
 print("\n=== STATUS ===")
 for k,v in collections.Counter(x['status'] for x in out).most_common(): print(f"  {v:5d}  {k}")
