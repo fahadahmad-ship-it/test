@@ -11,10 +11,10 @@ FILL={'Spam (Disavow)':'FFEAD1DC','Spam (Nofollow, No Action)':'FFD5A6BD','Keep'
 BLUE='FFD9E2F3'; WHITE='FFFFFFFF'
 thin=Side(style='thin'); BORD=Border(left=thin,right=thin,top=thin,bottom=thin)
 
-def hdr(ws,row=1):
+def hdr(ws,row=1,sz=9):
     for c in ws[row]:
         if c.value is None: continue
-        c.font=Font(name=F,sz=9,b=True,color='FFFFFFFF')
+        c.font=Font(name=F,sz=sz,b=True,color='FFFFFFFF')
         c.fill=PatternFill('solid',fgColor=NAVY)
         c.alignment=Alignment(horizontal='center',vertical='center',wrap_text=True)
         c.border=BORD
@@ -92,6 +92,7 @@ widths(ws,{'A':48,'B':16.29,'C':17.57,'D':18.71,'E':94})
 ws['A1']='https://newimagecanopy.com/'; ws.merge_cells('A1:B1')
 ws['A1'].font=Font(name=F,sz=16,b=True,color=NAVY); ws['A1'].alignment=Alignment(vertical='center')
 ws.append(['Status','Domains','Backlinks','Share of Domains','What it means'])
+SUMMARY_HDR_SZ=10
 cnt=collections.Counter(r['status'] for r in AUD)
 blc=collections.Counter(); 
 for r in AUD: blc[r['status']]+=int(r['backlinks'] or 0)
@@ -105,7 +106,7 @@ for s in ['Spam (Disavow)','HELD - pending partner','Spam (Nofollow, No Action)'
 ws.append(['Total',tot,sum(blc.values()),1.0,''])
 for r in range(2,ws.max_row+1):
     ws.row_dimensions[r].height=22.5
-    if r==2: hdr(ws,2)
+    if r==2: hdr(ws,2,sz=10)
     else:
         s=ws.cell(r,1).value
         style(ws,r,FILL.get(s,WHITE) if s!='Total' else WHITE,{'B':'#,##0','C':'#,##0','D':'0.00%'},centre=('B','C','D'))
@@ -113,16 +114,16 @@ for r in range(2,ws.max_row+1):
         if s=='Total':
             for c in ws[r]: c.font=Font(name=F,sz=9,b=True)
 
-def block(title,lines):
+def block(title,lines,sz=11):
     ws.append([]); ws.append([title])
-    r=ws.max_row; ws.cell(r,1).font=Font(name=F,sz=11,b=True,color=NAVY); ws.row_dimensions[r].height=22.5
+    r=ws.max_row; ws.cell(r,1).font=Font(name=F,sz=sz,b=True,color=NAVY); ws.row_dimensions[r].height=22.5
     for t in lines:
         ws.append([t]); rr=ws.max_row; ws.merge_cells(f'A{rr}:E{rr}')
         ws.cell(rr,1).font=Font(name=F,sz=9); ws.cell(rr,1).alignment=Alignment(vertical='center',wrap_text=True)
         ws.row_dimensions[rr].height=22.5
 
 held=cnt['HELD - pending partner']; spam=cnt['Spam (Disavow)']+cnt['Spam (Nofollow, No Action)']
-block('Key findings',[
+block('Key findings',sz=10,lines=[
  f"{spam:,} of the {tot:,} referring domains are spam. {cnt['Spam (Disavow)']:,} have at least one dofollow link and go in the disavow file; the other {cnt['Spam (Nofollow, No Action)']} are nofollow only and need no action.",
  f"{held} referring domains carry exact-match commercial anchors (gas station canopy services, and geo variants for Austin TX, Dallas TX, Houston TX, Tulsa OK and Oklahoma City OK). These look commissioned, are HELD OUT of the disavow file, and must be confirmed with the previous SEO vendor before any are submitted.",
  "newimagecanopy.com is the target of a large automated link attack that accelerated sharply in October 2026: referring domains went from 925 to 2,445 in a single month (+1,520).",
@@ -297,6 +298,48 @@ widths(ws,{'A':40,'B':8,'C':12,'D':14,'E':13,'F':44,'G':52,'H':16})
 ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:H{ws.max_row}'; ws.sheet_view.showGridLines=False
 
 wb.move_sheet('All Backlinks',offset=0); wb.move_sheet('Disavow List',offset=0)
+
+# =========================================================================
+# Final typography pass. Sizes and row heights taken verbatim from
+# Just Drive Media: Summary title 16, Summary status header 10,
+# 'Key findings' 10, section headings 11, everything else 9. Geist only.
+# Row heights: Summary 22.5 | data headers 31.5 | Domain Audit rows 15.75
+# | all other data rows 22.5.
+# (JDM's own Disavow List header is Arial 10 - a slip in their file, not
+#  replicated: Geist 9 is used there, matching their other three tabs.)
+# =========================================================================
+DATA_ROW_H={'Domain Audit':15.75}
+for name in wb.sheetnames:
+    ws=wb[name]
+    is_summary = (name=='Summary')
+    for row in ws.iter_rows():
+        for c in row:
+            fo=c.font
+            if fo.name!=F or fo.sz not in (9,10,11,16):
+                sz=fo.sz if fo.sz in (9,10,11,16) else 9
+                try: col=fo.color.rgb if (fo.color and isinstance(fo.color.rgb,str)) else None
+                except Exception: col=None
+                c.font=Font(name=F,sz=sz,b=fo.b,i=fo.i,color=col)
+            elif fo.name!=F:
+                c.font=Font(name=F,sz=9,b=fo.b,color=None)
+    if is_summary:
+        for r in range(1,ws.max_row+1): ws.row_dimensions[r].height=22.5
+    else:
+        ws.row_dimensions[1].height=31.5
+        h=DATA_ROW_H.get(name,22.5)
+        for r in range(2,ws.max_row+1): ws.row_dimensions[r].height=h
+    ws.sheet_format.defaultRowHeight=15.0
+
+# verify no stray font/size survived
+import collections as _c
+bad=_c.Counter()
+for name in wb.sheetnames:
+    for row in wb[name].iter_rows():
+        for c in row:
+            if c.value is None: continue
+            if c.font.name!=F or c.font.sz not in (9,10,11,16): bad[(name,c.font.name,c.font.sz)]+=1
+print("non-conforming cells:",dict(bad) if bad else "none")
+
 wb.save(OUT)
 
 # ---------------- disavow.txt ----------------
