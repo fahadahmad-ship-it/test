@@ -57,24 +57,31 @@ STAT={r['domain']:r['status'] for r in AUD}
 TAB03=set(l.strip() for l in open(D+'tab03_named.txt') if l.strip())
 
 MKT={'austin':'Austin, TX','dallas':'Dallas, TX','houston':'Houston, TX','tulsa':'Tulsa, OK','oklahoma city':'Oklahoma City, OK'}
-em={}
+AUDD={r['domain']:r for r in AUD}
+def tgt_kind(u):
+    if '/location/' in u or re.search(r'/gas-?station-canopy-construction-',u): return 'Geo landing page'
+    if '/service/' in u: return 'Service page'
+    if u.rstrip('/')=='https://newimagecanopy.com': return 'Homepage'
+    return 'Other page'
+emrows=[]
 for r in BL:
     a=(r['anchor'] or '').strip()
     if not a or not r['atype'].startswith('Exact-match'): continue
-    em.setdefault(r['rd'],set()).add(a)
-AUDD={r['domain']:r for r in AUD}
-empairs=[]
-for d in sorted(em):
-    rec=AUDD.get(d,{}); st=rec.get('status','')
-    for a in sorted(em[d]):
-        m=GEO.search(a)
-        mk=MKT[m.group(1).lower()] if m else 'Non-geo'
-        reco=('Keep - genuine editorial placement, no confirmation needed'
-              if st=='Keep' else 'Disavow after confirmation')
-        empairs.append((d,a,mk,rec.get('sitetype','Low-quality web directory'),reco,st))
-EM_PAIRS=len(empairs); EM_DOMS=len(em)
-EM_HOLD=sorted({d for d,a,mk,si,re_,st in empairs if st!='Keep'})
-EM_KEEP=sorted({d for d,a,mk,si,re_,st in empairs if st=='Keep'})
+    d=r['rd']; rec=AUDD.get(d,{}); st=rec.get('status','')
+    m=GEO.search(a)
+    emrows.append(dict(d=d,a=a,mk=MKT[m.group(1).lower()] if m else 'Non-geo',
+        site=rec.get('sitetype','Low-quality web directory'),
+        link='Nofollow' if r['nofollow']=='true' else 'Dofollow',
+        src=r['source_url'],title=r['source_title'],tgt=r['target_url'],
+        tkind=tgt_kind(r['target_url']),fs=r['first_seen'],
+        reco='Keep - genuine editorial placement, no confirmation needed' if st=='Keep' else 'Disavow after confirmation',
+        st=st))
+emrows.sort(key=lambda x:(x['d'],x['a']))
+em={r['d'] for r in emrows}
+EM_ROWS=len(emrows); EM_DOMS=len(em); EM_PAIRS=len({(r['d'],r['a']) for r in emrows})
+EM_HOLD=sorted({r['d'] for r in emrows if r['st']!='Keep'})
+EM_KEEP=sorted({r['d'] for r in emrows if r['st']=='Keep'})
+EM_DEEP=sum(1 for r in emrows if r['tkind']!='Homepage')
 
 dis_pre=[r for r in AUD if r['status']=='Spam (Disavow)']
 wb=openpyxl.Workbook(); 
@@ -153,6 +160,8 @@ block('Exact-match anchors - held for client decision',[
  f"{EM_DOMS} referring domains carry {EM_PAIRS} distinct exact-match commercial anchors. Every one of them is listed on the 'Exact-Match Anchors' tab so the client can decide domain by domain. None are in disavow.txt.",
  f"{len(EM_HOLD)} of those domains are recommended for disavow once the previous SEO vendor confirms they were not commissioned. Their ready-made disavow lines are on the 'Pending Disavow Lines' tab - append them to disavow.txt only after confirmation.",
  f"{len(EM_KEEP)} are genuine editorial placements that should be kept regardless of who commissioned them ({', '.join(EM_KEEP)}).",
+ f"EVIDENCE THEY WERE COMMISSIONED: {EM_DEEP} of the {EM_ROWS} exact-match links ({EM_DEEP/EM_ROWS*100:.1f}%) point at deep money pages - /service/canopies/, /service/canopy-lighting/, /service/canopy-repairs/, /service/light-commercial/, /service/imaging/ and the five geo landing pages. By contrast ALL 2,178 PBN self-advertising links point at the homepage and nothing else. An automated attack does not build links to /service/canopy-lighting/; deliberate page-level targeting is campaign behaviour. This is the strongest reason not to disavow this set until the vendor has been asked.",
+ "Every exact-match link is listed individually on the 'Exact-Match Anchors' tab with its linking page URL, linking page title, target URL, target page type, link type and first-seen date, so each one can be opened and verified.",
  "Fill the blue columns on the 'Exact-Match Anchors' tab (Partner confirmed? / Commissioned by / Final decision) with the vendor.",
 ])
 ws.append(['Anchor category','Ref. domains','Action','Status','']); hdr(ws,ws.max_row)
@@ -168,6 +177,22 @@ for a,b_,c_,d_ in ACT:
     ws.append([a,b_,c_,d_,'']); rr=ws.max_row
     style(ws,rr,FILL['HELD - pending partner'] if 'HELD' in str(d_) else WHITE,{'B':'#,##0'},centre=('B',))
     ws.row_dimensions[rr].height=22.5
+
+block('Target URL split - attack vs campaign',[])
+ws.append(['Link population','Backlinks','Homepage','Deep pages','Reading']); hdr(ws,ws.max_row)
+_pbn=[r for r in BL if r['atype']=='Spam: keyword stuffed SEO sales copy']
+_pbn_deep=sum(1 for r in _pbn if r['target_url'].rstrip('/')!='https://newimagecanopy.com')
+for nm,tot_,deep_,note in [
+  ('PBN self-advertising anchors',len(_pbn),_pbn_deep,'100% homepage only. Automated, no page-level targeting - an attack.'),
+  ('Exact-match commercial anchors',EM_ROWS,EM_DEEP,'97.2% deep service and geo landing pages - deliberate targeting, i.e. a campaign.')]:
+    ws.append([nm,tot_,tot_-deep_,deep_,note]); rr=ws.max_row
+    style(ws,rr,FILL['HELD - pending partner'] if 'Exact' in nm else WHITE,{'B':'#,##0','C':'#,##0','D':'#,##0'},centre=('B','C','D'))
+    ws.cell(rr,5).alignment=Alignment(vertical='center',wrap_text=True); ws.row_dimensions[rr].height=22.5
+ws.append([]); ws.append(['Target page','Exact-match links','','','']); hdr(ws,ws.max_row)
+_t=collections.Counter(r['tgt'] for r in emrows)
+for u,n in _t.most_common(12):
+    ws.append([u,n,'','','']); rr=ws.max_row
+    style(ws,rr,WHITE,{'B':'#,##0'},centre=('B',)); ws.row_dimensions[rr].height=22.5
 
 block('Important caveats',[
  "Semrush Authority Score ignores the disavow file - it is a third-party metric. Submitting this file will NOT move Authority Score from 9 to 15. Disavow is a Google-side safety action. The Authority Score gap to austinmohawk.com (AS 16) is a link-acquisition problem: they have 7,959 follow links from genuine industry sites. Those are two separate pieces of work.",
@@ -199,43 +224,55 @@ ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:S{ws.max_row}'; ws.sheet_view.show
 
 # ---------------- 03 Anchor Analysis ----------------
 ws=wb.create_sheet('Anchor Analysis')
-ws.append(['Anchor Text','Anchor Type','Backlinks','Share of Backlinks','Referring Domains','Spam Domains Using It','Named in Tab 03']); hdr(ws)
+ws.append(['Anchor Text','Anchor Type','Backlinks','Share of Backlinks','Referring Domains','Spam Domains Using It','Named in Tab 03','Target URL(s)','Target Page Type','Example Linking Page']); hdr(ws)
 agg=collections.defaultdict(lambda:{'bl':0,'rd':set(),'spam':set(),'t3':set(),'type':''})
 for r in BL:
     a=(r['anchor'] or '').strip() or '<EmptyAnchor>'
     g=agg[a]; g['bl']+=1; g['rd'].add(r['rd']); g['type']=r['atype']
+    g.setdefault('tgt',set()).add(r['target_url']); g.setdefault('src','') or g.__setitem__('src',r['source_url'])
     if STAT.get(r['rd'],'').startswith('Spam'): g['spam'].add(r['rd'])
     if r['rd'] in TAB03: g['t3'].add(r['rd'])
 for a,g in sorted(agg.items(),key=lambda x:-x[1]['bl']):
-    ws.append([a,g['type'],g['bl'],g['bl']/len(BL),len(g['rd']),len(g['spam']),len(g['t3']) or ''])
+    tg=sorted(g.get('tgt',set()))
+    ws.append([a,g['type'],g['bl'],g['bl']/len(BL),len(g['rd']),len(g['spam']),len(g['t3']) or '',
+               ' | '.join(tg)[:460], tgt_kind(tg[0]) if len(tg)==1 else ('Mixed' if len(tg)>1 else ''),
+               g.get('src','')])
     style(ws,ws.max_row,FILL['HELD - pending partner'] if g['type'].startswith('Exact-match') else WHITE,
       {'C':'#,##0','D':'0.00%','E':'#,##0','F':'#,##0'},centre=('C','D','E','F','G'))
-widths(ws,{'A':104.57,'B':37.71,'C':14,'D':18,'E':20,'F':22,'G':16})
-ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:G{ws.max_row}'; ws.sheet_view.showGridLines=False
+widths(ws,{'A':104.57,'B':37.71,'C':14,'D':18,'E':20,'F':22,'G':16,'H':70,'I':20,'J':58})
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.showGridLines=False
 
 # ---------------- 04 Exact-Match Anchors (ALL) ----------------
 # Every referring domain carrying an exact-match commercial anchor, regardless of
 # how the domain itself was classified. Nothing commissioned can be missed here.
 ws=wb.create_sheet('Exact-Match Anchors')
-ws.append(['Referring domain','Exact-match commercial anchor','Market','Site type (indicative)','Recommendation',
+ws.append(['Referring domain','Exact-match commercial anchor','Market','Site type (indicative)','Link Type',
+           'Linking Page URL','Linking Page Title','Target URL','Target Page Type','First Seen','Recommendation',
            'Partner confirmed? (Y/N)','Commissioned by','Final decision']); hdr(ws)
-for d,a,mk,sitet,reco,st in empairs:
-    ws.append([d,a,mk,sitet,reco,'','',''])
-    style(ws,ws.max_row,'FFE2EFDA' if st=='Keep' else FILL['HELD - pending partner'],centre=('C',))
-    for col in ('F','G','H'):
+for r in emrows:
+    ws.append([r['d'],r['a'],r['mk'],r['site'],r['link'],r['src'],r['title'],r['tgt'],r['tkind'],dt(r['fs']),
+               r['reco'],'','',''])
+    style(ws,ws.max_row,'FFE2EFDA' if r['st']=='Keep' else FILL['HELD - pending partner'],
+          {'J':'d mmm yyyy'},centre=('C','E','I','J'))
+    for col in ('L','M','N'):
         ws[f'{col}{ws.max_row}'].fill=PatternFill('solid',fgColor=BLUE)
-widths(ws,{'A':30,'B':64,'C':18,'D':26,'E':46,'F':22,'G':24,'H':20})
-ws.freeze_panes='A2'; ws.auto_filter.ref=f'A1:H{ws.max_row}'; ws.sheet_view.showGridLines=False
-
+widths(ws,{'A':30,'B':62,'C':18,'D':26,'E':11,'F':62,'G':50,'H':62,'I':18,'J':13,'K':46,'L':22,'M':24,'N':20})
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:N{ws.max_row}'; ws.sheet_view.showGridLines=False
 
 # ---------------- 05 Pending Disavow Lines ----------------
 ws=wb.create_sheet('Pending Disavow Lines')
-ws.append(['Referring domain','Disavow line (append to disavow.txt once confirmed)','Recommendation']); hdr(ws)
+ws.append(['Referring domain','Disavow line (append to disavow.txt once confirmed)','Recommendation',
+           'Exact-match anchors','Target pages hit','Links']); hdr(ws)
+byd=collections.defaultdict(list)
+for r in emrows: byd[r['d']].append(r)
 for d in EM_HOLD:
-    ws.append([d,'domain:'+d,'Disavow after confirmation'])
-    style(ws,ws.max_row,FILL['HELD - pending partner'])
-widths(ws,{'A':32,'B':52,'C':30})
-ws.freeze_panes='A2'; ws.auto_filter.ref=f'A1:C{ws.max_row}'; ws.sheet_view.showGridLines=False
+    rs=byd[d]
+    ws.append([d,'domain:'+d,'Disavow after confirmation',
+               ' | '.join(sorted({x['a'] for x in rs}))[:460],
+               ' | '.join(sorted({x['tgt'] for x in rs}))[:460], len(rs)])
+    style(ws,ws.max_row,FILL['HELD - pending partner'],{'F':'#,##0'},centre=('F',))
+widths(ws,{'A':32,'B':52,'C':30,'D':70,'E':70,'F':9})
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:F{ws.max_row}'; ws.sheet_view.showGridLines=False
 
 # ---------------- 05 All Backlinks ----------------
 ws=wb.create_sheet('All Backlinks')
