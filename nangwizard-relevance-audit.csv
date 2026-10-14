@@ -1,0 +1,29 @@
+Domain,Price_USD,Sheet_Traffic,Verified_Traffic,Inflation,Relevance,Ranks_For,Verdict
+cheese.com,400,114925,118238,1.0x,HIGH,"cheese, cotija, pecorino, brie, feta, parmesan",BUY - dairy authority, best topical match in inventory
+sarasotamagazine.com,327,72161,61058,1.2x,HIGH,"duval's restaurant sarasota, new restaurants near me, waterfront restaurants",BUY - real city magazine with dining authority
+thebierkeller.com,270,107528,55914,1.9x,HIGH,"bierkeller liverpool, super bowl 2026, darts on tv",BUY - licensed venue brand, party/nightlife native fit
+vickyflipfloptravels.com,212,32227,13967,2.3x,HIGH,"new forest pubs, cool eateries near me, days out for adults",BUY - UK food/nightlife intent
+sometimes-homemade.com,156,128856,68379,1.9x,HIGH,"what to do when bored, sleepovers, craft ideas, hobbies",BUY - party/entertaining intent
+great-days-out.co.uk,98,88999,87440,1.0x,HIGH,"family days out, things to do with kids, theme parks",BUY - events/entertaining, traffic accurate
+dorsetecho.co.uk,52,217846,217846,1.0x,AUTHORITY,"dorset echo, local news, death notices",BUY - cheap trust link, real Newsquest paper
+wine.co.za,145,30600,28475,1.1x,MED-HIGH,"kanonkop, cape wine, wellington, wine jobs",CONSIDER - drinks adjacency but ZA geo
+canberradaily.com.au,390,26471,22851,1.2x,MEDIUM,"sushi near me, canberra news, crosswords",CONSIDER - AU geo signal
+scoop.co.nz,254,49265,49265,1.0x,AUTHORITY,"lotto, tv guide, news nz",CONSIDER - NZ news brand, no topical fit
+readersdigest.com.au,308,57599,57599,1.0x,MEDIUM,"cryptic crossword, emoji meanings, skincare",CONSIDER - AU brand value only
+live-less-ordinary.com,150,180926,180926,1.0x,MEDIUM,"filipino food, asian cuisine, bangkok",MAYBE - real food site, Asia-focused
+thesoulofseoul.net,50,112781,112781,1.0x,MEDIUM,"seoul, korean ramyun, hanok village",MAYBE - food but Korea-specific
+visitsouthdevon.co.uk,158,172808,172808,1.0x,WEAK,"dawlish, salcombe, torquay, totnes",SKIP - destination tourism not food
+visitdevon.co.uk,372,212212,212212,1.0x,WEAK,"devon, woolacombe beach, sidmouth webcam",SKIP - destination tourism not food
+angsarap.net,220,123861,16267,7.6x,MEDIUM,"filipino soups, poke bowl toppings, snow cheese",SKIP - good fit but traffic 7.6x inflated
+finegardening.com,371,220394,220394,1.0x,LOW,"creeping myrtle, pruning roses, raised beds",SKIP - gardening only, no kitchen overlap
+filmink.com.au,244,64104,64104,1.0x,LOW,"film reviews, one battle after another",SKIP - AU geo only, no food relevance
+autostraddle.com,177,422124,422124,1.0x,RISKY,"gay test, lesbian sex, picnic ideas for couples",SKIP - sex-query dominated
+thearchitectsdiary.com,138,268550,19664,13.7x,LOW,"arch design, modular home manufacturers",AVOID - traffic 13.7x inflated
+sociallifemagazine.com,121,126226,126226,1.0x,LOW,"regina hall, taylor sheridan net worth",AVOID - celebrity net-worth farm
+fancyhouse-design.com,110,126195,24689,5.1x,LOW,"fancy house, bay window seat",AVOID - traffic 5.1x inflated
+lorddecor.com,120,73247,32916,2.2x,LOW,"bedroom tan, how to wash a bedspread",AVOID - inflated, weak rankings
+nextluxury.com,264,135913,12625,10.8x,LOW,"071 crew, racist mexican jokes, tattoos",AVOID - offensive keywords, 10.8x inflated
+outoftownblog.com,200,34639,1362,25.4x,LOW,"cuisine laos, popular thai food",AVOID - traffic 25x inflated
+calendar.cx,336,15982,15982,1.0x,LOW,"what is tomorrow, tomorrow date",AVOID - date-lookup utility
+atn.com.au,42,13436,13436,1.0x,LOW,"coolum beach map, foot fetichism, casinos in sydney",AVOID - junk content despite AU geo
+bullz-eye.com,94,17283,17283,1.0x,LOW,"tits in tops, hot blondes, sexy redheads",AVOID - adult-adjacent
