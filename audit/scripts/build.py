@@ -51,6 +51,7 @@ for r in LNK:
     a=(r['anchor'] or '').strip()
     if not a or not r['atype'].startswith('Exact match'): continue
     rec=AUDD.get(r['rd'],{}); st=rec.get('status','')
+    if st=='Review (Host Artefact)': continue
     m=GEO.search(a)
     if st=='Keep': reco='Keep, genuine editorial placement, no confirmation needed'
     elif st=='Held (Nofollow, No Action)': reco='No action needed, nofollow passes no ranking value'
@@ -62,6 +63,18 @@ for r in LNK:
         title=r['source_title'],tgt=r['target_url'],tkind=tgt_kind(r['target_url']),
         fs=r['first_seen'],reco=reco,st=st,
         asc=rec.get('ascore',''),dr=rec.get('dr','')))
+# Domains held on the strength of the linking page rather than the anchor still need a
+# vendor decision, so they belong on the decision tab too.
+_seen_em={x['d'] for x in emrows}
+for r in LNK:
+    d=r['rd']; rec=AUDD.get(d,{})
+    if d in _seen_em or not rec.get('status','').startswith('Held'): continue
+    a=(r['anchor'] or '').strip() or '(no anchor text)'
+    emrows.append(dict(d=d,a=a,mk='Non-geo',site=rec.get('sitetype','Low quality web directory'),
+        tool=r['tool'],link='Nofollow' if r['nofollow']=='true' else 'Dofollow',src=r['source_url'],
+        title=r['source_title'],tgt=r['target_url'],tkind=tgt_kind(r['target_url']),fs=r['first_seen'],
+        reco='Disavow after confirmation',st=rec['status'],asc=rec.get('ascore',''),dr=rec.get('dr','')))
+    _seen_em.add(d)
 emrows.sort(key=lambda x:(x['d'],x['a']))
 emdoms=collections.Counter(x['d'] for x in emrows)
 EM_DOMS=len(emdoms); EM_LINKS=len(emrows); EM_ANCH=len({x['a'] for x in emrows})
@@ -152,7 +165,7 @@ block('Key findings',sz=10,lines=[
  f"{EM_DOMS} referring domains carry {EM_LINKS:,} exact match commercial placements across {EM_ANCH} distinct anchors. {len(EM_HOLD)} are held out of the disavow file pending vendor confirmation, {len(EM_NOFO)} are nofollow so need no decision, and {len(EM_KEEP)} are genuine editorial placements to keep.",
  f"The target URLs are the strongest evidence that the held set was commissioned. {money:,} of the {EM_LINKS:,} exact match links ({money/EM_LINKS*100:.1f}%) point at deep money pages such as /service/canopies/, /service/canopy-lighting/, /service/canopy-repairs/, /service/light-commercial/, /service/imaging/ and the five geo landing pages. {pbn_home:,} of the {pbnl:,} link scheme links ({pbn_home/pbnl*100:.0f}%) point at the homepage and nothing else. An automated attack does not build links to a lighting service page, so this level of page targeting is campaign behaviour.",
  "Ahrefs also revealed a paid press release campaign that Semrush did not index. EIN Presswire (Semrush AS 49) was syndicated to Nat Law Review (AS 60), WBOC (AS 51), XPR Media and a large lifestyle subdomain network, carrying the anchors 'New Image Canopy' and 'gas station canopy repair services'. Almost all of them are nofollow so they pass no ranking value, but they are clearly commissioned and must not be disavowed by mistake.",
- f"The largest single anchor, used on {tn:,} referring domains, is '{ta}'. The spam copy reuses the client's own brand names (New Image Canopy and the client-owned redirect shadyvent.com / Shady Vent Construction, Inc.) inside link-selling sentences - the signature of an automated negative SEO template, not of anything the client bought.",
+ f"The largest single anchor, used on {tn:,} referring domains, is '{ta}'. The spam copy reuses the client's own brand names, New Image Canopy and the client owned redirect shadyvent.com, inside link selling sentences. That is the signature of an automated negative SEO template rather than anything the client bought.",
  "shadyvent.com is confirmed client owned because it shares server IP 67.225.152.101 with newimagecanopy.com.",
  f"{low:,} of the {semrows:,} domains Semrush scored sit at Authority Score 0 to 2 ({low/semrows*100:.1f}%). {tld:,} referring domains are on throwaway TLDs (.shop, .online, .website, .space, .store, .site).",
  f"All {len(TAB03)} referring domains named in the client's Tab 03 extract were found in the live index and independently classified as Spam (Disavow). They are flagged 'Yes' in the Tab 03 column of the Domain Audit tab.",
@@ -214,7 +227,7 @@ block('What the held domains are actually worth',[
  f"Semrush organic traffic was queried for {_nq} of them as a check. {_notraf} have no measurable organic traffic at all and {_noidx} are not indexed by Semrush on any keyword. The highest traffic found anywhere in that sample is {_maxtraf:,.0f} visits a month. Traffic was not queried for the remaining {len(EM_HOLD)-_nq}, and those rows say so rather than guessing.",
  "Ahrefs reports most of these sites as having no keywords at all. Semrush disagrees and finds between 2 and 466 indexed keywords on the ones checked, so the Ahrefs spam flag and its traffic figures are not used anywhere in this audit. Semrush is the source for every metric shown.",
  "They are held for one reason only. They carry exact match commercial anchors pointing at specific service and geo pages, concentrated in identifiable bursts rather than spread evenly, which is what a paid campaign looks like. If the client paid for them, the client decides. If the vendor does not claim them, they belong in the disavow file, because on quality alone almost none of them would survive.",
- "The Exact Match Anchors tab is sorted so the domains needing a decision come first, and the column 'What Semrush says the site is worth' states the keywords and traffic for each one.",
+ f"The Exact Match Anchors tab is sorted so the domains needing a decision come first. Semrush keywords and traffic are shown for the {_nq} domains queried; the rest read 'not queried' rather than carrying a figure that was never measured.",
 ])
 block('What to do next, in order',[
  "1. Send this workbook to the previous SEO vendor and give them a deadline. The Exact Match Anchors tab is the only tab they need.",

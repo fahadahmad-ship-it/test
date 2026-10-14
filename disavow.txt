@@ -1,9 +1,9 @@
 # New Image Canopy (newimagecanopy.com) disavow file
 # Generated 14 Oct 2026 from Semrush (priority) merged with Ahrefs.
-# 2,149 domains. Source: New_Image_Canopy_Backlinks_Audit.xlsx, 'Disavow List' tab.
+# 2,140 domains. Source: New_Image_Canopy_Backlinks_Audit.xlsx, 'Disavow List' tab.
 #
-# Excluded: 635 referring domains carrying exact match commercial or press release
-# anchors are held out of this file. 553 need vendor confirmation (see the
+# Excluded: 641 referring domains carrying exact match commercial or press release
+# anchors are held out of this file. 562 need vendor confirmation (see the
 # 'Exact Match Anchors' and 'Pending Disavow Lines' tabs); 67 are nofollow and
 # need no decision; 12 are genuine editorial placements to keep.
 #
@@ -2043,7 +2043,7 @@ domain:wholinkstomysite.space
 domain:wholinkstomysite.store
 domain:youseotools.com
 
-# --- Link network host (shared IP, templated page) (68 domains) ---
+# --- Link network host (shared IP, templated page) (59 domains) ---
 domain:1000.co.in
 domain:2x9.co
 domain:a1webdirectory.xyz
@@ -2051,7 +2051,6 @@ domain:alljobs.info
 domain:allwebsitesdirectory.com
 domain:australianwebdirectory.shop
 domain:bestwebstats.com
-domain:bizlistingsnetwork.com
 domain:booksreadr.org
 domain:carplz.com
 domain:directorydaddy.xyz
@@ -2072,18 +2071,12 @@ domain:indians.cc
 domain:jobsapp.info
 domain:linksnatcher.art
 domain:linksnatcher.com
-domain:list-your-sites.org
-domain:listedbusiness.com
 domain:listsofindia.com
 domain:mp3fresh.net
-domain:netlistingz.com
 domain:newwebsiteslist.com
 domain:pagesearch.net
-domain:plotw.org
 domain:prashikshan.in
 domain:preparation.co.in
-domain:probizlistings.com
-domain:probusinesslisting.com
 domain:procycling.org
 domain:pudhe.com
 domain:queries.co.in
@@ -2091,7 +2084,6 @@ domain:rankvance.website
 domain:rankvanceauthority.info
 domain:read.org.in
 domain:sergechel.info
-domain:sitelistingz.com
 domain:smartwebdirectory.xyz
 domain:taxies.biz
 domain:theface.in
@@ -2109,7 +2101,6 @@ domain:websitescrawl.art
 domain:websitesea.com
 domain:wonvision.com
 domain:ycm.info
-domain:yourregionaldirectory.com
 domain:yourwebdirectory.xyz
 domain:youtoo.in
 

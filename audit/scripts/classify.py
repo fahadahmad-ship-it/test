@@ -33,7 +33,7 @@ LINKS=[]; seen={}
 for r in sorted(RAW,key=lambda x:(x['tool']!='Semrush',)):
     k=(canon(r['source_url']),canon(r['target_url']),(r['anchor'] or '').strip().lower())
     if k in seen:
-        seen[k]['seen_in']='Both'
+        if seen[k]['tool']!=r['tool']: seen[k]['seen_in']='Both'
         continue
     r['seen_in']=r['tool']; seen[k]=r; LINKS.append(r)
 print(f"links: {len(RAW):,} reported by the two tools, {len(LINKS):,} unique after removing {len(RAW)-len(LINKS):,} duplicates")
@@ -67,13 +67,16 @@ PBN  = re.compile(r'(seo authority|seo links|backlink|pbn|buy backlink|da 50|pa 
                   r'da boost|tf boost|dr improvement|authority link|sponsored post|anchor text audit|'
                   r'referring domain|digital pr|page one results|replacement policy|no obvious footprint|'
                   r'seoexpress|rankzly|landing page design|outrank competitors|metrics-verified|'
+                  r'content optimization|log file analysis|nap consistency|indexation service|map pack|'
+                  r'hreflang|rank tracking|skyscraper|topical authority|monthly retainer|white-hat|'
+                  r'editorial links|more clients than capacity|shopify development|api integration|'
                   r'high-authority|vanity metrics|order placement)',re.I)
 CANOPY=re.compile(r'(station canopy|station island canopy|gas canop|canopy light|canopy led light|'
                   r'canopy repair|canopy design|canopy construction|canopy solutions|canopy services|canopies|'
                   r'gas station re-?imaging|gas station imaging|re-?imaging services|gas pump canopy|'
                   r'petrol pump canopy|fuel station|petrol station|canopy for sale|canopy installation|'
                   r'canopy manufacturers|commercial canopy|canopy in |canopy the purpose|'
-                  r'purpose of a gas station canopy)',re.I)
+                  r"purpose of a gas station canopy|gas station's design)",re.I)
 GEO   = re.compile(r'(austin|dallas|houston|tulsa|oklahoma city)',re.I)
 BRAND = re.compile(r'(new ?image ?canopy|shady ?vent)',re.I)
 NAKED = re.compile(r'^(https?://|www\.)',re.I)
@@ -98,6 +101,8 @@ PRNET=re.compile(r'(einpresswire|presswire|pressrelease|newswire|xpr\.media|prne
 # editorial mention, not spam. Never disavow one automatically. The SEO sales-copy
 # templates also contain the client name, so those are excluded first.
 CLIENTPAGE=re.compile(r'(shady ?vent|new ?image ?canopy)',re.I)
+CLIENTSERVICE=re.compile(r'(gas station canop|canopy construction|canopy repair|fuel station canop|'
+                         r'petrol station canop|gas canop|canopy lighting|station canopy|gas station imaging)',re.I)
 SALESCOPY=re.compile(r'(backlink|seo|pbn|dofollow|da 50|pa 40|rank first page|link building|'
                      r'premium|authority|outreach)',re.I)
 
@@ -155,6 +160,8 @@ for d in ALLDOM:
     pr=bool(PRNET.search(d))
     listed=any(CLIENTPAGE.search(x['source_title'] or '') and not SALESCOPY.search(x['source_title'] or '')
                for x in rs)
+    svc_listed=any(CLIENTSERVICE.search(x['source_title'] or '') and not SALESCOPY.search(x['source_title'] or '')
+               for x in rs)
     eff_auth=asc if asc!='' else (dr/10 if dr!='' else 0)   # Semrush AS first, DR as fallback
 
     parent='.'.join(d.split('.')[-2:])
@@ -170,6 +177,8 @@ for d in ALLDOM:
     elif pr and rs: status,grp='Held (Confirm With Vendor)','Press release syndication, confirm who commissioned'
     elif listed and not has_pbn:
         status,grp='Keep','Business listing or editorial mention naming the client'
+    elif svc_listed and not has_pbn:
+        status,grp='Held (Confirm With Vendor)','Directory listing page titled after the client service, confirm who commissioned'
     elif casino: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Off topic casino or pharma anchor'
     elif has_pbn: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Automated PBN and service advertising anchor network'
     elif not rs:
@@ -187,9 +196,11 @@ for d in ALLDOM:
     elif d in KEEP_SEED or d in OWN: st='Genuine site'
     else: st='Low quality web directory'
 
-    tools=sorted({x['tool'] for x in rs}) or ([ 'Both' ] if src=='Both' else [src])
+    seen_both=any(x.get('seen_in')=='Both' for x in rs)
+    tools=sorted({x['tool'] for x in rs})
+    tool=('Both' if (seen_both or len(tools)>1) else (tools[0] if tools else src))
     out.append(dict(domain=d,status=status,group=grp,sitetype=st,ascore=asc,semrush_rd=srd,dr=dr,source=src,
-        tool='Both' if len(tools)>1 else tools[0],backlinks=bl,dofollow=dof if rs else '',nofollow=nof if rs else '',
+        tool=tool,backlinks=bl,dofollow=dof if rs else '',nofollow=nof if rs else '',
         first_seen=first,ip=ip,country=country,top_anchor=top,
         example_page=rs[0]['source_url'] if rs else '',page_title=rs[0]['source_title'] if rs else '',
         atypes='; '.join(f'{k} x{v}' for k,v in types.most_common()) or '(not in link sample)',
