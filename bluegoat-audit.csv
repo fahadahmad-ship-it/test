@@ -22,3 +22,12 @@ netlingo.com,109,90104,41073,2.2x,1.9,"""cha, what does 67 mean, foh meaning""",
 spacedaily.com,189,68509,9849,7.0x,0.50,"""spacedaily, pluto mountains, is there oxygen on mars""",SKIP - clean ratio and real site but 7x inflated and off-topic
 tuaw.com,270,46531,4494,10.4x,0.17,"""tuaw news, does goodwill accept apple pay""","SKIP - cleanest ratio tested but 10.4x inflated, thin affiliate content"
 activeprospect.com,300,11391,9508,1.0x,NA,"""what is the fcc, what is the ftc, trustedform""",AVOID - top 6 anchors are broker ads for 6 OTHER lead-gen domains (1163-1280 RD each)
+postandcourier.com,306,308304,339146,0.9x (UNDERstated),0.23,"""post and courier, Charleston SC local news""","BUY - Pulitzer-winning daily, 272k keywords, cleaner ratio than hackread"
+nationalworld.com,117,98634,77658,1.3x,0.13,"""national world, UK regional news network""","BUY - cleanest ratio of any paid site tested, 143k keywords, best value"
+wvgazettemail.com,149,60697,83223,0.7x (UNDERstated),1.24,"""charleston gazette-mail, WV news""",BUY - Pulitzer-winning daily; ratio elevated but content genuine
+montereyherald.com,300,33785,26708,1.3x,0.47,"""monterey herald, CA local news""","CONSIDER - real MediaNews daily, clean ratio, modest traffic"
+rutlandherald.com,128,220294,62182,3.5x,0.41,"""rutland herald, Vermont news""",CONSIDER - clean profile but traffic 3.5x inflated
+usatoday.com,195,26514494,NA,NA,NA,PR WIRE SYNDICATION,AVOID as link - editorial placement does not cost $195; expect nofollow syndication subpath
+apnews.com,104,31817643,NA,NA,NA,PR WIRE SYNDICATION,AVOID as link - same; verify URL pattern and rel before any purchase
+msn.com,300,70906462,NA,NA,NA,SYNDICATED FEED,"AVOID as link - syndicated content, typically deindexed"
+openpr.com,30,290403,NA,NA,NA,PRESS RELEASE WIRE,AVOID as link - pure PR wire
