@@ -2,8 +2,9 @@
 # Generated 14 Oct 2026 from the Semrush live index.
 # 1,860 domains. Source: New_Image_Canopy_Backlinks_Audit.xlsx, 'Disavow List' tab.
 #
-# EXCLUDED: 544 referring domains carrying exact-match commercial anchors are HELD OUT
-# of this file pending confirmation from the previous SEO vendor. See the 'Exact-Match (HELD)' tab.
+# EXCLUDED: 548 referring domains carrying exact-match commercial anchors are HELD OUT
+# of this file pending confirmation from the previous SEO vendor. See the 'Exact-Match Anchors' tab;
+# ready-made lines for the 544 disavow candidates are on the 'Pending Disavow Lines' tab.
 # Do NOT submit to Google Search Console until that confirmation is complete.
 #
 

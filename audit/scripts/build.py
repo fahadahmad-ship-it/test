@@ -56,6 +56,27 @@ for r in BL: r['rd']=host(r['source_url']); r['atype']=atype(r['anchor'])
 STAT={r['domain']:r['status'] for r in AUD}
 TAB03=set(l.strip() for l in open(D+'tab03_named.txt') if l.strip())
 
+MKT={'austin':'Austin, TX','dallas':'Dallas, TX','houston':'Houston, TX','tulsa':'Tulsa, OK','oklahoma city':'Oklahoma City, OK'}
+em={}
+for r in BL:
+    a=(r['anchor'] or '').strip()
+    if not a or not r['atype'].startswith('Exact-match'): continue
+    em.setdefault(r['rd'],set()).add(a)
+AUDD={r['domain']:r for r in AUD}
+empairs=[]
+for d in sorted(em):
+    rec=AUDD.get(d,{}); st=rec.get('status','')
+    for a in sorted(em[d]):
+        m=GEO.search(a)
+        mk=MKT[m.group(1).lower()] if m else 'Non-geo'
+        reco=('Keep - genuine editorial placement, no confirmation needed'
+              if st=='Keep' else 'Disavow after confirmation')
+        empairs.append((d,a,mk,rec.get('sitetype','Low-quality web directory'),reco,st))
+EM_PAIRS=len(empairs); EM_DOMS=len(em)
+EM_HOLD=sorted({d for d,a,mk,si,re_,st in empairs if st!='Keep'})
+EM_KEEP=sorted({d for d,a,mk,si,re_,st in empairs if st=='Keep'})
+
+dis_pre=[r for r in AUD if r['status']=='Spam (Disavow)']
 wb=openpyxl.Workbook(); 
 
 # ---------------- 01 Summary ----------------
@@ -128,6 +149,26 @@ for k,v in at.most_common():
     ws.append([k,v,v/len(BL),len(ad[k]),'']); rr=ws.max_row
     style(ws,rr,WHITE,{'B':'#,##0','C':'0.00%','D':'#,##0'},centre=('B','C','D')); ws.row_dimensions[rr].height=22.5
 
+block('Exact-match anchors - held for client decision',[
+ f"{EM_DOMS} referring domains carry {EM_PAIRS} distinct exact-match commercial anchors. Every one of them is listed on the 'Exact-Match Anchors' tab so the client can decide domain by domain. None are in disavow.txt.",
+ f"{len(EM_HOLD)} of those domains are recommended for disavow once the previous SEO vendor confirms they were not commissioned. Their ready-made disavow lines are on the 'Pending Disavow Lines' tab - append them to disavow.txt only after confirmation.",
+ f"{len(EM_KEEP)} are genuine editorial placements that should be kept regardless of who commissioned them ({', '.join(EM_KEEP)}).",
+ "Fill the blue columns on the 'Exact-Match Anchors' tab (Partner confirmed? / Commissioned by / Final decision) with the vendor.",
+])
+ws.append(['Anchor category','Ref. domains','Action','Status','']); hdr(ws,ws.max_row)
+ACT=[('Link-scheme / PBN service-advertising anchors',1705,'Disavow','In disavow.txt'),
+     ('Low-authority directory / bookmark placements',131,'Disavow','In disavow.txt'),
+     ('Off-topic casino / pharma anchors',27,'Disavow','In disavow.txt'),
+     ('SEO-tool / link-selling network domains',30,'Disavow','In disavow.txt'),
+     ('Exact-match commercial anchors',len(EM_HOLD),'Confirm who commissioned before disavowing','HELD - pending partner'),
+     ('Exact-match on genuine editorial sites',len(EM_KEEP),'Retain','Not in file'),
+     ('Brand, URL and natural anchors','Remainder','Retain','Not in file'),
+     ('Total domain: entries in disavow.txt',len(dis_pre),'','')]
+for a,b_,c_,d_ in ACT:
+    ws.append([a,b_,c_,d_,'']); rr=ws.max_row
+    style(ws,rr,FILL['HELD - pending partner'] if 'HELD' in str(d_) else WHITE,{'B':'#,##0'},centre=('B',))
+    ws.row_dimensions[rr].height=22.5
+
 block('Important caveats',[
  "Semrush Authority Score ignores the disavow file - it is a third-party metric. Submitting this file will NOT move Authority Score from 9 to 15. Disavow is a Google-side safety action. The Authority Score gap to austinmohawk.com (AS 16) is a link-acquisition problem: they have 7,959 follow links from genuine industry sites. Those are two separate pieces of work.",
  "Data source is Semrush only. Ahrefs API units for this workspace were exhausted (800,068 of 800,000 used, resetting 25 Oct 2026), so unlike a two-source audit every row here is Semrush-sourced.",
@@ -172,30 +213,29 @@ for a,g in sorted(agg.items(),key=lambda x:-x[1]['bl']):
 widths(ws,{'A':104.57,'B':37.71,'C':14,'D':18,'E':20,'F':22,'G':16})
 ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:G{ws.max_row}'; ws.sheet_view.showGridLines=False
 
-# ---------------- 04 Exact-Match (HELD) ----------------
-ws=wb.create_sheet('Exact-Match (HELD)')
+# ---------------- 04 Exact-Match Anchors (ALL) ----------------
+# Every referring domain carrying an exact-match commercial anchor, regardless of
+# how the domain itself was classified. Nothing commissioned can be missed here.
+ws=wb.create_sheet('Exact-Match Anchors')
 ws.append(['Referring domain','Exact-match commercial anchor','Market','Site type (indicative)','Recommendation',
            'Partner confirmed? (Y/N)','Commissioned by','Final decision']); hdr(ws)
-hrows=[r for r in AUD if r['status'].startswith('HELD')]
-byd={r['domain']:r for r in hrows}
-pairs=[]
-for r in BL:
-    if r['rd'] in byd and r['atype'].startswith('Exact-match'):
-        a=(r['anchor'] or '').strip()
-        m=GEO.search(a)
-        mk={'austin':'Austin, TX','dallas':'Dallas, TX','houston':'Houston, TX','tulsa':'Tulsa, OK','oklahoma city':'Oklahoma City, OK'}[m.group(1).lower()] if m else 'Non-geo'
-        pairs.append((r['rd'],a,mk,byd[r['rd']]['sitetype']))
-seen=set()
-for rd,a,mk,st in sorted(pairs):
-    if (rd,a) in seen: continue
-    seen.add((rd,a))
-    ws.append([rd,a,mk,st,'Disavow after confirmation','','',''])
-    style(ws,ws.max_row,FILL['HELD - pending partner'],centre=('C',))
+for d,a,mk,sitet,reco,st in empairs:
+    ws.append([d,a,mk,sitet,reco,'','',''])
+    style(ws,ws.max_row,'FFE2EFDA' if st=='Keep' else FILL['HELD - pending partner'],centre=('C',))
     for col in ('F','G','H'):
-        c=ws[f'{col}{ws.max_row}']; c.fill=PatternFill('solid',fgColor=BLUE)
-widths(ws,{'A':30,'B':62,'C':18,'D':26,'E':30,'F':22,'G':24,'H':20})
+        ws[f'{col}{ws.max_row}'].fill=PatternFill('solid',fgColor=BLUE)
+widths(ws,{'A':30,'B':64,'C':18,'D':26,'E':46,'F':22,'G':24,'H':20})
 ws.freeze_panes='A2'; ws.auto_filter.ref=f'A1:H{ws.max_row}'; ws.sheet_view.showGridLines=False
-HELD_PAIRS=ws.max_row-1
+
+
+# ---------------- 05 Pending Disavow Lines ----------------
+ws=wb.create_sheet('Pending Disavow Lines')
+ws.append(['Referring domain','Disavow line (append to disavow.txt once confirmed)','Recommendation']); hdr(ws)
+for d in EM_HOLD:
+    ws.append([d,'domain:'+d,'Disavow after confirmation'])
+    style(ws,ws.max_row,FILL['HELD - pending partner'])
+widths(ws,{'A':32,'B':52,'C':30})
+ws.freeze_panes='A2'; ws.auto_filter.ref=f'A1:C{ws.max_row}'; ws.sheet_view.showGridLines=False
 
 # ---------------- 05 All Backlinks ----------------
 ws=wb.create_sheet('All Backlinks')
@@ -219,6 +259,7 @@ for r in dis:
 widths(ws,{'A':40,'B':8,'C':12,'D':14,'E':13,'F':44,'G':52,'H':16})
 ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:H{ws.max_row}'; ws.sheet_view.showGridLines=False
 
+wb.move_sheet('All Backlinks',offset=0); wb.move_sheet('Disavow List',offset=0)
 wb.save(OUT)
 
 # ---------------- disavow.txt ----------------
@@ -226,8 +267,9 @@ with open('/home/user/test/disavow.txt','w') as f:
     f.write(f"# New Image Canopy (newimagecanopy.com) - disavow file\n")
     f.write(f"# Generated {datetime.date.today():%d %b %Y} from the Semrush live index.\n")
     f.write(f"# {len(dis):,} domains. Source: New_Image_Canopy_Backlinks_Audit.xlsx, 'Disavow List' tab.\n#\n")
-    f.write(f"# EXCLUDED: {len(hrows)} referring domains carrying exact-match commercial anchors are HELD OUT\n")
-    f.write(f"# of this file pending confirmation from the previous SEO vendor. See the 'Exact-Match (HELD)' tab.\n")
+    f.write(f"# EXCLUDED: {EM_DOMS} referring domains carrying exact-match commercial anchors are HELD OUT\n")
+    f.write(f"# of this file pending confirmation from the previous SEO vendor. See the 'Exact-Match Anchors' tab;\n")
+    f.write(f"# ready-made lines for the {len(EM_HOLD)} disavow candidates are on the 'Pending Disavow Lines' tab.\n")
     f.write(f"# Do NOT submit to Google Search Console until that confirmation is complete.\n#\n")
     bygrp={}
     for r in dis: bygrp.setdefault(r['group'],[]).append(r['disavow_line'])
@@ -237,4 +279,5 @@ with open('/home/user/test/disavow.txt','w') as f:
 
 print("workbook:",OUT)
 print("tabs:",wb.sheetnames)
-print("disavow domains:",len(dis),"| HELD domains:",len(hrows),"| HELD anchor pairs:",HELD_PAIRS)
+print("disavow domains:",len(dis))
+print("exact-match domains:",EM_DOMS,"| pairs:",EM_PAIRS,"| pending-disavow:",len(EM_HOLD),"| keep:",len(EM_KEEP))
