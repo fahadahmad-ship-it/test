@@ -52,6 +52,9 @@ for _r in csv.DictReader(open(D+'ahrefs/ah_backlinks.csv'),delimiter=';'):
     if _h and _d and _h not in AHDR: AHDR[_h]=_d
 TAB03=set(l.strip() for l in open(D+'tab03_named.txt') if l.strip())
 OWN={'shadyvent.com','newimagecanopy.com'}
+# Domains the client reviewed by hand and ruled on. A decision made on the live page
+# beats anything inferred from the link data, so these are applied last and win.
+CLIENT_DISAVOW={'pr-new.domaineye.com'}   # SEO domains for sale listing, dofollow, client call
 KEEP_SEED={'yellowpages.com','grokipedia.com','birdeye.com','scam-detector.com','procore.com','accio.com',
  'superpages.com','owler.com','pei.org','roofingcalculator.com','dexknows.com','dandb.com','wexfordins.com',
  'bestprosintown.com','mykukun.com','qtego.us','processregister.com','empirepetroleum.com','domaineye.com',
@@ -263,6 +266,13 @@ for x in out:
         if a<=6:
             x['status']='Review (Low Authority)'
             x['group']='Low authority site with no editorial signal, client to confirm keep or disavow'; demoted+=1
+# Last word, after every inference: a domain the client ruled on by hand.
+for x in out:
+    if x['domain'] in CLIENT_DISAVOW:
+        x['status']='Spam (Disavow)'
+        x['group']='Link selling page, reviewed and disavowed by the client'
+        x['disavow_line']='domain:'+x['domain']
+        x['redundant']=''
 for x in out:
     if x['status']!='Spam (Disavow)': x['disavow_line']=''
 assert not [x for x in out if x['disavow_line'] and x['status']!='Spam (Disavow)']

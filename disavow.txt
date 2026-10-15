@@ -1,6 +1,6 @@
 # New Image Canopy (newimagecanopy.com) disavow file
 # Generated 15 Oct 2026 from Semrush (priority) merged with Ahrefs.
-# 2,140 domains. Source: New_Image_Canopy_Backlinks_Audit.xlsx, 'Disavow List' tab.
+# 2,141 domains. Source: New_Image_Canopy_Backlinks_Audit.xlsx, 'Disavow List' tab.
 #
 # Excluded: 641 referring domains carrying exact match commercial or press release
 # anchors are held out of this file. 562 need partner confirmation (see the
@@ -2158,3 +2158,6 @@ domain:seo-revealed.club
 domain:topleveldomains.space
 domain:webworthchecker.cv
 domain:yesdomains.space
+
+# --- Link selling page, reviewed and disavowed by the client (1 domains) ---
+domain:pr-new.domaineye.com
