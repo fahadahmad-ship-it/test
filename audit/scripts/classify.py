@@ -302,6 +302,21 @@ for x in out:
                      'Harmless placement, every link is nofollow so it passes no ranking value')
                     + '. ' + x['group'])
 
+# A root domain that carries no link of its own, while a subdomain of it does, is not a
+# second referring site. Semrush counts referring domains at root level and Ahrefs counts
+# the subdomain, so merging the two lists lists the same site twice: the subdomain row
+# holds the link, and the root row holds nothing but an aggregated count. Verified against
+# the API by filtering backlinks on refdomain: for annikabansal.com and thecarnetwork.org
+# every URL returned belongs to the subdomain. Drop the empty root row and keep the one
+# that holds the evidence.
+_linked={r['rd'] for r in LINKS}
+_dupe_roots={x['domain'] for x in out
+             if x['domain'] not in _linked
+             and any(k['domain']!=x['domain'] and k['domain'].endswith('.'+x['domain'])
+                     and k['domain'] in _linked for k in out)}
+out=[x for x in out if x['domain'] not in _dupe_roots]
+print(f"dropped {len(_dupe_roots)} root domains that carry no link, counted twice with their subdomain")
+
 # Last word, after every inference: a domain the client ruled on by hand.
 for x in out:
     if x['domain'] in CLIENT_DISAVOW:
