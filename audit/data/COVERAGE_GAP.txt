@@ -1,0 +1,26 @@
+Semrush backlink coverage gap, found 15 Oct 2026
+================================================
+
+Semrush holds 4,138 backlinks for newimagecanopy.com. This audit holds 3,710 of
+them, so 428 Semrush links were never collected. The original pull stopped short
+rather than paginating to the end.
+
+Measured from the tail (offsets 3,500 to 4,138, 638 rows pulled):
+  new links not already held     : 208
+  domains in those new links     : 196
+  domains absent from the audit  : 127
+  further new domains in the last 38 rows : 25
+  total domains the audit is missing, measured so far : 221
+
+The tail is one slice, so the true number of missing domains is at least this
+and probably higher. Closing it properly means re-pulling all 4,138 links and
+re-running the classification.
+
+Separately, 77 rows in Domain Audit have no anchor and no example link. Those
+are not part of this gap: 61 come from Ahrefs, which reported a referring-domain
+count but whose individual links were never pulled, and the Ahrefs API units are
+exhausted until 25 Oct 2026. The other 16 are domains Semrush lists in
+refdomains but does not return in the backlinks report.
+
+Nothing in the audit is wrong because of this. Every link, domain and decision
+already in the sheet is verified. The profile is simply not complete.
