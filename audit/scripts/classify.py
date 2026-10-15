@@ -112,7 +112,7 @@ def anchor_type(a):
     if PBN.search(a): return 'Spam: keyword stuffed SEO sales copy'
     if CANOPY.search(a) and not NAKED.match(a):
         # anything this long is a sentence scraped from body copy, not an anchor a
-        # vendor would recognise as a placement they bought
+        # partner would recognise as a placement they bought
         if len(a)>120: return 'Contextual or other'
         return 'Exact match commercial (geo)' if GEO.search(a) else 'Exact match commercial'
     if GENERIC.match(a): return 'Generic'
@@ -173,12 +173,12 @@ for d in ALLDOM:
     elif has_exact and has_pbn: status,grp='Held (Review)','Mixes exact match commercial with link scheme anchors'
     elif has_exact and nof==len(rs) and rs:
         status,grp='Held (Nofollow, No Action)','Exact match commercial anchor, every link is nofollow and passes no ranking value'
-    elif has_exact: status,grp='Held (Confirm With Vendor)','Exact match commercial anchor, confirm who commissioned'
-    elif pr and rs: status,grp='Held (Confirm With Vendor)','Press release syndication, confirm who commissioned'
+    elif has_exact: status,grp='Held (Pending Partner)','Exact match commercial anchor, confirm who commissioned'
+    elif pr and rs: status,grp='Held (Pending Partner)','Press release syndication, confirm who commissioned'
     elif listed and not has_pbn:
         status,grp='Keep','Business listing or editorial mention naming the client'
     elif svc_listed and not has_pbn:
-        status,grp='Held (Confirm With Vendor)','Directory listing page titled after the client service, confirm who commissioned'
+        status,grp='Held (Pending Partner)','Directory listing page titled after the client service, confirm who commissioned'
     elif casino: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Off topic casino or pharma anchor'
     elif has_pbn: status,grp=('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'),'Automated PBN and service advertising anchor network'
     elif not rs:
