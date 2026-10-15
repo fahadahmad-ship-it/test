@@ -156,7 +156,9 @@ for d in ALLDOM:
     dof=sum(1 for x in rs if x['nofollow']=='false'); nof=len(rs)-dof
     bl=len(rs) or int(num((sem or {}).get('backlinks') or (ahr or {}).get('links') or 1))
     anchors=[x['anchor'] for x in rs if (x['anchor'] or '').strip()]
-    top=collections.Counter(anchors).most_common(1)[0][0] if anchors else ('(not in link sample)' if not rs else '')
+    # No link row means no anchor to show. Leave it blank rather than printing a
+    # placeholder; the Status column already says what the domain is.
+    top=collections.Counter(anchors).most_common(1)[0][0] if anchors else ''
     has_pbn=types['Spam: keyword stuffed SEO sales copy']>0
     has_exact=types['Exact match commercial (geo)']+types['Exact match commercial']>0
     casino=any(CASINO.search(d) or CASINO.search(x['anchor'] or '') for x in rs) or CASINO.search(d)

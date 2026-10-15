@@ -187,15 +187,17 @@ low=sum(1 for r in AUD if r['ascore']!='' and int(r['ascore'])<=2)
 semrows=sum(1 for r in AUD if r['ascore']!='')
 tld=sum(1 for r in AUD if re.search(r'\.(shop|online|website|space|store|site)$',r['domain'],re.I))
 money=sum(1 for x in emrows if x['core'] and x['tkind'] in ('Service page','Geo landing page'))
-CLIENT_AS=9; COMP_FOLLOW=7959; COMP_RD=954
+CMP={r['domain']:r for r in csv.DictReader(
+    (l for l in open(D+'competitors.csv') if not l.startswith('#')),delimiter=';')}
+SV_OVERLAP=942; SV_INFILE=893   # measured against shadyvent_refdomains.csv, first 1,000 of 1,407
 block('Key findings',sz=10,lines=[
  f"{spam:,} of the {len(AUD):,} referring domains are spam. {cnt['Spam (Disavow)']:,} have at least one dofollow link and go in the disavow file, the other {cnt['Spam (Nofollow, No Action)']:,} are nofollow only and need no action. All {len(TAB03)} domains named in Tab 03 are among them.",
  f"{EM_CORE_DOMS} referring domains carry {len(EM_CORE):,} exact match commercial placements. {len(EM_HOLD)} are held out of the disavow file until the previous SEO partner confirms what was commissioned. Do not upload before that.",
  f"{money:,} of the {len(EM_CORE):,} exact match links ({money/len(EM_CORE)*100:.0f}%) point at deep service and geo pages, while all {pbnl:,} link scheme links point at the homepage. Page level targeting is a paid campaign, not an attack.",
  f"The largest anchor, on {tn:,} referring domains, reuses the client's own brand and the client owned redirect shadyvent.com inside link selling sentences, which is a typical automated negative SEO template.",
  f"Held does not mean valuable. {_notraf} of the {_nq} held domains have no organic traffic at all and the whole set draws {_sumtraf:,.0f} visits a month between them, about one visit per site.",
- f"Authority Score is {CLIENT_AS} against a competitor set at 10 to 16. austinmohawk.com has {COMP_FOLLOW:,} follow links from {COMP_RD} domains, so the gap is link acquisition and the disavow file will not close it.",
- f"shadyvent.com is client owned, shares server IP 67.225.152.101, and carries {SV['referring_domains']:,} referring domains of its own, {SV['follow_links']:,} of them dofollow. It redirects into the client, so all of that passes through. None of it is in this audit.",
+ f"Authority Score is {CMP['newimagecanopy.com']['ascore']} against named competitors at {CMP['tfccanopy.com']['ascore']} and {CMP['austinmohawk.com']['ascore']}. austinmohawk.com draws {int(CMP['austinmohawk.com']['follow_links']):,} follow links from {int(CMP['austinmohawk.com']['refdomains']):,} domains, against this site's {int(CMP['newimagecanopy.com']['follow_links']):,} from {int(CMP['newimagecanopy.com']['refdomains']):,}. The gap is link acquisition and the disavow file will not close it.",
+ f"shadyvent.com is client owned, shares server IP 67.225.152.101, and carries {SV['referring_domains']:,} referring domains of its own, {SV['follow_links']:,} of them dofollow, which the redirect passes through to this site. Of the 1,000 sampled, {SV_OVERLAP} are already in this audit and {SV_INFILE} are already in the disavow file, so it is the same network rather than a second one.",
 ])
 block('Anchor text profile (all backlinks)',[])
 ws.append(['Anchor type','Backlinks','Share of Backlinks','Referring Domains','']); hdr(ws,ws.max_row)
