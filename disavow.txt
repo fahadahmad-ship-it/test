@@ -2,8 +2,8 @@
 # Generated 15 Oct 2026 from Semrush (priority) merged with Ahrefs.
 # 2,141 domains. Source: New_Image_Canopy_Backlinks_Audit.xlsx, 'Disavow List' tab.
 #
-# Excluded: 641 referring domains carrying exact match commercial or press release
-# anchors are held out of this file. 562 need partner confirmation (see the
+# Excluded: 644 referring domains carrying exact match commercial or press release
+# anchors are held out of this file. 565 need partner confirmation (see the
 # 'Exact Match Anchors' and 'Pending Disavow Lines' tabs); 64 are nofollow and
 # need no decision; 15 are genuine editorial placements to keep.
 #

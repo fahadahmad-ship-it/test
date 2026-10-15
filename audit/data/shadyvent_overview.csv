@@ -1,0 +1,10 @@
+# Semrush backlinks_overview for shadyvent.com, the client owned redirect domain.
+# Pulled 15 Oct 2026. Its referring domains are NOT in this audit; every link in
+# this workbook points at newimagecanopy.com directly.
+metric;value
+ascore;2
+total_backlinks;1533
+referring_domains;1407
+follow_links;1424
+nofollow_links;109
+referring_ips;1337

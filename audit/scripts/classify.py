@@ -216,11 +216,13 @@ for d in ALLDOM:
         atypes='; '.join(f'{k} x{v}' for k,v in types.most_common()) or '(not in link sample)',
         tab03='Yes' if d in TAB03 else '',redundant='',disavow_line='domain:'+d))
 
+# A nameserver or demo hostname is infrastructure, not a site of its own, but it still
+# carries whatever anchor it carries. It is classified on that anchor like anything else;
+# the hostname is noted in the group so nobody reads it as a separate placement.
 ARTEFACT=re.compile(r'^(ns[0-9]+|demo[0-9]*|mail|web|cpanel|webmail|ftp)\.',re.I)
 for x in out:
-    if ARTEFACT.match(x['domain']) and x['status'].startswith('Held'):
-        x['status']='Review (Host Artefact)'
-        x['group']='Nameserver or demo hostname, an artefact of its parent rather than a placement'
+    if ARTEFACT.match(x['domain']):
+        x['group']+=". Served on a nameserver or demo hostname of "+'.'.join(x['domain'].split('.')[1:])+", not a site of its own"
 # Linking pages checked by hand and found dead. The link is gone, so there is nothing
 # to disavow; the status stays out of the file and the group says why.
 DEAD={}

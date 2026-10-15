@@ -52,6 +52,8 @@ def dt(ts):
     except: return ''
 
 AHR={r['domain']:r for r in csv.DictReader(open(D+'ahrefs/ah_refdomains.csv'),delimiter=';')}
+SV={r['metric']:int(r['value']) for r in csv.DictReader(
+    (l for l in open(D+'shadyvent_overview.csv') if not l.startswith('#')),delimiter=';')}
 SEMT={r['domain']:r for r in csv.DictReader(open(D+'semrush_traffic.csv'),delimiter=';')}
 AUD=list(csv.DictReader(open(D+'domain_audit.csv'),delimiter=';'))
 LNK=list(csv.DictReader(open(D+'links_all.csv'),delimiter=';'))
@@ -123,7 +125,6 @@ ws['A1'].font=Font(name=F,sz=16,b=True,color=NAVY); ws['A1'].alignment=Alignment
 ws.append(['Status','Domains','Backlinks','Share of Domains','What it means'])
 HDRROW=ws.max_row; hdr(ws,HDRROW,sz=10)
 MEAN={'Review (Parent Unresolved)':'A subdomain whose parent domain could not be resolved either way. Never disavowed automatically.',
- 'Review (Host Artefact)':'A nameserver or demo hostname, which is an artefact of its parent rather than a placement in its own right.',
  'Spam (Disavow)':'Confirmed spam with at least one dofollow link. Included in the disavow file.',
  'Held (Pending Partner)':'Exact match commercial anchor or press release placement. May have been commissioned. Not in the disavow file until the previous SEO partner confirms.',
  'Held (Nofollow, No Action)':'Exact match commercial anchor, but every link is nofollow so it passes no ranking value. No disavow needed either way.',
@@ -135,7 +136,7 @@ MEAN={'Review (Parent Unresolved)':'A subdomain whose parent domain could not be
  'Keep':'Genuine or harmless link. Keep.','Own Site':'Client owned property or sister brand. Keep.'}
 ORDER=['Spam (Disavow)','Held (Pending Partner)','Held (Nofollow, No Action)','Held (Review)',
        'Spam (Nofollow, No Action)','Review (No Link Sample)','Review (Parent Unresolved)',
-       'Review (Conflicts With Parent)','Review (Host Artefact)','Review (Low Authority)',
+       'Review (Conflicts With Parent)','Review (Low Authority)',
        'Keep','Own Site']
 first=ws.max_row+1
 for s in ORDER:
@@ -194,7 +195,7 @@ block('Key findings',sz=10,lines=[
  f"The largest anchor, on {tn:,} referring domains, reuses the client's own brand and the client owned redirect shadyvent.com inside link selling sentences, which is a typical automated negative SEO template.",
  f"Held does not mean valuable. {_notraf} of the {_nq} held domains have no organic traffic at all and the whole set draws {_sumtraf:,.0f} visits a month between them, about one visit per site.",
  f"Authority Score is {CLIENT_AS} against a competitor set at 10 to 16. austinmohawk.com has {COMP_FOLLOW:,} follow links from {COMP_RD} domains, so the gap is link acquisition and the disavow file will not close it.",
- f"shadyvent.com is client owned, shares server IP 67.225.152.101, and has its own 1,280 referring domains from the same network. It redirects into the client, so those links pass through and it needs a parallel audit.",
+ f"shadyvent.com is client owned, shares server IP 67.225.152.101, and carries {SV['referring_domains']:,} referring domains of its own, {SV['follow_links']:,} of them dofollow. It redirects into the client, so all of that passes through. None of it is in this audit.",
 ])
 block('Anchor text profile (all backlinks)',[])
 ws.append(['Anchor type','Backlinks','Share of Backlinks','Referring Domains','']); hdr(ws,ws.max_row)
