@@ -296,13 +296,12 @@ for r in AUD:
       _tr(d,'organic_keywords'),float(r['dr']) if r['dr'] else '',
       r['group'],r['sitetype'],r['atypes'],r['tab03'],r['country']])
     style(ws,ws.max_row,FILL.get(r['status'],WHITE),
-      {'C':'#,##0','D':'#,##0','E':'#,##0','F':'#,##0','I':'#,##0','J':'#,##0','K':'d mmm yyyy',
-       'R':'#,##0','S':'0.0'},
-      centre=('C','D','E','F','G','I','J','K','O','R','S','W','X'),valign='top')
+      {'D':'#,##0','E':'#,##0','F':'#,##0','K':'d mmm yyyy','R':'#,##0','S':'0.0'},
+      centre=('C','D','E','F','G','I','J','K','O','P','R','S','W','X'),valign='top')
 widths(ws,{'A':36,'B':20,'C':9.57,'D':13,'E':9.43,'F':9.71,'G':12.43,'H':21.29,'I':14,
            'K':12,'L':45,'N':40,'O':14,'P':15,'Q':14,
            'R':15,'S':11,'T':46,'U':24,'V':40,'W':14,'X':9})
-ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:X{ws.max_row}'; ws.sheet_view.showGridLines=False
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:X{ws.max_row}'
 
 # ============ 03 Anchor Analysis ============
 # Just Drive Media's six columns first, this audit's additions to the right of them.
@@ -324,9 +323,10 @@ for a,g in sorted(agg.items(),key=lambda x:-x[1]['bl']):
                ' | '.join(tg)[:460],tgt_kind(tg[0]) if len(tg)==1 else 'Mixed',g['src']])
     # Just Drive Media fills the spam anchor rows and leaves everything else white.
     style(ws,ws.max_row,FILL['Spam (Disavow)'] if g['type'].startswith('Spam') else WHITE,
-      {'C':'#,##0','D':'0.00%','E':'#,##0','F':'#,##0'},centre=('C','D','E','F','G','I'))
+      {'C':'#,##0','D':'0.00%'},centre=('C','D','E','F','G','I'))
+ws['A1'].alignment=Alignment(horizontal='center',vertical='center',wrap_text=False)
 widths(ws,{'A':104.57,'B':37.71,'C':14,'F':20.29,'G':16,'H':70,'I':20,'J':58})
-ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.showGridLines=False
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'
 
 # ============ 04 Exact Match Anchors (the decision tab) ============
 def fnum(x):
@@ -413,7 +413,7 @@ if _held_rows:
     ws.add_data_validation(dv2); dv2.add(f'H{min(_held_rows)}:H{max(_held_rows)}')
 widths(ws,{'A':24.43,'B':54,'C':16,'D':24.57,'E':30.71,'F':15.43,'G':17.57,'H':15,
            'I':62,'J':11,'K':52,'L':26,'M':13,'N':16,'O':20,'P':46,'Q':12,'R':13,'S':20,'T':11,'U':22})
-ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:U{ws.max_row}'; ws.sheet_view.showGridLines=False
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:U{ws.max_row}'
 EM_DECISION_ROWS=len(_held_rows)
 
 # ============ 05 Pending Disavow Lines ============
@@ -431,7 +431,7 @@ for d in EM_HOLD:
       ' | '.join(sorted({x['a'] for x in rs}))[:460],' | '.join(sorted({x['tgt'] for x in rs}))[:460]])
     style(ws,ws.max_row,WHITE,{'D':'#,##0','E':'0.0','H':'#,##0'},centre=('D','E','H'))
 widths(ws,{'A':32,'B':44,'C':48,'D':13,'E':12,'F':52,'G':26,'H':12,'I':68,'J':68})
-ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.showGridLines=False
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'
 
 # ============ 06 All Backlinks ============
 ws=wb.create_sheet('All Backlinks')
@@ -441,15 +441,19 @@ for r in LNK:
     s=STAT.get(r['rd'],'')
     ws.append([r['rd'],s,r['tool'],r['anchor'],r['atype'],'Nofollow' if r['nofollow']=='true' else 'Dofollow',
                r['source_url'],r['source_title'],r['target_url'],dt(r['first_seen'])])
-    style(ws,ws.max_row,FILL.get(s,WHITE),{'J':'d mmm yyyy'},centre=('C','F','J'))
+    style(ws,ws.max_row,FILL.get(s,WHITE),{'J':'d mmm yyyy'},centre=('F','J'))
+for _r in range(1,ws.max_row+1):
+    _c=ws.cell(_r,3); _c.alignment=Alignment(horizontal='left',vertical='center',
+                                             wrap_text=(_r==1))
 widths(ws,{'A':25.43,'B':27.14,'C':14.71,'D':55,'E':32,'F':10,'G':55,'H':53.14,'I':38,'J':14})
-ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.showGridLines=False
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'
 
 # ============ 07 Disavow List ============
 # Just Drive Media's seven columns, then this audit's additions.
 ws=wb.create_sheet('Disavow List')
 ws.append(['Disavow Line','AS','Backlinks',"RD's",'Traffic','Organic Keywords','Top Anchor Text',
-           'Source','DR (Ahrefs)','Dofollow Links','First Seen','Group','Named in Tab 03']); hdr(ws)
+           'Source','DR (Ahrefs)','Dofollow Links','First Seen','Group','Named in Tab 03'])
+hdr(ws,sz=10)   # Just Drive Media sets this one header a point larger than the rest
 for r in sorted(dis,key=lambda x:x['domain']):
     d=r['domain']
     ws.append([r['disavow_line'],int(r['ascore']) if r['ascore'] else '',
@@ -458,10 +462,10 @@ for r in sorted(dis,key=lambda x:x['domain']):
       r['source'],float(r['dr']) if r['dr'] else '',
       int(r['dofollow'] or 0) if r['dofollow'] else '',dt(r['first_seen']),r['group'],r['tab03']])
     style(ws,ws.max_row,FILL['Spam (Disavow)'],
-      {'B':'#,##0','C':'#,##0','D':'#,##0','E':'#,##0','F':'#,##0','I':'0.0','J':'#,##0','K':'d mmm yyyy'},
+      {'C':'#,##0','D':'#,##0','E':'#,##0','F':'#,##0','I':'0.0','J':'#,##0','K':'d mmm yyyy'},
       centre=('B','C','D','E','F','H','I','J','K','M'))
 widths(ws,{'A':44,'B':14,'C':15.57,'D':14,'G':71.57,'H':10,'I':12,'J':14,'K':13,'L':46,'M':16})
-ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:M{ws.max_row}'; ws.sheet_view.showGridLines=False
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:M{ws.max_row}'
 
 # ---- typography pass, sizes read from Just Drive Media ----
 for name in wb.sheetnames:
