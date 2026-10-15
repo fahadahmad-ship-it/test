@@ -52,6 +52,11 @@ def dt(ts):
     except: return ''
 
 AHR={r['domain']:r for r in csv.DictReader(open(D+'ahrefs/ah_refdomains.csv'),delimiter=';')}
+# The referring domain's own referring-domain count, collected with the Authority
+# Score pull. Used for the RD's column where refdomains.csv has nothing.
+try:
+    SRD={r['domain']:r for r in csv.DictReader(open(D+'semrush_rd.csv'),delimiter=';')}
+except FileNotFoundError: SRD={}
 SV={r['metric']:int(r['value']) for r in csv.DictReader(
     (l for l in open(D+'shadyvent_overview.csv') if not l.startswith('#')),delimiter=';')}
 SEMT={r['domain']:r for r in csv.DictReader(open(D+'semrush_traffic.csv'),delimiter=';')}
@@ -227,7 +232,8 @@ for r in AUD:
     d=r['domain']; rs=byd.get(d,[])
     ws.append([d,r['status'],int(r['ascore']) if r['ascore'] else 'Not scored',
       int(r['backlinks'] or 0),
-      int(r['semrush_rd']) if r.get('semrush_rd') else '',
+      int(r['semrush_rd']) if r.get('semrush_rd') else
+        (int(SRD[d]['own_refdomains']) if d in SRD else ''),
       _tr(d,'organic_traffic'),
       'Yes' if (r['status']=='Spam (Disavow)' and r['redundant']!='Yes') else
       ('Covered by parent' if r['redundant']=='Yes' else ('Held' if r['status'].startswith('Held') else 'No')),
@@ -376,7 +382,9 @@ hdr(ws,sz=10)   # Just Drive Media sets this one header a point larger than the 
 for r in sorted(dis,key=lambda x:x['domain']):
     d=r['domain']
     ws.append([r['disavow_line'],int(r['ascore']) if r['ascore'] else '',
-      int(r['backlinks'] or 0),int(r['semrush_rd']) if r.get('semrush_rd') else '',
+      int(r['backlinks'] or 0),
+      int(r['semrush_rd']) if r.get('semrush_rd') else
+        (int(SRD[d]['own_refdomains']) if d in SRD else ''),
       _tr(d,'organic_traffic'),_tr(d,'organic_keywords'),r['top_anchor']])
     style(ws,ws.max_row,FILL['Spam (Disavow)'],
       {'C':'#,##0','D':'#,##0','E':'#,##0','F':'#,##0'},centre=('B','C','D','E','F'))
