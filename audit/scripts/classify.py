@@ -93,7 +93,9 @@ JUNKTLD=re.compile(r'\.(top|cfd|monster|sbs|icu|website|shop|store|space|site|on
 SPAMIP=re.compile(r'^(64\.182\.|69\.13\.|94\.46\.|118\.139\.|184\.168\.|185\.(39|41|51|61|163|196|198|58)\.|'
                   r'188\.114\.|195\.20\.19\.|15\.204\.|51\.81\.|203\.161\.54\.|5\.100\.156\.|92\.249\.46\.)')
 SPAMTITLE=re.compile(r'(where to buy .{0,12}aged domains|directory pages index|domain report|web directory|'
-                     r'boost organic traffic|premium seo|link building services)',re.I)
+                     r'boost organic traffic|premium seo|link building services|'
+                     # a page that exists to sell domains is a link farm page, whoever hosts it
+                     r'domains? for sale|top list of .{0,10}domains|top domains [-–]|seo\.domains)',re.I)
 # Press-release distribution and its syndication footprint
 PRNET=re.compile(r'(einpresswire|presswire|pressrelease|newswire|xpr\.media|prnews|'
                  r'^lifestyle\.|businessesinthenews|newsdirect)',re.I)
@@ -168,8 +170,13 @@ for d in ALLDOM:
     if d in OWN or parent in OWN: status,grp='Own Site','Client owned property'
     elif d in KEEP_SEED: status,grp='Keep','Genuine or editorial'
     elif asc!='' and asc>=20: status,grp='Keep','Genuine site, Semrush Authority Score 20 or above'
-    elif parent in KEEP_SEED and parent!=d:
+    elif parent in KEEP_SEED and parent!=d and not (has_pbn or casino or spam_title or SPAMNAME.search(d)):
         status,grp='Keep',f'Genuine or editorial (subdomain of {parent})'
+    elif parent in KEEP_SEED and parent!=d:
+        # The parent is genuine but this subdomain carries link scheme evidence of its own,
+        # so neither keeping nor disavowing it follows from the parent. The client decides.
+        status,grp=('Review (Conflicts With Parent)',
+                    f'Parent {parent} is genuine, but this subdomain serves a link scheme page')
     elif has_exact and has_pbn: status,grp='Held (Review)','Mixes exact match commercial with link scheme anchors'
     elif has_exact and nof==len(rs) and rs:
         status,grp='Held (Nofollow, No Action)','Exact match commercial anchor, every link is nofollow and passes no ranking value'
@@ -225,7 +232,14 @@ for x in out:
     if not parent or parent==d: continue
     pst=BY[parent]['status']
     if pst in ('Keep','Own Site') and x['status'].startswith('Spam'):
-        x['status']=pst; x['group']=f'Genuine or editorial (subdomain of {parent})'; promoted+=1
+        # Only inherit a clean parent where the child shows nothing of its own. A child that
+        # was classed spam on its own anchor or page title is a conflict, not a clean link.
+        if x['group'].startswith(('Automated PBN','Off topic casino','Link network host','SEO tool')):
+            x['status']='Review (Conflicts With Parent)'
+            x['group']=f'Parent {parent} is genuine, but this subdomain serves a link scheme page'
+        else:
+            x['status']=pst; x['group']=f'Genuine or editorial (subdomain of {parent})'
+        promoted+=1
     elif pst.startswith('Review') and x['status'].startswith('Spam'):
         x['status']='Review (Parent Unresolved)'; x['group']=f'Parent {parent} unresolved, client to confirm'; promoted+=1
     elif pst=='Spam (Disavow)' and x['status']=='Spam (Disavow)':

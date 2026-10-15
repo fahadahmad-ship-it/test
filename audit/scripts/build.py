@@ -131,10 +131,12 @@ MEAN={'Review (Parent Unresolved)':'A subdomain whose parent domain could not be
  'Spam (Nofollow, No Action)':'Spam, but every link is nofollow and passes no ranking value, so no disavow is needed.',
  'Review (No Link Sample)':'Neither tool returned link level data, so dofollow cannot be confirmed. Never disavowed automatically.',
  'Review (Low Authority)':'Low authority site with no editorial signal. A judgement call, not a fact, so the client confirms.',
+ 'Review (Conflicts With Parent)':'The parent domain is genuine but this subdomain serves a link scheme page, so the parent does not settle it. Never disavowed automatically.',
  'Keep':'Genuine or harmless link. Keep.','Own Site':'Client owned property or sister brand. Keep.'}
 ORDER=['Spam (Disavow)','Held (Pending Partner)','Held (Nofollow, No Action)','Held (Review)',
        'Spam (Nofollow, No Action)','Review (No Link Sample)','Review (Parent Unresolved)',
-       'Review (Host Artefact)','Review (Low Authority)','Keep','Own Site']
+       'Review (Conflicts With Parent)','Review (Host Artefact)','Review (Low Authority)',
+       'Keep','Own Site']
 first=ws.max_row+1
 for s in ORDER:
     if not cnt[s]: continue
