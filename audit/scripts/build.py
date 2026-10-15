@@ -201,7 +201,9 @@ for r in LNK: _at[r['atype']]+=1; _ad[r['atype']].add(r['rd'])
 for t,nbl in _at.most_common():
     ws.append([t,nbl,nbl/len(LNK),len(_ad[t]),''])
     style(ws,ws.max_row,FILL['Spam (Disavow)'] if t.startswith('Spam') else WHITE,
-          {'B':'#,##0','C':'0.00%','D':'#,##0'},centre=('B','C','D'))
+          {'A':'#,##0','B':'#,##0','C':'0.0%','D':'#,##0'},centre=('B','C','D'))
+    # that sheet leaves the unused fifth column of this table unruled
+    ws.cell(ws.max_row,5).border=Border(); ws.cell(ws.max_row,5).fill=PatternFill()
 
 for r in range(1,ws.max_row+1): ws.row_dimensions[r].height=22.5
 
