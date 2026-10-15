@@ -2159,5 +2159,5 @@ domain:topleveldomains.space
 domain:webworthchecker.cv
 domain:yesdomains.space
 
-# --- Link selling page, reviewed and disavowed by the client (1 domains) ---
+# --- Link selling page, reviewed and disavowed by the client (1 domain) ---
 domain:pr-new.domaineye.com

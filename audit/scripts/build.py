@@ -430,7 +430,7 @@ with open('/home/user/test/disavow.txt','w') as f:
     bg=collections.defaultdict(list)
     for r in dis: bg[re.sub(r' \(covered by.*','',r['group'])].append(r['disavow_line'])
     for g in sorted(bg,key=lambda k:-len(bg[k])):
-        f.write(f"\n# --- {g} ({len(bg[g]):,} domains) ---\n")
+        f.write(f"\n# --- {g} ({len(bg[g]):,} domain{'' if len(bg[g])==1 else 's'}) ---\n")
         for ln in sorted(bg[g]): f.write(ln+'\n')
 
 print("workbook:",OUT); print("tabs:",wb.sheetnames)
