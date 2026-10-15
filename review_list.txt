@@ -1,0 +1,284 @@
+REVIEW LIST — New Image Canopy backlink audit
+
+69 domains carry a Review status. None of them is in disavow.txt. This file
+groups them by why, with a live link for each so the call can be made on the page.
+
+Of the 69, 55 need no decision of their own: they are parent domains that do not
+link to the client at all. The link sits on a subdomain that is already classified.
+That leaves 14 real decisions, and 11 of those are nofollow, so they pass no
+ranking value whichever way they go. The 3 that actually matter are marked BELOW.
+
+==============================================================================================
+Review (Conflicts With Parent)  (1)
+==============================================================================================
+
+pr-new.domaineye.com   <<< DOFOLLOW, needs a real decision
+    why      : Parent domaineye.com is genuine, but this subdomain serves a link scheme page
+    Semrush  : AS 15 | 0 keywords | 0 visits a month
+    link     : https://pr-new.domaineye.com/b841e04d8fcc15413eb045400db1bb91a103318a/b5e3827bceda4c404be6317b7496b75558947392
+      anchor : shadyvent.com
+      type   : Naked URL | DOFOLLOW | target https://newimagecanopy.com/
+      title  : Seo.Domains - The top list of SEO domains for sale
+
+==============================================================================================
+Review (Host Artefact)  (3)
+==============================================================================================
+
+demo1.worldbankingdirectory.com   <<< DOFOLLOW, needs a real decision
+    why      : Nameserver or demo hostname, an artefact of its parent rather than a placement
+    Semrush  : AS 2 | 0 keywords | 0 visits a month
+    link     : https://demo1.worldbankingdirectory.com/news/gas-station-canopy-construction-building-safety-and-style/
+      anchor : Gas Station Canopy Construction: Building Safety and Style
+      type   : Exact match commercial | DOFOLLOW | target https://newimagecanopy.com/
+      title  : Gas Station Canopy Construction: Building Safety and Style - WordPress Website
+    link     : https://demo1.worldbankingdirectory.com/question/is-there-a-standard-height-for-the-canopy-at-a-gas-station-also-is-there-a-different-height-for-truck-stops/
+      anchor : New Image Canopy
+      type   : Branded | DOFOLLOW | target https://newimagecanopy.com/
+      title  : Is there a standard height for the canopy at a gas station? Also, is there a different height for tr
+    link     : https://demo1.worldbankingdirectory.com/news/reliable-gas-station-canopies-services/
+      anchor : Reliable Gas Station Canopies Services
+      type   : Exact match commercial | DOFOLLOW | target https://newimagecanopy.com/service/canopies/
+      title  : Reliable Gas Station Canopies Services - WordPress Website
+
+ns1.thecarnetwork.org   <<< DOFOLLOW, needs a real decision
+    why      : Nameserver or demo hostname, an artefact of its parent rather than a placement
+    Semrush  : AS 2 | 1 keywords | 0 visits a month
+    link     : https://ns1.thecarnetwork.org/news/154070-gas-station-canopy-construction-building-safety-and-style
+      anchor : (no anchor text)
+      type   : Empty or image | DOFOLLOW | target https://newimagecanopy.com/
+      title  : Gas Station Canopy Construction: Building Safety and Style - Bizmark
+    link     : https://ns1.thecarnetwork.org/user/AmeliaRogers?page=1096
+      anchor : Gas Station Canopy Construction: Building Safety and Style
+      type   : Exact match commercial | nofollow | target https://newimagecanopy.com/
+      title  : Amelia Rogers's Profile - Bizmark
+
+ns2.thecarnetwork.org   <<< DOFOLLOW, needs a real decision
+    why      : Nameserver or demo hostname, an artefact of its parent rather than a placement
+    Semrush  : AS not scored | 4 keywords | 0 visits a month
+    link     : https://ns2.thecarnetwork.org/news/154070-gas-station-canopy-construction-building-safety-and-style
+      anchor : (no anchor text)
+      type   : Empty or image | DOFOLLOW | target https://newimagecanopy.com/
+      title  : Gas Station Canopy Construction: Building Safety and Style - Bizmark
+    link     : https://ns2.thecarnetwork.org/user/AmeliaRogers?page=1096
+      anchor : Gas Station Canopy Construction: Building Safety and Style
+      type   : Exact match commercial | nofollow | target https://newimagecanopy.com/
+      title  : Amelia Rogers's Profile - Bizmark
+
+==============================================================================================
+Review (Low Authority)  (1)
+==============================================================================================
+
+similars.net   (nofollow only, passes no ranking value)
+    why      : Low authority site with no editorial signal, client to confirm keep or disavow
+    Semrush  : AS 6 | 37 keywords | 0 visits a month
+    link     : https://similars.net/alternatives-to/canopycanopycanopy.com
+      anchor : Visit site →
+      type   : Contextual or other | nofollow | target https://newimagecanopy.com/
+      title  : 30 Similar Sites Like Canopycanopycanopy.com
+    link     : https://similars.net/alternatives-to/triplecanopy.github.io
+      anchor : Visit site →
+      type   : Contextual or other | nofollow | target https://newimagecanopy.com/
+      title  : 34 Similar Sites Like Triplecanopy.github.io
+
+==============================================================================================
+Review (Parent Unresolved)  (9)
+==============================================================================================
+
+authority-web-link-resource-hub.simplywebshop.shop   (nofollow only, passes no ranking value)
+    why      : Parent simplywebshop.shop unresolved, client to confirm
+    Semrush  : AS not scored | 0 keywords | 0 visits a month
+    link     : https://authority-web-link-resource-hub.simplywebshop.shop/i-remember-when-my-website-had-less-than-50-visitors-a-month-and-i-was-starting-to-doubt-if-seo-could-help-me-but-seoexpress-s-budget-friendly-plan-ran-initial-links-in-just-two-weeks-and-by-three
+      anchor : Honestly, before using SEOExpress.org for local SEO strategies targeted at small businesses like min
+      type   : Spam: keyword stuffed SEO sales copy | nofollow | target https://newimagecanopy.com/
+      title  : I Remember When My Website Had Less Than 50 Visitors a Month and I Was Doubtful SEO Would Help. Then
+
+contextual-link-building-network.simplywebshop.shop   (nofollow only, passes no ranking value)
+    why      : Parent simplywebshop.shop unresolved, client to confirm
+    Semrush  : AS not scored | 0 keywords | 0 visits a month
+    link     : https://contextual-link-building-network.simplywebshop.shop/i-remember-when-my-website-had-less-than-50-visitors-a-month-and-i-was-starting-to-doubt-if-seo-could-help-me-but-seoexpress-s-budget-friendly-plan-ran-initial-links-in-just-two-weeks-and-by-three
+      anchor : Honestly, before using SEOExpress.org for local SEO strategies targeted at small businesses like min
+      type   : Spam: keyword stuffed SEO sales copy | nofollow | target https://newimagecanopy.com/
+      title  : I Remember When My Website Had Less Than 50 Visitors a Month and I Was Doubtful SEO Would Help. Then
+
+high-domain-authority-directory.simplywebshop.shop   (nofollow only, passes no ranking value)
+    why      : Parent simplywebshop.shop unresolved, client to confirm
+    Semrush  : AS not scored | 0 keywords | 0 visits a month
+    link     : https://high-domain-authority-directory.simplywebshop.shop/i-remember-when-my-website-had-less-than-50-visitors-a-month-and-i-was-starting-to-doubt-if-seo-could-help-me-but-seoexpress-s-budget-friendly-plan-ran-initial-links-in-just-two-weeks-and-by-three
+      anchor : Honestly, before using SEOExpress.org for local SEO strategies targeted at small businesses like min
+      type   : Spam: keyword stuffed SEO sales copy | nofollow | target https://newimagecanopy.com/
+      title  : I Remember When My Website Had Less Than 50 Visitors a Month and I Was Doubtful SEO Would Help. Then
+
+natural-editorial-backlink-hub.simplywebshop.shop   (nofollow only, passes no ranking value)
+    why      : Parent simplywebshop.shop unresolved, client to confirm
+    Semrush  : AS not scored | 0 keywords | 0 visits a month
+    link     : https://natural-editorial-backlink-hub.simplywebshop.shop/i-remember-when-my-website-had-less-than-50-visitors-a-month-and-i-was-starting-to-doubt-if-seo-could-help-me-but-seoexpress-s-budget-friendly-plan-ran-initial-links-in-just-two-weeks-and-by-three
+      anchor : Honestly, before using SEOExpress.org for local SEO strategies targeted at small businesses like min
+      type   : Spam: keyword stuffed SEO sales copy | nofollow | target https://newimagecanopy.com/
+      title  : I Remember When My Website Had Less Than 50 Visitors a Month and I Was Doubtful SEO Would Help. Then
+
+organic-resource-hub-collection.review-link-system-link-baron.store   (nofollow only, passes no ranking value)
+    why      : Parent review-link-system-link-baron.store unresolved, client to confirm
+    Semrush  : AS not scored | 0 keywords | 0 visits a month
+    link     : https://organic-resource-hub-collection.review-link-system-link-baron.store/i-remember-when-my-website-had-less-than-50-visitors-a-month-and-i-was-starting-to-doubt-if-seo-could-help-me-but-seoexpress-s-budget-friendly-plan-ran-initial-links-in-just-two-weeks-and-by-three
+      anchor : Honestly, before using SEOExpress.org for local SEO strategies targeted at small businesses like min
+      type   : Spam: keyword stuffed SEO sales copy | nofollow | target https://newimagecanopy.com/
+      title  : I Remember When My Website Had Less Than 50 Visitors a Month and I Was Doubtful SEO Would Help. Then
+
+organic-search-ranking-directory.simplywebshop.shop   (nofollow only, passes no ranking value)
+    why      : Parent simplywebshop.shop unresolved, client to confirm
+    Semrush  : AS not scored | 0 keywords | 0 visits a month
+    link     : https://organic-search-ranking-directory.simplywebshop.shop/i-remember-when-my-website-had-less-than-50-visitors-a-month-and-i-was-starting-to-doubt-if-seo-could-help-me-but-seoexpress-s-budget-friendly-plan-ran-initial-links-in-just-two-weeks-and-by-three
+      anchor : Honestly, before using SEOExpress.org for local SEO strategies targeted at small businesses like min
+      type   : Spam: keyword stuffed SEO sales copy | nofollow | target https://newimagecanopy.com/
+      title  : I Remember When My Website Had Less Than 50 Visitors a Month and I Was Doubtful SEO Would Help. Then
+
+sites.jake.eu   (nofollow only, passes no ranking value)
+    why      : Parent jake.eu unresolved, client to confirm
+    Semrush  : AS not scored | 0 keywords | 0 visits a month
+    link     : https://sites.jake.eu/share/112862
+      anchor : newimagecanopy.com
+      type   : Naked URL | nofollow | target https://newimagecanopy.com/
+      title  : ❤️ URL Shared ❤️
+    link     : https://sites.jake.eu/share/78125
+      anchor : shadyvent.com
+      type   : Naked URL | nofollow | target https://newimagecanopy.com/
+      title  : ❤️ URL Shared ❤️
+    link     : https://sites.jake.eu/share/78126
+      anchor : shadyvent.com
+      type   : Naked URL | nofollow | target https://newimagecanopy.com/
+      title  : ❤️ URL Shared ❤️
+
+trusted-web-resource-directory.simplywebshop.shop   (nofollow only, passes no ranking value)
+    why      : Parent simplywebshop.shop unresolved, client to confirm
+    Semrush  : AS not scored | 0 keywords | 0 visits a month
+    link     : https://trusted-web-resource-directory.simplywebshop.shop/i-remember-when-my-website-had-less-than-50-visitors-a-month-and-i-was-starting-to-doubt-if-seo-could-help-me-but-seoexpress-s-budget-friendly-plan-ran-initial-links-in-just-two-weeks-and-by-three
+      anchor : Honestly, before using SEOExpress.org for local SEO strategies targeted at small businesses like min
+      type   : Spam: keyword stuffed SEO sales copy | nofollow | target https://newimagecanopy.com/
+      title  : I Remember When My Website Had Less Than 50 Visitors a Month and I Was Doubtful SEO Would Help. Then
+
+web.thecloudherald.com   (nofollow only, passes no ranking value)
+    why      : Parent thecloudherald.com unresolved, client to confirm
+    Semrush  : AS 2 | 0 keywords | 0 visits a month
+    link     : https://web.thecloudherald.com/18/IMcpzpJdnL
+      anchor : visit shadyvent.com for latest info
+      type   : Branded | nofollow | target https://newimagecanopy.com/
+      title  : In The Age Of Digital Transformation, Drive Your Website’s Success With Intelligent, Results-Oriente
+
+==============================================================================================
+Review (No Link Sample)  (55)
+==============================================================================================
+Neither tool returned a link for these roots. In every case the actual link is on a
+subdomain that is already classified, shown in brackets. No action needed on the root.
+
+annikabansal.com
+    link is on: lifestyle.annikabansal.com   [Held (Nofollow, No Action)]
+articlerich.com
+    link is on: lifestyle.articlerich.com   [Held (Nofollow, No Action)]
+briefmobile.com
+    link is on: lifestyle.briefmobile.com   [Held (Nofollow, No Action)]
+careersavvy.co.uk
+    link is on: lifestyle.careersavvy.co.uk   [Held (Nofollow, No Action)]
+cfxmagazine.com
+    link is on: lifestyle.cfxmagazine.com   [Held (Nofollow, No Action)]
+cleanweb.co
+    link is on: lifestyle.cleanweb.co   [Held (Nofollow, No Action)]
+clientim.com
+    link is on: lifestyle.clientim.com   [Held (Nofollow, No Action)]
+datasn.com
+    link is on: songer.datasn.com   [Keep]
+easyhouseremodeling.com
+    link is on: lifestyle.easyhouseremodeling.com   [Held (Nofollow, No Action)]
+emphas.is
+    link is on: lifestyle.emphas.is   [Held (Nofollow, No Action)]
+epubzone.org
+    link is on: lifestyle.epubzone.org   [Held (Nofollow, No Action)]
+faithfamilyamerica.com
+    link is on: lifestyle.faithfamilyamerica.com   [Held (Nofollow, No Action)]
+friendhood.net
+    link is on: lifestyle.friendhood.net   [Held (Nofollow, No Action)]
+gopreneurs.com
+    link is on: lifestyle.gopreneurs.com   [Held (Nofollow, No Action)]
+houstonnewstoday.com
+    link is on: lifestyle.houstonnewstoday.com   [Held (Nofollow, No Action)]
+humane.net
+    link is on: lifestyle.humane.net   [Held (Nofollow, No Action)]
+hungrybear.net
+    link is on: lifestyle.hungrybear.net   [Held (Nofollow, No Action)]
+ideawins.com
+    link is on: lifestyle.ideawins.com   [Held (Nofollow, No Action)]
+imone2015.com
+    link is on: lifestyle.imone2015.com   [Held (Nofollow, No Action)]
+inentertainment.co.uk
+    link is on: lifestyle.inentertainment.co.uk   [Held (Nofollow, No Action)]
+infotechinc.net
+    link is on: lifestyle.infotechinc.net   [Held (Nofollow, No Action)]
+inspiredn.com
+    link is on: lifestyle.inspiredn.com   [Held (Nofollow, No Action)]
+jake.eu
+    link is on: sites.jake.eu   [Review (Parent Unresolved)]
+lamora.net
+    link is on: lifestyle.lamora.net   [Held (Nofollow, No Action)]
+lincolnlabs.com
+    link is on: lifestyle.lincolnlabs.com   [Held (Nofollow, No Action)]
+longislandreport.org
+    link is on: lifestyle.longislandreport.org   [Held (Nofollow, No Action)]
+marketresearchjournals.com
+    link is on: lifestyle.marketresearchjournals.com   [Held (Nofollow, No Action)]
+menstyle1.com
+    link is on: lifestyle.menstyle1.com   [Held (Nofollow, No Action)]
+passionateaboutfood.net
+    link is on: lifestyle.passionateaboutfood.net   [Held (Nofollow, No Action)]
+pspl.com
+    link is on: lifestyle.pspl.com   [Held (Nofollow, No Action)]
+realie.org
+    link is on: lifestyle.realie.org   [Held (Nofollow, No Action)]
+review-link-system-link-baron.store
+    link is on: organic-resource-hub-collection.review-link-system-link-baron.store   [Review (Parent Unresolved)]
+rogueimc.org
+    link is on: lifestyle.rogueimc.org   [Held (Nofollow, No Action)]
+side.cr
+    link is on: lifestyle.side.cr   [Held (Nofollow, No Action)]
+simplywebshop.shop
+    link is on: authority-web-link-resource-hub.simplywebshop.shop   [Review (Parent Unresolved)]
+    link is on: contextual-link-building-network.simplywebshop.shop   [Review (Parent Unresolved)]
+sli.mg
+    link is on: lifestyle.sli.mg   [Held (Nofollow, No Action)]
+sourcefed.com
+    link is on: lifestyle.sourcefed.com   [Held (Nofollow, No Action)]
+successxl.com
+    link is on: lifestyle.successxl.com   [Held (Nofollow, No Action)]
+tasteterminal.com
+    link is on: lifestyle.tasteterminal.com   [Held (Nofollow, No Action)]
+thecarnetwork.org
+    link is on: ns1.thecarnetwork.org   [Review (Host Artefact)]
+    link is on: ns2.thecarnetwork.org   [Review (Host Artefact)]
+thecloudherald.com
+    link is on: web.thecloudherald.com   [Review (Parent Unresolved)]
+thedishh.com
+    link is on: lifestyle.thedishh.com   [Held (Nofollow, No Action)]
+theglimpse.com
+    link is on: lifestyle.theglimpse.com   [Held (Nofollow, No Action)]
+thenyctimes.com
+    link is on: lifestyle.thenyctimes.com   [Held (Nofollow, No Action)]
+thepointnews.com
+    link is on: lifestyle.thepointnews.com   [Held (Nofollow, No Action)]
+thriveinsider.com
+    link is on: lifestyle.thriveinsider.com   [Held (Nofollow, No Action)]
+tophustler.com
+    link is on: lifestyle.tophustler.com   [Held (Nofollow, No Action)]
+toptraveltrends.com
+    link is on: lifestyle.toptraveltrends.com   [Held (Nofollow, No Action)]
+travelshq.com
+    link is on: lifestyle.travelshq.com   [Held (Nofollow, No Action)]
+trondstidkontroll.com
+    link is on: lifestyle.trondstidkontroll.com   [Held (Nofollow, No Action)]
+tvshowauditions.info
+    link is on: lifestyle.tvshowauditions.info   [Held (Nofollow, No Action)]
+ukuncut.org.uk
+    link is on: lifestyle.ukuncut.org.uk   [Held (Nofollow, No Action)]
+wordsjournal.com
+    link is on: lifestyle.wordsjournal.com   [Held (Nofollow, No Action)]
+worldbankingdirectory.com
+    link is on: demo1.worldbankingdirectory.com   [Review (Host Artefact)]
+xbode.org
+    link is on: lifestyle.xbode.org   [Held (Nofollow, No Action)]
