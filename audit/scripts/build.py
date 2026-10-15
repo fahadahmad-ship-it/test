@@ -2,18 +2,38 @@ import csv,collections,datetime,re
 import openpyxl
 from openpyxl.styles import Font,PatternFill,Alignment,Border,Side
 from openpyxl.worksheet.datavalidation import DataValidation
+from openpyxl.utils.cell import coordinate_to_tuple
 D='/home/user/test/audit/data/'
 OUT='/home/user/test/New_Image_Canopy_Backlinks_Audit.xlsx'
 NAVY='FF1F3864'; F='Geist'; WHITE='FFFFFFFF'
-INPUT='FF1F3864'; GREEN='FFE2EFDA'; EXCEPT='FFF8CBAD'
-# Every colour below is taken from the two source workbooks and nothing else.
-# Just Drive Media: FFEAD1DC, FFD5A6BD, FFC27BA0, FFA64D79, FF1F3864, FFFFFFFF.
-# Super K Express: FFFFF2CC (held anchor), FFF8CBAD (exception), FFE2EFDA (keep), FF1F3864 (input).
+INPUT='FF1F3864'; GREEN='FFC27BA0'          # the Keep fill, as Just Drive Media uses it
+# Just Drive Media's palette only: FFEAD1DC, FFD5A6BD, FFC27BA0, FFA64D79, FF1F3864, FFFFFFFF.
+# That sheet colours its four decided statuses and nothing else, so the four statuses it
+# shares with this audit keep its exact fills and the six it does not have stay white,
+# with the Status column carrying the meaning instead of a colour.
 FILL={'Spam (Disavow)':'FFEAD1DC','Spam (Nofollow, No Action)':'FFD5A6BD','Keep':'FFC27BA0',
-      'Own Site':'FFA64D79','Held (Pending Partner)':'FFFFF2CC','Held (Nofollow, No Action)':'FFF8CBAD',
-      'Held (Review)':'FFF8CBAD','Review (No Link Sample)':WHITE,'Review (Parent Unresolved)':WHITE,
+      'Own Site':'FFA64D79','Held (Pending Partner)':WHITE,'Held (Nofollow, No Action)':WHITE,
+      'Held (Review)':WHITE,'Review (No Link Sample)':WHITE,'Review (Parent Unresolved)':WHITE,
       'Review (Host Artefact)':WHITE,'Review (Low Authority)':WHITE}
 thin=Side(style='thin'); BORD=Border(left=thin,right=thin,top=thin,bottom=thin)
+def banner(ws,rng):
+    """Style a merged full width note. openpyxl only styles the anchor cell, so the fill and
+    border have to be written to every cell under the merge or the navy stops at column A."""
+    a,b=rng.split(':')
+    r1,c1=coordinate_to_tuple(a); r2,c2=coordinate_to_tuple(b)
+    ws.merge_cells(rng)
+    # Style after merging, never before: merge_cells resets the covered cells, so a fill
+    # written first is thrown away and the navy stops at the first column. Styling the
+    # covered cells afterwards does reach the file, even though openpyxl drops it again
+    # when the file is read back, so check this in the sheet XML rather than with openpyxl.
+    for rr in range(r1,r2+1):
+        for cc in range(c1,c2+1):
+            c=ws.cell(rr,cc)
+            c.font=Font(name=F,sz=10,b=True,color=WHITE)
+            c.fill=PatternFill('solid',fgColor=NAVY)
+            c.alignment=Alignment(vertical='center',wrap_text=True)
+            c.border=BORD
+    ws.row_dimensions[int(re.findall(r'\d+',rng)[0])].height=31.5
 def hdr(ws,row=1,sz=9):
     for c in ws[row]:
         if c.value is None: continue
@@ -100,9 +120,7 @@ ws['A1']='https://newimagecanopy.com/'; ws.merge_cells('A1:B1')
 ws['A1'].font=Font(name=F,sz=16,b=True,color=NAVY); ws['A1'].alignment=Alignment(vertical='center')
 ws.append(['Before you upload: confirm with the previous SEO partner which of the '
            f'{len(EM_HOLD)} held domains they commissioned. Nothing on the Exact Match Anchors tab is in disavow.txt.'])
-ws.merge_cells(f'A2:E2')
-ws['A2'].font=Font(name=F,sz=10,b=True,color='FF000000'); ws['A2'].fill=PatternFill('solid',fgColor=EXCEPT)
-ws['A2'].alignment=Alignment(vertical='center',wrap_text=True); ws['A2'].border=BORD
+banner(ws,'A2:E2')
 ws.append([])
 ws.append(['Status','Domains','Backlinks','Share of Domains','What it means'])
 HDRROW=ws.max_row; hdr(ws,HDRROW,sz=10)
@@ -132,7 +150,8 @@ for c in ws[ws.max_row]: c.font=Font(name=F,sz=9,b=True)
 
 def block(title,lines,sz=11):
     ws.append([]); ws.append([title]); r=ws.max_row
-    ws.cell(r,1).font=Font(name=F,sz=sz,b=True,color=NAVY)
+    ws.cell(r,1).font=Font(name=F,sz=sz,b=True,color=('FF000000' if sz==10 else NAVY))
+    ws.cell(r,1).alignment=Alignment(vertical='center')
     for t in lines:
         ws.append([t]); rr=ws.max_row; ws.merge_cells(f'A{rr}:E{rr}')
         ws.cell(rr,1).font=Font(name=F,sz=9); ws.cell(rr,1).alignment=Alignment(vertical='center',wrap_text=True)
@@ -236,7 +255,7 @@ for nm,tot_,deep_,note in [
   ('Link scheme and PBN self advertising',pbnl,pbnl-pbn_home,'Homepage only. Automated, with no page level targeting, so an attack.'),
   ('Exact match commercial',EM_LINKS,sum(1 for x in emrows if x['tkind']!='Homepage'),'Deep service and geo landing pages, which is deliberate targeting and therefore a campaign.')]:
     ws.append([nm,tot_,tot_-deep_,deep_,note]); rr=ws.max_row
-    style(ws,rr,FILL['Held (Pending Partner)'] if 'Exact' in nm else WHITE,{'B':'#,##0','C':'#,##0','D':'#,##0'},centre=('B','C','D'))
+    style(ws,rr,WHITE,{'B':'#,##0','C':'#,##0','D':'#,##0'},centre=('B','C','D'))
     ws.cell(rr,5).alignment=Alignment(vertical='center',wrap_text=True)
 ws.append([]); ws.append(['Target page','Exact match links','','',''])
 hdr(ws,ws.max_row)
@@ -262,7 +281,7 @@ for g,act in ACT:
     tot_in+=a; tot_no+=b
     ws.append([g,a,b,act,'']); style(ws,ws.max_row,WHITE,{'B':'#,##0','C':'#,##0'},centre=('B','C'))
 ws.append(['Exact match commercial and press release anchors',0,len(EM_NOFO),'Confirm who commissioned before disavowing',''])
-style(ws,ws.max_row,FILL['Held (Pending Partner)'],{'B':'#,##0','C':'#,##0'},centre=('B','C'))
+style(ws,ws.max_row,WHITE,{'B':'#,##0','C':'#,##0'},centre=('B','C'))
 ws.append(['Brand, URL and natural anchors',0,0,'Retain','']); style(ws,ws.max_row,WHITE,{'B':'#,##0','C':'#,##0'},centre=('B','C'))
 ws.append(['Total domain: entries in disavow.txt',tot_in,tot_no,'',''])
 style(ws,ws.max_row,WHITE,{'B':'#,##0','C':'#,##0'},centre=('B','C'))
@@ -338,7 +357,7 @@ for a,g in sorted(agg.items(),key=lambda x:-x[1]['bl']):
     tg=sorted(g['tgt'])
     ws.append([a if a!='<EmptyAnchor>' else '(no anchor text)',g['type'],g['bl'],g['bl']/len(LNK),len(g['rd']),len(g['spam']),len(g['t3']) or '',
                ' | '.join(tg)[:460],tgt_kind(tg[0]) if len(tg)==1 else 'Mixed',g['src']])
-    style(ws,ws.max_row,FILL['Held (Pending Partner)'] if g['type'].startswith('Exact match') else WHITE,
+    style(ws,ws.max_row,WHITE,
       {'C':'#,##0','D':'0.00%','E':'#,##0','F':'#,##0'},centre=('C','D','E','F','G','I'))
 widths(ws,{'A':104.57,'B':37.71,'C':14,'D':18,'E':20,'F':22,'G':16,'H':70,'I':20,'J':58})
 ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.showGridLines=False
@@ -371,10 +390,7 @@ ws=wb.create_sheet('Exact Match Anchors')
 ws.append(['Held does not mean valuable. These sites carry exact match commercial anchors, which is why they are '
            'held out of the disavow file, but almost none of them has measurable traffic. Mark column Q for each '
            'domain. Anything you do not claim belongs in the disavow file.'])
-ws.merge_cells('A1:T1')
-ws['A1'].font=Font(name=F,sz=10,b=True,color='FF000000'); ws['A1'].fill=PatternFill('solid',fgColor=EXCEPT)
-ws['A1'].alignment=Alignment(vertical='center',wrap_text=True); ws['A1'].border=BORD
-ws.row_dimensions[1].height=30
+banner(ws,'A1:T1')
 ws.append(['Referring domain','Status','Placements','First seen','Last seen','Batch (first seen month)',
   'AS (Semrush)','Semrush keywords','Semrush traffic a month','What Semrush says the site is worth',
   'Markets','Site type (indicative)','Anchors used','Target pages hit','Indexed by (audit tool)','Recommendation',
@@ -414,11 +430,9 @@ for reco,_,d,rs,rec,places,mk,st_ in dec:
       'Both' if len({x['tool'] for x in rs})>1 else list({x['tool'] for x in rs})[0],
       reco,'','','',''])
     r=ws.max_row
-    base=GREEN if st_=='Keep' else (FILL['Held (Nofollow, No Action)'] if st_=='Held (Nofollow, No Action)'
-          else (FILL.get(st_,WHITE) if st_.startswith('Review') else WHITE))
+    base=GREEN if st_=='Keep' else WHITE
     style(ws,r,base,{'C':'#,##0','D':'d mmm yyyy','E':'d mmm yyyy','G':'#,##0','H':'#,##0','I':'#,##0'},
           centre=('C','D','E','F','G','H','I','K','O'))
-    ws.cell(r,13).fill=PatternFill('solid',fgColor=FILL['Held (Pending Partner)'])
     for col in ('Q','R','S','T'):
         _c=ws[f'{col}{r}']; _c.fill=PatternFill('solid',fgColor=INPUT)
         _c.font=Font(name=F,sz=9,color=WHITE)      # so what the partner types is readable
@@ -447,7 +461,7 @@ for x in sorted(emrows,key=lambda y:(y['d'],y['a'])):
 for x in _emseen.values():
     ws.append([x['d'],x['a'],x['mk'] if x['mk']!='Non-geo' else 'No market',x['link'],x['tool'],
                x['src'],x['title'],x['tgt'],x['tkind'],dt(x['fs'])])
-    style(ws,ws.max_row,FILL['Held (Pending Partner)'],{'J':'d mmm yyyy'},centre=('C','D','E','I','J'))
+    style(ws,ws.max_row,WHITE,{'J':'d mmm yyyy'},centre=('C','D','E','I','J'))
 widths(ws,{'A':30,'B':64,'C':18,'D':11,'E':11,'F':62,'G':50,'H':62,'I':18,'J':13})
 ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.showGridLines=False
 
@@ -455,10 +469,7 @@ ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'; ws.sheet_view.show
 ws=wb.create_sheet('Pending Disavow Lines')
 ws.append(['Do not paste this whole column into disavow.txt. These lines are not approved for upload. '
            'Append only the domains the partner does not claim, after column T of the Exact Match Anchors tab is filled in.'])
-ws.merge_cells('A1:J1')
-ws['A1'].font=Font(name=F,sz=10,b=True,color='FF000000'); ws['A1'].fill=PatternFill('solid',fgColor=EXCEPT)
-ws['A1'].alignment=Alignment(vertical='center',wrap_text=True); ws['A1'].border=BORD
-ws.row_dimensions[1].height=30
+banner(ws,'A1:J1')
 ws.append(['Referring domain','Disavow line (append to disavow.txt once confirmed)','Recommendation',
            'AS (Semrush)','DR (Ahrefs)','What Semrush says the site is worth','Site type','Placements',
            'Exact match anchors','Target pages hit']); hdr(ws,2)
@@ -469,7 +480,7 @@ for d in EM_HOLD:
       int(rec['ascore']) if rec['ascore'] else 'Not scored',
       round(fnum(rec['dr']),1) if rec['dr'] else 'Not scored',quality(d),rec['sitetype'],places,
       ' | '.join(sorted({x['a'] for x in rs}))[:460],' | '.join(sorted({x['tgt'] for x in rs}))[:460]])
-    style(ws,ws.max_row,FILL['Held (Pending Partner)'],{'D':'#,##0','E':'0.0','H':'#,##0'},centre=('D','E','H'))
+    style(ws,ws.max_row,WHITE,{'D':'#,##0','E':'0.0','H':'#,##0'},centre=('D','E','H'))
 widths(ws,{'A':32,'B':52,'C':42,'D':13,'E':12,'F':52,'G':26,'H':12,'I':68,'J':68})
 ws.freeze_panes='B3'; ws.auto_filter.ref=f'A2:J{ws.max_row}'; ws.sheet_view.showGridLines=False
 
@@ -522,6 +533,33 @@ for name in wb.sheetnames:
         for c in row:
             if c.value is not None and (c.font.name!=F or c.font.sz not in (9,10,11,16)): bad[(name,c.font.name,c.font.sz)]+=1
 print("non-conforming cells:",dict(bad) if bad else "none")
+# ---------------------------------------------------------------------------
+# Column widths taken from Just Drive Media, matched by what the column holds.
+# Where that sheet leaves a column at the default width, this one leaves it too.
+# Columns this audit adds, which that sheet has no counterpart for, keep the
+# widths set when their tab was built.
+JDM_W={
+ 'Domain Audit':{'Domain':36.0,'Status':20.0,'AS (Semrush)':9.57,'Links':13.0,
+   'RDs (Semrush)':9.43,'In Disavow':12.43,'Links Point To':21.29,'Dofollow Links':14.0,
+   'Nofollow Links':None,'First Seen':12.0,'Top Anchor Text':45.0,'Example Linking Page':None,
+   'Linking Page Title':40.0,'Source':14.0,'IP':15.0,'Disavow Line':14.0},
+ 'Anchor Analysis':{'Anchor Text':104.57,'Anchor Type':37.71,'Links':14.0,
+   'Share of Links':None,'Referring Domains':None,'Spam Domains Using It':20.29},
+ 'All Backlinks':{'Referring Domain':25.43,'Status':27.14,'Tool':14.71,'Anchor Text':55.0,
+   'Anchor Type':32.0,'Link Type':10.0,'Linking Page URL':55.0,'Linking Page Title':53.14,
+   'Target URL':38.0,'First Seen':14.0},
+ 'Disavow List':{'Disavow Line':44.0,'AS (Semrush)':14.0,'Links':15.57,
+   'RDs (Semrush)':14.0,'Top Anchor Text':71.57},
+}
+for _t,_m in JDM_W.items():
+    _ws=wb[_t]
+    _heads={c.value:c.column_letter for c in _ws[1]}
+    for _name,_w in _m.items():
+        _col=_heads.get(_name)
+        if not _col: continue
+        if _w is None: _ws.column_dimensions.pop(_col,None)
+        else: _ws.column_dimensions[_col].width=_w
+
 wb.save(OUT)
 
 with open('/home/user/test/disavow.txt','w') as f:
