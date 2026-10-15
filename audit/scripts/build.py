@@ -173,6 +173,43 @@ block('Key findings',sz=10,lines=[
  f"{low:,} of the {semrows:,} domains Semrush scored sit at Authority Score 0 to 2 ({low/semrows*100:.1f}%). {tld:,} referring domains are on throwaway TLDs (.shop, .online, .website, .space, .store, .site).",
  f"All {len(TAB03)} referring domains named in the client's Tab 03 extract were found in the live index and independently classified as Spam (Disavow). They are flagged 'Yes' in the Tab 03 column of the Domain Audit tab.",
 ])
+block('Complete breakdown, every domain and every link',[])
+ws.append(['Status','Domains','Share of domains','Links','Share of links']); hdr(ws,ws.max_row)
+_ldof=collections.Counter(); _lall=collections.Counter()
+for _r in LNK:
+    _s=STAT.get(_r['rd'],'')
+    _lall[_s]+=1
+    if _r['nofollow']=='false': _ldof[_s]+=1
+for s in ORDER:
+    if not cnt[s]: continue
+    ws.append([s,cnt[s],cnt[s]/len(AUD),_lall[s],_lall[s]/len(LNK)])
+    style(ws,ws.max_row,FILL.get(s,WHITE),{'B':'#,##0','C':'0.0%','D':'#,##0','E':'0.0%'},centre=('B','C','D','E'))
+ws.append(['Total',len(AUD),1.0,len(LNK),1.0])
+style(ws,ws.max_row,WHITE,{'B':'#,##0','C':'0.0%','D':'#,##0','E':'0.0%'},centre=('B','C','D','E'))
+for c in ws[ws.max_row]: c.font=Font(name=F,sz=9,b=True)
+ws.append([])
+ws.append(['Grouped','Domains','Share of domains','Links','Share of links']); hdr(ws,ws.max_row)
+_G=[('Spam, in the disavow file',['Spam (Disavow)']),
+    ('Spam, nofollow so no action needed',['Spam (Nofollow, No Action)']),
+    ('Held for the vendor to decide',['Held (Confirm With Vendor)','Held (Review)']),
+    ('Held but nofollow, no decision needed',['Held (Nofollow, No Action)']),
+    ('Review, not enough evidence either way',['Review (No Link Sample)','Review (Parent Unresolved)','Review (Host Artefact)','Review (Low Authority)']),
+    ('Keep, genuine links',['Keep','Own Site'])]
+for nm,sts in _G:
+    _d=sum(cnt[s] for s in sts); _l=sum(_lall[s] for s in sts)
+    if not _d: continue
+    ws.append([nm,_d,_d/len(AUD),_l,_l/len(LNK)])
+    style(ws,ws.max_row,FILL.get(sts[0],WHITE),{'B':'#,##0','C':'0.0%','D':'#,##0','E':'0.0%'},centre=('B','C','D','E'))
+_spamd=cnt['Spam (Disavow)']+cnt['Spam (Nofollow, No Action)']
+_keepd=cnt['Keep']+cnt['Own Site']
+_spaml=_lall['Spam (Disavow)']+_lall['Spam (Nofollow, No Action)']
+_keepl=_lall['Keep']+_lall['Own Site']
+block('The ratio',[
+ f"Spam outnumbers genuine links by {_spamd/_keepd:.0f} to 1 on domains and {_spaml/_keepl:.0f} to 1 on links. {_spamd:,} of the {len(AUD):,} referring domains are spam and only {_keepd} are genuine.",
+ f"{len(dis):,} domains go in the disavow file, which is {len(dis)/len(AUD)*100:.0f} per cent of the profile. The other {len(AUD)-len(dis):,} stay out of it: {cnt['Spam (Nofollow, No Action)']:,} are spam but nofollow so they pass no ranking value, {sum(cnt[s] for s in ('Held (Confirm With Vendor)','Held (Nofollow, No Action)')):,} are held for the vendor, {sum(cnt[s] for s in ORDER if s.startswith('Review')):,} lack the evidence to decide, and {_keepd} are genuine.",
+ f"Of the {len(dis):,} in the file, {sum(1 for r in AUD if r['status']=='Spam (Disavow)' and r['redundant']!='Yes' and r['group'].startswith('Automated PBN')):,} are the single automated anchor network. That one network is {sum(1 for r in AUD if r['status']=='Spam (Disavow)' and r['redundant']!='Yes' and r['group'].startswith('Automated PBN'))/len(dis)*100:.0f} per cent of everything being disavowed.",
+])
+
 block('Authority Score vs competitor set',[])
 ws.append(['Domain','Authority Score','Referring domains','Follow links','Note']); hdr(ws,ws.max_row)
 for d,a,r_,f_,n in [('newimagecanopy.com (client)',9,2445,3589,'Most referring domains, lowest Authority Score'),
