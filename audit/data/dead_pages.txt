@@ -1,0 +1,6 @@
+# Linking pages opened by hand and found dead. A dead page means the link is gone,
+# so it passes nothing and needs no disavow line. Recorded here rather than guessed.
+# domain;what the page returned;checked by;date
+demo1.worldbankingdirectory.com;500 internal server error;client;2026-10-15
+ns1.thecarnetwork.org;404 page not found;client;2026-10-15
+ns2.thecarnetwork.org;404 page not found, same article as ns1;client;2026-10-15

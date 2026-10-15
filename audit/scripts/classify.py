@@ -218,6 +218,19 @@ for x in out:
     if ARTEFACT.match(x['domain']) and x['status'].startswith('Held'):
         x['status']='Review (Host Artefact)'
         x['group']='Nameserver or demo hostname, an artefact of its parent rather than a placement'
+# Linking pages checked by hand and found dead. The link is gone, so there is nothing
+# to disavow; the status stays out of the file and the group says why.
+DEAD={}
+try:
+    for _l in open(D+'dead_pages.txt'):
+        _l=_l.strip()
+        if _l and not _l.startswith('#'):
+            _p=_l.split(';'); DEAD[_p[0]]=_p[1]
+except FileNotFoundError: pass
+for x in out:
+    if x['domain'] in DEAD:
+        x['group']=f"{x['group']}. Linking page checked by hand and dead ({DEAD[x['domain']]}), so the link is gone"
+        if x['status']=='Spam (Disavow)': x['status']='Review (Host Artefact)'
 BY={x['domain']:x for x in out}
 def parent_of(d):
     # walk every suffix, so multi-part TLDs (domain.com.lc, site.co.in) resolve correctly

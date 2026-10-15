@@ -4,8 +4,8 @@
 #
 # Excluded: 641 referring domains carrying exact match commercial or press release
 # anchors are held out of this file. 562 need partner confirmation (see the
-# 'Exact Match Anchors' and 'Pending Disavow Lines' tabs); 67 are nofollow and
-# need no decision; 12 are genuine editorial placements to keep.
+# 'Exact Match Anchors' and 'Pending Disavow Lines' tabs); 64 are nofollow and
+# need no decision; 15 are genuine editorial placements to keep.
 #
 # Do not submit to Google Search Console until that confirmation is complete.
 # Uploading replaces any existing disavow file. Download and merge the current one first.
