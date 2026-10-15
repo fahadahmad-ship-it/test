@@ -57,6 +57,15 @@ AHR={r['domain']:r for r in csv.DictReader(open(D+'ahrefs/ah_refdomains.csv'),de
 try:
     SRD={r['domain']:r for r in csv.DictReader(open(D+'semrush_rd.csv'),delimiter=';')}
 except FileNotFoundError: SRD={}
+# HTTP status of each linking page, from the client's Ahrefs export. This is the state
+# of the page, not a vendor metric, so it does not touch the Semrush sourced columns.
+try:
+    PSTAT={r['source_url_canonical']:r for r in csv.DictReader(open(D+'page_status.csv'),delimiter=';')}
+except FileNotFoundError: PSTAT={}
+def page_live(u):
+    r=PSTAT.get(canon(u))
+    if not r: return None
+    return r['http_code']=='200' and not r['lost']
 SV={r['metric']:int(r['value']) for r in csv.DictReader(
     (l for l in open(D+'shadyvent_overview.csv') if not l.startswith('#')),delimiter=';')}
 SEMT={r['domain']:r for r in csv.DictReader(open(D+'semrush_traffic.csv'),delimiter=';')}
@@ -189,7 +198,9 @@ tld=sum(1 for r in AUD if re.search(r'\.(shop|online|website|space|store|site)$'
 money=sum(1 for x in emrows if x['core'] and x['tkind'] in ('Service page','Geo landing page'))
 CMP={r['domain']:r for r in csv.DictReader(
     (l for l in open(D+'competitors.csv') if not l.startswith('#')),delimiter=';')}
-SV_OVERLAP=942; SV_INFILE=893   # measured against shadyvent_refdomains.csv, first 1,000 of 1,407
+# Measured against the client's own Ahrefs export of shadyvent's backlinks, so this is
+# the whole set rather than the 1,000 row sample the API was giving.
+SVU={'total':965,'in_audit':868,'in_file':457,'unique_dofollow':1}
 block('Key findings',sz=10,lines=[
  f"{spam:,} of the {len(AUD):,} referring domains are spam. {cnt['Spam (Disavow)']:,} have at least one dofollow link and go in the disavow file, the other {cnt['Spam (Nofollow, No Action)']:,} are nofollow only and need no action. All {len(TAB03)} domains named in Tab 03 are among them.",
  f"{EM_CORE_DOMS} referring domains carry {len(EM_CORE):,} exact match commercial placements. {len(EM_HOLD)} are held out of the disavow file until the previous SEO partner confirms what was commissioned. Do not upload before that.",
@@ -197,7 +208,7 @@ block('Key findings',sz=10,lines=[
  f"The largest anchor, on {tn:,} referring domains, reuses the client's own brand and the client owned redirect shadyvent.com inside link selling sentences, which is a typical automated negative SEO template.",
  f"Held does not mean valuable. {_notraf} of the {_nq} held domains have no organic traffic at all and the whole set draws {_sumtraf:,.0f} visits a month between them, about one visit per site.",
  f"Authority Score is {CMP['newimagecanopy.com']['ascore']} against named competitors at {CMP['tfccanopy.com']['ascore']} and {CMP['austinmohawk.com']['ascore']}. austinmohawk.com draws {int(CMP['austinmohawk.com']['follow_links']):,} follow links from {int(CMP['austinmohawk.com']['refdomains']):,} domains, against this site's {int(CMP['newimagecanopy.com']['follow_links']):,} from {int(CMP['newimagecanopy.com']['refdomains']):,}. The gap is link acquisition and the disavow file will not close it.",
- f"shadyvent.com is client owned, shares server IP 67.225.152.101, and carries {SV['referring_domains']:,} referring domains of its own, {SV['follow_links']:,} of them dofollow, which the redirect passes through to this site. Of the 1,000 sampled, {SV_OVERLAP} are already in this audit and {SV_INFILE} are already in the disavow file, so it is the same network rather than a second one.",
+ f"shadyvent.com is client owned, shares server IP 67.225.152.101, and redirects into this site, so its links pass through. Ahrefs lists {SVU['total']} referring domains for it, of which {SVU['in_audit']} are already in this audit and {SVU['in_file']} already in the disavow file. Only {SVU['unique_dofollow']} domain links to it dofollow and is not covered here, so the redirect adds almost nothing beyond what this file already handles.",
 ])
 block('Anchor text profile (all backlinks)',[])
 ws.append(['Anchor type','Backlinks','Share of Backlinks','Referring Domains','']); hdr(ws,ws.max_row)
@@ -312,7 +323,7 @@ ORDER_R={'Hold for partner, Semrush shows this site is indexed and ranking':0,
 ws=wb.create_sheet('Exact Match Anchors')
 ws.append(['Referring domain','Exact-match commercial anchor','Market','Site type (indicative)',
   'Recommendation','Partner confirmed? (Y/N)','Commissioned by','Final decision',
-  'Example backlink (linking page)']); hdr(ws)
+  'Example backlink (linking page)','Example backlink checked']); hdr(ws)
 pairs=collections.defaultdict(list)
 for x in emrows: pairs[(x['d'],x['a'])].append(x)
 prow=[]
@@ -323,13 +334,17 @@ _held_rows=[]
 for _,d,a,xs,rec,st_ in prow:
     # One real, checkable backlink for this domain and anchor. Prefer a dofollow link on a
     # money page, so the example is the strongest placement rather than an arbitrary one.
-    ex=sorted(xs,key=lambda x:(x['link']!='Dofollow',
+    # Prefer a link the Ahrefs export confirms is still live, then dofollow, then a
+    # money page, so the example is both checkable and the strongest the domain has.
+    ex=sorted(xs,key=lambda x:(page_live(x['src']) is not True,
+              x['link']!='Dofollow',
               x['tkind'] not in ('Service page','Geo landing page'),x['src']))[0]
     mk=sorted({x['mk'] for x in xs if x['mk']!='Non-geo'})
     ws.append([d,a,', '.join(mk) if mk else 'No market',rec['sitetype'],reco_for(d,st_),'','','',
-      ex['src']])
+      ex['src'],
+      {True:'Live, HTTP 200',False:'Dead or lost',None:'Not checked'}[page_live(ex['src'])]])
     r=ws.max_row
-    style(ws,r,GREEN if st_=='Keep' else WHITE,centre=('C',))
+    style(ws,r,GREEN if st_=='Keep' else WHITE,centre=('C','J'))
     for col in ('F','G','H'):
         _c=ws[f'{col}{r}']; _c.fill=PatternFill('solid',fgColor=INPUT)
         _c.font=Font(name=F,sz=9,color=WHITE)      # so what the partner types is readable
@@ -341,8 +356,8 @@ if _held_rows:
     dv2=DataValidation(type='list',formula1='"Keep,Disavow"',allow_blank=True,showErrorMessage=True,
         errorTitle='Choose Keep or Disavow',error='Only the domains awaiting confirmation can be set.')
     ws.add_data_validation(dv2); dv2.add(f'H{min(_held_rows)}:H{max(_held_rows)}')
-widths(ws,{'A':24.43,'B':54,'C':16,'D':24.57,'E':30.71,'F':15.43,'G':17.57,'H':15,'I':62})
-ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:I{ws.max_row}'
+widths(ws,{'A':24.43,'B':54,'C':16,'D':24.57,'E':30.71,'F':15.43,'G':17.57,'H':15,'I':62,'J':20})
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'
 EM_DECISION_ROWS=len(_held_rows)
 
 # ============ 05 Pending Disavow Lines ============
