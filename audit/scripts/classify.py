@@ -268,6 +268,38 @@ for x in out:
         if a<=6:
             x['status']='Review (Low Authority)'
             x['group']='Low authority site with no editorial signal, client to confirm keep or disavow'; demoted+=1
+# Resolve the Review statuses into the four this sheet actually acts on. None of these
+# domains has a single dofollow link, so none can reach the disavow file either way;
+# leaving them as "Review" only asks the reader a question the data already answers.
+BY2={x['domain']:x for x in out}
+def _child_of(p):
+    ks=[d for d in BY2 if d!=p and d.endswith('.'+p)]
+    return BY2[sorted(ks)[0]] if ks else None
+for x in out:
+    if not x['status'].startswith('Review'): continue
+    rs=[r for r in LINKS if r['rd']==x['domain']]
+    if x['status']=='Review (No Link Sample)':
+        ch=_child_of(x['domain'])
+        if ch:
+            cst=ch['status']
+            x['status']=('Keep' if cst in ('Keep','Own Site')
+                         else 'Held (Nofollow, No Action)' if cst.startswith('Held')
+                         else 'Spam (Nofollow, No Action)' if cst.startswith('Spam')
+                         else 'Keep')
+            x['group']=(f"No link of its own to the client. The link is on {ch['domain']}, "
+                        f"which is {ch['status']}, so nothing is owed on the root")
+        else:
+            x['status']='Keep'
+            x['group']='No link sample from either tool, so nothing passes and nothing is owed'
+    else:
+        # everything else here is nofollow only, so it passes no ranking value
+        spammy=any(r['atype'].startswith('Spam') for r in rs)
+        x['status']='Spam (Nofollow, No Action)' if spammy else 'Keep'
+        x['group']=(('Link scheme anchor, but every link is nofollow so it passes no ranking value'
+                     if spammy else
+                     'Harmless placement, every link is nofollow so it passes no ranking value')
+                    + '. ' + x['group'])
+
 # Last word, after every inference: a domain the client ruled on by hand.
 for x in out:
     if x['domain'] in CLIENT_DISAVOW:
