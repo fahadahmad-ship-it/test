@@ -10,7 +10,7 @@ Search Console property, so a file filed on kandkmfg.com does nothing for the li
 pointing at the other two. The three are therefore kept apart all the way through and
 each gets its own file.
 """
-import csv, collections, glob, re, sys, os
+import csv, collections, glob, re, sys, os, datetime
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from load import read_semrush, host
 
@@ -50,6 +50,13 @@ def canon(u):
     u = (u or '').strip().lower().split('#')[0]
     u = re.sub(r'^https?://', '', u); u = re.sub(r'^www\.', '', u)
     return u.rstrip('/')
+def ah_ts(v):
+    # Ahrefs ships 'First seen' as 'YYYY-MM-DD HH:MM:SS'. Semrush first_seen is a unix
+    # timestamp, so convert, keeping the two sources in one comparable format.
+    v = (v or '').strip()
+    if not v: return ''
+    try: return str(int(datetime.datetime.strptime(v[:19], '%Y-%m-%d %H:%M:%S').replace(tzinfo=datetime.UTC).timestamp()))
+    except Exception: return ''
 have = {(canon(r['source_url']), canon(r['target_url']), (r['anchor'] or '').strip().lower()) for r in LINKS}
 added = 0
 for r in AHL:
@@ -58,7 +65,8 @@ for r in AHL:
     have.add(k); added += 1
     LINKS.append(dict(rd=host(r['Referring page URL']), tool='Ahrefs', source_url=r['Referring page URL'],
                       source_title=r['Referring page title'], target_url=r['Target URL'], anchor=r['Anchor'],
-                      nofollow='true' if r['Nofollow'] == 'true' else 'false', first_seen='', last_seen='',
+                      nofollow='true' if r['Nofollow'] == 'true' else 'false',
+                      first_seen=ah_ts(r.get('First seen')), last_seen=ah_ts(r.get('Last seen')),
                       response_code=r['Referring page HTTP code'], redirect_url='', page_ascore=''))
 LINKS = [r for r in LINKS if r['rd']]
 print(f'links: {len(srows):,} Semrush rows, {len(LINKS):,} unique after merging the Ahrefs export '

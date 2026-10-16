@@ -8,7 +8,8 @@ records. Two things differ, both because this client's situation differs:
     the disavow headers name the brief's wording once, to tie the two together.
   * Just over half the links arrive through a redirect from gaworktrucks.com or
     kandkmanufacturing.com, which are separate Search Console properties. A disavow
-    filed on kandkmfg.com does nothing for those, so three files are written.
+    filed on kandkmfg.com does nothing for those, so each property is handled on its own
+    and the money-site file carries the complete union (the client can upload only that one).
 """
 import csv, collections, datetime, re, glob, sys, os
 import openpyxl
@@ -218,10 +219,14 @@ HIST = ('Semrush recorded {} referring domains in August 2026, {} in September a
         .format(*(f"{int(_h[d]['domains_num']):,}" for d in ('2026-08-01', '2026-09-01', '2026-10-01'))))
 tab05_nofollow = sum(1 for d in TAB05 if STAT[d] == 'Spam (Nofollow, No Action)')
 
+_propby = collections.defaultdict(set)
+for _l in LNK: _propby[_l['rd']].add(_l['property'])
+_direct = sum(1 for r in dis if CLIENT in (_propby.get(r['domain']) or {CLIENT}))
+_via = len(dis) - _direct
 block('Key findings', sz=10, lines=[
  f"{spam:,} of the {len(AUD):,} referring domains are spam. {cnt['Spam (Disavow)']:,} carry at least one dofollow link and go in the disavow file; the other {cnt['Spam (Nofollow, No Action)']:,} are nofollow only and pass nothing, so they need no action. Authority is thin throughout: {_as2:,} of the {_scored:,} scored referring domains sit at Semrush Authority Score 2 or below.",
  f"The profile has roughly tripled since the brief was written. {HIST} The brief's 898 referring domains at Authority Score 16 is an August snapshot; the live profile is {len(AUD):,} domains and {len(LNK):,} links, so auditing the brief's list alone would have missed most of the attack.",
- f"{PROPC[CLIENT]:,} links point at kandkmfg.com directly. The other {PROPC['gaworktrucks.com'] + PROPC['kandkmanufacturing.com']:,} arrive through a redirect from gaworktrucks.com ({PROPC['gaworktrucks.com']:,}) and kandkmanufacturing.com ({PROPC['kandkmanufacturing.com']:,}), which are separate Search Console properties. A file filed on kandkmfg.com does nothing for those, so three files are supplied and all three need uploading.",
+ f"{PROPC[CLIENT]:,} links point at kandkmfg.com directly. The other {PROPC['gaworktrucks.com'] + PROPC['kandkmanufacturing.com']:,} reach it through a redirect from gaworktrucks.com ({PROPC['gaworktrucks.com']:,}) and kandkmanufacturing.com ({PROPC['kandkmanufacturing.com']:,}), two other domains the client owns that 301 into the site. The client has Search Console access to kandkmfg.com only, so every bad domain, including the {_via:,} that reach the site only through those redirects, is disavowed in the single kandkmfg.com file as a domain: line, where Google applies it to the site that ranks.",
  f"Two campaigns are running at once and they are easy to tell apart. Not one of the {pbnl:,} link scheme links points anywhere but the home page, while {deep:,} of the {len(EM_CORE):,} exact match commercial links point at a product, capability or industry page. Page level targeting is a paid campaign; the home page flood is an attack.",
  f"The largest single anchor, on {tn:,} referring domains, is sales copy for a backlink service that names the client's own domain as its example. The same template runs in three variants, one for each of the three client domains.",
  f"{EM_CORE_DOMS:,} referring domains carry exact match commercial anchors, and {len(EM_HOLD):,} domains in total are held out of the files until the previous partner confirms what was commissioned. They are not {len(EM_HOLD):,} independent sites: {_net:,} of them sit in three address ranges and most are article directories or bookmark farms, so this was one vendor network. Do not upload before that conversation.",
