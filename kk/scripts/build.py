@@ -423,6 +423,9 @@ for r in dis:
 FILES = {'kandkmfg.com': 'disavow_kandkmfg.txt',
          'gaworktrucks.com': 'disavow_gaworktrucks.txt',
          'kandkmanufacturing.com': 'disavow_kandkmanufacturing.txt'}
+# How the money-site file's domains reach the site: directly, or only through a redirect.
+_direct = sum(1 for r in dis if CLIENT in ({x['property'] for x in byd.get(r['domain'], [])} or {CLIENT}))
+_via = len(dis) - _direct
 written = {}
 for p, fn in FILES.items():
     rows = byprop.get(p, [])
@@ -431,9 +434,6 @@ for p, fn in FILES.items():
         f.write(f'# {CLIENT_NAME} disavow file for the {p} Search Console property\n')
         f.write(f'# Generated {datetime.date.today():%d %b %Y} from Semrush (priority) merged with the client Ahrefs export.\n')
         f.write(f'# {len(rows):,} domains. Source: {os.path.basename(OUT)}, "Disavow List" tab.\n#\n')
-        if p != CLIENT:
-            f.write(f'# {p} redirects into kandkmfg.com, but Google processes a disavow file per\n')
-            f.write(f'# property, so these lines have to be uploaded under {p} itself.\n#\n')
         _pl = lambda n, one, many: f'{n:,} {one if n == 1 else many}'
         f.write(f'# Excluded: {len(EM_HOLD):,} referring domains are held out of this file until the\n')
         f.write('# previous SEO partner, the supplier the brief refers to, confirms what it\n')
@@ -442,15 +442,21 @@ for p, fn in FILES.items():
         f.write(f'# {_pl(len(EM_KEEP), "is a genuine placement", "are genuine placements")} to keep.\n#\n')
         f.write('# Do not submit to Google Search Console until that confirmation is complete.\n')
         if p == CLIENT:
-            f.write('# This is the money site. It carries the COMPLETE set of bad referring domains\n')
-            f.write('# across all three owned properties, because gaworktrucks.com and\n')
-            f.write('# kandkmanufacturing.com 301-redirect into it and a disavow should cover the\n')
-            f.write('# links however Google attributes them across the redirect.\n')
+            f.write('# THIS IS THE FILE TO UPLOAD. The client has Search Console access to kandkmfg.com\n')
+            f.write('# only, so this is the single disavow file that can be submitted.\n')
+            f.write('# It carries the COMPLETE set of bad referring domains across all three owned\n')
+            f.write('# properties. gaworktrucks.com and kandkmanufacturing.com 301-redirect into\n')
+            f.write('# kandkmfg.com, so their bad links are disavowed here, as domain: lines, where\n')
+            f.write('# Google will apply them to the site that actually ranks.\n')
+            f.write(f'#   {_direct:,} of these domains link to kandkmfg.com directly;\n')
+            f.write(f'#   {_via:,} reach it only through the gaworktrucks.com / kandkmanufacturing.com redirects.\n')
             f.write('# Checked on 16 Oct 2026: no disavow file is currently filed on this property,\n')
             f.write('# so this upload adds one rather than replacing anything.\n#\n')
         else:
-            f.write('# Uploading replaces any existing disavow file on this property. Check Search Console\n')
-            f.write('# for one and merge it in first if there is.\n#\n')
+            f.write('# REFERENCE ONLY, NOT FOR UPLOAD. The client does not have Search Console access\n')
+            f.write(f'# to {p}, so this file cannot be submitted. Every domain in it is already\n')
+            f.write('# included in disavow_kandkmfg.txt, which is the file to upload. This list is\n')
+            f.write(f'# kept only to show which bad domains reach the site through the {p} redirect.\n#\n')
         bg = collections.defaultdict(list)
         for r in rows: bg[re.sub(r' \(covered by.*', '', r['group'])].append(r['disavow_line'])
         for g in sorted(bg, key=lambda k: -len(bg[k])):

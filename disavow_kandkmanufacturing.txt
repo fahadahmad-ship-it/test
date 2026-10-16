@@ -2,9 +2,6 @@
 # Generated 16 Oct 2026 from Semrush (priority) merged with the client Ahrefs export.
 # 1,377 domains. Source: KandK_Manufacturing_Backlinks_Audit.xlsx, "Disavow List" tab.
 #
-# kandkmanufacturing.com redirects into kandkmfg.com, but Google processes a disavow file per
-# property, so these lines have to be uploaded under kandkmanufacturing.com itself.
-#
 # Excluded: 667 referring domains are held out of this file until the
 # previous SEO partner, the supplier the brief refers to, confirms what it
 # commissioned. See the 'Exact Match Anchors' and 'Pending Disavow Lines' tabs.
@@ -12,8 +9,10 @@
 # 4 are genuine placements to keep.
 #
 # Do not submit to Google Search Console until that confirmation is complete.
-# Uploading replaces any existing disavow file on this property. Check Search Console
-# for one and merge it in first if there is.
+# REFERENCE ONLY, NOT FOR UPLOAD. The client does not have Search Console access
+# to kandkmanufacturing.com, so this file cannot be submitted. Every domain in it is already
+# included in disavow_kandkmfg.txt, which is the file to upload. This list is
+# kept only to show which bad domains reach the site through the kandkmanufacturing.com redirect.
 #
 
 # --- Automated link scheme advertising the client domain as its sales example (1,276 domains) ---

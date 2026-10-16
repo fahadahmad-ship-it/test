@@ -9,10 +9,14 @@
 # 4 are genuine placements to keep.
 #
 # Do not submit to Google Search Console until that confirmation is complete.
-# This is the money site. It carries the COMPLETE set of bad referring domains
-# across all three owned properties, because gaworktrucks.com and
-# kandkmanufacturing.com 301-redirect into it and a disavow should cover the
-# links however Google attributes them across the redirect.
+# THIS IS THE FILE TO UPLOAD. The client has Search Console access to kandkmfg.com
+# only, so this is the single disavow file that can be submitted.
+# It carries the COMPLETE set of bad referring domains across all three owned
+# properties. gaworktrucks.com and kandkmanufacturing.com 301-redirect into
+# kandkmfg.com, so their bad links are disavowed here, as domain: lines, where
+# Google will apply them to the site that actually ranks.
+#   1,547 of these domains link to kandkmfg.com directly;
+#   690 reach it only through the gaworktrucks.com / kandkmanufacturing.com redirects.
 # Checked on 16 Oct 2026: no disavow file is currently filed on this property,
 # so this upload adds one rather than replacing anything.
 #
