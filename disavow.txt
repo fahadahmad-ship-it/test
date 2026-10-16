@@ -1,5 +1,5 @@
 # New Image Canopy (newimagecanopy.com) disavow file
-# Generated 15 Oct 2026 from Semrush (priority) merged with Ahrefs.
+# Generated 16 Oct 2026 from Semrush (priority) merged with Ahrefs.
 # 2,260 domains. Source: New_Image_Canopy_Backlinks_Audit.xlsx, 'Disavow List' tab.
 #
 # Excluded: 644 referring domains carrying exact match commercial or press release

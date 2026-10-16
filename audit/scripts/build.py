@@ -5,16 +5,15 @@ from openpyxl.worksheet.datavalidation import DataValidation
 from openpyxl.utils.cell import coordinate_to_tuple
 D='/home/user/test/audit/data/'
 OUT='/home/user/test/New_Image_Canopy_Backlinks_Audit.xlsx'
-NAVY='FF1F3864'; F='Geist'; WHITE='FFFFFFFF'
-INPUT='FF1F3864'; GREEN='FFC27BA0'          # the Keep fill, as Just Drive Media uses it
-# Just Drive Media's palette only: FFEAD1DC, FFD5A6BD, FFC27BA0, FFA64D79, FF1F3864, FFFFFFFF.
-# That sheet colours its four decided statuses and nothing else, so the four statuses it
-# shares with this audit keep its exact fills and the six it does not have stay white,
-# with the Status column carrying the meaning instead of a colour.
-FILL={'Spam (Disavow)':'FFEAD1DC','Spam (Nofollow, No Action)':'FFD5A6BD','Keep':'FFC27BA0',
-      'Own Site':'FFA64D79','Held (Pending Partner)':WHITE,'Held (Nofollow, No Action)':WHITE,
-      'Held (Review)':WHITE,'Review (No Link Sample)':WHITE,'Review (Parent Unresolved)':WHITE,
-      'Review (Host Artefact)':WHITE,'Review (Low Authority)':WHITE}
+CLIENT_NAME='New Image Canopy'
+# The client's final scheme, taken from the signed off workbook: one accent colour for
+# headers and for the cells the partner fills in, white everywhere else. No status colour
+# coding: the Status column carries the meaning, so the rows stay readable when printed
+# and nobody has to learn a key.
+TEAL='FF0C343D'; F='Geist'; WHITE='FFFFFFFF'
+NAVY=TEAL                                  # kept so older references resolve to the accent
+INPUT=TEAL; GREEN=WHITE
+FILL=collections.defaultdict(lambda:WHITE)
 thin=Side(style='thin'); BORD=Border(left=thin,right=thin,top=thin,bottom=thin)
 def banner(ws,rng):
     """Style a merged full width note. openpyxl only styles the anchor cell, so the fill and
@@ -40,7 +39,7 @@ def hdr(ws,row=1,sz=9):
         c.font=Font(name=F,sz=sz,b=True,color=WHITE); c.fill=PatternFill('solid',fgColor=NAVY)
         c.alignment=Alignment(horizontal='center',vertical='center',wrap_text=True); c.border=BORD
     ws.row_dimensions[row].height=31.5
-def style(ws,r,fill,numfmts=None,centre=(),valign='center'):
+def style(ws,r,fill=WHITE,numfmts=None,centre=(),valign='center'):
     for c in ws[r]:
         c.font=Font(name=F,sz=9,color='FF000000'); c.fill=PatternFill('solid',fgColor=fill); c.border=BORD
         c.alignment=Alignment(vertical=valign,horizontal='center' if c.column_letter in centre else None)
@@ -133,9 +132,13 @@ for r in LNK: blc[STAT.get(r['rd'],'')]+=1
 wb=openpyxl.Workbook()
 # ============ 01 Summary ============
 ws=wb.active; ws.title='Summary'; ws.sheet_view.showGridLines=False
-widths(ws,{'A':48,'B':16.29,'C':17.57,'D':18.71,'E':94})
-ws['A1']='https://newimagecanopy.com/'; ws.merge_cells('A1:B1')
-ws['A1'].font=Font(name=F,sz=16,b=True,color=NAVY); ws['A1'].alignment=Alignment(vertical='center')
+widths(ws,{'A':38.86,'B':16.29,'C':17.57,'D':18.71,'E':120})
+ws['B1']=CLIENT_NAME; ws.merge_cells('B1:E2')
+for _rr in (1,2):
+    for _cc in range(2,6):
+        _c=ws.cell(_rr,_cc); _c.font=Font(name=F,sz=21,b=True,color=TEAL)
+        _c.alignment=Alignment(horizontal='center',vertical='center')
+ws.append([])
 ws.append(['Status','Domains','Backlinks','Share of Domains','What it means'])
 HDRROW=ws.max_row; hdr(ws,HDRROW,sz=10)
 MEAN={'Review (Parent Unresolved)':'A subdomain whose parent domain could not be resolved either way. Never disavowed automatically.',
@@ -159,7 +162,8 @@ style(ws,ws.max_row,WHITE,{'B':'#,##0','C':'#,##0','D':'0.0%'},centre=('B','C','
 for c in ws[ws.max_row]: c.font=Font(name=F,sz=9,b=True)
 
 def block(title,lines,sz=11):
-    ws.append([]); ws.append([title]); r=ws.max_row
+    # No spacer row: the client's layout runs the sections straight on.
+    ws.append([title]); r=ws.max_row
     ws.cell(r,1).font=Font(name=F,sz=sz,b=True,color=('FF000000' if sz==10 else NAVY))
     ws.cell(r,1).alignment=Alignment(vertical='center')
     for t in lines:
@@ -227,7 +231,7 @@ for r in range(1,ws.max_row+1): ws.row_dimensions[r].height=22.5
 # ============ 02 Domain Audit ============
 # Just Drive Media's seventeen columns, in its order and under its names. The columns this
 # audit adds that it has no counterpart for follow to the right of them.
-ws=wb.create_sheet('Domain Audit')
+ws=wb.create_sheet('Referring Domain Audit')
 ws.append(['Domain','Status','AS','Backlinks',"RD's",'Traffic','In Disavow','Links Point To',
   'Dofollow Links','Nofollow Links','First Seen','Top Anchor Text','Example Linking Page',
   'Linking Page Title','Source','IP','Disavow Line']); hdr(ws)
@@ -252,9 +256,9 @@ for r in AUD:
       r['disavow_line'] if r['redundant']!='Yes' else ''])
     style(ws,ws.max_row,FILL.get(r['status'],WHITE),
       {'D':'#,##0','E':'#,##0','F':'#,##0','K':'d mmm yyyy'},
-      centre=('C','D','E','F','G','I','J','K','O','P'),valign='top')
-widths(ws,{'A':36,'B':20,'C':9.57,'D':13,'E':9.43,'F':9.71,'G':12.43,'H':21.29,'I':14,
-           'K':12,'L':45,'N':40,'O':14,'P':15,'Q':14})
+      centre=('C','D','E','F','G','I','J','K','O','P'))
+widths(ws,{'A':36,'B':24.71,'C':9.57,'D':13,'E':9.43,'F':9.71,'G':12.43,'H':21.29,'I':14,
+           'J':8.71,'K':12,'L':45,'M':8.71,'N':40,'O':14,'P':15,'Q':14})
 ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:Q{ws.max_row}'
 
 # ============ 03 Anchor Analysis ============
@@ -277,7 +281,7 @@ for a,g in sorted(agg.items(),key=lambda x:-x[1]['bl']):
     style(ws,ws.max_row,FILL['Spam (Disavow)'] if g['type'].startswith('Spam') else WHITE,
       {'C':'#,##0','D':'0.00%'},centre=('C','D','E','F'))
 ws['A1'].alignment=Alignment(horizontal='center',vertical='center',wrap_text=False)
-widths(ws,{'A':104.57,'B':37.71,'C':14,'F':20.29})
+widths(ws,{'A':115.86,'B':37.71,'C':14,'D':8.71,'F':20.29})
 ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:F{ws.max_row}'
 
 # ============ 04 Exact Match Anchors (the decision tab) ============
@@ -321,9 +325,8 @@ ORDER_R={'Hold for partner, Semrush shows this site is indexed and ranking':0,
 # Super K Express's eight columns, in its order and under its names, plus the example backlink.
 # The Semrush evidence this audit adds follows to the right of them.
 ws=wb.create_sheet('Exact Match Anchors')
-ws.append(['Referring domain','Exact-match commercial anchor','Market','Site type (indicative)',
-  'Recommendation','Partner confirmed? (Y/N)','Commissioned by','Final decision',
-  'Example backlink (linking page)','Example backlink checked']); hdr(ws)
+ws.append(['Referring domain','Example backlink (linking page)','Exact-match commercial anchor',
+  'Market','Site type (indicative)','Partner confirmed? (Y/N)','Final decision']); hdr(ws)
 pairs=collections.defaultdict(list)
 for x in emrows: pairs[(x['d'],x['a'])].append(x)
 prow=[]
@@ -340,24 +343,22 @@ for _,d,a,xs,rec,st_ in prow:
               x['link']!='Dofollow',
               x['tkind'] not in ('Service page','Geo landing page'),x['src']))[0]
     mk=sorted({x['mk'] for x in xs if x['mk']!='Non-geo'})
-    ws.append([d,a,', '.join(mk) if mk else 'No market',rec['sitetype'],reco_for(d,st_),'','','',
-      ex['src'],
-      {True:'Live, HTTP 200',False:'Dead or lost',None:'Not checked'}[page_live(ex['src'])]])
+    ws.append([d,ex['src'],a,', '.join(mk) if mk else 'No market',rec['sitetype'],'',''])
     r=ws.max_row
-    style(ws,r,GREEN if st_=='Keep' else WHITE,centre=('C','J'))
-    for col in ('F','G','H'):
+    style(ws,r,centre=('D',))
+    for col in ('F','G'):
         _c=ws[f'{col}{r}']; _c.fill=PatternFill('solid',fgColor=INPUT)
         _c.font=Font(name=F,sz=9,color=WHITE)      # so what the partner types is readable
     if st_.startswith('Held') and st_!='Held (Nofollow, No Action)': _held_rows.append(r)
 if _held_rows:
     dv=DataValidation(type='list',formula1='"Y,N"',allow_blank=True,showErrorMessage=True,
         errorTitle='Enter Y or N',error='Type Y if your agency commissioned this placement, or N if not.')
-    ws.add_data_validation(dv); dv.add(f'F{min(_held_rows)}:F{max(_held_rows)}')  # noqa
+    ws.add_data_validation(dv); dv.add(f'F{min(_held_rows)}:F{max(_held_rows)}')
     dv2=DataValidation(type='list',formula1='"Keep,Disavow"',allow_blank=True,showErrorMessage=True,
         errorTitle='Choose Keep or Disavow',error='Only the domains awaiting confirmation can be set.')
-    ws.add_data_validation(dv2); dv2.add(f'H{min(_held_rows)}:H{max(_held_rows)}')
-widths(ws,{'A':24.43,'B':54,'C':16,'D':24.57,'E':30.71,'F':15.43,'G':17.57,'H':15,'I':62,'J':20})
-ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'
+    ws.add_data_validation(dv2); dv2.add(f'G{min(_held_rows)}:G{max(_held_rows)}')
+widths(ws,{'A':25.43,'B':59,'C':53.14,'D':16,'E':24.57,'F':15.43,'G':15})
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:G{ws.max_row}'
 EM_DECISION_ROWS=len(_held_rows)
 
 # ============ 05 Pending Disavow Lines ============
@@ -374,23 +375,23 @@ ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:C{ws.max_row}'
 # ============ 06 All Backlinks ============
 ws=wb.create_sheet('All Backlinks')
 ws.append(['Referring Domain','Status','Tool','Anchor Text','Anchor Type','Link Type','Linking Page URL',
-           'Linking Page Title','Target URL','First Seen']); hdr(ws)
+           'Linking Page Title','Target URL']); hdr(ws)
 for r in LNK:
     s=STAT.get(r['rd'],'')
     ws.append([r['rd'],s,r['tool'],r['anchor'],r['atype'],'Nofollow' if r['nofollow']=='true' else 'Dofollow',
-               r['source_url'],r['source_title'],r['target_url'],dt(r['first_seen'])])
-    style(ws,ws.max_row,FILL.get(s,WHITE),{'J':'d mmm yyyy'},centre=('F','J'))
+               r['source_url'],r['source_title'],r['target_url']])
+    style(ws,ws.max_row,centre=('F',))
 for _r in range(1,ws.max_row+1):
     _c=ws.cell(_r,3); _c.alignment=Alignment(horizontal='left',vertical='center',
                                              wrap_text=(_r==1))
-widths(ws,{'A':25.43,'B':27.14,'C':14.71,'D':55,'E':32,'F':10,'G':55,'H':53.14,'I':38,'J':14})
-ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:J{ws.max_row}'
+widths(ws,{'A':25.43,'B':27.14,'C':14.71,'D':55,'E':32,'F':10,'G':55,'H':53.14,'I':30.57})
+ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:I{ws.max_row}'
 
 # ============ 07 Disavow List ============
 # Just Drive Media's seven columns, then this audit's additions.
 ws=wb.create_sheet('Disavow List')
 ws.append(['Disavow Line','AS','Backlinks',"RD's",'Traffic','Organic Keywords','Top Anchor Text'])
-hdr(ws,sz=10)   # Just Drive Media sets this one header a point larger than the rest
+hdr(ws)         # the client levelled this header to 9 like every other tab
 for r in sorted(dis,key=lambda x:x['domain']):
     d=r['domain']
     ws.append([r['disavow_line'],int(r['ascore']) if r['ascore'] else '',
@@ -400,7 +401,7 @@ for r in sorted(dis,key=lambda x:x['domain']):
       _tr(d,'organic_traffic'),_tr(d,'organic_keywords'),r['top_anchor']])
     style(ws,ws.max_row,FILL['Spam (Disavow)'],
       {'C':'#,##0','D':'#,##0','E':'#,##0','F':'#,##0'},centre=('B','C','D','E','F'))
-widths(ws,{'A':44,'B':14,'C':15.57,'D':14,'G':71.57})
+widths(ws,{'A':44,'B':14,'C':15.57,'D':14,'E':11.14,'F':14.86,'G':98.86})
 ws.freeze_panes='B2'; ws.auto_filter.ref=f'A1:G{ws.max_row}'
 
 # ---- typography pass, sizes read from Just Drive Media ----
@@ -416,7 +417,7 @@ for name in wb.sheetnames:
                 c.font=Font(name=F,sz=sz,b=fo.b,i=fo.i,color=col)
     if name!='Summary':
         w.row_dimensions[1].height=31.5
-        h=15.75 if name=='Domain Audit' else 22.5
+        h=15.75 if name=='Referring Domain Audit' else 22.5
         for r in range(2,w.max_row+1): w.row_dimensions[r].height=h
     w.sheet_format.defaultRowHeight=15.0
 bad=collections.Counter()
@@ -427,7 +428,7 @@ for name in wb.sheetnames:
 print("non-conforming cells:",dict(bad) if bad else "none")
 # Column widths are set on each tab as it is built, using Just Drive Media's own values
 # for the tabs it has and Super K Express's for the decision tabs.
-wb.save(OUT)
+
 
 with open('/home/user/test/disavow.txt','w') as f:
     f.write("# New Image Canopy (newimagecanopy.com) disavow file\n")
@@ -445,6 +446,10 @@ with open('/home/user/test/disavow.txt','w') as f:
         f.write(f"\n# --- {g} ({len(bg[g]):,} domain{'' if len(bg[g])==1 else 's'}) ---\n")
         for ln in sorted(bg[g]): f.write(ln+'\n')
 
+# Tab order as the client signed it off.
+wb._sheets=[wb[t] for t in ['Summary','Referring Domain Audit','All Backlinks','Anchor Analysis',
+                            'Exact Match Anchors','Pending Disavow Lines','Disavow List']]
+wb.save(OUT)
 print("workbook:",OUT); print("tabs:",wb.sheetnames)
 print(f"domains {len(AUD):,} | links {len(LNK):,} | disavow {len(dis):,} (+{len(redun)} redundant child lines omitted)")
 print(f"exact-match: {EM_DOMS} domains, {EM_LINKS} links, {EM_ANCH} anchors | hold {len(EM_HOLD)} nofollow {len(EM_NOFO)} keep {len(EM_KEEP)}")
