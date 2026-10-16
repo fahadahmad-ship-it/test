@@ -85,3 +85,20 @@ resolved into one of these on its own evidence.
 
 `build.py` prints the counts. Check them against the Summary, and check that no Held,
 Keep or Own Site domain appears in disavow.txt. The scripts in this repo do both.
+
+## Things that change per client
+
+The tabs, columns and styling above do not change. These three do, and each audit should
+state which way it went.
+
+- **Who confirms the held links.** New Image Canopy had a previous SEO *partner*; K&K
+  Manufacturing's brief says *supplier*. Use the client's own word in the Held status
+  name, the decision tab's confirmation column and the disavow file header.
+- **One file or several.** A disavow file applies to one Search Console property. Where
+  the client owns other domains that redirect into the site, their links sit on their own
+  properties and need their own files, one per property, each named for it. Check the
+  `redirect_url` column on the Semrush backlink export before assuming one file is enough.
+- **What makes a link look commissioned.** Exact match commercial anchors always count.
+  So does the page a link points at: if the link scheme only ever hits the home page and
+  every deep product or service page link carries a commercial anchor, then the target
+  page is a cleaner signal than the anchor and should be used alongside it.
