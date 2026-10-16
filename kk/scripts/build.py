@@ -170,7 +170,7 @@ ws.append(['Status', 'Domains', 'Backlinks', 'Share of Domains', 'What it means'
 hdr(ws, ws.max_row, sz=10)
 MEAN = {
  'Spam (Disavow)': 'Confirmed spam with at least one dofollow link. Included in the disavow file.',
- 'Held (Pending Partner)': 'Exact match commercial anchor, or a link aimed at a product, capability or industry page. May have been commissioned. Not in the disavow file until the previous supplier confirms.',
+ 'Held (Pending Partner)': 'Exact match commercial anchor, or a link aimed at a product, capability or industry page. May have been commissioned. Not in the disavow file until the previous partner confirms.',
  'Held (Nofollow, No Action)': 'Same, but every link is nofollow so it passes no ranking value. No disavow needed either way.',
  'Held (Review)': 'Carries both exact match commercial and link scheme anchors. Needs a judgement call.',
  'Spam (Nofollow, No Action)': 'Spam, but every link is nofollow and passes no ranking value, so no disavow is needed.',
