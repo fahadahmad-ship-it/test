@@ -5,13 +5,15 @@
 # gaworktrucks.com redirects into kandkmfg.com, but Google processes a disavow file per
 # property, so these lines have to be uploaded under gaworktrucks.com itself.
 #
-# Excluded: 670 referring domains are held out of this file pending
-# confirmation from the previous supplier (see the 'Exact Match Anchors' and
-# 'Pending Disavow Lines' tabs); 2 are nofollow and need no decision;
-# 1 are genuine placements to keep.
+# Excluded: 670 referring domains are held out of this file until the
+# previous SEO partner, the supplier the brief refers to, confirms what it
+# commissioned. See the 'Exact Match Anchors' and 'Pending Disavow Lines' tabs.
+# A further 2 domains are nofollow and need no decision, and
+# 1 is a genuine placement to keep.
 #
 # Do not submit to Google Search Console until that confirmation is complete.
-# Uploading replaces any existing disavow file. Download and merge the current one first.
+# Uploading replaces any existing disavow file on this property. Check Search Console
+# for one and merge it in first if there is.
 #
 
 # --- Automated link scheme advertising the client domain as its sales example (1,252 domains) ---

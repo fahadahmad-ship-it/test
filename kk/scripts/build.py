@@ -3,8 +3,9 @@
 Format is the one the client signed off on New Image Canopy and that AUDIT_FORMAT.md
 records. Two things differ, both because this client's situation differs:
 
-  * The brief says "confirm with the previous supplier which links were commissioned",
-    so the held bucket and the decision tab say supplier rather than partner.
+  * The brief says "confirm with the previous supplier which links were commissioned".
+    The signed-off sheet calls that role the partner, so the sheet keeps its own word and
+    the disavow headers name the brief's wording once, to tie the two together.
   * Just over half the links arrive through a redirect from gaworktrucks.com or
     kandkmanufacturing.com, which are separate Search Console properties. A disavow
     filed on kandkmfg.com does nothing for those, so three files are written.
@@ -145,7 +146,7 @@ EM_CORE = [x for x in emrows if x['core']]
 EM_CORE_DOMS = len({x['d'] for x in EM_CORE})
 EM_DOMS = len({x['d'] for x in emrows}); EM_LINKS = len(emrows)
 EM_ANCH = len({x['a'] for x in emrows})
-EM_HOLD = sorted({x['d'] for x in emrows if x['st'] in ('Held (Pending Supplier)', 'Held (Review)')})
+EM_HOLD = sorted({x['d'] for x in emrows if x['st'] in ('Held (Pending Partner)', 'Held (Review)')})
 EM_NOFO = sorted({x['d'] for x in emrows if x['st'] == 'Held (Nofollow, No Action)'})
 EM_KEEP = sorted({x['d'] for x in emrows if x['st'] == 'Keep'})
 
@@ -162,20 +163,20 @@ widths(ws, {'A': 38.86, 'B': 16.29, 'C': 17.57, 'D': 18.71, 'E': 120})
 ws['B1'] = CLIENT_NAME; ws.merge_cells('B1:E2')
 for _rr in (1, 2):
     for _cc in range(2, 6):
-        _c = ws.cell(_rr, _cc); _c.font = Font(name=F, sz=21, b=True, color=TEAL)
+        _c = ws.cell(_rr, _cc); _c.font = Font(name=F, sz=9, b=True, color=TEAL)
         _c.alignment = Alignment(horizontal='center', vertical='center')
 ws.append([])
 ws.append(['Status', 'Domains', 'Backlinks', 'Share of Domains', 'What it means'])
 hdr(ws, ws.max_row, sz=10)
 MEAN = {
  'Spam (Disavow)': 'Confirmed spam with at least one dofollow link. Included in the disavow file.',
- 'Held (Pending Supplier)': 'Exact match commercial anchor, or a link aimed at a product, capability or industry page. May have been commissioned. Not in the disavow file until the previous supplier confirms.',
+ 'Held (Pending Partner)': 'Exact match commercial anchor, or a link aimed at a product, capability or industry page. May have been commissioned. Not in the disavow file until the previous supplier confirms.',
  'Held (Nofollow, No Action)': 'Same, but every link is nofollow so it passes no ranking value. No disavow needed either way.',
  'Held (Review)': 'Carries both exact match commercial and link scheme anchors. Needs a judgement call.',
  'Spam (Nofollow, No Action)': 'Spam, but every link is nofollow and passes no ranking value, so no disavow is needed.',
  'Keep': 'Genuine or harmless link. Keep.',
  'Own Site': 'Client owned domain that redirects into the site.'}
-ORDER = ['Spam (Disavow)', 'Held (Pending Supplier)', 'Held (Nofollow, No Action)', 'Held (Review)',
+ORDER = ['Spam (Disavow)', 'Held (Pending Partner)', 'Held (Nofollow, No Action)', 'Held (Review)',
          'Spam (Nofollow, No Action)', 'Keep', 'Own Site']
 for s in ORDER:
     if not cnt[s]: continue
@@ -218,16 +219,13 @@ HIST = ('Semrush recorded {} referring domains in August 2026, {} in September a
 tab05_nofollow = sum(1 for d in TAB05 if STAT[d] == 'Spam (Nofollow, No Action)')
 
 block('Key findings', sz=10, lines=[
- f"{spam:,} of the {len(AUD):,} referring domains are spam. {cnt['Spam (Disavow)']:,} carry at least one dofollow link and go in the disavow file; the other {cnt['Spam (Nofollow, No Action)']:,} are nofollow only and pass nothing, so they need no action.",
- f"The profile has roughly tripled since the brief was written. {HIST} The brief's figure of 898 referring domains at Authority Score 16 is a snapshot of August; the live profile is {len(AUD):,} domains and {len(LNK):,} links. Auditing the brief's list alone would have missed most of the attack.",
- f"{PROPC[CLIENT]:,} links point at kandkmfg.com directly. The other {PROPC['gaworktrucks.com'] + PROPC['kandkmanufacturing.com']:,} arrive through a redirect from gaworktrucks.com ({PROPC['gaworktrucks.com']:,}) and kandkmanufacturing.com ({PROPC['kandkmanufacturing.com']:,}), which are separate Search Console properties. A file filed on kandkmfg.com does nothing for those, so three files are supplied and all three must be uploaded.",
+ f"{spam:,} of the {len(AUD):,} referring domains are spam. {cnt['Spam (Disavow)']:,} carry at least one dofollow link and go in the disavow file; the other {cnt['Spam (Nofollow, No Action)']:,} are nofollow only and pass nothing, so they need no action. Authority is thin throughout: {_as2:,} of the {_scored:,} scored referring domains sit at Semrush Authority Score 2 or below.",
+ f"The profile has roughly tripled since the brief was written. {HIST} The brief's 898 referring domains at Authority Score 16 is an August snapshot; the live profile is {len(AUD):,} domains and {len(LNK):,} links, so auditing the brief's list alone would have missed most of the attack.",
+ f"{PROPC[CLIENT]:,} links point at kandkmfg.com directly. The other {PROPC['gaworktrucks.com'] + PROPC['kandkmanufacturing.com']:,} arrive through a redirect from gaworktrucks.com ({PROPC['gaworktrucks.com']:,}) and kandkmanufacturing.com ({PROPC['kandkmanufacturing.com']:,}), which are separate Search Console properties. A file filed on kandkmfg.com does nothing for those, so three files are supplied and all three need uploading.",
  f"Two campaigns are running at once and they are easy to tell apart. Not one of the {pbnl:,} link scheme links points anywhere but the home page, while {deep:,} of the {len(EM_CORE):,} exact match commercial links point at a product, capability or industry page. Page level targeting is a paid campaign; the home page flood is an attack.",
  f"The largest single anchor, on {tn:,} referring domains, is sales copy for a backlink service that names the client's own domain as its example. The same template runs in three variants, one for each of the three client domains.",
- f"{EM_CORE_DOMS:,} referring domains carry exact match commercial anchors and {len(EM_HOLD):,} domains in total are held out of the disavow file until the previous supplier confirms what was commissioned. Do not upload before that conversation.",
- f"The held set is not {len(EM_HOLD):,} independent websites. {_net:,} of them sit in just three address ranges, 69.13.0.0/16, 64.182.0.0/16 and 94.46.0.0/16, and most are article directories or bookmark sites. Whoever was paid for these was buying from one network, which is the first thing to put to the previous supplier.",
- f"Held does not mean valuable. {_notraf:,} of the {len(_q):,} held domains checked draw no organic traffic at all, {_noidx:,} of them because Semrush holds no organic data for the domain in the first place. The whole held set draws {_sumtraf:,.0f} visits a month between them.",
- f"All nine referring domains named in Tab 05 are confirmed spam and are resolved in this sheet. {tab05_nofollow} of the nine are nofollow only, so disavowing them changes nothing; the rest are in the file.",
- f"Authority is thin across the board: {_as2:,} of the {_scored:,} scored referring domains sit at Semrush Authority Score 2 or below. The disavow file cleans up the profile, it does not build authority. That is what the Tab 09 link targets are for.",
+ f"{EM_CORE_DOMS:,} referring domains carry exact match commercial anchors, and {len(EM_HOLD):,} domains in total are held out of the files until the previous partner confirms what was commissioned. They are not {len(EM_HOLD):,} independent sites: {_net:,} of them sit in three address ranges and most are article directories or bookmark farms, so this was one vendor network. Do not upload before that conversation.",
+ f"Held does not mean valuable. {_notraf:,} of the {len(_q):,} held domains draw no organic traffic at all, {_noidx:,} of them because Semrush holds no organic data for the domain in the first place. All nine referring domains named in Tab 05 are confirmed spam and resolved in this sheet, {tab05_nofollow} of them nofollow only, so disavowing those changes nothing.",
 ])
 block('Anchor text profile (all backlinks)', [])
 ws.append(['Anchor type', 'Backlinks', 'Share of Backlinks', 'Referring Domains', '']); hdr(ws, ws.max_row)
@@ -258,7 +256,7 @@ for r in AUD:
       r['disavow_line'] if r['redundant'] != 'Yes' else ''])
     style(ws, ws.max_row, WHITE, {'D': '#,##0', 'E': '#,##0', 'F': '#,##0', 'K': 'd mmm yyyy'},
           centre=('C', 'D', 'E', 'F', 'G', 'I', 'J', 'K', 'O', 'P'))
-widths(ws, {'A': 36, 'B': 24.71, 'C': 9.57, 'D': 13, 'E': 9.43, 'F': 9.71, 'G': 12.43, 'H': 34,
+widths(ws, {'A': 36, 'B': 24.71, 'C': 9.57, 'D': 13, 'E': 9.43, 'F': 9.71, 'G': 12.43, 'H': 21.29,
             'I': 14, 'J': 8.71, 'K': 12, 'L': 45, 'M': 8.71, 'N': 40, 'O': 14, 'P': 15, 'Q': 14})
 ws.freeze_panes = 'B2'; ws.auto_filter.ref = f'A1:Q{ws.max_row}'
 
@@ -311,19 +309,19 @@ def reco_for(d, st_):
     if st_ == 'Held (Nofollow, No Action)': return 'No action needed, nofollow passes no ranking value'
     if st_ == 'Held (Review)': return 'Review, mixes link scheme with exact match anchors'
     hl = has_life(d)
-    if hl is True: return 'Hold for supplier, Semrush shows this site is indexed and ranking'
-    if hl is False: return 'Disavow unless the supplier confirms, Semrush shows almost nothing indexed'
-    return 'Disavow unless the supplier confirms they bought it'
-ORDER_R = {'Hold for supplier, Semrush shows this site is indexed and ranking': 0,
-           'Disavow unless the supplier confirms they bought it': 1,
-           'Disavow unless the supplier confirms, Semrush shows almost nothing indexed': 2,
+    if hl is True: return 'Hold for partner, Semrush shows this site is indexed and ranking'
+    if hl is False: return 'Disavow unless the partner confirms, Semrush shows almost nothing indexed'
+    return 'Disavow unless the partner confirms they bought it'
+ORDER_R = {'Hold for partner, Semrush shows this site is indexed and ranking': 0,
+           'Disavow unless the partner confirms they bought it': 1,
+           'Disavow unless the partner confirms, Semrush shows almost nothing indexed': 2,
            'Review, mixes link scheme with exact match anchors': 3,
            'No action needed, nofollow passes no ranking value': 4,
            'Keep, genuine editorial placement, no confirmation needed': 5}
 
 ws = wb.create_sheet('Exact Match Anchors')
 ws.append(['Referring domain', 'Example backlink (linking page)', 'Exact-match commercial anchor',
-  'Market', 'Site type (indicative)', 'Supplier confirmed? (Y/N)', 'Final decision']); hdr(ws)
+  'Market', 'Site type (indicative)', 'Partner confirmed? (Y/N)', 'Final decision']); hdr(ws)
 pairs = collections.defaultdict(list)
 for x in emrows: pairs[(x['d'], x['a'])].append(x)
 prow = []
@@ -346,7 +344,7 @@ for _, d, a, xs, rec, st_ in prow:
     if st_.startswith('Held') and st_ != 'Held (Nofollow, No Action)': _held_rows.append(r)
 if _held_rows:
     dv = DataValidation(type='list', formula1='"Y,N"', allow_blank=True, showErrorMessage=True,
-        errorTitle='Enter Y or N', error='Type Y if the previous supplier commissioned this placement, or N if not.')
+        errorTitle='Enter Y or N', error='Type Y if the previous partner commissioned this placement, or N if not.')
     ws.add_data_validation(dv); dv.add(f'F{min(_held_rows)}:F{max(_held_rows)}')
     dv2 = DataValidation(type='list', formula1='"Keep,Disavow"', allow_blank=True, showErrorMessage=True,
         errorTitle='Choose Keep or Disavow', error='Only the domains awaiting confirmation can be set.')
@@ -357,14 +355,16 @@ EM_DECISION_ROWS = len(_held_rows)
 
 # ============ Pending Disavow Lines ============
 ws = wb.create_sheet('Pending Disavow Lines')
-ws.append(['Referring domain', 'Disavow line (append to the right disavow file once confirmed)',
+ws.append(['Referring domain', 'Disavow line (append to disavow.txt once confirmed)',
            'Recommendation']); hdr(ws)
+FILEOF = {'kandkmfg.com': 'disavow_kandkmfg.txt', 'gaworktrucks.com': 'disavow_gaworktrucks.txt',
+          'kandkmanufacturing.com': 'disavow_kandkmanufacturing.txt'}
 for d in EM_HOLD:
     props = sorted({x['property'] for x in byd.get(d, [])}) or [CLIENT]
-    ws.append([d, 'domain:' + d,
-               'Append only if the previous supplier does not claim it. Property: ' + ', '.join(props)])
+    ws.append([d, 'domain:' + d, 'Append only if the partner does not claim it, to '
+               + ' and '.join(FILEOF[x] for x in props)])
     style(ws, ws.max_row, WHITE)
-widths(ws, {'A': 32, 'B': 48, 'C': 62})
+widths(ws, {'A': 32, 'B': 44, 'C': 48})
 ws.freeze_panes = 'B2'; ws.auto_filter.ref = f'A1:C{ws.max_row}'
 
 # ============ Disavow List ============
@@ -387,8 +387,8 @@ for name in wb.sheetnames:
     for row in w.iter_rows():
         for c in row:
             fo = c.font
-            if fo.name != F or fo.sz not in (9, 10, 11, 21):
-                sz = fo.sz if fo.sz in (9, 10, 11, 21) else 9
+            if fo.name != F or fo.sz not in (9, 10, 11):
+                sz = fo.sz if fo.sz in (9, 10, 11) else 9
                 try: col = fo.color.rgb if (fo.color and isinstance(fo.color.rgb, str)) else None
                 except Exception: col = None
                 c.font = Font(name=F, sz=sz, b=fo.b, i=fo.i, color=col)
@@ -401,7 +401,7 @@ bad = collections.Counter()
 for name in wb.sheetnames:
     for row in wb[name].iter_rows():
         for c in row:
-            if c.value is not None and (c.font.name != F or c.font.sz not in (9, 10, 11, 21)):
+            if c.value is not None and (c.font.name != F or c.font.sz not in (9, 10, 11)):
                 bad[(name, c.font.name, c.font.sz)] += 1
 print('non-conforming cells:', dict(bad) if bad else 'none')
 
@@ -426,12 +426,19 @@ for p, fn in FILES.items():
         if p != CLIENT:
             f.write(f'# {p} redirects into kandkmfg.com, but Google processes a disavow file per\n')
             f.write(f'# property, so these lines have to be uploaded under {p} itself.\n#\n')
-        f.write(f'# Excluded: {len(EM_HOLD):,} referring domains are held out of this file pending\n')
-        f.write("# confirmation from the previous supplier (see the 'Exact Match Anchors' and\n")
-        f.write(f"# 'Pending Disavow Lines' tabs); {len(EM_NOFO):,} are nofollow and need no decision;\n")
-        f.write(f'# {len(EM_KEEP):,} are genuine placements to keep.\n#\n')
+        _pl = lambda n, one, many: f'{n:,} {one if n == 1 else many}'
+        f.write(f'# Excluded: {len(EM_HOLD):,} referring domains are held out of this file until the\n')
+        f.write('# previous SEO partner, the supplier the brief refers to, confirms what it\n')
+        f.write("# commissioned. See the 'Exact Match Anchors' and 'Pending Disavow Lines' tabs.\n")
+        f.write(f'# A further {_pl(len(EM_NOFO), "domain is", "domains are")} nofollow and need no decision, and\n')
+        f.write(f'# {_pl(len(EM_KEEP), "is a genuine placement", "are genuine placements")} to keep.\n#\n')
         f.write('# Do not submit to Google Search Console until that confirmation is complete.\n')
-        f.write('# Uploading replaces any existing disavow file. Download and merge the current one first.\n#\n')
+        if p == CLIENT:
+            f.write('# Checked on 16 Oct 2026: no disavow file is currently filed on this property,\n')
+            f.write('# so this upload adds one rather than replacing anything.\n#\n')
+        else:
+            f.write('# Uploading replaces any existing disavow file on this property. Check Search Console\n')
+            f.write('# for one and merge it in first if there is.\n#\n')
         bg = collections.defaultdict(list)
         for r in rows: bg[re.sub(r' \(covered by.*', '', r['group'])].append(r['disavow_line'])
         for g in sorted(bg, key=lambda k: -len(bg[k])):

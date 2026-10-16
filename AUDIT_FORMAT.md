@@ -44,8 +44,9 @@ One accent colour, `FF0C343D`, for header rows and for the cells the partner fil
 Everything else white. No status colour coding: the Status column carries the meaning, so
 the sheet prints legibly and nobody has to learn a key.
 
-- Font Geist throughout. Sizes 9 for data and most headers, 10 for the Summary status
-  table header and the Key findings heading, 11 for section headings, 21 for the title.
+- Font Geist throughout. Sizes 9 for data, most headers and the client name in B1, 10 for
+  the Summary status table header and the Key findings heading, 11 for section headings.
+  Nothing larger: the client shrank the title to 9 bold in the accent colour.
 - Header row: Geist 9 bold, white on `FF0C343D`, centred, wrapped, height 31.5.
 - Data rows: Geist 9, white fill, vertically centred, thin border all round.
   Height 22.5, except Referring Domain Audit at 15.75.
@@ -62,7 +63,7 @@ resolved into one of these on its own evidence.
 |--------|-------|
 | Spam (Disavow) | Confirmed spam with at least one dofollow link. In the file. |
 | Spam (Nofollow, No Action) | Spam, but every link is nofollow, so nothing passes. |
-| Held (Pending Partner) | Exact match commercial or press release anchor. Out of the file until the previous SEO partner confirms. |
+| Held (Pending Partner) | Exact match commercial or press release anchor, or a link aimed at a deep money page. Out of the file until the previous SEO partner confirms. |
 | Held (Nofollow, No Action) | Same, but nofollow, so no decision is needed. |
 | Keep | Genuine or harmless. |
 | Own Site | Client owned property or redirect. |
@@ -79,7 +80,9 @@ resolved into one of these on its own evidence.
   second referring site. Keep the row that holds the link.
 - Every row on the decision tab carries a real, checkable example backlink.
 - disavow.txt uses `domain:` lines, grouped by reason, with a header stating the count and
-  the warning not to upload before the partner has confirmed.
+  the warning not to upload before the partner has confirmed. Say whether a file is already
+  filed on the property: if one is, warn that uploading replaces it; if the client has
+  checked and there is none, say so instead of warning about a file that does not exist.
 
 ## Before sending
 
@@ -91,9 +94,10 @@ Keep or Own Site domain appears in disavow.txt. The scripts in this repo do both
 The tabs, columns and styling above do not change. These three do, and each audit should
 state which way it went.
 
-- **Who confirms the held links.** New Image Canopy had a previous SEO *partner*; K&K
-  Manufacturing's brief says *supplier*. Use the client's own word in the Held status
-  name, the decision tab's confirmation column and the disavow file header.
+- **Who confirms the held links.** The sheet says *partner* and keeps saying it, whatever
+  a client's own brief calls the role, so every audit reads the same. Where the brief uses
+  another word (K&K Manufacturing's says *supplier*) tie the two together once, in the
+  disavow file header, rather than renaming the column.
 - **One file or several.** A disavow file applies to one Search Console property. Where
   the client owns other domains that redirect into the site, their links sit on their own
   properties and need their own files, one per property, each named for it. Check the

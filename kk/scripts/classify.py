@@ -271,11 +271,11 @@ for d in sorted(ALL):
         _h = ('. The host is an article directory or bookmark farm, so the placement is low quality '
               'even if it was bought' if re.search(r'article|bookmark|directori|directory|listing|submit', d, re.I)
               else '')
-        status, grp = ('Held (Pending Supplier)' if dof else 'Held (Nofollow, No Action)',
-                       _w + ', confirm with the previous supplier who commissioned it' + _h)
+        status, grp = ('Held (Pending Partner)' if dof else 'Held (Nofollow, No Action)',
+                       _w + ', confirm with the previous partner who commissioned it' + _h)
     elif pr and rs:
-        status, grp = ('Held (Pending Supplier)' if dof else 'Held (Nofollow, No Action)',
-                       'Press release syndication, confirm with the previous supplier who commissioned it')
+        status, grp = ('Held (Pending Partner)' if dof else 'Held (Nofollow, No Action)',
+                       'Press release syndication, confirm with the previous partner who commissioned it')
     elif listed and not has_pbn:
         status, grp = 'Keep', 'Business listing or editorial mention naming the client'
     elif offtopic:
