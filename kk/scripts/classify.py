@@ -221,7 +221,9 @@ out = []
 for d in sorted(ALL):
     rs = by.get(d, [])
     sem, ahr = SEM.get(d), AHD.get(d)
-    asc = int(num(sem['domain_ascore'])) if sem else ''
+    # The bulk comparison report covers every domain, including the subdomain hosts and
+    # the Ahrefs-only sites the referring-domain report never returns.
+    asc = int(num(BETTER[d])) if d in BETTER else (int(num(sem['domain_ascore'])) if sem else '')
     dr = num(ahr['DR']) if ahr else (num(AHDR[d]) if d in AHDR else '')
     ip = sem['ip'] if sem else ''
     country = (sem['country'] if sem else '') or ''

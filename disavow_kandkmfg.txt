@@ -2,11 +2,11 @@
 # Generated 16 Oct 2026 from Semrush (priority) merged with the client Ahrefs export.
 # 1,548 domains. Source: KandK_Manufacturing_Backlinks_Audit.xlsx, "Disavow List" tab.
 #
-# Excluded: 670 referring domains are held out of this file until the
+# Excluded: 667 referring domains are held out of this file until the
 # previous SEO partner, the supplier the brief refers to, confirms what it
 # commissioned. See the 'Exact Match Anchors' and 'Pending Disavow Lines' tabs.
 # A further 2 domains are nofollow and need no decision, and
-# 1 is a genuine placement to keep.
+# 4 are genuine placements to keep.
 #
 # Do not submit to Google Search Console until that confirmation is complete.
 # Checked on 16 Oct 2026: no disavow file is currently filed on this property,
