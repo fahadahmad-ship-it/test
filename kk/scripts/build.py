@@ -408,10 +408,18 @@ print('non-conforming cells:', dict(bad) if bad else 'none')
 # ---- the three disavow files ----
 # One per Search Console property. A line only goes in the file for the property its
 # links actually point at, because that is the only file Google will apply it to.
+# Each bad domain is filed on the property its links point at (point of attribution).
+# The money site kandkmfg.com additionally receives the COMPLETE union: every owned
+# domain 301-redirects into it, and Google forwards disavow signals across a redirect
+# imperfectly, so the site being protected gets belt-and-suspenders cover. Listing a
+# domain that does not link to kandkmfg.com directly is harmless.
 byprop = collections.defaultdict(list)
 for r in dis:
-    for p in (sorted({x['property'] for x in byd.get(r['domain'], [])}) or [CLIENT]):
+    props = sorted({x['property'] for x in byd.get(r['domain'], [])}) or [CLIENT]
+    for p in props:
         byprop[p].append(r)
+    if CLIENT not in props:
+        byprop[CLIENT].append(r)
 FILES = {'kandkmfg.com': 'disavow_kandkmfg.txt',
          'gaworktrucks.com': 'disavow_gaworktrucks.txt',
          'kandkmanufacturing.com': 'disavow_kandkmanufacturing.txt'}
@@ -434,6 +442,10 @@ for p, fn in FILES.items():
         f.write(f'# {_pl(len(EM_KEEP), "is a genuine placement", "are genuine placements")} to keep.\n#\n')
         f.write('# Do not submit to Google Search Console until that confirmation is complete.\n')
         if p == CLIENT:
+            f.write('# This is the money site. It carries the COMPLETE set of bad referring domains\n')
+            f.write('# across all three owned properties, because gaworktrucks.com and\n')
+            f.write('# kandkmanufacturing.com 301-redirect into it and a disavow should cover the\n')
+            f.write('# links however Google attributes them across the redirect.\n')
             f.write('# Checked on 16 Oct 2026: no disavow file is currently filed on this property,\n')
             f.write('# so this upload adds one rather than replacing anything.\n#\n')
         else:
