@@ -161,7 +161,8 @@ SPAMTITLE = re.compile(r'(where to buy .{0,12}aged domains|directory pages index
                        r'buy backlinks|backlink (checker|generator|service)|da pa checker|'
                        # signatures read off this profile's own link farms
                        r'seo domain research|url shared|any seo resource|few of top websites|'
-                       r'aged domains and backlinks|directory pages index)', re.I)
+                       r'aged domains and backlinks|directory pages index|'
+                       r'domain list page|top domains? page|domain list \d)', re.I)
 # A URL template shared by hundreds of throwaway hosts is one operator, not a site.
 SPAMURL = re.compile(r'/domain/domain/part/|/best-for-ranking-|/share/[0-9]+$', re.I)
 DEEP = re.compile(r'kandkmfg\.com/(product|capability|industry|blog|what-is|join-our-team)', re.I)
@@ -286,7 +287,7 @@ for d in sorted(ALL):
         status, grp = ('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'), 'Automated link scheme advertising the client domain as its sales example'
     elif SPAMNAME.search(d):
         status, grp = ('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'), 'SEO tool, bookmark or link selling network domain'
-    elif spam_title or ah_spam:
+    elif spam_title:
         status, grp = ('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'), 'Templated link farm page'
     elif netblock:
         status, grp = ('Spam (Disavow)' if dof else 'Spam (Nofollow, No Action)'), f'Link network host, {_c[c24(ip)]} of the client referring domains share the {c24(ip)}.0/24 block'

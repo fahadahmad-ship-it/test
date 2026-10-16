@@ -1,6 +1,6 @@
 # K&K Manufacturing disavow file for the kandkmfg.com Search Console property
 # Generated 16 Oct 2026 from Semrush (priority) merged with the client Ahrefs export.
-# 1,548 domains. Source: KandK_Manufacturing_Backlinks_Audit.xlsx, "Disavow List" tab.
+# 1,547 domains. Source: KandK_Manufacturing_Backlinks_Audit.xlsx, "Disavow List" tab.
 #
 # Excluded: 667 referring domains are held out of this file until the
 # previous SEO partner, the supplier the brief refers to, confirms what it
@@ -1549,18 +1549,6 @@ domain:seo-revealed.club
 domain:smartwebdirectory.xyz
 domain:yourwebdirectory.xyz
 
-# --- Templated link farm page (10 domains) ---
-domain:bestwebstats.com
-domain:domain.com.lc
-domain:domains.com.bz
-domain:domainsc.com
-domain:five.co.in
-domain:jobsapp.info
-domain:pudhe.com
-domain:sergechel.info
-domain:weldrunners.com
-domain:youtoo.in
-
 # --- SEO tool, bookmark or link selling network domain. Hosted in 118.139.0.0/16, a range carrying 54 of the referring domains in this profile, so this is one network rather than an independent site (10 domains) ---
 domain:backlinkhouse.com
 domain:backlinkon.com
@@ -1572,3 +1560,14 @@ domain:getwebsiteworth.com
 domain:linksnatcher.art
 domain:linksnatcher.com
 domain:uaewebdirectory.info
+
+# --- Templated link farm page (9 domains) ---
+domain:bestwebstats.com
+domain:domain.com.lc
+domain:domains.com.bz
+domain:domainsc.com
+domain:five.co.in
+domain:jobsapp.info
+domain:pudhe.com
+domain:sergechel.info
+domain:youtoo.in
