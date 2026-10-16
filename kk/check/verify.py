@@ -103,11 +103,11 @@ offbrand = 0
 for n in wb.sheetnames:
     for row in openpyxl.load_workbook(XL)[n].iter_rows():
         for c in row:
-            if c.value is not None and (c.font.name != 'Geist' or c.font.sz not in (9, 10, 11)):
+            if c.value is not None and (c.font.name != 'Geist' or c.font.sz not in (9, 10, 11, 21)):
                 offbrand += 1
-ck(offbrand == 0, f'no populated cell uses anything but Geist at 9, 10 or 11 ({offbrand} do)')
+ck(offbrand == 0, f'no populated cell uses anything but Geist at 9, 10, 11 or 21 ({offbrand} do)')
 szs = sorted({float(m) for m in re.findall(r'<sz val="([\d.]+)"/>', styles)})
-ck(set(szs) <= {9.0, 10.0, 11.0}, f'font sizes used: {szs}')
+ck(set(szs) <= {9.0, 10.0, 11.0, 21.0}, f'font sizes used: {szs}')
 ck('FF0C343D' in styles, 'the accent colour FF0C343D is in the palette')
 names = [n for n in wb.sheetnames]
 for i, n in enumerate(names, 1):

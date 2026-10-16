@@ -5,7 +5,7 @@ ignored; differences in layout, wording of headers, widths, heights, fills, font
 alignment, freeze panes, filters and gridlines are not.
 """
 import openpyxl, sys, collections
-A = '/home/user/test/New_Image_Canopy_Backlinks_Audit.xlsx'   # the signed-off template
+A = '/home/user/test/kk/ref/NIC_signed_template.xlsx'  # authoritative signed-off template with logo
 B = '/home/user/test/KandK_Manufacturing_Backlinks_Audit.xlsx'
 wa = openpyxl.load_workbook(A); wb = openpyxl.load_workbook(B)
 diffs = []
@@ -75,7 +75,7 @@ for n in wa.sheetnames:
                               ('h align', lambda c: c.alignment.horizontal),
                               ('v align', lambda c: c.alignment.vertical),
                               ('number format', lambda c: c.number_format),
-                              ('border', lambda c: (c.border.left.style, c.border.top.style))):
+                              ('border', lambda c: ((c.border.left.style if c.border.left else None), (c.border.top.style if c.border.top else None)))):
                 if get(ca) != get(cb): d(f'data row col {i} ({hb[i-1]}) {attr}: {get(ca)!r} vs {get(cb)!r}')
     # data validation
     va = sorted(str(v.formula1) for v in sa.data_validations.dataValidation)

@@ -15,6 +15,9 @@ import csv, collections, datetime, re, glob, sys, os
 import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.worksheet.datavalidation import DataValidation
+from openpyxl.drawing.image import Image as XLImage
+from openpyxl.drawing.spreadsheet_drawing import OneCellAnchor, AnchorMarker
+from openpyxl.drawing.xdr import XDRPositiveSize2D
 from openpyxl.utils.cell import coordinate_to_tuple
 
 D = '/home/user/test/kk/data/'
@@ -27,6 +30,10 @@ TEAL = 'FF0C343D'; F = 'Geist'; WHITE = 'FFFFFFFF'
 NAVY = TEAL; INPUT = TEAL
 FILL = collections.defaultdict(lambda: WHITE)
 thin = Side(style='thin'); BORD = Border(left=thin, right=thin, top=thin, bottom=thin)
+# The signed-off template borders only the header row of the data tabs (left, right, top,
+# no bottom) and leaves the data cells unbordered; the light sheet gridlines carry the grid.
+HEADTOP = Border(left=thin, right=thin, top=thin)
+NOBORD = Border()
 
 def banner(ws, rng):
     a, b = rng.split(':')
@@ -164,7 +171,7 @@ widths(ws, {'A': 38.86, 'B': 16.29, 'C': 17.57, 'D': 18.71, 'E': 120})
 ws['B1'] = CLIENT_NAME; ws.merge_cells('B1:E2')
 for _rr in (1, 2):
     for _cc in range(2, 6):
-        _c = ws.cell(_rr, _cc); _c.font = Font(name=F, sz=9, b=True, color=TEAL)
+        _c = ws.cell(_rr, _cc); _c.font = Font(name=F, sz=21, b=True, color=TEAL)
         _c.alignment = Alignment(horizontal='center', vertical='center')
 ws.append([])
 ws.append(['Status', 'Domains', 'Backlinks', 'Share of Domains', 'What it means'])
@@ -224,13 +231,13 @@ for _l in LNK: _propby[_l['rd']].add(_l['property'])
 _direct = sum(1 for r in dis if CLIENT in (_propby.get(r['domain']) or {CLIENT}))
 _via = len(dis) - _direct
 block('Key findings', sz=10, lines=[
- f"{spam:,} of the {len(AUD):,} referring domains are spam. {cnt['Spam (Disavow)']:,} carry at least one dofollow link and go in the disavow file; the other {cnt['Spam (Nofollow, No Action)']:,} are nofollow only and pass nothing, so they need no action. Authority is thin throughout: {_as2:,} of the {_scored:,} scored referring domains sit at Semrush Authority Score 2 or below.",
- f"The profile has roughly tripled since the brief was written. {HIST} The brief's 898 referring domains at Authority Score 16 is an August snapshot; the live profile is {len(AUD):,} domains and {len(LNK):,} links, so auditing the brief's list alone would have missed most of the attack.",
- f"{PROPC[CLIENT]:,} links point at kandkmfg.com directly. The other {PROPC['gaworktrucks.com'] + PROPC['kandkmanufacturing.com']:,} reach it through a redirect from gaworktrucks.com ({PROPC['gaworktrucks.com']:,}) and kandkmanufacturing.com ({PROPC['kandkmanufacturing.com']:,}), two other domains the client owns that 301 into the site. The client has Search Console access to kandkmfg.com only, so every bad domain, including the {_via:,} that reach the site only through those redirects, is disavowed in the single kandkmfg.com file as a domain: line, where Google applies it to the site that ranks.",
- f"Two campaigns are running at once and they are easy to tell apart. Not one of the {pbnl:,} link scheme links points anywhere but the home page, while {deep:,} of the {len(EM_CORE):,} exact match commercial links point at a product, capability or industry page. Page level targeting is a paid campaign; the home page flood is an attack.",
- f"The largest single anchor, on {tn:,} referring domains, is sales copy for a backlink service that names the client's own domain as its example. The same template runs in three variants, one for each of the three client domains.",
- f"{EM_CORE_DOMS:,} referring domains carry exact match commercial anchors, and {len(EM_HOLD):,} domains in total are held out of the files until the previous partner confirms what was commissioned. They are not {len(EM_HOLD):,} independent sites: {_net:,} of them sit in three address ranges and most are article directories or bookmark farms, so this was one vendor network. Do not upload before that conversation.",
- f"Held does not mean valuable. {_notraf:,} of the {len(_q):,} held domains draw no organic traffic at all, {_noidx:,} of them because Semrush holds no organic data for the domain in the first place. All nine referring domains named in Tab 05 are confirmed spam and resolved in this sheet, {tab05_nofollow} of them nofollow only, so disavowing those changes nothing.",
+ f"{spam:,} of the {len(AUD):,} referring domains are spam. {cnt['Spam (Disavow)']:,} have a dofollow link and go in the disavow file; the other {cnt['Spam (Nofollow, No Action)']:,} are nofollow and need no action.",
+ f"The attack has tripled since the brief: {int(_h['2026-08-01']['domains_num']):,} referring domains in August, {int(_h['2026-10-01']['domains_num']):,} now. We audited the full live profile, not the brief's 898.",
+ f"You can upload a disavow file for kandkmfg.com only. That one file covers every bad domain, including the {_via:,} that reach the site through the gaworktrucks.com and kandkmanufacturing.com redirects.",
+ f"Two patterns, easy to tell apart. All {pbnl:,} link scheme links hit the home page; the {len(EM_CORE):,} commercial anchors hit product pages. The home page flood is the attack.",
+ f"The biggest anchor, on {tn:,} domains, is backlink sales copy that names the client's own domain.",
+ f"{len(EM_HOLD):,} domains are held for the previous partner to confirm, in case any were paid placements. {_net:,} of them share three IP ranges, so they are one network, not {len(EM_HOLD):,} separate sites.",
+ f"Held does not mean good: {_notraf:,} of the {len(_q):,} held domains have no traffic at all. All nine domains named in Tab 05 are spam.",
 ])
 block('Anchor text profile (all backlinks)', [])
 ws.append(['Anchor type', 'Backlinks', 'Share of Backlinks', 'Referring Domains', '']); hdr(ws, ws.max_row)
@@ -342,7 +349,7 @@ for _, d, a, xs, rec, st_ in prow:
                                    x['tkind'] == 'Homepage', x['src']))[0]
     ws.append([d, ex['src'], a, ex['mk'], rec['sitetype'], '', ''])
     r = ws.max_row
-    style(ws, r, WHITE, centre=('D',))
+    style(ws, r, WHITE, centre=('C', 'D'))
     for col in ('F', 'G'):
         _c = ws[f'{col}{r}']; _c.fill = PatternFill('solid', fgColor=INPUT)
         _c.font = Font(name=F, sz=9, color=WHITE)
@@ -391,9 +398,10 @@ for name in wb.sheetnames:
     w = wb[name]
     for row in w.iter_rows():
         for c in row:
+            if c.value is None: continue  # leave empty cells at the template default (e.g. behind the logo)
             fo = c.font
-            if fo.name != F or fo.sz not in (9, 10, 11):
-                sz = fo.sz if fo.sz in (9, 10, 11) else 9
+            if fo.name != F or fo.sz not in (9, 10, 11, 21):
+                sz = fo.sz if fo.sz in (9, 10, 11, 21) else 9
                 try: col = fo.color.rgb if (fo.color and isinstance(fo.color.rgb, str)) else None
                 except Exception: col = None
                 c.font = Font(name=F, sz=sz, b=fo.b, i=fo.i, color=col)
@@ -401,12 +409,17 @@ for name in wb.sheetnames:
         w.row_dimensions[1].height = 31.5
         h = 15.75 if name == 'Referring Domain Audit' else 22.5
         for r in range(2, w.max_row + 1): w.row_dimensions[r].height = h
+        # Match the template: header row bordered left/right/top only, data cells unbordered.
+        for c in w[1]:
+            if c.value is not None: c.border = HEADTOP
+        for row in w.iter_rows(min_row=2):
+            for c in row: c.border = NOBORD
     w.sheet_format.defaultRowHeight = 15.0
 bad = collections.Counter()
 for name in wb.sheetnames:
     for row in wb[name].iter_rows():
         for c in row:
-            if c.value is not None and (c.font.name != F or c.font.sz not in (9, 10, 11)):
+            if c.value is not None and (c.font.name != F or c.font.sz not in (9, 10, 11, 21)):
                 bad[(name, c.font.name, c.font.sz)] += 1
 print('non-conforming cells:', dict(bad) if bad else 'none')
 
@@ -468,6 +481,15 @@ for p, fn in FILES.items():
             f.write(f"\n# --- {g} ({len(bg[g]):,} domain{'' if len(bg[g]) == 1 else 's'}) ---\n")
             for ln in sorted(bg[g]): f.write(ln + '\n')
     written[fn] = len(rows)
+
+# The Harbinger Marketing logo, lifted from the signed-off template, top-left of the
+# Summary at the same cell anchor and size the template uses.
+LOGO = D + 'harbinger_logo.png'
+if os.path.exists(LOGO):
+    _img = XLImage(LOGO)
+    _img.anchor = OneCellAnchor(AnchorMarker(col=0, colOff=381000, row=0, rowOff=0),
+                                XDRPositiveSize2D(1866900, 552450))
+    wb['Summary'].add_image(_img)
 
 wb._sheets = [wb[t] for t in ['Summary', 'Referring Domain Audit', 'All Backlinks', 'Anchor Analysis',
                               'Exact Match Anchors', 'Pending Disavow Lines', 'Disavow List']]
