@@ -76,3 +76,30 @@ which is a mention, not a commercial link. Buy US food/home blogs instead.
 | thehowtohome.com | $217 | Only other site that ranks for both kitchen and recipe terms. Pay this one last. |
 
 Total $493 for three placements against $17,050 of sheet.
+
+## 5. Built-status verification — sometimes-homemade.com (19 Oct 2026)
+
+NOT BUILT. Two independent checks:
+
+1. Absent from the 559-domain built list supplied by the client.
+2. Absent from nangwizard.net's referring domains in Semrush
+   (887 ref domains, full set pulled; no sometimes-homemade.com row,
+   with or without the www prefix).
+
+Control for check 2 — the filter was proven to work before the negative
+was trusted:
+
+    refdomain = suziethefoodie.com  -> 1 link
+      https://www.suziethefoodie.com/inside-the-australian-chefs-pantry-
+        ingredients-that-never-go-out-of-style/
+      anchor: "buy nangs Melbourne"  dofollow
+
+Note on an earlier run: the same filter with operation "contains" returns
+NOTHING FOUND even for domains that are present. Only "equals" works on
+this report. Any built-check run with "contains" is void.
+
+### Side finding
+
+artofhealthyliving.com and myconsciouseating.com are on the client's built
+list but have no link in Semrush's index for nangwizard.net. Both are recent
+(Sept/Oct '26) so this may just be crawl lag — but get the live URLs.
