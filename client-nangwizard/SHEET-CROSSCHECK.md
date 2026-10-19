@@ -251,3 +251,71 @@ The four muddyrivernews.com links ($800 on the sheet) resolve under
 paid-link signal. Ask Reachgorilla whether placements are editorial or go
 into a sponsored silo BEFORE ordering, and check the same for
 rutlandherald.com.
+
+## 9. News / food / lifestyle — full closeout of the sheet (19 Oct 2026)
+
+Every remaining domain on the sheet with a news, food or lifestyle claim,
+measured. Nothing new clears the bar above rutlandherald.com and
+dorsetecho.co.uk from section 8.
+
+### The business-news trio share one signature
+
+| | citybiz.co | techround.co.uk | bmmagazine.co.uk |
+|---|---|---|---|
+| Price | $150 | $200 | $134.09 |
+| Ahrefs DR | 78 | 77 | 77 |
+| Semrush AS | 42 | 42 | 42 |
+| DR/AS gap | 36 | 35 | 35 |
+| Ref domains | 14,491 | 9,854 | 19,135 |
+| Links/RD | 20 | 28 | 22 |
+
+Three different publications landing on DR 77-78 against AS 42 is not a
+coincidence; it is the shape of a guest-post network. bmmagazine.co.uk
+does carry food content, but it is business-of-food (fertiliser shortages
+and Iran war, Morrisons supply deals, food delivery apps) — a nangs link
+sits there as an obvious paid placement, not editorial.
+
+### Second tier — defensible, with a caveat each
+
+| Domain | Price | DR/AS | Traffic | Caveat |
+|---|---|---|---|---|
+| moneymagpie.com | $680 (2) | 58/38, gap 20 | ~27k UK | Genuine consumer food/lifestyle: "where kids eat for GBP 1", food inflation, supermarket deals. But 33.7 links per ref domain, $340 each, UK compliance. |
+| maenner.media | $140 | 56/42, gap 14 | 39,143 DE | Cleanest gap in this batch and real traffic — but German-language men's lifestyle for an AU/US brand. |
+
+### Rejected
+
+| Domain | Price | DR/AS | Reason |
+|---|---|---|---|
+| xxbrits.uk | $62 | 66/40 | DR 66 off 906 referring domains. Not reachable organically. |
+| landlordtoday.co.uk | $140 | 69/34 | Gap 35. Landlord trade press, no food. |
+| brandvm.com | $238 | 73/38 | Gap 35. Marketing blog. |
+| hstoday.us | $57 | 75/45 | Gap 30. Homeland security news — the worst possible context for a nitrous oxide brand. |
+| netlingo.com | $109 | 72/46 | Gap 26. Internet-slang dictionary. No editorial. |
+| stockhouse.com | $50 | 72/51 | 1,696,323 backlinks over 19,090 ref domains = 89 links/RD. Finance. |
+| gmauthority.com | $285 | 74/51 | Real auto news, clean-ish gap of 23 — but zero food or lifestyle surface. |
+| ltcnews.com | $240 | 55/37 | Long-term care news. $240 for 2,191 ref domains. |
+| pfalz-express.de | $180 | 59/30 | Gap 29, German regional. |
+| hallelife.de | $209 | 51/32 | 51.5 links/RD, German city portal. |
+| meincharivari.de / radio-kreta.de | $210 / $180 | 38 / 41 DR | Bavarian radio and a Crete radio station. |
+
+### Competitor link-mining produced nothing
+
+Pulled the referring domains of three nangs competitors to find
+publishers that already accept this vertical:
+
+- mrnangs.com.au (3,391 ref domains) — google.xx country TLDs, forum
+  profiles, scraper sites. No publishers.
+- nangs-delivery.com.au (81) — directories and expired-domain junk.
+- galaxywhip.com — URL shorteners, .top/.xyz blog spam, SEO-service sites.
+
+The vertical as a whole is buying from low-grade pools. There is no
+competitor prospect list to mine, which is why the Reachgorilla sheet's
+few genuine publishers matter.
+
+### Correction — mantelligence.com
+
+Section 2 called it "link-inflated; authority bought, not earned". The
+DR/AS check does not support that: DR 53 / AS 41 is a gap of 12, normal.
+The real objection is different — 16,638 referring domains producing only
+~23k traffic is a site that has decayed, not one with a bought profile.
+Still not a buy at $193, but for decay, not spam.
