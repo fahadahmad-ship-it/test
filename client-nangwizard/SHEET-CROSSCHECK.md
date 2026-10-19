@@ -190,3 +190,64 @@ profile passes that risk on. Do not buy.
 | lorddecor.com | $120 | WITHDRAWN — directory-spam link profile. |
 
 Total for the two buys: $373.
+
+## 8. Second pass over the 75 available (19 Oct 2026)
+
+Ran the DR/AS gap test, links-per-refdomain, real market traffic and a
+food-section check across every remaining plausible domain. Built status
+verified in Semrush with "equals" and a live control.
+
+Control for this pass:
+
+    refdomain = muddyrivernews.com  -> 2 links, dofollow
+      https://muddyrivernews.com/business/sponsored-content/
+        australian-food-staples-everyone-loves/20251006084641/
+      anchor: "nangs on the Gold Coast"
+
+### Two genuine finds
+
+| | rutlandherald.com | dorsetecho.co.uk |
+|---|---|---|
+| Price | $128.06 | $51.93 |
+| Ahrefs DR | 72 | 71 |
+| Semrush AS | 47 | 50 |
+| DR/AS gap | 25 | 21 |
+| Ref domains | 9,314 | 7,423 |
+| Links/RD | 54 | 15.5 |
+| Traffic | 64,041 (US) | 170,762 (UK) |
+| Food desk | /features/food/ — egg drop soup, seared scallops, breakfast sausage, mussels in beer | /leisure/foodanddrink/restaurantreviews/ — Michelin Guide, Weymouth fish restaurants |
+| Built for nangwizard | No | No |
+
+Both are real regional newspapers with staffed food sections, the two
+highest authority scores on the whole sheet, and among the cheapest.
+The gaps of 21-25 are normal for newspapers (wire syndication and nav
+sitewides inflate DR against AS); this is not the directory-spam
+signature seen on lorddecor.com.
+
+dorsetecho.co.uk carries the UK nitrous-oxide problem from section 3 and
+is UK-only traffic. rutlandherald.com has neither issue.
+
+### Rejected on this pass
+
+| Domain | Price | Reason |
+|---|---|---|
+| austindailyherald.com | $120 | 2,188,267 backlinks across 11,199 ref domains = 195 links per domain. Sitewide/footer linking at scale. |
+| homebusinessmag.com | $93 | DR 71 / AS 41, gap 30, and 69 links per ref domain. Business content, no food. |
+| luxurylaunches.com | $325 | DR 68 / AS 38, gap 30. Luxury gadgets, not food. |
+| mayfair-london.co.uk | $336 | ~14k UK-only traffic for $336. Overpriced, and UK compliance. |
+| homeia.com | $260 | 841 US visits/month. |
+| humansofglobe.com | $145 | 83 US visits/month. |
+| housesitmatch.com | $88 | ~1.9k UK. House-sitting, no food. |
+| sustainhealth.fit | $105 | Traffic is South Africa and Ireland, ~2.6k. |
+| fiftyandfab.co.uk | $90 | DR 25 / AS 29 — clean, but 894 ref domains and negligible traffic. |
+| thetinyhouse.net | $195 | ~9.6k, DR 48 / AS 29. |
+| movingtobend.com | $100 | DR 16. Bend, Oregon only. |
+| exploringthenorth.com | $60 | DR 54 / AS 31 off 6,429 ref domains against ~8.1k traffic. Ratio does not hold up. |
+
+### Side finding — the muddyrivernews placements are labelled sponsored
+
+The four muddyrivernews.com links ($800 on the sheet) resolve under
+/business/sponsored-content/. A sponsored-content directory is an explicit
+paid-link signal. Ask Reachgorilla whether placements are editorial or go
+into a sponsored silo BEFORE ordering, and check the same for
+rutlandherald.com.
