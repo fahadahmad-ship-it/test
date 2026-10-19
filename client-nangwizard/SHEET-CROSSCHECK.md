@@ -103,3 +103,90 @@ this report. Any built-check run with "contains" is void.
 artofhealthyliving.com and myconsciouseating.com are on the client's built
 list but have no link in Semrush's index for nangwizard.net. Both are recent
 (Sept/Oct '26) so this may just be crawl lag — but get the live URLs.
+
+## 6. Built-status verification — grandmashousediy.com (19 Oct 2026)
+
+NOT BUILT.
+
+1. Absent from the 559-domain built list (exact and fuzzy match on
+   grandma / housediy / house-diy; only hit was grandmagazine.com).
+2. Absent from nangwizard.net's referring domains in Semrush, as
+   grandmashousediy.com and as www.grandmashousediy.com.
+
+Control (filter proven live before the negative was trusted):
+
+    refdomain = thepaintedhinge.com  -> 1 link
+      https://www.thepaintedhinge.com/the-smarter-way-to-stock-up-on-
+        cream-chargers-for-busy-kitchens/
+      anchor: "cream charger wholesale"  dofollow
+
+Also not linking to three nangs competitors (nangs-delivery.com.au,
+mrnangs.com.au, galaxywhip.com), all of which do have Semrush backlink
+data. It is not a recycled nangs link farm.
+
+### Link profile: clean
+
+| | grandmashousediy.com |
+|---|---|
+| Ahrefs DR | 41 |
+| Semrush AS | 30 |
+| DR/AS gap | 11 (normal) |
+| Ref domains | 4,746 |
+| Links per ref domain | 6.6 |
+
+Top referrers are genuine craft/homemaking blog-hop links — hometalk.com
+(AS 42), thepaintedapron.com (27), indahnuria.com (21),
+dining-delight.blogspot.com (19), debbie-dabbleblog.blogspot.com (18),
+classicalhomemaking.com (14). Low authority but organic blogger-community
+linking. No directories, no PBN naming patterns.
+
+### The real objection: traffic, not quality
+
+~7.9k global organic. Top pages are DIY, not food: "how to care for it"
+(pos 1, 1,300 vol), "wall painting colors" (pos 2), "diy doggie door"
+(pos 1). One recipe page (pulled pork, pos 2, 590 vol). Traffic is spread
+thin, no single page dominating — so not a one-hit-wonder, just small.
+
+Verdict: safe but overpriced at $179.24 for ~7.9k traffic and a mostly
+non-food audience. Buy only after the stronger picks.
+
+## 7. CORRECTION — lorddecor.com withdrawn from the recommended order
+
+Section 4 recommended lorddecor.com at $120. Withdrawn. The DR/AS gap
+check I had not yet run on it:
+
+| | lorddecor.com |
+|---|---|
+| Ahrefs DR | 73 |
+| Semrush AS | 36 |
+| DR/AS gap | 37 |
+| Ref domains | 3,870 |
+
+DR 73 off only 3,870 referring domains is not achievable organically. Its
+top referrers say why:
+
+| Referring domain | AS | Links |
+|---|---|---|
+| poordirectory.com | 5 | 4,465 |
+| trafficdirectory.org | 6 | 1,981 |
+| futuristichomeus.com | 2 | 1,703 |
+| blackgreendirectory.com | 13 | 957 |
+| zenithecho.com | 2 | 548 |
+| piratedirectory.org | 5 | 373 |
+| askology.biz | 2 | 277 |
+| askpandi.com | 2 | 181 |
+
+A directory-spam network. The ~175k traffic and the kitchen rankings are
+real, but the authority is bought, and a link from a site carrying this
+profile passes that risk on. Do not buy.
+
+### Revised order
+
+| Domain | Price | Status |
+|---|---|---|
+| sometimes-homemade.com | $156 | BUY. DR 41 / AS 46 — AS above DR, the healthy direction. 2.4 links/RD. ~160k traffic. Real recipe editorial. |
+| thehowtohome.com | $217 | BUY. DR 46 / AS 36, gap 10. Only other site ranking for both kitchen and recipe terms. |
+| grandmashousediy.com | $179.24 | Optional. Clean profile, thin traffic, DIY-first audience. |
+| lorddecor.com | $120 | WITHDRAWN — directory-spam link profile. |
+
+Total for the two buys: $373.
