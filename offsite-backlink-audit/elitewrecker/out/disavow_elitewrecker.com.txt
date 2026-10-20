@@ -2,7 +2,7 @@
 # Prepared by Harbinger Marketing. Generated 2026-10-20 from the full live
 # Semrush + Ahrefs referring-domain profile (subdomains scope).
 #
-# Domains in this file: 1661 (Status = Spam (Disavow): confirmed spam with >=1 dofollow link).
+# Domains in this file: 1660 (Status = Spam (Disavow): confirmed spam with >=1 dofollow link).
 # This file is for the elitewrecker.com Search Console property and is the FULL UNION
 # of every bad domain, including links that reach the site via the elitewrecker.net 301.
 # elitewrecker.net is client-owned and redirects in; disavow is uploaded to elitewrecker.com only.
@@ -1177,7 +1177,6 @@ domain:pbnbacklinks.site
 domain:pecah77gacor.site
 domain:perfectwebseo.link
 domain:phanerosart.com
-domain:pineywoods.online
 domain:piolo.shop
 domain:plako.shop
 domain:plavo.shop

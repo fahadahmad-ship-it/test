@@ -411,11 +411,9 @@ def classify(info):
     # 10 spam page title / url template -> Spam
     if any(spam_title(t) for t in info["titles"]) or any(spam_url(l) for l in [info["ex_page"]]):
         return "Spam (Disavow)" if dofollow>0 else "Spam (Nofollow, No Action)"
-    # 11 junk TLD + naked/empty-only anchors + low AS + points home => corroborated spam
-    only_cheap = all(anchor_type(x) in ("Naked URL","Empty or image","Generic") for x in [l["anchor"] for l in dom_links[dom]]) if dom_links[dom] else False
-    net = info["ip"] and net24.get("/".join(info["ip"].split(".")[:3]),0) >= 5
-    if junk_tld(dom) and only_cheap and (as_num is None or as_num < 5) and (net or nofollow>0 or dofollow>0):
-        return "Spam (Disavow)" if dofollow>0 else "Spam (Nofollow, No Action)"
+    # 11 (playbook): a junk TLD / shared IP is NEVER evidence on its own. No disavow here.
+    #    Every spam domain is already caught above by a spam anchor, spam page title, or
+    #    spam host name. Anything reaching this point has no visible spam evidence -> Keep.
     # 12 else Keep
     return "Keep"
 
