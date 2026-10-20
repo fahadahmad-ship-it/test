@@ -87,7 +87,8 @@ for p in sorted(glob.glob(D + "/rd/semrush_refdomains_*.csv")):
         refmeta.setdefault(dom, {})
         refmeta[dom].update({"ip": d.get("ip",""), "country": d.get("country",""),
                              "sem_first": ts_to_date(d.get("first_seen","")),
-                             "sem_rd_backlinks": d.get("backlinks_num","")})
+                             "sem_rd_backlinks": d.get("backlinks_num",""),
+                             "sem_rd_as": d.get("as","")})
 
 # Ahrefs refdomains (tab, quoted). Header has trailing spaces on some cols.
 with io.open(D + "/ahrefs_refdomains.tsv", "r", encoding="utf-8-sig") as f:
@@ -210,10 +211,10 @@ def anchor_type(a):
     if al == "" : return "Empty or image"
     if is_offtopic(a): return "Spam: off topic"
     if is_spam_anchor(a): return "Spam: keyword stuffed SEO sales copy"
-    if is_commercial(a):
-        return "Exact match commercial (geo)" if has_geo(a) else "Exact match commercial"
     if is_naked_url(a): return "Naked URL"
     if is_branded(a): return "Branded"
+    if is_commercial(a):
+        return "Exact match commercial (geo)" if has_geo(a) else "Exact match commercial"
     if al in GENERIC_SET: return "Generic"
     return "Contextual or other"
 
@@ -320,29 +321,21 @@ for dom, ls in dom_links.items():
     meta = refmeta.get(dom, {})
     a = as_data.get(dom, {})
     rk = rank_data.get(dom, {})
-    as_val = a.get("as","")
+    # AS: comparison report first; fall back to referring-domain report domain_ascore
+    as_val = a.get("as","") or meta.get("sem_rd_as","")
+    as_src = "comparison" if a.get("as","") else ("refdomains" if meta.get("sem_rd_as","") else "none")
     try: as_num = float(as_val) if as_val not in ("", None) else None
     except: as_num = None
     dofollow = sum(1 for l in ls if not l["nofollow"])
     nofollow = sum(1 for l in ls if l["nofollow"])
     anchors = [l["anchor"] for l in ls]
     types = Counter(anchor_type(x) for x in anchors)
-    has_spam = any(is_spam_anchor(x) or is_offtopic(x) for x in anchors)
-    has_off = any(is_offtopic(x) for x in anchors)
-    has_comm = any(is_commercial(x) for x in anchors)
-    # deep money-page target?
-    def deep(l):
-        pp = path_of(l["target"]);
-        if l.get("prop") and l["prop"] not in OWNED: pass
-        return pp not in ("","/", "/contact","/contact/","/contact-us","/contact-us/") and (
-            "/service" in pp or "/tow" in pp or "/heavy" in pp or "/recovery" in pp or "/wrecker" in pp
-            or "/roadside" in pp or len(pp.strip("/").split("/"))>=2 or pp.strip("/") not in ("",))
-    points_deep = any(l["target"] and path_of(l["target"]) not in ("","/") and
-                      path_of(l["target"]) not in ("/contact","/contact/","/contact-us","/contact-us/")
-                      for l in ls)
-    deep_commercial = any((is_commercial(l["anchor"]) or True) and
-                          path_of(l["target"]).startswith(("/service","/tow","/heavy","/recovery","/wrecker","/roadside","/service-area"))
-                          for l in ls)
+    # domain flags derived from anchor TYPE (spam/brand precedence already applied)
+    has_off  = types.get("Spam: off topic",0) > 0
+    has_spam = has_off or types.get("Spam: keyword stuffed SEO sales copy",0) > 0
+    has_comm = (types.get("Exact match commercial",0) + types.get("Exact match commercial (geo)",0)) > 0
+    MONEY_PATHS = ("/service","/tow","/heavy","/recovery","/wrecker","/roadside","/flatbed","/service-area")
+    deep = any(path_of(l["target"]).startswith(MONEY_PATHS) for l in ls)
     # top anchor (by frequency, prefer dofollow)
     top_anchor = Counter(anchors).most_common(1)[0][0] if anchors else ""
     # example linking page: prefer a dofollow, http200, with a title
@@ -357,15 +350,15 @@ for dom, ls in dom_links.items():
     ts = set(l["tool"] for l in ls)
     tool = "Both" if ts=={"Both"} or len(ts)>1 or "Both" in ts else (list(ts)[0] if ts else "Semrush")
     domains[dom] = {
-        "domain":dom, "as":as_num, "as_raw":as_val,
-        "backlinks": a.get("backlinks") or str(len(ls)),
+        "domain":dom, "as":as_num, "as_raw":as_val, "as_src":as_src,
+        "backlinks": a.get("backlinks") or meta.get("sem_rd_backlinks") or str(len(ls)),
         "rds": a.get("rds",""), "traffic": rk.get("traffic",0), "keywords": rk.get("keywords",0),
         "dofollow":dofollow, "nofollow":nofollow, "nlinks":len(ls),
         "first_seen":first_seen, "top_anchor":top_anchor,
         "ex_page": ex["src"] if ex else "", "ex_title": ex["title"] if ex else "",
         "links_point_to":links_point_to, "ip":meta.get("ip",""), "country":meta.get("country",""),
         "tool":tool, "has_spam":has_spam, "has_off":has_off, "has_comm":has_comm,
-        "points_deep":points_deep, "deep_commercial":deep_commercial,
+        "deep":deep,
         "ahrefs_spam":meta.get("ahrefs_spam",False), "types":dict(types),
         "titles":[l["title"] for l in ls],
     }
@@ -389,7 +382,7 @@ def classify(info):
     dom = info["domain"]; as_num = info["as"]
     dofollow = info["dofollow"]; nofollow = info["nofollow"]
     anchors_spam = info["has_spam"]; off = info["has_off"]; comm = info["has_comm"]
-    deep = info["deep_commercial"]
+    deep = info["deep"]
     # 1 owned
     if dom in OWNED: return "Own Site"
     # 2 AS>=20 genuine
@@ -435,15 +428,15 @@ import os; os.makedirs(OUT, exist_ok=True)
 # domains_classified.csv
 with io.open(OUT+"/domains_classified.csv","w",encoding="utf-8",newline="") as f:
     w=csv.writer(f)
-    w.writerow(["domain","status","as","backlinks","rds","traffic","keywords","dofollow","nofollow",
+    w.writerow(["domain","status","as","as_src","backlinks","rds","traffic","keywords","dofollow","nofollow",
                 "first_seen","top_anchor","example_page","example_title","links_point_to","tool","ip",
-                "ahrefs_spam","points_deep","deep_commercial","has_spam","has_comm"])
+                "ahrefs_spam","deep","has_spam","has_comm"])
     for d in sorted(domains):
         i=domains[d]
-        w.writerow([d,i["status"],i["as_raw"],i["backlinks"],i["rds"],i["traffic"],i["keywords"],
+        w.writerow([d,i["status"],i["as_raw"],i["as_src"],i["backlinks"],i["rds"],i["traffic"],i["keywords"],
                     i["dofollow"],i["nofollow"],i["first_seen"],i["top_anchor"],i["ex_page"],i["ex_title"],
-                    i["links_point_to"],i["tool"],i["ip"],i["ahrefs_spam"],i["points_deep"],
-                    i["deep_commercial"],i["has_spam"],i["has_comm"]])
+                    i["links_point_to"],i["tool"],i["ip"],i["ahrefs_spam"],
+                    i["deep"],i["has_spam"],i["has_comm"]])
 
 # links_classified.csv
 with io.open(OUT+"/links_classified.csv","w",encoding="utf-8",newline="") as f:

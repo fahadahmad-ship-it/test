@@ -160,7 +160,7 @@ def main():
     # Key findings heading
     kf=ws.cell(row=r,column=1,value="Key findings"); kf.font=Font(name=GEIST,size=10,bold=True,color="FF000000")
     kf.alignment=Alignment(vertical="center"); kfrow=r; r+=1
-    findings=build_findings(doms,by_status,stats,links)
+    findings=build_findings(doms,by_status,stats,links,anchors)
     for fnd in findings:
         ws.merge_cells(start_row=r,start_column=1,end_row=r,end_column=5)
         c=ws.cell(row=r,column=1,value=fnd); c.font=dfont(); c.alignment=Alignment(vertical="center",wrap_text=True)
@@ -211,17 +211,19 @@ def main():
     for l in sorted(links,key=lambda x:x["referring_domain"]):
         rows.append([l["referring_domain"],l["status"],l["tool"],l["anchor"],l["anchor_type"],
                      l["link_type"],l["linking_page_url"],l["linking_page_title"],l["target_url"]])
-    write_data_tab(wb,"All Backlinks",cols,rows,22.5)
+    ws_ab=write_data_tab(wb,"All Backlinks",cols,rows,22.5)
+    ws_ab["C1"].alignment=Alignment(horizontal="left",vertical="center",wrap_text=True)  # template quirk
 
     # ========== ANCHOR ANALYSIS ==========
     cols=[("Anchor Text",115.86,"l",None,0),("Anchor Type",37.71,"l",None,0),("Backlinks",14,"c","#,##0",0),
-          ("Share of Backlinks",8.71,"c","0.00%",0),("Referring Domains",14,"c","#,##0",0),
+          ("Share of Backlinks",8.71,"c","0.00%",0),("Referring Domains",13,"c","#,##0",0),
           ("Spam Domains Using It",20.29,"c","#,##0",0)]
     rows=[]
     for a in anchors:
         rows.append([a["anchor"],a["type"],int(float(a["backlinks"])),float(a["share"]),
                      int(float(a["refdomains"])),int(float(a["spam_domains"]))])
-    write_data_tab(wb,"Anchor Analysis",cols,rows,22.5)
+    ws_aa=write_data_tab(wb,"Anchor Analysis",cols,rows,22.5)
+    ws_aa["A1"].alignment=Alignment(horizontal="center",vertical="center",wrap_text=False)  # template quirk
 
     # ========== EXACT MATCH ANCHORS ==========  (Held domains w/ commercial anchors)
     cols=[("Referring domain",25.43,"l",None,0),("Example backlink (linking page)",59,"l",None,0),
@@ -229,21 +231,27 @@ def main():
           ("Site type (indicative)",24.57,"l",None,0),("Partner confirmed? (Y/N)",15.43,"l",None,1),
           ("Final decision",15,"l",None,1)]
     # pick, per held domain, a commercial-anchor example link
-    held=[d for d in doms if d["status"].startswith("Held")]
+    held={d["domain"] for d in doms if d["status"].startswith("Held")}
     link_by_dom=defaultdict(list)
     for l in links: link_by_dom[l["referring_domain"]].append(l)
     rows=[]
-    for d in sorted(held,key=lambda x:x["domain"]):
-        exl=None
-        for l in link_by_dom[d["domain"]]:
-            if l["anchor_type"].startswith("Exact match"): exl=l; break
-        if exl is None:
-            # held via deep-page link; use any link
-            exl=link_by_dom[d["domain"]][0] if link_by_dom[d["domain"]] else None
-        anc=exl["anchor"] if exl else d["top_anchor"]
-        page=exl["linking_page_url"] if exl else d["example_page"]
-        rows.append([d["domain"],page,anc,market_of(anc),sitetype_of(d["domain"],exl["linking_page_title"] if exl else ""),
-                     "None","None"])
+    for dom in sorted(held):
+        ls=link_by_dom[dom]
+        # one row per distinct exact-match commercial anchor (geo or not)
+        seen={}
+        for l in ls:
+            if l["anchor_type"].startswith("Exact match"):
+                a=l["anchor"]
+                if a not in seen: seen[a]=l
+        if not seen:
+            # held via deep-page link w/ non-commercial anchor: one row w/ representative link
+            l=ls[0] if ls else None
+            a=l["anchor"] if l else ""
+            seen[a]=l
+        for a,l in sorted(seen.items()):
+            page=l["linking_page_url"] if l else ""
+            title=l["linking_page_title"] if l else ""
+            rows.append([dom,page,a,market_of(a),sitetype_of(dom,title),"None","None"])
     write_data_tab(wb,"Exact Match Anchors",cols,rows,22.5)
 
     # ========== PENDING DISAVOW LINES ==========  (Held domains)
@@ -273,26 +281,32 @@ def main():
     # ---- disavow.txt (.com union) ----
     write_disavow(dis, by_status)
 
-def build_findings(doms,by_status,stats,links):
+def build_findings(doms,by_status,stats,links,anchors):
+    from collections import Counter
     n=len(doms)
     spam_dis=len(by_status.get("Spam (Disavow)",[]))
     spam_nf=len(by_status.get("Spam (Nofollow, No Action)",[]))
-    held=len(by_status.get("Held (Pending Partner)",[]))+len(by_status.get("Held (Nofollow, No Action)",[]))
     held_pp=len(by_status.get("Held (Pending Partner)",[]))
-    keep=len(by_status.get("Keep",[]))
     spam_total=spam_dis+spam_nf
-    at=stats["anchor_types"]
-    seo=at.get("Spam: keyword stuffed SEO sales copy",{"bl":0,"rd":0})
-    # home vs deep (recompute from links)
-    home_spam=sum(1 for l in links if l["anchor_type"].startswith("Spam") and (l["target_url"].rstrip('/').endswith(".com") or l["target_url"].rstrip('/').endswith("elitewrecker.com")))
+    # single biggest spam anchor (by referring domains), like K&K
+    spam_anc=[a for a in anchors if a["type"].startswith("Spam")]
+    top_anc=max(spam_anc,key=lambda a:int(float(a["refdomains"]))) if spam_anc else None
+    top_anc_rd=int(float(top_anc["refdomains"])) if top_anc else 0
+    # held IP concentration (/16)
+    net16=Counter()
+    for d in by_status.get("Held (Pending Partner)",[]):
+        ip=d["ip"]
+        if ip and ip.count(".")==3: net16[".".join(ip.split(".")[:2])]+=1
+    ip3=sum(c for _,c in net16.most_common(3))
+    top3=", ".join(f"{k}.x" for k,_ in net16.most_common(3))
     held_notraffic=sum(1 for d in by_status.get("Held (Pending Partner)",[]) if int(d["traffic"])==0)
     f=[]
     f.append(f"{spam_total:,} of the {n:,} referring domains are spam. {spam_dis:,} have a dofollow link and go in the disavow file; the other {spam_nf:,} are nofollow and need no action.")
-    f.append(f"The attack has roughly tripled since the brief: 762 referring domains in the brief's April snapshot, {n:,} across the full live Semrush+Ahrefs profile now. We audited the full live profile, not the brief's 762.")
+    f.append(f"The attack has more than tripled since the brief: Semrush showed 762 referring domains in the brief's April snapshot and 2,142 now; the full live Semrush+Ahrefs profile we audited is {n:,}. We audited the full live profile, not the brief's 762.")
     f.append(f"You can upload a disavow file for {MONEY_SITE} only. That one file covers every bad domain, including the links that reach the site through the elitewrecker.net 301 redirect.")
     f.append("Two patterns, easy to tell apart: the link-scheme flood points only at the home page, while the commercial-anchor links point at deep /services location pages. The home-page flood is the attack.")
-    f.append(f"The biggest spam anchor is backlink sales copy that names the client's own domain (e.g. “elitewrecker.com Premium Authority Backlinks…”), on {seo['rd']:,} referring domains.")
-    f.append(f"{held_pp:,} domains are held for the previous supplier/Harbinger to confirm, in case any were paid placements — almost all are low-quality directory and article-network pages on shared IP ranges, i.e. one network, not {held_pp:,} separate sites.")
+    f.append(f"The biggest single spam anchor is backlink sales copy naming the client's own domain (“elitewrecker.com Premium Authority Backlinks for Better Search Visibility”), on {top_anc_rd:,} referring domains.")
+    f.append(f"{held_pp:,} domains are held for the previous supplier/Harbinger to confirm, in case any were paid placements. {ip3:,} of them sit in three hosting ranges ({top3}), so they are one directory/article network, not {held_pp:,} separate sites.")
     f.append(f"Held does not mean good: {held_notraffic:,} of the {held_pp:,} held (pending) domains have no organic traffic at all. The paid-link / PBN and Telegram clusters named in the brief are all confirmed spam.")
     return f
 
