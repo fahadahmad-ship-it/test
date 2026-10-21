@@ -1,0 +1,8 @@
+# Regenerable intermediates (rebuild with load.py / classify.py from raw data)
+data/joined.json
+data/classified.json
+data/chunks/
+data/all_domains.txt
+# subagent scratch
+process_page.py
+data/fetch/_parts/
