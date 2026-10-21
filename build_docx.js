@@ -180,9 +180,12 @@ C.push(callout('HOW WE SOURCED THIS ARTICLE', [
   bulletLink('Web testing framework: ', 'OWASP Top 10', URL.owasp, ', Open Worldwide Application Security Project.'),
 ], 'F8FAFC', GREY));
 
-// About + internal links
-C.push(new Paragraph({ children: [run('')], spacing: { after: 60 } }));
-C.push(new Paragraph({ children: [run('About DiseaseFix:  ', { bold: true, color: DARK, size: 18 }), run('DiseaseFix publishes patient focused health and medical information for readers worldwide.', { color: GREY, size: 18 })], spacing: { after: 50 } }));
+// About the author / editorial process (generic staff bio for E-E-A-T)
+C.push(new Paragraph({ children: [run('')], spacing: { after: 40 } }));
+C.push(callout('ABOUT THE DISEASEFIX HEALTH DESK', [
+  new Paragraph({ spacing: { after: 0, line: 282 }, children: [run('This article was researched and written by the DiseaseFix Health Desk, the publication’s in house editorial team covering health, medicine, and the systems that protect patient data. Every piece is checked against primary and authoritative sources, government regulations, official guidance, and named industry reports, before it is published, and figures are updated as newer data is released. DiseaseFix publishes patient focused health information for readers worldwide.', { color: DARK, size: 19 })] }),
+], 'F8FAFC', TEAL));
+C.push(new Paragraph({ children: [run('')], spacing: { after: 40 } }));
 C.push(new Paragraph({ children: [link('About', URL.about), run('     ', { size: 18 }), link('Diseases and conditions', URL.conditions), run('     ', { size: 18 }), link('Write for us', URL.write)], spacing: { after: 60 } }));
 C.push(new Paragraph({ children: [run('This article is for general information and does not constitute legal or medical advice.', { italics: true, color: GREY, size: 16 })], spacing: { after: 60 } }));
 
