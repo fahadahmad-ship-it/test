@@ -75,16 +75,23 @@ def main():
     client_named = []
     for d in fileset:
         r = by_domain[d]
-        ev_anchor = ev_title = ev_host = False
+        ev_anchor = ev_title = ev_host = ev_coclient = False
+        # the referring domain's own name is a member of the vendor's network
+        if (d not in cfg.OWNED_DOMAINS) and any(tok in d for tok in cfg.PBN_COCLIENT_TOKENS):
+            ev_coclient = True
         for l in r.get("links", []):
             a = (l.get("anchor") or ""); t = (l.get("source_title") or "")
+            rdr = (l.get("redirect_url") or "")
             if any_sig(a, cfg.SPAM_ANCHOR_SIGNATURES) or any_sig(a, cfg.SPAM_SOFT_SIGNATURES) or any_sig(a, cfg.OFFTOPIC_TOKENS):
                 ev_anchor = True
-            if any_sig(t, cfg.SPAM_TITLE_SIGNATURES) or "backlink" in t.lower() or re.search(r"page\s*[\d,]{3,}", t.lower()) or "premium backlink" in t.lower():
+            if any_sig(t, cfg.SPAM_TITLE_SIGNATURES) or any_sig(t, cfg.SPAM_SOFT_SIGNATURES) or "backlink" in t.lower() or re.search(r"page\s*[\d,]{3,}", t.lower()) or "premium backlink" in t.lower() or "seo resource" in t.lower() or "resellers" in t.lower():
                 ev_title = True
+            # anchor or redirect names another client of the same vendor network
+            if any(tok in a.lower() for tok in cfg.PBN_COCLIENT_TOKENS) or any(tok in rdr.lower() for tok in cfg.PBN_COCLIENT_TOKENS):
+                ev_coclient = True
         if any(s in d for s in cfg.SPAM_HOST_SIGNATURES) or re.search(r"\.(shop|online|xyz|site|space|store|icu|club|monster|wiki|biz|sbs|click|link|live|today|fun|life|cfd|rest|lol)$", d):
             ev_host = True
-        if not (ev_anchor or ev_title or ev_host):
+        if not (ev_anchor or ev_title or ev_host or ev_coclient):
             no_ev.append(d)
         # a client-naming title WITHOUT sales copy = genuine citation
         for l in r.get("links", []):
@@ -137,12 +144,15 @@ def main():
                         "Anchor Analysis", "Exact Match Anchors",
                         "Pending Disavow Lines", "Disavow List"]
             check(names == expected, f"tabs present and in order: {names}")
-            # header-name check per tab via XML shared strings presence
+            # header-name check per tab by reading the saved sheet cell values
+            blob = ""
             with zipfile.ZipFile(xlsx) as z:
-                shared = z.read("xl/sharedStrings.xml").decode("utf-8", "replace")
+                for n in z.namelist():
+                    if n.startswith("xl/") and n.endswith(".xml"):
+                        blob += z.read(n).decode("utf-8", "replace")
             for h in ["Referring Domain", "Anchor Type", "Disavow Line", "In Disavow",
                       "Exact-match commercial anchor", "Partner confirmed? (Y/N)"]:
-                check(h in shared, f"header string present: {h!r}")
+                check(h in blob, f"header string present: {h!r}")
             wb.close()
         except Exception as e:
             print(f"  WARN  workbook read failed: {e}"); WARN.append(str(e))

@@ -283,6 +283,28 @@ def load_as_override(metrics_dir):
     return out
 
 
+def load_rank(metrics_dir):
+    import glob, html
+    out = {}
+    if not metrics_dir:
+        return out
+    for p in glob.glob(os.path.join(metrics_dir, "*rank*.csv")):
+        with open(p, encoding="utf-8", errors="replace") as fh:
+            for line in fh:
+                line = html.unescape(line.strip())
+                if not line or line.lower().startswith("domain;"):
+                    continue
+                parts = line.split(";")
+                if len(parts) < 4:
+                    continue
+                dd = parts[0].strip().lower()
+                try:
+                    out[dd] = (int(parts[3]), int(parts[2]))  # (traffic, keywords)
+                except (ValueError, IndexError):
+                    continue
+    return out
+
+
 def main():
     joined = json.load(open(sys.argv[1], encoding="utf-8"))
     cfg = load_config(sys.argv[2])
@@ -291,9 +313,15 @@ def main():
     as_override = load_as_override(metrics_dir)
     if as_override:
         sys.stderr.write(f"[classify] authoritative AS loaded for {len(as_override)} domains\n")
+    rank = load_rank(metrics_dir)
+    if rank:
+        sys.stderr.write(f"[classify] organic metrics loaded for {len(rank)} domains\n")
     domains = joined["domains"]
     for rec in domains.values():
         classify_domain(rec, cfg, as_override)
+        if rec["domain"] in rank:
+            rec["organic_traffic"] = rank[rec["domain"]][0]
+            rec["organic_keywords"] = rank[rec["domain"]][1]
 
     from collections import Counter
     counts = Counter(r["status"] for r in domains.values())
