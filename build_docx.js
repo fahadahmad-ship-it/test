@@ -27,7 +27,6 @@ const URL = {
   write: 'https://www.diseasefix.com/write-for-us/',
 };
 
-// ---- helpers -------------------------------------------------------------
 function link(text, url) {
   return new ExternalHyperlink({ link: url, children: [new TextRun({ text, style: 'Hyperlink', color: LINK, underline: {} })] });
 }
@@ -36,7 +35,7 @@ function para(children, opts = {}) {
   return new Paragraph({ children: Array.isArray(children) ? children : [run(children)], spacing: { after: 170, line: 290 }, ...opts });
 }
 function crosshead(text) {
-  return new Paragraph({ children: [run(text, { bold: true, color: TEAL, size: 26 })], spacing: { before: 300, after: 120 }, heading: HeadingLevel.HEADING_1 });
+  return new Paragraph({ children: [run(text, { bold: true, color: TEAL, size: 26 })], spacing: { before: 300, after: 120 }, heading: HeadingLevel.HEADING_2 });
 }
 function bullet(children) {
   return new Paragraph({ children: Array.isArray(children) ? children : [run(children)], numbering: { reference: 'bullets', level: 0 }, spacing: { after: 90, line: 282 } });
@@ -63,47 +62,46 @@ function stat(figure, labelText) {
   return new Paragraph({ spacing: { after: 70, line: 276 }, children: [run(figure + '  ', { bold: true, color: DARK, size: 24 }), run(labelText, { color: DARK, size: 19 })] });
 }
 
-// ---- content -------------------------------------------------------------
 const C = [];
 
-C.push(new Paragraph({ children: [run('To Protect Your Medical Records, Hospitals Are Paying People to Break In', { bold: true, color: DARK, size: 40 })], spacing: { after: 110 } }));
+// Title = semantic H1
+C.push(new Paragraph({ heading: HeadingLevel.HEADING_1, spacing: { after: 110 },
+  children: [run('To Protect Your Medical Records, Hospitals Are Paying People to Break In', { bold: true, color: DARK, size: 40 })] }));
 C.push(new Paragraph({ children: [run('HIPAA penetration testing has become a quiet front line in the fight to keep patient data out of criminal hands. Here is how it works, and why regulators increasingly expect it.', { italics: true, color: GREY, size: 23 })], spacing: { after: 140 } }));
 C.push(new Paragraph({ children: [
   run('By the DiseaseFix Health Desk', { bold: true, color: DARK, size: 18 }),
-  run('   ·   Reviewed against primary sources   ·   Published October 21, 2026   ·   6 minute read', { color: GREY, size: 18 }),
+  run('   ·   Reviewed against primary sources   ·   Published October 21, 2026   ·   5 minute read', { color: GREY, size: 18 }),
 ], spacing: { after: 150 } }));
 C.push(hr());
 
 // Lede
 C.push(para([run('Somewhere on a hospital network tonight, someone is trying to steal patient records. In a growing number of cases, the hospital hired them to do it.', { size: 23 })]));
-C.push(para([
-  run('The practice is called penetration testing. In plain terms, it is an authorized, simulated cyberattack on the systems that hold patient data: skilled specialists try to break in the way a criminal would, then hand over a map of every weakness they find so it can be fixed before anyone else does. In American healthcare it has moved from a niche technical chore to a front line defense for some of the most sensitive information a person owns.'),
-]));
+C.push(para('The practice is called penetration testing. In plain terms, it is an authorized, simulated cyberattack on the systems that hold patient data: skilled specialists try to break in the way a criminal would, then hand over a map of every weakness they find so it can be fixed before anyone else does. In American healthcare it has moved from a niche technical chore to a central defense for some of the most sensitive information a person owns.'));
 C.push(para('It is a strange arrangement, and an increasingly common one. Medical records are prized by criminals precisely because they cannot be reset. A stolen bank card can be canceled in minutes; a diagnosis, a prescription history, or a genetic result cannot be canceled and reissued. The cost of getting security wrong, measured in dollars and in exposed lives, has pushed hospitals, device makers, and health technology startups toward a counterintuitive conclusion: the surest way to learn whether your defenses hold is to attack them yourself.'));
 
 // A crime that pays
 C.push(crosshead('A crime that pays'));
 C.push(para([
   run('For criminals, healthcare is a rich and reliable target. The '),
-  link('IBM Cost of a Data Breach Report 2025', URL.ibm),
-  run(' put the average healthcare breach at 7.42 million dollars, down from 9.77 million a year earlier but still the costliest of any industry, a distinction healthcare has now held for fourteen years running. The report, which studied 600 organizations hit between March 2024 and February 2025, found the global average across all industries at 4.44 million, with financial services the next most expensive sector at 5.56 million.'),
+  link('IBM Cost of a Data Breach Report 2026', URL.ibm),
+  run(' put the average healthcare breach at 6.64 million dollars. That is down about 10 percent from the year before, and healthcare was the only sector whose costs fell, yet it remains the most expensive industry to breach, a distinction it has held for well over a decade. The report, which studied 602 organizations hit between March 2025 and February 2026, found the global average across all industries at 4.99 million.'),
 ]));
 C.push(para([
-  run('Those figures stay abstract until you remember what sits inside the records. The same information readers come to DiseaseFix to understand, whether they are researching '),
-  link('heart conditions', URL.heart),
+  run('Two cautions keep those numbers honest. They are global averages, and in the United States, where this story unfolds, breach costs run far higher and rose again this year. The healthcare figure also rests on a small slice of the organizations studied. Still, the direction is unmistakable, and the stakes stay abstract only until you remember what sits inside the records. The same information readers come to DiseaseFix to understand, whether they are researching a heart condition like '),
+  link('pericarditis', URL.heart),
   run(', '),
   link('cancer', URL.cancers),
   run(', or '),
   link('kidney disease', URL.kidney),
-  run(', is exactly what a breach spills into the open. Healthcare was also the slowest sector to respond, taking 279 days on average to identify and contain a breach. Once that data is loose, it stays loose.'),
+  run(', is exactly what a breach spills into the open. Healthcare is also routinely the slowest sector to detect and contain an intrusion, often taking the better part of a year. Once that data is loose, it stays loose.'),
 ]));
 
-C.push(callout('BY THE NUMBERS: HEALTHCARE DATA BREACHES, 2025', [
-  stat('7.42M', 'dollars: the average cost of a healthcare data breach, the highest of any industry'),
-  stat('14', 'straight years healthcare has been the costliest industry to breach'),
-  stat('279', 'days, on average, to identify and contain a healthcare breach'),
-  stat('4.44M', 'dollars: the global average breach across all industries'),
-  new Paragraph({ children: [run('Source: IBM Cost of a Data Breach Report 2025.', { italics: true, color: GREY, size: 17 })], spacing: { before: 40, after: 0 } }),
+C.push(callout('BY THE NUMBERS: HEALTHCARE DATA BREACHES, 2026', [
+  stat('6.64M', 'dollars: the average cost of a healthcare data breach, the highest of any industry'),
+  stat('7.42M', 'dollars: last year’s healthcare average; costs fell about 10 percent, the only sector to drop'),
+  stat('4.99M', 'dollars: the global average breach across all industries'),
+  stat('602', 'organizations studied, breached between March 2025 and February 2026'),
+  new Paragraph({ children: [run('Source: IBM Cost of a Data Breach Report 2026.', { italics: true, color: GREY, size: 17 })], spacing: { before: 40, after: 0 } }),
 ]));
 
 // The rule
@@ -111,16 +109,16 @@ C.push(crosshead('The rule that never says "penetration test"'));
 C.push(para([
   run('The law at the center of all this is the Health Insurance Portability and Accountability Act, passed in 1996 and known to nearly everyone as HIPAA. Its Security Rule requires any organization handling electronic protected health information, shortened to ePHI, to protect that data’s confidentiality, integrity, and availability. Tucked into the regulation, at '),
   link('45 CFR 164.308(a)(1)(ii)(A)', URL.cfr),
-  run(', is a requirement that sounds mundane and turns out to be the whole ballgame: a thorough risk analysis.'),
+  run(', is a requirement that sounds mundane and turns out to be the crux of the matter: a thorough risk analysis, meaning a documented study of where patient data could be exposed and how badly.'),
 ]));
 C.push(para('Here is the catch. HIPAA never uses the words penetration test. It describes the destination, not the route. It tells organizations to understand where patient data could be exposed and leaves the method to them. That gap, between what the law demands and how an organization proves it has delivered, is where the testers make their living.'));
 
 // Breaking in
 C.push(crosshead('Breaking in, on purpose'));
 C.push(para([
-  run('A penetration test is a controlled, authorized rehearsal of a real attack. Specialist firms that perform '),
+  run('A penetration test is a controlled, authorized rehearsal of a real attack. That is the premise behind '),
   link('hipaa penetration testing', URL.anchor),
-  run(' narrow the work to the systems that create, store, or move patient data, then tie every finding back to the Security Rule so it feeds the risk analysis the law requires. Web applications are measured against the '),
+  run(', work that narrows the search to the systems that create, store, or move patient data and ties every finding back to the Security Rule so it feeds the risk analysis the law requires. Web applications are measured against the '),
   link('OWASP Top 10', URL.owasp),
   run(', the widely used catalog of the most critical web security flaws maintained by the Open Worldwide Application Security Project. Testers chase down business logic errors and places where records could leak, and, crucially, they return after the fixes to confirm the holes are truly closed.'),
 ]));
@@ -148,20 +146,25 @@ C.push(para('Which is why, somewhere on a hospital network tonight, a hired stra
 
 C.push(hr());
 
-// FAQ
+// FAQ (section head H2, questions H3)
 C.push(crosshead('Questions readers ask'));
 const faqs = [
   ['What is HIPAA penetration testing?',
    'HIPAA penetration testing is an authorized, simulated cyberattack on the systems that store or transmit electronic protected health information. Ethical testers try to breach those systems the way a criminal would, then report every weakness so it can be fixed and documented in the risk analysis the HIPAA Security Rule requires.'],
-  ['Is a penetration test required by HIPAA?',
+  ['Does HIPAA require penetration testing?',
    'Not by name. HIPAA requires a documented risk analysis under 45 CFR 164.308(a)(1)(ii)(A), but it does not list penetration testing as a mandatory step. A test is one of the clearest ways to satisfy and strengthen that risk analysis, not a separate legal mandate.'],
-  ['How often should a healthcare organization test?',
+  ['How often should a healthcare organization run a penetration test?',
    'There is no fixed legal frequency. Office for Civil Rights guidance says to repeat the risk analysis whenever systems or circumstances change. Many organizations settle on at least once a year, and again after any major change such as a new application or device.'],
+  ['How much does HIPAA penetration testing cost?',
+   'There is no standard price. The cost depends on how many systems, applications, and devices fall in scope, and whether the work covers networks, web applications, or connected medical devices. A single application test and a full health system assessment are very different jobs, so reputable providers price only after scoping the environment.'],
+  ['What is the difference between a penetration test and a vulnerability scan?',
+   'A vulnerability scan is automated. It checks systems against a database of known weaknesses and produces a list. A penetration test goes further: a human tester tries to exploit those weaknesses to confirm which are genuinely dangerous and how far a real attacker could get.'],
   ['Who is qualified to run the test?',
    'Authorized security professionals, whether an internal team or a specialist outside firm. What matters is explicit authorization, healthcare specific scoping of the systems that hold ePHI, and a report that maps each finding back to the HIPAA Security Rule.'],
 ];
 for (const [q, a] of faqs) {
-  C.push(new Paragraph({ children: [run(q, { bold: true, color: DARK, size: 21 })], spacing: { before: 150, after: 50 }, heading: HeadingLevel.HEADING_2 }));
+  C.push(new Paragraph({ heading: HeadingLevel.HEADING_3, spacing: { before: 150, after: 50 },
+    children: [run(q, { bold: true, color: DARK, size: 21 })] }));
   C.push(para(a));
 }
 
@@ -169,8 +172,8 @@ C.push(hr());
 
 // Sourcing box
 C.push(callout('HOW WE SOURCED THIS ARTICLE', [
-  new Paragraph({ children: [run('Every figure and claim here is drawn from primary sources and reflects the most recent data available at publication. We do not paraphrase secondhand summaries where an original exists.', { color: DARK, size: 19 })], spacing: { after: 90 } }),
-  bulletLink('Breach costs and response times: ', 'IBM Cost of a Data Breach Report 2025', URL.ibm, '.'),
+  new Paragraph({ children: [run('Every figure and claim here is drawn from primary sources and reflects the most recent data available at publication. Industry breach costs rest on a subset of the organizations studied and are global averages; United States costs run higher. We do not paraphrase secondhand summaries where an original exists.', { color: DARK, size: 19 })], spacing: { after: 90 } }),
+  bulletLink('Breach costs and response times: ', 'IBM Cost of a Data Breach Report 2026', URL.ibm, '.'),
   bulletLink('Risk analysis requirement: ', '45 CFR 164.308(a)(1)(ii)(A)', URL.cfr, ', U.S. electronic Code of Federal Regulations.'),
   bulletLink('Regulator guidance: ', 'HHS Office for Civil Rights risk analysis guidance', URL.hhsRisk, ' (first issued 2010).'),
   bulletLink('Enforcement actions: ', 'HHS OCR resolution agreements and civil money penalties', URL.hhsEnforce, ', including the Bryan County Ambulance Authority settlement.'),
@@ -185,16 +188,15 @@ C.push(new Paragraph({ children: [run('This article is for general information a
 
 C.push(hr());
 
-// Editor publishing notes (AEO/GEO/SEO)
+// Editor publishing notes
 C.push(callout('EDITOR’S PUBLISHING NOTES (SEO / AEO)', [
   new Paragraph({ spacing: { after: 70, line: 276 }, children: [run('Meta title:  ', { bold: true, color: DARK, size: 18 }), run('HIPAA Penetration Testing: Why Hospitals Hire Ethical Hackers', { color: DARK, size: 18 })] }),
-  new Paragraph({ spacing: { after: 70, line: 276 }, children: [run('Meta description:  ', { bold: true, color: DARK, size: 18 }), run('What HIPAA penetration testing is, what the HIPAA Security Rule actually requires, and why healthcare breaches averaged 7.42 million dollars in 2025.', { color: DARK, size: 18 })] }),
+  new Paragraph({ spacing: { after: 70, line: 276 }, children: [run('Meta description:  ', { bold: true, color: DARK, size: 18 }), run('What HIPAA penetration testing is, what the HIPAA Security Rule actually requires, and why healthcare breaches averaged 6.64 million dollars in 2026.', { color: DARK, size: 18 })] }),
   new Paragraph({ spacing: { after: 70, line: 276 }, children: [run('Suggested slug:  ', { bold: true, color: DARK, size: 18 }), run('hipaa-penetration-testing-healthcare-data', { color: DARK, size: 18 })] }),
   new Paragraph({ spacing: { after: 70, line: 276 }, children: [run('Primary keyword:  ', { bold: true, color: DARK, size: 18 }), run('hipaa penetration testing', { color: DARK, size: 18 })] }),
-  new Paragraph({ spacing: { after: 0, line: 276 }, children: [run('Recommended structured data:  ', { bold: true, color: DARK, size: 18 }), run('Add Article and FAQPage JSON-LD (map the four questions above) to strengthen answer engine and generative search visibility.', { color: DARK, size: 18 })] }),
+  new Paragraph({ spacing: { after: 0, line: 276 }, children: [run('Structured data:  ', { bold: true, color: DARK, size: 18 }), run('Ship the companion file HIPAA-Penetration-Testing-DiseaseFix.schema.html (Article + FAQPage JSON-LD) in the page head.', { color: DARK, size: 18 })] }),
 ], 'FFFBEB', 'B45309'));
 
-// ---- document ------------------------------------------------------------
 const doc = new Document({
   creator: 'DiseaseFix Health Desk',
   title: 'To Protect Your Medical Records, Hospitals Are Paying People to Break In',
@@ -204,4 +206,4 @@ const doc = new Document({
   sections: [{ properties: { page: { size: { width: 12240, height: 15840 }, margin: { top: 1080, bottom: 1080, left: 1300, right: 1300 } } }, children: C }],
 });
 
-Packer.toBuffer(doc).then((buf) => { fs.writeFileSync('HIPAA-Penetration-Testing-DiseaseFix.docx', buf); console.log('Wrote', buf.length, 'bytes'); });
+Packer.toBuffer(doc).then((buf) => { fs.writeFileSync('HIPAA-Penetration-Testing-DiseaseFix.docx', buf); console.log('Wrote docx', buf.length, 'bytes'); });
