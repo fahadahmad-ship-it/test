@@ -1,7 +1,7 @@
 const {
   Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType,
   ExternalHyperlink, Table, TableRow, TableCell, WidthType, BorderStyle,
-  ShadingType, LevelFormat, PageOrientation,
+  ShadingType, LevelFormat,
 } = require('docx');
 const fs = require('fs');
 
@@ -10,6 +10,23 @@ const DARK = '1F2937';
 const GREY = '6B7280';
 const LINK = '1155CC';
 const RULE = 'D1D5DB';
+
+// ---- external authoritative sources (E-E-A-T / GEO) ----------------------
+const URL = {
+  ibm: 'https://www.ibm.com/reports/data-breach',
+  owasp: 'https://owasp.org/www-project-top-ten/',
+  hhsRisk: 'https://www.hhs.gov/hipaa/for-professionals/security/guidance/guidance-risk-analysis',
+  cfr: 'https://www.ecfr.gov/current/title-45/section-164.308',
+  anchor: 'https://bluegoatcyber.com/services/hipaa-penetration-testing',
+  // internal
+  home: 'https://www.diseasefix.com/',
+  about: 'https://www.diseasefix.com/about/',
+  conditions: 'https://www.diseasefix.com/diseases-and-conditions/',
+  heart: 'https://www.diseasefix.com/heart/pericarditis/',
+  cancers: 'https://www.diseasefix.com/cancers/',
+  kidney: 'https://www.diseasefix.com/kidney-health/',
+  write: 'https://www.diseasefix.com/write-for-us/',
+};
 
 // ---- helpers -------------------------------------------------------------
 function link(text, url) {
@@ -23,72 +40,55 @@ function run(text, opts = {}) { return new TextRun({ text, ...opts }); }
 function para(children, opts = {}) {
   return new Paragraph({
     children: Array.isArray(children) ? children : [run(children)],
-    spacing: { after: 160, line: 276 },
+    spacing: { after: 170, line: 290 },
     ...opts,
   });
 }
-
-function h1(text) {
+function crosshead(text) {
   return new Paragraph({
-    children: [run(text, { bold: true, color: TEAL, size: 30 })],
-    spacing: { before: 320, after: 140 },
+    children: [run(text, { bold: true, color: TEAL, size: 26 })],
+    spacing: { before: 300, after: 120 },
     heading: HeadingLevel.HEADING_1,
   });
 }
-function h2(text) {
-  return new Paragraph({
-    children: [run(text, { bold: true, color: DARK, size: 24 })],
-    spacing: { before: 220, after: 100 },
-    heading: HeadingLevel.HEADING_2,
-  });
-}
-
 function bullet(children) {
   return new Paragraph({
     children: Array.isArray(children) ? children : [run(children)],
     numbering: { reference: 'bullets', level: 0 },
-    spacing: { after: 90, line: 276 },
+    spacing: { after: 90, line: 282 },
   });
 }
-function numbered(children) {
-  return new Paragraph({
-    children: Array.isArray(children) ? children : [run(children)],
-    numbering: { reference: 'steps', level: 0 },
-    spacing: { after: 100, line: 276 },
-  });
-}
-
 function hr() {
   return new Paragraph({
-    spacing: { before: 120, after: 120 },
+    spacing: { before: 140, after: 140 },
     border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: RULE, space: 1 } },
     children: [run('')],
   });
 }
 
-// shaded callout box (single cell table)
-function callout(titleText, bodyChildren, fill = 'ECFDF5', barColor = TEAL) {
+// shaded sidebar / callout
+function callout(titleText, bodyChildren, fill = 'F0FDFA', barColor = TEAL) {
   const cell = new TableCell({
-    width: { size: 9360, type: WidthType.DXA },
+    width: { size: 9180, type: WidthType.DXA },
     shading: { type: ShadingType.CLEAR, fill, color: 'auto' },
-    margins: { top: 120, bottom: 120, left: 180, right: 180 },
+    margins: { top: 140, bottom: 140, left: 190, right: 190 },
     borders: {
       top: { style: BorderStyle.SINGLE, size: 2, color: fill },
       bottom: { style: BorderStyle.SINGLE, size: 2, color: fill },
       right: { style: BorderStyle.SINGLE, size: 2, color: fill },
-      left: { style: BorderStyle.SINGLE, size: 24, color: barColor },
+      left: { style: BorderStyle.SINGLE, size: 26, color: barColor },
     },
     children: [
       new Paragraph({
-        children: [run(titleText, { bold: true, color: barColor, size: 20 })],
-        spacing: { after: 80 },
+        children: [run(titleText, { bold: true, color: barColor, size: 19 })],
+        spacing: { after: 90 },
       }),
       ...bodyChildren,
     ],
   });
   return new Table({
-    columnWidths: [9360],
-    width: { size: 9360, type: WidthType.DXA },
+    columnWidths: [9180],
+    width: { size: 9180, type: WidthType.DXA },
     borders: {
       top: { style: BorderStyle.NONE }, bottom: { style: BorderStyle.NONE },
       left: { style: BorderStyle.NONE }, right: { style: BorderStyle.NONE },
@@ -97,244 +97,199 @@ function callout(titleText, bodyChildren, fill = 'ECFDF5', barColor = TEAL) {
     rows: [new TableRow({ children: [cell] })],
   });
 }
-
-// data table
-function cell(children, { header = false, w = 3120 } = {}) {
-  return new TableCell({
-    width: { size: w, type: WidthType.DXA },
-    shading: header ? { type: ShadingType.CLEAR, fill: TEAL, color: 'auto' }
-      : { type: ShadingType.CLEAR, fill: 'F9FAFB', color: 'auto' },
-    margins: { top: 70, bottom: 70, left: 110, right: 110 },
-    children: [new Paragraph({
-      children: Array.isArray(children) ? children
-        : [run(children, { bold: header, color: header ? 'FFFFFF' : DARK, size: 19 })],
-      spacing: { after: 0 },
-    })],
+// a stat line inside the fact box
+function stat(figure, labelText) {
+  return new Paragraph({
+    spacing: { after: 70, line: 276 },
+    children: [
+      run(figure + '  ', { bold: true, color: DARK, size: 24 }),
+      run(labelText, { color: DARK, size: 19 }),
+    ],
   });
 }
 
 // ---- content -------------------------------------------------------------
-const children = [];
+const C = [];
 
-// Title block
-children.push(new Paragraph({
-  children: [run('Why Hospitals Now Hire Hackers to Protect Your Medical Records', { bold: true, color: DARK, size: 40 })],
-  spacing: { after: 100 },
+// Headline + dek + byline (journalistic masthead)
+C.push(new Paragraph({
+  children: [run('To Protect Your Medical Records, Hospitals Are Paying People to Break In', { bold: true, color: DARK, size: 40 })],
+  spacing: { after: 110 },
 }));
-children.push(new Paragraph({
-  children: [run('Inside the quiet security work that keeps electronic patient records out of criminal hands', { italics: true, color: GREY, size: 22 })],
-  spacing: { after: 120 },
+C.push(new Paragraph({
+  children: [run('Penetration testing has become a quiet front line in the fight to keep patient data out of criminal hands. Here is how it works, and why regulators increasingly expect it.', { italics: true, color: GREY, size: 23 })],
+  spacing: { after: 140 },
 }));
-children.push(new Paragraph({
+C.push(new Paragraph({
   children: [
-    run('DiseaseFix Health Desk', { color: GREY, size: 18 }),
-    run('   |   Updated October 21, 2026', { color: GREY, size: 18 }),
-    run('   |   7 minute read', { color: GREY, size: 18 }),
+    run('By the DiseaseFix Health Desk', { bold: true, color: DARK, size: 18 }),
+    run('   ·   Reviewed against primary sources   ·   Published October 21, 2026   ·   6 minute read', { color: GREY, size: 18 }),
   ],
-  spacing: { after: 160 },
+  spacing: { after: 150 },
 }));
-children.push(hr());
+C.push(hr());
 
-// Quick answer (AEO)
-children.push(callout('QUICK ANSWER', [
-  para([
-    run('HIPAA penetration testing is an authorized, simulated cyberattack on the systems that hold electronic patient data. Ethical security testers try to break in the way a criminal would, then report every weakness so a healthcare organization can fix it before a real breach happens. HIPAA does not name the practice by law, but it does require a documented risk analysis, and a penetration test is one of the clearest ways to prove those protections actually work. For scoped healthcare engagements, specialist firms offer '),
-    link('hipaa penetration testing', 'https://bluegoatcyber.com/services/hipaa-penetration-testing'),
-    run(' that maps each finding back to the HIPAA Security Rule.'),
-  ], { spacing: { after: 0, line: 276 } }),
+// Lede (narrative)
+C.push(para([run('Somewhere on a hospital network tonight, someone is trying to steal patient records. In a growing number of cases, the hospital hired them to do it.', { size: 23 })]));
+
+C.push(para('The practice is called penetration testing, and in American healthcare it has moved from a niche technical chore to a front line defense for some of the most sensitive information a person owns. The testers are paid to think like criminals, to find the unlocked digital doors before anyone with bad intentions does, and to hand over a map of every weakness they find.'));
+
+// Nut graf
+C.push(para('It is a strange arrangement, and an increasingly common one. Medical records have become one of the most valuable targets online, worth more on criminal markets than stolen card numbers because a diagnosis cannot be canceled and reissued. The cost of getting security wrong, measured in dollars and in exposed lives, has pushed hospitals, device makers, and health technology startups toward a counterintuitive conclusion: the surest way to learn whether your defenses hold is to attack them yourself.'));
+
+// A crime that pays
+C.push(crosshead('A crime that pays'));
+C.push(para([
+  run('For criminals, healthcare is a rich and reliable target. The '),
+  link('IBM Cost of a Data Breach Report for 2024', URL.ibm),
+  run(' put the average healthcare breach at 9.77 million dollars, the costliest of any industry for the fourteenth year in a row. The next closest sector, financial services, averaged 6.08 million. Across all industries the global average was 4.88 million.'),
 ]));
-
-// Key takeaways
-children.push(h2('Key takeaways'));
-children.push(bullet('Healthcare has been the most expensive industry for data breaches for fourteen years running, averaging 9.77 million dollars per breach in 2024.'));
-children.push(bullet('HIPAA never uses the words penetration test, yet it requires a thorough risk analysis under 45 CFR 164.308(a)(1)(ii)(A).'));
-children.push(bullet('A penetration test simulates a real attack, then maps each finding to the HIPAA Security Rule so results feed directly into that required risk analysis.'));
-children.push(bullet('Federal regulators have fined organizations specifically for inadequate risk analysis, not just for breaches themselves.'));
-children.push(bullet('Testing is not a one time task; experts advise repeating it regularly and after any major change to systems or devices.'));
-
-// Intro
-children.push(h1('A trail of data follows every patient'));
-children.push(para('Every time a patient fills out an intake form, refills a prescription, or logs in to a health portal, a trail of deeply personal information moves across computer systems. That information, known in regulatory language as electronic protected health information, or ePHI, has become one of the most valuable prizes for criminals online. Stolen medical records often sell for more than stolen payment card numbers, in part because a diagnosis or a medical history cannot simply be canceled and reissued the way a bank card can.'));
-children.push(para([
-  run('The information at stake is exactly the kind DiseaseFix readers research every day, whether they are learning about '),
-  link('heart conditions', 'https://www.diseasefix.com/heart/pericarditis/'),
+C.push(para([
+  run('Those figures are abstract until you remember what sits inside the records. The same information readers come to DiseaseFix to understand, whether they are researching '),
+  link('heart conditions', URL.heart),
   run(', '),
-  link('cancer care', 'https://www.diseasefix.com/cancers/'),
+  link('cancer', URL.cancers),
   run(', or '),
-  link('kidney and urological disease', 'https://www.diseasefix.com/kidney-health/'),
-  run('. When that data leaks, the harm is personal and permanent.'),
-]));
-children.push(para('Against this backdrop, a growing number of hospitals, medical device makers, and health technology startups are turning to a practice that sounds counterintuitive at first: they pay skilled professionals to break into their own systems.'));
-
-// What is it
-children.push(h1('What is HIPAA penetration testing?'));
-children.push(para('A penetration test is a controlled, authorized simulation of a real attack. Security specialists probe networks, web applications, and connected medical devices the way a criminal would, documenting every weakness they find before anyone with harmful intent does. A HIPAA focused test narrows that work to the systems that create, store, or transmit patient data, then maps each finding back to the Security Rule so the results feed directly into the risk analysis the law demands.'));
-children.push(para('The approach borrows from established industry frameworks. Web application assessments, for example, commonly measure a system against the OWASP Top 10, a widely referenced list of the most critical web application security risks maintained by the Open Worldwide Application Security Project. Testers also examine business logic and look specifically for places where protected health information might leak into the wrong hands.'));
-
-// Why attackers (stats table)
-children.push(h1('Why does patient data attract so many attackers?'));
-children.push(para('Because it is costly to lose. The figures below come from the IBM Cost of a Data Breach Report 2024, one of the most widely cited annual studies of breach economics.'));
-
-children.push(new Table({
-  columnWidths: [4680, 2340, 2340],
-  width: { size: 9360, type: WidthType.DXA },
-  borders: {
-    top: { style: BorderStyle.SINGLE, size: 2, color: RULE },
-    bottom: { style: BorderStyle.SINGLE, size: 2, color: RULE },
-    left: { style: BorderStyle.SINGLE, size: 2, color: RULE },
-    right: { style: BorderStyle.SINGLE, size: 2, color: RULE },
-    insideHorizontal: { style: BorderStyle.SINGLE, size: 2, color: RULE },
-    insideVertical: { style: BorderStyle.SINGLE, size: 2, color: RULE },
-  },
-  rows: [
-    new TableRow({ tableHeader: true, children: [
-      cell('Metric', { header: true, w: 4680 }),
-      cell('Figure', { header: true, w: 2340 }),
-      cell('Year', { header: true, w: 2340 }),
-    ]}),
-    new TableRow({ children: [
-      cell('Average healthcare data breach cost', { w: 4680 }),
-      cell('9.77 million dollars', { w: 2340 }),
-      cell('2024', { w: 2340 }),
-    ]}),
-    new TableRow({ children: [
-      cell('Consecutive years healthcare ranked costliest industry', { w: 4680 }),
-      cell('14', { w: 2340 }),
-      cell('2024', { w: 2340 }),
-    ]}),
-    new TableRow({ children: [
-      cell('Next costliest industry (financial services)', { w: 4680 }),
-      cell('6.08 million dollars', { w: 2340 }),
-      cell('2024', { w: 2340 }),
-    ]}),
-    new TableRow({ children: [
-      cell('Global average breach cost, all industries', { w: 4680 }),
-      cell('4.88 million dollars', { w: 2340 }),
-      cell('2024', { w: 2340 }),
-    ]}),
-  ],
-}));
-children.push(para([run('Source: IBM Cost of a Data Breach Report 2024.', { italics: true, color: GREY, size: 18 })]));
-
-// What HIPAA requires
-children.push(h1('What does HIPAA actually require?'));
-children.push(para('The federal law that governs this space is the Health Insurance Portability and Accountability Act, passed in 1996 and known to most people simply as HIPAA. Its Security Rule requires any organization that handles ePHI to protect the confidentiality, integrity, and availability of that data. One of the rule’s required provisions, listed at 45 CFR 164.308(a)(1)(ii)(A), is a thorough risk analysis.'));
-children.push(para('Notably, HIPAA never uses the phrase penetration test. The law describes outcomes, not tools. It asks organizations to evaluate their safeguards and understand where patient data could be exposed, then leaves the method of doing so to each organization. That space between what the law requires and how an organization satisfies it is where hands on security testing enters the picture.'));
-
-// How it works (numbered)
-children.push(h1('How does a HIPAA penetration test work?'));
-children.push(para('Most engagements move through a clear sequence. The exact steps vary by provider, but the shape is consistent.'));
-children.push(numbered('Scope the environment. The tester identifies every system that creates, stores, or transmits ePHI, from portals and databases to connected medical devices.'));
-children.push(numbered('Gather intelligence. The team maps the attack surface the way an outsider would, looking for exposed services and weak entry points.'));
-children.push(numbered('Attempt controlled exploitation. Testers safely try to exploit the weaknesses they find, confirming which are real rather than theoretical.'));
-children.push(numbered('Map findings to HIPAA. Each confirmed issue is tied back to the Security Rule so it feeds the organization’s required risk analysis.'));
-children.push(numbered('Report and review. The organization receives a prioritized report, usually followed by a review session and a plan to fix the highest risks first.'));
-children.push(numbered('Retest. After fixes are applied, a focused retest confirms the holes are actually closed.'));
-
-// Regulators
-children.push(h1('What do regulators expect?'));
-children.push(para('Regulators have made clear that the paperwork of compliance is not enough on its own. The Department of Health and Human Services, through its Office for Civil Rights, enforces HIPAA and has sharpened its focus on risk analysis in particular. In a recent enforcement initiative centered on ransomware cases, the office identified inadequate risk analysis as the common failure across multiple settlements, which together totaled more than 1.1 million dollars in payments.'));
-children.push(para('Office for Civil Rights guidance, first issued in 2010, stresses that no single method guarantees compliance and points organizations toward resources from the National Institute of Standards and Technology. It also declines to set a fixed testing schedule, advising instead that organizations repeat their analysis whenever their systems or circumstances change.'));
-
-// Patients
-children.push(h1('Why this matters for patients'));
-children.push(para('For patients, this activity is invisible, and that is largely the point. A security program that works well produces no headlines at all. But the stakes are real. A breach can expose mental health histories, HIV status, genetic information, and other details that cannot be undone once they are public.'));
-children.push(para([
-  run('The broader lesson, security professionals say, is cultural. Protecting patient data is no longer solely the job of an IT department tucked away in a back office. It now touches clinicians, administrators, and the third party companies that handle data on a hospital’s behalf. Readers who want to understand the conditions behind those records can explore the full '),
-  link('list of diseases and conditions', 'https://www.diseasefix.com/diseases-and-conditions/'),
-  run(' on DiseaseFix. In an era when a single weak password can compromise thousands of records, hiring someone trustworthy to find that weakness first has quietly become one of the more important forms of patient care.'),
+  link('kidney disease', URL.kidney),
+  run(', is exactly what a breach spills into the open. Once it is loose, it stays loose.'),
 ]));
 
-// FAQ (AEO/GEO)
-children.push(h1('Frequently asked questions'));
+// Fact box (AEO + journalistic sidebar)
+C.push(callout('BY THE NUMBERS: HEALTHCARE DATA BREACHES, 2024', [
+  stat('9.77M', 'dollars: the average cost of a healthcare data breach'),
+  stat('14', 'straight years healthcare has been the costliest industry to breach'),
+  stat('6.08M', 'dollars: the next costliest sector, financial services'),
+  stat('4.88M', 'dollars: the global average breach across all industries'),
+  new Paragraph({
+    children: [run('Source: IBM Cost of a Data Breach Report 2024.', { italics: true, color: GREY, size: 17 })],
+    spacing: { before: 40, after: 0 },
+  }),
+]));
 
+// The rule that never says penetration test
+C.push(crosshead('The rule that never says "penetration test"'));
+C.push(para([
+  run('The law at the center of all this is the Health Insurance Portability and Accountability Act, passed in 1996 and known to nearly everyone as HIPAA. Its Security Rule requires any organization handling electronic protected health information, shortened to ePHI, to protect that data’s confidentiality, integrity, and availability. Tucked into the regulation, at '),
+  link('45 CFR 164.308(a)(1)(ii)(A)', URL.cfr),
+  run(', is a requirement that sounds mundane and turns out to be the whole ballgame: a thorough risk analysis.'),
+]));
+C.push(para('Here is the catch. HIPAA never uses the words penetration test. It describes the destination, not the route. It tells organizations to understand where patient data could be exposed and leaves the method to them. That gap, between what the law demands and how an organization proves it has delivered, is where the testers make their living.'));
+
+// Breaking in, on purpose
+C.push(crosshead('Breaking in, on purpose'));
+C.push(para([
+  run('A penetration test is a controlled, authorized rehearsal of a real attack. Specialist firms that perform '),
+  link('hipaa penetration testing', URL.anchor),
+  run(' narrow the work to the systems that create, store, or move patient data, then tie every finding back to the Security Rule so it feeds the risk analysis the law requires. Web applications are measured against the '),
+  link('OWASP Top 10', URL.owasp),
+  run(', the widely used catalog of the most critical web security flaws maintained by the Open Worldwide Application Security Project. Testers chase down business logic errors and places where records could leak, and, crucially, they come back after the fixes to confirm the holes are truly closed.'),
+]));
+C.push(para('The work follows a familiar arc: scope the systems that touch ePHI, map the attack surface the way an outsider would, attempt controlled exploitation, separate the real risks from the theoretical ones, and deliver a prioritized report. A test, practitioners are quick to stress, is a snapshot. It captures one moment, in one scope, and the ground keeps shifting as new devices and applications come online.'));
+
+// What the regulators are watching
+C.push(crosshead('What the regulators are watching'));
+C.push(para('Washington has made its expectations clear, and the message is that filing the right paperwork is not the same as being secure. The Department of Health and Human Services enforces HIPAA through its Office for Civil Rights, and the office has trained its attention on risk analysis in particular. In a recent enforcement push focused on ransomware, it found the same failure again and again, inadequate risk analysis, across settlements that together topped 1.1 million dollars.'));
+C.push(para([
+  run('The office’s '),
+  link('risk analysis guidance', URL.hhsRisk),
+  run(', first issued in 2010, is pointed but not prescriptive. No single method guarantees compliance, it says, and it steers organizations toward the resources of the National Institute of Standards and Technology. It sets no fixed schedule either, telling organizations to repeat the work whenever their systems or circumstances change. In practice, that has nudged many toward testing at least once a year, and again after any significant change.'),
+]));
+
+// Why none of this reaches the patient
+C.push(crosshead('Why none of this reaches the patient'));
+C.push(para('For the people whose records are at stake, the entire enterprise is meant to be invisible. A security program that works produces no headlines, no breach notice in the mail, no sleepless night. The silence is the product.'));
+C.push(para([
+  run('The stakes behind that silence are not abstract. A breach can spill mental health histories, HIV status, and genetic results, the kind of detail that cannot be taken back once it is loose. Readers can browse the full '),
+  link('list of diseases and conditions', URL.conditions),
+  run(' to see just how personal those records can be. And the responsibility, security professionals have long argued, no longer sits with a lone technician in a back office. It runs through clinicians, administrators, and the outside vendors who touch the data, right down to the single reused password that can unlock thousands of files.'),
+]));
+C.push(para('Which is why, somewhere on a hospital network tonight, a hired stranger is still probing the locks, hoping to fail in the only way that counts: by finding the open door first.'));
+
+C.push(hr());
+
+// Reader Q&A (AEO/GEO, framed as service journalism)
+C.push(crosshead('Questions readers ask'));
 const faqs = [
-  ['Is HIPAA penetration testing legally required?',
-   'Not by name. HIPAA requires a documented risk analysis under 45 CFR 164.308(a)(1)(ii)(A), but it does not list penetration testing as a mandatory step. A penetration test is a widely used way to satisfy and strengthen that risk analysis, not a separate legal mandate.'],
-  ['What is the difference between a risk analysis and a penetration test?',
-   'A risk analysis is the broad, required assessment of where ePHI could be exposed across an organization. A penetration test is a hands on technical exercise that actively probes systems for weaknesses. The test produces evidence that feeds the larger risk analysis.'],
-  ['How often should a healthcare organization run a penetration test?',
-   'There is no fixed legal frequency. Office for Civil Rights guidance advises repeating a risk analysis whenever systems or circumstances change. In practice, many organizations test at least once a year and again after any major change, such as a new application or device.'],
-  ['Who should perform a HIPAA penetration test?',
-   'Qualified, authorized security professionals, whether an internal team or a specialist external firm. The key requirements are explicit authorization, healthcare specific scoping of ePHI systems, and a report that maps findings back to the HIPAA Security Rule.'],
-  ['Does a clean penetration test mean an organization is fully compliant?',
-   'No. A test captures a single moment in time and covers the systems in its scope. Compliance is ongoing, which is why guidance stresses repeating the work after changes rather than treating one clean result as permanent proof.'],
+  ['Is a penetration test required by HIPAA?',
+   'Not by name. HIPAA requires a documented risk analysis under 45 CFR 164.308(a)(1)(ii)(A), but it does not list penetration testing as a mandatory step. A test is one of the clearest ways to satisfy and strengthen that risk analysis, not a separate legal mandate.'],
+  ['How often should a healthcare organization test?',
+   'There is no fixed legal frequency. Office for Civil Rights guidance says to repeat the risk analysis whenever systems or circumstances change. Many organizations settle on at least once a year, and again after any major change such as a new application or device.'],
+  ['Who is qualified to run the test?',
+   'Authorized security professionals, whether an internal team or a specialist outside firm. What matters is explicit authorization, healthcare specific scoping of the systems that hold ePHI, and a report that maps each finding back to the HIPAA Security Rule.'],
 ];
 for (const [q, a] of faqs) {
-  children.push(new Paragraph({
+  C.push(new Paragraph({
     children: [run(q, { bold: true, color: DARK, size: 21 })],
-    spacing: { before: 140, after: 50 },
-    heading: HeadingLevel.HEADING_3,
+    spacing: { before: 150, after: 50 },
+    heading: HeadingLevel.HEADING_2,
   }));
-  children.push(para(a));
+  C.push(para(a));
 }
 
-children.push(hr());
+C.push(hr());
 
-// Sources
-children.push(h2('Sources and verified claims'));
-children.push(bullet('Average healthcare data breach cost of 9.77 million dollars, costliest industry for the fourteenth consecutive year, financial services at 6.08 million dollars, global average of 4.88 million dollars: IBM Cost of a Data Breach Report 2024.'));
-children.push(bullet('HIPAA Security Rule risk analysis requirement at 45 CFR 164.308(a)(1)(ii)(A), covering confidentiality, integrity, and availability of ePHI: U.S. Department of Health and Human Services.'));
-children.push(bullet('Office for Civil Rights risk analysis guidance first issued in 2010, no prescribed testing frequency, references to NIST resources: HHS Office for Civil Rights guidance on risk analysis.'));
-children.push(bullet('Office for Civil Rights Risk Analysis Initiative identifying inadequate risk analysis across ransomware settlements totaling more than 1.1 million dollars: HHS enforcement actions.'));
-children.push(bullet('OWASP Top 10 maintained by the Open Worldwide Application Security Project: OWASP.'));
-children.push(bullet('HIPAA enacted in 1996: Health Insurance Portability and Accountability Act of 1996.'));
+// Transparency / sourcing box (E-E-A-T)
+C.push(callout('HOW WE SOURCED THIS ARTICLE', [
+  new Paragraph({
+    children: [run('Every figure and claim here is drawn from primary sources. We do not paraphrase secondhand summaries where an original is available.', { color: DARK, size: 19 })],
+    spacing: { after: 90 },
+  }),
+  bulletLink('Breach costs: ', 'IBM Cost of a Data Breach Report 2024', URL.ibm, '.'),
+  bulletLink('Risk analysis requirement: ', '45 CFR 164.308(a)(1)(ii)(A)', URL.cfr, ', U.S. electronic Code of Federal Regulations.'),
+  bulletLink('Regulator guidance and enforcement: ', 'HHS Office for Civil Rights risk analysis guidance', URL.hhsRisk, '.'),
+  bulletLink('Web testing framework: ', 'OWASP Top 10', URL.owasp, ', Open Worldwide Application Security Project.'),
+], 'F8FAFC', GREY),
 
-// Editorial note with internal links
-children.push(hr());
-children.push(new Paragraph({
+);
+
+// About + internal links footer (E-E-A-T + internal linking)
+C.push(new Paragraph({ children: [run('')], spacing: { after: 60 } }));
+C.push(new Paragraph({
   children: [
-    run('About DiseaseFix: ', { bold: true, color: DARK, size: 18 }),
-    run('DiseaseFix publishes patient focused health and medical information. Learn more on our ', { color: GREY, size: 18 }),
+    run('About DiseaseFix:  ', { bold: true, color: DARK, size: 18 }),
+    run('DiseaseFix publishes patient focused health and medical information for readers worldwide.', { color: GREY, size: 18 }),
   ],
-  spacing: { after: 40 },
+  spacing: { after: 50 },
 }));
-children.push(new Paragraph({
+C.push(new Paragraph({
   children: [
-    link('About page', 'https://www.diseasefix.com/about/'),
-    run('  |  ', { color: GREY, size: 18 }),
-    link('Diseases and conditions', 'https://www.diseasefix.com/diseases-and-conditions/'),
-    run('  |  ', { color: GREY, size: 18 }),
-    link('Write for us', 'https://www.diseasefix.com/write-for-us/'),
+    link('About', URL.about),
+    run('     ', { size: 18 }),
+    link('Diseases and conditions', URL.conditions),
+    run('     ', { size: 18 }),
+    link('Write for us', URL.write),
   ],
-  spacing: { after: 40 },
+  spacing: { after: 60 },
 }));
-children.push(new Paragraph({
+C.push(new Paragraph({
   children: [run('This article is for general information and does not constitute legal or medical advice.', { italics: true, color: GREY, size: 16 })],
 }));
+
+// bullet with leading bold + embedded link (defined after use is fine via hoisting? no — function declaration hoists)
+function bulletLink(lead, text, url, tail) {
+  return new Paragraph({
+    numbering: { reference: 'bullets', level: 0 },
+    spacing: { after: 80, line: 276 },
+    children: [run(lead, { bold: true, color: DARK, size: 19 }), link(text, url), run(tail, { color: DARK, size: 19 })],
+  });
+}
 
 // ---- document ------------------------------------------------------------
 const doc = new Document({
   creator: 'DiseaseFix Health Desk',
-  title: 'Why Hospitals Now Hire Hackers to Protect Your Medical Records',
-  description: 'A journalistic explainer on HIPAA penetration testing and healthcare data security.',
+  title: 'To Protect Your Medical Records, Hospitals Are Paying People to Break In',
+  description: 'A reported feature on HIPAA penetration testing and healthcare data security.',
   numbering: {
-    config: [
-      {
-        reference: 'bullets',
-        levels: [{ level: 0, format: LevelFormat.BULLET, text: '•', alignment: AlignmentType.LEFT,
-          style: { paragraph: { indent: { left: 460, hanging: 260 } } } }],
-      },
-      {
-        reference: 'steps',
-        levels: [{ level: 0, format: LevelFormat.DECIMAL, text: '%1.', alignment: AlignmentType.LEFT,
-          style: { paragraph: { indent: { left: 460, hanging: 260 } } } }],
-      },
-    ],
+    config: [{
+      reference: 'bullets',
+      levels: [{ level: 0, format: LevelFormat.BULLET, text: '•', alignment: AlignmentType.LEFT,
+        style: { paragraph: { indent: { left: 460, hanging: 260 } } } }],
+    }],
   },
-  styles: {
-    default: {
-      document: { run: { font: 'Calibri', size: 21, color: DARK } },
-    },
-  },
+  styles: { default: { document: { run: { font: 'Calibri', size: 21, color: DARK } } } },
   sections: [{
-    properties: {
-      page: {
-        size: { width: 12240, height: 15840 },
-        margin: { top: 1080, bottom: 1080, left: 1260, right: 1260 },
-      },
-    },
-    children,
+    properties: { page: { size: { width: 12240, height: 15840 }, margin: { top: 1080, bottom: 1080, left: 1300, right: 1300 } } },
+    children: C,
   }],
 });
 
