@@ -131,16 +131,27 @@ def join(rd, backlinks):
     domain_set = set(rd.keys())
     for d in rd.values():
         d["links"] = []
+        d["_seen"] = set()
     unmatched = 0
+    dupes = 0
     for bl in backlinks:
         host = host_of(bl["source_url"])
         d = registrable(host, domain_set)
         if d in rd:
+            key = (bl["source_url"], bl["target_url"], bl["anchor"])
+            if key in rd[d]["_seen"]:
+                dupes += 1
+                continue
+            rd[d]["_seen"].add(key)
             rd[d]["links"].append(bl)
         else:
             unmatched += 1
+    for d in rd.values():
+        d.pop("_seen", None)
     if unmatched:
         sys.stderr.write(f"[load] {unmatched} links did not map to a spine domain\n")
+    if dupes:
+        sys.stderr.write(f"[load] {dupes} duplicate links collapsed\n")
     return rd
 
 
