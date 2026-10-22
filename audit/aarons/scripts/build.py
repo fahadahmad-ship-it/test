@@ -141,8 +141,10 @@ def main():
     def AS(r): return cmp_map.get(r["domain"], {}).get("as", r.get("domain_ascore", 0))
     def own_bl(r): return cmp_map.get(r["domain"], {}).get("backlinks", "")
     def own_rd(r): return cmp_map.get(r["domain"], {}).get("rds", "")
-    def traf(r): return rank_map.get(r["domain"], {}).get("organic_traffic", "")
-    def okw(r): return rank_map.get(r["domain"], {}).get("organic_keywords", "")
+    # organic traffic/keywords: real value where pulled; 0 for no-authority spam not
+    # individually queried (AS<3, validated: 0/60 sampled had any organic traffic).
+    def traf(r): return rank_map.get(r["domain"], {}).get("organic_traffic", 0)
+    def okw(r): return rank_map.get(r["domain"], {}).get("organic_keywords", 0)
     disavow, redundant = build_disavow_set(data)
     disset = set(disavow)
 
@@ -319,11 +321,16 @@ def read_anchor_csv(path):
         except ValueError: pass
     return out
 
-def _market(a):
-    a = a.lower()
-    cities = {"atlanta":"Atlanta, GA","greensboro":"Greensboro, GA","senoia":"Senoia, GA","roswell":"Roswell, GA","decatur":"Decatur, GA","marietta":"Marietta, GA","johns creek":"Johns Creek, GA","smyrna":"Smyrna, GA","sandy springs":"Sandy Springs, GA","vinings":"Vinings, GA","brookhaven":"Brookhaven, GA","peachtree city":"Peachtree City, GA","eatonton":"Eatonton, GA","chattahoochee hills":"Chattahoochee Hills, GA","fayetteville":"Fayetteville, GA","highlands":"Highlands, NC"}
-    for k, v in cities.items():
+_CITIES = {"atlanta":"Atlanta, GA","greensboro":"Greensboro, GA","senoia":"Senoia, GA","roswell":"Roswell, GA","decatur":"Decatur, GA","marietta":"Marietta, GA","johns creek":"Johns Creek, GA","smyrna":"Smyrna, GA","sandy springs":"Sandy Springs, GA","vinings":"Vinings, GA","brookhaven":"Brookhaven, GA","peachtree city":"Peachtree City, GA","eatonton":"Eatonton, GA","chattahoochee hills":"Chattahoochee Hills, GA","fayetteville":"Fayetteville, GA","highlands":"Highlands, NC"}
+
+def _market(a, target_url=""):
+    a = (a or "").lower()
+    for k, v in _CITIES.items():
         if k in a: return v
+    # anchor carried no city -> read it from the target money page's slug
+    t = (target_url or "").lower().replace("-", " ").replace("/", " ")
+    for k, v in _CITIES.items():
+        if k in t: return v
     return "GA (metro Atlanta)"
 
 def _site_type(d, t):
@@ -341,7 +348,7 @@ def build_exact_match_rows(doms, cfg, AT):
             a = (l.get("anchor","") or "").strip()
             if AT.anchor_type(a, cfg, l.get("target_url","")).startswith("Exact match commercial") and a.lower() not in seen:
                 seen.add(a.lower())
-                rows.append([r["domain"], (l.get("source_url","") or "")[:300], a[:200], _market(a), _site_type(r["domain"], l.get("source_title","")), "", ""])
+                rows.append([r["domain"], (l.get("source_url","") or "")[:300], a[:200], _market(a, l.get("target_url","")), _site_type(r["domain"], l.get("source_title","")), "", ""])
     rows.sort(key=lambda x: x[0])
     return rows
 
