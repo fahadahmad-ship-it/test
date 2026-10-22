@@ -24,22 +24,29 @@ live profile (5,392 referring domains) was audited**, not a sample.
 
 | Status | Domains | In disavow file? |
 |---|---|---|
-| **Spam (Disavow)** — confirmed spam, ≥1 dofollow link | **4,119** | Yes |
-| **Spam (Nofollow, No Action)** — spam but all links nofollow | 200 | No (passes nothing) |
-| **Held (Pending Partner/supplier)** — commercial/commissioned-looking, confirm first | 663 | No (held) |
-| **Held (Nofollow, No Action)** | 49 | No |
-| **Keep** — genuine / editorial / authoritative | 359 | No |
+| **Spam (Disavow)** — confirmed spam, ≥1 dofollow link | **4,123** | Yes |
+| **Spam (Nofollow, No Action)** — spam but all links nofollow | 208 | No (passes nothing) |
+| **Held (Pending Partner/supplier)** — commercial/commissioned-looking, confirm first | 961 | No (held) |
+| **Held (Nofollow, No Action)** | 52 | No |
+| **Keep** — genuine / editorial / authoritative | 46 | No |
 | **Own Site** — client-owned (aaronssystems.com, aaronssecurity.com) | 2 | No |
-| **Total** | **5,392** | **4,119 in file** |
+| **Total** | **5,392** | **4,123 in file** |
 
 Nothing was disavowed on an Authority Score, a TLD, or a shared IP alone — every
-one of the 4,119 file domains rests on visible evidence (a spam anchor, a spam
+one of the 4,123 file domains rests on visible evidence (a spam anchor, a spam
 page title, a known link-farm host, or a same-network member domain) **and** has
 at least one dofollow link to the site. The check was run exhaustively in both
 directions over all 5,392 domains: **zero** high-authority or trafficked sites are
 in the file (every domain with ≥100 monthly organic visits — indeed.com, birdeye.com,
 growjo.com, wiza.co, etc. — is Kept), and **zero** dofollow PBN/off-topic spam links
-are left out.
+are left out. Every domain classified "Nofollow, No Action" was re-checked against
+its **full** link set (not a sample) to confirm none hides a dofollow link — none did.
+
+Note on the 961 Held set: it is larger than a first pass suggested because the
+previous supplier's directory campaign (business-directory pages carrying exact-match
+commercial geo anchors to deep `/services/` and `/location/` pages) is held for
+confirmation rather than kept or disavowed. Many are low-authority; some may still be
+disavowed once the supplier rules out a commission.
 
 ## The two campaigns (this is the important distinction for you)
 
@@ -47,7 +54,7 @@ The target page separates two different things:
 
 1. **The home-page flood (disavow).** ~10,500 of the analyzed links point at the
    home page with PBN sales-copy anchors. This is the negative-SEO / link-spam
-   attack. These are the 4,119 **Spam (Disavow)** domains.
+   attack. These are the 4,123 **Spam (Disavow)** domains.
 2. **The deep-page, commercial-anchor campaign (HELD).** ~1,500 links point at deep
    `/services/…-ga/` and `/location/…-ga/` money pages using **exact-match
    commercial geo anchors** (e.g. "home theater installation atlanta ga"). These are
@@ -58,11 +65,11 @@ The target page separates two different things:
 ## What to do with the files
 
 - **`disavow_aaronshometech.com.txt`** — the disavow file for the aaronshometech.com
-  Search Console property. 4,119 `domain:` lines, grouped by reason. It is the full
+  Search Console property. 4,123 `domain:` lines, grouped by reason. It is the full
   **union** of bad domains for the money site.
 - **Do NOT upload it yet.** First have the previous-supplier conversation about the
-  **663 Held (Pending Partner) domains** (the "Pending Disavow Lines" tab lists these —
-  the dofollow held links that could be disavowed; a further 49 held links are nofollow
+  **961 Held (Pending Partner) domains** (the "Pending Disavow Lines" tab lists these —
+  the dofollow held links that could be disavowed; a further 52 held links are nofollow
   and need no action). Any the supplier confirms were **not** commissioned can then be
   appended to the file; any that were commissioned stay out.
 - Uploading a disavow file **replaces** any file already on the property. We did not
@@ -95,7 +102,18 @@ The target page separates two different things:
   higher-authority domain plus every disavow candidate with any authority, to make
   sure no trafficked/genuine site is wrongly disavowed. The remaining no-authority
   spam domains (freshly-registered PBN hosts) are recorded as zero, consistent with
-  Semrush returning no organic data for them.
+  Semrush returning no organic data for them (validated: 0 of a 60-domain sample of
+  AS<3 spam had any organic traffic).
+- **All Backlinks tab** lists the analyzed link set — 18,534 of the ~40,274 links in
+  the profile — with **every one of the 5,392 referring domains represented** by at
+  least one example link. The disavow decision is made per referring domain, so this
+  is complete for decision purposes; the full link dump can be pulled on request. The
+  per-domain "Dofollow / Nofollow Links" counts reflect the analyzed links (a floor
+  for a few very high-volume domains); the follow/nofollow *verdict* was confirmed
+  against each domain's full link set where it mattered.
+- **Logo:** the signed template's Harbinger Marketing logo image was not available in
+  this environment, so the Summary tab omits the image; the layout otherwise matches
+  the format.
 
 ## The workbook
 
