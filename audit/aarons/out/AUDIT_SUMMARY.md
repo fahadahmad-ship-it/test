@@ -104,16 +104,24 @@ The target page separates two different things:
   spam domains (freshly-registered PBN hosts) are recorded as zero, consistent with
   Semrush returning no organic data for them (validated: 0 of a 60-domain sample of
   AS<3 spam had any organic traffic).
-- **All Backlinks tab** lists the analyzed link set — 18,534 of the ~40,274 links in
+- **All Backlinks tab** lists the analyzed link set — ~19,560 of the ~40,274 links in
   the profile — with **every one of the 5,392 referring domains represented** by at
   least one example link. The disavow decision is made per referring domain, so this
-  is complete for decision purposes; the full link dump can be pulled on request. The
-  per-domain "Dofollow / Nofollow Links" counts reflect the analyzed links (a floor
-  for a few very high-volume domains); the follow/nofollow *verdict* was confirmed
-  against each domain's full link set where it mattered.
-- **Logo:** the signed template's Harbinger Marketing logo image was not available in
-  this environment, so the Summary tab omits the image; the layout otherwise matches
-  the format.
+  is complete for decision purposes; the Summary's backlink totals use the *full*
+  per-domain counts (the Total reads 40,277), so they reflect the whole profile. The
+  full link-by-link dump can be pulled on request. The per-domain "Dofollow / Nofollow
+  Links" counts reflect the analyzed links (a floor for a few very high-volume
+  domains); the follow/nofollow *verdict* was confirmed against each domain's full
+  link set where it mattered.
+
+## Format
+
+The workbook matches the signed **K&K Manufacturing** template **cell-for-cell** —
+verified by `check/compare.py` with **zero structural differences** (tabs, column
+headers, widths, row heights, fonts/sizes, fills, header-only borders, alignment,
+freeze panes, autofilters, gridlines, number formats, input cells, and the Harbinger
+logo on the Summary). The Summary carries the status table, the anchor-type profile
+table, and seven key findings, exactly as in the template.
 
 ## The workbook
 

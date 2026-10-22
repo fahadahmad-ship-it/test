@@ -1,16 +1,14 @@
 # Disavow file for aaronshometech.com (Google Search Console property)
 # Prepared by Harbinger Marketing — 2026-10-22
 # 4123 domains. One domain: line each; a domain: line also covers its subdomains.
-# SCOPE: this file is the full UNION of bad domains for the money site. Owned domains
-#   aaronssystems.com and aaronssecurity.com 301 into this profile; their bad links are
-#   folded in here (one file). If the client has Search Console access to those
-#   properties, separate per-property files can be produced on request.
-# HELD links are NOT in this file. Exact-match commercial and deep-money-page links that
-#   may be commissioned are held for the previous SEO supplier (the 'partner' on the
-#   sheet; the client's brief calls this role the 'supplier') to confirm first.
-# DO NOT UPLOAD before that supplier conversation. Uploading REPLACES any existing
-#   disavow file on the property — confirm with the client whether one already exists
-#   (none was supplied for this audit).
+# SCOPE: full UNION of bad domains for the money site. Owned domains aaronssystems.com and
+#   aaronssecurity.com 301 into this profile; their bad links are folded in here (one file).
+#   Per-property files can be produced if the client has Search Console access to them.
+# HELD links are NOT in this file. Exact-match commercial and deep-money-page links that may be
+#   commissioned are held for the previous SEO supplier (the 'partner' on the sheet; the client's
+#   brief calls this role the 'supplier') to confirm first.
+# DO NOT UPLOAD before that supplier conversation. Uploading REPLACES any existing disavow file —
+#   confirm with the client whether one already exists (none was supplied for this audit).
 
 # --- PBN / link-service sales-copy spam (dofollow): 4116 domains ---
 domain:007eaglegaze.online
