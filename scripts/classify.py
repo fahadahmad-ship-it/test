@@ -107,10 +107,21 @@ for r in rrows:
                  refdomains=r[ri['Dofollow ref. domains']], first=r[ri['First seen']],
                  links_to_target=r[ri['Links to target']])
 
+# Referring-domain granularity: map each backlink host to the domain the Ahrefs refdomains
+# file defines (longest matching root). This rolls subdomains into their referring domain so
+# counts reconcile to the refdomains list, every row carries metrics, and a root with no link
+# of its own is not double-counted against its linking subdomain (playbook parent/subdomain rule).
+RDROOTS = sorted(RD.keys(), key=len, reverse=True)
+def ref_domain(host):
+    for root in RDROOTS:
+        if host == root or host.endswith('.' + root):
+            return root
+    return host
+
 links_by_dom = {}
 all_links = []
 for r in brows:
-    h = host_of(r[bi['Referring page URL']])
+    h = ref_domain(host_of(r[bi['Referring page URL']]))
     tgt = r[bi['Target URL']]
     tl = tgt.lower()
     prop = 'deep' if '/services/' in tl else ('home' if tl.rstrip('/').endswith('controlledcomfort.com') else 'other')

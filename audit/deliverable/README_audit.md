@@ -13,7 +13,7 @@ names — same role, tied together here and in the disavow header rather than re
   so this is a new upload (add), not a replace.**
 
 ## What we found (plain terms)
-- The brief listed **56** domains. The live profile is **~1,124 referring hosts / 2,514
+- The brief listed **56** domains. The live profile is **1,089 referring domains / 2,514
   backlinks**, growing ~70+ new referring domains/day — a large, ongoing operation.
 - **Two campaigns, split by the page they point at:**
   1. A **home-page PBN / "buy-backlinks" flood** — `*.store` / `*.shop` / numbered `*.xyz`
@@ -28,10 +28,10 @@ names — same role, tied together here and in the disavow header rather than re
 | Status | Domains | In disavow? |
 |---|---|---|
 | Spam (Disavow) | 348 | Yes |
-| Spam (Nofollow, No Action) | 487 | No (all nofollow) |
+| Spam (Nofollow, No Action) | 459 | No (all nofollow) |
 | Held (Pending Partner/supplier) | 101 | No — pending supplier |
 | Held (Nofollow, No Action) | 9 | No |
-| Keep | 179 | No |
+| Keep | 172 | No |
 | Own Site | 0 | — |
 
 *(Two independent adversarial reviews of the Keep/Spam boundary ran before shipping. They found
@@ -52,7 +52,7 @@ verification suite re-passes both directions after the fixes.)*
 
 ## Method notes / honest limits
 - **Metrics source:** the "AS" column carries **Ahrefs DR** (and traffic/keywords from Ahrefs),
-  because per-domain Semrush Authority Score was not pulled for all ~1,124 domains. The signed-off
+  because per-domain Semrush Authority Score was not pulled for all 1,089 domains. The signed-off
   audit prefers Semrush AS as the number; swap it in if you want that exactly. **No decision rests
   on the score** — every disavow line rests on a visible spam anchor/host, not on DR.
   - This matters: 384 domains have DR ≥ 20, but only ~55 are genuine (real traffic). The other

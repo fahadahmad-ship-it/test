@@ -160,14 +160,15 @@ emx = []
 for dom, d in D.items():
     if not d['status'].startswith('Held'):
         continue
-    # find an exact-match anchor link for this domain
+    # this tab is EXACT-MATCH anchors only; held-by-deep-target-only domains appear on the
+    # Pending Disavow Lines tab instead (keeps this tab true to its name).
     exlink = next((l for l in LINKS if l['referring_domain'] == dom and l['anchor_type'].startswith('Exact match')), None)
     if not exlink:
-        exlink = next((l for l in LINKS if l['referring_domain'] == dom), None)
-    anchor = exlink['anchor'] if exlink else d['top_anchor']
-    tgt = (exlink['target'] if exlink else d['example_target']).lower()
+        continue
+    anchor = exlink['anchor']
+    tgt = exlink['target'].lower()
     market = 'Omaha NE — Heating/Furnace' if 'heating' in tgt else ('Omaha NE — Air Conditioning' if 'air-condition' in tgt else 'Omaha NE — HVAC (home)')
-    rows.append([dom, exlink['url'] if exlink else d['example_url'], anchor, market,
+    rows.append([dom, exlink['url'], anchor, market,
                  'Directory / business listing', '', 'Hold — pending supplier confirmation'])
     emx.append(dom)
 rows.sort(key=lambda r: r[0])
