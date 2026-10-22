@@ -96,8 +96,11 @@ The target page separates two different things:
   rather than a fresh Ahrefs fetch. If you can export the Ahrefs **Backlinks CSV
   (with the "Referring page HTTP code" column)** and **Referring domains CSV**, we'll
   fold them in for live-page checks and any extra link discovery.
-- **Authority Score** uses Semrush's bulk comparison report (which agrees with the
-  domain overview); it was pulled for all 5,392 domains.
+- **Authority metric is Semrush Authority Score (AS) throughout** — pulled for all
+  5,392 domains from Semrush's bulk comparison report (which agrees with the domain
+  overview). **No DA / PA / DR (Moz / Ahrefs) figure is used as a metric anywhere.**
+  Where "DA 50 PA 40", "DR scores" etc. appear, they are the spam vendor's own wording
+  quoted verbatim from the anchor text as evidence, not a measurement by this audit.
 - **Organic traffic / keywords** were pulled for every retained, held, and
   higher-authority domain plus every disavow candidate with any authority, to make
   sure no trafficked/genuine site is wrongly disavowed. The remaining no-authority
