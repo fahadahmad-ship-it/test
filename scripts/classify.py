@@ -68,7 +68,21 @@ def is_pbn_host(h):
            'backlinker', 'webrankingsolution')
     return any(b in h for b in bad)
 
-OFFTOPIC = re.compile(r'casino|gambling|poker|pharma|viagra|cialis|escort|porn|erythromycin', re.I)
+OFFTOPIC = re.compile(r'\b(casino|gambling|poker|pharmac\w*|viagra|cialis|escort\w*|porn\w*|erythromycin)\b', re.I)
+
+# spam evidence that lives in the LINKING PAGE TITLE (not the anchor) — playbook rule 10.
+# Phrases are specific (require a backlink/broker context) so genuine articles don't match.
+TITLE_SPAM = re.compile(
+    r'where to buy aged domains|buy[^.]{0,30}backlink|backlink[^.]{0,30}(buy|cheap|rank|citation flow|'
+    r'trust flow|authority|domain rating|1st page|first page)|pbn backlink|powerful pbn|'
+    r'dofollow[^.]{0,20}backlink|dofollow link building|high[- ]quality[^.]{0,20}backlink|'
+    r'seo (authority )?backlink|manual outreach backlink|tiered link building|niche edit|'
+    r'citation flow|trust flow|raise domain rating|contextual link placement|'
+    r'guest posts?,? (and )?(seo|backlink)|unbeatable google ranking|rank on (1st|first) page', re.I)
+
+def spammy_text(s):
+    s = s or ''
+    return bool(is_pbn_anchor(s) or TITLE_SPAM.search(s))
 
 def anchor_type(a):
     a = (a or '').strip()
@@ -116,14 +130,16 @@ def classify(dom, links):
     spam_flag = meta.get('spam', False)
     anydofollow = any(not l['nofollow'] for l in links)
     pbn_host = is_pbn_host(dom)
-    pbn_anchor = any(is_pbn_anchor(l['anchor']) for l in links)
+    anchor_spam = any(spammy_text(l['anchor']) for l in links)
+    title_spam = any(spammy_text(l['title']) for l in links)
+    spam_copy = anchor_spam or title_spam          # visible spam in anchor OR linking-page title
     offtopic = any(OFFTOPIC.search((l['anchor'] or '') + ' ' + (l['title'] or '')) for l in links)
     exact = [l for l in links if is_exact_match(l['anchor'])]
     deep = [l for l in links if l['prop'] == 'deep']
     held_links = exact + [l for l in deep if l not in exact]
 
     dr = fnum(meta.get('dr', 0))
-    clean = (not spam_flag) and (not pbn_host) and (not pbn_anchor) and (not offtopic)
+    clean = (not spam_flag) and (not pbn_host) and (not spam_copy) and (not offtopic)
     # 1. Own site
     if dom in CLIENT_HOSTS:
         return 'Own Site', 'Client-owned / money site.'
@@ -133,19 +149,20 @@ def classify(dom, links):
     if clean and (traffic >= 100 or (dr >= 20 and traffic > 0)):
         return 'Keep', f'Genuine authoritative citation: DR {meta.get("dr","")}, organic traffic {traffic}, not spam-flagged.'
     # 3. Held — exact-match commercial anchor and/or deep money-page target (non-PBN host)
-    if held_links and (not pbn_host) and (not pbn_anchor) and (not offtopic):
+    if held_links and (not pbn_host) and (not spam_copy) and (not offtopic):
         reason = []
         if exact: reason.append(f'exact-match commercial anchor ("{exact[0]["anchor"]}")')
         if deep:  reason.append(f'links to deep money page ({deep[0]["target"]})')
         all_nf = all(l['nofollow'] for l in held_links)
         status = 'Held (Nofollow, No Action)' if all_nf else 'Held (Pending Partner)'
         return status, 'May be commissioned: ' + ' + '.join(reason) + '.'
-    # 4. Spam — PBN host / sales-copy anchor / off-topic / spam-flagged with spam evidence
-    if pbn_host or pbn_anchor or offtopic:
+    # 4. Spam — PBN host / sales-copy anchor / spam page title / off-topic
+    if pbn_host or spam_copy or offtopic:
         ev = []
-        if pbn_host:   ev.append('PBN/link-farm host name')
-        if pbn_anchor: ev.append('PBN sales-copy anchor')
-        if offtopic:   ev.append('off-topic (pharma/casino) anchor')
+        if pbn_host:    ev.append('PBN/link-farm host name')
+        if anchor_spam: ev.append('PBN sales-copy anchor')
+        if title_spam:  ev.append('spam page title (link-broker/PBN)')
+        if offtopic:    ev.append('off-topic (pharma/casino) anchor or title')
         status = 'Spam (Disavow)' if anydofollow else 'Spam (Nofollow, No Action)'
         return status, 'Spam evidence: ' + ', '.join(ev) + '.'
     # 5. Otherwise Keep (no disavow without visible evidence)

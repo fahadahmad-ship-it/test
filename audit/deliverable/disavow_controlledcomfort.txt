@@ -1,6 +1,6 @@
 # Google disavow file — controlledcomfort.com (Controlled Comfort, Omaha NE)
 # Generated 2026-10-22 from Ahrefs export (1,089 ref. domains / 2,514 backlinks).
-# ACTIVE DISAVOW LINES: 315
+# ACTIVE DISAVOW LINES: 348
 #
 # Scope: ONE Search Console property (controlledcomfort.com). No owned domains redirect
 #   into the money site, so a single file applies. No disavow file currently exists on
@@ -82,7 +82,7 @@ domain:webpageseochecker.store
 domain:websitelinkchecker.shop
 domain:websiteseocheckerda.shop
 
-# === PBN sales-copy anchor (248) ===
+# === PBN sales-copy anchor (262) ===
 domain:1seoservices.link
 domain:7-seo.info
 domain:7-seo.link
@@ -115,6 +115,7 @@ domain:bestseocheckerfree.online
 domain:bestseocheckerfree.space
 domain:betulcrime.com
 domain:bisprofit.com
+domain:bitproperty.online
 domain:blog-forest.help
 domain:blogcheckerfree.site
 domain:blogcheckeronline.shop
@@ -136,6 +137,7 @@ domain:bulkdacheckertools.site
 domain:bulkpachecker.store
 domain:bulkpadachecker.site
 domain:canadapsilocybin.com
+domain:canlisohbethatlari.online
 domain:cartermanageus.com
 domain:cgpa2percentag.com
 domain:checkbacklinks.site
@@ -145,10 +147,12 @@ domain:checkdomaindapa.space
 domain:checkerbacklink.space
 domain:checkwebsitedapa.online
 domain:chordmp3.net
+domain:cinto.shop
 domain:cinvo.shop
 domain:competitionchecker.online
 domain:corner-writers.blog
 domain:creativeranker.info
+domain:crinto.shop
 domain:cripio.shop
 domain:cvillico.com
 domain:daanddrchecker.website
@@ -189,8 +193,10 @@ domain:drcheckerbulk.shop
 domain:drcheckerbulk.space
 domain:drcheckerfree.shop
 domain:drdachecker.space
+domain:drumio.shop
 domain:drurchecker.site
 domain:dupurgeniefr.com
+domain:erythromycinonline.site
 domain:externallinkchecker.space
 domain:externallinkschecker.online
 domain:extremeseotools.link
@@ -199,6 +205,7 @@ domain:fastlifesite.com
 domain:findbacklinks.space
 domain:findwebsitebacklinks.space
 domain:fittyfoody.com
+domain:flenro.shop
 domain:fralto.shop
 domain:freeblogseochecker.website
 domain:freedaandpachecker.space
@@ -233,13 +240,17 @@ domain:linkingdomainchecker.site
 domain:linkingdomainchecker.website
 domain:livebacklinkchecker.website
 domain:marketing-updatee.store
+domain:mertio.shop
 domain:mervi.shop
+domain:murvix.shop
 domain:mylisthero.com
 domain:newbacklinkschecker.online
 domain:newblogerseo.com
+domain:nimbra.shop
 domain:ninko.shop
 domain:nitinenterprises.shop
 domain:nivira.shop
+domain:nokvio.shop
 domain:oneclickseochecker.online
 domain:oneclickseochecker.space
 domain:onlyhealthydeals.com
@@ -258,6 +269,9 @@ domain:padafreechecker.website
 domain:pagebacklinkschecker.site
 domain:pagerankingchecker.space
 domain:pageseochecker.website
+domain:pamto.shop
+domain:plavo.shop
+domain:plenko.shop
 domain:plrdownloadshub.com
 domain:plurio.shop
 domain:primenewsartical.com
@@ -332,5 +346,24 @@ domain:websitestatschecker.website
 domain:wecelebrities.com
 domain:xylo-mist.online
 
-# === Off-topic (pharma/casino) (1) ===
-domain:emergencyelectricianfinder.com
+# === Spam page title (link-broker/PBN) (20) ===
+domain:1000.co.in
+domain:alljobs.info
+domain:backlinkstree.com
+domain:bestwebstats.com
+domain:domain.com.lc
+domain:domainanalysis.org
+domain:domainsc.com
+domain:gamerkun.com
+domain:indexaward.com
+domain:linksnatcher.com
+domain:pagesearch.net
+domain:taxies.biz
+domain:tunca.org
+domain:way2check.art
+domain:way2check.cv
+domain:websiterace.com
+domain:websitescrawl.art
+domain:wonvision.com
+domain:ycm.info
+domain:youtoo.in

@@ -205,6 +205,8 @@ for dom in emitted:
         reason_of[dom] = 'PBN / link-farm host'
     elif 'sales-copy' in rs:
         reason_of[dom] = 'PBN sales-copy anchor'
+    elif 'spam page title' in rs:
+        reason_of[dom] = 'Spam page title (link-broker/PBN)'
     elif 'off-topic' in rs:
         reason_of[dom] = 'Off-topic (pharma/casino)'
     else:
@@ -231,7 +233,8 @@ lines.append('#   The held list is in the workbook (Pending Disavow Lines / Exac
 lines.append('# Every line below rests on visible evidence (PBN host / sales-copy anchor / off-topic).')
 lines.append('# Do not submit to Google Search Console on the client\'s behalf.')
 lines.append('')
-for g in ['PBN / link-farm host', 'PBN sales-copy anchor', 'Off-topic (pharma/casino)', 'Spam']:
+for g in ['PBN / link-farm host', 'PBN sales-copy anchor', 'Spam page title (link-broker/PBN)',
+          'Off-topic (pharma/casino)', 'Spam']:
     if not groups.get(g):
         continue
     lines.append(f'# === {g} ({len(groups[g])}) ===')

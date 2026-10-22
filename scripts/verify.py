@@ -53,10 +53,16 @@ check(not (set(held) & fset), "a Held domain is in the disavow file")
 PBN = re.compile(r'premium seo backlink|buy backlink|dofollow backlink|pbn network|da ?\d{2}|pa ?\d{2}|'
                  r'increase your domain|whatsapp us|high quality .*backlink|link building|higher google ranking|'
                  r'if you had told me last year|ranking in europe is not the same', re.I)
-OFF = re.compile(r'casino|gambling|pharma|viagra|cialis|escort|porn|erythromycin', re.I)
+# spam evidence that can live in the linking-page TITLE (link-broker / PBN pages)
+TITLE = re.compile(r'where to buy aged domains|buy[^.]{0,30}backlink|backlink[^.]{0,30}(buy|cheap|rank|citation|'
+                   r'trust flow|authority|domain rating|1st page|first page)|pbn backlink|powerful pbn|'
+                   r'dofollow[^.]{0,20}backlink|high[- ]quality[^.]{0,20}backlink|seo (authority )?backlink|'
+                   r'manual outreach backlink|tiered link building|niche edit|citation flow|trust flow|'
+                   r'raise domain rating|contextual link placement|unbeatable google ranking|rank on (1st|first) page', re.I)
+OFF = re.compile(r'\b(casino|gambling|pharmac\w*|viagra|cialis|escort\w*|porn\w*|erythromycin)\b', re.I)
 HOSTBAD = re.compile(r'\.store$|\.shop$|^\d+\.xyz$|buybacklink|backlink|seoexpress|rankforge|linkbaron|'
-                     r'outrank|dapachecker|99backlink|worldtopbacklink|rankboost', re.I)
-# false positives: every disavow domain must have visible evidence (host OR anchor OR offtopic title)
+                     r'outrank|dapachecker|99backlink|worldtopbacklink|rankboost|erythromycin', re.I)
+# false positives: every disavow domain must have visible evidence (host OR anchor OR title OR off-topic)
 links_by = {}
 for l in LINKS:
     links_by.setdefault(l['referring_domain'], []).append(l)
@@ -64,7 +70,9 @@ noevidence = []
 for d in file_domains:
     ls = links_by.get(d, [])
     host_ev = bool(HOSTBAD.search(d))
-    anchor_ev = any(PBN.search(l['anchor'] or '') or OFF.search((l['anchor'] or '') + ' ' + (l['title'] or '')) for l in ls)
+    anchor_ev = any(PBN.search(l['anchor'] or '') or PBN.search(l['title'] or '')
+                    or TITLE.search(l['title'] or '') or TITLE.search(l['anchor'] or '')
+                    or OFF.search((l['anchor'] or '') + ' ' + (l['title'] or '')) for l in ls)
     if not (host_ev or anchor_ev):
         noevidence.append(d)
 check(not noevidence, f"disavow domains with NO visible evidence: {len(noevidence)} e.g. {noevidence[:12]}")
@@ -73,7 +81,7 @@ fneg = []
 for d, v in D.items():
     if v['status'].startswith(('Keep', 'Held')):
         for l in links_by.get(d, []):
-            if l['nofollow'] == 'False' and (PBN.search(l['anchor'] or '') or OFF.search((l['anchor'] or ''))):
+            if l['nofollow'] == 'False' and (PBN.search(l['anchor'] or '') or OFF.search((l['anchor'] or '') + ' ' + (l['title'] or '')) or TITLE.search(l['title'] or '')):
                 fneg.append(d); break
 check(not fneg, f"Keep/Held domains with dofollow spam anchor (false negatives): {fneg[:12]}")
 # 9. no blank First Seen where refdomain data exists

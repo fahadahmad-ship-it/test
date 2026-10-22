@@ -27,22 +27,26 @@ names — same role, tied together here and in the disavow header rather than re
 ## The decision split (status = the six audit statuses; see workbook)
 | Status | Domains | In disavow? |
 |---|---|---|
-| Spam (Disavow) | 315 | Yes |
-| Spam (Nofollow, No Action) | 477 | No (all nofollow) |
+| Spam (Disavow) | 348 | Yes |
+| Spam (Nofollow, No Action) | 487 | No (all nofollow) |
 | Held (Pending Partner/supplier) | 101 | No — pending supplier |
 | Held (Nofollow, No Action) | 9 | No |
-| Keep | 222 | No |
+| Keep | 179 | No |
 | Own Site | 0 | — |
 
-*(Final numbers are confirmed by the verification suite; a two-pass adversarial review of the
-Keep/Spam boundary was run before shipping.)*
+*(Two independent adversarial reviews of the Keep/Spam boundary ran before shipping. They found
+and fixed: 1 false positive — a page titled "Emergency Electrician Specialists" was wrongly
+disavowed because "Specialists" contains the substring "cialis"; now Keep — and 44 false
+negatives — link-broker / PBN pages whose spam copy sits in the page TITLE, not the anchor
+("Where to buy aged domains and backlinks…", "Powerful PBN Backlinks…"); now disavowed. The
+verification suite re-passes both directions after the fixes.)*
 
 ## Before you upload — do these first
 1. **Confirm with the supplier** which of the 110 HELD directory placements they commissioned.
    Held domains are deliberately **excluded** from the file. Only move a held domain into the file
    if the supplier confirms it was NOT commissioned. Draft request:
    `../supplier_confirmation_request.md`.
-2. **Do not upload before that conversation.** The file disavows the 315 evidence-backed spam
+2. **Do not upload before that conversation.** The file disavows the 348 evidence-backed spam
    domains only; it is safe to that extent, but the held set is the point of the whole audit.
 3. We do **not** submit to Google Search Console for you — you upload it.
 
