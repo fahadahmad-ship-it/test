@@ -34,7 +34,7 @@ def fnum(x):
 GEO = re.compile(r'\bomaha\b|\bne\b|nebraska', re.I)
 SERVICE = re.compile(r'furnace|furnance|hvac|air\s*condition|\bac\b|a/?c\b|heating|cooling|heat\s*pump', re.I)
 def is_commercial_phrase(a):
-    """A short commercial service phrase (optionally with geo) — not a sentence/filler."""
+    """A short commercial service phrase (optionally with geo), not a sentence/filler."""
     a = (a or '').strip()
     if not a or is_pbn_anchor(a) or OFFTOPIC.search(a):
         return False
@@ -77,7 +77,7 @@ def is_pbn_host(h):
 
 OFFTOPIC = re.compile(r'\b(casino|gambling|poker|pharmac\w*|viagra|cialis|escort\w*|porn\w*|erythromycin)\b', re.I)
 
-# spam evidence that lives in the LINKING PAGE TITLE (not the anchor) — playbook rule 10.
+# spam evidence that lives in the LINKING PAGE TITLE (not the anchor), playbook rule 10.
 # Phrases are specific (require a backlink/broker context) so genuine articles don't match.
 TITLE_SPAM = re.compile(
     r'where to buy aged domains|buy[^.]{0,30}backlink|backlink[^.]{0,30}(buy|cheap|rank|citation flow|'
@@ -162,12 +162,12 @@ def classify(dom, links):
     # 1. Own site
     if dom in CLIENT_HOSTS:
         return 'Own Site', 'Client-owned / money site.'
-    # 2. Keep — strongly genuine citation (real authority/audience). This wins over Held so a
+    # 2. Keep, strongly genuine citation (real authority/audience). This wins over Held so a
     #    real directory's exact-match citation is not needlessly held. Authority, not traffic>=1:
     #    a token 1-visit directory must NOT qualify (that is the DR/traffic trap).
     if clean and (traffic >= 100 or (dr >= 20 and traffic > 0)):
         return 'Keep', f'Genuine authoritative citation: DR {meta.get("dr","")}, organic traffic {traffic}, not spam-flagged.'
-    # 3. Held — exact-match commercial anchor and/or deep money-page target (non-PBN host)
+    # 3. Held, exact-match commercial anchor and/or deep money-page target (non-PBN host)
     if held_links and (not pbn_host) and (not spam_copy) and (not offtopic):
         reason = []
         if exact: reason.append(f'exact-match commercial anchor ("{exact[0]["anchor"]}")')
@@ -175,7 +175,7 @@ def classify(dom, links):
         all_nf = all(l['nofollow'] for l in held_links)
         status = 'Held (Nofollow, No Action)' if all_nf else 'Held (Pending Partner)'
         return status, 'May be commissioned: ' + ' + '.join(reason) + '.'
-    # 4. Spam — PBN host / sales-copy anchor / spam page title / off-topic
+    # 4. Spam, PBN host / sales-copy anchor / spam page title / off-topic
     if pbn_host or spam_copy or offtopic:
         ev = []
         if pbn_host:    ev.append('PBN/link-farm host name')

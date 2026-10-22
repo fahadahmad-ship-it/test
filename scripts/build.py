@@ -123,7 +123,7 @@ top_anchor = Counter(l['anchor'] for l in LINKS).most_common(1)[0]
 findings = [
  f"{disavow_n + dist['Spam (Nofollow, No Action)']} of the {tot_dom} referring domains are spam; {disavow_n} have a dofollow link and go in the disavow file, {dist['Spam (Nofollow, No Action)']} are all-nofollow (no action).",
  f"The brief listed 56 domains; the live profile is {tot_dom} referring domains / {tot_bl} backlinks and is still growing (~70+ new referring domains a day).",
- "You can upload a disavow file for controlledcomfort.com only. No owned domains redirect in, so one file applies, and no disavow file exists on the property yet — this is a new upload.",
+ "You can upload a disavow file for controlledcomfort.com only. No owned domains redirect in, so one file applies, and no disavow file exists on the property yet, so this is a new upload.",
  f"Two patterns, easy to tell apart. A home-page PBN/'buy backlinks' flood ({home_links} links) and a deep service-page directory campaign ({deep_links} links). The page a link points at separates them.",
  f'The biggest anchor is backlink sales copy: "{top_anchor[0][:60]}" on {top_anchor[1]} links.',
  f"{held_n} domains are held for the previous supplier to confirm which placements were commissioned, before anything is disavowed.",
@@ -213,7 +213,7 @@ for dom, d in sorted(D.items()):
     if not ex:
         continue
     tgt = ex['target'].lower()
-    market = 'Omaha NE — Heating/Furnace' if 'heating' in tgt else ('Omaha NE — Air Conditioning' if 'air-condition' in tgt else 'Omaha NE — HVAC')
+    market = 'Omaha NE, Heating/Furnace' if 'heating' in tgt else ('Omaha NE, Air Conditioning' if 'air-condition' in tgt else 'Omaha NE, HVAC')
     rows.append([dom, ex['url'], ex['anchor'], market, 'Directory / business listing', '', ''])
 data_tab(ws, hdrs, rows, [25.4, 59, 53.1, 16, 24.6, 15.4, 15],
          ['gen', 'gen', 'center', 'center', 'gen', 'gen', 'gen'], ['General'] * 7, 22.5)
@@ -230,7 +230,7 @@ if nrows:
 # ================= Tab 6: Pending Disavow Lines =================
 ws = wb.create_sheet('Pending Disavow Lines')
 hdrs = ['Referring domain', 'Disavow line (append to disavow.txt once confirmed)', 'Recommendation']
-rows = [[dom, f"domain:{dom}", 'Hold — append to disavow.txt only if the supplier confirms it was NOT commissioned']
+rows = [[dom, f"domain:{dom}", 'Hold. Append to disavow.txt only if the supplier confirms it was NOT commissioned']
         for dom, d in sorted(D.items()) if d['status'].startswith('Held')]
 data_tab(ws, hdrs, rows, [32, 44, 48], ['gen', 'gen', 'gen'], ['General'] * 3, 22.5)
 
@@ -260,12 +260,12 @@ groups = defaultdict(list)
 for dom in emitted:
     groups[reason_group(dom)].append(dom)
 held = sorted(dom for dom, d in D.items() if d['status'].startswith('Held'))
-L = ['# Google disavow file — controlledcomfort.com (Controlled Comfort, Omaha NE)',
+L = ['# Google disavow file for controlledcomfort.com (Controlled Comfort, Omaha NE)',
      '# Generated 2026-10-22 from Ahrefs export (1,089 ref. domains / 2,514 backlinks).',
      f'# ACTIVE DISAVOW LINES: {len(emitted)}', '#',
      '# Scope: ONE Search Console property (controlledcomfort.com). No owned domains redirect',
      '#   into the money site, so a single file applies. No disavow file currently exists on',
-     '#   the property (client-confirmed) — this is a NEW upload (add), not a replace.',
+     '#   the property (client-confirmed), so this is a NEW upload (add), not a replace.',
      '# "Partner" in the workbook = the previous SEO SUPPLIER this brief names; same role.', '#',
      f'# EXCLUDED pending the supplier: {len(held)} HELD domains (exact-match commercial anchors /',
      '#   deep money-page links that may be COMMISSIONED directory placements). They are NOT in',

@@ -1,10 +1,10 @@
-# Google disavow file — controlledcomfort.com (Controlled Comfort, Omaha NE)
+# Google disavow file for controlledcomfort.com (Controlled Comfort, Omaha NE)
 # Generated 2026-10-22 from Ahrefs export (1,089 ref. domains / 2,514 backlinks).
 # ACTIVE DISAVOW LINES: 348
 #
 # Scope: ONE Search Console property (controlledcomfort.com). No owned domains redirect
 #   into the money site, so a single file applies. No disavow file currently exists on
-#   the property (client-confirmed) — this is a NEW upload (add), not a replace.
+#   the property (client-confirmed), so this is a NEW upload (add), not a replace.
 # "Partner" in the workbook = the previous SEO SUPPLIER this brief names; same role.
 #
 # EXCLUDED pending the supplier: 100 HELD domains (exact-match commercial anchors /
