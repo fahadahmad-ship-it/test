@@ -83,16 +83,31 @@ The brief table has been checked against the live Semrush profile. The verdict i
   `/services/air-conditioning` pull (likely a trailing-slash target variant — reconcile each of
   the 56 against the live index before finalising).
 
+### Ahrefs CSV — confirmed for all 56 (client export, 2026-10-22)
+
+The client's Ahrefs export (1,089 referring domains / 2,514 backlinks) closes every open
+question on the 56. **All 56 found in both files.** Result:
+
+- **Keep check closed — none qualify.** Every one of the 56 is **DR 0** (highest: lookuplists.com
+  1.1). Nothing is a genuine AS≥20 site, so rule 2 never fires; all stay Held.
+- **All 56 have ≥1 dofollow link; 0 are all-nofollow** → every one is `Held (Pending Partner)`,
+  none drops to `Held (Nofollow, No Action)`. Non-commissioned ones become real `Spam (Disavow)`.
+- **52/56 have zero organic traffic; 50/56 carry Ahrefs' "Is spam" flag; all HTTP 200 (live).**
+- **Trailing-slash discrepancy explained:** domains link to *both* `/services/heating` and
+  `/services/heating/` (two URL variants) — which is why the earlier no-slash Semrush pull missed
+  some. Target split confirms the brief: 29 heating / 17 AC / 10 home.
+
+So the verdict on the 56 is now **fully evidenced and locked: all 56 → Held (Pending supplier).**
+
 Still needed before any line goes live:
-- **Per-domain Authority Score / traffic / keywords.** Not pulled for all 56 (profile velocity
-  makes bulk sorted pulls very unit-expensive, and **Ahrefs API units are exhausted**). Nothing
-  sampled looks like a genuine AS≥20 `Keep` site, but confirm from the client's **Ahrefs CSV**
-  or a scoped per-domain Semrush pull.
+- **Supplier confirmation** (which of the 56 — and the wider program — were commissioned).
 - **Whether a disavow file already exists** on the controlledcomfort.com Search Console property
   (replace vs add), and **which properties the client can upload to.** Ask the client.
 
-I have **not** fabricated any metric. The full live findings and the exact numbers are in
-`enrichment_findings.md`.
+The wider profile the export revealed (it is far more than 56, and contains a separately
+disavowable PBN network plus ~55 genuine citations to protect) is written up in
+`full_profile_intelligence.md`. I have **not** fabricated any metric; exact numbers are in
+`enrichment_findings.md` and the profile file.
 
 ## Two things only a human can do (I will not)
 
