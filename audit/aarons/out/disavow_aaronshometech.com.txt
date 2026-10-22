@@ -1,6 +1,6 @@
 # Disavow file for aaronshometech.com (Google Search Console property)
-# Prepared by Harbinger Marketing — 2026-10-21
-# 4120 domains. One domain: line each; a domain: line also covers its subdomains.
+# Prepared by Harbinger Marketing — 2026-10-22
+# 4119 domains. One domain: line each; a domain: line also covers its subdomains.
 # SCOPE: this file is the full UNION of bad domains for the money site. Owned domains
 #   aaronssystems.com and aaronssecurity.com 301 into this profile; their bad links are
 #   folded in here (one file). If the client has Search Console access to those
@@ -12,7 +12,7 @@
 #   disavow file on the property — confirm with the client whether one already exists
 #   (none was supplied for this audit).
 
-# --- PBN / link-service sales-copy spam (dofollow): 4082 domains ---
+# --- PBN / link-service sales-copy spam (dofollow): 4116 domains ---
 domain:007eaglegaze.online
 domain:1000.co.in
 domain:100ranking.com
@@ -35,6 +35,9 @@ domain:888ph.online
 domain:a1webdirectory.xyz
 domain:acompio.us
 domain:adcreativevideo.com
+domain:adultbacklinks.site
+domain:adultwebsitetraffic.shop
+domain:adultwebtraffic.site
 domain:advanced-seo.com
 domain:advanced-seo.info
 domain:advanced-seo.link
@@ -42,6 +45,7 @@ domain:affordablelinkbuilding.site
 domain:affordablelinkbuilding.space
 domain:agencylinkbuilding.site
 domain:agencylinkbuilding.space
+domain:agentbetting.online
 domain:aibacklinkautomation.space
 domain:aibacklinkbuilder.shop
 domain:aibacklinkcreator.website
@@ -500,6 +504,10 @@ domain:backlinksonline.shop
 domain:backlinkspace.com
 domain:backlinkspace.info
 domain:backlinkspace.link
+domain:backlinkspecialist.online
+domain:backlinkspecialist.shop
+domain:backlinkspecialist.site
+domain:backlinkspecialist.website
 domain:backlinkspulse.com
 domain:backlinkspulse.info
 domain:backlinkspulse.link
@@ -596,6 +604,7 @@ domain:bestbacklinkservices.store
 domain:bestbacklinksoftware.com
 domain:bestbacklinkwebsites.site
 domain:bestblogcontentz1.site
+domain:bestcasinoreviewsites.online
 domain:bestdachecker.shop
 domain:bestdachecker.site
 domain:bestdachecker.space
@@ -607,6 +616,7 @@ domain:bestdapachecker.site
 domain:bestdapachecker.space
 domain:bestdapachecker.store
 domain:bestdapachecker.website
+domain:bestenglishonlinecasino.online
 domain:bestfloridaseo.com
 domain:bestfloridaseo.info
 domain:bestfloridaseo.link
@@ -617,6 +627,7 @@ domain:bestfreeseochecker.store
 domain:bestfreeseochecker.website
 domain:bestfreetrafficsources.shop
 domain:bestfreetrafficwebsite.shop
+domain:bestirishcasinoonline.online
 domain:bestlink.space
 domain:bestlink.website
 domain:bestlinkbuilding.shop
@@ -632,12 +643,15 @@ domain:bestlinkchecker.space
 domain:bestlinkchecker.store
 domain:bestlinkchecker.website
 domain:bestofthefirstcoast.com
+domain:bestonlinecasinogamescanada.online
+domain:bestonlinecasinomexico.online
 domain:bestrankchecker.online
 domain:bestrankchecker.shop
 domain:bestrankchecker.site
 domain:bestrankchecker.space
 domain:bestrankchecker.store
 domain:bestrankchecker.website
+domain:bestsafestonlinecasino.online
 domain:bestseo.website
 domain:bestseocenter.com
 domain:bestseocenter.info
@@ -871,6 +885,7 @@ domain:businessdirectorybacklinks.shop
 domain:businessdirectorylinks.space
 domain:businessdirectorylinks.website
 domain:buy-quality-backlinks.online
+domain:buyadultwebtraffic.store
 domain:buybacklinksonline.online
 domain:buybacklinksonline.shop
 domain:buybacklinksonline.website
@@ -920,6 +935,14 @@ domain:canadapsilocybin.com
 domain:canlisohbethatlari.online
 domain:carplz.com
 domain:cartermanageus.com
+domain:casinobacklinks.online
+domain:casinobacklinks.space
+domain:casinobacklinks.website
+domain:casinogamingsites.online
+domain:casinooftheking.com
+domain:casinoonlinecrazytime.online
+domain:casinopopular.online
+domain:casinosthatpayrealcash.online
 domain:cgpa2percentag.com
 domain:charmnga.shop
 domain:cheapbacklink.shop
@@ -2135,6 +2158,7 @@ domain:growwebsitetraffic.store
 domain:guestbacklink.com
 domain:guestbacklink.info
 domain:guestbacklink.link
+domain:gumushaneescorton.shop
 domain:hebagh.cv
 domain:highauthority.online
 domain:highauthority.store
@@ -2303,6 +2327,7 @@ domain:linkbuildingservice.store
 domain:linkbuildingservice.website
 domain:linkbuildingservices.shop
 domain:linkbuildingsoftware.shop
+domain:linkbuildingspecialist.online
 domain:linkbuildingstrategies.online
 domain:linkbuildingtool.space
 domain:linkbuildingtools.shop
@@ -2387,6 +2412,7 @@ domain:makefreebacklinks.shop
 domain:makefreebacklinks.site
 domain:makefreebacklinks.store
 domain:makewebsitebacklinks.site
+domain:malatyaescorton.shop
 domain:marinasone.com
 domain:marketsseo.com
 domain:marketsseo.info
@@ -2541,6 +2567,7 @@ domain:onlinebacklinkcreator.website
 domain:onlinebacklinkgenerator.store
 domain:onlinebacklinkmaker.online
 domain:onlinebacklinkmaker.site
+domain:onlinecasinouknew.online
 domain:onlinedachecker.online
 domain:onlinedachecker.shop
 domain:onlinedachecker.site
@@ -2552,6 +2579,8 @@ domain:onlinedapachecker.shop
 domain:onlinedapachecker.space
 domain:onlinedapachecker.store
 domain:onlinedapachecker.website
+domain:onlinegamblingbonus.online
+domain:onlinelivecasinouk.online
 domain:onlinepadachecker.online
 domain:onlinepadachecker.shop
 domain:onlinepadachecker.space
@@ -2968,6 +2997,7 @@ domain:realbacklinkchecker.space
 domain:realbacklinkchecker.website
 domain:realtraffic.shop
 domain:realvisitors.website
+domain:realwinningonlinecasino.online
 domain:referraltraffic.space
 domain:regenerativespinesatl.com
 domain:reisenweg.com
@@ -3636,6 +3666,7 @@ domain:todrivetraffic.store
 domain:tokoseo.com
 domain:tokoseo.info
 domain:tokyopush188.online
+domain:top5casino.online
 domain:topbacklinkchecker.online
 domain:topbacklinkchecker.shop
 domain:topbacklinkchecker.site
@@ -3648,6 +3679,9 @@ domain:topbacklinks.store
 domain:topentreno.com
 domain:topleveldomains.space
 domain:toplinkbuilding.site
+domain:toponlinegamblingcasinos.online
+domain:topratedonlinecasinocanada.online
+domain:topratedonlinecasinousa.online
 domain:topseobacklink.com
 domain:topseobacklink.info
 domain:topseobacklink.link
@@ -4096,43 +4130,8 @@ domain:youseotools.info
 domain:youseotools.link
 domain:youtoo.in
 
-# --- Off-topic spam (dofollow): 36 domains ---
-domain:adultbacklinks.site
-domain:adultwebsitetraffic.shop
-domain:adultwebtraffic.site
-domain:agentbetting.online
-domain:backlinkspecialist.online
-domain:backlinkspecialist.shop
-domain:backlinkspecialist.site
-domain:backlinkspecialist.website
-domain:bestcasinoreviewsites.online
-domain:bestenglishonlinecasino.online
-domain:bestirishcasinoonline.online
+# --- Off-topic spam (dofollow): 1 domains ---
 domain:bestnz-poker-casinoslot.com
-domain:bestonlinecasinogamescanada.online
-domain:bestonlinecasinomexico.online
-domain:bestsafestonlinecasino.online
-domain:buyadultwebtraffic.store
-domain:casinobacklinks.online
-domain:casinobacklinks.space
-domain:casinobacklinks.website
-domain:casinogamingsites.online
-domain:casinooftheking.com
-domain:casinoonlinecrazytime.online
-domain:casinopopular.online
-domain:casinosthatpayrealcash.online
-domain:fivestarbusinesslistings.com
-domain:gumushaneescorton.shop
-domain:linkbuildingspecialist.online
-domain:malatyaescorton.shop
-domain:onlinecasinouknew.online
-domain:onlinegamblingbonus.online
-domain:onlinelivecasinouk.online
-domain:realwinningonlinecasino.online
-domain:top5casino.online
-domain:toponlinegamblingcasinos.online
-domain:topratedonlinecasinocanada.online
-domain:topratedonlinecasinousa.online
 
 # --- Link-farm / directory host signature (dofollow): 2 domains ---
 domain:gbdi.biz

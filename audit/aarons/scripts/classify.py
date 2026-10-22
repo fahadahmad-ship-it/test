@@ -34,6 +34,18 @@ def any_sig(text, sigs):
     t = norm(text)
     return any(s in t for s in sigs)
 
+_OFFTOPIC_RE = None
+def offtopic_hit(text, cfg):
+    """Word-boundary match for off-topic tokens, so short tokens don't match
+    inside unrelated words (e.g. 'cialis' inside 'specialist', 'slot' in 'slots')."""
+    global _OFFTOPIC_RE
+    if _OFFTOPIC_RE is None:
+        _OFFTOPIC_RE = re.compile(r"\b(" + "|".join(re.escape(t) for t in cfg.OFFTOPIC_TOKENS) + r")\b")
+    t = norm(text)
+    # also split domain punctuation so concatenated host tokens are seen as words
+    t2 = re.sub(r"[._/\-]", " ", t)
+    return bool(_OFFTOPIC_RE.search(t)) or bool(_OFFTOPIC_RE.search(t2))
+
 def classify_domain(rec, cfg, as_override=None):
     d = rec["domain"]
     # authoritative AS: backlinks_comparison (agrees with overview) when available,
@@ -64,9 +76,8 @@ def classify_domain(rec, cfg, as_override=None):
                  ("seo rank boost" in blob_title) or \
                  bool(re.search(r"page\s*[\d,]{3,}", blob_title)) or \
                  ("premium backlink" in blob_title)
-    offtopic = any_sig(blob_anchor, cfg.OFFTOPIC_TOKENS) or \
-               any_sig(blob_title, cfg.OFFTOPIC_TOKENS) or \
-               any_sig(d, cfg.OFFTOPIC_TOKENS)
+    offtopic = offtopic_hit(blob_anchor, cfg) or offtopic_hit(blob_title, cfg) or \
+               offtopic_hit(d, cfg)
     # a PBN co-client named in anchor/redirect = link-farm page selling to many clients
     coclient = any_sig(blob_anchor, cfg.PBN_COCLIENT_TOKENS) or \
                any(any(tok in r for tok in cfg.PBN_COCLIENT_TOKENS) for r in redirects)

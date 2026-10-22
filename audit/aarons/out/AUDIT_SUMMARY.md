@@ -24,18 +24,22 @@ live profile (5,392 referring domains) was audited**, not a sample.
 
 | Status | Domains | In disavow file? |
 |---|---|---|
-| **Spam (Disavow)** — confirmed spam, ≥1 dofollow link | **4,120** | Yes |
+| **Spam (Disavow)** — confirmed spam, ≥1 dofollow link | **4,119** | Yes |
 | **Spam (Nofollow, No Action)** — spam but all links nofollow | 200 | No (passes nothing) |
-| **Held (Pending Partner/supplier)** — commercial/commissioned-looking, confirm first | 662 | No (held) |
+| **Held (Pending Partner/supplier)** — commercial/commissioned-looking, confirm first | 663 | No (held) |
 | **Held (Nofollow, No Action)** | 49 | No |
 | **Keep** — genuine / editorial / authoritative | 359 | No |
 | **Own Site** — client-owned (aaronssystems.com, aaronssecurity.com) | 2 | No |
-| **Total** | **5,392** | **4,120 in file** |
+| **Total** | **5,392** | **4,119 in file** |
 
 Nothing was disavowed on an Authority Score, a TLD, or a shared IP alone — every
-one of the 4,120 file domains rests on visible evidence (a spam anchor, a spam
+one of the 4,119 file domains rests on visible evidence (a spam anchor, a spam
 page title, a known link-farm host, or a same-network member domain) **and** has
-at least one dofollow link to the site.
+at least one dofollow link to the site. The check was run exhaustively in both
+directions over all 5,392 domains: **zero** high-authority or trafficked sites are
+in the file (every domain with ≥100 monthly organic visits — indeed.com, birdeye.com,
+growjo.com, wiza.co, etc. — is Kept), and **zero** dofollow PBN/off-topic spam links
+are left out.
 
 ## The two campaigns (this is the important distinction for you)
 
@@ -43,7 +47,7 @@ The target page separates two different things:
 
 1. **The home-page flood (disavow).** ~10,500 of the analyzed links point at the
    home page with PBN sales-copy anchors. This is the negative-SEO / link-spam
-   attack. These are the 4,120 **Spam (Disavow)** domains.
+   attack. These are the 4,119 **Spam (Disavow)** domains.
 2. **The deep-page, commercial-anchor campaign (HELD).** ~1,500 links point at deep
    `/services/…-ga/` and `/location/…-ga/` money pages using **exact-match
    commercial geo anchors** (e.g. "home theater installation atlanta ga"). These are
@@ -54,12 +58,13 @@ The target page separates two different things:
 ## What to do with the files
 
 - **`disavow_aaronshometech.com.txt`** — the disavow file for the aaronshometech.com
-  Search Console property. 4,120 `domain:` lines, grouped by reason. It is the full
+  Search Console property. 4,119 `domain:` lines, grouped by reason. It is the full
   **union** of bad domains for the money site.
 - **Do NOT upload it yet.** First have the previous-supplier conversation about the
-  **711 Held domains** (the "Pending Disavow Lines" tab lists them). Any that the
-  supplier confirms were **not** commissioned can then be appended to the file; any
-  that were commissioned stay out.
+  **663 Held (Pending Partner) domains** (the "Pending Disavow Lines" tab lists these —
+  the dofollow held links that could be disavowed; a further 49 held links are nofollow
+  and need no action). Any the supplier confirms were **not** commissioned can then be
+  appended to the file; any that were commissioned stay out.
 - Uploading a disavow file **replaces** any file already on the property. We did not
   receive an existing file — please confirm whether one exists before uploading
   (if so, we merge rather than replace).

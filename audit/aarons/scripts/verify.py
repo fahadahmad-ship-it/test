@@ -18,6 +18,14 @@ def any_sig(text, sigs):
     t = (text or "").lower()
     return any(s in t for s in sigs)
 
+_OFF_RE = None
+def offtopic_hit(text, cfg):
+    global _OFF_RE
+    if _OFF_RE is None:
+        _OFF_RE = re.compile(r"\b(" + "|".join(re.escape(t) for t in cfg.OFFTOPIC_TOKENS) + r")\b")
+    t = (text or "").lower()
+    return bool(_OFF_RE.search(t)) or bool(_OFF_RE.search(re.sub(r"[._/\-]", " ", t)))
+
 FAILS = []
 WARN = []
 def check(cond, msg):
@@ -82,7 +90,7 @@ def main():
         for l in r.get("links", []):
             a = (l.get("anchor") or ""); t = (l.get("source_title") or "")
             rdr = (l.get("redirect_url") or "")
-            if any_sig(a, cfg.SPAM_ANCHOR_SIGNATURES) or any_sig(a, cfg.SPAM_SOFT_SIGNATURES) or any_sig(a, cfg.OFFTOPIC_TOKENS):
+            if any_sig(a, cfg.SPAM_ANCHOR_SIGNATURES) or any_sig(a, cfg.SPAM_SOFT_SIGNATURES) or offtopic_hit(a, cfg):
                 ev_anchor = True
             if any_sig(t, cfg.SPAM_TITLE_SIGNATURES) or any_sig(t, cfg.SPAM_SOFT_SIGNATURES) or "backlink" in t.lower() or re.search(r"page\s*[\d,]{3,}", t.lower()) or "premium backlink" in t.lower() or "seo resource" in t.lower() or "resellers" in t.lower():
                 ev_title = True
@@ -107,7 +115,7 @@ def main():
         if r["status"].startswith("Keep"):
             for l in r.get("links", []):
                 a = l.get("anchor") or ""
-                if (not l["nofollow"]) and (any_sig(a, cfg.SPAM_ANCHOR_SIGNATURES) or any_sig(a, cfg.OFFTOPIC_TOKENS)):
+                if (not l["nofollow"]) and (any_sig(a, cfg.SPAM_ANCHOR_SIGNATURES) or offtopic_hit(a, cfg)):
                     kept_spam.append(r["domain"]); break
     check(not kept_spam, f"zero Keep domains carry a dofollow PBN/off-topic anchor (offenders: {kept_spam[:15]})")
     nf_wrong = []
