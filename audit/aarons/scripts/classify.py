@@ -121,7 +121,9 @@ def classify_domain(rec, cfg, as_override=None):
         and not any_sig(t, cfg.SPAM_ANCHOR_SIGNATURES) and "backlink" not in t
         for t in titles)
 
-    held_signal = commercial_geo or commercial or deep_commissioned
+    # press-release syndication host (rule 5) -> held, may be commissioned
+    pr_host = any(h in d for h in getattr(cfg, "PRESS_RELEASE_HOSTS", []))
+    held_signal = commercial_geo or commercial or deep_commissioned or pr_host
     hard_spam = hard_spam_anchor or spam_title or offtopic or coclient or coclient_domain
     # host/TLD signal only counts as spam evidence for low-authority domains and
     # never on its own for a domain with real authority
@@ -151,10 +153,6 @@ def classify_domain(rec, cfg, as_override=None):
         # rule 2: a genuine, authoritative site is kept (never disavow a real citation)
         status, reason = "Keep", f"Genuine site (Authority Score {AS})"
         evidence = f"AS={AS}"
-    elif (branded_anchor or editorial_title) and not hard_spam:
-        # rule 6: linking page names the client without sales copy = genuine citation
-        status, reason = "Keep", "Branded / editorial citation naming the client without sales copy"
-        evidence = "branded/editorial"
     elif held_signal and hard_spam:
         # rule 3: exact-match/commercial AND PBN on the same domain -> hold, confirm
         base = "Held (Pending Partner)" if has_dofollow or len(links) == 0 else "Held (Nofollow, No Action)"
@@ -166,6 +164,12 @@ def classify_domain(rec, cfg, as_override=None):
         status = base
         reason = "Exact-match commercial (geo) anchor or deep money-page link; may be commissioned by the previous supplier"
         evidence = _ev_commercial(anchors, links, cfg)
+    elif editorial_title and not hard_spam:
+        # rule 6: the linking PAGE TITLE names the client without sales copy = genuine
+        # citation (a naked brand anchor alone is not enough; PBN pages use those too).
+        # Only reached when there is no commercial/deep held-signal above.
+        status, reason = "Keep", "Editorial / business-listing citation naming the client without sales copy"
+        evidence = "editorial (title names client)"
     elif hard_spam:
         kind = "PBN / link-service sales-copy"
         ev = _ev_spam(anchors, titles, cfg)
@@ -191,13 +195,8 @@ def classify_domain(rec, cfg, as_override=None):
             status, reason = "Spam (Disavow)", "Spam host-name / link-farm TLD signature on a no-authority domain"
         evidence = f"host: {d}"
         rec["spam_group"] = "host"
-    elif AS >= cfg.KEEP_AS_THRESHOLD:
-        status, reason = "Keep", f"Genuine site (Authority Score {AS})"
-        evidence = f"AS={AS}"
-    elif branded_anchor or editorial_title:
-        status, reason = "Keep", "Branded / editorial citation naming the client without sales copy"
-        evidence = "branded/editorial"
     else:
+        # no visible spam evidence -> retained (never disavow without evidence)
         status, reason = "Keep", "No spam evidence visible; retained (not disavowed without evidence)"
         evidence = "no evidence"
 

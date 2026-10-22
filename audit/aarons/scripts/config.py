@@ -110,6 +110,20 @@ SPAM_TITLE_SIGNATURES = [
     "backlinks for sale", "link marketplace", "buy links", "pbn",
     "/domain/", "page 14", "cheap backlinks", "casino", "poker", "slot",
     "gambling", "pharma", "viagra", "cialis", "escort", "porn", "adult",
+    "web directory", "websites directory", "global websites directory",
+    "seo rank boost", "backlink building services", "authority backlink",
+    "link spreader", "top list of websites", "few of top websites",
+    "top websites", "link list", "toplist", "top billion",
+    "backlinks, guest", "guest posts, press", "backlinks and guest",
+]
+
+# Press-release syndication hosts (playbook rule 5 -> Held, Pending Partner):
+# syndicated PR can be a commissioned placement; confirm before any action.
+PRESS_RELEASE_HOSTS = [
+    "ezpr.org", "einpresswire.com", "prlog.org", "openpr.com", "newswire.com",
+    "pressrelease", "prfree", "24-7pressrelease", "issuewire.com", "prweb.com",
+    "pr.com", "releasewire", "newsnetmedia", "yoursourcenews", "economicpolicytimes",
+    "businesstimes", "onlygolfnews", "timesla.com", "xpr.media",
 ]
 
 # Off-topic (casino/pharma/etc.) hard-spam tokens (Section 6 rule 7).
