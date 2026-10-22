@@ -29,9 +29,9 @@ names — same role, tied together here and in the disavow header rather than re
 |---|---|---|
 | Spam (Disavow) | 348 | Yes |
 | Spam (Nofollow, No Action) | 459 | No (all nofollow) |
-| Held (Pending Partner/supplier) | 101 | No — pending supplier |
-| Held (Nofollow, No Action) | 9 | No |
-| Keep | 172 | No |
+| Held (Pending Partner/supplier) | 94 | No — pending supplier |
+| Held (Nofollow, No Action) | 6 | No |
+| Keep | 182 | No |
 | Own Site | 0 | — |
 
 *(Two independent adversarial reviews of the Keep/Spam boundary ran before shipping. They found
@@ -42,7 +42,7 @@ negatives — link-broker / PBN pages whose spam copy sits in the page TITLE, no
 verification suite re-passes both directions after the fixes.)*
 
 ## Before you upload — do these first
-1. **Confirm with the supplier** which of the 110 HELD directory placements they commissioned.
+1. **Confirm with the supplier** which of the 100 HELD directory placements they commissioned.
    Held domains are deliberately **excluded** from the file. Only move a held domain into the file
    if the supplier confirms it was NOT commissioned. Draft request:
    `../supplier_confirmation_request.md`.
@@ -60,8 +60,10 @@ verification suite re-passes both directions after the fixes.)*
     We kept the ~55 genuine citations (bbb.org, yellowpages, chamber of commerce, omahachamber.org,
     oppd.com, …) and disavowed the farms on evidence.
 - **IP column:** not present in the Ahrefs export, so marked "n/a (not in export)".
-- **Template match:** `compare.py` against the signed-off `.xlsx` template could not run — the
-  template is not in this repo. The workbook follows the format spec (tabs/columns/styling incl.
-  the accent `FF0C343D`, Geist, header-only borders). Run `compare.py` when the template is available.
+- **Template match:** `compare.py` reports **zero structural differences** against the signed-off
+  K&K template — tabs, column widths, row heights, fonts/sizes, fills, header-only borders,
+  alignments, number formats, freeze panes, filters, gridlines, the 21pt title, the embedded
+  Harbinger logo, and the Y/N & Keep/Disavow dropdowns all match. Resolved the two doc conflicts
+  from the template itself: 21pt Summary title and header-only data borders.
 - **Ahrefs API** was exhausted, so Ahrefs detail came from the client CSV export (as the playbook
   expects); Semrush provided the live recon.

@@ -33,9 +33,16 @@ def fnum(x):
 # ---- evidence predicates -------------------------------------------------
 GEO = re.compile(r'\bomaha\b|\bne\b|nebraska', re.I)
 SERVICE = re.compile(r'furnace|furnance|hvac|air\s*condition|\bac\b|a/?c\b|heating|cooling|heat\s*pump', re.I)
-def is_exact_match(anchor):
-    a = anchor or ''
-    return bool(SERVICE.search(a) and GEO.search(a)) and not is_pbn_anchor(a)
+def is_commercial_phrase(a):
+    """A short commercial service phrase (optionally with geo) — not a sentence/filler."""
+    a = (a or '').strip()
+    if not a or is_pbn_anchor(a) or OFFTOPIC.search(a):
+        return False
+    if len(a.split()) > 7:            # a sentence is contextual, not an exact-match anchor
+        return False
+    return bool(SERVICE.search(a))
+def is_exact_match(anchor):          # exact-match commercial (geo or non-geo) -> Held signal
+    return is_commercial_phrase(anchor)
 
 PBN_ANCHOR = re.compile(
     r'premium seo backlink|buy backlink|dofollow backlink|pbn network|da ?\d{2}|pa ?\d{2}|'
@@ -85,11 +92,12 @@ def spammy_text(s):
     return bool(is_pbn_anchor(s) or TITLE_SPAM.search(s))
 
 def anchor_type(a):
+    """Anchor-type labels match the signed-off template vocabulary exactly."""
     a = (a or '').strip()
-    if a == '':                      return 'Empty/image'
-    if is_exact_match(a):            return 'Exact match commercial (geo)'
-    if is_pbn_anchor(a):            return 'Spam: PBN sales copy'
-    if OFFTOPIC.search(a):           return 'Spam: off topic'
+    if a == '':                      return 'Empty or image'
+    if is_commercial_phrase(a):      return 'Exact match commercial (geo)' if GEO.search(a) else 'Exact match commercial'
+    if is_pbn_anchor(a):             return 'Spam: keyword stuffed SEO sales copy'
+    if OFFTOPIC.search(a):           return 'Spam: keyword stuffed SEO sales copy'
     if BRANDED.search(a) and not NAKED.match(a): return 'Branded'
     if NAKED.match(a):               return 'Naked URL'
     if GENERIC.match(a):             return 'Generic'

@@ -7,11 +7,10 @@
 #   the property (client-confirmed) — this is a NEW upload (add), not a replace.
 # "Partner" in the workbook = the previous SEO SUPPLIER this brief names; same role.
 #
-# EXCLUDED pending the supplier: 110 HELD domains (exact-match commercial anchors /
+# EXCLUDED pending the supplier: 100 HELD domains (exact-match commercial anchors /
 #   deep money-page links that may be COMMISSIONED directory placements). They are NOT in
 #   this file. Confirm with the supplier which were commissioned before relying on this.
-#   The held list is in the workbook (Pending Disavow Lines / Exact Match Anchors tabs).
-# Every line below rests on visible evidence (PBN host / sales-copy anchor / off-topic).
+# Every line below rests on visible evidence (PBN host / sales-copy anchor / spam title).
 # Do not submit to Google Search Console on the client's behalf.
 
 # === PBN / link-farm host (66) ===
