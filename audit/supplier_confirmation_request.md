@@ -11,10 +11,16 @@ We're auditing the backlink profile for Controlled Comfort (controlledcomfort.co
 disavow decision, and want to avoid disavowing anything you placed on purpose.
 
 Between **25 August and 10 September 2026**, 56 directory/listing domains began linking to the
-site in a single tight cluster. They carry exact-match commercial anchors (e.g. "Furnace Heating
-Repair Omaha NE", "Air Conditioner Repair Omaha NE", "HVAC Repair Omaha NE") pointing at
-`/services/heating`, `/services/air-conditioning`, and the home page. It reads like one
-commissioned directory-listing package.
+site in a tight cluster. They carry exact-match commercial anchors (e.g. "Furnace Heating Repair
+Omaha NE", "Air Conditioner Repair Omaha NE", "HVAC Repair Omaha NE") pointing at
+`/services/heating`, `/services/air-conditioning`, and the home page, in a classic directory
+listing template (exact-match anchor + "Visit Website" + "controlledcomfort.com" per listing).
+
+**Context (from our live Semrush check):** these 56 look like the most recent slice of a
+**sustained** program — the same directory/bookmark/article pattern has been pointing at the
+money pages since at least **May 2025**, the profile now holds ~2,400 referring domains, and
+many of these domains were placed **twice** (once ~Dec 2025/Jan 2026, again Aug/Sep 2026). So
+please answer for the **whole program**, not just the 56 below.
 
 Please confirm:
 

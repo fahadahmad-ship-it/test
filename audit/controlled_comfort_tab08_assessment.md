@@ -63,25 +63,36 @@ move is to hold the whole set and ask the supplier, not to auto-disavow.
   verdict (still exact-match commercial → Held), but it is a quality red flag to raise: a
   commissioned package producing garbled anchors is low quality whoever paid for it.
 
-## What this assessment can NOT yet establish (data gaps — flag honestly)
+## Live-data enrichment (Semrush, pulled 2026-10-22) — see `enrichment_findings.md`
 
-The brief is a **single-source Semrush estimate, ~5 weeks old**, with only four columns. The
-real audit pipeline needs more before any line goes live. Specifically missing:
+The brief table has been checked against the live Semrush profile. The verdict is unchanged
+(all 56 Held), but three things now matter:
 
-- **Dofollow / nofollow per link.** Without it I cannot split `Held (Pending Partner)` from
-  `Held (Nofollow, No Action)`. If a domain's links are all nofollow, nothing passes and no
-  decision is needed. All 56 are provisionally placed in the decision bucket; the nofollow
-  ones will fall out once the flag is known.
-- **Authority Score, traffic, organic keywords** (Semrush) per domain — needed for the
-  Referring Domain Audit and Disavow List tabs, and a Keep check (AS ≥ 20 → Keep, rule 2).
-- **Linking-page title + live HTTP status** (the Ahrefs cross-check) — needed for a real,
-  checkable example backlink per row (format rule) and to protect genuine citations (rule 6).
-- **Whether a disavow file already exists** on the controlledcomfort.com Search Console
-  property (replace vs add), and **which properties the client can upload to.** Ask the client.
+- **The links are dofollow.** Sampled links to both deep pages are `nofollow=false`, live
+  (HTTP 200), on listing pages with authority score 0. So they **pass equity** — any of the 56
+  the supplier did *not* commission is a genuine `Spam (Disavow)`, not a nofollow "no action".
+- **The 56 badly under-count the problem.** The live profile is **2,440 referring domains**
+  (not 56), AS 21, and it is growing at **~70+ new referring domains per day** right now
+  (the 1,000 newest RDs span just 13.7 days). The same directory/bookmark/article template
+  points at the money pages from **May 2025 to today** — an ~18-month sustained campaign, with
+  many brief domains showing *two* placements (a ~Jan 2026 listing and the Aug/Sep 2026 one).
+  The eventual disavow (post-supplier) should cover the **whole footprint**, not just these 56;
+  a full-profile audit is the right next job.
+- **Two discrepancies:** brief "First seen" dates run ~2–4 weeks off Semrush's (estimate — don't
+  quote them as exact), and the brief's 17 AC domains didn't surface in the live
+  `/services/air-conditioning` pull (likely a trailing-slash target variant — reconcile each of
+  the 56 against the live index before finalising).
 
-I have **not** fabricated any of these. I can pull them live from the Semrush and Ahrefs MCP
-tools on request (that would let me finalise the nofollow split and build the full 7-tab
-workbook) — but it does not change the headline: the set is held pending the supplier.
+Still needed before any line goes live:
+- **Per-domain Authority Score / traffic / keywords.** Not pulled for all 56 (profile velocity
+  makes bulk sorted pulls very unit-expensive, and **Ahrefs API units are exhausted**). Nothing
+  sampled looks like a genuine AS≥20 `Keep` site, but confirm from the client's **Ahrefs CSV**
+  or a scoped per-domain Semrush pull.
+- **Whether a disavow file already exists** on the controlledcomfort.com Search Console property
+  (replace vs add), and **which properties the client can upload to.** Ask the client.
+
+I have **not** fabricated any metric. The full live findings and the exact numbers are in
+`enrichment_findings.md`.
 
 ## Two things only a human can do (I will not)
 

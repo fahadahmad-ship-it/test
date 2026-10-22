@@ -17,6 +17,14 @@
 # (remove its leading "# ") ONLY for a domain the supplier confirms they did NOT
 # commission AND that is then verified as spam with at least one dofollow link.
 #
+# NOTE (live Semrush check, 2026-10-22): sampled links from these domains are
+# DOFOLLOW and live (HTTP 200), so non-commissioned ones ARE equity-passing spam
+# that belongs in the file once the supplier confirms. SCOPE WARNING: these 56 are
+# a recent slice of a much larger, ongoing directory/bookmark campaign — the live
+# profile holds 2,440 referring domains and is adding ~70+/day. The real disavow
+# should come from a full-profile audit, not just this Tab 08 list. See
+# enrichment_findings.md.
+#
 # BEFORE SUBMITTING, also confirm with the client:
 #   - whether a disavow file already exists on the controlledcomfort.com Search
 #     Console property (uploading REPLACES it — do not drop existing lines); and
