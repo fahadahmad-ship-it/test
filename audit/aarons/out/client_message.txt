@@ -1,0 +1,37 @@
+Subject: Aaron's Home Tech backlink audit and disavow review
+
+Hi [Name],
+
+The backlink audit for aaronshometech.com is complete. The workbook, the disavow file, and a short summary are attached.
+
+What we found
+
+The site is under an active negative SEO attack. Semrush shows referring domains climbing from around 900 a year ago to roughly 5,399 today, while the Authority Score has fallen from 28 to 10. The links are overwhelmingly the work of a single link selling network, with sales copy anchors such as "premium pbn backlinks" and "buy backlinks online cheap", and the same network is pushing links to several unrelated businesses at the same time.
+
+We reviewed every one of the 5,392 referring domains on its own evidence. The breakdown is:
+
+4,123 confirmed spam with at least one dofollow link, included in the disavow file.
+208 spam that link only through nofollow, so they pass nothing and need no action.
+961 held for the previous supplier to confirm, because they carry exact match commercial anchors or links to deep money pages and may have been commissioned.
+52 held but nofollow, so no action is needed either way.
+46 genuine or editorial links to keep.
+2 client owned domains.
+
+Every authority figure in the audit is the Semrush Authority Score, shown in the AS column.
+
+What to do next
+
+Please do not upload the disavow file yet. We first need to confirm the 961 held domains with the previous supplier, since some may be paid placements we should not remove. Once that conversation is done, any that were not commissioned can be added to the file. Please also note that uploading a disavow file replaces any file already on the property, so confirm whether one already exists.
+
+What we need from you
+
+1. Confirmation that aaronssystems.com and aaronssecurity.com are your domains, and whether they redirect into aaronshometech.com.
+2. The name or details of the previous SEO supplier, so we can confirm the held set quickly.
+3. Which Search Console properties you can upload a disavow file to.
+4. If available, your Ahrefs exports (the Backlinks CSV with the referring page HTTP code column, and the Referring domains CSV), so we can add live page checks.
+
+Happy to walk through the workbook on a call whenever suits you.
+
+Best regards,
+[Your name]
+Harbinger Marketing
