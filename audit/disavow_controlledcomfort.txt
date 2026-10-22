@@ -1,0 +1,87 @@
+# Google disavow file — controlledcomfort.com (Controlled Comfort, Omaha NE)
+# Generated 2026-10-22 from Semrush Tab 08 (estimate, pulled 2026-09-16).
+#
+# ACTIVE DISAVOW LINES: 0
+#
+# DO NOT UPLOAD THIS FILE YET.
+# All 56 referring domains below are HELD, not disavowed. Every one carries an
+# exact-match commercial anchor (Controlled Comfort's HVAC service + "Omaha NE"
+# geography) and/or points at a deep money page (/services/heating,
+# /services/air-conditioning). Under the audit rules these may be COMMISSIONED
+# placements, so none may be disavowed until the previous SUPPLIER confirms which
+# placements they commissioned. ("Supplier" here is the role the audit format
+# always names "partner".)
+#
+# They are listed below ONLY as commented-out pending lines so nothing is lost.
+# A commented (#) line has NO effect if this file is uploaded. Activate a line
+# (remove its leading "# ") ONLY for a domain the supplier confirms they did NOT
+# commission AND that is then verified as spam with at least one dofollow link.
+#
+# BEFORE SUBMITTING, also confirm with the client:
+#   - whether a disavow file already exists on the controlledcomfort.com Search
+#     Console property (uploading REPLACES it — do not drop existing lines); and
+#   - which Search Console properties they can actually upload to.
+# Do not submit to Google Search Console on the client's behalf.
+# ---------------------------------------------------------------------------
+
+# === HELD, pending supplier confirmation — links to /services/heating (29) ===
+# domain:listique.org
+# domain:topbizdir.com
+# domain:zynatee.com
+# domain:theinfosynth.com
+# domain:onepluslisting.com
+# domain:true-listings.com
+# domain:lookuplists.com
+# domain:getdirectory.org
+# domain:localstudio.info
+# domain:honestdir.com
+# domain:localbusinessfinder.co
+# domain:listingcenter.org
+# domain:thelistingmatrix.com
+# domain:directoryology.com
+# domain:myreallistings.com
+# domain:selectbusinesszone.com
+# domain:thedirectopia.com
+# domain:ackoona.org
+# domain:listingsspot.com
+# domain:businesslistingforall.com
+# domain:5starlocalcenter.com
+# domain:bestlocalcenter.com
+# domain:ideal-listings.com
+# domain:directoryninja.org
+# domain:godigitalbusinesshub.com
+# domain:findbusinesses.org
+# domain:getzzby.com
+# domain:businessinfoseek.com
+# domain:easybusinessdirect.com
+
+# === HELD, pending supplier confirmation — links to /services/air-conditioning (17) ===
+# domain:premiuminc.org
+# domain:ultimatesites.info
+# domain:yourpremium.org
+# domain:rozzbee.com
+# domain:topincitylocal.com
+# domain:probusinessworld.com
+# domain:woorivo.com
+# domain:localbusinessesdir.com
+# domain:showmelocalpro.com
+# domain:populardirectory.co
+# domain:directorist.net
+# domain:snapsearch.org
+# domain:seekbump.org
+# domain:yellowmarketplaces.com
+# domain:directoryview.com
+# domain:localdirectory247.com
+# domain:getlistedahead.com
+
+# === HELD, pending supplier confirmation — links to home page / (10) ===
+# domain:thelistingcloud.net
+# domain:weblistings.info
+# domain:directorycentered.com
+# domain:busineessupdir.com
+# domain:findlocalcenter.com
+# domain:a-zbusinesses.com
+# domain:localbusinessguide.org
+# domain:atozweb.org
+# domain:localpagesdirectory.com
+# domain:searchknock.com
