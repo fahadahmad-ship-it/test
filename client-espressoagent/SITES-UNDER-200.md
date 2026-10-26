@@ -39,3 +39,29 @@ re-thinkingthefuture (real estate/architecture) + wvgazettemail,
 rutlandherald, spacecoastdaily (US news authority).
 Method: inventory filtered to RE/business/marketing/finance, English,
 non-foreign, <$200, then each Semrush-verified not built.
+
+## UPDATE (26 Oct) — corrected against client's actual sheet built list
+REMOVED (were built, Semrush hadn't indexed the Custom Link placements):
+bbntimes.com, re-thinkingthefuture.com, kennarealestate.com.
+
+ADDED — 10 more, verified not built vs sheet list + Semrush:
+
+| Domain | AS | Traffic | Price | Category |
+|---|---|---|---|---|
+| getassist.net | 43 | 126625 | 150 | Tech/business/marketing |
+| ilounge.com | 43 | 69295 | 150 | Business/finance |
+| bnonews.com | 43 | 50929 | 154 | US news |
+| marketinglad.io | 42 | 85300 | 140 | Marketing |
+| sanangelolive.com | 42 | 39973 | 34 | US (TX) news — cheapest |
+| researchprospect.com | 42 | 63959 | 190 | Education/business |
+| herald-dispatch.com | 42 | 28974 | 127 | US daily |
+| financialcontent.com | 42 | 63836 | 86 | Finance |
+| ecommercefastlane.com | 42 | 8601 | 60 | Marketing/ecommerce |
+| fingerlakes1.com | 42 | 34334 | 142 | US news/business |
+
+Total verified not-built under $200: 30.
+
+Note: Semrush backlink-absence is not definitive — 3 sheet-built sites
+(above) had live Custom Link placements Semrush had not indexed. The
+client's own sheet list is authoritative; this list is cross-checked
+against both.
