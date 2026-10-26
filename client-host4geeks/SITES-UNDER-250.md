@@ -1,0 +1,47 @@
+# host4geeks.com — 22 verified not-built sites under $250
+Client: managed VPS / WordPress hosting. From the 11,020-site inventory.
+"Already built" derived from host4geeks' live backlinks + order-sheet
+builds; every pick Semrush-verified not linking to host4geeks (control:
+mostlyblogging.com returned its live "best-wordpress-hosting-for-agencies"
+link = already built, excluded). 26 Oct 2026.
+
+## Best topical fit (hosting / security / dev / SaaS)
+
+| Domain | AS | Traffic | Price | Why |
+|---|---|---|---|---|
+| hostadvice.com | 47 | 92,609 | $180 | Hosting-review site — exact vertical |
+| powerdmarc.com | 47 | 71,837 | $203 | Email security/DMARC — infra audience |
+| invgate.com | 48 | 238,603 | $190 | ITSM software — IT/devops buyers |
+| plainenglish.io | 49 | 140,428 | $166 | Dev/software community |
+| codeitbro.com | 46 | 388,293 | $80 | Tech/software how-to |
+| techylist.com | 47 | 702,444 | $125 | Tech |
+| mobileappdaily.com | 47 | 236,153 | $137 | Tech/app dev |
+| electronicsforu.com | 48 | 152,527 | $110 | Electronics/tech |
+| fileion.com | 48 | 475,129 | $183 | Software/downloads |
+| wistia.com | 47 | 60,167 | $75 | SaaS/marketing |
+| spacedaily.com | 47 | 68,509 | $189 | Science/tech |
+| fonts2u.com | 46 | 140,133 | $210 | Tech/design |
+| wheonx.com | 49 | 248,660 | $60 | Tech/gaming |
+
+## Business / news / marketing (B2B authority)
+
+| Domain | AS | Traffic | Price |
+|---|---|---|---|
+| wvgazettemail.com | 54 | 60,697 | $149 |
+| skillsyouneed.com | 51 | 284,933 | $180 |
+| bbntimes.com | 50 | 934,220 | $130 |
+| rutlandherald.com | 46 | 220,294 | $128 |
+| companieshistory.com | 46 | 164,109 | $246 |
+| thesocialcat.com | 46 | 120,644 | $248 |
+| goonlinetools.com | 46 | 119,193 | $190 |
+| vaizle.com | 45 | 115,442 | $90 |
+| ediblemanhattan.com | 46 | 107,869 | $145 |
+
+## Top picks
+hostadvice.com ($180), powerdmarc.com ($203), invgate.com ($190) — the
+three on-vertical infra/hosting/security sites. Then codeitbro ($80),
+wistia ($75), wheonx ($60) for cheap tech reach.
+
+Method: inventory filtered to tech/hosting/dev/SaaS/business, English,
+non-foreign, <$250, excluded host4geeks' backlinks, each pick
+Semrush-verified not built. Already-built caught: mostlyblogging.com.
