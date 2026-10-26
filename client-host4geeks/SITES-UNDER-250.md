@@ -45,3 +45,24 @@ wistia ($75), wheonx ($60) for cheap tech reach.
 Method: inventory filtered to tech/hosting/dev/SaaS/business, English,
 non-foreign, <$250, excluded host4geeks' backlinks, each pick
 Semrush-verified not built. Already-built caught: mostlyblogging.com.
+
+## MORE — 14 additional verified not-built (batch 2)
+
+| Domain | AS | Traffic | Price | Fit |
+|---|---|---|---|---|
+| gbhackers.com | 44 | 42168 | 150 | Cybersecurity news |
+| hacker9.com | 44 | 96222 | 140 | Security/tech |
+| scalefusion.com | 42 | 59140 | 241 | Endpoint/MDM (IT) |
+| opencart.com | 45 | 27475 | 205 | Ecommerce platform (hosting-adjacent) |
+| webutility.io | 43 | 129854 | 140 | Software/dev tools |
+| entheosweb.com | 43 | 116000 | 193 | Web/tech/design |
+| toolify.ai | 44 | 58500 | 169 | AI tools directory |
+| searchbug.com | 43 | 55122 | 246 | Tech/data |
+| getassist.net | 43 | 126625 | 150 | Tech/business |
+| psu.com | 44 | 92304 | 131 | Tech/gaming |
+| bestmediainfo.com | 44 | 48076 | 74 | Tech/AI |
+| coherentmarketinsights.com | 43 | 27107 | 120 | Business/tech |
+| prnews.io | 44 | 90355 | 165 | Marketing/PR |
+| marketinglad.io | 42 | 85300 | 140 | Marketing |
+
+Total verified not-built under $250: 36.
