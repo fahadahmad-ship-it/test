@@ -66,3 +66,27 @@ Semrush-verified not built. Already-built caught: mostlyblogging.com.
 | marketinglad.io | 42 | 85300 | 140 | Marketing |
 
 Total verified not-built under $250: 36.
+
+## MORE — 11 additional verified not-built (batch 3)
+
+| Domain | AS | Traffic | Price | Fit |
+|---|---|---|---|---|
+| ipcisco.com | 41 | 72068 | 174 | Networking/IT education — strong infra fit |
+| invoiceberry.com | 41 | 26090 | 142 | SaaS (invoicing) |
+| agicent.com | 42 | 47534 | 177 | App dev/software |
+| insidermonkey.com | 41 | 110196 | 218 | US finance/tech |
+| applemagazine.com | 41 | 38038 | 99 | US tech |
+| artificin.com | 41 | 63057 | 132 | AI/tech |
+| seostudio.tools | 41 | 102730 | 120 | Marketing/SEO tools |
+| onestream.live | 42 | 34301 | 240 | Streaming SaaS |
+| wedio.com | 42 | 56852 | 195 | Tech/photography |
+| cgmagonline.com | 42 | 60350 | 186 | Gaming/tech |
+| digitaljournal.com | 42 | 15566 | 30 | US tech/PR news — cheapest |
+
+Total verified not-built under $250: 47.
+
+GEOGRAPHY CAVEAT: verified not-built, but the inventory traffic figure is
+global. Some tech sites (e.g. hacker9.com = 97% India) reach the wrong
+audience for a US hosting company. Likely-US here: insidermonkey,
+applemagazine, digitaljournal. Confirm the US/India split before ordering
+any pick where audience geography matters.
