@@ -90,3 +90,22 @@ global. Some tech sites (e.g. hacker9.com = 97% India) reach the wrong
 audience for a US hosting company. Likely-US here: insidermonkey,
 applemagazine, digitaljournal. Confirm the US/India split before ordering
 any pick where audience geography matters.
+
+## MORE — 12 additional verified not-built (batch 4: news + tech)
+
+| Domain | AS | Traffic | Price | Type |
+|---|---|---|---|---|
+| ilounge.com | 43 | 69295 | 150 | Apple/tech (strong fit) |
+| timesargus.com | 44 | 54533 | 226 | US (VT) daily |
+| spacecoastdaily.com | 44 | 47327 | 60 | US (FL) news |
+| sanangelolive.com | 42 | 39973 | 34 | US (TX) news — cheapest |
+| herald-dispatch.com | 42 | 28974 | 127 | US (WV) daily |
+| fingerlakes1.com | 42 | 34334 | 142 | US (NY) news/business |
+| newsitem.com | 41 | 45861 | 133 | US (PA) news |
+| bnonews.com | 43 | 50929 | 154 | US breaking news |
+| financialcontent.com | 42 | 63836 | 86 | Finance |
+| goodmenproject.com | 44 | 31413 | 72 | US men's/business |
+| tycoonstory.com | 41 | 161542 | 50 | Business/entrepreneur (check geo) |
+| valiantceo.com | 41 | 14582 | 72 | Business |
+
+Total verified not-built under $250: 59.
