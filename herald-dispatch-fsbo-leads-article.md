@@ -6,6 +6,8 @@ For decades, the "For Sale By Owner" sign has been a quiet symbol of American in
 
 Walk through almost any neighborhood in the country and you will still find them: handmade signs, a flyer box stuffed with printouts, a phone number scrawled under the word "owner." The National Association of Realtors has tracked For Sale By Owner transactions for years, and while the share rises and falls, the pattern underneath stays remarkably steady. A large portion of owners who start out selling on their own eventually list with an agent anyway.
 
+The latest research backs this up. In the National Association of Realtors [2025 Profile of Home Buyers and Sellers](https://www.nar.realtor/news/real-estate-news/nar-2025-profile-of-home-buyers-sellers-reveals-market-extremes), For Sale By Owner transactions fell to roughly five percent of all sales, while a record ninety one percent of sellers worked with an agent. The same report found that the typical owner sold home traded for about $360,000, compared with roughly $425,000 for agent assisted sales. In other words, the homeowners trying hardest to save a commission often leave real money on the table.
+
 The reasons are familiar to anyone who has tried it. Pricing a home is harder than it looks. Showings eat up evenings and weekends. Buyers negotiate aggressively when they know there is no agent on the other side. Paperwork piles up, deadlines sneak forward, and the promise of saving a commission slowly gives way to the exhaustion of doing everything alone.
 
 That slow turn from confidence to frustration is exactly where opportunity lives for a prepared agent.
@@ -18,7 +20,7 @@ That is the appeal of the For Sale By Owner market. Unlike a cold list of random
 
 The challenge has always been speed and accuracy. A sign in a yard does not come with a phone number in your database. A listing on a classifieds site might vanish by the weekend. Agents who rely on driving around town or refreshing websites by hand burn hours for a handful of contacts, and by the time they call, three competitors have already left a voicemail.
 
-This is the gap that modern prospecting tools were built to close. Services that deliver [high-quality FSBO leads](https://www.espressoagent.com/fsbos) pull fresh owner listings together with verified phone numbers, so an agent can open their laptop in the morning and start real conversations before lunch instead of spending the day hunting for names.
+This is the gap that modern prospecting tools were built to close. Services that deliver [high-quality FSBO leads](https://www.espressoagent.com/fsbos) pull fresh owner listings together with verified phone numbers, so an agent can open their laptop in the morning and start real conversations before lunch instead of spending the day hunting for names. The most effective agents rarely stop at a single source. They pair owner listings with [expired listing leads](https://www.espressoagent.com/expired-listings) and other [motivated seller leads](https://www.espressoagent.com/motivated-seller-leads), building a steady rotation of homeowners who are ready to move.
 
 ## Why Timing Beats Almost Everything Else
 
@@ -56,7 +58,7 @@ It also changes the emotional experience of the job. Chasing scattered referrals
 FSBO stands for "For Sale By Owner." It describes a homeowner who lists and markets their property without hiring a real estate agent, usually to avoid paying a sales commission.
 
 **Why do agents target FSBO sellers?**
-Because these owners have already decided to sell. A majority eventually list with an agent after discovering how demanding the process is on their own, which makes them a warmer prospect than a homeowner who has shown no intention of moving.
+Because these owners have already decided to sell. National Association of Realtors data shows roughly ninety one percent of sellers ultimately use an agent, so most owners who start out on their own eventually look for professional help. That makes them a warmer prospect than a homeowner who has shown no intention of moving.
 
 **What makes a FSBO lead high quality?**
 Freshness and accuracy. A strong lead pairs a recently listed owner property with a verified, current phone number, so the agent can reach a real person quickly instead of chasing dead ends.
@@ -70,3 +72,10 @@ For agents who follow up consistently and lead with value rather than pressure, 
 ## The Bottom Line
 
 The For Sale By Owner sign is not a closed door. It is an invitation that most agents simply never answer in time. The ones who do, armed with current data and a genuinely helpful approach, are quietly building some of the strongest listing pipelines in the business. In a market where every seller matters, reaching the right homeowner at the right moment is no longer a lucky break. It is a system, and the agents who master it are the ones still thriving when the easy leads dry up.
+
+## Related Resources
+
+- [High quality FSBO leads for agents](https://www.espressoagent.com/fsbos)
+- [Fresh expired listing leads](https://www.espressoagent.com/expired-listings)
+- [Motivated seller leads](https://www.espressoagent.com/motivated-seller-leads)
+- [NAR 2025 Profile of Home Buyers and Sellers](https://www.nar.realtor/news/real-estate-news/nar-2025-profile-of-home-buyers-sellers-reveals-market-extremes) (authoritative industry data)
