@@ -90,7 +90,10 @@ GENUINE = {
 }
 # multi-tenant platforms: disavow the specific subdomain, never the shared root
 MULTITENANT = {"blogspot.com","wordpress.com","medium.com","tumblr.com","weebly.com","wixsite.com",
-               "godaddysites.com","blogspot.in","substack.com","livejournal.com"}
+               "godaddysites.com","blogspot.in","substack.com","livejournal.com","altervista.org"}
+# genuine-industry name guard: keep low-volume dumpster/cleanout/waste/homes sites out of the scheme-injection rule
+INDUSTRY_NAME = re.compile(r"(dumpster|rolloff|roll-off|cleanout|clean-out|cleanup|hoarding|junkremoval|junk-removal|"
+                           r"hauling|disposal|wastemanagement|[a-z]homes|realestate|landscap)", re.I)
 # sister dumpster brands that appear as referring domains (relationship unknown -> Held pending supplier)
 SISTER_DUMPSTER = {
     "stldumpsters.com","stldumpster.com","stldumpsterental.com","renthisdumpster.com","stlrolloffs.com",
@@ -221,7 +224,7 @@ def main():
                     status, evidence = _held("exact-match commercial/geo anchor: %s" % ex_anchor)
                 elif sig:
                     status, evidence = _spam("spam host-name signature (%s)" % dom)
-                elif naked_only and bl >= 3 and asc < 20:
+                elif naked_only and bl >= 2 and asc < 20 and not INDUSTRY_NAME.search(dom):
                     status, evidence = _spam("link-scheme injection: %d naked-URL/brand/image links from low-authority host (AS %d) within the attack" % (bl, asc))
                 elif asc >= 20:
                     status = "Keep"; evidence = "AS %d genuine site, no spam evidence" % asc

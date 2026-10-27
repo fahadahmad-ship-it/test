@@ -1,7 +1,7 @@
 # Anchors deliberately EXCLUDED from the scapersllc.com disavow file — with the reason for each
 
 Generated 2026-10-27. This lists every anchor group held back from the one-time
-disavow file and why. 4,101 domains ARE disavowed (gambling + link-selling/PBN); the groups below are NOT.
+disavow file and why. 4,212 domains ARE disavowed (gambling + link-selling/PBN); the groups below are NOT.
 
 ## 1. Exact-match 'dumpster rental <Missouri city>' / service anchors — HELD pending supplier confirmation
 
@@ -81,10 +81,10 @@ Brand/navigational anchors kept: "scapersllc.com", "visit website", "website", "
 
 ## 3. Nofollow-only spam anchors — NO ACTION (pass no ranking value)
 
-Reason: 38 domains are spam but every link from them is nofollow, so Google passes no value; disavowing is unnecessary.
+Reason: 40 domains are spam but every link from them is nofollow, so Google passes no value; disavowing is unnecessary.
 
 ## 4. Low-volume, no-visible-anchor domains — KEPT out of the file
 
-Reason: 307 domains (mostly 1-2 links, empty/image anchors) show no visible per-domain spam evidence. Per the
+Reason: 194 domains (mostly 1-2 links, empty/image anchors) show no visible per-domain spam evidence. Per the
 playbook, nothing is disavowed on a name, TLD, score or shared IP alone, so these are left out. The client can extend
 the file later if Search Console shows them causing harm.

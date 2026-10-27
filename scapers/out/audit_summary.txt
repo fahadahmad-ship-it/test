@@ -1,14 +1,14 @@
 SCAPERS LLC — backlink audit summary (counts)
   Referring domains: 4983   Backlinks: 28089
-  Spam (Disavow): 4101 domains / 26105 links
+  Spam (Disavow): 4212 domains / 26322 links
   Held (Pending Partner): 534 domains / 1249 links
   Held (Nofollow, No Action): 3 domains / 6 links
-  Spam (Nofollow, No Action): 38 domains / 254 links
-  Keep: 307 domains / 475 links
-  Disavow file lines (deduped): 4101
+  Spam (Nofollow, No Action): 40 domains / 258 links
+  Keep: 194 domains / 254 links
+  Disavow file lines (deduped): 4212
   Held (excluded, pending supplier): 537
     disavow group 'Off-topic gambling anchors (July 2026 flood)': 31
     disavow group 'Hacked third-party site (gambling injection)': 11
     disavow group 'Link-selling / PBN sales-copy network': 260
     disavow group 'Spam host-name signature (SEO-tool / directory / PBN host)': 3640
-    disavow group 'Naked-URL link-scheme injection': 159
+    disavow group 'Naked-URL link-scheme injection': 270

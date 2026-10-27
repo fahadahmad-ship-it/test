@@ -6,7 +6,7 @@ Prepared by Harbinger Marketing · 27 Oct 2026 · Harbinger backlink-audit forma
 
 | File | What it is |
 |------|-----------|
-| `disavow_scapersllc.com.txt` | **Submission-ready Google disavow file** — 4,101 `domain:` lines, grouped by reason, with a header. **Do not upload before reading the caveat below.** |
+| `disavow_scapersllc.com.txt` | **Submission-ready Google disavow file** — 4,212 `domain:` lines, grouped by reason, with a header. **Do not upload before reading the caveat below.** |
 | `excluded_anchors.md` | The anchors/domains **deliberately held out of the file**, with the reason for each (the second deliverable). |
 | `Scapers_LLC_Backlinks_Audit.xlsx` | Full 7-tab workbook (Summary, Referring Domain Audit, All Backlinks, Anchor Analysis, Exact Match Anchors, Pending Disavow Lines, Disavow List). |
 | `audit_summary.txt` | The headline counts. |
@@ -27,12 +27,12 @@ Two separate negative-SEO floods hit the site:
 
 | Status | Domains | In the file? |
 |--------|--------:|--------------|
-| Spam (Disavow) | 4,101 | **Yes** |
-| Spam (Nofollow, No Action) | 38 | No — nofollow, passes no value |
+| Spam (Disavow) | 4,212 | **Yes** |
+| Spam (Nofollow, No Action) | 40 | No — nofollow, passes no value |
 | Held (Pending Supplier) | 537 | **No — pending confirmation** |
-| Keep (genuine / low-signal) | 307 | No |
+| Keep (genuine / low-signal) | 194 | No |
 
-Every disavowed domain rests on **visible evidence** (a gambling or PBN sales-copy anchor, a spam host-name
+At the client's instruction the low-volume (2-link) directory/listing spam is now included; the ~190 domains left as Keep are genuine citations or industry-relevant local sites, plus single-link mentions. Every disavowed domain rests on **visible evidence** (a gambling or PBN sales-copy anchor, a spam host-name
 signature, or a naked-URL link-scheme pattern) — nothing is disavowed on score, TLD or IP alone. Verified both
 directions: zero genuine citations in the file, zero gambling/PBN links left in Keep/Held.
 
