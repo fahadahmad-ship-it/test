@@ -120,6 +120,7 @@ def build():
     top3 = held_nets.most_common(3)
     top3_share = sum(n for _,n in top3)
     held_lowas = sum(1 for v in held if v["ascore"] <= 2)
+    held_notraffic = sum(1 for v in held if (v["traffic"] or 0) == 0)
     spam_dof = dom_count["Spam (Disavow)"]; spam_nof = dom_count["Spam (Nofollow, No Action)"]
     spam_total = spam_dof + spam_nof
 
@@ -130,7 +131,7 @@ def build():
         "Two patterns, easy to tell apart. %d links hit the home page (the link-scheme flood); the other %d hit deep product/service pages (the commissioned-looking campaign). The home-page flood is the attack." % (home_links, deep_links),
         "The biggest anchor, on %d domains, is backlink sales copy naming the client's own domain: \"%s\"." % (top_anchor_doms, top_anchor[:70]),
         "%d domains are held for the previous SEO provider (the \"partner\") to confirm, in case any were paid placements. Unlike the home-page flood, they are NOT one IP network - they scatter across many hosts and /24 ranges (the three largest hold only %d between them). Most are low-quality web directories and listing sites carrying exact-match geo anchors to deep product pages." % (len(held), top3_share),
-        "Held does not mean valuable: %d of the %d held domains sit at Authority Score 2 or below and none above 19. Per-domain organic traffic was not pulled (see delivery note); Authority Score is the authority signal used here." % (held_lowas, len(held)),
+        "Held does not mean valuable: %d of the %d held domains have zero organic traffic, and %d sit at Authority Score 2 or below. These are low-authority hosts, not real publishers." % (held_notraffic, len(held), held_lowas),
     ]
 
     # ===== Tab 1 Summary =====
@@ -270,9 +271,10 @@ def build():
     rows7=[]
     for d in ds["emitted"]:
         v=domains[d]
-        rows7.append(["domain:"+d, v["ascore"], v["backlinks"], "", v["traffic"], v["orgkw"], v["top_anchor"]])
+        rows7.append(["domain:"+d, v["ascore"], v["backlinks"],
+                      ("" if v["rds"] is None else v["rds"]), v["traffic"], v["orgkw"], v["top_anchor"]])
     write_table(ws,H7,rows7,W7,22.5,
-                numfmts={1:"0.0",2:"#,##0",4:"#,##0",5:"#,##0"},
+                numfmts={1:"0.0",2:"#,##0",3:"#,##0",4:"#,##0",5:"#,##0"},
                 aligns={1:"center",2:"center",3:"center",4:"center",5:"center"})
 
     path = os.path.join(OUT, "Premier_Blinds_and_Designs_Backlinks_Audit.xlsx")

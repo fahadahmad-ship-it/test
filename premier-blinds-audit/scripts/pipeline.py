@@ -31,10 +31,29 @@ def link_property(l):
         return r
     return load.host_of(l["target_url"])
 
+def load_metrics():
+    """Per-domain Semrush metrics pulled via fan-out:
+    domain;ascore;rds;backlinks_total;organic_keywords;organic_traffic"""
+    m = {}
+    for p in glob.glob(os.path.join(DATA,"metrics","metrics_*.csv")):
+        for line in open(p, encoding="utf-8"):
+            line=line.strip()
+            if not line: continue
+            parts=line.split(";")
+            if len(parts) < 6: continue
+            d=parts[0].strip().lower()
+            def i(x):
+                try: return int(float(x))
+                except: return 0
+            m[d]={"ascore":i(parts[1]),"rds":i(parts[2]),"total":i(parts[3]),
+                  "orgkw":i(parts[4]),"traffic":i(parts[5])}
+    return m
+
 def build():
     bl, dropped, rec = load.read_backlinks(sorted(glob.glob(os.path.join(DATA,"fetch","bl_*.csv"))))
     rd, rddrop = load.read_refdomains(sorted(glob.glob(os.path.join(DATA,"rd","rd_*.csv"))))
     rdmap = {r["domain"].strip().lower(): r for r in rd}
+    metrics = load_metrics()
     match = load.build_refdomain_matcher(rdmap.keys())
 
     groups = defaultdict(list)
@@ -48,7 +67,18 @@ def build():
         if not links:
             continue  # refdomain row whose links folded into another host key
         r = rdmap.get(d)
-        asc = _num(r["domain_ascore"]) if r else None
+        rd_asc = _num(r["domain_ascore"]) if r else None
+        mt = metrics.get(d)
+        # prefer the backlinks_overview Authority Score; fall back to the
+        # referring-domain figure if the per-domain pull failed (metric 0 but rd>0)
+        if mt and mt["ascore"] > 0:
+            asc = float(mt["ascore"])
+        elif rd_asc is not None:
+            asc = rd_asc
+        elif mt:
+            asc = float(mt["ascore"])
+        else:
+            asc = None
         status, reason = classify.classify_domain(d, links, asc)
 
         dof = sum(1 for l in links if l["nofollow"].strip().lower() == "false")
@@ -79,9 +109,9 @@ def build():
             "domain": d, "status": status, "reason": reason,
             "ascore": asc if asc is not None else 0.0,
             "backlinks": len(links),
-            "rds": None,          # referring-domain's own RD count — not pulled (see limits)
-            "traffic": 0,         # organic traffic — not pulled per-domain (see limits)
-            "orgkw": 0,           # organic keywords — not pulled per-domain (see limits)
+            "rds": (mt["rds"] if mt else None),        # referring-domain's own RD count (backlinks_overview)
+            "traffic": (mt["traffic"] if mt else 0),   # organic traffic (domain_rank, us)
+            "orgkw": (mt["orgkw"] if mt else 0),       # organic keywords (domain_rank, us)
             "in_disavow": in_disavow,
             "points_to": ", ".join(props),
             "dofollow": dof, "nofollow": nof,

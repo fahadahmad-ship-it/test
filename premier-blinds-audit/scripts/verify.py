@@ -74,8 +74,15 @@ def main():
                 bad.append((d,l["source_title"])); break
     check(not bad, "no disavow domain is a genuine citation naming the client (%d fail)"%len(bad))
     for d,ti in bad[:10]: print("      LEAK",d,"|",ti[:60])
-    # traffic hand-review (traffic not pulled -> documented, all 0)
-    warn(all(domains[d]["traffic"]==0 for d in udoms), "traffic=0 for all disavow (per-domain traffic not pulled; documented limitation)")
+    # traffic hand-review: a disavow domain with real organic traffic is a
+    # false-positive risk -> list for manual review and confirm it still rests on evidence
+    traf=sorted(((domains[d]["traffic"] or 0, d) for d in udoms), reverse=True)
+    withtraf=[(t,d) for t,d in traf if t>=100]
+    print("  disavow domains with organic_traffic >= 100 (hand-review): %d" % len(withtraf))
+    for t,d in withtraf[:15]:
+        print("      traffic=%-6d %-28s reason=%s title=%s" % (t,d,domains[d]["reason"],(domains[d]["example_title"] or '')[:40]))
+    check(all(domains[d]["reason"] in EVIDENCE_REASONS for _,d in withtraf),
+          "every high-traffic disavow domain still rests on visible spam evidence")
 
     # ---- NO FALSE NEGATIVES (bad link wrongly kept) ----
     print("\n=== NO FALSE NEGATIVES ===")

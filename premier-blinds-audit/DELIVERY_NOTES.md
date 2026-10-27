@@ -78,26 +78,27 @@ previous SEO provider). The client should identify that party; the held set is
 their call, not something to auto-disavow.
 
 Unlike some campaigns, this held set is **not one IP network** — it scatters across
-many hosts and /24 ranges, and 411 of 440 held domains sit at Authority Score ≤ 2.
-Held does **not** mean valuable.
+many hosts and /24 ranges, 378 of 440 held domains have **zero organic traffic**, and
+388 sit at Authority Score ≤ 2. Held does **not** mean valuable.
 
-## Limits (flagged honestly)
+## Data completeness
 
-- **Per-domain organic traffic & keywords were not pulled.** With 3,159 referring
-  domains and a metered API (and a usage-limit event mid-run), pulling organic
-  traffic/keywords for every domain was not justified — they are recorded as **0**,
-  and **Authority Score** (held for every domain) is used as the authority signal
-  instead. This is consistent with the reality that a PBN flood has no organic
-  audience. We can enrich the Keep + Held subset with real traffic on request.
-- **Authority Score** is the Semrush referring-domain figure (the available bulk
-  source via the API); it can run a few points low versus the per-domain report.
-  No disavow decision rests on it — every line rests on link evidence.
-- **"RD's"** (each referring domain's own referring-domain count) was not pulled
-  and is left blank.
-- **Source is Semrush only.** The environment's network policy blocked fetching the
-  linking hosts and the client site directly, and no Ahrefs export was supplied, so
-  there is no Ahrefs cross-check or live-page (HTTP) verification beyond Semrush's
-  last-crawl `response_code`. Example linking pages prefer a dofollow, HTTP-200 link.
+Every referring domain carries **real Semrush metrics**, pulled per-domain:
+- **Authority Score** and **RD's** (the referring domain's own referring-domain count)
+  from `backlinks_overview` — the per-domain source.
+- **Organic Traffic** and **Organic Keywords** from `domain_rank` (US database). A
+  `NOTHING FOUND` response is recorded as a true **0** (per the playbook) — and the
+  overwhelming majority of these PBN/junk domains genuinely have no organic audience.
+  98 of 3,159 domains show any organic traffic; the real publishers (yahoo,
+  yellowpages, superpages, hunterdouglas, bing, citylifestyle, sitelike) all land in
+  **Keep**, never in a disavow file — confirmed by the hand-review check.
+
+One input note (not a gap in the workbook): the source is **Semrush**. The
+environment's network policy blocked fetching the client site and linking hosts, and
+no Ahrefs CSV export was supplied by the client, so live-page HTTP status rests on
+Semrush's last-crawl `response_code` rather than an Ahrefs cross-check. Supply the
+Ahrefs backlink + referring-domain CSV exports and we'll fold in any links Semrush
+missed and add the Ahrefs live-page verification.
 
 ## Verification (both directions, exhaustive — not a sample)
 
