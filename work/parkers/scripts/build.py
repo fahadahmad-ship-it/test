@@ -288,6 +288,8 @@ def write_workbook(audit_rows, bl_rows, an_rows, em_rows, pd_rows, dl_rows,
     held = cnt.get("Held (Pending Partner)",0)+cnt.get("Held (Nofollow, No Action)",0)
     keep = cnt.get("Keep",0); own = cnt.get("Own Site",0)
     spam_total = spam_dis + spam_nof
+    held_rows = [r for r in audit_rows if str(r[1]).startswith("Held")]
+    held_zero = sum(1 for r in held_rows if not (r[5] or 0))
     findings = [
       f"{spam_total:,} of the {total_domains:,} referring domains are spam. {spam_dis:,} have at least one dofollow link and go in the disavow file; {spam_nof:,} are nofollow only and pass no value, so no action is needed on them.",
       f"The attack is growing fast: Semrush records referring domains roughly doubling from 1,044 (31 Aug 2026) to 2,415 (30 Sep 2026) and {total_domains:,} live now — far above the client's snapshot. The audit covers the full live profile, not the snapshot.",
@@ -295,7 +297,7 @@ def write_workbook(audit_rows, bl_rows, an_rows, em_rows, pd_rows, dl_rows,
       "Two patterns, easy to tell apart: the link-scheme flood points at the home page with keyword-stuffed SEO sales-copy anchors, while the genuine local campaign points at deep service pages with HVAC + Cordele/Leesburg GA anchors. Target page separates them.",
       f"The dominant anchor is PBN sales copy — 'premium seo link building experts helping parkersair.com websites rank higher' — on roughly 1,396 referring domains. The 'da 50 pa 40 … buy backlinks', 'niche edit' and 'join our telegram' variants come from the same network.",
       f"{held:,} domains are held for the {PARTNER_WORD} to confirm before any disavow decision, because they carry exact-match HVAC/geo commercial anchors or point at deep money pages that may be commissioned placements.",
-      f"Held does not mean valuable: the held set is dominated by low-quality directory listings with little or no organic traffic. Keep covers {keep:,} genuine or harmless domains; {own} is client-owned.",
+      f"Held does not mean valuable: {held_zero:,} of the {len(held_rows):,} held domains have zero organic traffic in Semrush — they are low-quality directory and listing pages. Keep covers {keep:,} genuine or harmless domains (real local citations); no owned/redirect domains were found.",
     ]
     for i, txt in enumerate(findings):
         s.cell(12+i,1, txt)
@@ -306,9 +308,14 @@ def write_workbook(audit_rows, bl_rows, an_rows, em_rows, pd_rows, dl_rows,
         a = b["anchor"] if b["anchor"].strip() else "<EmptyAnchor>"
         at = C.anchor_type(a)
         at_counter[at]+=1; at_rds[at].add(b["refdomain"])
+    # match the signed-off template's 8-row order exactly
     profile_order = ["Spam: keyword stuffed SEO sales copy","Naked URL","Exact match commercial",
-                     "Exact match commercial (geo)","Branded","Generic","Empty or image",
-                     "Spam: off topic","Contextual or other"]
+                     "Exact match commercial (geo)","Generic","Branded","Empty or image",
+                     "Contextual or other"]
+    # fold any off-topic spam (none for this client) into the sales-copy spam row so no link is lost
+    if at_counter.get("Spam: off topic"):
+        at_counter["Spam: keyword stuffed SEO sales copy"] += at_counter["Spam: off topic"]
+        at_rds["Spam: keyword stuffed SEO sales copy"] |= at_rds.get("Spam: off topic", set())
     # clear existing profile data rows (21..28) then rewrite, keeping styles of row 21
     tmpl_cells = [ {"font":copy.copy(s.cell(21,c).font),"fill":copy.copy(s.cell(21,c).fill),
                     "alignment":copy.copy(s.cell(21,c).alignment),"border":copy.copy(s.cell(21,c).border),
