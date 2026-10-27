@@ -80,6 +80,14 @@ PRESS_RELEASE_HOSTS = [
     "issuewire", "accesswire", "digitaljournal", "benzinga", "marketersmedia",
 ]
 
+# Client/analyst-confirmed spam overrides (evidence noted). Verdict still respects
+# nofollow: a dofollow link -> Spam (Disavow); all-nofollow -> Spam (Nofollow, No Action).
+MANUAL_SPAM = {
+    "newsblogsports.site": "Off-topic promotional spam: SiteToSocial Pinterest-tool anchor "
+                           "('grow your website traffic, fully automated') unrelated to the client; "
+                           "Semrush shows 0 organic keywords / 0 traffic (client-confirmed)",
+}
+
 NAKED_URL_FORMS = {
     "parkersair.com", "www.parkersair.com", "http://parkersair.com",
     "https://parkersair.com", "http://www.parkersair.com", "https://www.parkersair.com",
@@ -167,6 +175,9 @@ def classify_domain(domain, links, refdom_meta):
     # ---- verdict order (playbook section 6) ----
     if host in OWNED_DOMAINS or host == CLIENT_DOMAIN:
         return "Own Site", types, "Client-owned / redirect property", locals()
+    if host in MANUAL_SPAM:
+        st, r = spam(MANUAL_SPAM[host])
+        return st, types, r, locals()
     # genuine high-authority site (guard against obvious spam hosts / offtopic dofollow)
     if eff_as >= 20 and not spam_host and not (has_offtopic and any_dofollow) and not (has_pbn and any_dofollow):
         return "Keep", types, f"Authority Score {eff_as} (genuine site)", locals()

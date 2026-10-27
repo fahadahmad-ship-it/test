@@ -1,5 +1,5 @@
 # Disavow file for parkersair.com (Parker's Heating & Air Conditioning Inc.)
-# Generated 2026-10-27 — 1641 domains
+# Generated 2026-10-27 — 1642 domains
 # Property: parkersair.com (Google Search Console). This is the ONLY file to upload for this property.
 # Held domains carrying exact-match commercial anchors are EXCLUDED pending the client's confirmation of whether any outreach was commissioned.
 # Do NOT upload before that confirmation. The SEO team records the disavow judgement by end of October 2026.
@@ -1562,6 +1562,9 @@ domain:wholinkstomysite.shop
 domain:wishwebtraffic.online
 domain:youseotools.com
 domain:youseotools.link
+
+# Off-topic spam (casino / pharma / other) (1)
+domain:newsblogsports.site
 
 # Spam host names (34)
 domain:a1webdirectory.xyz
