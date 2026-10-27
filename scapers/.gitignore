@@ -1,0 +1,4 @@
+# regenerable intermediates
+data/perdomain_full.json
+data/perdomain_partial.json
+scripts/__pycache__/

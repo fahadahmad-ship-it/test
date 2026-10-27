@@ -1,0 +1,16 @@
+Semrush backlinks_overview (live, 2026-10-27):
+  total backlinks = 28070
+  referring domains (domains_num) = 4961
+  dofollow (follows_num) = 26912
+  nofollow (nofollows_num) = 1158
+  Authority Score (score) = 10
+  urls_num = 15816
+  ips_num = 5918
+
+Ahrefs backlinks-stats (subdomains): live=2007, all_time=10008, live_refdomains=1208, all_time_refdomains=2414
+Ahrefs DR = 7
+
+Brief snapshot (from task): 17,457 links / 1,119 referring domains  -> matches ~July/Aug 2026.
+TWO FLOODS:
+  Flood 1 (July 2026): June 4,403 -> July 17,708 links (+~13,300) with domains 1,052 -> 1,093 (+41). High links/domain = link-scheme.
+  Flood 2 (Sep->Oct 2026): domains 1,365 -> 4,946 (+3,581), links 18,669 -> 27,917 (+9,248). NEW wave the brief never saw.

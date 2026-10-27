@@ -1,0 +1,17 @@
+domain,verdict,disavow_host,evidence,note
+ac.cd,Spam (Disavow),isamgoma.ac.cd,"betsat/maxwin on isamgoma.ac.cd/page/Grandpashabet (hacked)",hacked academic subdomain gambling injection; disavow subdomain not clean root
+polsub.ac.id,Spam (Disavow),oia.polsub.ac.id,"maxwin/betsat on oia.polsub.ac.id (hacked)",hacked academic subdomain; disavow subdomain
+karindom.org,Spam (Disavow),smile.karindom.org,"sahabet on smile.karindom.org/.../hello-world (hacked WP)",hacked WordPress subdomain; disavow subdomain
+gouv.cd,Spam (Disavow),bas-uele.gouv.cd,"betsat on bas-uele.gouv.cd (hacked gov)",hacked government subdomain; disavow subdomain
+kuto.vn,Spam (Disavow),kuto.vn,"maxwin/betsat injected on kuto.vn product pages",compromised site gambling injection; disavow root
+conselhobranco.com.br,Spam (Disavow),conselhobranco.com.br,"maxwin injected on conselhobranco.com.br posts",compromised WP; disavow root
+apkhanger.com,Spam (Disavow),apkhanger.com,"betsat across apkhanger.com",spam/warez host gambling; disavow root
+givesmart.com,Keep,,"'Thank you for supporting Queen of All Saints!' on e.givesmart.com/events",genuine charity fundraiser citation; KEEP
+piggington.com,Spam (Disavow),piggington.com,"betsat/maxwin/betwoon on piggington.com/image/* (8636 links, July flood)",dominant gambling-flood host; disavow root
+cauchuyencuocsong.io.vn,Spam (Disavow),cauchuyencuocsong.io.vn,"maxwin giris/betwoon, casinofast path (hacked)",gambling injection; disavow root
+anhquocstore.io.vn,Spam (Disavow),anhquocstore.io.vn,"betsat/maxwin giris, nezihbet path (hacked)",gambling injection; disavow root
+globalmarketingbusiness.com,Spam (Disavow),globalmarketingbusiness.com,"betsat injected across posts (hacked)",gambling injection; disavow root
+2printit.se,Spam (Disavow),2printit.se,"maxwin/sahabet giris (hacked Swedish shop)",gambling injection; disavow root
+hongbien3mien.id.vn,Spam (Disavow),hongbien3mien.id.vn,"maxwin/betwoon, nezihbet path (hacked)",gambling injection; disavow root
+qualitylifestyle.in,Spam (Disavow),qualitylifestyle.in,"maxwin giris/betsat (hacked)",gambling injection; disavow root
+hakon.id.vn,Spam (Disavow),hakon.id.vn,"betwoon/maxwin (hacked VN shop)",gambling injection; disavow root
