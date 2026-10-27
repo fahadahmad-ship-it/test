@@ -27,25 +27,28 @@ white_fill = PatternFill("solid", fgColor=WHITE)
 def F(sz, bold=False, color="FF000000"): return Font(name=GEIST, size=sz, bold=bold, color=color)
 
 # cell helpers -----------------------------------------------------------------
-def hdr_cell(c, text):
+def hdr_cell(c, text, wrap=True):
     c.value = text; c.font = F(9, True, WHITE); c.fill = accent_fill
-    c.border = BORDER_HEADER; c.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+    c.border = BORDER_HEADER
+    c.alignment = Alignment(horizontal="center", vertical="center", wrap_text=(True if wrap else None))
 
-def data_cell(c, val, numfmt=None, align="left"):
+def data_cell(c, val, numfmt=None, align=None):
+    # text cells use general alignment (horizontal=None) to match the template;
+    # numeric columns pass align="center".
     c.value = val; c.font = F(9); c.fill = white_fill; c.border = NOBORDER
     c.alignment = Alignment(horizontal=align, vertical="center")
     if numfmt: c.number_format = numfmt
 
 def input_cell(c, val=""):
     c.value = val; c.font = F(9, False, WHITE); c.fill = accent_fill; c.border = NOBORDER
-    c.alignment = Alignment(horizontal="center", vertical="center")
+    c.alignment = Alignment(horizontal=None, vertical="center")
 
-def write_table(ws, headers, rows, widths, data_h, numfmts=None, aligns=None, input_cols=()):
+def write_table(ws, headers, rows, widths, data_h, numfmts=None, aligns=None, input_cols=(), hdr_wrap=True):
     numfmts = numfmts or {}; aligns = aligns or {}
     for i, w in enumerate(widths, 1):
         ws.column_dimensions[get_column_letter(i)].width = w
     for j, h in enumerate(headers, 1):
-        hdr_cell(ws.cell(row=1, column=j), h)
+        hdr_cell(ws.cell(row=1, column=j), h, wrap=hdr_wrap)
     ws.row_dimensions[1].height = 31.5
     for r, row in enumerate(rows, 2):
         for j, val in enumerate(row, 1):
@@ -53,7 +56,7 @@ def write_table(ws, headers, rows, widths, data_h, numfmts=None, aligns=None, in
                 input_cell(ws.cell(row=r, column=j), val)
             else:
                 data_cell(ws.cell(row=r, column=j), val,
-                          numfmt=numfmts.get(j-1), align=aligns.get(j-1, "left"))
+                          numfmt=numfmts.get(j-1), align=aligns.get(j-1))
         ws.row_dimensions[r].height = data_h
     ws.freeze_panes = "B2"
     last = get_column_letter(len(headers))
@@ -126,12 +129,13 @@ def build():
 
     key_findings = [
         "%d of the %d referring domains are spam. %d have a dofollow link and go in the disavow file; the other %d are nofollow and need no action." % (spam_total, tot_dom, spam_dof, spam_nof),
-        "The attack exploded in the last month: 782 referring domains in September 2026, %d now. We audited the full live profile." % tot_dom,
+        "The attack exploded over the past year (Semrush history: ~101 referring domains in July 2025, 782 by September 2026, 3,159 live now). Folding in Ahrefs discovery, the full audited profile is %d referring domains across %d links." % (tot_dom, tot_bl),
         "The client owns two Search Console properties: premierblindsanddesigns.com and thepremierdesigns.com, which 301s into it. A disavow file is provided for each; the money-site file carries the full union of every bad domain.",
         "Two patterns, easy to tell apart. %d links hit the home page (the link-scheme flood); the other %d hit deep product/service pages (the commissioned-looking campaign). The home-page flood is the attack." % (home_links, deep_links),
         "The biggest anchor, on %d domains, is backlink sales copy naming the client's own domain: \"%s\"." % (top_anchor_doms, top_anchor[:70]),
         "%d domains are held for the previous SEO provider (the \"partner\") to confirm, in case any were paid placements. Unlike the home-page flood, they are NOT one IP network - they scatter across many hosts and /24 ranges (the three largest hold only %d between them). Most are low-quality web directories and listing sites carrying exact-match geo anchors to deep product pages." % (len(held), top3_share),
         "Held does not mean valuable: %d of the %d held domains have zero organic traffic, and %d sit at Authority Score 2 or below. These are low-authority hosts, not real publishers." % (held_notraffic, len(held), held_lowas),
+        "Semrush and Ahrefs were merged: Ahrefs surfaced %d referring domains and %d links Semrush had not indexed (including a sequential-numeric .xyz PBN cluster). The Source column on every row shows which tool found it; all metrics remain Semrush." % (sum(1 for v in domains.values() if v["source"]=="Ahrefs"), ds["ahrefs_new"]),
     ]
 
     # ===== Tab 1 Summary =====
@@ -153,15 +157,15 @@ def build():
         vals = [st, dom_count.get(st,0), bl_count.get(st,0), (dom_count.get(st,0)/tot_dom if tot_dom else 0), meaning[st]]
         for j,val in enumerate(vals,1):
             c=ws.cell(row=r,column=j); c.font=F(9); c.fill=white_fill; c.border=BORDER_FULL
-            if j==1: c.alignment=Alignment(horizontal="left",vertical="center"); c.value=val
+            if j==1: c.alignment=Alignment(vertical="center"); c.value=val
             elif j in (2,3): c.alignment=Alignment(horizontal="center",vertical="center"); c.value=val; c.number_format="#,##0"
             elif j==4: c.alignment=Alignment(horizontal="center",vertical="center"); c.value=val; c.number_format="0.0%"
-            else: c.alignment=Alignment(horizontal="left",vertical="center",wrap_text=True); c.value=val
+            else: c.alignment=Alignment(vertical="center",wrap_text=True); c.value=val
         r+=1
     # total row
     for j,val in enumerate(["Total",tot_dom,tot_bl,1.0,""],1):
         c=ws.cell(row=r,column=j); c.font=F(9,True); c.fill=white_fill; c.border=BORDER_FULL
-        if j==1: c.alignment=Alignment(horizontal="left",vertical="center"); c.value=val
+        if j==1: c.alignment=Alignment(vertical="center"); c.value=val
         elif j in (2,3): c.alignment=Alignment(horizontal="center",vertical="center"); c.value=val; c.number_format="#,##0"
         elif j==4: c.alignment=Alignment(horizontal="center",vertical="center"); c.value=val; c.number_format="0.0%"
     kf_start = r+2
@@ -169,8 +173,8 @@ def build():
     for i, kf in enumerate(key_findings):
         rr = kf_start+1+i
         ws.merge_cells(start_row=rr,start_column=1,end_row=rr,end_column=5)
-        c = ws.cell(row=rr,column=1); c.value=kf; c.font=F(9,color=ACCENT)
-        c.alignment=Alignment(horizontal="left",vertical="center",wrap_text=True)
+        c = ws.cell(row=rr,column=1); c.value=kf; c.font=F(9)  # black, matches template theme1
+        c.alignment=Alignment(vertical="center",wrap_text=True)
     ap_head = kf_start+1+len(key_findings)+1
     ws.cell(row=ap_head,column=1).value="Anchor text profile (all backlinks)"
     ws.cell(row=ap_head,column=1).font=F(11,True,ACCENT)
@@ -183,7 +187,7 @@ def build():
         vals=[at, at_bl[at], at_bl[at]/len(links), len(at_dom[at])]
         for j,val in enumerate(vals,1):
             c=ws.cell(row=rr,column=j); c.font=F(9); c.fill=white_fill; c.border=BORDER_FULL
-            if j==1: c.alignment=Alignment(horizontal="left",vertical="center"); c.value=val
+            if j==1: c.alignment=Alignment(vertical="center"); c.value=val
             elif j==3: c.alignment=Alignment(horizontal="center",vertical="center"); c.value=val; c.number_format="0.0%"
             else: c.alignment=Alignment(horizontal="center",vertical="center"); c.value=val; c.number_format="#,##0"
         rr+=1
@@ -206,7 +210,7 @@ def build():
         rows2.append([v["domain"],v["status"],v["ascore"],v["backlinks"],
                       "" if v["rds"] is None else v["rds"], v["traffic"], v["in_disavow"],
                       v["points_to"], v["dofollow"], v["nofollow"], v["first_seen"],
-                      v["top_anchor"], v["example_page"], v["example_title"], "Semrush",
+                      v["top_anchor"], v["example_page"], v["example_title"], v["source"],
                       v["ip"], v["disavow_line"]])
     write_table(ws,H2,rows2,W2,15.75,
                 numfmts={2:"0.0",3:"#,##0",5:"#,##0",8:"#,##0",9:"#,##0",10:"d mmm yyyy"},
@@ -231,7 +235,7 @@ def build():
     arows.sort(key=lambda x:-x[2])
     write_table(ws,H4,arows,W4,22.5,
                 numfmts={2:"#,##0",3:"0.0%",4:"#,##0",5:"#,##0"},
-                aligns={2:"center",3:"center",4:"center",5:"center"})
+                aligns={2:"center",3:"center",4:"center",5:"center"}, hdr_wrap=False)
 
     # ===== Tab 5 Exact Match Anchors =====
     ws = wb.create_sheet("Exact Match Anchors")

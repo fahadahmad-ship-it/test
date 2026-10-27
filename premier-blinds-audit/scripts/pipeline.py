@@ -49,12 +49,58 @@ def load_metrics():
                   "orgkw":i(parts[4]),"traffic":i(parts[5])}
     return m
 
+AHREFS_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "ahrefs_in")
+
+def _ahrefs_unix(s):
+    s=(s or "").strip()
+    for fmt in ("%Y-%m-%d %H:%M:%S","%Y-%m-%d"):
+        try: return str(int(datetime.strptime(s,fmt).timestamp()))
+        except: pass
+    return ""
+
+def _canonkey(l):
+    import load_ahrefs
+    return (load_ahrefs.canon(l["source_url"]), load_ahrefs.canon(l["target_url"]),
+            (l["anchor"] or "").strip().lower())
+
 def build():
     bl, dropped, rec = load.read_backlinks(sorted(glob.glob(os.path.join(DATA,"fetch","bl_*.csv"))))
     rd, rddrop = load.read_refdomains(sorted(glob.glob(os.path.join(DATA,"rd","rd_*.csv"))))
     rdmap = {r["domain"].strip().lower(): r for r in rd}
     metrics = load_metrics()
-    match = load.build_refdomain_matcher(rdmap.keys())
+    for l in bl:
+        l["source"] = "Semrush"; l["http"] = (l.get("response_code") or "").strip()
+
+    # ---- merge Ahrefs (discovery + link detail + HTTP status; never a metric) ----
+    ahrefs_names = set()
+    ablpath = os.path.join(AHREFS_DIR, "bl.tsv")
+    ahrefs_new = ahrefs_both = 0
+    if os.path.exists(ablpath):
+        import load_ahrefs
+        abl = load_ahrefs.backlinks(ablpath)
+        ard = load_ahrefs.refdomains(os.path.join(AHREFS_DIR, "rd.tsv"))
+        ahrefs_names = {r["domain"].strip().lower() for r in ard}
+        index = {}
+        for l in bl: index.setdefault(_canonkey(l), l)
+        for al in abl:
+            k = (load_ahrefs.canon(al["source_url"]), load_ahrefs.canon(al["target_url"]),
+                 (al["anchor"] or "").strip().lower())
+            if k in index:
+                s = index[k]
+                s["source"] = "Semrush, Ahrefs"
+                if not s["http"]: s["http"] = al["http"]
+                ahrefs_both += 1
+            else:
+                bl.append({
+                    "source_url": al["source_url"], "source_title": al["source_title"],
+                    "target_url": al["target_url"], "anchor": al["anchor"],
+                    "nofollow": al["nofollow"], "first_seen": _ahrefs_unix(al["first_seen"]),
+                    "last_seen": _ahrefs_unix(al["last_seen"]), "response_code": al["http"],
+                    "redirect_url": "", "page_ascore": "", "source": "Ahrefs", "http": al["http"],
+                })
+                ahrefs_new += 1
+
+    match = load.build_refdomain_matcher(set(rdmap.keys()) | ahrefs_names)
 
     groups = defaultdict(list)
     for l in bl:
@@ -95,11 +141,17 @@ def build():
         if r and _ts(r["first_seen"]):
             first_seens.append(_ts(r["first_seen"]))
         first_seen = min(first_seens) if first_seens else None
-        # example linking page: prefer dofollow + HTTP 200
+        # example linking page: prefer dofollow + a live HTTP 200 (Semrush or Ahrefs)
         def rank(l):
+            http = (l.get("http") or l.get("response_code") or "").strip()
             return (0 if l["nofollow"].strip().lower()=="false" else 1,
-                    0 if (l["response_code"] or "").strip()=="200" else 1)
+                    0 if http=="200" else 1)
         ex = sorted(links, key=rank)[0]
+        # Source = which tool(s) found this domain's links
+        srcs = {l.get("source","Semrush") for l in links}
+        flat = set()
+        for s in srcs: flat.update(x.strip() for x in s.split(","))
+        source = "Semrush, Ahrefs" if {"Semrush","Ahrefs"} <= flat else ("Ahrefs" if flat=={"Ahrefs"} else "Semrush")
 
         in_disavow = ("Yes" if status=="Spam (Disavow)" else
                       "Held" if status.startswith("Held") else "No")
@@ -119,6 +171,7 @@ def build():
             "top_anchor": top_anchor,
             "example_page": ex["source_url"],
             "example_title": ex["source_title"],
+            "source": source,
             "ip": (r["ip"] if r else "") or "",
             "disavow_line": disavow_line,
             "properties": {link_property(l) for l in links},
@@ -126,7 +179,7 @@ def build():
         }
         for l in links:
             links_out.append({
-                "refdomain": d, "status": status, "tool": "Semrush",
+                "refdomain": d, "status": status, "tool": l.get("source","Semrush"),
                 "anchor": l["anchor"], "anchor_type": classify.anchor_type(l["anchor"]),
                 "link_type": "Dofollow" if l["nofollow"].strip().lower()=="false" else "Nofollow",
                 "page_url": l["source_url"], "page_title": l["source_title"],
@@ -161,6 +214,7 @@ def build():
         "total_links": total_links, "dropped": dropped, "recovered": rec,
         "disavow_domains": disavow_domains, "emitted": emitted,
         "redundant_children": redundant_children,
+        "ahrefs_new": ahrefs_new, "ahrefs_both": ahrefs_both,
     }
 
 if __name__ == "__main__":

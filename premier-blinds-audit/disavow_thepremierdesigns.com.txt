@@ -8,7 +8,7 @@
 # page title/URL, or a known link-network host) - never on Authority Score,
 # TLD or IP alone.
 #
-# HELD LINKS ARE EXCLUDED. 440 domains carry exact-match commercial anchors
+# HELD LINKS ARE EXCLUDED. 445 domains carry exact-match commercial anchors
 # or point at deep product/service pages and may have been commissioned
 # placements. They are NOT in this file. The client must first confirm with the
 # previous SEO provider (the party that ran prior link building) whether any

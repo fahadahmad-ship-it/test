@@ -6,20 +6,24 @@ audit (New Image Canopy / K&K template). All metrics are Semrush.
 ## In plain terms
 
 Premier Blinds & Designs is under a **negative-SEO / PBN link attack**. The live
-Semrush profile is **4,493 backlinks from 3,159 referring domains** at Authority
-Score 14. The attack **exploded in the last month**: 782 referring domains in
-September 2026, ~3,159 now — a ~4× jump. We audited the **full live profile**, not
-an older snapshot.
+Semrush profile is 4,493 backlinks from 3,159 referring domains at Authority Score
+14; **merging in the Ahrefs exports adds 697 domains and 1,172 links Semrush had not
+indexed, for a full audited profile of 5,665 links from 3,856 referring domains.**
+The attack **exploded over the past year** (≈101 referring domains in July 2025 →
+782 by September 2026 → 3,159 live now). We audited the **full merged profile**.
 
 | Status | Domains | In the disavow file? |
 |---|---|---|
-| Spam (Disavow) | 2,603 | **Yes** |
-| Spam (Nofollow, No Action) | 82 | No — nofollow, passes nothing |
-| Held (Pending Partner) | 439 | **No — awaiting confirmation** |
+| Spam (Disavow) | 2,722 | **Yes** |
+| Spam (Nofollow, No Action) | 636 | No — nofollow, passes nothing |
+| Held (Pending Partner) | 444 | **No — awaiting confirmation** |
 | Held (Nofollow, No Action) | 1 | No |
-| Keep | 33 | No — genuine citations |
+| Keep | 52 | No — genuine citations |
 | Own Site | 1 | No — `thepremierdesigns.com` (redirects in) |
-| **Total** | **3,159** | |
+| **Total** | **3,856** | |
+
+Source of each referring domain is shown in the workbook's **Source** column:
+2,711 Semrush-only, 448 found by both tools, 697 Ahrefs-only discovery.
 
 **Two campaigns, easy to tell apart.** 3,756 links hit the **home page** with
 backlink sales-copy anchors (e.g. *"Build Strong SEO Authority with High Quality
@@ -34,7 +38,7 @@ commissioned.
 You confirmed Premier can upload to **both** owned Search Console properties, so
 there are two disavow files:
 
-1. **`disavow_premierblindsanddesigns.com.txt`** — the money site. **2,603 domains.**
+1. **`disavow_premierblindsanddesigns.com.txt`** — the money site. **2,722 domains.**
    This is the **full union** of every bad domain, including those that reach the
    site through the `thepremierdesigns.com` 301 redirect (Google forwards disavow
    signals across redirects imperfectly, so the money-site file carries everything).
@@ -54,14 +58,14 @@ if one does, uploading **replaces** it, so merge first.
 
 ## The "commissioned link" question — your first task
 
-The 439 **Held (Pending Partner)** domains are the links that *may have been
+The 444 **Held (Pending Partner)** domains are the links that *may have been
 commissioned*. They carry exact-match commercial/geo anchors pointing at deep
 product and service pages — the signature of paid or semi-automated placements,
 not the random home-page spam flood. They are **excluded from the disavow files
 until someone confirms** whether Premier (or its previous SEO provider) paid for
 any of them. Disavowing a link the client paid for would throw away a real asset.
 
-**What to do:** open the **"Exact Match Anchors"** tab (Tab 5, 518 rows). It lists
+**What to do:** open the **"Exact Match Anchors"** tab (Tab 5, 523 rows). It lists
 each held domain, a real example linking page, the exact-match anchor, the market
 (Peachtree City / Atlanta / Georgia / Non-geo), and an indicative site type. The
 last two columns — **"Partner confirmed? (Y/N)"** and **"Final decision"** (the
@@ -78,8 +82,8 @@ previous SEO provider). The client should identify that party; the held set is
 their call, not something to auto-disavow.
 
 Unlike some campaigns, this held set is **not one IP network** — it scatters across
-many hosts and /24 ranges, 378 of 440 held domains have **zero organic traffic**, and
-388 sit at Authority Score ≤ 2. Held does **not** mean valuable.
+many hosts and /24 ranges, 382 of 445 held domains have **zero organic traffic**, and
+391 sit at Authority Score ≤ 2. Held does **not** mean valuable.
 
 ## Data completeness
 

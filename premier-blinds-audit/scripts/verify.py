@@ -27,9 +27,9 @@ def main():
     domains=ds["domains"]; links=ds["links"]
     emitted=set(ds["emitted"])
     print("=== DATA & CLASSIFICATION ===")
-    # reconcile
-    check(len(domains)==3159, "domain count 3159 (got %d)"%len(domains))
-    check(len(links)==4493, "link count 4493 (got %d)"%len(links))
+    NDOM=len(domains); NLINK=len(links)
+    print("  domains=%d links=%d (Ahrefs merged: +%d new links)"%(NDOM,NLINK,ds.get("ahrefs_new",0)))
+    check(NDOM>0 and NLINK>0, "dataset non-empty")
 
     # ---- disavow file integrity ----
     print("\n=== DISAVOW FILE INTEGRITY ===")
@@ -118,8 +118,8 @@ def main():
     rc={}
     for i,sf in enumerate(sorted(names, key=lambda n:int(re.search(r"\d+",n.split('/')[-1]).group()))):
         rc[sheet_names[i]]=rowcount(sf)
-    check(rc["Referring Domain Audit"]==3160, "RDA rows = 3160 (got %d)"%rc["Referring Domain Audit"])
-    check(rc["All Backlinks"]==4494, "All Backlinks rows = 4494 (got %d)"%rc["All Backlinks"])
+    check(rc["Referring Domain Audit"]==NDOM+1, "RDA rows = domains+1 = %d (got %d)"%(NDOM+1,rc["Referring Domain Audit"]))
+    check(rc["All Backlinks"]==NLINK+1, "All Backlinks rows = links+1 = %d (got %d)"%(NLINK+1,rc["All Backlinks"]))
     check(rc["Disavow List"]==len(emitted)+1, "Disavow List rows = %d (got %d)"%(len(emitted)+1,rc["Disavow List"]))
     # Pending Disavow == held pending partner count
     held_pp=sum(1 for v in domains.values() if v["status"]=="Held (Pending Partner)")
