@@ -50,16 +50,9 @@ def main():
                 fn.append((r["domain"],r["status"],at,r.get("top_anchor","")[:40]))
     check(not fn, f"no Keep/Held domain has a top gambling/PBN anchor (offenders: {fn[:5]})")
 
-    # --- traffic review: disavow domains with real traffic ---
-    traf={}
-    if os.path.exists(ahrd):
-        rr=csv.DictReader(open(ahrd,encoding="utf-8",errors="replace")); cm={c.lower():c for c in rr.fieldnames}
-        for row in rr:
-            d=row[cm["domain"]].strip().lower()
-            try: traf[d]=int(float(row[cm["traffic_domain"]] or 0))
-            except: traf[d]=0
-    hi=[(r["domain"],traf.get(r["domain"],0),r["evidence"][:40]) for r in rows if r["status"]=="Spam (Disavow)" and traf.get(r["domain"],0)>=500]
-    for d,t,e in hi: warns.append(f"disavow domain with traffic {t}: {d} ({e}) — hand-reviewed")
+    # --- review: disavow domains with a notable Semrush Authority Score (Semrush metric) ---
+    hi=[(r["domain"],r["AS"],r["evidence"][:45]) for r in rows if r["status"]=="Spam (Disavow)" and r["AS"]>=20]
+    for d,a,e in sorted(hi,key=lambda x:-x[1]): warns.append(f"disavow domain with Semrush AS {a}: {d} ({e}) — hand-reviewed")
 
     # --- counts reconcile ---
     total=len(rows)

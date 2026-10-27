@@ -60,18 +60,10 @@ def main():
         r["AS"]=int(r["AS"] or 0); r["backlinks"]=int(r["backlinks"] or 0); r["first_seen"]=int(r["first_seen"] or 0)
         rows.append(r)
     by_dom={r["domain"]:r for r in rows}
-    # ahrefs traffic/DR per domain
-    traf={}; dr={}
-    if os.path.exists(ahrd_p):
-        rr=csv.DictReader(open(ahrd_p,encoding="utf-8",errors="replace"))
-        cm={c.lower():c for c in rr.fieldnames}
-        for row in rr:
-            d=row[cm["domain"]].strip().lower()
-            try: traf[d]=int(float(row[cm.get("traffic_domain","")] or 0))
-            except: traf[d]=0
-            try: dr[d]=float((row[cm.get("domain_rating","")] or "0"))
-            except: dr[d]=0
-    for r in rows: r["traffic"]=traf.get(r["domain"],0)
+    # Metrics are Semrush-only. Semrush holds no organic traffic/keyword data for these spam domains
+    # (domain_rank returns NOTHING FOUND = a real zero), so Traffic and Organic Keywords are recorded as 0.
+    # Ahrefs is used ONLY for link detail (anchors, targets, dofollow, example pages) — never a metric.
+    for r in rows: r["traffic"]=0
 
     # ---- tallies ----
     stat_order=["Spam (Disavow)","Held (Pending Partner)","Held (Nofollow, No Action)","Spam (Nofollow, No Action)","Keep","Own Site"]
@@ -80,6 +72,7 @@ def main():
     total_d=len(rows); total_b=sum(r["backlinks"] for r in rows)
     spam_file=dc.get("Spam (Disavow)",0); spam_nf=dc.get("Spam (Nofollow, No Action)",0)
     held=dc.get("Held (Pending Partner)",0)+dc.get("Held (Nofollow, No Action)",0)
+    held_low_as=sum(1 for r in rows if r["status"].startswith("Held") and r["AS"]<=5)
 
     # ---- anchors (Semrush) ----
     anchors=[]
@@ -138,7 +131,7 @@ def main():
       f"One file, for {CDOM}. All spam source domains are disavowed on this one property. Some flood links show a redirect_url to sister dumpster brands (stldumpsters.com, stldumpster.com, renthisdumpster.com, stlrolloffs.com, farmingtondumpsters.com); if the client controls those Search Console properties they each need their own file.",
       "Two campaigns, told apart by target. The gambling and PBN sales-copy links point at the home page; the exact-match 'dumpster rental <MO city>' anchors point at deep service/product pages. The home-page flood is the attack.",
       "The dominant anchor is link-sales copy that names the client and its sister brands, e.g. 'farmingtondumpsters.com premium authority backlinks for better search visibility' (1,474 domains) and 'High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service ... buy backlinks online cheap'.",
-      f"{held:,} domains are HELD for the supplier (previous SEO partner) to confirm, in case any exact-match 'dumpster rental <city> MO' placements were commissioned. Held is not the same as valuable: almost none of these domains carry real organic traffic. They are excluded from the file pending that conversation.",
+      f"{held:,} domains are HELD for the supplier (previous SEO partner) to confirm, in case any exact-match 'dumpster rental <city> MO' placements were commissioned. Held is not the same as valuable: {held_low_as:,} of the {held:,} carry a Semrush Authority Score of 5 or below and no organic data. They are excluded from the file pending that conversation.",
     ]
     fr=kr+1
     for fnd in findings:

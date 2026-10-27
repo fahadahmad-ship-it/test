@@ -51,7 +51,8 @@ directions: zero genuine citations in the file, zero gambling/PBN links left in 
 
 ## Method & limits
 
-Metrics are from Semrush (Authority Score, backlinks, referring domains); Ahrefs supplied link-level detail (anchors,
-targets, live-page status, traffic) for ~2,100 of the domains. Where Semrush records a domain but Ahrefs does not, the
-domain is classified on its Semrush anchor/host evidence. Per-domain organic traffic/keywords for brand-new spam
-domains read as real zeros (no audience), consistent with the link-scheme fingerprint.
+**Every metric is from Semrush** — Authority Score, backlinks, referring domains, first-seen. Ahrefs is used **only for
+link detail** (anchors, targets, dofollow/nofollow, HTTP status), never as a metric. Per-domain organic traffic and
+organic keywords read as real zeros: Semrush's `domain_rank` returns NOTHING FOUND for these brand-new spam domains,
+which is a true zero (no audience), consistent with the link-scheme fingerprint. Where Semrush records a domain but
+Ahrefs does not, the domain is classified on its Semrush anchor/host evidence.
