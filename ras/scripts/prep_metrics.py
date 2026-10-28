@@ -28,14 +28,15 @@ def main():
     recs = R['records']
     subset = set()
     for r in recs:
-        if r['status'] == 'Keep' or r['base'] == 'Held' or (r['ascore'] or 0) >= 10 or r.get('ar_spam') is False:
+        # organic traffic is a meaningful signal only for kept/held domains (genuineness,
+        # and the "held has no traffic" finding) and for high-authority domains.
+        if r['status'] == 'Keep' or r['base'] == 'Held' or (r['ascore'] or 0) >= 15 or r.get('ar_spam') is False:
             subset.add(r['domain'])
-    # validation sample of spam-disavow domains
+    # validation sample of spam-disavow domains (confirm NOTHING FOUND = real zero)
     spam = [r['domain'] for r in recs if r['status'] == 'Spam (Disavow)' and r['domain'] not in subset]
     random.seed(42)
     sample = random.sample(spam, min(60, len(spam)))
     subset.update(sample)
-    subset.update(missing_as)  # also get rank for the new domains
     with open(os.path.join(W, 'domains_rank_subset.txt'), 'w') as f:
         for d in sorted(subset):
             f.write(d + '\n')

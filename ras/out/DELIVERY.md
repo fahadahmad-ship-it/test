@@ -5,8 +5,8 @@
 
 - Your referring-domain profile is under a large, **active link-selling / negative-SEO flood**. Of **3,552 referring domains**, **3,286 are spam** (2,543 with a dofollow link that passes value — these go in the disavow file — and 743 nofollow that need no action).
 - The brief's figure (about 458 referring domains, 183 link-selling) was a months-old snapshot. The attack has since **roughly quadrupled**: Semrush counted ~629 referring domains in September and **2,815 now**; with Ahrefs-only discoveries the full live profile is **3,552**. We audited the full live profile, not the brief's list.
-- **68 domains are held**, not disavowed — they carry exact-match product anchors or point at deep product pages and *may* have been commissioned by a previous SEO partner. **Nothing is submitted to Google until that question is answered.**
-- **198 domains are genuine** (real directories, business listings and editorial mentions) and are kept.
+- **65 domains are held**, not disavowed — they carry exact-match product anchors or point at deep product pages and *may* have been commissioned by a previous SEO partner. **Nothing is submitted to Google until that question is answered.**
+- **201 domains are genuine** (real directories, business listings and editorial mentions) and are kept.
 
 ## What's actually happening
 
@@ -42,7 +42,7 @@ A disavow file applies to **one** Search Console property. We produced one file 
 
 ## Before you upload — two decisions we need from you
 
-1. **The commissioned question (blocking).** Were any of the **68 held domains** paid for by your previous SEO partner? If yes, name them and we remove them from consideration; if no, we append them to the disavow file. Until you answer, they stay out. (Worth knowing: held does **not** mean valuable — 68 of the 68 held domains have no organic traffic at all.)
+1. **The commissioned question (blocking).** Were any of the **65 held domains** paid for by your previous SEO partner? If yes, name them and we remove them from consideration; if no, we append them to the disavow file. Until you answer, they stay out. (Worth knowing: held does **not** mean valuable — 65 of the 65 held domains have no organic traffic at all.)
 2. **Disavow vs. dilute.** Uploading a disavow file is the direct fix, but it is a strong signal to Google and is not easily reversed. The alternative is to **dilute** the spam by building a steady stream of genuine, branded, on-topic links so the bad ratio falls over time, and disavow only the worst offenders. Our recommendation: **disavow the 2,543 confirmed-spam dofollow domains** (they are unambiguous link-spam and carry no value to lose), and run branded-link building alongside to rebuild profile health. We can set out a dilution plan if you prefer to hold off on disavowing.
 
 ## Honest limits

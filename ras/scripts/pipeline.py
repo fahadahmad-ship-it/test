@@ -55,10 +55,14 @@ def load_metrics_as():
     return m
 
 def load_metrics_rank():
-    """domain_rank: domain;organic_keywords;organic_traffic -> (kw, traffic)."""
-    path = os.path.join(D, 'metrics', 'domain_rank.csv')
+    """domain_rank: domain;organic_keywords;organic_traffic -> (kw, traffic).
+    Reads domain_rank.csv and/or domain_rank_*.csv part files."""
     m = {}
-    if os.path.exists(path):
+    paths = [os.path.join(D, 'metrics', 'domain_rank.csv')]
+    paths += sorted(glob.glob(os.path.join(D, 'metrics', 'domain_rank_*.csv')))
+    for path in paths:
+        if not os.path.exists(path):
+            continue
         with open(path, encoding='utf-8') as f:
             for line in f:
                 line = line.rstrip('\n')
