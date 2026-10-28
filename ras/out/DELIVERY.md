@@ -42,7 +42,7 @@ A disavow file applies to **one** Search Console property. We produced one file 
 
 ## Before you upload — two decisions we need from you
 
-1. **The commissioned question (blocking).** Were any of the **65 held domains** paid for by your previous SEO partner? If yes, name them and we remove them from consideration; if no, we append them to the disavow file. Until you answer, they stay out. (Worth knowing: held does **not** mean valuable — 65 of the 65 held domains have no organic traffic at all.)
+1. **The commissioned question (blocking).** Were any of the **65 held domains** paid for by your previous SEO partner? If yes, name them and we remove them from consideration; if no, we append them to the disavow file. Until you answer, they stay out. (Worth knowing: held does **not** mean valuable — 53 of the 65 held domains have no organic traffic at all.)
 2. **Disavow vs. dilute.** Uploading a disavow file is the direct fix, but it is a strong signal to Google and is not easily reversed. The alternative is to **dilute** the spam by building a steady stream of genuine, branded, on-topic links so the bad ratio falls over time, and disavow only the worst offenders. Our recommendation: **disavow the 2,543 confirmed-spam dofollow domains** (they are unambiguous link-spam and carry no value to lose), and run branded-link building alongside to rebuild profile health. We can set out a dilution plan if you prefer to hold off on disavowing.
 
 ## Honest limits

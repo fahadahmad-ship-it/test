@@ -247,9 +247,9 @@ def main():
         f"The attack has exploded since the brief: about 458 referring domains in the brief's snapshot, {total_domains} now (Semrush counts 2,815 at root level; Ahrefs adds the rest). We audited the full live profile, not the brief's list.",
         f"You can upload a disavow file for ras-systems.com only. That one file carries the complete union of every bad domain, including the {redirect_doms} links that reach the site through the rasmachines.com, ras-systems.net and ras-systems.us redirects.",
         f"Two patterns, easy to tell apart. {home_links} of {total_backlinks} links ({home_links/total_backlinks*100:.0f}%) hit the home page — the link-selling flood; the deep links to product and news pages are the smaller, separate set.",
-        f"The single biggest anchor, on {big_anchor_rd} domains, is backlink sales copy: “{big_anchor[:70]}…” — it advertises a link-selling service and names the client's own domain.",
+        f"The flood is nine link-selling anchor families (PBN, guest-post, “DA 50 PA 40”, Telegram, Masslinker, SEO-Link.vip and fake testimonials). The single biggest, on {big_anchor_rd} domains, is “{big_anchor[:60]}…” — sales copy that names the client's own domain rather than describing the business.",
         f"{len(held_recs)} domains are held for the previous SEO partner to confirm, in case any were commissioned placements (exact-match product anchors or deep product-page links). Nothing is submitted until that question is answered.",
-        f"Held does not mean valuable: {held_zero_traffic} of the {len(held_recs)} held domains have no organic traffic at all. The nine anchor families in Tab 05 all advertise link-selling services, not the business.",
+        f"Held does not mean valuable: {held_zero_traffic} of the {len(held_recs)} held domains have no organic traffic at all. The exact-match anchors that place them in the held bucket are listed in Tab 05 (Exact Match Anchors) for the partner to check.",
     ]
     for f_txt in findings:
         ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
