@@ -283,10 +283,10 @@ def build_anchor_analysis(wb, merged_links, domains):
         data_cell(ws, r, 2, e["type"], "l")
         data_cell(ws, r, 3, e["bl"], "c", "#,##0")
         data_cell(ws, r, 4, (e["bl"] / total if total else 0), "c", "0.00%")
-        data_cell(ws, r, 5, len(e["doms"]), "c", "#,##0")
-        data_cell(ws, r, 6, len(e["spam"]), "c", "#,##0")
+        data_cell(ws, r, 5, len(e["doms"]), "c")        # General, matching template
+        data_cell(ws, r, 6, len(e["spam"]), "c")        # General, matching template
         r += 1
-    set_widths(ws, {"A": 115.86, "B": 37.71, "C": 14, "D": 8.71, "E": 16, "F": 20.29})
+    set_widths(ws, {"A": 115.86, "B": 37.71, "C": 14, "D": 8.71, "E": 13, "F": 20.29})
     finalize_data_tab(ws, r - 1, 6, 22.5)
     return ws
 
@@ -315,7 +315,7 @@ def build_exact_match(wb, domains):
             c = ws.cell(row=r, column=col, value=None)
             c.font = Font(name="Geist", size=9, color=WHITE)
             c.fill = fill_accent
-            c.alignment = al_c
+            c.alignment = Alignment(vertical="center")   # default horizontal, matching template
         r += 1
     set_widths(ws, {"A": 25.43, "B": 59, "C": 53.14, "D": 16, "E": 24.57, "F": 15.43, "G": 15})
     finalize_data_tab(ws, r - 1, 7, 22.5)
