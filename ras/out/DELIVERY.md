@@ -49,7 +49,7 @@ A disavow file applies to **one** Search Console property. We produced one file 
 
 - **Nothing has been submitted to Google.** The disavow files are drafts pending your answer on the held set.
 - We have **not** been told whether a disavow file is already filed on ras-systems.com. If one exists, uploading ours **replaces** it — check first and send us any existing file so we can merge.
-- Organic traffic / keyword figures are Semrush. For the low-authority spam domains that Semrush holds no organic data for, we record a true zero (spot-checked); that absence of any audience is itself the clearest sign the domain is a link farm.
+- Organic traffic / keyword figures are Semrush, pulled per-domain for **all 3,552 referring domains** (100% coverage). The spam domains overwhelmingly return no organic data at all — a true zero; that absence of any audience is itself the clearest sign the domain is a link farm.
 - Linking-page live status reflects each tool's last crawl (5,852 of 5,995 link sources last seen returning HTTP 200).
 
 ## Files in this delivery

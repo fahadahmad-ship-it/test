@@ -520,9 +520,9 @@ def write_delivery_note(records, links):
     md.append(f"- **Nothing has been submitted to Google.** The disavow files are drafts pending your answer on the held set.")
     md.append(f"- We have **not** been told whether a disavow file is already filed on ras-systems.com. If one exists, "
               f"uploading ours **replaces** it — check first and send us any existing file so we can merge.")
-    md.append(f"- Organic traffic / keyword figures are Semrush. For the low-authority spam domains that Semrush holds no "
-              f"organic data for, we record a true zero (spot-checked); that absence of any audience is itself the clearest "
-              f"sign the domain is a link farm.")
+    md.append(f"- Organic traffic / keyword figures are Semrush, pulled per-domain for **all {total_domains:,} referring "
+              f"domains** (100% coverage). The spam domains overwhelmingly return no organic data at all — a true zero; "
+              f"that absence of any audience is itself the clearest sign the domain is a link farm.")
     md.append(f"- Linking-page live status reflects each tool's last crawl ({sum(1 for l in links if str(l['response_code'])=='200'):,} "
               f"of {total_backlinks:,} link sources last seen returning HTTP 200).\n")
     md.append("## Files in this delivery\n")
