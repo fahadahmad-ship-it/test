@@ -38,11 +38,11 @@ def warn(cond, msg):
 
 
 def rebuild_domains():
-    sem = L.load_semrush(sorted(glob.glob(f"{ROOT}/data/fetch/backlinks_*.csv")))
-    ahr = L.load_ahrefs_backlinks(sorted(glob.glob(f"{ROOT}/data/ahrefs/backlinks.json")))
-    refmeta = L.load_ahrefs_refdomains(sorted(glob.glob(f"{ROOT}/data/ahrefs/refdomains.json")))
-    merged = L.canonical_merge(sem, ahr)
-    domains = B.build_domains(merged, refmeta)
+    # use the exact same loader as the builder, so verification can never drift
+    merged, domains, refmeta = B.assemble()
+    for l in merged:
+        if "anchor_type" not in l:
+            l["anchor_type"] = C.classify_anchor(l["anchor"], l.get("target_url", ""))
     return domains, merged
 
 

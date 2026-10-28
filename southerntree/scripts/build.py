@@ -130,7 +130,7 @@ def build_domains(merged_links, refmeta):
             l["is_pr"] = any(sig in l["source_host"] for sig in C.PR_SIGNATURES)
         any_do = any(l["is_dofollow"] for l in links)
         meta = refmeta.get(dom, {})
-        as_score = meta.get("dr")
+        as_score = meta.get("as_score")
         if as_score is None:
             drs = [float(l["dr"]) for l in links if l.get("dr") not in (None, "")]
             as_score = max(drs) if drs else None
@@ -521,8 +521,8 @@ def make_findings(domains, merged_links):
         top_anchor_doms = len({l["refdomain"] for l in merged_links if l["anchor"] == ta})
     return [
         f"{spam_dis + spam_nf} of the {total} referring domains are spam. {spam_dis} have a dofollow link and go in the disavow file; {spam_nf} are nofollow and need no action.",
-        f"The profile exploded far past the brief: the task named 41 referring domains, but the live Semrush profile is 4,723 domains / 6,276 links and roughly 5x'd in the last 30 days. This audit covers the live profile (Ahrefs-visible set), not the 41.",
-        f"Metrics here are Ahrefs (Domain Rating, Ahrefs traffic): Semrush API units were exhausted mid-pull, so AS/traffic could not be completed from Semrush. Ahrefs indexes fewer of the brand-new flood domains than Semrush, so the true spam count is higher than shown.",
+        f"The profile exploded far past the brief: the task named 41 referring domains, but the full Semrush export audited here is {total} domains / {len(merged_links)} links, up roughly 5x in the last 30 days. This audit covers the complete profile, not the 41.",
+        f"Metrics are the full Semrush export (Authority Score, IP, backlink counts for every referring domain), merged with Ahrefs for additional link discovery. Semrush is the source for Authority Score; Ahrefs supplies per-domain organic traffic, which the Semrush export did not include.",
         f"Two patterns, easy to tell apart. The link-scheme flood hits the home page; the commissioned-looking commercial anchors ({deep} deep-page links) hit /service/ pages in Griffin GA. The home-page flood is the attack.",
         f"The dominant spam anchor is keyword-stuffed SEO sales copy naming the client's own domain: {pbn_links} links across {pbn_doms} domains.",
         f"{held} domains are held for the {PARTNER_WORD} to confirm, in case any were paid placements. The brief said to confirm with 'Harbinger' — Harbinger is the agency running this audit, so confirmation is sought from the client's previous SEO partner instead.",
@@ -530,14 +530,36 @@ def make_findings(domains, merged_links):
     ]
 
 
-def main():
-    sem_files = sorted(glob.glob(f"{ROOT}/data/fetch/backlinks_*.csv"))
-    arf = sorted(glob.glob(f"{ROOT}/data/ahrefs/backlinks.json"))
-    ard = sorted(glob.glob(f"{ROOT}/data/ahrefs/refdomains.json"))
-    sem = L.load_semrush(sem_files) if sem_files else []
-    ahr = L.load_ahrefs_backlinks(arf) if arf else []
-    refmeta = L.load_ahrefs_refdomains(ard) if ard else {}
-    merged = L.canonical_merge(sem, ahr)
+def assemble():
+    SEM_BL = f"{ROOT}/data/semrush_ui/backlinks.csv"
+    SEM_RD = f"{ROOT}/data/semrush_ui/refdomains.csv"
+    ahr_bl = sorted(glob.glob(f"{ROOT}/data/ahrefs/backlinks.json"))
+    ahr_rd = sorted(glob.glob(f"{ROOT}/data/ahrefs/refdomains.json"))
+
+    if os.path.exists(SEM_BL):
+        sem = L.load_semrush_ui_backlinks(SEM_BL)          # full Semrush web-UI export
+    else:
+        sem = L.load_semrush(sorted(glob.glob(f"{ROOT}/data/fetch/backlinks_*.csv")))
+    ahr = L.load_ahrefs_backlinks(ahr_bl) if ahr_bl else []
+    merged = L.canonical_merge(sem, ahr)                   # Semrush priority, Ahrefs adds discovery
+
+    sem_meta = L.load_semrush_ui_refdomains(SEM_RD) if os.path.exists(SEM_RD) else {}
+    ahr_meta = L.load_ahrefs_refdomains(ahr_rd) if ahr_rd else {}
+    refmeta = {}
+    for dom in set(sem_meta) | set(ahr_meta):
+        s = sem_meta.get(dom, {}); a = ahr_meta.get(dom, {})
+        as_sem = s.get("as_sem")
+        as_score = as_sem if as_sem is not None else a.get("dr")
+        refmeta[dom] = {
+            "as_score": as_score,
+            "as_source": "Semrush" if as_sem is not None else ("Ahrefs" if a.get("dr") is not None else ""),
+            "ip": s.get("ip") or a.get("ip") or "",
+            "country": s.get("country", ""),
+            "traffic": a.get("traffic", 0),
+            "positions": a.get("positions", ""),
+            "links_to_target": s.get("backlinks_sem") or a.get("links_to_target"),
+            "first_seen": min([x for x in (s.get("first_seen_sem"), a.get("first_seen")) if x], default=None),
+        }
     domains = build_domains(merged, refmeta)
     # fill rds / organic_keywords from aggregates
     for dom, d in domains.items():
@@ -546,7 +568,11 @@ def main():
         d["organic_keywords"] = refmeta.get(dom, {}).get("positions", "")
         if not d.get("traffic"):
             d["traffic"] = refmeta.get(dom, {}).get("traffic", 0)
-    # attach anchor_type onto merged links for summary (build_domains already did per domain)
+    return merged, domains, refmeta
+
+
+def main():
+    merged, domains, refmeta = assemble()
     for l in merged:
         if "anchor_type" not in l:
             l["anchor_type"] = C.classify_anchor(l["anchor"], l.get("target_url", ""))

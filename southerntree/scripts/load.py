@@ -162,6 +162,59 @@ def _truthy(v):
     return str(v).strip().lower() in ("true", "1", "yes")
 
 
+def load_semrush_ui_backlinks(path):
+    """Semrush web-UI backlink export: UTF-8-BOM, comma-delimited, RFC-4180 quoted."""
+    links = []
+    with open(path, encoding="utf-8-sig", newline="") as fh:
+        for rec in csv.DictReader(fh):
+            src = (rec.get("Source url") or "").strip()
+            tgt = (rec.get("Target url") or "").strip()
+            src_host = host_of(src)
+            links.append({
+                "source_url": src,
+                "source_host": src_host,
+                "source_title": rec.get("Source title", "") or "",
+                "target_url": tgt,
+                "target_host": host_of(tgt),
+                "redirect_url": "",
+                "property_host": CLIENT_HOST,
+                "anchor": rec.get("Anchor", "") or "",
+                "is_dofollow": (rec.get("Nofollow", "") or "").strip().lower() != "true",
+                "first_seen": rec.get("First seen", "") or "",
+                "response_code": "",
+                "refdomain": registrable_root(src_host),
+                "subdomain": src_host,
+                "tool": "Semrush",
+                "target_is_deep": path_is_deep(tgt),
+            })
+    return links
+
+
+def load_semrush_ui_refdomains(path):
+    """Semrush web-UI referring-domain export -> per-domain Semrush metrics (AS, IP, country)."""
+    meta = {}
+    with open(path, encoding="utf-8-sig", newline="") as fh:
+        for rec in csv.DictReader(fh):
+            dom = registrable_root((rec.get("Domain") or "").strip().lower())
+            if not dom:
+                continue
+            m = meta.setdefault(dom, {})
+            a = rec.get("Domain ascore")
+            if a not in (None, ""):
+                m["as_sem"] = max(int(float(a)), m.get("as_sem", -1))
+            b = rec.get("Backlinks")
+            if b not in (None, ""):
+                m["backlinks_sem"] = m.get("backlinks_sem", 0) + int(float(b))
+            if rec.get("IP Address"):
+                m.setdefault("ip", rec["IP Address"].strip())
+            if (rec.get("Country") or "").strip():
+                m.setdefault("country", rec["Country"].strip())
+            fs = (rec.get("First seen") or "").strip()
+            if fs and ("first_seen_sem" not in m or fs < m["first_seen_sem"]):
+                m["first_seen_sem"] = fs
+    return meta
+
+
 def load_ahrefs_backlinks(files):
     import json
     links = []
