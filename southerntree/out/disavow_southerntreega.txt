@@ -1,7 +1,7 @@
 # Disavow file for southerntreega.com (Google Search Console property)
 # Generated 2026-10-28 by Harbinger Marketing
 # 4069 referring domains, grouped by reason.
-# DO NOT UPLOAD before the previous SEO partner has confirmed which of the 747 HELD
+# DO NOT UPLOAD before the previous SEO partner has confirmed which of the 746 HELD
 #   (exact-match / commissioned-looking) domains were paid placements. Held
 #   domains are intentionally EXCLUDED from this file.
 # The brief named 'Harbinger' as confirmer; Harbinger is the agency running this

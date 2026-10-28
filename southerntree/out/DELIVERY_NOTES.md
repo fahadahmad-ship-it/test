@@ -26,20 +26,20 @@ Per the audit playbook, we audited the **complete live profile, not the brief's 
 | Status | Domains | In the file? |
 |---|---|---|
 | **Spam (Disavow)** | **4,069** | **Yes** |
-| Spam (Nofollow, No Action) | 519 | No — nofollow, passes nothing |
+| Spam (Nofollow, No Action) | 520 | No — nofollow, passes nothing |
 | Held (Pending Partner) | 645 | No — until the partner confirms |
-| Held (Nofollow, No Action) | 102 | No |
+| Held (Nofollow, No Action) | 101 | No |
 | Keep | 25 | No — genuine citations (BBB AS 79, Yellowpages 73, Birdeye 86, DexKnows 78, Brandfetch, local directories) |
 | Own Site | 0 | — |
 | **Total** | **5,360** | |
 
-**86% of the profile (4,588 domains) is spam.** Two campaigns, easy to tell apart:
+**85.6% of the profile (4,589 domains) is spam.** Two campaigns, easy to tell apart:
 - A **link-scheme flood** of keyword-stuffed "SEO backlink" sales-copy anchors + link-indexer / URL-shortener / "domain report" stub pages, almost all pointing at the **home page**. This is the attack → the disavow file.
 - A smaller **commissioned-looking campaign**: exact-match commercial anchors ("Tree Service Griffin GA", "Tree Pruning Services Griffin GA") on low-quality directories/article-farms, pointing at **deep `/service/` pages** (1,988 deep-page links). These are **Held** — they *may* have been paid placements, and disavowing a link the client paid for would hurt them.
 
 ## 3. 🔴 Read before you upload
 
-**(a) Held domains are excluded on purpose.** 747 domains are held pending confirmation of whether they were commissioned. The brief said to *"confirm with Harbinger"* — but **Harbinger is the agency running this audit**, so confirmation must come from the **client's previous SEO partner**. Until that conversation happens, none of the 747 held domains go in the file. The *Pending Disavow Lines* and *Exact Match Anchors* tabs list them for that review.
+**(a) Held domains are excluded on purpose.** 746 domains are held pending confirmation of whether they were commissioned. The brief said to *"confirm with Harbinger"* — but **Harbinger is the agency running this audit**, so confirmation must come from the **client's previous SEO partner**. Until that conversation happens, none of the 746 held domains go in the file. The *Pending Disavow Lines* and *Exact Match Anchors* tabs list them for that review.
 
 **(b) Metrics are Semrush, traffic is Ahrefs.** The **AS** column is the true **Semrush Authority Score**, with IP and backlink counts from the Semrush export. Per-domain **organic traffic** is Ahrefs' estimate (the Semrush export doesn't include it). Nothing is disavowed on a score alone — every one of the 4,069 lines rests on anchor, linking-page title, or host-name evidence (verified both directions, exhaustively).
 

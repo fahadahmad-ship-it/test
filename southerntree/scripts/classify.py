@@ -278,13 +278,16 @@ def classify_domain(agg):
         return nofollow_variant("Held (Pending Partner)"), \
             "Carries both an exact-match commercial anchor and sales-copy spam"
 
-    # 4. exact-match commercial, OR a link to a deep money page => Held
-    if has_exact or has_deep:
+    # 4. exact-match commercial, OR a deep-page link that is NOT overt spam => Held.
+    #    A PBN / off-topic sales-copy anchor is never "commissioned", so a deep-page
+    #    link cannot rescue it into Held -- it falls through to the spam rules below.
+    if has_exact or (has_deep and not (has_pbn or has_offtopic)):
         why = "Exact-match commercial anchor" if has_exact else "Links to a deep service/location page"
         return nofollow_variant("Held (Pending Partner)"), why + " -- may be commissioned"
 
-    # 5. press-release syndication host => Held
-    if has_pr:
+    # 5. genuine press-release syndication host => Held (an overt-spam anchor is never a
+    #    real PR placement, so a "press-release"-named spam host is not rescued here)
+    if has_pr and not (has_pbn or has_offtopic):
         return nofollow_variant("Held (Pending Partner)"), "Press-release syndication host"
 
     # 6. title names client without SEO sales copy => Keep (genuine citation / listing)
