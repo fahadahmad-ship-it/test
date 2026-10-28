@@ -80,7 +80,22 @@ SPAM_HOST_SIGNATURES = [
     "blogchecker", "profitseo", "profitsurge", "seoservice", "buybacklink",
     "aadomain", "domainlist", "buydomain", "ageddomain", "indexation",
     "webtracking", "trafficbot", "rankbooster", "linkfarm",
+    # link-indexer / URL-shortener / SEO-report / PBN-network hosts seen in this profile
+    "addurl", "atomizelink", "urls-shortener", "urlshortener", "shortener",
+    "seodomains", "freemyip", "goooogla", "byteshort", "seohub", "seolink",
+    "linkpro", "ranklab", "blinks.", "linkcentre", "submiturl", "pingmylink",
 ]
+
+# Auto-generated indexer / stub / PBN linking-page title templates (strong spam signal)
+INDEXER_TITLE_PHRASES = [
+    "website stats", "domain report", "url shared", "seo domain research",
+    "domain research", "directory pages index", "pages index", "web directory",
+    "url shortener", "few of top websites", "top billion", "attribution for anchor",
+    "blogroll", "ecommerce seo", "seo stack", "digital transformation",
+]
+# Emoji / pictographic symbols in a title -- these auto-gen spam pages are riddled with them;
+# genuine business-directory listings in this profile never use them.
+EMOJI_RE = re.compile("[\U0001F000-\U0001FAFF☀-➿⬀-⯿️←-⇿‼⁉]")
 
 # Directory / bookmarking host signatures (for site-type labelling, not spam on their own)
 DIRECTORY_SIGNATURES = [
@@ -154,7 +169,13 @@ def host_is_spam(host):
     return any(sig in h for sig in SPAM_HOST_SIGNATURES)
 
 
-def title_is_spam(title):
+def _domain_label(domain):
+    d = (domain or "").lower().split("//")[-1].split("/")[0]
+    parts = d.split(".")
+    return parts[0] if parts else d
+
+
+def title_is_spam(title, domain=""):
     t = _norm(title)
     if any(p in t for p in SPAM_SALES_PHRASES):
         return True
@@ -163,6 +184,19 @@ def title_is_spam(title):
     # domain-marketplace / listing-farm title templates (playbook lesson)
     if re.search(r"(page\s*[\d,]{2,})|(domain list)|(aged domains)|(buy .*backlink)", t):
         return True
+    # auto-generated indexer / SEO-report / PBN title templates
+    if any(p in t for p in INDEXER_TITLE_PHRASES):
+        return True
+    if EMOJI_RE.search(title or ""):
+        return True
+    # directory-submission stub: the linking page's title is just the referring
+    # domain's own name (e.g. "Addurl.in", "Acquire.co.in", "Top Billion")
+    if domain and t:
+        lab = _domain_label(domain)
+        norm_t = re.sub(r"[^a-z0-9]", "", t)
+        norm_d = re.sub(r"[^a-z0-9]", "", domain.lower())
+        if lab and len(norm_t) <= len(norm_d) + 2 and (norm_t == norm_d or norm_t == lab):
+            return True
     return False
 
 
@@ -229,7 +263,7 @@ def classify_domain(agg):
     has_deep = any(l.get("target_is_deep") for l in links)
     has_pr = any(l.get("is_pr") for l in links)
     host_spam = host_is_spam(agg["domain"]) or any(host_is_spam(l["source_host"]) for l in links)
-    title_spam = any(title_is_spam(l["title"]) for l in links)
+    title_spam = any(title_is_spam(l.get("source_title", ""), agg["domain"]) for l in links)
     any_spam_evidence = has_pbn or has_offtopic or host_spam or title_spam
 
     # 2. genuine high-authority site => Keep -- BUT only when there is no spam
@@ -254,7 +288,7 @@ def classify_domain(agg):
         return nofollow_variant("Held (Pending Partner)"), "Press-release syndication host"
 
     # 6. title names client without SEO sales copy => Keep (genuine citation / listing)
-    if any(title_names_client_cleanly(l["title"]) for l in links) and not (has_pbn or has_offtopic):
+    if any(title_names_client_cleanly(l.get("source_title", "")) for l in links) and not (has_pbn or has_offtopic):
         return "Keep", "Linking page names the client without SEO sales copy (genuine citation)"
 
     # 7. off-topic spam
