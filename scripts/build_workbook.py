@@ -7,7 +7,7 @@ sys.path.insert(0, '/home/user/test/scripts')
 import classify as C
 import template_spec as T
 import openpyxl
-from openpyxl.styles import Font, PatternFill, Alignment
+from openpyxl.styles import Font, PatternFill, Alignment, Side, Border
 from openpyxl.utils import get_column_letter
 
 DATA='/home/user/test/data'
@@ -196,9 +196,13 @@ LEFTW=Alignment(wrap_text=True, vertical='top')
 def set_widths(ws, name):
     for col,w in T.WIDTHS.get(name,{}).items():
         ws.column_dimensions[col].width=w
-def write_header(ws, headers, row=1):
+THIN=Side(style='thin', color='FF000000')
+BORDER_TOP3=Border(left=THIN, right=THIN, top=THIN)        # data-tab header: top+sides, no bottom
+BORDER_BOX=Border(left=THIN, right=THIN, top=THIN, bottom=THIN)  # full box (Summary tables)
+def write_header(ws, headers, row=1, border=BORDER_TOP3):
     for ci,h in enumerate(headers,1):
         c=ws.cell(row,ci,h); c.font=hdr_font(); c.fill=HFILL; c.alignment=CEN
+        if border is not None: c.border=border
 
 # ----- helper to pick example page/title/top anchor -----
 def rep(d):
@@ -337,7 +341,7 @@ status_dom=Counter(status.values())
 status_bl=Counter()
 for L in links: status_bl[L['status']]+=1
 total_dom=sum(status_dom.values())
-write_header(ws, ['Status','Domains','Backlinks','Share of Domains','What it means'], row=3)
+write_header(ws, ['Status','Domains','Backlinks','Share of Domains','What it means'], row=3, border=BORDER_BOX)
 rr=4
 for st in T.STATUS_ORDER:
     dn=status_dom.get(st,0); bn=status_bl.get(st,0)
@@ -346,13 +350,14 @@ for st in T.STATUS_ORDER:
     ws.cell(rr,3,bn).font=body_font(); ws.cell(rr,3).number_format=T.FMT_INT; ws.cell(rr,3).alignment=Alignment(horizontal='center')
     ws.cell(rr,4,(dn/total_dom if total_dom else 0)).font=body_font(); ws.cell(rr,4).number_format=T.FMT_PCT; ws.cell(rr,4).alignment=Alignment(horizontal='center')
     ws.cell(rr,5,T.STATUS_MEANING[st]).font=body_font(); ws.cell(rr,5).alignment=LEFTW
-    for ci in range(1,6): ws.cell(rr,ci).fill=WFILL
+    for ci in range(1,6): ws.cell(rr,ci).fill=WFILL; ws.cell(rr,ci).border=BORDER_BOX
     rr+=1
 # total row
 ws.cell(rr,1,'Total').font=body_font(bold=True)
 ws.cell(rr,2,total_dom).font=body_font(bold=True); ws.cell(rr,2).number_format=T.FMT_INT; ws.cell(rr,2).alignment=Alignment(horizontal='center')
 ws.cell(rr,3,len(links)).font=body_font(bold=True); ws.cell(rr,3).number_format=T.FMT_INT; ws.cell(rr,3).alignment=Alignment(horizontal='center')
 ws.cell(rr,4,1.0).font=body_font(bold=True); ws.cell(rr,4).number_format=T.FMT_PCT; ws.cell(rr,4).alignment=Alignment(horizontal='center')
+for ci in range(1,6): ws.cell(rr,ci).fill=WFILL; ws.cell(rr,ci).border=BORDER_BOX
 total_row=rr; rr+=1   # Key findings starts immediately after Total (row 11), matching template
 # key findings
 spam_dom=status_dom.get(C.S_SPAM_DISAVOW,0)+status_dom.get(C.S_SPAM_NOFOLLOW,0)
@@ -397,14 +402,16 @@ for f in findings:
     ws.merge_cells(start_row=rr,start_column=1,end_row=rr,end_column=5)  # bullet spans A:E like template
     rr+=1
 ws.cell(rr,1,'Anchor text profile (all backlinks)').font=Font(name=T.FONT_NAME,bold=True,size=11,color=T.TITLE_COLOR); rr+=1
-write_header(ws, ['Anchor type','Backlinks','Share of Backlinks','Referring Domains'], row=rr); rr+=1
+write_header(ws, ['Anchor type','Backlinks','Share of Backlinks','Referring Domains'], row=rr, border=BORDER_BOX)
+ws.cell(rr,5).fill=HFILL; ws.cell(rr,5).border=BORDER_BOX  # header bar extends to col E like template
+rr+=1
 for atype in T.ANCHOR_TYPES:
     bn=at_bl.get(atype,0)
     ws.cell(rr,1,atype).font=body_font()
     ws.cell(rr,2,bn).font=body_font(); ws.cell(rr,2).number_format=T.FMT_INT; ws.cell(rr,2).alignment=Alignment(horizontal='center')
     ws.cell(rr,3,(bn/total_bl if total_bl else 0)).font=body_font(); ws.cell(rr,3).number_format=T.FMT_PCT; ws.cell(rr,3).alignment=Alignment(horizontal='center')
     ws.cell(rr,4,len(at_dom.get(atype,set()))).font=body_font(); ws.cell(rr,4).number_format=T.FMT_INT; ws.cell(rr,4).alignment=Alignment(horizontal='center')
-    for ci in range(1,5): ws.cell(rr,ci).fill=WFILL
+    for ci in range(1,5): ws.cell(rr,ci).fill=WFILL; ws.cell(rr,ci).border=BORDER_BOX
     rr+=1
 
 # logo on Summary — same image, anchor and size as the template (oneCellAnchor)

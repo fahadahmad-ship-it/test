@@ -5,7 +5,7 @@ HEADER_FONT = "FFFFFFFF"    # white
 TITLE_COLOR = "FF0C343D"
 BODY_COLOR  = "FF000000"
 WHITE_FILL  = "FFFFFFFF"
-FONT_NAME = "Arial"
+FONT_NAME = "Geist"
 # Number formats
 FMT_INT = "#,##0"
 FMT_PCT = "0.0%"
