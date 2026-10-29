@@ -187,9 +187,9 @@ def site_type(domain, titles, urls):
 # ========== BUILD WORKBOOK ==========
 wb=openpyxl.Workbook(); wb.remove(wb.active)
 HFILL=PatternFill('solid', fgColor=T.HEADER_FILL)
-WFILL=PatternFill('solid', fgColor='FFFFFF')
+WFILL=PatternFill('solid', fgColor=T.WHITE_FILL)
 def hdr_font(sz=9): return Font(name=T.FONT_NAME, bold=True, color=T.HEADER_FONT, size=sz)
-def body_font(sz=9, bold=False): return Font(name=T.FONT_NAME, bold=bold, color='000000', size=sz)
+def body_font(sz=9, bold=False): return Font(name=T.FONT_NAME, bold=bold, color=T.BODY_COLOR, size=sz)
 CEN=Alignment(horizontal='center', wrap_text=True)
 LEFTW=Alignment(wrap_text=True, vertical='top')
 
@@ -329,8 +329,9 @@ DIS_N=r-2
 
 # ===== Tab 1: Summary =====
 ws=wb.create_sheet('Summary', 0); set_widths(ws,'Summary')
+ws.merge_cells('B1:E2')
 ws['B1']=CLIENT_TITLE; ws['B1'].font=Font(name=T.FONT_NAME,bold=True,size=21,color=T.TITLE_COLOR)
-ws['B1'].alignment=Alignment(horizontal='center')
+ws['B1'].alignment=Alignment(horizontal='center', vertical='center')
 # status table
 status_dom=Counter(status.values())
 status_bl=Counter()
@@ -352,7 +353,7 @@ ws.cell(rr,1,'Total').font=body_font(bold=True)
 ws.cell(rr,2,total_dom).font=body_font(bold=True); ws.cell(rr,2).number_format=T.FMT_INT; ws.cell(rr,2).alignment=Alignment(horizontal='center')
 ws.cell(rr,3,len(links)).font=body_font(bold=True); ws.cell(rr,3).number_format=T.FMT_INT; ws.cell(rr,3).alignment=Alignment(horizontal='center')
 ws.cell(rr,4,1.0).font=body_font(bold=True); ws.cell(rr,4).number_format=T.FMT_PCT; ws.cell(rr,4).alignment=Alignment(horizontal='center')
-total_row=rr; rr+=2
+total_row=rr; rr+=1   # Key findings starts immediately after Total (row 11), matching template
 # key findings
 spam_dom=status_dom.get(C.S_SPAM_DISAVOW,0)+status_dom.get(C.S_SPAM_NOFOLLOW,0)
 held_dom=status_dom.get(C.S_HELD_PARTNER,0)+status_dom.get(C.S_HELD_NOFOLLOW,0)
@@ -390,10 +391,11 @@ findings=[
  f"Held does not mean good: {held_notraffic} of the {held_dom} held domains have no organic traffic at all. They are kept out of the disavow file only because the anchor could indicate a paid placement — confirm, then disavow the unclaimed ones using Tab 'Pending Disavow Lines'.",
  f"Unlike some networks, these domains are spread across many IP subnets (no single hosting cluster), so IP is not a reliable filter here — the anchor text and the sales-copy pattern are what separate the attack from the commissioned links.",
 ]
-ws.cell(rr,1,'Key findings').font=Font(name=T.FONT_NAME,bold=True,size=10,color='000000'); rr+=1
+ws.cell(rr,1,'Key findings').font=Font(name=T.FONT_NAME,bold=True,size=10,color=T.BODY_COLOR); rr+=1
 for f in findings:
-    c=ws.cell(rr,1,f); c.font=body_font(); c.alignment=LEFTW; rr+=1
-rr+=1
+    c=ws.cell(rr,1,f); c.font=body_font(); c.alignment=LEFTW
+    ws.merge_cells(start_row=rr,start_column=1,end_row=rr,end_column=5)  # bullet spans A:E like template
+    rr+=1
 ws.cell(rr,1,'Anchor text profile (all backlinks)').font=Font(name=T.FONT_NAME,bold=True,size=11,color=T.TITLE_COLOR); rr+=1
 write_header(ws, ['Anchor type','Backlinks','Share of Backlinks','Referring Domains'], row=rr); rr+=1
 for atype in T.ANCHOR_TYPES:

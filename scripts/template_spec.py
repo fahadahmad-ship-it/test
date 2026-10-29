@@ -1,8 +1,10 @@
 # Build spec extracted from the K&K template — reused verbatim for kbelectric.online
-# Colors / fonts
-HEADER_FILL = "0C343D"      # dark teal, header rows
-HEADER_FONT = "FFFFFF"      # white
-TITLE_COLOR = "0C343D"
+# Colors / fonts (8-digit ARGB with FF alpha, to byte-match the template)
+HEADER_FILL = "FF0C343D"    # dark teal, header rows
+HEADER_FONT = "FFFFFFFF"    # white
+TITLE_COLOR = "FF0C343D"
+BODY_COLOR  = "FF000000"
+WHITE_FILL  = "FFFFFFFF"
 FONT_NAME = "Arial"
 # Number formats
 FMT_INT = "#,##0"
