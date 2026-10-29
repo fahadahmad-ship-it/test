@@ -147,7 +147,7 @@ def is_client_domain(domain):
     d = domain.lower()
     return "kbelectric" in d.replace("-", "")
 
-KEEP_TRAFFIC_MIN = 30  # a benign-anchor domain must show real organic traffic to be "Keep"
+KEEP_TRAFFIC_MIN = 20  # a benign-anchor domain must show real organic traffic to be "Keep"
 
 def classify_domain(domain, anchor_types, has_dofollow, has_spam_copy, dr=None, traffic=None,
                     titles=None):

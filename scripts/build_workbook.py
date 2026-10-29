@@ -108,7 +108,7 @@ print(f"unified links: {len(links)}")
 
 # ---------- aggregate per audit-key (host) ----------
 doms=defaultdict(lambda: dict(anchors=Counter(), atypes=set(), dofollow=False, nofollow=False,
-    nlinks=0, first=None, titles=[], tools=set(), examples=[], targets=Counter(), spamcopy=False))
+    nlinks=0, first=None, titles=[], srcs=set(), examples=[], targets=Counter(), spamcopy=False))
 for L in links:
     d=doms[L['key']]
     d['anchors'][L['anchor']]+=1
@@ -118,9 +118,16 @@ for L in links:
     else: d['nofollow']=True
     if L['atype']==C.T_SPAM: d['spamcopy']=True
     if L['first'] and (d['first'] is None or L['first']<d['first']): d['first']=L['first']
-    d['titles'].append(L['title']); d['tools'].add(L['tool'])
+    d['titles'].append(L['title'])
+    if L['tool']=='Both': d['srcs'].update(('Semrush','Ahrefs'))
+    else: d['srcs'].add(L['tool'])
     d['targets'][L['target_url']]+=1
     d['examples'].append(L)
+def source_label(srcs):
+    return 'Both' if {'Semrush','Ahrefs'}<=srcs else (next(iter(srcs)) if srcs else '')
+def as_int(v):
+    try: return int(round(float(v)))
+    except: return v if v not in (None,'') else None
 
 # ---------- classify each domain ----------
 status={}
@@ -197,13 +204,13 @@ r=2
 for key,d in audit_rows:
     e=enr(key); sr=sr_ref.get(key,{})
     top_anchor, ex_page, ex_title=rep(d)
-    as_val=sr.get('as') or e.get('dr')
+    as_val=as_int(sr.get('as') or e.get('dr'))
     ip_val=sr.get('ip') or ah_ip.get(key) or ''
     dof=sum(1 for L in d['examples'] if L['dofollow']); nof=d['nlinks']-dof
     tgt_root=reg_root(hostof(d['targets'].most_common(1)[0][0])) if d['targets'] else TARGET_ROOT
     vals=[key, status[key], as_val, d['nlinks'], e.get('refdomains'), e.get('traffic'),
           indis[key], tgt_root or TARGET_ROOT, dof, nof, d['first'], top_anchor, ex_page,
-          ex_title, '/'.join(sorted(d['tools'])) if d['tools'] else '', ip_val, disline[key]]
+          ex_title, source_label(d['srcs']), ip_val, disline[key]]
     for ci,v in enumerate(vals,1):
         c=ws.cell(r,ci,v); c.font=body_font(); c.fill=WFILL
         if ci in (4,5,6,9,10): c.number_format=T.FMT_INT; c.alignment=Alignment(horizontal='center')
@@ -299,7 +306,7 @@ for key,st in status.items():
 r=2
 for root in sorted(dis_agg):
     a=dis_agg[root]; top=a['anchors'].most_common(1)[0][0] if a['anchors'] else ''
-    vals=[f'domain:{root}', a['as_v'], a['bl'], a['rd'], a['tr'], a['kw'], top]
+    vals=[f'domain:{root}', as_int(a['as_v']), a['bl'], a['rd'], a['tr'], a['kw'], top]
     for ci,v in enumerate(vals,1):
         c=ws.cell(r,ci,v); c.font=body_font(); c.fill=WFILL
         if ci in (2,3,4,5,6): c.number_format=T.FMT_INT; c.alignment=Alignment(horizontal='center')
@@ -342,13 +349,33 @@ at_bl=Counter(L['atype'] for L in links)
 at_dom=defaultdict(set)
 for L in links: at_dom[L['atype']].add(L['key'])
 top_spam_anchor=max((a for a in anchor_agg.items() if a[1]['atype']==C.T_SPAM), key=lambda kv:len(kv[1]['doms']), default=(None,{'doms':set()}))
+# home vs service page split by anchor group
+def is_home(u):
+    p=urlparse(u).path.rstrip('/'); return p=='' or p=='/'
+spam_home=sum(1 for L in links if L['atype']==C.T_SPAM and is_home(L['target_url']))
+spam_tot=at_bl.get(C.T_SPAM,0)
+comm_links=[L for L in links if L['atype'] in (C.T_EXACT,C.T_EXACT_GEO)]
+comm_service=sum(1 for L in comm_links if not is_home(L['target_url']))
+# timing bursts
+def ym(d): return (d.year,d.month) if d else None
+allm=Counter(ym(L['first']) for L in links if L['first'])
+peak=max(allm.items(), key=lambda kv:kv[1]) if allm else (None,0)
+heldm=Counter(ym(L['first']) for L in links if L['status'] in (C.S_HELD_PARTNER,C.S_HELD_NOFOLLOW) and L['first'])
+hpeak=max(heldm.items(), key=lambda kv:kv[1]) if heldm else (None,0)
+MON=['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+def mlabel(t): return f"{MON[t[1]]} {t[0]}" if t and t[0] else "a single month"
+def mlab(item): return mlabel(item[0]) if item and item[0] else "a single month"
+held_notraffic=sum(1 for k,st in status.items() if st in (C.S_HELD_PARTNER,C.S_HELD_NOFOLLOW)
+                   and not (enr(k).get('traffic') or 0))
+spam_anchor_txt=(top_spam_anchor[0] or '')[:60]
 findings=[
- f"{spam_dom} of the {total_dom} referring domains are spam. {status_dom.get(C.S_SPAM_DISAVOW,0)} have a dofollow link and go in the disavow file; the other {status_dom.get(C.S_SPAM_NOFOLLOW,0)} are nofollow and need no action.",
- f"The profile splits into two patterns: a link-scheme / PBN flood (keyword-stuffed SEO sales-copy anchors on throwaway domains) and a layer of exact-match commercial anchors pointing at KB's service pages.",
- f"The disavow file ({DISAVOW_FILE}) contains {disavow_n} unique domain lines. It is built from the {status_dom.get(C.S_SPAM_DISAVOW,0)} spam domains carrying at least one dofollow link.",
- f"The biggest spam anchor" + (f", on {len(top_spam_anchor[1]['doms'])} domains, is backlink sales copy that names the client's own domain." if top_spam_anchor[0] else " is backlink sales copy that names the client's own domain."),
- f"{held_dom} domains are held for the previous partner to confirm, in case any were commissioned placements. They use real commercial anchors, not sales copy, so they are not disavowed until the partner confirms.",
- f"Held does not mean good: most held domains have little or no organic traffic. They are kept out of the disavow file only because the anchor could indicate a paid placement.",
+ f"{spam_dom} of the {total_dom} referring domains are spam. {status_dom.get(C.S_SPAM_DISAVOW,0)} carry at least one dofollow link and go in the disavow file ({disavow_n} unique domain lines); the other {status_dom.get(C.S_SPAM_NOFOLLOW,0)} are nofollow and pass no value, so they need no action.",
+ f"Two patterns, easy to tell apart. The link scheme is a keyword-stuffed SEO sales-copy flood: {'all ' if spam_home==spam_tot else str(spam_home)+' of the '}{spam_tot} sales-copy links point at the home page. The {len(comm_links)} exact-match commercial links behave differently — {comm_service} of them hit KB's service pages (sports / stadium / court lighting, commercial electrical).",
+ f"The single biggest spam anchor, on {len(top_spam_anchor[1]['doms'])} domains, is backlink sales copy that names the client's own domain — e.g. “{spam_anchor_txt}…”. An anchor advertising a link-selling service, not the business, is the clearest sign of a bought/PBN link.",
+ f"The attack is recent and concentrated: the biggest single month is {mlab(peak)} with {peak[1]} links first seen — many domains stood up in a short window, which is the signature of an automated network rather than organic growth.",
+ f"{held_dom} domains are held for the previous partner to confirm, in case any were commissioned. They use real commercial anchors (not sales copy) and cluster around {mlab(hpeak)} ({hpeak[1]} links), consistent with a deliberate build. They are NOT in the disavow file until the partner confirms, so nothing paid-for is discarded by accident.",
+ f"Held does not mean good: {held_notraffic} of the {held_dom} held domains have no organic traffic at all. They are kept out of the disavow file only because the anchor could indicate a paid placement — confirm, then disavow the unclaimed ones using Tab 'Pending Disavow Lines'.",
+ f"Unlike some networks, these domains are spread across many IP subnets (no single hosting cluster), so IP is not a reliable filter here — the anchor text and the sales-copy pattern are what separate the attack from the commissioned links.",
 ]
 ws.cell(rr,1,'Key findings').font=Font(name=T.FONT_NAME,bold=True,size=10,color='000000'); rr+=1
 for f in findings:
