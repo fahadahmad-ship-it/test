@@ -85,8 +85,17 @@ def main():
             diff(f"[{name}] data border", border_sig(gw.cell(2,1)), border_sig(tw.cell(2,1)))
             diff(f"[{name}] data align", align_sig(gw.cell(2,1)), align_sig(tw.cell(2,1)))
 
+    # number formats (date + percent) on representative cells
+    diff("[Referring Domain Audit] First Seen numfmt",
+         g["Referring Domain Audit"].cell(2,11).number_format,
+         t["Referring Domain Audit"].cell(2,11).number_format)
+    diff("[Anchor Analysis] share numfmt",
+         g["Anchor Analysis"].cell(2,4).number_format,
+         t["Anchor Analysis"].cell(2,4).number_format)
+
     # Summary
     gs, tsh = g["Summary"], t["Summary"]
+    diff("[Summary] share numfmt", gs.cell(4,4).number_format, tsh.cell(4,4).number_format)
     diff("[Summary] gridlines", gs.sheet_view.showGridLines, tsh.sheet_view.showGridLines)
     diff("[Summary] title font", font_sig(gs["B1"]), font_sig(tsh["B1"]))
     from openpyxl.utils import get_column_letter
@@ -95,6 +104,16 @@ def main():
         diff(f"[Summary] width col {L}", round(gs.column_dimensions[L].width or 0,2),
              round(tsh.column_dimensions[L].width or 0,2))
     diff("[Summary] has logo image", len(getattr(gs,'_images',[]))>0, len(getattr(tsh,'_images',[]))>0)
+    def logo_sig(ws):
+        imgs = getattr(ws, '_images', [])
+        if not imgs: return None
+        a = imgs[0].anchor
+        try:
+            fr = a._from
+            return (fr.col, fr.colOff, fr.row, fr.rowOff, a.ext.cx, a.ext.cy)
+        except Exception:
+            return ("unsupported-anchor",)
+    diff("[Summary] logo anchor+size", logo_sig(gs), logo_sig(tsh))
 
     if DIFFS:
         print(f"STRUCTURAL DIFFERENCES ({len(DIFFS)}):")

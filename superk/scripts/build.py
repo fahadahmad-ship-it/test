@@ -68,7 +68,7 @@ def style_header_row(ws, row, ncols):
     ws.row_dimensions[row].height = T.HEADER_ROW_HEIGHT
 
 def write_data_tab(wb, name, headers, rows, pct_cols=(), date_cols=(), int_cols=(),
-                   header_nowrap_cols=()):
+                   header_nowrap_cols=(), pct_format="0.0%"):
     ws = wb.create_sheet(name)
     ncols = len(headers)
     for c, h in enumerate(headers, start=1):
@@ -85,9 +85,9 @@ def write_data_tab(wb, name, headers, rows, pct_cols=(), date_cols=(), int_cols=
             cell.border = BORDER_NONE
             cell.alignment = AL_DATA
             if c in pct_cols:
-                cell.number_format = T.FMT_PCT
+                cell.number_format = pct_format
             elif c in date_cols:
-                cell.number_format = "yyyy-mm-dd"
+                cell.number_format = "d mmm yyyy"
         ws.row_dimensions[i].height = h
     # widths
     for c, w in enumerate(T.COL_WIDTHS[name], start=1):
@@ -183,22 +183,26 @@ def build():
     write_data_tab(wb, "All Backlinks", T.HEADERS["All Backlinks"], bl_rows)
 
     # ---- Tab 4: Anchor Analysis ----
-    # per-anchor: backlinks (count of links), share, referring domains, spam domains using it
-    anchor_links = defaultdict(list)
+    # Authoritative anchor distribution from Semrush backlinks_anchors (backlinks_num,
+    # domains_num). Link-level pulls undercount the dominant anchors, so the counts here
+    # are Semrush's, never the sample. "Spam Domains Using It" = domains_num for a spam-type
+    # anchor (any domain using a spam anchor is spam), else spam domains observed using it.
+    sem_anchors = data["anchors"]
+    total_anchor_bl = sum(a["backlinks_num"] for a in sem_anchors) or 1
+    obs_spam_by_anchor = defaultdict(set)
     for r in recs:
-        for l in r["links"]:
-            anchor_links[(l.get("anchor","") or "")].append((r["domain"], r["status"]))
-    total_links = sum(len(v) for v in anchor_links.values()) or 1
+        if r["status"].startswith("Spam"):
+            for l in r["links"]:
+                obs_spam_by_anchor[(l.get("anchor","") or "")].add(r["domain"])
     an_rows = []
-    for anchor, uses in anchor_links.items():
-        doms = {d for d, s in uses}
-        spam_doms = {d for d, s in uses if s.startswith("Spam")}
-        at = classify.anchor_type(anchor)
-        an_rows.append([anchor if anchor else "<EmptyAnchor>", at, len(uses),
-                        len(uses)/total_links, len(doms), len(spam_doms)])
+    for a in sem_anchors:
+        anchor = a["anchor"]; at = classify.anchor_type(anchor)
+        spam_dom = a["domains_num"] if at in classify.SPAM_ANCHOR_TYPES else len(obs_spam_by_anchor.get(anchor, ()))
+        an_rows.append([anchor if anchor else "<EmptyAnchor>", at, a["backlinks_num"],
+                        a["backlinks_num"]/total_anchor_bl, a["domains_num"], spam_dom])
     an_rows.sort(key=lambda x: -x[2])
     write_data_tab(wb, "Anchor Analysis", T.HEADERS["Anchor Analysis"], an_rows, pct_cols=(4,),
-                   header_nowrap_cols=(1,))
+                   header_nowrap_cols=(1,), pct_format="0.00%")
 
     # ---- Tab 5: Exact Match Anchors ----
     em_rows = []
@@ -271,7 +275,12 @@ def build_summary(ws, recs, by_status, data):
     for c, w in enumerate(T.COL_WIDTHS["Summary"], start=1):
         ws.column_dimensions[get_column_letter(c)].width = w
     img = XLImage(os.path.join(REF, "harbinger_logo.png"))
-    img.anchor = "A1"
+    from openpyxl.drawing.spreadsheet_drawing import OneCellAnchor, AnchorMarker
+    from openpyxl.drawing.xdr import XDRPositiveSize2D
+    img.anchor = OneCellAnchor(
+        _from=AnchorMarker(col=T.LOGO_FROM_COL, colOff=T.LOGO_FROM_COLOFF,
+                           row=T.LOGO_FROM_ROW, rowOff=T.LOGO_FROM_ROWOFF),
+        ext=XDRPositiveSize2D(cx=T.LOGO_EXT_CX, cy=T.LOGO_EXT_CY))
     ws.add_image(img)
     # title
     ws.merge_cells("B1:E2")
@@ -334,12 +343,15 @@ def build_summary(ws, recs, by_status, data):
     for c, h in enumerate(aph, start=1):
         cell = ws.cell(row=hr, column=c, value=h)
         cell.font = F_SUMHDR; cell.fill = FILL_ACCENT; cell.border = BORDER_BOX; cell.alignment = AL_HEADER
-    # aggregate anchor types across all links
-    type_bl = Counter(); type_dom = defaultdict(set)
+    # aggregate anchor types: backlinks from Semrush (authoritative), referring domains as
+    # distinct domains observed using that anchor type (avoids double-counting across anchors)
+    type_bl = Counter()
+    for a in data["anchors"]:
+        type_bl[classify.anchor_type(a["anchor"])] += a["backlinks_num"]
+    type_dom = defaultdict(set)
     for rec in recs:
         for l in rec["links"]:
-            at = classify.anchor_type(l.get("anchor",""))
-            type_bl[at] += 1; type_dom[at].add(rec["domain"])
+            type_dom[classify.anchor_type(l.get("anchor",""))].add(rec["domain"])
     tot_bl = sum(type_bl.values()) or 1
     rr = hr + 1
     for at, n in type_bl.most_common():

@@ -62,6 +62,20 @@ domains have no organic traffic.
 - **Ahrefs 250-row API cap.** A small number of Ahrefs-only fringe domains lacked
   retrievable link-level detail; they were classified conservatively on host-name + Ahrefs
   spam signals and **never disavowed without a visible signal**.
+- **The file is the full union (Semrush + Ahrefs).** Of the 1,663 disavowed domains, 1,172
+  are in Semrush's live profile and **491 are Ahrefs-discovered** spam the live
+  referring-domain report doesn't list (e.g. a sequential `NNNNNNNN.xyz` farm, recent
+  `.shop`/`.space` PBN sites). Each still rests on a visible spam anchor/title/host and has
+  a dofollow link. Per the playbook the money-site file carries the complete union, and
+  listing a domain that no longer links is harmless — so the file is intentionally broader
+  than Semrush's 1,644.
+- **Authority Score is blank for 580 Ahrefs-only domains.** Semrush AS is only retrievable
+  in bulk via `backlinks_comparison`, which this MCP does not expose; per-domain AS at that
+  scale is infeasible. Those domains are classified on anchor/title/host evidence (AS plays
+  no part in their verdict), so the blank does not weaken any decision.
+- **Anchor counts are Semrush-authoritative.** The Anchor Analysis tab and the Summary
+  anchor-profile table use Semrush `backlinks_anchors` counts (e.g. `jogjatoto` = 59,168
+  backlinks), not the link-level sample.
 - **Blog/site platforms** (blogspot, weebly, typepad, tripod, livedoor, …) are disavowed at
   the **subdomain** level (`domain:spamblog.blogspot.com`), never the platform root.
   Path-based free hosts (angelfire.com, tripod.com) are kept out of the file — the specific
