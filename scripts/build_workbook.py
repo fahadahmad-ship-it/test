@@ -20,9 +20,22 @@ DISAVOW_FILE='disavow_kbelectric.txt'
 MULTI_SUFFIX={'co.in','net.in','org.in','co.uk','org.uk','me.uk','com.au','net.au','org.au',
     'co.nz','co.za','com.br','com.mx','co.jp','or.jp','com.sg','com.my','co.id','com.tr',
     'com.ua','co.il','com.ph','com.pk','com.ng','com.co','web.id'}
+# multi-tenant platforms: a disavow must target the SUBDOMAIN, never the shared root,
+# so these are treated as effective public suffixes (domain:sub.blogspot.com, not domain:blogspot.com)
+PLATFORMS={'blogspot.com','wordpress.com','pages.dev','github.io','wixsite.com','weebly.com',
+    'tumblr.com','medium.com','substack.com','netlify.app','vercel.app','web.app','000webhostapp.com',
+    'myshopify.com','hashnode.dev','notion.site','gitbook.io','strikingly.com','jimdosite.com',
+    'glitch.me','repl.co','firebaseapp.com','azurewebsites.net','herokuapp.com','blogspot.in',
+    'blogspot.co.uk','blogspot.ca','blogspot.com.au','wordpress.co','square.site','godaddysites.com',
+    'webflow.io','sites.google.com','translate.goog','r.appspot.com','onrender.com'}
 def reg_root(host):
     host=(host or '').lower().strip().rstrip('.')
     if host.startswith('www.'): host=host[4:]
+    for p in PLATFORMS:
+        if host==p: return host
+        if host.endswith('.'+p):
+            label=host[:-(len(p)+1)].split('.')[-1]
+            return f"{label}.{p}" if label else host
     parts=host.split('.')
     if len(parts)<=2: return host
     last2='.'.join(parts[-2:]); last3='.'.join(parts[-3:])
