@@ -28,8 +28,10 @@ SERVICE_TERMS = [
 ]
 GEO_TERMS = [
     "covington", "atlanta", "chattanooga", "macon", "conyers", "newnan",
-    "georgia", "tennessee", " ga", "ga ", " tn", "tn ", ", ga", ", tn",
+    "georgia", "tennessee",
 ]
+# word-boundary geo match (so "ga" does not match inside "chattanooGA")
+GEO_RE = re.compile(r"\b(covington|atlanta|macon|conyers|newnan|georgia|chattanooga|tennessee|ga|tn)\b", re.I)
 BRAND_TERMS = ["jaco contracting", "jaco roofing", "jaco"]
 
 # ---- spam signals ----
@@ -107,7 +109,7 @@ def anchor_type(anchor):
         return "Naked URL"
     # exact match commercial (geo if carries client geography)
     svc = has(al, SERVICE_TERMS)
-    geo = has(al, GEO_TERMS)
+    geo = bool(GEO_RE.search(a))
     if svc and geo:
         return "Exact match commercial (geo)"
     if svc:

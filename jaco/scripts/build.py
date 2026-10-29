@@ -44,10 +44,12 @@ def dt(unix):
     except Exception:
         return None
 
+_TN_RE = re.compile(r"\b(chattanooga|tennessee|tn)\b", re.I)
+_GA_RE = re.compile(r"\b(covington|atlanta|macon|conyers|newnan|georgia|ga)\b", re.I)
 def market_of(anchor):
-    a = (anchor or "").lower()
-    tn = any(x in a for x in ["chattanooga", "tennessee", " tn", "tn ", ",tn", ", tn"])
-    ga = any(x in a for x in ["covington", "atlanta", "macon", "conyers", "newnan", "georgia", " ga", "ga ", ",ga", ", ga"])
+    a = anchor or ""
+    tn = bool(_TN_RE.search(a))
+    ga = bool(_GA_RE.search(a))
     if tn and ga:
         return "Georgia / Tennessee"
     if tn:
@@ -252,7 +254,7 @@ def main():
     aug_rd, now_rd = 406, total_domains
     findings = [
         f"{spam_total:,} of the {total_domains:,} referring domains are spam. {spam_dof:,} have a dofollow link and go in the disavow file; the other {spam_nof:,} are nofollow and need no action.",
-        f"The attack has roughly tripled since mid-2026: 406 referring domains in August 2026, {now_rd:,} now. We audited the full live profile, not an older snapshot.",
+        f"Referring domains roughly tripled on Semrush: 406 in August 2026 to 1,289 now (Oct 2026). Across Semrush and Ahrefs combined the live profile is {now_rd:,} referring domains. We audited the full live profile, not an older snapshot.",
         f"You can upload one disavow file, for {CLIENT}. No owned domains redirect into the site, so a single file ({DISAVOW_FILE}) covers every bad domain.",
         f"Two patterns, easy to tell apart. {scheme_home:,} link-scheme / sales-copy links hit the home page; the {commercial_deep:,} commercial-anchor links hit deep location and service pages. The home-page flood is the attack.",
         f"The biggest single anchor, on {top_sales_doms:,} domains, is backlink sales copy that names the client's own domain.",
