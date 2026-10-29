@@ -37,15 +37,15 @@ Worth your money? Depends who you are. Let us dig in.
 
 ## Table of contents
 
-1. What is magnesium taurate, really?
+1. Magnesium taurate, in plain English
 2. The benefits worth knowing about
 3. Taurate or glycinate?
-4. How much should you take?
+4. Getting the dose right without the guesswork
 5. The side effects nobody mentions
-6. So, is it worth it?
+6. My honest verdict
 7. Your questions, answered
 
-## What is magnesium taurate, really?
+## Magnesium taurate, in plain English
 
 Magnesium cannot stand its own company. Restless little thing, chemically speaking, so it turns up holding hands with some partner long before it lands in your capsule. And whoever that partner happens to be? They rewrite the entire story of what unfolds once you have swallowed it. In this case, say hello to taurine.
 
@@ -86,7 +86,7 @@ The 1am Google question. Short answer below.
 
 Real answer? No clean winner here. And whoever swears blind that one form suits every human alive is usually halfway through a sales pitch. My take, for what it is worth: pick whichever one targets the thing bugging you most. Run it a fortnight or so. Your own body hands out the score, nobody else.
 
-## How much should you take?
+## Getting the dose right without the guesswork
 
 Here is where people get played. They lock onto the giant number on the front. Wrong number. The two words worth your attention are elemental magnesium, hiding further down the label. That is the part doing any real work. Say the front shouts 1,000 mg of magnesium taurate at you. The magnesium actually in there? A sliver of it. And taurate hands over less per capsule than most rivals anyway, so yeah, mind the gap.
 
@@ -103,7 +103,7 @@ Most healthy adults take this stuff and never think twice. Natural is not the sa
 
 Pregnant, breastfeeding, living with something long term, on daily tablets? A two minute word with your doctor is part of the shopping, not a nice to have. You can [consult a doctor on ClinicSpots](https://www.clinicspots.com/doctors) and get something built around your own situation.
 
-## So, is it worth it?
+## My honest verdict
 
 Not a miracle. Let us kill that idea now, because the internet will try to sell you one. The logic, though, is hard to argue with. Grab a mineral most of us run short on. Tie it to an amino acid your heart and nerves already lean on. Deliver it in a shape that absorbs well and does not punish your stomach.
 
