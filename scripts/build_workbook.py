@@ -7,7 +7,7 @@ sys.path.insert(0, '/home/user/test/scripts')
 import classify as C
 import template_spec as T
 import openpyxl
-from openpyxl.styles import Font, PatternFill, Alignment, Side, Border
+from openpyxl.styles import Font, PatternFill, Alignment, Side, Border, Color
 from openpyxl.utils import get_column_letter
 
 DATA='/home/user/test/data'
@@ -190,19 +190,38 @@ HFILL=PatternFill('solid', fgColor=T.HEADER_FILL)
 WFILL=PatternFill('solid', fgColor=T.WHITE_FILL)
 def hdr_font(sz=9): return Font(name=T.FONT_NAME, bold=True, color=T.HEADER_FONT, size=sz)
 def body_font(sz=9, bold=False): return Font(name=T.FONT_NAME, bold=bold, color=T.BODY_COLOR, size=sz)
-CEN=Alignment(horizontal='center', wrap_text=True)
-LEFTW=Alignment(wrap_text=True, vertical='top')
+_TBLACK=Color(theme=1, tint=0.0)  # template uses theme black on Summary total + findings
+def tfont(sz=9, bold=False): return Font(name=T.FONT_NAME, bold=bold, color=_TBLACK, size=sz)
+CEN=Alignment(horizontal='center', vertical='center', wrap_text=True)
+LEFTW=Alignment(vertical='center', wrap_text=True)
+A_CTR=Alignment(horizontal='center', vertical='center')
+A_LBL=Alignment(vertical='center')
 
 def set_widths(ws, name):
     for col,w in T.WIDTHS.get(name,{}).items():
         ws.column_dimensions[col].width=w
-THIN=Side(style='thin', color='FF000000')
+THIN=Side(style='thin', color=Color(rgb='FF000000'))
 BORDER_TOP3=Border(left=THIN, right=THIN, top=THIN)        # data-tab header: top+sides, no bottom
 BORDER_BOX=Border(left=THIN, right=THIN, top=THIN, bottom=THIN)  # full box (Summary tables)
+import json as _json
+ALIGN=_json.load(open('/home/user/test/scripts/align_spec.json'))  # per-tab per-column halign/numfmt from template
 def write_header(ws, headers, row=1, border=BORDER_TOP3):
     for ci,h in enumerate(headers,1):
         c=ws.cell(row,ci,h); c.font=hdr_font(); c.fill=HFILL; c.alignment=CEN
         if border is not None: c.border=border
+
+def style_tab(name, nrows):
+    """Restyle a data tab's header + data cells to match the template exactly (align/numfmt/border)."""
+    ws=wb[name]; sp=ALIGN[name]; ncols=len(sp['hdr'])
+    for c in range(1,ncols+1):
+        hh=sp['hdr'][c-1]
+        hc=ws.cell(1,c); hc.font=hdr_font(); hc.fill=HFILL; hc.border=BORDER_TOP3
+        hc.alignment=Alignment(horizontal=hh[0], vertical='center', wrap_text=bool(hh[2]))
+        dh,dv,dw,dnf=sp['data'][c-1]
+        al=Alignment(horizontal=dh, vertical='center', wrap_text=bool(dw))
+        for r in range(2,nrows+2):
+            dc=ws.cell(r,c); dc.font=body_font(); dc.fill=WFILL
+            dc.alignment=al; dc.number_format=dnf
 
 # ----- helper to pick example page/title/top anchor -----
 def rep(d):
@@ -342,21 +361,23 @@ status_bl=Counter()
 for L in links: status_bl[L['status']]+=1
 total_dom=sum(status_dom.values())
 write_header(ws, ['Status','Domains','Backlinks','Share of Domains','What it means'], row=3, border=BORDER_BOX)
+for ci in range(1,6): ws.cell(3,ci).font=hdr_font(10)   # status header is 10pt in template
 rr=4
 for st in T.STATUS_ORDER:
     dn=status_dom.get(st,0); bn=status_bl.get(st,0)
-    ws.cell(rr,1,st).font=body_font()
-    ws.cell(rr,2,dn).font=body_font(); ws.cell(rr,2).number_format=T.FMT_INT; ws.cell(rr,2).alignment=Alignment(horizontal='center')
-    ws.cell(rr,3,bn).font=body_font(); ws.cell(rr,3).number_format=T.FMT_INT; ws.cell(rr,3).alignment=Alignment(horizontal='center')
-    ws.cell(rr,4,(dn/total_dom if total_dom else 0)).font=body_font(); ws.cell(rr,4).number_format=T.FMT_PCT; ws.cell(rr,4).alignment=Alignment(horizontal='center')
+    ws.cell(rr,1,st).font=body_font(); ws.cell(rr,1).alignment=A_LBL
+    ws.cell(rr,2,dn).font=body_font(); ws.cell(rr,2).number_format=T.FMT_INT; ws.cell(rr,2).alignment=A_CTR
+    ws.cell(rr,3,bn).font=body_font(); ws.cell(rr,3).number_format=T.FMT_INT; ws.cell(rr,3).alignment=A_CTR
+    ws.cell(rr,4,(dn/total_dom if total_dom else 0)).font=body_font(); ws.cell(rr,4).number_format=T.FMT_PCT; ws.cell(rr,4).alignment=A_CTR
     ws.cell(rr,5,T.STATUS_MEANING[st]).font=body_font(); ws.cell(rr,5).alignment=LEFTW
     for ci in range(1,6): ws.cell(rr,ci).fill=WFILL; ws.cell(rr,ci).border=BORDER_BOX
     rr+=1
 # total row
-ws.cell(rr,1,'Total').font=body_font(bold=True)
-ws.cell(rr,2,total_dom).font=body_font(bold=True); ws.cell(rr,2).number_format=T.FMT_INT; ws.cell(rr,2).alignment=Alignment(horizontal='center')
-ws.cell(rr,3,len(links)).font=body_font(bold=True); ws.cell(rr,3).number_format=T.FMT_INT; ws.cell(rr,3).alignment=Alignment(horizontal='center')
-ws.cell(rr,4,1.0).font=body_font(bold=True); ws.cell(rr,4).number_format=T.FMT_PCT; ws.cell(rr,4).alignment=Alignment(horizontal='center')
+ws.cell(rr,1,'Total').font=tfont(bold=True); ws.cell(rr,1).alignment=A_LBL
+ws.cell(rr,2,total_dom).font=tfont(bold=True); ws.cell(rr,2).number_format=T.FMT_INT; ws.cell(rr,2).alignment=A_CTR
+ws.cell(rr,3,len(links)).font=tfont(bold=True); ws.cell(rr,3).number_format=T.FMT_INT; ws.cell(rr,3).alignment=A_CTR
+ws.cell(rr,4,1.0).font=tfont(bold=True); ws.cell(rr,4).number_format=T.FMT_PCT; ws.cell(rr,4).alignment=A_CTR
+ws.cell(rr,5).font=tfont(bold=True); ws.cell(rr,5).alignment=A_LBL
 for ci in range(1,6): ws.cell(rr,ci).fill=WFILL; ws.cell(rr,ci).border=BORDER_BOX
 total_row=rr; rr+=1   # Key findings starts immediately after Total (row 11), matching template
 # key findings
@@ -396,21 +417,22 @@ findings=[
  f"Held does not mean good: {held_notraffic} of the {held_dom} held domains have no organic traffic at all. They are kept out of the disavow file only because the anchor could indicate a paid placement — confirm, then disavow the unclaimed ones using Tab 'Pending Disavow Lines'.",
  f"Unlike some networks, these domains are spread across many IP subnets (no single hosting cluster), so IP is not a reliable filter here — the anchor text and the sales-copy pattern are what separate the attack from the commissioned links.",
 ]
-ws.cell(rr,1,'Key findings').font=Font(name=T.FONT_NAME,bold=True,size=10,color=T.BODY_COLOR); rr+=1
+kf=ws.cell(rr,1,'Key findings'); kf.font=Font(name=T.FONT_NAME,bold=True,size=10,color=T.BODY_COLOR); kf.alignment=A_LBL; rr+=1
 for f in findings:
-    c=ws.cell(rr,1,f); c.font=body_font(); c.alignment=LEFTW
+    c=ws.cell(rr,1,f); c.font=tfont(); c.alignment=LEFTW
     ws.merge_cells(start_row=rr,start_column=1,end_row=rr,end_column=5)  # bullet spans A:E like template
     rr+=1
-ws.cell(rr,1,'Anchor text profile (all backlinks)').font=Font(name=T.FONT_NAME,bold=True,size=11,color=T.TITLE_COLOR); rr+=1
+ap=ws.cell(rr,1,'Anchor text profile (all backlinks)'); ap.font=Font(name=T.FONT_NAME,bold=True,size=11,color=T.TITLE_COLOR); ap.alignment=A_LBL; rr+=1
 write_header(ws, ['Anchor type','Backlinks','Share of Backlinks','Referring Domains'], row=rr, border=BORDER_BOX)
-ws.cell(rr,5).fill=HFILL; ws.cell(rr,5).border=BORDER_BOX  # header bar extends to col E like template
+ws.cell(rr,5).fill=HFILL; ws.cell(rr,5).border=BORDER_BOX; ws.cell(rr,5).font=hdr_font(); ws.cell(rr,5).alignment=CEN  # header bar extends to col E
 rr+=1
 for atype in T.ANCHOR_TYPES:
     bn=at_bl.get(atype,0)
-    ws.cell(rr,1,atype).font=body_font()
-    ws.cell(rr,2,bn).font=body_font(); ws.cell(rr,2).number_format=T.FMT_INT; ws.cell(rr,2).alignment=Alignment(horizontal='center')
-    ws.cell(rr,3,(bn/total_bl if total_bl else 0)).font=body_font(); ws.cell(rr,3).number_format=T.FMT_PCT; ws.cell(rr,3).alignment=Alignment(horizontal='center')
-    ws.cell(rr,4,len(at_dom.get(atype,set()))).font=body_font(); ws.cell(rr,4).number_format=T.FMT_INT; ws.cell(rr,4).alignment=Alignment(horizontal='center')
+    ws.cell(rr,1,atype).font=body_font(); ws.cell(rr,1).alignment=A_LBL; ws.cell(rr,1).number_format=T.FMT_INT
+    ws.cell(rr,2,bn).font=body_font(); ws.cell(rr,2).number_format=T.FMT_INT; ws.cell(rr,2).alignment=A_CTR
+    ws.cell(rr,3,(bn/total_bl if total_bl else 0)).font=body_font(); ws.cell(rr,3).number_format=T.FMT_PCT; ws.cell(rr,3).alignment=A_CTR
+    ws.cell(rr,4,len(at_dom.get(atype,set()))).font=body_font(); ws.cell(rr,4).number_format=T.FMT_INT; ws.cell(rr,4).alignment=A_CTR
+    ws.cell(rr,5).font=body_font(); ws.cell(rr,5).alignment=A_LBL  # empty E cell: Geist font, v-center (matches template)
     for ci in range(1,5): ws.cell(rr,ci).fill=WFILL; ws.cell(rr,ci).border=BORDER_BOX
     rr+=1
 
@@ -424,6 +446,20 @@ if __import__('os').path.exists(LOGO):
     img.anchor=OneCellAnchor(_from=AnchorMarker(col=0, colOff=381000, row=0, rowOff=0),
                              ext=XDRPositiveSize2D(1866900, 552450))
     ws.add_image(img)
+
+# spec-driven styling pass: align/numfmt/border per column exactly like the template
+style_tab('Referring Domain Audit', AUDIT_N)
+style_tab('All Backlinks', ALLBL_N)
+style_tab('Anchor Analysis', ANCHOR_N)
+style_tab('Exact Match Anchors', EM_N)
+# template highlights the two manual-input columns (Partner confirmed?, Final decision) with the teal fill
+_em=wb['Exact Match Anchors']
+_emfont=Font(name=T.FONT_NAME, bold=False, color=T.HEADER_FONT, size=9)  # white text on teal
+for r in range(2, EM_N+2):
+    for c in (6,7):
+        _em.cell(r,c).fill=HFILL; _em.cell(r,c).font=_emfont
+style_tab('Pending Disavow Lines', PEND_N)
+style_tab('Disavow List', DIS_N)
 
 wb.save(OUT)
 print("SAVED", OUT)
