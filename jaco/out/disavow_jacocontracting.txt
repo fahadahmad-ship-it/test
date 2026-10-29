@@ -1,5 +1,5 @@
 # Disavow file for jacocontracting.com (Google Search Console property: jacocontracting.com)
-# Generated 2026-10-29 — 1166 domains, all confirmed spam with at least one dofollow link.
+# Generated 2026-10-29 — 1173 domains, all confirmed spam with at least one dofollow link.
 #
 # IMPORTANT — DO NOT UPLOAD until the previous SEO partner has confirmed the Held set.
 #   Held (Pending Partner) domains are NOT in this file. They carry exact-match
@@ -16,7 +16,7 @@
 #
 # Each line disavows the referring (source) domain; domain: covers its subdomains.
 
-# --- Backlink-marketplace / domain-list page templates (51) ---
+# --- Backlink-marketplace / domain-list page templates (60) ---
 domain:1000.co.in
 domain:1stcallglasscare.com
 domain:2x9.co
@@ -28,7 +28,16 @@ domain:carplz.com
 domain:cheapsmmprovider.online
 domain:domain.com.lc
 domain:domainanalysis.org
+domain:domains.com.bz
 domain:domainsc.com
+domain:domraider.br.com
+domain:domraider.de.com
+domain:domraider.eu.com
+domain:domraider.gb.net
+domain:domraider.it.com
+domain:domraider.uk.com
+domain:domraider.uk.net
+domain:domraider.us.com
 domain:findinfo.in
 domain:gamerkun.com
 domain:getonline.co.in
@@ -69,7 +78,7 @@ domain:wonvision.com
 domain:ycm.info
 domain:youtoo.in
 
-# --- Link-network / directory / backlink-marketplace hosts (19) ---
+# --- Link-network / directory / backlink-marketplace hosts (18) ---
 domain:a1webdirectory.xyz
 domain:all-aged-domains.com
 domain:allwebsitesdirectory.com
@@ -80,7 +89,6 @@ domain:backlinksbank.com
 domain:backlinkshouse.com
 domain:backlinkstree.com
 domain:best-seo-domains.com
-domain:chattanooga-directory.com
 domain:directorydaddy.xyz
 domain:eachdirectory.xyz
 domain:egyptiandirectory.com
@@ -89,9 +97,6 @@ domain:seo-revealed.club
 domain:smartwebdirectory.xyz
 domain:uaewebdirectory.info
 domain:yourwebdirectory.xyz
-
-# --- Off-topic spam (gambling / pharma / adult / malicious) (1) ---
-domain:amirarticles.com
 
 # --- PBN / link-scheme sales-copy anchors (1095) ---
 domain:007eaglegaze.online

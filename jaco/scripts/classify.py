@@ -63,11 +63,25 @@ SPAM_HOST = [
     "marketplace", "buy", "aged-domain", "ageddomain", "domainmarket",
     "linkbuilding", "guestpost", "guest-post", "indexation", "serp",
 ]
+# STRONG host signals unambiguously advertise link spam; they override a
+# client-naming title or high authority. WEAK signals (directory/listing/
+# bookmark/buy/ranking) do not, so a genuine local-directory citation is never
+# disavowed on the host name alone.
+STRONG_SPAM_HOST = [
+    "backlink", "pbn", "dofollow", "dapa", "rankchecker", "highda", "high-da",
+    "aged-domain", "ageddomain", "domainmarket", "linkbuilding", "guestpost",
+    "guest-post", "indexation", "linkdir",
+]
 SPAM_TITLE = [
     "where to buy", "aged domain", "buy backlink", "domain list", "pbn",
     "link building service", "powerful pbn", "dofollow backlink", "backlinks to",
     "link placement", "high da backlink", "citation flow", "link velocity",
     "buy aged", "sell backlink", "backlink service", "improve citation",
+    # domain-marketplace / SEO-spam page templates (lesson: catch these as evidence)
+    "any seo resource", "top domains", "domains for sale", "domain for sale",
+    "seo domain research", "domain research", "directory pages index",
+    "pages index", "expired domain", "buy domains", "domain marketplace",
+    "free backlink", "link directory", "domains – page", "domain – page",
 ]
 PR_HOST = [
     "einnews", "prnewswire", "openpr", "pressreleas", "pr.com", "prlog",
@@ -77,6 +91,20 @@ PR_HOST = [
 def has(text, needles):
     t = (text or "").lower()
     return any(n in t for n in needles)
+
+def _compile_terms(terms):
+    """Word-boundary regex for alnum/space terms; literal for terms with punctuation.
+    Prevents substring false positives like 'cialis' inside 'specialist' or 'tf' inside 'software'."""
+    parts = []
+    for t in terms:
+        if re.fullmatch(r"[a-z0-9 ]+", t):
+            parts.append(r"\b" + re.escape(t) + r"\b")
+        else:
+            parts.append(re.escape(t))
+    return re.compile("|".join(parts), re.I)
+
+SALESCOPY_RE = _compile_terms(SALESCOPY)
+OFFTOPIC_RE = _compile_terms(OFFTOPIC)
 
 def is_naked_url(anchor):
     a = (anchor or "").strip().lower()
@@ -98,11 +126,11 @@ def anchor_type(anchor):
     al = a.lower()
     if a == "" :
         return "Empty or image"
-    # off-topic spam first (unambiguous)
-    if has(al, OFFTOPIC):
+    # off-topic spam first (unambiguous) — word-boundary match (no 'cialis' in 'specialist')
+    if OFFTOPIC_RE.search(a):
         return "Spam: off topic"
     # PBN / SEO sales copy
-    if has(al, SALESCOPY):
+    if SALESCOPY_RE.search(a):
         return "Spam: keyword stuffed SEO sales copy"
     # naked url / domain
     if is_naked_url(a):
@@ -217,6 +245,7 @@ def main():
             for L in ls
         )
         spam_host = has(d, SPAM_HOST)
+        strong_spam_host = has(d, STRONG_SPAM_HOST)
         spam_title = any(has(L.get("source_title", ""), SPAM_TITLE) for L in ls)
         pr_host = has(d, PR_HOST)
         titles_name_client = any(
@@ -260,11 +289,13 @@ def main():
             status = "Held (Nofollow, No Action)" if all_nofollow else "Held (Pending Partner)"
             reason = "press-release syndication host (may be commissioned)"
         # 5. Genuine high-AS site with no spam signal -> Keep
-        elif (v["AS"] or 0) >= 20 and not (has_salescopy or has_offtopic or spam_host or spam_title):
+        elif (v["AS"] or 0) >= 20 and not (has_salescopy or has_offtopic or strong_spam_host or spam_title):
             status = "Keep"
             reason = f"authority score {v['AS']} with no spam signal (genuine site)"
-        # 6. Linking title names client without sales copy -> Keep (citation/listing)
-        elif titles_name_client and not (has_salescopy or has_offtopic or spam_host or spam_title):
+        # 6. Linking title names client without sales copy -> Keep (citation/listing).
+        #    Protection is critical: never disavow a genuine citation. Only an
+        #    unambiguous link-spam host (strong) or a marketplace title overrides it.
+        elif titles_name_client and not (has_salescopy or has_offtopic or strong_spam_host or spam_title):
             status = "Keep"
             reason = "linking page names the client without SEO sales copy (business listing / editorial mention)"
         # 7. Off-topic spam

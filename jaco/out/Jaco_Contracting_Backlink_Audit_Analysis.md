@@ -4,17 +4,17 @@
 
 ## Headline
 
-**jacocontracting.com is under an active, accelerating negative-SEO / PBN link-spam attack.** Of **2,212 referring domains** now in the live profile, **1,773 (80%) are spam**. **1,166 carry at least one dofollow link and go in the disavow file**; 607 more are spam but entirely nofollow (no action needed). **259** domains are **held** for the previous SEO partner to confirm before any disavow, because they carry exact-match commercial anchors or deep-page links that may have been commissioned. **180** are genuine and kept.
+**jacocontracting.com is under an active, accelerating negative-SEO / PBN link-spam attack.** Of **2,212 referring domains** now in the live profile, **1,785 (81%) are spam**. **1,173 carry at least one dofollow link and go in the disavow file**; 612 more are spam but entirely nofollow (no action needed). **261** domains are **held** for the previous SEO partner to confirm before any disavow, because they carry exact-match commercial anchors or deep-page links that may have been commissioned. **166** are genuine and kept.
 
 ## The profile at a glance
 
 | Status | Domains | Backlinks | Share of domains |
 |---|---:|---:|---:|
-| Spam (Disavow) | 1,166 | 1,207 | 52.7% |
-| Held (Pending Partner) | 142 | 1,606 | 6.4% |
-| Held (Nofollow, No Action) | 117 | 395 | 5.3% |
-| Spam (Nofollow, No Action) | 607 | 659 | 27.4% |
-| Keep | 180 | 628 | 8.1% |
+| Spam (Disavow) | 1,173 | 1,201 | 53.0% |
+| Held (Pending Partner) | 143 | 1,620 | 6.5% |
+| Held (Nofollow, No Action) | 118 | 396 | 5.3% |
+| Spam (Nofollow, No Action) | 612 | 668 | 27.7% |
+| Keep | 166 | 610 | 7.5% |
 | Own Site | 0 | 0 | 0.0% |
 | **Total** | **2,212** | **4,495** | **100%** |
 
@@ -24,26 +24,26 @@
 
 ## Seven findings
 
-1. **1,773 of 2,212 referring domains are spam.** 1,166 have a dofollow link and are in the disavow file; 607 are nofollow and pass no value.
-2. **The attack is recent and accelerating.** Referring domains sat at ~200–280 for most of 2025–early 2026, then climbed 362 (Jul 26) → 406 (Aug) → 526 (Sep) → **1,289 (Oct 2026)**. Of the 1,166 disavow domains, **1,074 first appeared in Sep–Oct 2026** — the spam roughly tripled the profile in two months. The brief's older figures are a stale snapshot; this audit covers the full live profile.
+1. **1,785 of 2,212 referring domains are spam.** 1,173 have a dofollow link and are in the disavow file; 612 are nofollow and pass no value.
+2. **The attack is recent and accelerating.** Referring domains sat at ~200–280 for most of 2025–early 2026, then climbed 362 (Jul 26) → 406 (Aug) → 526 (Sep) → **1,289 (Oct 2026)**. Of the 1,173 disavow domains, **1,079 first appeared in Sep–Oct 2026** — the spam roughly tripled the profile in two months. The brief's older figures are a stale snapshot; this audit covers the full live profile.
 3. **One file covers everything.** No redirect/owned domains feed the site, so you upload a single file for the jacocontracting.com property. (Confirm whether a disavow file already exists on the property first — uploading replaces it.)
-4. **Two campaigns, easy to tell apart by target page.** **2,505 link-scheme / sales-copy / naked-URL links hit the home page**; the **503 exact-match commercial links hit deep location & service pages** (Covington, Atlanta, Chattanooga, Macon roofing pages). The home-page flood is the attack; the deep-page commercial anchors are what may have been commissioned.
+4. **Two campaigns, easy to tell apart by target page.** **2,504 link-scheme / sales-copy / naked-URL links hit the home page**; the **511 exact-match commercial links hit deep location & service pages** (Covington, Atlanta, Chattanooga, Macon roofing pages). The home-page flood is the attack; the deep-page commercial anchors are what may have been commissioned.
 5. **The dominant anchor is backlink sales copy naming the client's own domain.** "Premium Backlink Experts for jacocontracting.com Websites Seeking High…" appears on **912 domains**. The whole anchor profile is dominated by PBN templates such as "High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN Network Service…".
-6. **259 domains are held for the partner**, in case any exact-match commercial placements were paid for. They are **excluded from the disavow file** until confirmed. The big one, `addirectory.org`, alone auto-generates 664 "Roofing Contractor Covington" links.
-7. **Held does not mean good.** 196 of the 259 held domains have zero organic traffic. Several spam clusters share a /24 subnet — 118.139.181.0/24 (30), 195.20.19.0/24 (17), 5.100.156.0/24 (13) — i.e. single operators running many domains (Cloudflare/CDN ranges excluded). No domain is disavowed on a shared IP alone.
+6. **261 domains are held for the partner**, in case any exact-match commercial placements were paid for. They are **excluded from the disavow file** until confirmed. The big one, `addirectory.org`, alone auto-generates 664 "Roofing Contractor Covington" links.
+7. **Held does not mean good.** 198 of the 261 held domains have zero organic traffic. Several spam clusters share a /24 subnet — 118.139.181.0/24 (30), 195.20.19.0/24 (17), 5.100.156.0/24 (13) — i.e. single operators running many domains (Cloudflare/CDN ranges excluded). No domain is disavowed on a shared IP alone.
 
 ## Anchor-text profile (all backlinks)
 
 | Anchor type | Backlinks | Share | Referring domains |
 |---|---:|---:|---:|
-| Spam: keyword stuffed SEO sales copy | 1,699 | 37.8% | 1,654 |
+| Spam: keyword stuffed SEO sales copy | 1,704 | 37.9% | 1,659 |
 | Exact match commercial (geo) | 1,206 | 26.8% | 201 |
 | Naked URL | 858 | 19.1% | 258 |
 | Generic | 358 | 8.0% | 75 |
-| Exact match commercial | 244 | 5.4% | 146 |
+| Exact match commercial | 253 | 5.6% | 147 |
 | Empty or image | 43 | 1.0% | 18 |
-| Spam: off topic | 42 | 0.9% | 30 |
 | Contextual or other | 41 | 0.9% | 19 |
+| Spam: off topic | 28 | 0.6% | 23 |
 | Branded | 4 | 0.1% | 2 |
 
 ## What is genuine (kept)
@@ -73,7 +73,7 @@ The audit protects real citations. Highest-authority kept domains include:
 ## Deliverables
 
 - **`Jaco_Contracting_Backlinks_Audit.xlsx`** — 7 tabs (Summary, Referring Domain Audit, All Backlinks, Anchor Analysis, Exact Match Anchors, Pending Disavow Lines, Disavow List), signed-off Harbinger format.
-- **`disavow_jacocontracting.txt`** — 1,166 `domain:` lines, grouped by reason, for the jacocontracting.com Search Console property.
+- **`disavow_jacocontracting.txt`** — 1,173 `domain:` lines, grouped by reason, for the jacocontracting.com Search Console property.
 
 ## Before you upload — required steps
 
