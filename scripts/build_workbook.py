@@ -407,6 +407,17 @@ for atype in T.ANCHOR_TYPES:
     for ci in range(1,5): ws.cell(rr,ci).fill=WFILL
     rr+=1
 
+# logo on Summary — same image, anchor and size as the template (oneCellAnchor)
+LOGO='/home/user/test/assets/harbinger_logo.png'
+if __import__('os').path.exists(LOGO):
+    from openpyxl.drawing.image import Image as XLImage
+    from openpyxl.drawing.spreadsheet_drawing import OneCellAnchor, AnchorMarker
+    from openpyxl.drawing.xdr import XDRPositiveSize2D
+    img=XLImage(LOGO)
+    img.anchor=OneCellAnchor(_from=AnchorMarker(col=0, colOff=381000, row=0, rowOff=0),
+                             ext=XDRPositiveSize2D(1866900, 552450))
+    ws.add_image(img)
+
 wb.save(OUT)
 print("SAVED", OUT)
 print(f"Audit domains={AUDIT_N} AllBacklinks={ALLBL_N} Anchors={ANCHOR_N} ExactMatch={EM_N} Pending={PEND_N} Disavow={DIS_N}")
