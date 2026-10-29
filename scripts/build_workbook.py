@@ -407,15 +407,16 @@ def mlabel(t): return f"{MON[t[1]]} {t[0]}" if t and t[0] else "a single month"
 def mlab(item): return mlabel(item[0]) if item and item[0] else "a single month"
 held_notraffic=sum(1 for k,st in status.items() if st in (C.S_HELD_PARTNER,C.S_HELD_NOFOLLOW)
                    and not (enr(k).get('traffic') or 0))
-spam_anchor_txt=(top_spam_anchor[0] or '')[:60]
+spam_anchor_txt=(top_spam_anchor[0] or '')[:55]
+cf=lambda n: f"{n:,}"
 findings=[
- f"{spam_dom} of the {total_dom} referring domains are spam. {status_dom.get(C.S_SPAM_DISAVOW,0)} carry at least one dofollow link and go in the disavow file ({disavow_n} unique domain lines); the other {status_dom.get(C.S_SPAM_NOFOLLOW,0)} are nofollow and pass no value, so they need no action.",
- f"Two patterns, easy to tell apart. The link scheme is a keyword-stuffed SEO sales-copy flood: {'all ' if spam_home==spam_tot else str(spam_home)+' of the '}{spam_tot} sales-copy links point at the home page. The {len(comm_links)} exact-match commercial links behave differently — {comm_service} of them hit KB's service pages (sports / stadium / court lighting, commercial electrical).",
- f"The single biggest spam anchor, on {len(top_spam_anchor[1]['doms'])} domains, is backlink sales copy that names the client's own domain — e.g. “{spam_anchor_txt}…”. An anchor advertising a link-selling service, not the business, is the clearest sign of a bought/PBN link.",
- f"The attack is recent and concentrated: the biggest single month is {mlab(peak)} with {peak[1]} links first seen — many domains stood up in a short window, which is the signature of an automated network rather than organic growth.",
- f"{held_dom} domains are held for the previous partner to confirm, in case any were commissioned. They use real commercial anchors (not sales copy) and cluster around {mlab(hpeak)} ({hpeak[1]} links), consistent with a deliberate build. They are NOT in the disavow file until the partner confirms, so nothing paid-for is discarded by accident.",
- f"Held does not mean good: {held_notraffic} of the {held_dom} held domains have no organic traffic at all. They are kept out of the disavow file only because the anchor could indicate a paid placement — confirm, then disavow the unclaimed ones using Tab 'Pending Disavow Lines'.",
- f"Unlike some networks, these domains are spread across many IP subnets (no single hosting cluster), so IP is not a reliable filter here — the anchor text and the sales-copy pattern are what separate the attack from the commissioned links.",
+ f"{cf(spam_dom)} of the {cf(total_dom)} linking domains are spam. {cf(status_dom.get(C.S_SPAM_DISAVOW,0))} have a dofollow link, so they go in the disavow file ({cf(disavow_n)} lines). The other {cf(status_dom.get(C.S_SPAM_NOFOLLOW,0))} are nofollow and need no action.",
+ f"There are two clear patterns. One is a flood of spam links with sales-pitch anchors — {'all ' if spam_home==spam_tot else str(spam_home)+' of '}{cf(spam_tot)} point at the home page. The other is {cf(len(comm_links))} links with service keywords; {cf(comm_service)} point at KB's service pages (sports, stadium and court lighting, commercial electrical).",
+ f"The biggest spam anchor is on {cf(len(top_spam_anchor[1]['doms']))} domains. It advertises a link-selling service, not the business — for example “{spam_anchor_txt}…”. That is a clear sign of a paid or PBN link.",
+ f"Most of it is recent. {cf(peak[1])} links first appeared in {mlab(peak)} alone. A burst of new domains like this points to an automated network, not natural growth.",
+ f"{cf(held_dom)} domains are on hold for the old SEO partner to check, in case they were paid for. They use normal service keywords (not spam pitches) and mostly date from {mlab(hpeak)}. They are NOT disavowed yet, so nothing paid-for is removed by mistake.",
+ f"On hold does not mean good: {cf(held_notraffic)} of the {cf(held_dom)} have no search traffic at all. Once the partner confirms, disavow any they do not claim (see the 'Pending Disavow Lines' tab).",
+ f"These domains sit on many different IP addresses, so IP will not help you spot them. The anchor text is what separates the spam from the paid links.",
 ]
 kf=ws.cell(rr,1,'Key findings'); kf.font=Font(name=T.FONT_NAME,bold=True,size=10,color=T.BODY_COLOR); kf.alignment=A_LBL; rr+=1
 for f in findings:
