@@ -51,7 +51,7 @@ SALESCOPY = [
 OFFTOPIC = [
     "casino", "poker", "slot", "gambling", "betting", "bet365", "viagra",
     "cialis", "pharma", "escort", "porn", "xxx", "adult", "payday", "loan",
-    "crypto", "forex", "bitcoin", "888", "judi", "togel", "slot gacor",
+    "crypto", "forex", "bitcoin", "judi", "togel", "slot gacor",
     "telegram", "darksidelinks", "t.me/", "sportsbook", "roulette", "baccarat",
 ]
 SPAM_HOST = [
@@ -236,8 +236,13 @@ def main():
 
         # 1. Own site: none for jaco (no owned/redirect domains)
 
+        # 1b. Off-topic spam (gambling/pharma/adult/malicious) is NEVER a commissioned
+        #     placement -> Spam, even when the domain also carries a commercial anchor.
+        if has_offtopic:
+            status = "Spam (Disavow)" if dof_offtopic else "Spam (Nofollow, No Action)"
+            reason = "off-topic (gambling/pharma/adult/telegram) spam anchor"
         # 2 & 3. Exact-match or deep commercial -> Held (possibly commissioned)
-        if exact or deep_commercial:
+        elif exact or deep_commercial:
             if all_nofollow:
                 status = "Held (Nofollow, No Action)"
             else:

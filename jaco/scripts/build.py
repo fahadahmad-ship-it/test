@@ -40,7 +40,7 @@ def dt(unix):
     if not unix:
         return None
     try:
-        return datetime.datetime.utcfromtimestamp(int(unix))
+        return datetime.datetime.fromtimestamp(int(unix), datetime.timezone.utc).replace(tzinfo=None)
     except Exception:
         return None
 
@@ -254,7 +254,7 @@ def main():
         f"{spam_total:,} of the {total_domains:,} referring domains are spam. {spam_dof:,} have a dofollow link and go in the disavow file; the other {spam_nof:,} are nofollow and need no action.",
         f"The attack has roughly tripled since mid-2026: 406 referring domains in August 2026, {now_rd:,} now. We audited the full live profile, not an older snapshot.",
         f"You can upload one disavow file, for {CLIENT}. No owned domains redirect into the site, so a single file ({DISAVOW_FILE}) covers every bad domain.",
-        f"Two patterns, easy to tell apart. {home_links:,} link-scheme links hit the home page; the commercial-anchor links hit deep location and service pages. The home-page flood is the attack.",
+        f"Two patterns, easy to tell apart. {scheme_home:,} link-scheme / sales-copy links hit the home page; the {commercial_deep:,} commercial-anchor links hit deep location and service pages. The home-page flood is the attack.",
         f"The biggest single anchor, on {top_sales_doms:,} domains, is backlink sales copy that names the client's own domain.",
         f"{held_total:,} domains are held for the previous partner to confirm, in case any were paid placements.",
         f"Held does not mean good: {held_zero_traffic:,} of the {held_total:,} held domains have no organic traffic at all.",
