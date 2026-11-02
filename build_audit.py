@@ -81,6 +81,8 @@ for r in refdomains:
     b = bl_by_dom.get(dom, {})
     anchor = (b.get("anchor") or "").strip()
     atype = classify_anchor(anchor)
+    # An overt SEO-sales-copy anchor is spam even if Ahrefs' is_spam flag missed it.
+    spam = spam or (atype == "Spam: keyword stuffed SEO sales copy")
     # status
     if spam and df > 0:            status = "Spam (Disavow)"
     elif spam and df == 0:         status = "Spam (Nofollow, No Action)"
@@ -100,7 +102,8 @@ for r in refdomains:
         "points_to": host_of(b.get("url_to","")) or TARGET,
         "ip": (r.get("ip_source") or "").strip() if (r.get("ip_source") or "").lower()!="none" else "",
         "orgkw": int(num(r.get("positions_source_domain"), int)),
-        "link_type": "Dofollow" if (df>0) else "Nofollow",
+        # link type of THIS representative backlink (fallback to domain-level if absent)
+        "link_type": ("Dofollow" if bl(b.get("is_dofollow")) else "Nofollow") if b else ("Dofollow" if df>0 else "Nofollow"),
     })
 
 # ---------- aggregates ----------
@@ -186,6 +189,7 @@ findings = [
  f"PAID-ANCHOR QUESTION: {dom_count.get('Held (Pending Partner)',0)+dom_count.get('Held (Nofollow, No Action)',0):,} non-spam domains carry exact-match commercial / geo money anchors (e.g. 'Expert Landscape Designers Winston-Salem NC', 'Best Nursery in Greensboro NC'), many on a cluster of social-bookmarking sites (atozbookmarks.net, sharedbookmark.net, instabookmarking.com, bookmarkhaven.com ...). That footprint is consistent with a COMMISSIONED/paid bookmarking link package. The link data cannot prove it was commissioned - confirm with the client and any previous SEO agency. All are held in Tab 05 (of these, only the {dom_count.get('Held (Pending Partner)',0):,} dofollow ones could pass value; the {dom_count.get('Held (Nofollow, No Action)',0):,} nofollow ones are inert).",
  "MANUAL ACTION: cannot be confirmed from Ahrefs or any tool used here. A Google manual action appears ONLY in Google Search Console > Security & Manual Actions > Manual actions. It must be read directly in GSC. The traffic curve argues AGAINST a link penalty tied to this spam: the biggest organic decline (peak ~15.9k/mo May 2025 to ~1.8k by Jan 2026) PRE-DATES the spam, which points to an algorithmic/core-update or on-site cause.",
  "DISAVOW RECOMMENDATION: not warranted yet. File the Tab 07 disavow ONLY if (A) GSC shows a manual action for unnatural links, OR (B) the client/agency confirms the links were bought. Otherwise monitor; Google already discounts this kind of junk algorithmically, and a reflexive disavow risks dropping value from legitimate links.",
+ "REVIEW BEFORE UPLOAD: the Tab 07 list is built mechanically (Ahrefs spam flag + at least one dofollow link). A few high-volume entries (c99.nl, semanticjuice.com, whosmypro.com) are SEO/recon TOOL scans, not link-farm attacks - harmless to disavow but they are NOT evidence of an attack. The genuine attack is the single-link .shop / .xyz / .store cluster.",
 ]
 for fx in findings:
     c=put(ws,rr,1,fx,align=WRAP); ws.merge_cells(start_row=rr,start_column=1,end_row=rr,end_column=5); rr+=1
@@ -200,7 +204,7 @@ for t_ in ANCHOR_ORDER:
     put(ws,rr,2,at_bl[t_],align=CENV)
     put(ws,rr,3,(at_bl[t_]/tot_anchor_bl if tot_anchor_bl else 0),align=CENV,numfmt="0.0%")
     put(ws,rr,4,at_rd[t_],align=CENV); rr+=1
-note=put(ws,rr,1,"Note: anchor-type profile covers the top 250 anchors by link volume (the long tail of single-use anchors is excluded). Status counts above cover the full live referring-domain profile.",align=WRAP)
+note=put(ws,rr,1,"Notes: 'AS' column throughout = Ahrefs Domain Rating (DR, 0-100). 'Traffic' = estimated monthly organic visits. 'RD's' = referring domains linking to that domain. Source: Ahrefs live backlinks index, "+datetime.date.today().isoformat()+". Anchor-type profile above covers the top 250 anchors by link volume (long tail of single-use anchors excluded); status counts cover the FULL live referring-domain profile (1,693 domains). To action: in Tab 05 fill column F (Y/N) and column G (Keep/Disavow).",align=WRAP)
 note.font=Font(name="Geist",size=8,italic=True,color="FF666666"); ws.merge_cells(start_row=rr,start_column=1,end_row=rr,end_column=5)
 
 # ===== 2. Referring Domain Audit =====
@@ -268,7 +272,7 @@ for i,r in enumerate(held,2):
 if not held:
     put(ws,2,1,"(none)");
 nrow=len(held)+3
-n=put(ws,nrow,1,"These carry exact-match commercial anchors and may be commissioned placements. Ask the client / previous SEO partner to confirm (Y/N) before any disavow. Nofollow-only rows pass no value and need no action regardless.",align=WRAP)
+n=put(ws,nrow,1,"HOW TO USE: these carry exact-match commercial anchors and may be commissioned placements. Ask the client / previous SEO partner whether each was paid for. Fill column F with Y or N, and column G with Keep (partner claims it / legitimate) or Disavow (unclaimed + low quality). Nofollow rows pass no value and need no action regardless of answer.",align=WRAP)
 n.font=Font(name="Geist",size=8,italic=True,color="FF666666"); ws.merge_cells(start_row=nrow,start_column=1,end_row=nrow,end_column=7)
 
 # ===== 6. Pending Disavow Lines =====
