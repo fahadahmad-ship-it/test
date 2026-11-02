@@ -1,2 +1,3 @@
 data/*.jsonl
+_*.png
 summary_preview.png

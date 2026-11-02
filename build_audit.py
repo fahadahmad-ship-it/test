@@ -4,6 +4,7 @@ import csv, json, re, datetime, os
 import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
+from openpyxl.drawing.image import Image as XLImage
 
 DATA = "/home/user/test/data"
 OUT = "/home/user/test/NewGarden_Backlinks_Audit.xlsx"
@@ -181,7 +182,13 @@ wb = openpyxl.Workbook()
 # ===== 1. Summary =====
 ws = wb.active; ws.title = "Summary"
 apply_widths(ws)
-t = ws.cell(1,2,"New Garden Landscaping & Nursery"); t.font=Font(name="Geist",size=21,bold=True,color=DARK); t.alignment=CENV
+# client name in B1 (same cell the template uses), left-aligned past the logo so it never overlaps it
+t = ws.cell(1,2,"New Garden Landscaping & Nursery"); t.font=Font(name="Geist",size=21,bold=True,color=DARK)
+t.alignment=Alignment(horizontal="left", vertical="center")
+# agency logo at A1 (same image/size/position as template)
+if os.path.exists("assets/harbinger_logo.png"):
+    _lg=XLImage("assets/harbinger_logo.png"); _lg.width=196; _lg.height=58
+    ws.add_image(_lg,"A1")
 # status table (header row 3, matching template)
 hdr_row=3
 for c,h in enumerate(["Status","Domains","Backlinks","Share of Domains","What it means"],1):
