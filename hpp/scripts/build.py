@@ -273,7 +273,7 @@ total_row = r
 
 # key findings
 kf_row = total_row + 1
-ws.cell(row=kf_row, column=1, value="Key findings").font = font(10, True)
+_kf = ws.cell(row=kf_row, column=1, value="Key findings"); _kf.font = font(10, True); _kf.alignment = Alignment(vertical="center")
 findings = build_findings(doms, links, dom_by_status, emit_disavow)
 fr = kf_row + 1
 for text in findings:
@@ -283,7 +283,7 @@ for text in findings:
 
 # anchor profile
 ap_row = fr
-ws.cell(row=ap_row, column=1, value="Anchor text profile (all backlinks)").font = font(11, True, ACCENT)
+_as = ws.cell(row=ap_row, column=1, value="Anchor text profile (all backlinks)"); _as.font = font(11, True, ACCENT); _as.alignment = Alignment(vertical="center")
 aphdr = ["Anchor type", "Backlinks", "Share of Backlinks", "Referring Domains"]
 hr = ap_row + 1
 for i, h in enumerate(aphdr):
@@ -303,6 +303,7 @@ for at, cnt in at_links.most_common():
     for col in range(1, 5):
         cell = ws.cell(row=dr, column=col); cell.fill = fill_white; cell.border = border_all
         cell.alignment = (left_mid if col == 1 else center_nowrap)
+    ws.cell(row=dr, column=1).number_format = "#,##0"
     ws.cell(row=dr, column=2).number_format = "#,##0"
     ws.cell(row=dr, column=3).number_format = "0.0%"
     ws.cell(row=dr, column=4).number_format = "#,##0"
@@ -315,16 +316,23 @@ for rr in range(1, dr+1):
 
 # ============ helper to style a data tab ============
 def data_tab(title, headers, rows, widths, row_height, numfmts=None, date_cols=None,
-             input_cols=None, dropdowns=None):
+             input_cols=None, dropdowns=None, center_cols=None, header_overrides=None):
     ws = wb.create_sheet(title)
     numfmts = numfmts or {}; date_cols = date_cols or set(); input_cols = input_cols or {}
+    center_cols = center_cols or set(); header_overrides = header_overrides or {}
     for i, h in enumerate(headers):
         cc = ws.cell(row=1, column=1+i, value=h)
-        cc.font = font(9, True, WHITE); cc.fill = fill_accent; cc.alignment = center; cc.border = border_hdr
+        cc.font = font(9, True, WHITE); cc.fill = fill_accent; cc.border = border_hdr
+        if (1+i) in header_overrides:
+            ho, hw = header_overrides[1+i]
+            cc.alignment = Alignment(horizontal=ho, vertical="center", wrap_text=hw)
+        else:
+            cc.alignment = center
     for ri, row in enumerate(rows, start=2):
         for ci, val in enumerate(row, start=1):
             cc = ws.cell(row=ri, column=ci, value=val)
-            cc.font = font(9); cc.fill = fill_white; cc.alignment = left_mid
+            cc.font = font(9); cc.fill = fill_white
+            cc.alignment = center_nowrap if ci in center_cols else left_mid
             if ci in numfmts: cc.number_format = numfmts[ci]
             if ci in date_cols: cc.number_format = "d mmm yyyy"
         # partner input cells (empty, accent-filled)
@@ -369,8 +377,8 @@ for d in sorted(doms.keys()):
 data_tab("Referring Domain Audit", rda_headers, rda_rows,
          widths=[36,24.71,9.57,13,9.43,9.71,12.43,21.29,14,8.71,12,45,8.71,40,14,15,14],
          row_height=15.75,
-         numfmts={3:"General",4:"#,##0",5:"#,##0",6:"#,##0",9:"#,##0",10:"#,##0"},
-         date_cols={11})
+         numfmts={4:"#,##0",5:"#,##0",6:"#,##0"},
+         date_cols={11}, center_cols={3,4,5,6,7,9,10,11,15,16})
 
 # ============ TAB 3: All Backlinks ============
 ab_headers = ["Referring Domain","Status","Tool","Anchor Text","Anchor Type","Link Type",
@@ -378,7 +386,8 @@ ab_headers = ["Referring Domain","Status","Tool","Anchor Text","Anchor Type","Li
 ab_rows = [[l["refdomain"],l["status"],l["tool"],l["anchor"],l["anchor_type"],l["link_type"],
             l["page_url"],l["page_title"],l["target_url"]] for l in links]
 data_tab("All Backlinks", ab_headers, ab_rows,
-         widths=[25.43,27.14,14.71,55,32,10,55,53.14,30.57], row_height=22.5)
+         widths=[25.43,27.14,14.71,55,32,10,55,53.14,30.57], row_height=22.5,
+         center_cols={6}, header_overrides={3:("left", True)})
 
 # ============ TAB 4: Anchor Analysis ============
 aa_headers = ["Anchor Text","Anchor Type","Backlinks","Share of Backlinks","Referring Domains","Spam Domains Using It"]
@@ -397,7 +406,7 @@ for a, cnt in anchor_links.most_common():
                     len(anchor_doms[a]), len(anchor_spamdoms[a])])
 data_tab("Anchor Analysis", aa_headers, aa_rows,
          widths=[115.86,37.71,14,8.71,13,20.29], row_height=22.5,
-         numfmts={3:"#,##0",4:"0.00%",5:"#,##0",6:"#,##0"})
+         numfmts={3:"#,##0",4:"0.00%"}, center_cols={3,4,5,6}, header_overrides={1:("center", False)})
 
 # ============ TAB 5: Exact Match Anchors ============
 ema_headers = ["Referring domain","Example backlink (linking page)","Exact-match commercial anchor",
@@ -422,7 +431,7 @@ for l in links:
 ema_rows.sort(key=lambda x: x[0])
 data_tab("Exact Match Anchors", ema_headers, ema_rows,
          widths=[25.43,59,53.14,16,24.57,15.43,15], row_height=22.5,
-         input_cols=[6,7], dropdowns={"F":'"Y,N"', "G":'"Keep,Disavow"'})
+         input_cols=[6,7], dropdowns={"F":'"Y,N"', "G":'"Keep,Disavow"'}, center_cols={3,4})
 
 # ============ TAB 6: Pending Disavow Lines ============
 pd_headers = ["Referring domain","Disavow line (append to disavow.txt once confirmed)","Recommendation"]
@@ -441,7 +450,7 @@ for d in sorted(emit_disavow):
                     doms[d]["top_anchor"]])
 data_tab("Disavow List", dl_headers, dl_rows,
          widths=[44,14,15.57,14,11.14,14.86,98.86], row_height=22.5,
-         numfmts={2:"General",3:"#,##0",4:"#,##0",5:"#,##0",6:"#,##0"})
+         numfmts={3:"#,##0",4:"#,##0",5:"#,##0",6:"#,##0"}, center_cols={2,3,4,5,6})
 
 os.makedirs(os.path.join(BASE, "out"), exist_ok=True)
 outxlsx = os.path.join(BASE, "out/HighPriorityPlumbing_Backlinks_Audit.xlsx")
