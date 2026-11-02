@@ -4,7 +4,7 @@
 #   anchors AND at least one dofollow link. Nofollow-only spam is excluded (no ranking value).
 # Domains using exact-match commercial/local anchors are HELD (see 'Pending Disavow Lines')
 #   and must be confirmed with the previous supplier before adding.
-# 519 domains disavowed.
+# 521 domains disavowed.
 #
 domain:100ranking.com
 domain:1888webdirectory.com
@@ -159,7 +159,6 @@ domain:cindylaup.com
 domain:citationbuilding.store
 domain:clifflisting.com
 domain:cmocheatsheets.com
-domain:co.com
 domain:competitorchecker.store
 domain:competitorlinks.store
 domain:connectedcannabis.shop
@@ -189,6 +188,7 @@ domain:dacheckerwebsite.site
 domain:dadpchecker.shop
 domain:dadpchecker.site
 domain:dadrcheckerfree.store
+domain:daechul.co.com
 domain:dailyfolknews.com
 domain:dapabacklinkchecker.site
 domain:dapabulkchecker.online
@@ -277,6 +277,8 @@ domain:geobacklinks.link
 domain:georgiainspectors.net
 domain:getseotips.com
 domain:getseotips.link
+domain:ggmap.co.com
+domain:ggmap.us.com
 domain:gladeflowers.com
 domain:go4seo.info
 domain:gofreebacklinks.com
@@ -404,6 +406,7 @@ domain:rankingschecker.space
 domain:rankwebsitechecker.website
 domain:rdxextremez.com
 domain:rjcentinc.com
+domain:royaldb.us.com
 domain:royalwebdirectory.net
 domain:s-tribe.net
 domain:sahammurah.com
@@ -498,7 +501,6 @@ domain:urlanalyzer.website
 domain:urlbacklinkschecker.shop
 domain:urlrankchecker.shop
 domain:urlrankingchecker.site
-domain:us.com
 domain:usaseobiz.link
 domain:vigorseo.info
 domain:visitorinsights.site
