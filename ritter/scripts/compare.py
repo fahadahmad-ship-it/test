@@ -74,16 +74,32 @@ def main():
                 for ti, oi in zip(tw._images, ow._images):
                     if (ti.width, ti.height) != (oi.width, oi.height):
                         d(f"[Summary] logo size: t=({ti.width},{ti.height}) o=({oi.width},{oi.height})")
-            # status table header row 3 + anchor header style compared generically below
+                    taf = ti.anchor._from
+                    oaf = oi.anchor._from
+                    if (taf.col, taf.colOff, taf.row, taf.rowOff) != (oaf.col, oaf.colOff, oaf.row, oaf.rowOff):
+                        d(f"[Summary] logo anchor differs t=({taf.col},{taf.colOff},{taf.row},{taf.rowOff}) o=({oaf.col},{oaf.colOff},{oaf.row},{oaf.rowOff})")
+            # fixed-layout status table: header row 3 (A..E) and a data row (row 4)
+            for c in range(1, 6):
+                if cell_sig(tw.cell(row=3, column=c)) != cell_sig(ow.cell(row=3, column=c)):
+                    d(f"[Summary] status header {get_column_letter(c)}3 style differs:\n   t={cell_sig(tw.cell(3,c))}\n   o={cell_sig(ow.cell(3,c))}")
+                if cell_sig(tw.cell(row=4, column=c)) != cell_sig(ow.cell(row=4, column=c)):
+                    d(f"[Summary] status data {get_column_letter(c)}4 style differs:\n   t={cell_sig(tw.cell(4,c))}\n   o={cell_sig(ow.cell(4,c))}")
+            # column widths A..E
+            for c in range(1, 6):
+                L = get_column_letter(c)
+                tw_w = tw.column_dimensions[L].width
+                ow_w = ow.column_dimensions[L].width
+                if tw_w and ow_w and abs(tw_w - ow_w) > 0.5:
+                    d(f"[Summary] col {L} width: t={round(tw_w,2)} o={round(ow_w,2)}")
             continue
 
-        # data tabs: header texts
+        # data tabs: header texts (ALL columns)
         tcoln = tw.max_column
         theaders = [tw.cell(row=1, column=c).value for c in range(1, tcoln + 1)]
         oheaders = [ow.cell(row=1, column=c).value for c in range(1, tcoln + 1)]
         if theaders != oheaders:
             d(f"[{name}] headers differ:\n   t={theaders}\n   o={oheaders}")
-        # column widths
+        # column widths (ALL columns)
         for c in range(1, tcoln + 1):
             L = get_column_letter(c)
             tw_w = tw.column_dimensions[L].width
@@ -96,19 +112,25 @@ def main():
         # data row height (row 2)
         if ow.max_row >= 2 and tw.row_dimensions[2].height != ow.row_dimensions[2].height:
             d(f"[{name}] data row height: t={tw.row_dimensions[2].height} o={ow.row_dimensions[2].height}")
-        # header cell style (col1) and data cell style (col1 row2).
-        # wrap_text is masked for headers: it has no visual effect on short
-        # headers and the template itself is inconsistent (Anchor Analysis A1
-        # is unwrapped while every other header wraps).
+
         def mask_wrap(sig):
+            # wrap_text has no visual effect on short headers and the template is
+            # itself inconsistent (Anchor Analysis A1 unwrapped, rest wrapped).
             return sig[:12] + (None,) + sig[13:]
-        if mask_wrap(cell_sig(tw.cell(row=1, column=1))) != mask_wrap(cell_sig(ow.cell(row=1, column=1))):
-            d(f"[{name}] header cell style differs:\n   t={cell_sig(tw.cell(1,1))}\n   o={cell_sig(ow.cell(1,1))}")
-        if ow.max_row >= 2:
-            ts = cell_sig(tw.cell(row=2, column=1))
-            os_ = cell_sig(ow.cell(row=2, column=1))
-            if ts != os_:
-                d(f"[{name}] data cell style differs:\n   t={ts}\n   o={os_}")
+
+        # EVERY header cell style (wrap masked)
+        for c in range(1, tcoln + 1):
+            if mask_wrap(cell_sig(tw.cell(row=1, column=c))) != mask_wrap(cell_sig(ow.cell(row=1, column=c))):
+                L = get_column_letter(c)
+                d(f"[{name}] header {L}1 style differs:\n   t={cell_sig(tw.cell(1,c))}\n   o={cell_sig(ow.cell(1,c))}")
+        # EVERY data-column style incl number_format (row 2 as representative)
+        if ow.max_row >= 2 and tw.max_row >= 2:
+            for c in range(1, tcoln + 1):
+                ts = cell_sig(tw.cell(row=2, column=c))
+                os_ = cell_sig(ow.cell(row=2, column=c))
+                if ts != os_:
+                    L = get_column_letter(c)
+                    d(f"[{name}] data {L}2 style differs:\n   t={ts}\n   o={os_}")
 
     if diffs:
         print(f"TEMPLATE DIFFERENCES: {len(diffs)}")

@@ -159,7 +159,8 @@ def main():
 
     # helper to lay a data tab
     def data_tab(name, headers, data, widths, row_height, col_align, col_numfmt,
-                 input_cols=()):
+                 input_cols=(), header_align_overrides=None):
+        header_align_overrides = header_align_overrides or {}
         ws = wb.create_sheet(name)
         # leave showGridLines unset (default = on) to match the template exactly
         for i, h in enumerate(headers, 1):
@@ -167,7 +168,11 @@ def main():
             c.font = HEADER_FONT
             c.fill = HEADER_FILL
             c.border = BORDER_HEADER
-            c.alignment = HEADER_ALIGN
+            if i in header_align_overrides:
+                c.alignment = Alignment(horizontal=header_align_overrides[i],
+                                        vertical="center", wrap_text=True)
+            else:
+                c.alignment = HEADER_ALIGN
         ws.row_dimensions[1].height = 31.5
         for ri, rowvals in enumerate(data, 2):
             for ci, val in enumerate(rowvals, 1):
@@ -248,7 +253,7 @@ def main():
                 l["linktype"], l["page_url"], l["page_title"], l["target"]] for l in all_links]
     data_tab("All Backlinks", ab_headers, ab_data,
              [25.43, 27.14, 14.71, 55, 32, 10, 55, 53.14, 30.57], 22.5,
-             {3: "left", 6: "center"}, {})
+             {3: "left", 6: "center"}, {}, header_align_overrides={3: "left"})
 
     # ============ TAB 4: Anchor Analysis ============
     total_links = len(all_links)
@@ -505,13 +510,13 @@ def compute_findings(rows, all_links, counts, bl_by_status):
     diry = sum(1 for r in pending_rows if any(k in r["domain"] for k in
               ("director", "listing", "list", "local", "biz", "bookmark", "pages", "find")))
     f = []
-    f.append(f"{all_spam:,} of the {total_dom:,} referring domains are spam. {spam_d:,} have a dofollow link and go in the disavow file; the other {spam_nf:,} are nofollow and need no action.")
-    f.append(f"The profile has grown about ninefold since the brief: roughly 150 referring domains then, {total_dom:,} now. We audited the full live profile, not the brief's 150.")
-    f.append(f"You can upload a disavow file for {C.MONEY_DOMAIN} only. No other domain redirects into the site, so that single file is the whole job.")
-    f.append(f"Two patterns, easy to tell apart. {home:,} of the {len(all_links):,} links hit the home page; the {deep:,} that hit deep service pages carry the commercial anchors. The home-page flood is the attack.")
-    f.append(f'The biggest anchor, on {top_anchor_doms:,} domains, is backlink sales copy: "{(top_anchor[:70] + ("…" if len(top_anchor) > 70 else ""))}".')
-    f.append(f"{held:,} domains are held for the previous supplier to confirm, in case any were paid placements. {diry:,} of them are named as web directories or listing sites, all carrying the same service-plus-‘Louisiana’ anchor template — the signature of one commissioned local-directory campaign, not {held:,} independent editorial links.")
-    f.append(f"Held does not mean valuable: {held_zero:,} of the {held + held_nf:,} held domains have no organic traffic at all.")
+    f.append(f"{all_spam:,} of the {total_dom:,} referring domains are spam. {spam_d:,} have a dofollow link and go in the disavow file. The other {spam_nf:,} are nofollow and need no action.")
+    f.append(f"The profile is far bigger than the brief said. The brief listed about 150 referring domains. The live profile now has {total_dom:,}. We audited all of them, not just the 150.")
+    f.append(f"Only one disavow file is needed, for {C.MONEY_DOMAIN}. No other domain redirects into the site, so this one file covers everything.")
+    f.append(f"There are two clear patterns. {home:,} of the {len(all_links):,} links point at the home page. The {deep:,} that point at deep service pages carry the commercial anchors. The home page links are the spam attack.")
+    f.append(f'The most common anchor is backlink sales copy. It appears on {top_anchor_doms:,} domains and reads "{top_anchor}".')
+    f.append(f"{held:,} domains are held for the previous supplier to confirm, in case they were paid placements. {diry:,} of them are directory or listing sites. They all use the same service plus Louisiana anchor, which looks like one commissioned local campaign.")
+    f.append(f"Held does not mean valuable. {held_zero:,} of the {held + held_nf:,} held domains have no organic traffic at all.")
     return f[:7]
 
 
