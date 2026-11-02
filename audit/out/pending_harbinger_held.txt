@@ -1,0 +1,194 @@
+# HELD PENDING HARBINGER CONFIRMATION - callturfsup.com
+# Generated: 2026-11-02
+# These are EXACT-MATCH COMMERCIAL (Gainesville/Haymarket) anchors that look like
+# commissioned link-building. DO NOT append to the disavow file until Harbinger
+# confirms who commissioned this activity.
+#   - If NOT commissioned by us / our partner -> append these to disavow_callturfsup.txt
+#   - If commissioned -> keep (do not disavow), log the vendor
+#
+# A) Dofollow (would pass value - decision needed): 83 domains
+domain:1800directory.net    # Flea And Tick Treatment For Home Gainesville VA
+domain:247businessdirectory.net    # Lawn Care Gainesville VA
+domain:5starlocalcenter.com    # Lawn Treatment Services Gainesville VA
+domain:acebusinessdir.com    # Flea And Tick Treatment For Home Gainesville VA
+domain:ackoona.org    # Lawn Aeration Service Gainesville VA
+domain:activepages.org    # Lawn Care Companies Gainesville VA
+domain:adlistingscape.com    # Lawn Treatment Services Gainesville VA
+domain:allbusinessadvisor.com    # Flea And Tick Treatment For Home Gainesville VA
+domain:articlesheaven.com    # lawn care Gainesville, VA
+domain:articleshub.us    # mosquito service in Haymarket, VA
+domain:b-listings.com    # Lawn Treatment Services Gainesville VA
+domain:bestbusinessesdirectory.com    # Lawn Treatment Services Gainesville VA
+domain:bestbusinesseslist.com    # Lawn Care Companies Gainesville VA
+domain:bestlocalcenter.com    # Lawn Aeration Service Gainesville VA
+domain:bizvote.org    # Expert Weed Control in Haymarket, VA – Book Your Service Today!
+domain:bizzopedia.com    # Flea And Tick Prevention Gainesville VA
+domain:bookmarkblitz.com    # Weed Control in Gainesville VA – Protect Your Yard Today!
+domain:bookmarkexpresspro.com    # Weed Control in Gainesville VA – Protect Your Yard Today!
+domain:bookmarkhaven.com    # Flea And Tick Prevention Gainesville VA – Secure Your Spot Now!
+domain:bookmarkingbuddy.com    # Lawn Care Services in Gainesville, VA – Let Your Yard Shine Today!
+domain:bookmarksavvy.com    # Lawn Care Services in Gainesville, VA – Let Your Yard Shine Today!
+domain:brilliantweb.org    # Flea And Tick Treatment For Home Gainesville VA
+domain:businessgurulisting.com    # Lawn Care Companies Gainesville VA
+domain:businessontop.co    # Lawn Care Companies Gainesville VA
+domain:businessprofilecenter.com    # Lawn Treatment Services Gainesville VA
+domain:clickdir.net    # Lawn Care Gainesville VA
+domain:directorycircles.com    # Lawn Treatment Services Gainesville VA
+domain:directorymania.net    # Lawn Care Services Gainesville VA
+domain:directorymatix.org    # Lawn Care Services Gainesville VA
+domain:directoryninja.org    # Lawn Care Maintenance Gainesville VA
+domain:directorypursuit.com    # Flea And Tick Treatment For Home Gainesville VA
+domain:dynamiclist.net    # Lawn Care Maintenance Gainesville VA
+domain:favemarks.net    # Reserve Your Lawn Aeration Service in Haymarket, VA
+domain:findist.net    # Lawn Care Services Gainesville VA
+domain:getdirectory.org    # Lawn Treatment Services Gainesville VA
+domain:getquicklisting.com    # Flea And Tick Prevention Gainesville VA
+domain:getzzby.com    # Lawn Aeration Service Gainesville VA
+domain:go1800business.com    # Flea And Tick Prevention Gainesville VA
+domain:gotolistings.org    # Lawn Care Companies Gainesville VA
+domain:greathub.org    # Lawn Care Gainesville VA
+domain:highratedbusiness.com    # Flea And Tick Treatment For Home Gainesville VA
+domain:iconbusinesses.com    # Lawn Care Maintenance Gainesville VA
+domain:ideailluminator.com    # mosquito control in Haymarket, VA
+domain:impact-directory.com    # Lawn Care Companies Gainesville VA
+domain:instabookmarking.com    # Mosquito Control in Haymarket, VA: Get Rid of Mosquitoes Today
+domain:leadstotop.com    # Flea And Tick Treatment For Home Gainesville VA
+domain:listingcircleweb.com    # Lawn Aeration Service Gainesville VA
+domain:listingpro.info    # Lawn Care Services Gainesville VA
+domain:listingshub.net    # Lawn Care Companies Gainesville VA
+domain:listingssearch.org    # Flea And Tick Prevention Gainesville VA
+domain:local-business-center.com    # Lawn Treatment Services Gainesville VA
+domain:localbizselect.com    # Lawn Aeration Service Gainesville VA
+domain:localbusinessguide.org    # Lawn Care Companies Gainesville VA
+domain:myreallistings.com    # Lawn Aeration Service Gainesville VA
+domain:notzia.com    # Lawn Care Gainesville VA
+domain:onepluslisting.com    # Lawn Care Maintenance Gainesville VA
+domain:onlinewebsitecenter.com    # Flea And Tick Prevention Gainesville VA
+domain:organizedlistings.com    # Flea And Tick Prevention Gainesville VA
+domain:oxourus.net    # Lawn Care Services Gainesville VA
+domain:reallistings.net    # Flea And Tick Treatment For Home Gainesville VA
+domain:reviewnearby.com    # Lawn Care Services Haymarket VA
+domain:saveswiftly.com    # Lawn Care Services in Gainesville, VA – Let Your Yard Shine Today!
+domain:savethepagenow.com    # Weed Control in Gainesville VA – Protect Your Yard Today!
+domain:seekbump.org    # Lawn Care Gainesville VA
+domain:seekershub.co    # Lawn Treatment Services Gainesville VA
+domain:sharedbookmark.net    # Reserve Your Lawn Aeration Service in Haymarket, VA
+domain:smallbizdir.com    # Flea And Tick Prevention Gainesville VA
+domain:smartbookmarking.net    # Lawn Care Services in Gainesville, VA – Let Your Yard Shine Today!
+domain:smoothbookmarks.com    # Reserve Your Lawn Aeration Service in Haymarket, VA
+domain:socialcrowd.biz    # Book Your Lawn Care Maintenance Services in Haymarket, VA
+domain:sparkelzdirectory.com    # Flea And Tick Treatment For Home Gainesville VA
+domain:supercoolbookmarks.com    # Expert Mosquito Treatment for Comfortable Outdoor Living in Gainesville, VA
+domain:theinfosynth.com    # Lawn Care Maintenance Gainesville VA
+domain:thelistingmatrix.com    # Lawn Aeration Service Gainesville VA
+domain:thinktankcentral.org    # mosquito control companies Haymarket, VA
+domain:topbusinesses.info    # Lawn Care Services Gainesville VA
+domain:toplistedgroup.com    # Lawn Aeration Service Gainesville VA
+domain:topwebfind.com    # Lawn Care Maintenance Gainesville VA
+domain:urban-listings.com    # Flea And Tick Prevention Gainesville VA
+domain:web247listings.com    # Lawn Treatment Services Gainesville VA
+domain:weblistings.info    # Lawn Care Companies Gainesville VA
+domain:yourbusinesscenter.org    # Lawn Aeration Service Gainesville VA
+domain:yourlocalcircle.com    # Lawn Care Gainesville VA
+#
+# B) Nofollow (no PageRank passed - no disavow needed either way): 100 domains
+# domain:1stcounsel.com    # lawn care in Haymarket, VA
+# domain:adamtorkildson.com    # lawn care in Haymarket, VA
+# domain:adriennemonson.com    # lawn care in Haymarket, VA
+# domain:altiusdirectory.com    # lawn care in Haymarket, VA
+# domain:americanconsumerproductsdigest.com    # lawn care plan
+# domain:annikabansal.com    # irrigation maintenance
+# domain:axcessnews.com    # lawn care in Haymarket, VA
+# domain:baltimorenewsjournal.com    # irrigation maintenance
+# domain:blerrp.com    # lawn care in Haymarket, VA
+# domain:buyersdesire.org    # lawn care in Haymarket, VA
+# domain:capitolhilltimes.com    # lawn care plan
+# domain:careersavvy.co.uk    # lawn treatment services in Gainesville, VA
+# domain:cbdindustrytoday.com    # lawn care in Haymarket, VA
+# domain:celebhomes.net    # lawn care plan
+# domain:cleanweb.co    # lawn care plan
+# domain:consumerproductsinthenews.com    # lawn care plan
+# domain:digitaladblog.com    # lawn care in Haymarket, VA
+# domain:eastmnweeklynews.com    # lawn treatment services in Gainesville, VA
+# domain:easyhouseremodeling.com    # lawn care in Haymarket, VA
+# domain:entertainmenttimesvirginia.com    # lawn care in Haymarket, VA
+# domain:entreprenerd.net    # lawn treatment services in Gainesville, VA
+# domain:faithfamilyamerica.com    # lawn care in Haymarket, VA
+# domain:fictiontalk.com    # lawn care in Haymarket, VA
+# domain:folsomlocalnews.com    # lawn care plan
+# domain:forkstofeet.com    # lawn treatment services in Gainesville, VA
+# domain:friendhood.net    # lawn care in Haymarket, VA
+# domain:globalenvironmentwatch.com    # irrigation maintenance
+# domain:globalreporterjournal.com    # irrigation maintenance
+# domain:gooddecisions.com    # lawn care plan
+# domain:gopreneurs.com    # lawn treatment services in Gainesville, VA
+# domain:houstonnewstoday.com    # lawn care plan
+# domain:humane.net    # lawn care plan
+# domain:hungrybear.net    # irrigation maintenance
+# domain:ideawins.com    # lawn care plan
+# domain:independent.mk    # lawn care in Haymarket, VA
+# domain:infotechinc.net    # irrigation maintenance
+# domain:inspiredn.com    # irrigation maintenance
+# domain:internationalenvironmenttimes.com    # lawn care plan
+# domain:internationalnewsledger.com    # irrigation maintenance
+# domain:kbew98country.com    # lawn care in Haymarket, VA
+# domain:kotaradio.com    # lawn treatment services in Gainesville, VA
+# domain:lmcordoba.com.ar    # lawn care plan
+# domain:longislandreport.org    # lawn care in Haymarket, VA
+# domain:luxedb.com    # lawn treatment services in Gainesville, VA
+# domain:menstyle1.com    # lawn care plan
+# domain:microcapnews.com    # lawn care in Haymarket, VA
+# domain:middletownlifemagazine.com    # lawn treatment services in Gainesville, VA
+# domain:myconsumerproductsguide.com    # lawn care plan
+# domain:myeaglecountry.com    # lawn treatment services in Gainesville, VA
+# domain:needtoknowcbd.com    # lawn care in Haymarket, VA
+# domain:newsblaze.com    # lawn care plan
+# domain:newsblaze.com.au    # lawn care plan
+# domain:newsblaze.in    # lawn treatment services in Gainesville, VA
+# domain:newsnetmedia.com    # lawn care in Haymarket, VA
+# domain:olddominiondispatch.com    # lawn treatment services in Gainesville, VA
+# domain:passionateaboutfood.net    # lawn care plan
+# domain:phenomena.org    # lawn treatment services in Gainesville, VA
+# domain:pluralist.com    # lawn care in Haymarket, VA
+# domain:quebecnewstribune.com    # lawn care in Haymarket, VA
+# domain:reipet.com    # lawn care in Haymarket, VA
+# domain:ribbon.co    # irrigation maintenance
+# domain:richmonddailyreporter.com    # lawn treatment services in Gainesville, VA
+# domain:sharism.org    # lawn care in Haymarket, VA
+# domain:signalnewscharlotte.com    # lawn treatment services in Gainesville, VA
+# domain:signalnewschicago.com    # lawn care in Haymarket, VA
+# domain:signalnewsdetroit.com    # lawn care in Haymarket, VA
+# domain:signalnewshouston.com    # lawn care in Haymarket, VA
+# domain:signalnewsindianapolis.com    # lawn treatment services in Gainesville, VA
+# domain:signalnewsmiami.com    # lawn care in Haymarket, VA
+# domain:signalnewsminneapolis.com    # lawn care in Haymarket, VA
+# domain:signalnewsnewyork.com    # lawn treatment services in Gainesville, VA
+# domain:signalnewsphiladelphia.com    # lawn care in Haymarket, VA
+# domain:signalnewsportlandor.com    # lawn care in Haymarket, VA
+# domain:signalnewsraleigh.com    # lawn care in Haymarket, VA
+# domain:signalnewssacramento.com    # lawn treatment services in Gainesville, VA
+# domain:signalnewsseattle.com    # lawn care in Haymarket, VA
+# domain:signalnewstampa.com    # lawn care in Haymarket, VA
+# domain:small-bizsense.com    # lawn care in Haymarket, VA
+# domain:smbworldreport.com    # irrigation maintenance
+# domain:social-matic.com    # lawn treatment services in Gainesville, VA
+# domain:sourcefed.com    # lawn care in Haymarket, VA
+# domain:spaziotribu.org    # lawn care plan
+# domain:theglimpse.com    # lawn treatment services in Gainesville, VA
+# domain:thegreatnews.com    # lawn care in Haymarket, VA
+# domain:thegreenearthgazette.com    # lawn care plan
+# domain:thepointnews.com    # lawn care in Haymarket, VA
+# domain:therapybutbetter.com    # irrigation maintenance
+# domain:theroguemag.com    # lawn care plan
+# domain:thriveinsider.com    # lawn treatment services in Gainesville, VA
+# domain:timesla.com    # lawn care in Haymarket, VA
+# domain:tophustler.com    # lawn care plan
+# domain:toptraveltrends.com    # lawn treatment services in Gainesville, VA
+# domain:travelshq.com    # irrigation maintenance
+# domain:trondstidkontroll.com    # lawn care in Haymarket, VA
+# domain:tvshowauditions.info    # lawn care in Haymarket, VA
+# domain:tweeternet.com    # irrigation maintenance
+# domain:usdailyledger.com    # irrigation maintenance
+# domain:usenvironmentalnewsreporter.com    # lawn care plan
+# domain:wordsjournal.com    # lawn care plan
+# domain:worldofvideogaming.com    # lawn care in Haymarket, VA
