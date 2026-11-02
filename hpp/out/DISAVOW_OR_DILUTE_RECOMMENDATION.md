@@ -153,7 +153,7 @@ We checked the whole set both directions, not a sample:
 - **No dofollow spam is wrongly kept.** No Keep/Held domain carries a dofollow
   sales-copy or off-topic anchor; no nofollow-marked domain actually has a
   dofollow link.
-- **Held is low-value, as expected:** **806 of the 945** held domains have zero
+- **Held is low-value, as expected:** **806 of the 941** held domains have zero
   organic traffic — consistent with a low-quality citation/directory campaign,
   which is exactly why they wait for the partner rather than being kept outright.
 
@@ -162,7 +162,7 @@ We checked the whole set both directions, not a sample:
 1. **Submit the disavow file** (`disavow_highpriorityplumbing.txt`, 1,592 domains)
    to the highpriorityplumbing.com Search Console property — **after** the step
    below. The 10 WhatsApp domains are included; the nofollow clusters are not.
-2. **Partner check first.** 945 domains are *Held (Pending Partner)* — exact-match
+2. **Partner check first.** 941 domains are *Held (Pending Partner)* — exact-match
    commercial anchors ("Septic Tank Service Conyers GA", etc.) and deep service/
    location-page links that may be a commissioned local-SEO campaign. Do **not**
    disavow these until the previous SEO partner confirms none were paid

@@ -89,6 +89,17 @@ def is_home(target_url):
 def main():
     bl, bl_rej = parse_backlinks(glob.glob(os.path.join(BASE, "data/fetch/bl_*.csv")))
     rd, rd_rej = parse_refdomains(glob.glob(os.path.join(BASE, "data/rd/rd_*.csv")))
+    # preferred Authority Score from the bulk comparison report (agrees with the overview
+    # report; the referring-domain report runs up to ~11 points low). Use it for the verdict
+    # so the AS that drives classification is the same AS shown in the workbook.
+    comp_as = {}
+    cpath = os.path.join(BASE, "data/metrics/comparison.csv")
+    if os.path.exists(cpath):
+        for line in open(cpath):
+            p = line.rstrip("\n").split(";")
+            if len(p) >= 2 and p[0] not in ("target", "domain"):
+                try: comp_as[canon_host(p[0])] = int(p[1])
+                except: pass
     # metrics (optional): domain;organic_keywords;organic_traffic
     metrics = {}
     mpath = os.path.join(BASE, "data/metrics/metrics.csv")
@@ -141,8 +152,11 @@ def main():
     # ---------- classify each referring domain ----------
     def classify(dom, rs):
         info = rdidx.get(dom, {})
-        try: asc = int(info.get("domain_ascore", "0") or 0)
-        except: asc = 0
+        if dom in comp_as:
+            asc = comp_as[dom]                       # preferred bulk AS (matches workbook)
+        else:
+            try: asc = int(info.get("domain_ascore", "0") or 0)
+            except: asc = 0
         types = [anchor_type(r["anchor"]) for r in rs]
         has_dofollow = any(not r["nofollow"] for r in rs)
         has_sales = any(t == "Spam: keyword stuffed SEO sales copy" for t in types)
