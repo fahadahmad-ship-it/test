@@ -223,7 +223,7 @@ for t_ in ANCHOR_ORDER:
     put(ws,rr,2,at_bl[t_],align=CENV,numfmt="#,##0",fill=True,border=True)
     put(ws,rr,3,(at_bl[t_]/tot_anchor_bl if tot_anchor_bl else 0),align=CENV,numfmt="0.0%",fill=True,border=True)
     put(ws,rr,4,at_rd[t_],align=CENV,numfmt="#,##0",fill=True,border=True); rr+=1
-note=put(ws,rr,1,"Notes: 'AS' column throughout = Ahrefs Domain Rating (DR, 0-100). 'Traffic' = estimated monthly organic visits. 'RD's' = referring domains linking to that domain. Source: Ahrefs live backlinks index, "+datetime.date.today().isoformat()+". Anchor-type profile above covers the top 250 anchors by link volume (long tail of single-use anchors excluded); status counts cover the FULL live referring-domain profile (1,693 domains). To action: in Tab 05 fill column F (Y/N) and column G (Keep/Disavow).",align=WRAP)
+note=put(ws,rr,1,"Notes: 'AS' column throughout = Ahrefs Domain Rating (DR, 0-100). 'Traffic' = estimated monthly organic visits. 'RD's' = referring domains linking to that domain. Source: Ahrefs live backlinks index, "+datetime.date.today().isoformat()+". Anchor-type profile above covers the top 250 anchors by link volume (long tail of single-use anchors excluded); status counts cover the FULL live referring-domain profile (1,693 domains). Tab 03 (All Backlinks) shows the top representative link per referring domain; per-domain link counts are in Tab 02. To action Tab 05: fill column F (Y/N = was it a paid placement) and column G (Keep or Disavow).",align=WRAP)
 note.font=Font(name="Geist",size=8,italic=True,color="FF666666"); ws.merge_cells(start_row=rr,start_column=1,end_row=rr,end_column=5)
 
 # ===== 2. Referring Domain Audit =====
@@ -254,9 +254,6 @@ for i,r in enumerate(rows_sorted,2):
     put(ws,i,1,r["domain"]); put(ws,i,2,r["status"]); put(ws,i,3,"Ahrefs",align=CENV)
     put(ws,i,4,r["anchor"],align=LEFT); put(ws,i,5,r["atype"]); put(ws,i,6,r["link_type"],align=CENV)
     put(ws,i,7,r["url_from"],align=LEFT); put(ws,i,8,r["title"],align=LEFT); put(ws,i,9,r["url_to"],align=LEFT)
-nrow=len(rows_sorted)+3
-n=put(ws,nrow,1,"Note: shows the top representative backlink per referring domain (Ahrefs '1 per domain'). A domain may have additional links; per-domain link counts are in the Referring Domain Audit tab.",align=WRAP)
-n.font=Font(name="Geist",size=8,italic=True,color="FF666666"); ws.merge_cells(start_row=nrow,start_column=1,end_row=nrow,end_column=9)
 
 # ===== 4. Anchor Analysis =====
 ws = wb.create_sheet("Anchor Analysis")
@@ -284,10 +281,7 @@ for i,r in enumerate(held,2):
     put(ws,i,4,market,align=CENV); put(ws,i,5,"Directory / blog (review source quality)")
     put(ws,i,6,"",align=CENV); put(ws,i,7,"")
 if not held:
-    put(ws,2,1,"(none)");
-nrow=len(held)+3
-n=put(ws,nrow,1,"HOW TO USE: these carry exact-match commercial anchors and may be commissioned placements. Ask the client / previous SEO partner whether each was paid for. Fill column F with Y or N, and column G with Keep (partner claims it / legitimate) or Disavow (unclaimed + low quality). Nofollow rows pass no value and need no action regardless of answer.",align=WRAP)
-n.font=Font(name="Geist",size=8,italic=True,color="FF666666"); ws.merge_cells(start_row=nrow,start_column=1,end_row=nrow,end_column=7)
+    put(ws,2,1,"(none)")
 
 # ===== 6. Pending Disavow Lines =====
 ws = wb.create_sheet("Pending Disavow Lines")
@@ -315,16 +309,25 @@ for i,r in enumerate(disavow,2):
     put(ws,i,7,r["anchor"],align=LEFT)
 if not disavow: put(ws,2,1,"(none)")
 
-# template puts a white fill on every data cell of the data tabs (headers keep the dark fill)
+# Match template sheet-level styling:
 for ws in wb.worksheets:
     if ws.title == "Summary":
-        continue
-    ncol = ws.max_column
-    for r in range(2, ws.max_row+1):
-        for c in range(1, ncol+1):
-            cell = ws.cell(r, c)
-            if not (cell.fill and cell.fill.patternType):
-                cell.fill = WHITE_FILL
+        ws.sheet_view.showGridLines = False          # template hides gridlines on Summary only
+        for r in range(1, ws.max_row+1):
+            ws.row_dimensions[r].height = 22.5        # template Summary row height
+    else:
+        # white fill on every data cell (headers keep the dark fill)
+        ncol = ws.max_column
+        for r in range(2, ws.max_row+1):
+            for c in range(1, ncol+1):
+                cell = ws.cell(r, c)
+                if not (cell.fill and cell.fill.patternType):
+                    cell.fill = WHITE_FILL
+        # autofilter across the full header+data range (template has this on every data tab)
+        ws.auto_filter.ref = f"A1:{get_column_letter(ncol)}{ws.max_row}"
+        ws.row_dimensions[1].height = 31.5            # taller header row, per template
+        ws.sheet_format.defaultRowHeight = 15.75      # data rows, per template
+        ws.sheet_format.customHeight = True
 
 wb.save(OUT)
 print("SAVED", OUT)
