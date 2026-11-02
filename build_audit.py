@@ -26,6 +26,9 @@ def num(v, cast=float, default=0):
         return default
 def bl(v):  # bool from csv/json
     return str(v).strip().lower() in ("true","1","yes")
+def asdate(s):
+    try: return datetime.datetime.strptime(str(s)[:10], "%Y-%m-%d").date()
+    except Exception: return s
 
 # index one representative backlink per referring domain
 bl_by_dom = {}
@@ -134,51 +137,66 @@ ANCHOR_ORDER = sorted(at_bl, key=lambda k:-at_bl[k])
 
 # ---------- styling ----------
 HEAD_FILL = PatternFill("solid", fgColor="FF0C343D")
+WHITE_FILL = PatternFill("solid", fgColor="FFFFFFFF")
 WHITE = "FFFFFFFF"; DARK="FF0C343D"
 def headfont(sz=9): return Font(name="Geist", size=sz, bold=True, color=WHITE)
 def cellfont(sz=9, bold=False, color="FF000000"): return Font(name="Geist", size=sz, bold=bold, color=color)
-CEN = Alignment(horizontal="center", vertical="center", wrap_text=True)
-CENV= Alignment(horizontal="center", vertical="center")
-WRAP= Alignment(wrap_text=True, vertical="top")
-LEFT= Alignment(horizontal="left", vertical="top")
-thin = Side(style="thin", color="FFD9D9D9")
+CEN = Alignment(horizontal="center", vertical="center", wrap_text=True)   # header cells
+CENV= Alignment(horizontal="center", vertical="center")                    # numeric / short data (vcenter)
+LEFT= Alignment(vertical="center")                                         # text data: default horiz, vcenter, NO wrap (template style)
+WRAP= Alignment(wrap_text=True, vertical="center")                         # summary 'meaning' / findings / notes (wrap)
+thin = Side(style="thin", color="FFBFBFBF")
 BORDER = Border(left=thin,right=thin,top=thin,bottom=thin)
 
-def style_header(ws, ncol, row=1):
+# exact template column widths per tab
+TPL_WIDTHS = {
+ "Summary": {'A':38.86,'B':16.29,'C':17.57,'D':18.71,'E':120.0},
+ "Referring Domain Audit": {'A':36.0,'B':24.71,'C':9.57,'D':13.0,'E':9.43,'F':9.71,'G':12.43,'H':21.29,'I':14.0,'J':8.71,'K':12.0,'L':45.0,'M':8.71,'N':40.0,'O':14.0,'P':15.0,'Q':14.0},
+ "All Backlinks": {'A':25.43,'B':27.14,'C':14.71,'D':55.0,'E':32.0,'F':10.0,'G':55.0,'H':53.14,'I':30.57},
+ "Anchor Analysis": {'A':115.86,'B':37.71,'C':14.0,'D':8.71,'E':13.0,'F':20.29},
+ "Exact Match Anchors": {'A':25.43,'B':59.0,'C':53.14,'D':16.0,'E':24.57,'F':15.43,'G':15.0},
+ "Pending Disavow Lines": {'A':32.0,'B':44.0,'C':48.0},
+ "Disavow List": {'A':44.0,'B':14.0,'C':15.57,'D':14.0,'E':11.14,'F':14.86,'G':98.86},
+}
+def apply_widths(ws):
+    for L,w in TPL_WIDTHS.get(ws.title,{}).items():
+        ws.column_dimensions[L].width = w
+
+def style_header(ws, ncol, row=1, size=9):
     for c in range(1, ncol+1):
         cell = ws.cell(row, c)
-        cell.font = headfont(); cell.fill = HEAD_FILL; cell.alignment = CEN; cell.border = BORDER
+        cell.font = headfont(size); cell.fill = HEAD_FILL; cell.alignment = CEN; cell.border = BORDER
 
-def put(ws, r, c, v, bold=False, align=None, numfmt=None, color="FF000000"):
+def put(ws, r, c, v, bold=False, align=None, numfmt=None, color="FF000000", fill=False, border=False):
     cell = ws.cell(r, c, v)
     cell.font = cellfont(bold=bold, color=color)
     cell.alignment = align or LEFT
     if numfmt: cell.number_format = numfmt
+    if fill: cell.fill = WHITE_FILL
+    if border: cell.border = BORDER
     return cell
 
 wb = openpyxl.Workbook()
 
 # ===== 1. Summary =====
 ws = wb.active; ws.title = "Summary"
-ws.column_dimensions["A"].width=40; ws.column_dimensions["B"].width=16
-ws.column_dimensions["C"].width=17; ws.column_dimensions["D"].width=18; ws.column_dimensions["E"].width=120
-t = ws.cell(1,2,"New Garden Landscaping & Nursery  —  newgarden.com"); t.font=Font(name="Geist",size=18,bold=True,color=DARK); t.alignment=CENV
-sub = ws.cell(2,2,f"Live referring-domain & backlink audit  ·  {datetime.date.today().isoformat()}"); sub.font=Font(name="Geist",size=10,italic=True,color=DARK)
-# status table
-hdr_row=4
+apply_widths(ws)
+t = ws.cell(1,2,"New Garden Landscaping & Nursery"); t.font=Font(name="Geist",size=21,bold=True,color=DARK); t.alignment=CENV
+# status table (header row 3, matching template)
+hdr_row=3
 for c,h in enumerate(["Status","Domains","Backlinks","Share of Domains","What it means"],1):
     ws.cell(hdr_row,c,h)
-style_header(ws,5,hdr_row)
+style_header(ws,5,hdr_row,size=10)
 rr=hdr_row+1
 for s in STATUS_ORDER:
-    put(ws,rr,1,s,bold=True)
-    put(ws,rr,2,dom_count.get(s,0),align=CENV)
-    put(ws,rr,3,bl_count.get(s,0),align=CENV)
-    put(ws,rr,4,(dom_count.get(s,0)/tot_dom if tot_dom else 0),align=CENV,numfmt="0.0%")
-    put(ws,rr,5,STATUS_MEANING[s],align=WRAP)
+    put(ws,rr,1,s,align=LEFT,fill=True,border=True)
+    put(ws,rr,2,dom_count.get(s,0),align=CENV,numfmt="#,##0",fill=True,border=True)
+    put(ws,rr,3,bl_count.get(s,0),align=CENV,numfmt="#,##0",fill=True,border=True)
+    put(ws,rr,4,(dom_count.get(s,0)/tot_dom if tot_dom else 0),align=CENV,numfmt="0.0%",fill=True,border=True)
+    put(ws,rr,5,STATUS_MEANING[s],align=WRAP,fill=True,border=True)
     rr+=1
-put(ws,rr,1,"Total",bold=True); put(ws,rr,2,tot_dom,bold=True,align=CENV); put(ws,rr,3,tot_bl,bold=True,align=CENV)
-put(ws,rr,4,1.0,bold=True,align=CENV,numfmt="0.0%"); rr+=2
+put(ws,rr,1,"Total",bold=True,fill=True,border=True); put(ws,rr,2,tot_dom,bold=True,align=CENV,numfmt="#,##0",fill=True,border=True); put(ws,rr,3,tot_bl,bold=True,align=CENV,numfmt="#,##0",fill=True,border=True)
+put(ws,rr,4,1.0,bold=True,align=CENV,numfmt="0.0%",fill=True,border=True); put(ws,rr,5,"",fill=True,border=True); rr+=2
 
 spam_dom = dom_count.get("Spam (Disavow)",0)+dom_count.get("Spam (Nofollow, No Action)",0)
 put(ws,rr,1,"Key findings",bold=True,color=DARK); rr+=1
@@ -199,12 +217,12 @@ rr+=1
 put(ws,rr,1,"Anchor text profile (top anchors by link volume)",bold=True,color=DARK); rr+=1
 for c,h in enumerate(["Anchor type","Backlinks","Share of Backlinks","Referring Domains"],1):
     ws.cell(rr,c,h)
-style_header(ws,4,rr); rr+=1
+style_header(ws,4,rr,size=10); rr+=1
 for t_ in ANCHOR_ORDER:
-    put(ws,rr,1,t_)
-    put(ws,rr,2,at_bl[t_],align=CENV)
-    put(ws,rr,3,(at_bl[t_]/tot_anchor_bl if tot_anchor_bl else 0),align=CENV,numfmt="0.0%")
-    put(ws,rr,4,at_rd[t_],align=CENV); rr+=1
+    put(ws,rr,1,t_,fill=True,border=True)
+    put(ws,rr,2,at_bl[t_],align=CENV,numfmt="#,##0",fill=True,border=True)
+    put(ws,rr,3,(at_bl[t_]/tot_anchor_bl if tot_anchor_bl else 0),align=CENV,numfmt="0.0%",fill=True,border=True)
+    put(ws,rr,4,at_rd[t_],align=CENV,numfmt="#,##0",fill=True,border=True); rr+=1
 note=put(ws,rr,1,"Notes: 'AS' column throughout = Ahrefs Domain Rating (DR, 0-100). 'Traffic' = estimated monthly organic visits. 'RD's' = referring domains linking to that domain. Source: Ahrefs live backlinks index, "+datetime.date.today().isoformat()+". Anchor-type profile above covers the top 250 anchors by link volume (long tail of single-use anchors excluded); status counts cover the FULL live referring-domain profile (1,693 domains). To action: in Tab 05 fill column F (Y/N) and column G (Keep/Disavow).",align=WRAP)
 note.font=Font(name="Geist",size=8,italic=True,color="FF666666"); ws.merge_cells(start_row=rr,start_column=1,end_row=rr,end_column=5)
 
@@ -212,20 +230,18 @@ note.font=Font(name="Geist",size=8,italic=True,color="FF666666"); ws.merge_cells
 ws = wb.create_sheet("Referring Domain Audit")
 cols = ["Domain","Status","AS","Backlinks","RD's","Traffic","In Disavow","Links Point To","Dofollow Links","Nofollow Links","First Seen","Top Anchor Text","Example Linking Page","Linking Page Title","Source","IP","Disavow Line"]
 for c,h in enumerate(cols,1): ws.cell(1,c,h)
-style_header(ws,len(cols)); ws.freeze_panes="B2"
-widths=[36,24,7,10,9,10,11,20,9,9,12,45,40,40,9,15,28]
-for i,w in enumerate(widths,1): ws.column_dimensions[get_column_letter(i)].width=w
+style_header(ws,len(cols)); ws.freeze_panes="B2"; apply_widths(ws)
 indisavow={"Spam (Disavow)":"Yes","Held (Pending Partner)":"Held","Held (Nofollow, No Action)":"Held"}
 order_rank={s:i for i,s in enumerate(STATUS_ORDER)}
 rows_sorted=sorted(rows,key=lambda r:(order_rank.get(r["status"],9),-r["Backlinks"]))
 for i,r in enumerate(rows_sorted,2):
     put(ws,i,1,r["domain"]); put(ws,i,2,r["status"])
-    put(ws,i,3,round(r["AS"],1),align=CENV); put(ws,i,4,r["Backlinks"],align=CENV)
-    put(ws,i,5,r["RDs"],align=CENV); put(ws,i,6,r["Traffic"],align=CENV)
+    put(ws,i,3,round(r["AS"],1),align=CENV); put(ws,i,4,r["Backlinks"],align=CENV,numfmt="#,##0")
+    put(ws,i,5,r["RDs"],align=CENV,numfmt="#,##0"); put(ws,i,6,r["Traffic"],align=CENV,numfmt="#,##0")
     put(ws,i,7,indisavow.get(r["status"],"No"),align=CENV); put(ws,i,8,r["points_to"],align=CENV)
     put(ws,i,9,r["dofollow"],align=CENV); put(ws,i,10,r["nofollow"],align=CENV)
-    put(ws,i,11,r["first_seen"],align=CENV)
-    put(ws,i,12,r["anchor"],align=WRAP); put(ws,i,13,r["url_from"],align=WRAP); put(ws,i,14,r["title"],align=WRAP)
+    put(ws,i,11,asdate(r["first_seen"]),align=CENV,numfmt="d mmm yyyy")
+    put(ws,i,12,r["anchor"],align=LEFT); put(ws,i,13,r["url_from"],align=LEFT); put(ws,i,14,r["title"],align=LEFT)
     put(ws,i,15,"Ahrefs",align=CENV); put(ws,i,16,r["ip"],align=CENV)
     put(ws,i,17,("domain:"+r["domain"]) if r["status"]=="Spam (Disavow)" else "")
 
@@ -233,12 +249,11 @@ for i,r in enumerate(rows_sorted,2):
 ws = wb.create_sheet("All Backlinks")
 cols=["Referring Domain","Status","Tool","Anchor Text","Anchor Type","Link Type","Linking Page URL","Linking Page Title","Target URL"]
 for c,h in enumerate(cols,1): ws.cell(1,c,h)
-style_header(ws,len(cols)); ws.freeze_panes="B2"
-for i,w in enumerate([25,27,10,55,32,10,55,53,40],1): ws.column_dimensions[get_column_letter(i)].width=w
+style_header(ws,len(cols)); ws.freeze_panes="B2"; apply_widths(ws)
 for i,r in enumerate(rows_sorted,2):
     put(ws,i,1,r["domain"]); put(ws,i,2,r["status"]); put(ws,i,3,"Ahrefs",align=CENV)
-    put(ws,i,4,r["anchor"],align=WRAP); put(ws,i,5,r["atype"]); put(ws,i,6,r["link_type"],align=CENV)
-    put(ws,i,7,r["url_from"],align=WRAP); put(ws,i,8,r["title"],align=WRAP); put(ws,i,9,r["url_to"],align=WRAP)
+    put(ws,i,4,r["anchor"],align=LEFT); put(ws,i,5,r["atype"]); put(ws,i,6,r["link_type"],align=CENV)
+    put(ws,i,7,r["url_from"],align=LEFT); put(ws,i,8,r["title"],align=LEFT); put(ws,i,9,r["url_to"],align=LEFT)
 nrow=len(rows_sorted)+3
 n=put(ws,nrow,1,"Note: shows the top representative backlink per referring domain (Ahrefs '1 per domain'). A domain may have additional links; per-domain link counts are in the Referring Domain Audit tab.",align=WRAP)
 n.font=Font(name="Geist",size=8,italic=True,color="FF666666"); ws.merge_cells(start_row=nrow,start_column=1,end_row=nrow,end_column=9)
@@ -247,13 +262,12 @@ n.font=Font(name="Geist",size=8,italic=True,color="FF666666"); ws.merge_cells(st
 ws = wb.create_sheet("Anchor Analysis")
 cols=["Anchor Text","Anchor Type","Backlinks","Share of Backlinks","Referring Domains","Spam Domains Using It"]
 for c,h in enumerate(cols,1): ws.cell(1,c,h)
-style_header(ws,len(cols)); ws.freeze_panes="B2"
-for i,w in enumerate([115,38,12,16,16,20],1): ws.column_dimensions[get_column_letter(i)].width=w
+style_header(ws,len(cols)); ws.freeze_panes="B2"; apply_widths(ws)
 an_sorted=sorted(anchors,key=lambda a:-int(a["links_to_target"]))
 for i,a in enumerate(an_sorted,2):
-    put(ws,i,1,a["anchor"],align=WRAP); put(ws,i,2,classify_anchor(a["anchor"]))
-    put(ws,i,3,int(a["links_to_target"]),align=CENV)
-    put(ws,i,4,(int(a["links_to_target"])/tot_anchor_bl if tot_anchor_bl else 0),align=CENV,numfmt="0.0%")
+    put(ws,i,1,a["anchor"],align=LEFT); put(ws,i,2,classify_anchor(a["anchor"]))
+    put(ws,i,3,int(a["links_to_target"]),align=CENV,numfmt="#,##0")
+    put(ws,i,4,(int(a["links_to_target"])/tot_anchor_bl if tot_anchor_bl else 0),align=CENV,numfmt="0.00%")
     put(ws,i,5,int(a["refdomains"]),align=CENV)
     put(ws,i,6,int(a["refdomains"]) if bl(a.get("is_spam")) else 0,align=CENV)
 
@@ -261,13 +275,12 @@ for i,a in enumerate(an_sorted,2):
 ws = wb.create_sheet("Exact Match Anchors")
 cols=["Referring domain","Example backlink (linking page)","Exact-match commercial anchor","Market","Site type (indicative)","Partner confirmed? (Y/N)","Final decision"]
 for c,h in enumerate(cols,1): ws.cell(1,c,h)
-style_header(ws,len(cols)); ws.freeze_panes="B2"
-for i,w in enumerate([25,59,53,16,25,22,16],1): ws.column_dimensions[get_column_letter(i)].width=w
+style_header(ws,len(cols)); ws.freeze_panes="B2"; apply_widths(ws)
 held=[r for r in rows if r["status"] in ("Held (Pending Partner)","Held (Nofollow, No Action)")]
 held.sort(key=lambda r:(-r["dofollow"],-r["Backlinks"]))
 for i,r in enumerate(held,2):
     m=GEO.search(r["anchor"]); market=m.group(0).title() if m else "Non-geo"
-    put(ws,i,1,r["domain"]); put(ws,i,2,r["url_from"],align=WRAP); put(ws,i,3,r["anchor"],align=WRAP)
+    put(ws,i,1,r["domain"]); put(ws,i,2,r["url_from"],align=LEFT); put(ws,i,3,r["anchor"],align=LEFT)
     put(ws,i,4,market,align=CENV); put(ws,i,5,"Directory / blog (review source quality)")
     put(ws,i,6,"",align=CENV); put(ws,i,7,"")
 if not held:
@@ -280,30 +293,38 @@ n.font=Font(name="Geist",size=8,italic=True,color="FF666666"); ws.merge_cells(st
 ws = wb.create_sheet("Pending Disavow Lines")
 cols=["Referring domain","Disavow line (append to disavow_newgarden.txt once confirmed)","Recommendation"]
 for c,h in enumerate(cols,1): ws.cell(1,c,h)
-style_header(ws,len(cols)); ws.freeze_panes="B2"
-for i,w in enumerate([32,52,60],1): ws.column_dimensions[get_column_letter(i)].width=w
+style_header(ws,len(cols)); ws.freeze_panes="B2"; apply_widths(ws)
 held_follow=[r for r in rows if r["status"]=="Held (Pending Partner)"]
 held_follow.sort(key=lambda r:r["domain"])
 for i,r in enumerate(held_follow,2):
     put(ws,i,1,r["domain"]); put(ws,i,2,"domain:"+r["domain"])
-    put(ws,i,3,"Append ONLY if the previous SEO partner does not confirm this was a commissioned placement.",align=WRAP)
+    put(ws,i,3,"Append ONLY if the previous SEO partner does not confirm this was a commissioned placement.",align=LEFT)
 if not held_follow: put(ws,2,1,"(none)")
 
 # ===== 7. Disavow List =====
 ws = wb.create_sheet("Disavow List")
 cols=["Disavow Line","AS","Backlinks","RD's","Traffic","Organic Keywords","Top Anchor Text"]
 for c,h in enumerate(cols,1): ws.cell(1,c,h)
-style_header(ws,len(cols)); ws.freeze_panes="B2"
-for i,w in enumerate([44,10,12,12,11,15,90],1): ws.column_dimensions[get_column_letter(i)].width=w
+style_header(ws,len(cols)); ws.freeze_panes="B2"; apply_widths(ws)
 disavow=[r for r in rows if r["status"]=="Spam (Disavow)"]
 disavow.sort(key=lambda r:-r["Backlinks"])
-# header comment lines (2 info rows then data) -> keep simple: data from row2
 for i,r in enumerate(disavow,2):
     put(ws,i,1,"domain:"+r["domain"]); put(ws,i,2,round(r["AS"],1),align=CENV)
-    put(ws,i,3,r["Backlinks"],align=CENV); put(ws,i,4,r["RDs"],align=CENV)
-    put(ws,i,5,r["Traffic"],align=CENV); put(ws,i,6,r["orgkw"],align=CENV)
-    put(ws,i,7,r["anchor"],align=WRAP)
+    put(ws,i,3,r["Backlinks"],align=CENV,numfmt="#,##0"); put(ws,i,4,r["RDs"],align=CENV,numfmt="#,##0")
+    put(ws,i,5,r["Traffic"],align=CENV,numfmt="#,##0"); put(ws,i,6,r["orgkw"],align=CENV,numfmt="#,##0")
+    put(ws,i,7,r["anchor"],align=LEFT)
 if not disavow: put(ws,2,1,"(none)")
+
+# template puts a white fill on every data cell of the data tabs (headers keep the dark fill)
+for ws in wb.worksheets:
+    if ws.title == "Summary":
+        continue
+    ncol = ws.max_column
+    for r in range(2, ws.max_row+1):
+        for c in range(1, ncol+1):
+            cell = ws.cell(r, c)
+            if not (cell.fill and cell.fill.patternType):
+                cell.fill = WHITE_FILL
 
 wb.save(OUT)
 print("SAVED", OUT)
