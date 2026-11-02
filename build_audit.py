@@ -202,13 +202,13 @@ spam_dom = dom_count.get("Spam (Disavow)",0)+dom_count.get("Spam (Nofollow, No A
 put(ws,rr,1,"Key findings",bold=True,color=DARK); rr+=1
 dh = dom_count.get('Held (Pending Partner)',0)+dom_count.get('Held (Nofollow, No Action)',0)
 findings = [
- f"{spam_dom:,} of the {tot_dom:,} referring domains are spam. {dom_count.get('Spam (Disavow)',0):,} have a dofollow link and go in the disavow file (Tab 07); the other {dom_count.get('Spam (Nofollow, No Action)',0):,} are nofollow and need no action.",
- "The spam is recent. Referring domains sat near 470 in early 2026, then jumped to about 1,780 by September - mostly single-link .shop, .xyz and .store domains created in automated bursts.",
- "Most spam anchors are SEO sales copy that names the client's own site (e.g. \"Premium SEO Backlinks newgarden.com\"). This looks like auto-generated spam, not links the client paid for.",
- f"{dh:,} domains use exact-match local anchors (e.g. \"Expert Landscape Designers Winston-Salem NC\"), many on social-bookmarking sites. These may be a paid link package - Tab 05 lists them to confirm with the client or previous agency.",
- "We cannot confirm a Google manual action from this data - check Google Search Console > Security & Manual Actions. The big traffic drop (May 2025 to Jan 2026) happened before the spam, so it points to an algorithm or on-site cause, not these links.",
- "Disavow only if GSC shows a manual action, or the client confirms buying links. Otherwise just monitor - Google ignores most of this spam automatically.",
- "Before uploading, note that a few top disavow entries (c99.nl, semanticjuice.com, whosmypro.com) are SEO tools, not attack sites. Harmless to disavow, but not proof of an attack.",
+ f"{spam_dom:,} of {tot_dom:,} referring domains are spam. {dom_count.get('Spam (Disavow)',0):,} have a dofollow link and go in the disavow file; {dom_count.get('Spam (Nofollow, No Action)',0):,} are nofollow and can be ignored.",
+ "The spam is recent - it jumped from about 470 domains in early 2026 to 1,780 by September.",
+ "Most spam links use SEO sales-copy anchors that name the site. This is auto-generated spam, not links the client bought.",
+ f"{dh:,} domains use local service anchors (e.g. \"Landscape Designers Winston-Salem NC\"). These may be a paid package - confirm in Tab 05.",
+ "No manual action is visible here - check Google Search Console. The big traffic drop came before the spam, so the spam is likely not the cause.",
+ "Disavow only if Search Console shows a manual action, or the client confirms buying links. Otherwise just monitor.",
+ "A few top disavow domains (c99.nl, semanticjuice.com) are SEO tools, not attack sites.",
 ]
 for fx in findings:
     c=put(ws,rr,1,fx,align=WRAP); ws.merge_cells(start_row=rr,start_column=1,end_row=rr,end_column=5); rr+=1
