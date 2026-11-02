@@ -140,6 +140,23 @@ So the complete answer to "disavow or dilute?" is:
 
 ---
 
+## Validation (false-positive / false-negative sweep)
+
+We checked the whole set both directions, not a sample:
+
+- **No genuine site is in the disavow file.** **Zero** of the 1,592 disavow
+  domains have meaningful organic traffic (none above 100 monthly visits); all
+  rest on visible evidence (spam anchor, link-seller host name, or spam page).
+  The high-authority referrers in the profile — `bbb.org`, `yellowpages.com`,
+  `birdeye.com`, `expertise.com`, `superpages.com`, `chamberofcommerce.com`,
+  `nextdoor.com` — are all classified **Keep**, not disavowed.
+- **No dofollow spam is wrongly kept.** No Keep/Held domain carries a dofollow
+  sales-copy or off-topic anchor; no nofollow-marked domain actually has a
+  dofollow link.
+- **Held is low-value, as expected:** **806 of the 945** held domains have zero
+  organic traffic — consistent with a low-quality citation/directory campaign,
+  which is exactly why they wait for the partner rather than being kept outright.
+
 ## Action plan
 
 1. **Submit the disavow file** (`disavow_highpriorityplumbing.txt`, 1,592 domains)
