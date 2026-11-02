@@ -127,23 +127,22 @@ def build_findings(doms, links, dom_by_status, emit_disavow):
     held_zero = sum(1 for d in held_with_met if met[d]["tr"] == 0)
     held_frac = (f"{held_zero} of the {len(held_with_met)}" if held_with_met else "most")
 
-    f1 = (f"{spam_total:,} of the {nd:,} referring domains are spam. {spam_do:,} carry at least one "
-          f"dofollow link and go in the disavow file; the other {spam_nf:,} are nofollow only and need no action.")
-    f2 = ("The attack roughly doubled in two months. Semrush shows ~1,650 referring domains steady through "
-          "mid-2026, then 3,217 by October 2026. We audited the full live profile, not the older snapshot.")
-    f3 = (f"You can upload a disavow file for {MONEY} only, and one file covers every bad domain. No client-owned "
-          "domains redirect into the site, so a single file is both necessary and sufficient.")
-    f4 = (f"Two patterns, easy to tell apart. The link-scheme flood hits the home page ({sales_home:,} sales-copy "
-          f"links point there); the commissioned-looking commercial anchors hit deep service and location pages "
-          f"({exact_deep:,} links). The home-page flood is the attack.")
-    f5 = (f'The biggest anchor, on {len(top_set):,} domains, is link sales copy that names the client: '
-          f'"{top_anchor[:70]}".')
-    f6 = (f"The two named clusters: {len(tele)} domains carry a Telegram channel invitation "
-          f'("JOIN OUR TELEGRAM"), all nofollow, so they pass nothing and need no disavow; {len(wa)} domains carry a '
-          f'WhatsApp link-service pitch ("I will Increase your Domain Authority..."), all dofollow, so they are '
-          f"disavowed; {len(xyz)} more self-promotional link-service .xyz domains are nofollow, no action.")
-    f7 = (f"{held_pp+held_nf} domains are held for the previous partner to confirm, in case any were paid "
-          f"placements. Held does not mean valuable: {held_frac} held domains have no organic traffic at all.")
+    f1 = (f"{spam_total:,} of the {nd:,} linking domains are spam. {spam_do:,} have a dofollow link and go in "
+          f"the disavow file. The other {spam_nf:,} are nofollow only, so they pass no value and need no action.")
+    f2 = ("The spam roughly doubled in two months. Semrush shows about 1,650 linking domains for most of 2026, "
+          "then 3,217 by October 2026. We checked the full live profile, not the older count.")
+    f3 = (f"You upload one disavow file, for {MONEY}. That one file covers every bad domain. No other domain the "
+          "client owns feeds into the site, so one file is enough.")
+    f4 = (f"There are two clear patterns. The spam flood points at the home page, with {sales_home:,} sales copy "
+          f"links. The paid looking service anchors point at deep service and location pages, with {exact_deep:,} "
+          f"links. The home page flood is the attack.")
+    f5 = (f'The most common anchor, on {len(top_set):,} domains, is spam sales copy that names the client. '
+          f'It reads "{top_anchor}".')
+    f6 = (f"The two named groups are small. {len(tele)} domains post a Telegram channel invite, all nofollow, so "
+          f"no action. {len(wa)} domains post a WhatsApp sales pitch, all dofollow, so they are disavowed. "
+          f"{len(xyz)} more are link seller .xyz sites, all nofollow, so no action.")
+    f7 = (f"{held_pp+held_nf} domains are held for the old SEO partner to confirm, in case any were paid for. "
+          f"Held does not mean good. {held_zero} of the {len(held_with_met)} held domains get no search traffic at all.")
     return [f1, f2, f3, f4, f5, f6, f7]
 
 
