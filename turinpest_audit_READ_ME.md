@@ -43,4 +43,4 @@ The brief's 12 anchors are Semrush-accurate, but the by-anchor plan points at th
 2. **Check Google Search Console** for a manual action / big ranking drop. A disavow mainly helps with a manual action or a clear algorithmic hit; Google ignores most of this spam automatically, so weigh whether to submit at all vs. monitor.
 3. Because the attack is ongoing, plan to **re-pull and top up the file** (and the disavow) in a few weeks.
 
-*Secondary metric columns (RD's / Traffic / Organic Keywords) are blank where the Semrush export doesn't provide them per referring domain.*
+*All metrics are Semrush. AS + Backlinks come from the bulk referring-domains export; RD's / Traffic / Organic Keywords were pulled per referring domain from Semrush `domain_rank` (Traffic, Organic Keywords) and `backlinks_overview` (RD's) for all 1,376 domains. Most spam domains show a high RD count with near-zero organic traffic — the PBN-network signature.*
