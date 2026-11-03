@@ -99,8 +99,11 @@ for r in refdomains:
     anchor=(rep.get("Anchor") or "").strip()
     atype=classify_anchor(anchor)
     tld=d.rsplit(".",1)[-1]
+    as_score=int(num(r.get("Domain ascore"),int))
     anchors_spam=any(classify_anchor(a)=="Spam: keyword stuffed SEO sales copy" for a in g["anchors"])
-    spam = anchors_spam or (tld in FARM_TLDS)
+    # A sales-copy anchor is spam at any authority. A link-farm TLD on its own only counts as
+    # spam when Authority Score is low (<20); higher-AS farm-TLD domains need a spam anchor.
+    spam = anchors_spam or (tld in FARM_TLDS and as_score < 20)
     bk=int(num(r.get("Backlinks"),int))
     df=g["df"]; nf=g["nf"]
     if df==0 and nf==0: df=bk
@@ -110,7 +113,7 @@ for r in refdomains:
     elif (not spam) and atype in COMMERCIAL and df==0: status="Held (Nofollow, No Action)"
     else:                        status="Keep"
     rows.append({
-        "domain":d,"status":status,"AS":int(num(r.get("Domain ascore"),int)),"Backlinks":bk,
+        "domain":d,"status":status,"AS":as_score,"Backlinks":bk,
         "dofollow":df,"nofollow":nf,"first_seen":asdate(r.get("First seen")),
         "anchor":anchor,"atype":atype,
         "url_from":rep.get("Source url",""),"title":rep.get("Source title",""),"url_to":rep.get("Target url",""),

@@ -1451,7 +1451,6 @@ domain:sitetrafficnumbers.website
 domain:sitetrafficstatsfree.shop
 domain:sitevisitorsperday.shop
 domain:sitewebseo.link
-domain:sluggish.xyz
 domain:smartstimer.com
 domain:smartwebdirectory.xyz
 domain:socialbacklinks.space
