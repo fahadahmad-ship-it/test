@@ -94,10 +94,15 @@ FINDINGS=[
  f"Held does not mean good: {held_zero} of the {held_total} held domains have no organic traffic at all.",
 ]
 
-# anchor profile (representative anchors, Ahrefs)
+# anchor profile (Ahrefs anchors only; collapse minor spam into sales-copy)
+def ptype(r):
+    t=r['atype']
+    if t=='Spam: injected e-commerce anchor': return 'Spam: keyword stuffed SEO sales copy'
+    return t
 prof_bl=defaultdict(int); prof_rd=defaultdict(int)
 for r in rows:
-    prof_bl[r['atype']]+=r['bl']; prof_rd[r['atype']]+=1
+    if r['source']=='Semrush': continue
+    prof_bl[ptype(r)]+=r['bl']; prof_rd[ptype(r)]+=1
 prof_total=sum(prof_bl.values()) or 1
 prof=sorted(prof_bl.items(), key=lambda kv:-kv[1])
 
@@ -113,35 +118,47 @@ def bodyfont(ws,start):
             if c.value is not None and c.font is not HFONT: c.font=BFONT
 
 # ---------- Summary ----------
+TITLE21=Font(name='Geist', size=21, bold=True, color='FF0C343D')
+HDR10=Font(name='Geist', size=10, bold=True, color='FFFFFFFF')
+HDR9=Font(name='Geist', size=9, bold=True, color='FFFFFFFF')
+KFHDR=Font(name='Geist', size=10, bold=True, color='FF000000')
+APHDR=Font(name='Geist', size=11, bold=True, color='FF0C343D')
+WRAPH=Alignment(vertical='center', wrap_text=True)
+PCT='0.0%'; NUM='#,##0'
 ws=wb.active; ws.title='Summary'
-ws['B1']='callturfsup.com'; ws['B1'].font=TITLE
-ws['A3']='Status'; ws['B3']='Domains'; ws['C3']='Backlinks'; ws['D3']='Share of Domains'; ws['E3']='What it means'
+ws.merge_cells('B1:E2'); ws['B1']='callturfsup.com'; ws['B1'].font=TITLE21; ws['B1'].alignment=Alignment(vertical='center')
+for col,t in zip('ABCDE',['Status','Domains','Backlinks','Share of Domains','What it means']):
+    c=ws[f'{col}3']; c.value=t; c.font=HDR10; c.fill=HFILL; c.alignment=WRAPH
 r=4
 for s in STATUSES:
-    ws.cell(r,1,s); ws.cell(r,2,C.get(s,0)); ws.cell(r,3,BL.get(s,0))
-    ws.cell(r,4,round(C.get(s,0)/tot,6)); ws.cell(r,5,MEAN[s]); r+=1
-ws.cell(r,1,'Total'); ws.cell(r,2,tot); ws.cell(r,3,sum(BL.values())); ws.cell(r,4,1.0); total_row=r; r+=1
-r+=0
-kf_hdr=r; ws.cell(r,1,'Key findings'); r+=1
-for f in FINDINGS: ws.cell(r,1,f); r+=1
-r+=0
-ap_hdr=r; ws.cell(r,1,'Anchor text profile (all backlinks, representative)'); r+=1
-ap_cols=r; ws.cell(r,1,'Anchor type'); ws.cell(r,2,'Backlinks'); ws.cell(r,3,'Share of Backlinks'); ws.cell(r,4,'Referring Domains'); r+=1
+    ws.cell(r,1,s).font=BFONT
+    b=ws.cell(r,2,C.get(s,0)); b.font=BFONT; b.number_format=NUM
+    cc=ws.cell(r,3,BL.get(s,0)); cc.font=BFONT; cc.number_format=NUM
+    d=ws.cell(r,4,(C.get(s,0)/tot) if tot else 0); d.font=BFONT; d.number_format=PCT
+    e=ws.cell(r,5,MEAN[s]); e.font=BFONT; e.alignment=WRAP
+    r+=1
+ws.cell(r,1,'Total').font=BOLD
+tb=ws.cell(r,2,tot); tb.font=BOLD; tb.number_format=NUM
+tc=ws.cell(r,3,sum(BL.values())); tc.font=BOLD; tc.number_format=NUM
+td=ws.cell(r,4,1.0); td.font=BOLD; td.number_format=PCT
+total_row=r; r+=1
+kf_hdr=r; ws.cell(r,1,'Key findings').font=KFHDR; r+=1
+for f in FINDINGS:
+    ws.merge_cells(start_row=r,start_column=1,end_row=r,end_column=5)
+    c=ws.cell(r,1,f); c.font=BFONT; c.alignment=WRAP; r+=1
+ap_hdr=r; ws.cell(r,1,'Anchor text profile (all backlinks)').font=APHDR; r+=1
+ap_cols=r
+for col,t in zip('ABCD',['Anchor type','Backlinks','Share of Backlinks','Referring Domains']):
+    c=ws[f'{col}{r}']; c.value=t; c.font=HDR9; c.fill=HFILL; c.alignment=WRAPH
+r+=1
 for t,bl in prof:
-    ws.cell(r,1,t); ws.cell(r,2,bl); ws.cell(r,3,round(bl/prof_total,6)); ws.cell(r,4,prof_rd[t]); r+=1
-bodyfont(ws,3)
-hdr(ws,3); hdr(ws,ap_cols)
-for rr in (total_row,):
-    for c in ws[rr]:
-        if c.value is not None: c.font=BOLD
-ws.cell(kf_hdr,1).font=SECT; ws.cell(ap_hdr,1).font=SECT
-for c in ws[ap_cols]:
-    if c.value is not None: c.font=HFONT; c.fill=HFILL
-# wrap key-findings + meaning
-for rr in range(kf_hdr+1, ap_hdr): ws.cell(rr,1).alignment=WRAP
-for rr in range(4,total_row): ws.cell(rr,5).alignment=WRAP
-setw(ws,{'A':40,'B':14,'C':16,'D':16,'E':95})
-for i in range(1,r+1): ws.row_dimensions[i].height=22.5
+    ws.cell(r,1,t).font=BFONT
+    b=ws.cell(r,2,bl); b.font=BFONT; b.number_format=NUM
+    sc=ws.cell(r,3,bl/prof_total); sc.font=BFONT; sc.number_format=PCT
+    rd=ws.cell(r,4,prof_rd[t]); rd.font=BFONT; rd.number_format=NUM
+    r+=1
+setw(ws,{'A':38.86,'B':16.29,'C':17.57,'D':18.71,'E':120})
+for i in range(1,r+2): ws.row_dimensions[i].height=22.5
 try:
     img=XLImage('assets/image1.png'); img.width=186; img.height=55; ws.add_image(img,'A1')
 except Exception as e: print('logo skip',e)
