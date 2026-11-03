@@ -1,5 +1,5 @@
 data/*.jsonl
 _*.png
 summary_preview.png
-data_semrush/
 tmp_semrush/
+data_semrush/*_semrush.csv

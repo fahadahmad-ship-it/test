@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Build newgarden.com backlinks audit (SEMRUSH source) in the K&K template format.
-Uses only Semrush metrics: AS = Semrush Authority Score (domain_score), Tool/Source = Semrush.
-Semrush's referring-domains report does not provide the referring domain's own RD count or
-organic traffic, so those two columns are intentionally left blank (noted on the Summary)."""
-import csv, json, re, datetime, os
+Source: Semrush UI CSV exports (refdomains_full.csv, backlinks_full.csv).
+Only Semrush metrics: AS = Semrush Authority Score (Domain ascore), Tool/Source = Semrush.
+Semrush's referring-domains export has no per-domain RD count or organic traffic, so those two
+template columns are left blank. Spam is derived from anchor patterns + link-farm TLDs
+(Semrush has no spam flag). Anchor Analysis is aggregated from the full 8,086-backlink export."""
+import csv, re, datetime, os
 from urllib.parse import urlparse
 from collections import defaultdict, Counter
 import openpyxl
@@ -14,31 +16,31 @@ from openpyxl.drawing.image import Image as XLImage
 DATA="/home/user/test/data_semrush"
 OUT="/home/user/test/NewGarden_Backlinks_Audit.xlsx"
 TARGET="newgarden.com"
+csv.field_size_limit(10_000_000)
 
 def load(p):
-    with open(p, newline="") as f: return list(csv.DictReader(f))
-refdomains=load(f"{DATA}/refdomains_semrush.csv")
-backlinks =load(f"{DATA}/backlinks_semrush.csv")
-anchors   =load(f"{DATA}/anchors_semrush.csv")
+    with open(p,newline="") as f: return list(csv.DictReader(f))
+refdomains=load(f"{DATA}/refdomains_full.csv")      # Domain ascore,Domain,Backlinks,IP Address,Country,First seen,Last seen
+backlinks =load(f"{DATA}/backlinks_full.csv")       # Page ascore,Source title,Source url,Target url,Anchor,External links,Internal links,Nofollow,Sponsored,Ugc,Text,Frame,Form,Image,Sitewide,First seen,Last seen,New link,Lost link
 
 def num(v,cast=float,d=0):
     try:
-        if v is None or str(v).strip()=="" or str(v).lower()=="none": return d
+        if v is None or str(v).strip()=="" : return d
         return cast(float(v))
     except Exception: return d
-def ts(v):
-    try: return datetime.datetime.utcfromtimestamp(int(float(v))).date()
-    except Exception: return ""
-def nofollow_true(v): return str(v).strip().lower() in ("true","1","yes")
+def asdate(s):
+    try: return datetime.datetime.strptime(str(s)[:10],"%Y-%m-%d").date()
+    except Exception: return s
+def is_nofollow(b): return str(b.get("Nofollow","")).strip().lower()=="true"
 
-# ---------- anchor-type classifier (same taxonomy as Ahrefs build) ----------
+# ---------- anchor-type classifier ----------
 GEO=re.compile(r"\b(greensboro|winston[- ]?salem|high point|summerfield|kernersville|oak ridge|browns summit|north carolina|\bn\.?c\.?\b)\b",re.I)
 SERVICE=re.compile(r"\b(landscap\w*|lawn|nursery|garden center|garden centre|hardscap\w*|irrigation|mulch\w*|patio|maintenance|tree service|plant(ing)? service|design (and|&) build)\b",re.I)
 SPAMCOPY=re.compile(r"(back\s?link|\bseo\b|\bpbn\b|do[- ]?follow|dofollow|domain rating|\bdr[\s\-]?\d|\bda\b\s?\d|\btf\b|rank(ing|s)?\b|link[- ]build|guest post|niche edit|\bserp\b|index(ation|ing)|citation flow|trust flow|outrank|link velocity|anchor text|white[- ]hat|tier(ed|\s?1)|authority (backlink|link)|buy .{0,15}link|premium .{0,15}(backlink|link)|traffic (surge|boost)|web traffic|t\.me/|telegram|happygrannypies|darksidelinks|boost .{0,20}(rank|authority|traffic|dr|da))",re.I)
 IMGSPAM=re.compile(r"ссылка на источник|источник изображени|image source",re.I)
 URLISH=re.compile(r"^\s*(https?://|www\.)|^\s*[a-z0-9][a-z0-9.\-]*\.(com|org|net|info|io|co|us|store|shop|xyz|site|online|me|biz|ru)(/\S*)?\s*$",re.I)
 BRAND=re.compile(r"new\s?garden",re.I)
-GENERIC={"website","visit website","visit site","source","go now","more like this","click here","read more","learn more","here","link","more","view","this website","visit","website link","go","see more","website ↗","icon - external link visit website"}
+GENERIC={"website","visit website","visit site","source","go now","more like this","click here","read more","learn more","here","link","more","view","this website","visit","website link","go","see more","website ↗"}
 FARM_TLDS={"shop","xyz","store","online","site","space","click","link","buzz","top","fun","sbs","icu","cfd","lol","bond"}
 
 def classify_anchor(a):
@@ -57,53 +59,50 @@ def classify_anchor(a):
 COMMERCIAL={"Exact match commercial","Exact match commercial (geo)"}
 
 # ---------- map backlinks to referring domains ----------
-refset=set((r["domain"] or "").strip().lower() for r in refdomains)
+refset=set((r["Domain"] or "").strip().lower() for r in refdomains)
 def root_of(host):
     host=(host or "").lower().strip()
     if host.startswith("www."): host=host[4:]
     if host in refset: return host
     labels=host.split(".")
-    for n in (2,3):  # try last-2 then last-3 labels
-        if len(labels)>=n:
-            cand=".".join(labels[-n:])
-            if cand in refset: return cand
-    # suffix match fallback
+    for n in (2,3):
+        if len(labels)>=n and ".".join(labels[-n:]) in refset: return ".".join(labels[-n:])
     for d in refset:
         if host==d or host.endswith("."+d): return d
     return ".".join(labels[-2:]) if len(labels)>=2 else host
 
 agg=defaultdict(lambda:{"df":0,"nf":0,"anchors":[],"rep":None,"rep_score":-1})
+anchor_agg=defaultdict(lambda:{"bl":0,"doms":set()})
 for b in backlinks:
-    host=urlparse(b.get("source_url","")).netloc
+    host=urlparse(b.get("Source url","")).netloc
     d=root_of(host)
     g=agg[d]
-    nf=nofollow_true(b.get("nofollow"))
-    if nf: g["nf"]+=1
-    else:  g["df"]+=1
-    an=(b.get("anchor") or "").strip()
+    if is_nofollow(b): g["nf"]+=1
+    else:              g["df"]+=1
+    an=(b.get("Anchor") or "").strip()
     g["anchors"].append(an)
-    sc=num(b.get("page_score"))
-    if sc>g["rep_score"]:
-        g["rep_score"]=sc; g["rep"]=b
+    sc=num(b.get("Page ascore"))
+    if sc>g["rep_score"]: g["rep_score"]=sc; g["rep"]=b
+    anchor_agg[an]["bl"]+=1; anchor_agg[an]["doms"].add(d)
 
-# ---------- build per-domain rows ----------
+anchors=[{"anchor":a,"backlinks_num":v["bl"],"domains_num":len(v["doms"])} for a,v in anchor_agg.items()]
+
+# ---------- per-domain rows ----------
 def host_target(url):
-    h=urlparse(url or "").netloc.lower()
-    return h or TARGET
+    h=urlparse(url or "").netloc.lower(); return h or TARGET
 rows=[]
 for r in refdomains:
-    d=(r["domain"] or "").strip().lower()
+    d=(r["Domain"] or "").strip().lower()
     if not d: continue
     g=agg.get(d,{"df":0,"nf":0,"anchors":[],"rep":None})
     rep=g["rep"] or {}
-    anchor=(rep.get("anchor") or "").strip()
+    anchor=(rep.get("Anchor") or "").strip()
     atype=classify_anchor(anchor)
     tld=d.rsplit(".",1)[-1]
     anchors_spam=any(classify_anchor(a)=="Spam: keyword stuffed SEO sales copy" for a in g["anchors"])
-    spam = anchors_spam or (tld in FARM_TLDS) or (atype=="Spam: keyword stuffed SEO sales copy")
-    bk=int(num(r.get("backlinks_num"),int))
+    spam = anchors_spam or (tld in FARM_TLDS)
+    bk=int(num(r.get("Backlinks"),int))
     df=g["df"]; nf=g["nf"]
-    # if we had no per-link rows for this domain, fall back to follow/nofollow unknown -> treat as dofollow
     if df==0 and nf==0: df=bk
     if spam and df>0:            status="Spam (Disavow)"
     elif spam and df==0:         status="Spam (Nofollow, No Action)"
@@ -111,19 +110,12 @@ for r in refdomains:
     elif (not spam) and atype in COMMERCIAL and df==0: status="Held (Nofollow, No Action)"
     else:                        status="Keep"
     rows.append({
-        "domain":d,"status":status,
-        "AS":int(num(r.get("domain_score"),int)),
-        "Backlinks":bk,
-        "dofollow":df,"nofollow":nf,
-        "first_seen":ts(r.get("first_seen")),
+        "domain":d,"status":status,"AS":int(num(r.get("Domain ascore"),int)),"Backlinks":bk,
+        "dofollow":df,"nofollow":nf,"first_seen":asdate(r.get("First seen")),
         "anchor":anchor,"atype":atype,
-        "url_from":rep.get("source_url",""),"title":rep.get("source_title",""),
-        "url_to":rep.get("target_url",""),
-        "points_to":host_target(rep.get("target_url","")),
-        "ip":(r.get("ip") or "").strip(),
-        "country":(r.get("country") or "").strip(),
-        "trust":int(num(r.get("domain_trust_score"),int)),
-        "link_type":"Dofollow" if (rep and not nofollow_true(rep.get("nofollow"))) else ("Nofollow" if rep else ("Dofollow" if df>0 else "Nofollow")),
+        "url_from":rep.get("Source url",""),"title":rep.get("Source title",""),"url_to":rep.get("Target url",""),
+        "points_to":host_target(rep.get("Target url","")),"ip":(r.get("IP Address") or "").strip(),
+        "link_type":"Dofollow" if (rep and not is_nofollow(rep)) else ("Nofollow" if rep else ("Dofollow" if df>0 else "Nofollow")),
     })
 
 STATUS_ORDER=["Spam (Disavow)","Held (Pending Partner)","Held (Nofollow, No Action)","Spam (Nofollow, No Action)","Keep","Own Site"]
@@ -136,27 +128,23 @@ STATUS_MEANING={
  "Own Site":"Client-owned domain that redirects into the site.",
 }
 dom_count=Counter(); bl_count=Counter()
-for r in rows:
-    dom_count[r["status"]]+=1; bl_count[r["status"]]+=r["Backlinks"]
+for r in rows: dom_count[r["status"]]+=1; bl_count[r["status"]]+=r["Backlinks"]
 tot_dom=sum(dom_count.values()); tot_bl=sum(bl_count.values())
 spam_dom=dom_count.get("Spam (Disavow)",0)+dom_count.get("Spam (Nofollow, No Action)",0)
 
-# anchor-type profile from Semrush anchors report
 at_bl=defaultdict(int); at_rd=defaultdict(int)
-tot_anchor_bl=sum(int(num(a["backlinks_num"],int)) for a in anchors) or 1
+tot_anchor_bl=sum(a["backlinks_num"] for a in anchors) or 1
 for a in anchors:
-    t=classify_anchor(a["anchor"]); at_bl[t]+=int(num(a["backlinks_num"],int)); at_rd[t]+=int(num(a["domains_num"],int))
+    t=classify_anchor(a["anchor"]); at_bl[t]+=a["backlinks_num"]; at_rd[t]+=a["domains_num"]
 ANCHOR_ORDER=sorted(at_bl,key=lambda k:-at_bl[k])
 
-# ======================= styling (identical to template) =======================
+# ======================= styling =======================
 HEAD_FILL=PatternFill("solid",fgColor="FF0C343D"); WHITE_FILL=PatternFill("solid",fgColor="FFFFFFFF")
 WHITE="FFFFFFFF"; DARK="FF0C343D"
 def headfont(sz=9): return Font(name="Geist",size=sz,bold=True,color=WHITE)
 def cellfont(sz=9,bold=False,color="FF000000"): return Font(name="Geist",size=sz,bold=bold,color=color)
-CEN=Alignment(horizontal="center",vertical="center",wrap_text=True)
-CENV=Alignment(horizontal="center",vertical="center")
-LEFT=Alignment(vertical="center")
-WRAP=Alignment(wrap_text=True,vertical="center")
+CEN=Alignment(horizontal="center",vertical="center",wrap_text=True); CENV=Alignment(horizontal="center",vertical="center")
+LEFT=Alignment(vertical="center"); WRAP=Alignment(wrap_text=True,vertical="center")
 thin=Side(style="thin",color="FFBFBFBF"); BORDER=Border(left=thin,right=thin,top=thin,bottom=thin)
 TPL_WIDTHS={
  "Summary":{'A':38.86,'B':16.29,'C':17.57,'D':18.71,'E':120.0},
@@ -212,7 +200,7 @@ findings=[
 for fx in findings:
     put(ws,rr,1,fx,align=WRAP); ws.merge_cells(start_row=rr,start_column=1,end_row=rr,end_column=5); rr+=1
 rr+=1
-put(ws,rr,1,"Anchor text profile (top anchors by link volume)",bold=True,color=DARK); rr+=1
+put(ws,rr,1,"Anchor text profile (all backlinks)",bold=True,color=DARK); rr+=1
 for c,h in enumerate(["Anchor type","Backlinks","Share of Backlinks","Referring Domains"],1): ws.cell(rr,c,h)
 style_header(ws,4,rr,size=10); rr+=1
 for t_ in ANCHOR_ORDER:
@@ -220,7 +208,7 @@ for t_ in ANCHOR_ORDER:
     put(ws,rr,2,at_bl[t_],align=CENV,numfmt="#,##0",fill=True,border=True)
     put(ws,rr,3,(at_bl[t_]/tot_anchor_bl),align=CENV,numfmt="0.0%",fill=True,border=True)
     put(ws,rr,4,at_rd[t_],align=CENV,numfmt="#,##0",fill=True,border=True); rr+=1
-note=put(ws,rr,1,"Source: Semrush Backlink Analytics (live), "+datetime.date.today().isoformat()+". 'AS' = Semrush Authority Score (0-100). Semrush's referring-domains report does not provide each referring domain's own referring-domain count or organic traffic, so the \"RD's\" and \"Traffic\" columns in Tab 02 are left blank. Anchor-type profile covers the top anchors by link volume; status counts cover the full profile. Tab 05: fill column F (Y/N) and column G (Keep/Disavow).",align=WRAP)
+note=put(ws,rr,1,"Source: Semrush Backlink Analytics export, "+datetime.date.today().isoformat()+" ("+format(len(backlinks),",")+" backlinks / "+format(tot_dom,",")+" referring domains). 'AS' = Semrush Authority Score (0-100). Semrush's referring-domains export has no per-domain referring-domain count or organic traffic, so the \"RD's\" and \"Traffic\" columns in Tab 02 are left blank. Anchor-type profile covers all backlinks; status counts cover the full profile. Tab 05: fill column F (Y/N) and column G (Keep/Disavow).",align=WRAP)
 note.font=Font(name="Geist",size=8,italic=True,color="FF666666"); ws.merge_cells(start_row=rr,start_column=1,end_row=rr,end_column=5)
 
 order_rank={s:i for i,s in enumerate(STATUS_ORDER)}
@@ -233,9 +221,8 @@ for c,h in enumerate(cols,1): ws.cell(1,c,h)
 style_header(ws,len(cols)); ws.freeze_panes="B2"; apply_widths(ws)
 indisavow={"Spam (Disavow)":"Yes","Held (Pending Partner)":"Held","Held (Nofollow, No Action)":"Held"}
 for i,r in enumerate(rows_sorted,2):
-    put(ws,i,1,r["domain"]); put(ws,i,2,r["status"])
-    put(ws,i,3,r["AS"],align=CENV); put(ws,i,4,r["Backlinks"],align=CENV,numfmt="#,##0")
-    put(ws,i,5,"",align=CENV); put(ws,i,6,"",align=CENV)   # RD's, Traffic: not provided by Semrush
+    put(ws,i,1,r["domain"]); put(ws,i,2,r["status"]); put(ws,i,3,r["AS"],align=CENV)
+    put(ws,i,4,r["Backlinks"],align=CENV,numfmt="#,##0"); put(ws,i,5,"",align=CENV,numfmt="#,##0"); put(ws,i,6,"",align=CENV,numfmt="#,##0")
     put(ws,i,7,indisavow.get(r["status"],"No"),align=CENV); put(ws,i,8,r["points_to"],align=CENV)
     put(ws,i,9,r["dofollow"],align=CENV); put(ws,i,10,r["nofollow"],align=CENV)
     put(ws,i,11,r["first_seen"],align=CENV,numfmt="d mmm yyyy")
@@ -258,14 +245,14 @@ ws=wb.create_sheet("Anchor Analysis")
 cols=["Anchor Text","Anchor Type","Backlinks","Share of Backlinks","Referring Domains","Spam Domains Using It"]
 for c,h in enumerate(cols,1): ws.cell(1,c,h)
 style_header(ws,len(cols)); ws.freeze_panes="B2"; apply_widths(ws)
-an_sorted=sorted(anchors,key=lambda a:-int(num(a["backlinks_num"],int)))
+an_sorted=sorted(anchors,key=lambda a:-a["backlinks_num"])
 for i,a in enumerate(an_sorted,2):
-    bln=int(num(a["backlinks_num"],int)); dmn=int(num(a["domains_num"],int)); at=classify_anchor(a["anchor"])
+    at=classify_anchor(a["anchor"])
     put(ws,i,1,a["anchor"],align=LEFT); put(ws,i,2,at)
-    put(ws,i,3,bln,align=CENV,numfmt="#,##0")
-    put(ws,i,4,(bln/tot_anchor_bl),align=CENV,numfmt="0.00%")
-    put(ws,i,5,dmn,align=CENV,numfmt="#,##0")
-    put(ws,i,6,dmn if at=="Spam: keyword stuffed SEO sales copy" else 0,align=CENV,numfmt="#,##0")
+    put(ws,i,3,a["backlinks_num"],align=CENV,numfmt="#,##0")
+    put(ws,i,4,(a["backlinks_num"]/tot_anchor_bl),align=CENV,numfmt="0.00%")
+    put(ws,i,5,a["domains_num"],align=CENV)
+    put(ws,i,6,a["domains_num"] if at=="Spam: keyword stuffed SEO sales copy" else 0,align=CENV)
 
 # ===== Exact Match Anchors =====
 ws=wb.create_sheet("Exact Match Anchors")
@@ -300,11 +287,10 @@ style_header(ws,len(cols)); ws.freeze_panes="B2"; apply_widths(ws)
 disavow=[r for r in rows if r["status"]=="Spam (Disavow)"]; disavow.sort(key=lambda r:-r["Backlinks"])
 for i,r in enumerate(disavow,2):
     put(ws,i,1,"domain:"+r["domain"]); put(ws,i,2,r["AS"],align=CENV)
-    put(ws,i,3,r["Backlinks"],align=CENV,numfmt="#,##0"); put(ws,i,4,"",align=CENV); put(ws,i,5,"",align=CENV)
-    put(ws,i,6,"",align=CENV); put(ws,i,7,r["anchor"],align=LEFT)
+    put(ws,i,3,r["Backlinks"],align=CENV,numfmt="#,##0"); put(ws,i,4,"",align=CENV,numfmt="#,##0"); put(ws,i,5,"",align=CENV,numfmt="#,##0")
+    put(ws,i,6,"",align=CENV,numfmt="#,##0"); put(ws,i,7,r["anchor"],align=LEFT)
 if not disavow: put(ws,2,1,"(none)")
 
-# sheet-level styling to match template
 for ws in wb.worksheets:
     if ws.title=="Summary":
         ws.sheet_view.showGridLines=False
@@ -327,4 +313,4 @@ with open("/home/user/test/disavow_newgarden.txt","w") as f:
     f.write(f"# Generated {datetime.date.today().isoformat()}. Spam referring domains with >=1 dofollow link.\n")
     f.write("# DO NOT UPLOAD unless GSC shows a manual action, or bought links are confirmed. See Summary tab.\n")
     for r in disavow: f.write("domain:"+r["domain"]+"\n")
-print("disavow lines:",len(disavow))
+print("disavow lines:",len(disavow),"| held:",len(held))
