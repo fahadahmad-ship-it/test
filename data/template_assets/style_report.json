@@ -1,0 +1,1428 @@
+{
+ "Summary": {
+  "freeze_panes": null,
+  "gridlines": false,
+  "auto_filter": null,
+  "merged": [
+   "A30:E30",
+   "A16:E16",
+   "A15:E15",
+   "A13:E13",
+   "A14:E14",
+   "A17:E17",
+   "A18:E18"
+  ],
+  "max_row": 30,
+  "max_col": 5,
+  "col_widths": {
+   "A": 38.86,
+   "B": 16.29,
+   "C": 17.57,
+   "D": 18.71,
+   "E": 120.0
+  },
+  "row_heights_sample": {
+   "1": 22.5,
+   "2": 22.5,
+   "3": 22.5,
+   "4": 22.5,
+   "5": 22.5,
+   "6": 22.5
+  },
+  "row_dim_default": 15.0,
+  "cells": {
+   "A1": {
+    "value": null,
+    "font": {
+     "name": "Calibri",
+     "size": 11.0,
+     "bold": false,
+     "italic": false,
+     "color": "Values must be of type <class 'str'>"
+    },
+    "fill": {
+     "type": null,
+     "fg": "00000000"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": null,
+     "wrap": null
+    }
+   },
+   "B1": {
+    "value": "New Garden Landscaping & Nurse",
+    "font": {
+     "name": "Geist",
+     "size": 21.0,
+     "bold": true,
+     "italic": false,
+     "color": "FF0C343D"
+    },
+    "fill": {
+     "type": null,
+     "fg": "00000000"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": "left",
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "A2": {
+    "value": null,
+    "font": {
+     "name": "Calibri",
+     "size": 11.0,
+     "bold": false,
+     "italic": false,
+     "color": "Values must be of type <class 'str'>"
+    },
+    "fill": {
+     "type": null,
+     "fg": "00000000"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": null,
+     "wrap": null
+    }
+   },
+   "B2": {
+    "value": null,
+    "font": {
+     "name": "Calibri",
+     "size": 11.0,
+     "bold": false,
+     "italic": false,
+     "color": "Values must be of type <class 'str'>"
+    },
+    "fill": {
+     "type": null,
+     "fg": "00000000"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": null,
+     "wrap": null
+    }
+   },
+   "A3": {
+    "value": "Status",
+    "font": {
+     "name": "Geist",
+     "size": 10.0,
+     "bold": true,
+     "italic": false,
+     "color": "FFFFFFFF"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FF0C343D"
+    },
+    "border": {
+     "left": "thin",
+     "right": "thin",
+     "top": "thin",
+     "bottom": "thin"
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": true
+    }
+   },
+   "B3": {
+    "value": "Domains",
+    "font": {
+     "name": "Geist",
+     "size": 10.0,
+     "bold": true,
+     "italic": false,
+     "color": "FFFFFFFF"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FF0C343D"
+    },
+    "border": {
+     "left": "thin",
+     "right": "thin",
+     "top": "thin",
+     "bottom": "thin"
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": true
+    }
+   },
+   "A4": {
+    "value": "Spam (Disavow)",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": "thin",
+     "right": "thin",
+     "top": "thin",
+     "bottom": "thin"
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   }
+  },
+  "images": [
+   {
+    "anchor_from": {
+     "col": 0,
+     "colOff": 0,
+     "row": 0,
+     "rowOff": 0
+    },
+    "ext": {
+     "cx": 1866900,
+     "cy": 552450
+    },
+    "saved": "data/template_assets/Summary_img0.png",
+    "size_bytes": 4484
+   }
+  ]
+ },
+ "Referring Domain Audit": {
+  "freeze_panes": "B2",
+  "gridlines": null,
+  "auto_filter": "A1:Q2684",
+  "merged": [],
+  "max_row": 2684,
+  "max_col": 17,
+  "col_widths": {
+   "A": 36.0,
+   "B": 24.71,
+   "C": 9.57,
+   "D": 13.0,
+   "E": 9.43,
+   "F": 9.71,
+   "G": 12.43,
+   "H": 21.29,
+   "I": 14.0,
+   "J": 8.71,
+   "K": 12.0,
+   "L": 45.0,
+   "M": 8.71,
+   "N": 40.0,
+   "O": 14.0,
+   "P": 15.0,
+   "Q": 14.0
+  },
+  "row_heights_sample": {
+   "1": 31.5
+  },
+  "row_dim_default": 15.75,
+  "cells": {
+   "A1": {
+    "value": "Domain",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": true,
+     "italic": false,
+     "color": "FFFFFFFF"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FF0C343D"
+    },
+    "border": {
+     "left": "thin",
+     "right": "thin",
+     "top": "thin",
+     "bottom": "thin"
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": true
+    }
+   },
+   "B1": {
+    "value": "Status",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": true,
+     "italic": false,
+     "color": "FFFFFFFF"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FF0C343D"
+    },
+    "border": {
+     "left": "thin",
+     "right": "thin",
+     "top": "thin",
+     "bottom": "thin"
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": true
+    }
+   },
+   "A2": {
+    "value": "rosih.ru",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "B2": {
+    "value": "Spam (Disavow)",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "A3": {
+    "value": "lydiaroyrealestate.com",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "B3": {
+    "value": "Spam (Disavow)",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "A4": {
+    "value": "nivira.shop",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   }
+  },
+  "images": []
+ },
+ "All Backlinks": {
+  "freeze_panes": "B2",
+  "gridlines": null,
+  "auto_filter": "A1:I8087",
+  "merged": [],
+  "max_row": 8087,
+  "max_col": 9,
+  "col_widths": {
+   "A": 25.43,
+   "B": 27.14,
+   "C": 14.71,
+   "D": 55.0,
+   "E": 32.0,
+   "F": 10.0,
+   "G": 55.0,
+   "H": 53.14,
+   "I": 30.57
+  },
+  "row_heights_sample": {
+   "1": 31.5
+  },
+  "row_dim_default": 15.75,
+  "cells": {
+   "A1": {
+    "value": "Referring Domain",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": true,
+     "italic": false,
+     "color": "FFFFFFFF"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FF0C343D"
+    },
+    "border": {
+     "left": "thin",
+     "right": "thin",
+     "top": "thin",
+     "bottom": "thin"
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": true
+    }
+   },
+   "B1": {
+    "value": "Status",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": true,
+     "italic": false,
+     "color": "FFFFFFFF"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FF0C343D"
+    },
+    "border": {
+     "left": "thin",
+     "right": "thin",
+     "top": "thin",
+     "bottom": "thin"
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": true
+    }
+   },
+   "A2": {
+    "value": "007eaglegaze.online",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "B2": {
+    "value": "Spam (Disavow)",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "A3": {
+    "value": "1000.co.in",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "B3": {
+    "value": "Keep",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "A4": {
+    "value": "10001ways.com",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   }
+  },
+  "images": []
+ },
+ "Anchor Analysis": {
+  "freeze_panes": "B2",
+  "gridlines": null,
+  "auto_filter": "A1:F472",
+  "merged": [],
+  "max_row": 472,
+  "max_col": 6,
+  "col_widths": {
+   "A": 115.86,
+   "B": 37.71,
+   "C": 14.0,
+   "D": 8.71,
+   "E": 13.0,
+   "F": 20.29
+  },
+  "row_heights_sample": {
+   "1": 31.5
+  },
+  "row_dim_default": 15.75,
+  "cells": {
+   "A1": {
+    "value": "Anchor Text",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": true,
+     "italic": false,
+     "color": "FFFFFFFF"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FF0C343D"
+    },
+    "border": {
+     "left": "thin",
+     "right": "thin",
+     "top": "thin",
+     "bottom": "thin"
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": true
+    }
+   },
+   "B1": {
+    "value": "Anchor Type",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": true,
+     "italic": false,
+     "color": "FFFFFFFF"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FF0C343D"
+    },
+    "border": {
+     "left": "thin",
+     "right": "thin",
+     "top": "thin",
+     "bottom": "thin"
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": true
+    }
+   },
+   "A2": {
+    "value": "(\u0421\u0441\u044b\u043b\u043a\u0430 \u043d\u0430 \u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "B2": {
+    "value": "Spam: keyword stuffed SEO sale",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "A3": {
+    "value": "newgarden.com",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "B3": {
+    "value": "Naked URL",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "A4": {
+    "value": "Build Powerful Website Authori",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   }
+  },
+  "images": []
+ },
+ "Exact Match Anchors": {
+  "freeze_panes": "B2",
+  "gridlines": null,
+  "auto_filter": "A1:G134",
+  "merged": [],
+  "max_row": 134,
+  "max_col": 7,
+  "col_widths": {
+   "A": 25.43,
+   "B": 59.0,
+   "C": 53.14,
+   "D": 16.0,
+   "E": 24.57,
+   "F": 15.43,
+   "G": 15.0
+  },
+  "row_heights_sample": {
+   "1": 31.5
+  },
+  "row_dim_default": 15.75,
+  "cells": {
+   "A1": {
+    "value": "Referring domain",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": true,
+     "italic": false,
+     "color": "FFFFFFFF"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FF0C343D"
+    },
+    "border": {
+     "left": "thin",
+     "right": "thin",
+     "top": "thin",
+     "bottom": "thin"
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": true
+    }
+   },
+   "B1": {
+    "value": "Example backlink (linking page",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": true,
+     "italic": false,
+     "color": "FFFFFFFF"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FF0C343D"
+    },
+    "border": {
+     "left": "thin",
+     "right": "thin",
+     "top": "thin",
+     "bottom": "thin"
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": true
+    }
+   },
+   "A2": {
+    "value": "atozbookmarks.net",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "B2": {
+    "value": "https://atozbookmarks.net/stor",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "A3": {
+    "value": "favemarks.net",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "B3": {
+    "value": "https://favemarks.net/story/br",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "A4": {
+    "value": "hometosight.com",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   }
+  },
+  "images": []
+ },
+ "Pending Disavow Lines": {
+  "freeze_panes": "B2",
+  "gridlines": null,
+  "auto_filter": "A1:C121",
+  "merged": [],
+  "max_row": 121,
+  "max_col": 3,
+  "col_widths": {
+   "A": 32.0,
+   "B": 44.0,
+   "C": 48.0
+  },
+  "row_heights_sample": {
+   "1": 31.5
+  },
+  "row_dim_default": 15.75,
+  "cells": {
+   "A1": {
+    "value": "Referring domain",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": true,
+     "italic": false,
+     "color": "FFFFFFFF"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FF0C343D"
+    },
+    "border": {
+     "left": "thin",
+     "right": "thin",
+     "top": "thin",
+     "bottom": "thin"
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": true
+    }
+   },
+   "B1": {
+    "value": "Disavow line (append to disavo",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": true,
+     "italic": false,
+     "color": "FFFFFFFF"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FF0C343D"
+    },
+    "border": {
+     "left": "thin",
+     "right": "thin",
+     "top": "thin",
+     "bottom": "thin"
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": true
+    }
+   },
+   "A2": {
+    "value": "360directory.biz",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "B2": {
+    "value": "domain:360directory.biz",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "A3": {
+    "value": "a1bizdirectori.com",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "B3": {
+    "value": "domain:a1bizdirectori.com",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "A4": {
+    "value": "a2zweblinks.org",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   }
+  },
+  "images": []
+ },
+ "Disavow List": {
+  "freeze_panes": "B2",
+  "gridlines": null,
+  "auto_filter": "A1:G1647",
+  "merged": [],
+  "max_row": 1647,
+  "max_col": 7,
+  "col_widths": {
+   "A": 44.0,
+   "B": 14.0,
+   "C": 15.57,
+   "D": 14.0,
+   "E": 11.14,
+   "F": 14.86,
+   "G": 98.86
+  },
+  "row_heights_sample": {
+   "1": 31.5
+  },
+  "row_dim_default": 15.75,
+  "cells": {
+   "A1": {
+    "value": "Disavow Line",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": true,
+     "italic": false,
+     "color": "FFFFFFFF"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FF0C343D"
+    },
+    "border": {
+     "left": "thin",
+     "right": "thin",
+     "top": "thin",
+     "bottom": "thin"
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": true
+    }
+   },
+   "B1": {
+    "value": "AS",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": true,
+     "italic": false,
+     "color": "FFFFFFFF"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FF0C343D"
+    },
+    "border": {
+     "left": "thin",
+     "right": "thin",
+     "top": "thin",
+     "bottom": "thin"
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": true
+    }
+   },
+   "A2": {
+    "value": "domain:rosih.ru",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "B2": {
+    "value": "10",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "A3": {
+    "value": "domain:lydiaroyrealestate.com",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "B3": {
+    "value": "4",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": "center",
+     "v": "center",
+     "wrap": null
+    }
+   },
+   "A4": {
+    "value": "domain:nivira.shop",
+    "font": {
+     "name": "Geist",
+     "size": 9.0,
+     "bold": false,
+     "italic": false,
+     "color": "FF000000"
+    },
+    "fill": {
+     "type": "solid",
+     "fg": "FFFFFFFF"
+    },
+    "border": {
+     "left": null,
+     "right": null,
+     "top": null,
+     "bottom": null
+    },
+    "align": {
+     "h": null,
+     "v": "center",
+     "wrap": null
+    }
+   }
+  },
+  "images": []
+ }
+}
