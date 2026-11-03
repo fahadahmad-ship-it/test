@@ -1,9 +1,9 @@
 # Disavow file for https://turinpest.com/
-# Generated 2026-11-02 from Semrush + Ahrefs backlink data
+# Generated 2026-11-02 from Semrush backlink data (Ahrefs is_spam used as one classification signal)
 # Scope: referring domains with spam/keyword-stuffed SEO sales-copy, PBN or link-network
 #   anchors AND at least one dofollow link. Nofollow-only spam is excluded (no ranking value).
-# Domains using exact-match commercial/local anchors are HELD (see 'Pending Disavow Lines')
-#   and must be confirmed with the previous supplier before adding.
+# Exact-match commercial/local anchor domains are HELD (see 'Pending Disavow Lines') and must be
+#   confirmed with the previous supplier before adding.
 # 521 domains disavowed.
 #
 domain:100ranking.com
