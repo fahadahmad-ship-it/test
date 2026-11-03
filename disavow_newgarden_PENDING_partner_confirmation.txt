@@ -1,78 +1,119 @@
 # PENDING - New Garden Landscaping & Nursery (newgarden.com)
 # Generated: 2026-11-03
-# These 120 referring domains carry an EXACT-MATCH commercial/geo anchor (Greensboro /
-#   Winston-Salem landscape-service copy) and MAY have been a commissioned/paid placement.
-#   Independent check: Ahrefs marks these anchors NOT spam (DR up to 60).
+# 202 referring domains with an EXACT-MATCH commercial / geo anchor (Greensboro / Winston-Salem local-service
+#   copy) pointing at deep /service/ and /location/ pages. These MAY be commissioned placements.
+#   Independent check: Ahrefs marks these anchors NOT spam. Held out of the disavow file until confirmed.
 #
-# ACTION: Do NOT disavow yet. First confirm with the previous SEO supplier which of these
-#   placements were commissioned. APPEND these lines to disavow_newgarden.txt ONLY for the
-#   domains the supplier does NOT confirm. Keep (do not disavow) any the supplier confirms
-#   as a legitimate commissioned placement and that are worth keeping.
-# (13 further Tab 05 domains are nofollow-only = no action needed either way.)
-# Held domains (dofollow): 120
-#
+# ACTION: ask the previous SEO supplier (the workbook's "partner") which of these were commissioned.
+#   APPEND to disavow_newgarden.txt ONLY the domains the supplier does NOT confirm. Keep the rest.
+# (45 further Tab 05 domains are nofollow-only = no action needed either way; they are not listed here.)
+domain:10googol.org
 domain:360directory.biz
 domain:a1bizdirectori.com
 domain:a2zweblinks.org
 domain:a2zweblinx.com
 domain:addbiz.org
 domain:addbusiness.org
+domain:addsocial.org
 domain:alistweb.org
+domain:angelinasweb.net
 domain:articles-place.com
 domain:atozbookmarks.net
+domain:authoritylistings.com
+domain:bestbizofweb.com
+domain:bestdirectoree.com
 domain:biigo.org
+domain:bimpsy.com
 domain:bizcitation.com
 domain:bizfair.co
+domain:bizfront.org
 domain:bizmarks.org
 domain:bizprimary.com
 domain:bizrecordcenter.com
 domain:biztags.org
+domain:blegg.biz
+domain:blimey.us
 domain:bookmarkhaven.com
 domain:bookmarkingbuddy.com
+domain:bowlisting.com
 domain:brickhavenataugusta.com
 domain:brilliantsites.net
 domain:bsocialtoday.com
 domain:buddylinks.org
+domain:buddylinks.us
+domain:businesshonors.org
+domain:businessresource.co
 domain:carolinatheatre.com
 domain:centralweb.co
 domain:checkthemout.biz
 domain:classyweb.biz
 domain:clicknmark.com
+domain:clickography.org
+domain:coolbusiness.co
 domain:dataflowcentral.com
 domain:deluxeweblinks.com
+domain:dirbull.org
 domain:directography.org
+domain:directopia.us
 domain:directorial.org
 domain:directoristorm.com
 domain:directory-palace.com
+domain:directorylisting.us
+domain:directoryplus.biz
+domain:directoryscape.net
+domain:directoryshine.net
+domain:directoryspace.biz
 domain:directoryvilla.org
 domain:ebizdirectory.co
+domain:edirectori.net
+domain:editorlistings.com
 domain:editorschoice.co
 domain:editorspick.biz
+domain:eurekster.com
+domain:ezlinx.org
 domain:favemarks.net
 domain:favoritedirectoree.com
 domain:favoritedirectori.com
+domain:favoritedirectory.org
 domain:ficuspedia.com
 domain:findelio.org
+domain:fixx.co
 domain:freshinsightlab.com
+domain:frontrunnerz.net
 domain:geobizdirectory.com
 domain:getalink.org
+domain:gettraffik.com
 domain:globallistingzone.com
 domain:goeditors.com
+domain:gogodex.com
+domain:gotohub.net
+domain:greatbiz.co
+domain:greatlistingz.com
+domain:hahadirectory.com
 domain:hi5biz.com
+domain:hitz.co
 domain:hometosight.com
+domain:hubdirectory.us
+domain:humanclickz.com
 domain:ibiznet.co
 domain:ilweb.biz
 domain:infodirectory.biz
 domain:instabookmarking.com
+domain:jumpitup.biz
 domain:klassyweb.com
 domain:klouty.net
 domain:koolbiz.us
+domain:koolweblinx.com
 domain:kwiklinks.co
 domain:likesite.org
 domain:linkjuicedirectory.org
 domain:linkography.net
 domain:linksgiving.net
 domain:linktrendz.com
+domain:list2rank.com
+domain:listingdirectoree.com
+domain:listingdirectori.org
+domain:listinggrove.com
 domain:listurwebsite.com
 domain:livewebdir.com
 domain:locallistingz.net
@@ -80,12 +121,20 @@ domain:locatebusiness.org
 domain:mahalobiz.com
 domain:mandex.biz
 domain:markd.biz
+domain:marketlistingpro.com
 domain:marktd.net
 domain:maxwebsites.org
 domain:morningsidehoney.wordpress.com
+domain:muscarimusings.blogspot.com
 domain:mycoolbookmarks.com
+domain:mysmallbiz.net
+domain:newbizlisting.com
 domain:onlinebeacon.co
+domain:oohandaah.org
+domain:portalit.co
 domain:postflowinsights.com
+domain:powerbizdirectory.com
+domain:premiumlinx.net
 domain:primedirectory.biz
 domain:primedirectoryhub.com
 domain:primelistcenter.com
@@ -93,13 +142,24 @@ domain:primewebdir.com
 domain:promotionzdirectori.com
 domain:prontowebdir.com
 domain:queshub.com
+domain:recommendit.biz
+domain:replistingz.com
 domain:risingbiz.co
+domain:rizing.biz
+domain:robuta.com
 domain:rocktheweb.biz
+domain:roidirectory.org
 domain:seoboost.biz
+domain:sezza.org
 domain:sharedbookmark.net
 domain:shizzle.biz
 domain:sift2sites.com
+domain:sitedirectori.com
+domain:slickr.org
+domain:smallbizdirectori.com
+domain:smashinghitz.net
 domain:smoothbookmarks.com
+domain:snap-this.com
 domain:socialcrowd.biz
 domain:socialdir.org
 domain:socialdirectionz.com
@@ -113,21 +173,39 @@ domain:supermoz.org
 domain:taggedbiz.com
 domain:thelistingnet.com
 domain:thinktankcentral.org
+domain:ton.bz
+domain:toplistingz.com
 domain:topmillionsites.net
 domain:topsee.us
 domain:topvoted.org
 domain:trustedandverifiedbiz.com
+domain:tygo.biz
 domain:ultimatebiz.net
+domain:ultimatesites.net
 domain:urlrange.com
+domain:veryimportantsites.com
+domain:vibrantbiz.org
+domain:voteit.biz
 domain:web-directori.com
+domain:webadore.net
 domain:webamplified.net
+domain:webawards.co
 domain:webdiamonds.us
 domain:webeditori.com
+domain:webfriendly.us
+domain:webmash.org
 domain:weboga.com
+domain:webpulso.net
+domain:websnoop.org
 domain:websolute.org
+domain:webtriber.com
+domain:webworldindex.org
+domain:webxplore.net
+domain:welkome.co
 domain:whatuseek.biz
 domain:worldsbestsites.biz
 domain:xfactorbiz.com
 domain:yellowpagelistingz.com
+domain:yeswecanlinks.com
 domain:yourgreenpal.com
 domain:zenlinks.net

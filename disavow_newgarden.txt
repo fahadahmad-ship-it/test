@@ -1,59 +1,28 @@
-# Google Disavow file - New Garden Landscaping & Nursery (newgarden.com)
-# Generated: 2026-11-03
-# Source: Semrush Backlink Analytics export (2,683 referring domains / 8,086 backlinks),
-#   cross-checked against Ahrefs. Verified: Semrush live totals match the export exactly.
+# Google disavow file - New Garden Landscaping & Nursery
+# Property: newgarden.com  (domain property - covers www., plants. and estimate. subdomains)
+# Generated: 2026-11-03   |   Source: Semrush export (2,683 referring domains / 8,086 backlinks), cross-checked against Ahrefs
 #
-# SCOPE: This file lists ONLY referring domains classified as spam/link-scheme placements
-#   that carry at least one DOFOLLOW link (1,646 domains). Nofollow-only spam is omitted
-#   (passes no ranking value). Domains with exact-match commercial/geo anchors that MAY be
-#   commissioned placements are HELD OUT pending confirmation - see the separate file
-#   'disavow_newgarden_PENDING_partner_confirmation.txt'.
+# Spam referring domains with at least one dofollow link: 1646
+# Each line rests on link evidence (spam anchor, spam page title, or a known link-network / directory host) - not on Authority Score or TLD alone.
 #
-# DO NOT SUBMIT until: (a) Google Search Console is checked for a manual action, AND
-#   (b) the previous SEO supplier confirms which anchors/placements were commissioned.
-# Disavow is a last resort - prefer monitoring unless a manual action exists or the client
-#   confirms links were bought.
-# Spam domains (dofollow): 1646
+# HELD links are NOT in this file. 202 domains carry exact-match commercial/geo anchors that MAY be
+#   commissioned placements; they wait in disavow_newgarden_PENDING_partner_confirmation.txt until confirmed.
+# In New Garden's brief the person who confirms is called the "supplier"; the workbook calls the same role
+#   the "partner". They are the same role.
 #
-domain:rosih.ru
-domain:lydiaroyrealestate.com
-domain:nivira.shop
-domain:allbacklinkchecker.space
-domain:alltopleveldomains.space
-domain:backlinkautomationtool.site
-domain:backlinkcountchecker.shop
-domain:backlinksindia.com
-domain:backlinkspulse.com
-domain:backlinkstores.com
-domain:betwinnermirror.com
-domain:big-easy-seo.com
-domain:boost-traffic.com
-domain:breachviews.com
-domain:bulkdacheckertools.space
-domain:businessdirectorybacklinks.shop
-domain:dacheckerofwebsite.online
-domain:daechul.co.com
-domain:dapacheckersoftware.space
-domain:domainwork.space
-domain:freedofollowbacklinks.shop
-domain:ggmap.co.com
-domain:ggmap.us.com
-domain:gladeflowers.com
-domain:lawyerinjeddah.com
-domain:oneclickseochecker.site
-domain:onlineshoppingidea.com
-domain:pagerankchecker.website
-domain:plumeriamarketing.com
-domain:rankingcheckeronline.online
-domain:rankingschecker.website
-domain:royaldb.us.com
-domain:seobacklinkbuilding.shop
-domain:seozens.info
+# DO NOT UPLOAD until BOTH are true:
+#   1. the previous SEO supplier has confirmed which placements were commissioned, and
+#   2. you have checked Google Search Console for a manual action.
+# Prefer monitoring: disavow only if a manual action exists or the client confirms buying links.
+# Check Search Console for an existing disavow file on this property first - uploading REPLACES the current file.
+# No client-owned redirect domains were found, so this single file is the complete set for the property.
+
+
+# --- SEO sales-copy / PBN anchor (1635) ---
 domain:007eaglegaze.online
 domain:100ranking.info
 domain:1seoservices.link
 domain:7-seo.com
-domain:a1webdirectory.xyz
 domain:adcreativevideo.com
 domain:adultbacklinks.site
 domain:advanced-seo.com
@@ -68,6 +37,7 @@ domain:aibacklinksoftware.site
 domain:aibacklinktool.store
 domain:ailinkgenerator.store
 domain:aiseochecker.space
+domain:allbacklinkchecker.space
 domain:allbacklinkchecker.store
 domain:allbacklinkschecker.store
 domain:allbet24hr.shop
@@ -80,7 +50,6 @@ domain:asalwebtechs1.site
 domain:australia-seo.com
 domain:australia-seo.info
 domain:australia-seo.link
-domain:australianwebdirectory.shop
 domain:authoritybacklink.space
 domain:authoritybacklinks.website
 domain:authoritylink.site
@@ -120,6 +89,7 @@ domain:backlinkaudittool.store
 domain:backlinkaudittool.website
 domain:backlinkautomation.space
 domain:backlinkautomationsoftware.space
+domain:backlinkautomationtool.site
 domain:backlinkbot.site
 domain:backlinkbuildertool.shop
 domain:backlinkbuildingagency.shop
@@ -148,6 +118,7 @@ domain:backlinkcompanies.shop
 domain:backlinkcompanies.store
 domain:backlinkcompany.website
 domain:backlinkcountchecker.online
+domain:backlinkcountchecker.shop
 domain:backlinkcountchecker.site
 domain:backlinkcreation.website
 domain:backlinkcreator.site
@@ -237,6 +208,7 @@ domain:backlinksguide.com
 domain:backlinksguide.info
 domain:backlinkshome.info
 domain:backlinksindexer.online
+domain:backlinksindia.com
 domain:backlinksindia.link
 domain:backlinksitechecker.space
 domain:backlinksitechecker.website
@@ -245,12 +217,14 @@ domain:backlinksoftware.shop
 domain:backlinkspace.link
 domain:backlinkspecialist.store
 domain:backlinkspecialist.website
+domain:backlinkspulse.com
 domain:backlinksreport.online
 domain:backlinksreport.site
 domain:backlinksseochecker.site
 domain:backlinkstomysite.online
 domain:backlinkstomysite.store
 domain:backlinkstomysite.website
+domain:backlinkstores.com
 domain:backlinksubmission.space
 domain:backlinksubmissionsite.site
 domain:backlinksubmitter.store
@@ -312,6 +286,8 @@ domain:bestwebsitechecker.site
 domain:bestwebtechs1234.site
 domain:bestwebtrafficservice.shop
 domain:betulcrime.com
+domain:betwinnermirror.com
+domain:big-easy-seo.com
 domain:big-easy-seo.info
 domain:big-easy-seo.link
 domain:bigassstadiumtourmerch.store
@@ -331,9 +307,11 @@ domain:blogdachecker.store
 domain:blogerreviewers.com
 domain:blogseochecker.store
 domain:blogtrafficgenerator.site
+domain:boost-traffic.com
 domain:boost-traffic.info
 domain:boost-traffic.link
 domain:bottraffic.online
+domain:breachviews.com
 domain:bringtraffictowebsite.shop
 domain:browardmac.shop
 domain:bulkbacklinkanalysis.shop
@@ -362,6 +340,7 @@ domain:bulkdacheckertool.store
 domain:bulkdacheckertool.website
 domain:bulkdacheckertools.online
 domain:bulkdacheckertools.shop
+domain:bulkdacheckertools.space
 domain:bulkdadrchecker.site
 domain:bulkdapachecker.online
 domain:bulkdapachecker.store
@@ -380,6 +359,7 @@ domain:bulkpachecker.store
 domain:bulkpadachecker.space
 domain:bulktraffic.shop
 domain:bunero.shop
+domain:businessdirectorybacklinks.shop
 domain:businessdirectorylinks.website
 domain:buybacklinksservice.website
 domain:buyclicktraffic.site
@@ -529,6 +509,7 @@ domain:dacheckerfree.store
 domain:dacheckerfreetool.shop
 domain:dacheckerfreetool.store
 domain:dacheckerinbulk.website
+domain:dacheckerofwebsite.online
 domain:dacheckerofwebsite.site
 domain:dacheckerofwebsite.website
 domain:dacheckeronline.online
@@ -566,6 +547,7 @@ domain:dadrcheckertool.online
 domain:dadrcheckertool.shop
 domain:dadrcheckertool.space
 domain:dadrpachecker.store
+domain:daechul.co.com
 domain:dafreechecker.online
 domain:dafreechecker.site
 domain:dafreechecker.space
@@ -609,6 +591,7 @@ domain:dapacheckerseo.store
 domain:dapacheckerseo.website
 domain:dapacheckersite.site
 domain:dapacheckersite.space
+domain:dapacheckersoftware.space
 domain:dapacheckertool.shop
 domain:dapacheckertool.space
 domain:dapacheckertool.website
@@ -657,7 +640,6 @@ domain:digitseotools.com
 domain:digitseotools.info
 domain:digitseotools.link
 domain:directorybacklinks.space
-domain:directorydaddy.xyz
 domain:directorylinkbuilding.online
 domain:diversifiedseo.info
 domain:dofollow.store
@@ -728,7 +710,6 @@ domain:drobo.shop
 domain:drurchecker.online
 domain:drurchecker.site
 domain:dupurgeniefr.com
-domain:eachdirectory.xyz
 domain:ecommercelink.space
 domain:edsheeranriga.com
 domain:engineoptimisation.site
@@ -794,6 +775,7 @@ domain:freedadrchecker.shop
 domain:freedadrchecker.site
 domain:freedadrchecker.space
 domain:freedadrchecker.website
+domain:freedofollowbacklinks.shop
 domain:freedofollowbacklinks.space
 domain:freedrchecker.online
 domain:freedrchecker.site
@@ -888,6 +870,9 @@ domain:getorganictraffic.space
 domain:getseotips.link
 domain:getwebsitehits.online
 domain:getwebsitehits.store
+domain:ggmap.co.com
+domain:ggmap.us.com
+domain:gladeflowers.com
 domain:go4seo.link
 domain:gofreebacklinks.link
 domain:goldbacklinks.com
@@ -939,6 +924,7 @@ domain:keywordtrends.website
 domain:kkinsider.com
 domain:krito.shop
 domain:ku3933net22.click
+domain:lawyerinjeddah.com
 domain:lentio.shop
 domain:libyanatravel.com
 domain:linkanalysis.website
@@ -980,6 +966,7 @@ domain:localseochecker.website
 domain:localseolinkbuilding.online
 domain:localseolinkbuilding.website
 domain:luminko.shop
+domain:lydiaroyrealestate.com
 domain:m98ufa.com
 domain:makebacklink.online
 domain:makebacklink.shop
@@ -1030,17 +1017,18 @@ domain:newbacklinkschecker.store
 domain:newbacklinkschecker.website
 domain:newblogerseo.com
 domain:newearthsummit.org
-domain:newsblogsports.site
 domain:nimbra.shop
 domain:nimpa.shop
 domain:nimto.shop
 domain:ninko.shop
+domain:nivira.shop
 domain:nokvio.shop
 domain:nuxlo.shop
 domain:oneclickbacklinkgenerator.shop
 domain:oneclicklinkbuilding.online
 domain:oneclicklinkbuilding.space
 domain:oneclickseochecker.shop
+domain:oneclickseochecker.site
 domain:oneclickseochecker.space
 domain:oneclickseochecker.website
 domain:onlinebacklinktool.space
@@ -1059,6 +1047,7 @@ domain:onlineseochecker.website
 domain:onlineserpchecker.shop
 domain:onlineserpchecker.site
 domain:onlineserpchecker.website
+domain:onlineshoppingidea.com
 domain:onlinewebsitechecker.online
 domain:onlinewebsitechecker.website
 domain:onvaxs.com
@@ -1118,6 +1107,7 @@ domain:pagebacklinkschecker.site
 domain:pagebacklinkschecker.space
 domain:pagedachecker.website
 domain:pagemonitor.space
+domain:pagerankchecker.website
 domain:pagerankingchecker.store
 domain:pagerankingchecker.website
 domain:pagereport.site
@@ -1136,6 +1126,7 @@ domain:plendo.shop
 domain:plixmo.shop
 domain:plonta.shop
 domain:plrdownloadshub.com
+domain:plumeriamarketing.com
 domain:plurio.shop
 domain:positionchecker.website
 domain:prbacklinks.site
@@ -1192,6 +1183,7 @@ domain:rankingchecker.website
 domain:rankingcheckerfree.shop
 domain:rankingcheckerfree.site
 domain:rankingcheckerfree.store
+domain:rankingcheckeronline.online
 domain:rankingcheckeronline.shop
 domain:rankingcheckeronline.site
 domain:rankingcheckeronline.store
@@ -1202,6 +1194,7 @@ domain:rankingideals.info
 domain:rankingideals.link
 domain:rankingschecker.site
 domain:rankingschecker.store
+domain:rankingschecker.website
 domain:rankingtool.shop
 domain:rankingtool.website
 domain:rankingtracker.site
@@ -1215,6 +1208,7 @@ domain:realbacklinkchecker.online
 domain:realbacklinkchecker.space
 domain:realwinningonlinecasino.online
 domain:rjcentinc.com
+domain:royaldb.us.com
 domain:russellcommission.org
 domain:s-tribe.net
 domain:sahammurah.com
@@ -1248,6 +1242,7 @@ domain:seoauditcheckertool.shop
 domain:seobacklink.shop
 domain:seobacklinkagency.site
 domain:seobacklinkagency.website
+domain:seobacklinkbuilding.shop
 domain:seobacklinkbuildingservices.online
 domain:seobacklinkbuildingservices.site
 domain:seobacklinkchecker.site
@@ -1380,6 +1375,7 @@ domain:seourlchecker.site
 domain:seowebchecker.space
 domain:seowebsitechecker.space
 domain:seowebsitechecker.website
+domain:seozens.info
 domain:sepchecker.shop
 domain:sepchecker.site
 domain:sepchecker.store
@@ -1466,7 +1462,6 @@ domain:sitetrafficstatsfree.shop
 domain:sitevisitorsperday.shop
 domain:sitewebseo.link
 domain:smartstimer.com
-domain:smartwebdirectory.xyz
 domain:socialbacklinks.space
 domain:soulvocable.com
 domain:southfwb.com
@@ -1490,7 +1485,6 @@ domain:top5casino.online
 domain:topbacklinkchecker.shop
 domain:topbacklinkchecker.store
 domain:topbacklinkchecker.website
-domain:topleveldomains.space
 domain:toponlinegamblingcasinos.online
 domain:topseobacklink.link
 domain:topseochecker.online
@@ -1659,5 +1653,21 @@ domain:whitehatbacklinks.space
 domain:whitehatseo.site
 domain:whitehatseo.website
 domain:wholinkstomysite.store
-domain:yourwebdirectory.xyz
 domain:youseotools.com
+
+# --- Spam host name (directory / SEO / backlink marketplace) (6) ---
+domain:a1webdirectory.xyz
+domain:australianwebdirectory.shop
+domain:directorydaddy.xyz
+domain:eachdirectory.xyz
+domain:smartwebdirectory.xyz
+domain:yourwebdirectory.xyz
+
+# --- Image hotlink / scraper (one domain, image-source links) (1) ---
+domain:rosih.ru
+
+# --- Other spam anchor/title evidence (4) ---
+domain:alltopleveldomains.space
+domain:domainwork.space
+domain:newsblogsports.site
+domain:topleveldomains.space

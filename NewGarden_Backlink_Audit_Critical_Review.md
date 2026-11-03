@@ -1,92 +1,89 @@
-# New Garden Landscaping & Nursery — Backlink Audit: Critical Review & Disavow Prep
+# New Garden Landscaping & Nursery — Backlink Audit: Critical Review & Rebuild to Signed Format
 
 **Target site:** newgarden.com
-**Source workbook:** `NewGarden_Backlinks_Audit.xlsx`
-**Reviewed:** 2026-11-03
-**Reviewer:** independent re-check against live Ahrefs + Semrush (not a restatement of the workbook)
-
-> **Note on the brief.** The task text and the 22-row table referenced `blackwalnutconstruction.com` — that was a *sample* of the format. The actual data to assess is this workbook, for **newgarden.com**. "Tab 05" = the **Exact Match Anchors** sheet (the held, possibly-commissioned placements).
+**Rebuilt:** 2026-11-03, to conform to `AUDIT_FORMAT.md`, `BACKLINK_AUDIT_PLAYBOOK.md`, and the K&K Manufacturing template.
+**Source of truth:** Semrush Backlink Analytics export (= the workbook), live-verified; Ahrefs used only for corroboration.
 
 ---
 
-## 1. Bottom line
+## 1. What changed in this rebuild
 
-- The audit is **sound and internally consistent.** Every count reconciles, and the single most important safety check passes: **no held / pending / exact-match / "Keep" domain has leaked into the disavow file.**
-- The underlying data is **authentic and current** — live Semrush totals match the workbook exactly, and an independent Ahrefs pull confirms the same spam campaigns and the same legitimate core.
-- **Disavow file is prepared** (`disavow_newgarden.txt`, 1,646 domains). It is **not** submitted, and it should not be until two human gates clear (Search Console manual-action check + supplier confirmation).
-- Two things to correct in how the audit is *presented* (not errors in the decisions): the "4,216 spam backlinks" headline is inflated by one image-hotlink domain, and "disavow" is being treated as the default when **monitoring** is the more defensible default here.
+The uploaded workbook was already ~95% conformant (it came off the same `build.py`). Two kinds of fixes were applied:
+
+### A. One substantive classification defect — fixed
+The playbook (verdict rule 4) says **exact-match commercial/geo anchors are always *Held* for supplier confirmation, never silently kept**. The uploaded workbook left **118** such domains in **Keep**.
+
+Applying the playbook's verdict order (rule 2 "AS ≥ 20 → Keep" outranks rule 4):
+- **4 domains stayed Keep** — AS ≥ 20, genuine press/news (`einpresswire.com` AS 48, `newsblaze.in` 25, `lmcordoba.com.ar` 21, `middletownlifemagazine.com` 20).
+- **114 domains moved Keep → Held** — 82 dofollow → **Held (Pending Partner)**, 32 nofollow → **Held (Nofollow, No Action)**.
+
+This is validated against the signed template: in K&K, ~99% of exact-match-commercial domains are Held (only 4 incidental exceptions). New Garden now matches that discipline. **The disavow set is unchanged** — Held is never disavowed, so no good or paid link is newly at risk; the fix simply surfaces 82 more domains to the supplier instead of hiding them in Keep.
+
+### B. Format conformance — fixed
+- Title now merged **B1:E2** (was unmerged).
+- **Key findings** heading → 10 pt; expanded from **6 → 7 findings** (playbook requires seven).
+- Anchor-profile header row → 9 pt (was 10).
+- Pending-Disavow header wording → "…append to **disavow.txt**…" (matches signed format).
+
+### Count changes (client-facing)
+| Status | Before | After |
+|---|---:|---:|
+| Spam (Disavow) | 1,646 | **1,646** (unchanged) |
+| Held (Pending Partner) | 120 | **202** |
+| Held (Nofollow, No Action) | 13 | **45** |
+| Spam (Nofollow, No Action) | 56 | 56 |
+| Keep | 848 | **734** |
+| Own Site | 0 | 0 |
+| **Total** | 2,683 | 2,683 |
+
+Tab 05 (Exact Match Anchors): 133 → **247 rows**. Pending Disavow Lines: 120 → **202**.
 
 ---
 
-## 2. What was produced
+## 2. Data validation (independent, live)
 
-| File | Contents | Status |
-|---|---|---|
-| `disavow_newgarden.txt` | 1,646 spam domains with ≥1 dofollow link, Google format | **Ready, HELD for submission** |
-| `disavow_newgarden_PENDING_partner_confirmation.txt` | 120 held exact-match/geo domains | Append **only** for domains the supplier does **not** confirm |
-| `NewGarden_Backlink_Audit_Critical_Review.md` | this review | — |
+- **Semrush live totals match the workbook exactly:** `8,086 backlinks / 2,683 referring domains, AS 30`. Authentic, current export.
+- **History (Semrush):** referring domains sat near **700–1,200 for most of the past year, then jumped from ~1,170 (Sep 2026) to ~2,640 (Oct)** — a recent attack.
+- **Ahrefs corroboration:** confirms the spam campaigns, the legitimate core (`plants.newgarden.com` catalogue, branded listings), and independently rates the Tab 05 geo anchors **not spam, DR 60** — supporting *hold*, not disavow.
 
 ---
 
-## 3. Data validation (independent, "check on all tools")
+## 3. Verification — 16/16 checks pass (`verify.py`)
 
-**Semrush (the workbook's own source), live 2026-11-03:**
-`total=8086 · domains=2683 · follows=7293 · nofollows=793 · AS=30 · images=292`
-→ Matches the workbook's stated `8,086 backlinks / 2,683 referring domains` **exactly**. The export is faithful and not stale.
+**Disavow integrity:** all lines `domain:` lowercase, no URLs, no duplicates; every file domain is Spam (Disavow) with ≥1 dofollow; **no Held/Keep/Own-Site/nofollow leak**.
+**No false positives:** every one of the 1,646 disavow domains rests on **visible evidence** — a spam/sales-copy anchor, a spam page title (e.g. the `.space` "Where to buy aged domains and backlinks" domain-marketplace titles), an off-topic anchor, or a known directory/SEO host — **none on Authority Score or TLD alone** (the playbook's hard rule, and its `weldrunners` lesson).
+**No false negatives:** zero Keep/Held domains carry a dofollow spam anchor; zero nofollow-spam rows actually have a dofollow link.
+**Reconciliation:** status counts sum to 2,683; Disavow List = Spam (Disavow) set; Pending = Held (Pending Partner) set; Tab 05 = both Held sets; backlink sums reconcile to 8,086.
 
-**Ahrefs (independent second opinion):**
-- Confirms the spam campaigns and independently flags them spam: *"Build Powerful Website Authority with Premium SEO Backlinks newgarden.com"*, *"High Quality Dofollow Backlinks DA 50 PA 40 Premium PBN…"*, and the *"SEOExpress.org"* fake-testimonial spam (604 ref domains).
-- Confirms the legitimate core: branded *"New Garden Landscaping & Nursery Inc"* and the `plants.newgarden.com` plant-catalogue citations (not spam, DR 52) — correctly kept.
-- Confirms the Tab 05 geo anchors *"Landscape Maintenance Services in Greensboro/Winston-Salem, NC"* (97 ref domains each) are marked **not spam, DR 60** — supporting the decision to **hold rather than disavow** them.
-- Spot-checks: `favemarks.net` → spam in both tools; `atozbookmarks.net` (Tab 05) → present, not spam; rows are genuine, not fabricated.
+**Concentration caveat (unchanged):** `rosih.ru` is 2,536 of the 4,216 "disavowed backlinks" but Ahrefs sees only 3 — it is **image hotlinking** of a `plants.newgarden.com` image, not bought links. Judge scale by **1,646 domains**, not backlink count.
 
 ---
 
-## 4. Correctness checks on the workbook (all pass)
+## 4. Structural conformance vs the K&K template
 
-| Check | Result |
+Tab order, every data-tab header, freeze panes (B2), autofilter, gridlines, accent `FF0C343D`, Geist, 21 pt title, and the embedded logo all **match**. Residual differences are benign and expected:
+- Summary B1 holds the client name (per-client by design).
+- Summary has one extra merged region — the **source-note row** (A30), which New Garden's workbook carries and K&K places differently.
+- Anchor Analysis has one extra column-width definition (cosmetic; both tabs have the correct 6 columns/headers).
+
+### Caveats I could not clear in this environment
+- The playbook's `kk/` scripts and the authoritative `NIC_signed_template.xlsx` are **not in the repo**, so a pixel-exact `compare.py` against the *NIC* template could not be run; the **K&K workbook you supplied was used as the structural reference** instead.
+- **Geist** is not installed here, so the font name is set correctly but its on-screen rendering can't be verified locally.
+- No raw Semrush/Ahrefs CSVs were supplied; the rebuild used the workbook's own data, which *is* the Semrush export (live totals matched exactly).
+
+---
+
+## 5. Human gates (unchanged — I cannot clear these)
+1. **Supplier confirmation.** New Garden's brief calls this role "supplier"; the workbook calls it "partner" — tied together once in the disavow file header. Ask which of the 202 pending placements were commissioned; append to `disavow_newgarden.txt` only those **not** confirmed.
+2. **Search Console.** Check for a manual action, and for an existing disavow file on the `newgarden.com` property (uploading **replaces** it). No client-owned redirect domains were found, so the single file is the complete set.
+3. Prefer **monitoring** unless a manual action exists or the client confirms buying links. I did **not** contact the supplier and did **not** submit anything to Google.
+
+---
+
+## 6. Files
+| File | Contents |
 |---|---|
-| Summary counts vs actual tab rows | ✅ reconcile (1,646 / 848 / 120 / 56 / 13 = 2,683) |
-| Held "Pending Partner" domains in disavow file | ✅ **0 leaks** |
-| Tab 05 exact-match domains in disavow file | ✅ **0 leaks** |
-| "Keep" domains in disavow file | ✅ **0 leaks** |
-| Every disavow domain is `Spam (Disavow)` in the audit | ✅ 1,646/1,646 |
-| Disavow domains carry a dofollow link | ✅ all; 0 contradictions |
-| Duplicate disavow lines | ✅ none |
-| Nofollow-"no action" rows with a dofollow link | ✅ 0 contradictions |
-| Spam anchors hiding in "Keep" (false negatives) | ✅ none found |
-
-**False-positive risk (the real danger of disavowing):** the **highest-authority domain in the entire disavow set is only AS 18** (a hacked-link injection — *"LINKS FOR newgarden.com TELEGRAM @…"*), then rosih.ru at AS 10. No strong editorial/legitimate domain is being disavowed. The 9 disavow domains whose top anchor is a plain `newgarden.com` are all link-farm TLDs (`a1webdirectory.xyz`, `australianwebdirectory.shop`, `.space` directories) — correctly caught by the TLD rule. **Risk of harming good links: very low.**
-
----
-
-## 5. Two presentation issues to fix
-
-1. **The "4,216 disavowed backlinks" figure is misleading.** `rosih.ru` alone accounts for **2,536 of them (60%)**. Ahrefs sees only **3** links from that domain — the signature of **image hotlinking** (rosih.ru embeds a `plants.newgarden.com` image across thousands of its catalogue pages; Semrush counts each page as a backlink). Disavowing the *domain* is harmless, but describe the scale as **1,646 spam domains**, not "4,216 spam links," and don't characterise rosih.ru as bought links.
-
-2. **Default action should be "monitor," not "disavow."** The Summary itself says it well: disavow only if Search Console shows a **manual action** or the client **confirms buying links**. Google ignores obvious auto-generated spam on its own, and an unnecessary disavow can remove value. The file should sit ready and be submitted only when a gate below actually triggers.
-
----
-
-## 6. Tab 05 (Exact Match Anchors) — the held set
-
-133 domains, all "Directory / blog" type, carrying exact-match local-service anchors:
-- **70 Winston-Salem**, **51 Greensboro**, **12 non-geo**
-- **120 dofollow → "Held (Pending Partner)"** (candidates for the pending file)
-- **13 nofollow → "No action"** (pass no value either way)
-
-These are the links that **must be confirmed with the previous SEO supplier before any disavow**. They look like a single coordinated local-SEO package (consistent anchors, directory sources) — which is exactly why they could be a legitimate commissioned placement rather than toxic spam. Columns F (*Partner confirmed? Y/N*) and G (*Final decision*) are intentionally blank, to be filled **after** the supplier responds.
-
----
-
-## 7. Human gates — what I did NOT do (and cannot)
-
-- **I did not contact the previous supplier**, and I cannot confirm on their behalf which anchors were commissioned. That confirmation is a prerequisite to finalising the pending set.
-- **I did not submit anything to Google.** The disavow file is prepared and held.
-- **Check Google Search Console** for a manual action before submitting — this data does not show one, and if there is none, monitoring is the better path.
-
-### Recommended next steps
-1. Confirm with the previous SEO supplier which Tab 05 placements were commissioned; record Y/N in column F and the decision in column G.
-2. For the domains **not** confirmed, append `disavow_newgarden_PENDING_partner_confirmation.txt` to `disavow_newgarden.txt`.
-3. Check Search Console for a manual action. If none and the client never bought links, **monitor** rather than submit.
-4. If submitting: upload `disavow_newgarden.txt` in Google's Disavow Tool for the correct property (note links point to `newgarden.com`, `www.newgarden.com`, and `plants.newgarden.com` — a domain-property disavow covers all).
+| `NewGarden_Backlinks_Audit.xlsx` | Rebuilt 7-tab workbook, reclassified, 7 findings, logo preserved |
+| `disavow_newgarden.txt` | 1,646 spam/dofollow domains, grouped by reason, playbook header, **held for submission** |
+| `disavow_newgarden_PENDING_partner_confirmation.txt` | 202 held domains; append only those the supplier does not confirm |
+| `build.py` / `verify.py` | Reproducible rebuild + 16-check verification suite |
