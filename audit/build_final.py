@@ -157,18 +157,50 @@ for t,bl in prof:
     sc=ws.cell(r,3,bl/prof_total); sc.font=BFONT; sc.number_format=PCT
     rd=ws.cell(r,4,prof_rd[t]); rd.font=BFONT; rd.number_format=NUM
     r+=1
+from openpyxl.styles import Border, Side
+THIN=Side(style='thin', color='FF000000'); BORD=Border(THIN,THIN,THIN,THIN)
+CENTER=Alignment(horizontal='center', vertical='center'); LEFTV=Alignment(horizontal='left', vertical='center')
+# status table: borders + alignment (A3:E{total_row})
+for rr in range(3, total_row+1):
+    for ci in range(1,6):
+        c=ws.cell(rr,ci); c.border=BORD
+        if rr==3: c.alignment=CENTER
+        elif ci in (2,3,4): c.alignment=CENTER
+        elif ci==5: c.alignment=WRAP
+        else: c.alignment=LEFTV
+# anchor-profile table: borders + alignment (ap_cols .. last)
+last_ap=r-1
+for rr in range(ap_cols, last_ap+1):
+    for ci in range(1,5):
+        c=ws.cell(rr,ci); c.border=BORD
+        if rr==ap_cols: c.alignment=CENTER
+        elif ci in (2,3,4): c.alignment=CENTER
+        else: c.alignment=LEFTV
 setw(ws,{'A':38.86,'B':16.29,'C':17.57,'D':18.71,'E':120})
 for i in range(1,r+2): ws.row_dimensions[i].height=22.5
 try:
     img=XLImage('assets/image1.png'); img.width=186; img.height=55; ws.add_image(img,'A1')
 except Exception as e: print('logo skip',e)
 
+NUMH={'AS','Backlinks',"RD's",'Traffic','In Disavow','Dofollow Links','Nofollow Links',
+      'Share of Backlinks','Referring Domains','Domains','Spam Domains Using It','Organic Keywords'}
 def datasheet(title, headers, records, widths, bodyh=22.5):
     ws=wb.create_sheet(title); ws.append(headers)
     for rec in records: ws.append(rec)
-    hdr(ws,1); bodyfont(ws,2); ws.freeze_panes='B2'; setw(ws,widths)
+    # header: teal fill, white bold, centered, bordered (data rows stay borderless like sample)
+    for c in ws[1]:
+        if c.value is not None:
+            c.font=HFONT; c.fill=HFILL
+            c.alignment=Alignment(horizontal='center', vertical='center', wrap_text=True); c.border=BORD
+    bodyfont(ws,2); ws.freeze_panes='B2'; setw(ws,widths)
     ws.sheet_format.defaultRowHeight=bodyh; ws.sheet_format.customHeight=True
     ws.row_dimensions[1].height=31.5
+    numcols=[i+1 for i,h in enumerate(headers) if h in NUMH]
+    cen=Alignment(horizontal='center', vertical='center')
+    if numcols:
+        for row in ws.iter_rows(min_row=2):
+            for ci in numcols:
+                row[ci-1].alignment=cen
     return ws
 
 # Referring Domain Audit
