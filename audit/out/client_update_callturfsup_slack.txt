@@ -1,9 +1,1 @@
-Quick update on the backlink cleanup for *callturfsup.com* 👇
-
-Someone's been pointing a lot of spam sites at you — it's climbed sharply, with more than half of it landing in just the last two months — so we went through the full live profile, every domain.
-
-• Of the *3,129* sites linking to you, *2,898 are spam*. We've got a disavow file ready for the *2,242* that can actually hurt your rankings — the other ~650 are harmless (no-follow), so we're leaving them alone.
-• Your real listings — *BBB, Yellow Pages, Chamber of Commerce* and the like — are all kept and untouched.
-• Before we send anything to Google, about *180* links look like they may have been placed by a *previous SEO* (exact-match "lawn care Gainesville, VA" style anchors), so we'd like those confirmed first — and it'd help to know whether a disavow file was ever uploaded for the site before.
-
-Once we hear back we'll submit it and keep watching, since the spam is still coming in. 🛡️
+Quick update on the backlink cleanup for callturfsup.com: someone has been pointing a lot of spam sites at you and it has climbed sharply, with more than half of it landing in just the last two months, so we went through the full live profile, every domain. Of the 3,129 sites linking to you, 2,898 are spam, and we have a disavow file ready for the 2,242 that can actually hurt rankings (the rest are harmless). Your real listings like BBB, Yellow Pages and Chamber of Commerce are all kept and untouched. Before we send anything to Google, about 180 links look like they may have been placed by your previous SEO, so we want them to confirm first, and it would help to know if a disavow file was ever uploaded for the site before. Once we hear back we submit it and keep watching while the spam is still coming in.
