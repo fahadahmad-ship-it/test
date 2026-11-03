@@ -1,0 +1,26 @@
+# Disavow file - farison.com
+# Scope: the 13 referring domains listed in Tab 08
+# Generated: 2026-11-03
+# Verified against Ahrefs (Site Explorer) and Semrush (Backlink Analytics) on 2026-11-03.
+#
+# All 13 confirmed: DR 0 / Authority Score ~2, dofollow, exact-match commercial
+# anchors, hosted on the shared 69.13.0.0/16 block. They are a subset of a
+# ~287-domain directory network on that same /16 (see assessment + full-network file).
+#
+# DRAFT - do NOT submit to Google Search Console until confirmed with Harbinger
+# and the partner who commissioned these links. Disavowing at domain: level
+# removes all links from each domain (current /detail/ URLs + legacy redirected URLs).
+#
+domain:gotolistings.org
+domain:getzzby.com
+domain:findzy.net
+domain:listingspace.net
+domain:showyourbizz.com
+domain:directoryhop.com
+domain:premiumlistings.co
+domain:downtownlists.com
+domain:b-listings.com
+domain:prolocalbusinesssearch.com
+domain:boblistings.org
+domain:smallbizdir.com
+domain:local-business-center.com
