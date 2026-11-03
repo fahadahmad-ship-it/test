@@ -1,0 +1,106 @@
+# Disavow file for collinspoolmanagement.com
+# Prepared: 2026-11-03
+# Scope: 76 referring domains flagged in Tab 08 (two footprints), assessed
+#        against the wider referring-domain profile.
+# Format: Google Search Console disavow-links tool. "domain:" disavows every
+#         link from the domain and its subdomains. Lines starting with # are comments.
+#
+# ****************************** DO NOT SUBMIT YET ******************************
+# This file requires sign-off BEFORE upload to Google Search Console:
+#   1. Harbinger (SEO lead)                              - whole file
+#   2. Partner who commissioned the directory/bookmark   - Section 2 only
+#      links (Section 2 reverses paid link-building work)
+# ***************************************************************************
+#
+# ============================================================================
+# SECTION 1 - Spam / PBN link-selling network (43 domains)
+# Footprint: link-selling anchors ("High Quality Dofollow Backlinks DA 50 PA 40
+#   Premium PBN Network Service ..." and "Professional Link Building Services
+#   Helping ..."), first seen Jul-Sep 2026. Unsolicited negative-SEO-style
+#   spam. Recommend disavow at domain level.
+# ============================================================================
+
+domain:cindylaup.com   # not present in Ahrefs index
+domain:hostprinter.com   # not present in Ahrefs index
+domain:digitalseotool.com   # not present in Ahrefs index
+domain:adcreativevideo.com   # not present in Ahrefs index
+domain:breachviews.com   # not present in Ahrefs index
+domain:bisprofit.com   # Ahrefs: DR 1.4, first_seen 2026-08-15, is_spam=true
+domain:plrdownloadshub.com   # Ahrefs: DR 6.0, first_seen 2026-08-21, is_spam=true
+domain:fletcherrld.com   # not present in Ahrefs index
+domain:aloysionunes.com   # not present in Ahrefs index
+domain:betwinnermirror.com   # not present in Ahrefs index
+domain:techbumppy.com   # not present in Ahrefs index
+domain:blogerreviewers.com   # Ahrefs: DR 0.0, first_seen 2026-08-12, is_spam=true
+domain:fashionclothingnews.com   # Ahrefs: DR 0.5, first_seen 2026-08-25, is_spam=true
+domain:ufabettererm4.com   # not present in Ahrefs index
+domain:archive-hu.com   # Ahrefs: DR 4.2, first_seen 2026-08-15, is_spam=true
+domain:onlyhealthydeals.com   # Ahrefs: DR 27.0, first_seen 2026-08-25, is_spam=true
+domain:chordmp3.net   # Ahrefs: DR 1.3, first_seen 2026-09-24, is_spam=true
+domain:betulcrime.com   # Ahrefs: DR 40.0, first_seen 2026-08-23, is_spam=true
+domain:canadapsilocybin.com   # Ahrefs: DR 0.0, first_seen 2026-08-26, is_spam=true
+domain:fittyfoody.com   # Ahrefs: DR 13.0, first_seen 2026-09-06, is_spam=true
+domain:firstguestpost.com   # not present in Ahrefs index
+domain:themicrodigits.com   # not present in Ahrefs index
+domain:gladeflowers.com   # not present in Ahrefs index
+domain:clifflisting.com   # not present in Ahrefs index
+domain:coruzants.com   # Ahrefs: DR 0.0, first_seen 2026-08-24, is_spam=true
+domain:currentchron.com   # not present in Ahrefs index
+domain:texturometer.com   # not present in Ahrefs index
+domain:digitalchatni.com   # Ahrefs: DR 0.1, first_seen 2026-08-24, is_spam=true
+domain:daechul.co.com   # not present in Ahrefs index
+domain:crembi.shop   # not present in Ahrefs index
+domain:reisenweg.com   # not present in Ahrefs index
+domain:bripto.shop   # Ahrefs: DR 0.5, first_seen 2026-09-06, is_spam=true
+domain:homesforsaleoldgreenwichct.com   # Ahrefs: DR 23.0, first_seen 2026-08-30, is_spam=true
+domain:smartstimer.com   # not present in Ahrefs index
+domain:cvillico.com   # not present in Ahrefs index
+domain:kernelpanicpodcast.com   # not present in Ahrefs index
+domain:mymarketpost.com   # Ahrefs: DR 0.6, first_seen 2026-08-24, is_spam=true
+domain:hotonlinegaming.com   # not present in Ahrefs index
+domain:raiseold.com   # not present in Ahrefs index
+domain:100ranking.info   # not present in Ahrefs index
+domain:100ranking.link   # not present in Ahrefs index
+domain:bestseosuite.com   # not present in Ahrefs index
+domain:24rankings.info   # not present in Ahrefs index
+
+# ============================================================================
+# SECTION 2 - Directory / bookmark / article listings (33 domains)
+# Footprint: exact-match commercial anchors ("Commercial Pool Services Atlanta
+#   GA", "Lifeguard Certification Atlanta GA", etc.), first seen Dec 2025-Aug
+#   2026. These were COMMISSIONED by a partner. Disavowing them reverses paid
+#   work - confirm with that partner before this section is submitted.
+# ============================================================================
+domain:articles-reference.com   # not present in Ahrefs index
+domain:elistingz.com   # not present in Ahrefs index
+domain:articles4all.org   # Ahrefs: DR 0.5, first_seen 2025-07-07, is_spam=false
+domain:instabookmarking.com   # Ahrefs: DR 0.5, first_seen 2025-05-31, is_spam=false
+domain:atozbookmarks.net   # Ahrefs: DR 0.1, first_seen 2024-12-11, is_spam=false
+domain:articlecity.info   # not present in Ahrefs index
+domain:engageeditor.com   # not present in Ahrefs index
+domain:gogodex.com   # not present in Ahrefs index
+domain:bizvote.org   # Ahrefs: DR 0.1, first_seen 2026-03-03, is_spam=true
+domain:articlelistingz.com   # not present in Ahrefs index
+domain:favoritedirectory.org   # not present in Ahrefs index
+domain:areasearchindex.com   # not present in Ahrefs index
+domain:infodirectorynow.com   # not present in Ahrefs index
+domain:favemarks.net   # Ahrefs: DR 0.2, first_seen 2026-04-30, is_spam=true
+domain:bookmarkhaven.com   # Ahrefs: DR 0.0, first_seen 2026-05-25, is_spam=false
+domain:bookmarkingbuddy.com   # Ahrefs: DR 0.0, first_seen 2026-05-22, is_spam=false
+domain:clicknmark.com   # Ahrefs: DR 0.0, first_seen 2026-05-12, is_spam=true
+domain:globallistingzone.com   # not present in Ahrefs index
+domain:finddirectory.org   # not present in Ahrefs index
+domain:businesseshq.co   # not present in Ahrefs index
+domain:essentialbizguide.com   # not present in Ahrefs index
+domain:atozweb.org   # Ahrefs: DR 0.0, first_seen 2026-04-09, is_spam=true
+domain:directoryspoke.org   # Ahrefs: DR 0.1, first_seen 2026-04-12, is_spam=true
+domain:bizrecordcenter.com   # not present in Ahrefs index
+domain:bizmarkdirectory.com   # not present in Ahrefs index
+domain:citylistcore.com   # not present in Ahrefs index
+domain:bizindexportal.com   # not present in Ahrefs index
+domain:citylocalhub.com   # Ahrefs: DR 0.0, first_seen 2026-04-13, is_spam=true
+domain:amazingbizlistings.com   # Ahrefs: DR 0.0, first_seen 2026-04-13, is_spam=true
+domain:geobizdirectory.com   # not present in Ahrefs index
+domain:checkedbizlistings.com   # not present in Ahrefs index
+domain:247businessdirectory.net   # Ahrefs: DR 0.0, first_seen 2026-04-19, is_spam=true
+domain:ideailluminator.com   # Ahrefs: DR 0.0, first_seen 2026-08-06, is_spam=false
