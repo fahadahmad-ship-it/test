@@ -233,15 +233,22 @@ for i,r in enumerate(rows_sorted,2):
     put(ws,i,15,"Semrush",align=CENV); put(ws,i,16,r["ip"],align=CENV)
     put(ws,i,17,("domain:"+r["domain"]) if r["status"]=="Spam (Disavow)" else "")
 
-# ===== All Backlinks (top representative link per referring domain) =====
+# ===== All Backlinks (every backlink, like the template) =====
 ws=wb.create_sheet("All Backlinks")
 cols=["Referring Domain","Status","Tool","Anchor Text","Anchor Type","Link Type","Linking Page URL","Linking Page Title","Target URL"]
 for c,h in enumerate(cols,1): ws.cell(1,c,h)
 style_header(ws,len(cols)); ws.freeze_panes="B2"; apply_widths(ws)
-for i,r in enumerate(rows_sorted,2):
-    put(ws,i,1,r["domain"]); put(ws,i,2,r["status"]); put(ws,i,3,"Semrush",align=CENV)
-    put(ws,i,4,r["anchor"],align=LEFT); put(ws,i,5,r["atype"]); put(ws,i,6,r["link_type"],align=CENV)
-    put(ws,i,7,r["url_from"],align=LEFT); put(ws,i,8,r["title"],align=LEFT); put(ws,i,9,r["url_to"],align=LEFT)
+status_by_dom={r["domain"]:r["status"] for r in rows}
+allbl=[]
+for b in backlinks:
+    dom=root_of(urlparse(b.get("Source url","")).netloc)
+    allbl.append((dom,b))
+allbl.sort(key=lambda x:(x[0], -num(x[1].get("Page ascore"))))
+for i,(dom,b) in enumerate(allbl,2):
+    an=(b.get("Anchor") or "").strip()
+    put(ws,i,1,dom); put(ws,i,2,status_by_dom.get(dom,"Keep")); put(ws,i,3,"Semrush",align=CENV)
+    put(ws,i,4,an,align=LEFT); put(ws,i,5,classify_anchor(an)); put(ws,i,6,"Nofollow" if is_nofollow(b) else "Dofollow",align=CENV)
+    put(ws,i,7,b.get("Source url",""),align=LEFT); put(ws,i,8,b.get("Source title",""),align=LEFT); put(ws,i,9,b.get("Target url",""),align=LEFT)
 
 # ===== Anchor Analysis =====
 ws=wb.create_sheet("Anchor Analysis")
