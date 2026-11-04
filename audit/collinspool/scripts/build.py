@@ -188,6 +188,18 @@ SAMPLE_WIDTHS = {
     "Disavow List": {"A":44.0,"B":14.0,"C":15.57,"D":14.0,"E":11.14,"F":14.86,"G":98.86},
 }
 
+# Columns (1-indexed) the sample centres horizontally, per tab. All data cells
+# are vertically centred; listed columns are also horizontally centred, the rest
+# left-aligned (horizontal=None) - read from the signed sample.
+CENTER_COLS = {
+    "Referring Domain Audit": {3,4,5,6,7,8,9,10,11,15,16},
+    "All Backlinks": {3,6},
+    "Anchor Analysis": {3,4,5,6},
+    "Exact Match Anchors": {4,6},
+    "Pending Disavow Lines": set(),
+    "Disavow List": {2,3,4,5,6},
+}
+
 def style_workbook(wb, data_tabs):
     thin = Side(style="thin", color="FFD9D9D9")
     hdr_fill = PatternFill("solid", fgColor=ACCENT)
@@ -195,20 +207,23 @@ def style_workbook(wb, data_tabs):
     hdr_font = Font(name=FONT, size=9, bold=True, color="FFFFFFFF")
     data_font = Font(name=FONT, size=9, color="FF000000")
     hdr_align = Alignment(horizontal="center", vertical="center", wrap_text=True)
-    data_align = Alignment(vertical="center")
+    ctr = Alignment(horizontal="center", vertical="center")
+    lft = Alignment(vertical="center")
     for name, nrows, ncols, rowh in data_tabs:
         ws = wb[name]
+        center = CENTER_COLS.get(name, set())
         # header row: accent fill, bold white, thin border all round, height 31.5
         for c in range(1, ncols + 1):
             cell = ws.cell(row=1, column=c)
             cell.fill = hdr_fill; cell.font = hdr_font; cell.alignment = hdr_align
             cell.border = Border(left=thin, right=thin, top=thin, bottom=thin)
         ws.row_dimensions[1].height = 31.5
-        # data cells: Geist 9 black on white, vertical centre, NO border, NO row height
+        # data cells: Geist 9 black on white, per-column alignment, no border/height
         for rr in range(2, nrows + 1):
             for c in range(1, ncols + 1):
                 cl = ws.cell(row=rr, column=c)
-                cl.font = data_font; cl.alignment = data_align; cl.fill = white_fill
+                cl.font = data_font; cl.fill = white_fill
+                cl.alignment = ctr if c in center else lft
         ws.freeze_panes = "B2"
         ws.auto_filter.ref = f"A1:{get_column_letter(ncols)}{max(nrows,1)}"
         # gridlines left at default (sample does not override) -> do not set
@@ -386,6 +401,7 @@ def main():
         ws0.cell(row=rr,column=3,value=blcount.get(s,0))
         ws0.cell(row=rr,column=4,value=(scount.get(s,0)/total_dom if total_dom else 0))
         ws0.cell(row=rr,column=5,value=meaning[s]); rr+=1
+    total_row=rr
     ws0.cell(row=rr,column=1,value="Total"); ws0.cell(row=rr,column=2,value=total_dom)
     ws0.cell(row=rr,column=3,value=total_bl); ws0.cell(row=rr,column=4,value=1); rr+=2
 
@@ -428,11 +444,14 @@ def main():
         f"Of the {len(t08)} Tab-08 flagged domains, {len(t08_found)} are in the live profile: {len(t08_dis)} disavowed, {len(t08_held)} held, {len(t08_found)-len(t08_dis)-len(t08_held)} other; {len(t08)-len(t08_found)} not found live.",
         f"One Search Console property ({C.MONEY_DOMAIN}); {red_note}. Held does not mean valuable - disavowing paid links without confirmation can hurt the client.",
     ]
+    kf_head=rr
     ws0.cell(row=rr,column=1,value="Key findings"); rr+=1
-    for i,f in enumerate(findings,1):
-        ws0.cell(row=rr,column=1,value=f"{i}. {f}"); rr+=1
+    for f in findings:                      # unnumbered, as the sample
+        ws0.cell(row=rr,column=1,value=f); rr+=1
     rr+=1
+    ap_head=rr
     ws0.cell(row=rr,column=1,value="Anchor text profile (all backlinks)"); rr+=1
+    at_head=rr
     ws0.cell(row=rr,column=1,value="Anchor type"); ws0.cell(row=rr,column=2,value="Backlinks")
     ws0.cell(row=rr,column=3,value="Share of Backlinks"); ws0.cell(row=rr,column=4,value="Referring Domains (distinct)"); rr+=1
     for at,n in type_bl.most_common():
@@ -443,17 +462,25 @@ def main():
     src_row=rr
     ws0.cell(row=rr,column=1,value=f"Source: Semrush Backlink Analytics + Ahrefs discovery, {TODAY} ({total_bl} backlinks / {total_dom} referring domains). Full Ahrefs merge pending client CSV (Ahrefs API 250-row cap).")
 
-    # --- Summary styling to match the signed sample ---
+    # --- Summary styling to match the signed sample, element by element ---
     maxr=ws0.max_row
+    reg=Font(name=FONT,size=9,color="FF000000")
+    reg_b=Font(name=FONT,size=9,bold=True,color="FF000000")
+    hdr10=Font(name=FONT,size=10,bold=True,color="FF000000")
     for r in range(1,maxr+1):
-        ws0.row_dimensions[r].height=22.5
+        ws0.row_dimensions[r].height=22.5                     # every row 22.5
         for c in range(1,6):
             cl=ws0.cell(row=r,column=c)
-            if cl.value is not None and cl.font is not None and not cl.font.bold:
-                cl.font=Font(name=FONT,size=9,color="FF000000")
-    ws0["B1"].font=Font(name=FONT,size=21,bold=True,color=ACCENT)      # title 21pt
-    for c in range(1,6):                                               # status header 10 bold
-        ws0.cell(row=3,column=c).font=Font(name=FONT,size=10,bold=True,color="FF000000")
+            if cl.value is not None:
+                cl.font=reg                                   # default Geist 9 (blanks stay Calibri 11)
+    ws0["B1"].font=Font(name=FONT,size=21,bold=True,color=ACCENT)   # title 21
+    for c in range(1,6):
+        ws0.cell(row=3,column=c).font=hdr10                   # status-table header 10 bold
+        ws0.cell(row=at_head,column=c).font=hdr10             # anchor-type header 10 bold
+    ws0.cell(row=total_row,column=1).font=reg_b               # Total bold
+    ws0.cell(row=kf_head,column=1).font=reg_b                 # "Key findings" bold
+    ws0.cell(row=ap_head,column=1).font=reg_b                 # "Anchor text profile" bold
+    ws0.cell(row=src_row,column=1).font=Font(name=FONT,size=8,italic=True,color="FF000000")  # source 8 italic
     ws0.sheet_view.showGridLines=False
     for L,w in SAMPLE_WIDTHS["Summary"].items():
         ws0.column_dimensions[L].width=w

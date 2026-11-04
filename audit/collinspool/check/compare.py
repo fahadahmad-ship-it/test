@@ -72,13 +72,32 @@ for t in common:
         cwm = wm.column_dimensions[L].width; cws = ws.column_dimensions[L].width
         if cwm and cws and abs(cwm-cws) > 2:
             d(f"[{t}] col {L} width mine={cwm} sample={cws}")
-    # number formats per column (first data row) - catches % / #,##0 / date mismatches
+    # number formats + alignment per column (first data row)
     if t != "Summary" and wm.max_row > 1 and ws.max_row > 1:
         for c in range(1, min(wm.max_column, ws.max_column)+1):
-            nm = wm.cell(row=2, column=c).number_format
-            nsx = ws.cell(row=2, column=c).number_format
-            if nm != nsx:
-                d(f"[{t}] col {openpyxl.utils.get_column_letter(c)} numfmt mine={nm!r} sample={nsx!r}")
+            L2 = openpyxl.utils.get_column_letter(c)
+            if wm.cell(row=2,column=c).number_format != ws.cell(row=2,column=c).number_format:
+                d(f"[{t}] col {L2} numfmt mine={wm.cell(row=2,column=c).number_format!r} sample={ws.cell(row=2,column=c).number_format!r}")
+            am = wm.cell(row=2,column=c).alignment; asx = ws.cell(row=2,column=c).alignment
+            if (am.horizontal, am.vertical) != (asx.horizontal, asx.vertical):
+                d(f"[{t}] col {L2} align mine=({am.horizontal},{am.vertical}) sample=({asx.horizontal},{asx.vertical})")
+
+# Summary semantic-cell fonts (located by text, robust to row offset)
+def _fsig(cell):
+    f = cell.font; return (f.name, f.size, bool(f.bold), bool(f.italic))
+def _findrow(ws, text):
+    for r in range(1, ws.max_row+1):
+        v = ws.cell(row=r, column=1).value
+        if isinstance(v, str) and v.strip().startswith(text):
+            return r
+    return None
+sm, ss = m["Summary"], s["Summary"]
+if _fsig(sm["B1"]) != _fsig(ss["B1"]):
+    d(f"[Summary] title B1 font mine={_fsig(sm['B1'])} sample={_fsig(ss['B1'])}")
+for label in ["Status","Total","Key findings","Anchor text profile","Anchor type","Source:"]:
+    rm, rs = _findrow(sm, label), _findrow(ss, label)
+    if rm and rs and _fsig(sm.cell(row=rm,column=1)) != _fsig(ss.cell(row=rs,column=1)):
+        d(f"[Summary] '{label}' font mine={_fsig(sm.cell(row=rm,column=1))} sample={_fsig(ss.cell(row=rs,column=1))}")
 
 # images/logo
 def nimg(ws): return len(getattr(ws, "_images", []))
