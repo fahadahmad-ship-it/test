@@ -215,6 +215,25 @@ def style_workbook(wb, data_tabs):
         for L, w in SAMPLE_WIDTHS.get(name, {}).items():
             ws.column_dimensions[L].width = w
 
+# Number formats read from the signed sample, applied by column header.
+NUMFMT = {
+    "Referring Domain Audit": {"Backlinks":"#,##0","RD's":"#,##0","Traffic":"#,##0",
+                                "First Seen":"d mmm yyyy"},
+    "Anchor Analysis": {"Backlinks":"#,##0","Share of Backlinks":"0.00%"},
+    "Disavow List": {"Backlinks":"#,##0","RD's":"#,##0","Traffic":"#,##0",
+                      "Organic Keywords":"#,##0"},
+}
+
+def apply_numfmts(wb):
+    for t, cols in NUMFMT.items():
+        ws = wb[t]
+        hdr = [ws.cell(row=1, column=c).value for c in range(1, ws.max_column+1)]
+        for name, fmt in cols.items():
+            if name in hdr:
+                ci = hdr.index(name) + 1
+                for r in range(2, ws.max_row+1):
+                    ws.cell(row=r, column=ci).number_format = fmt
+
 # ------------------------------------------------------------------ main
 def main():
     domains, stats = build()
@@ -249,7 +268,11 @@ def main():
         df = sum(1 for l in links if not truthy(l.get("nofollow")))
         nf = sum(1 for l in links if truthy(l.get("nofollow")))
         fs = [l.get("fsd") for l in links if l.get("fsd")]
-        first = min(fs) if fs else (ts_to_date(meta.get("first_seen")) if meta.get("first_seen") else "")
+        first_s = min(fs) if fs else (ts_to_date(meta.get("first_seen")) if meta.get("first_seen") else "")
+        try:
+            first = datetime.date.fromisoformat(first_s) if first_s else None
+        except ValueError:
+            first = None
         pts = Counter(C.host_of(l.get("redirect_url") or l.get("target_url")) for l in links)
         ex = pick_example(links)
         tool = "Semrush"
@@ -456,6 +479,22 @@ def main():
         ("Pending Disavow Lines", ws5.max_row, 3, None),
         ("Disavow List", ws6.max_row, 7, None),
     ])
+
+    # number formats on data tabs (match the sample)
+    apply_numfmts(wb)
+    # number formats on the Summary tables
+    statuses=set(order)|{"Total"}
+    for r in range(1, ws0.max_row+1):
+        a=ws0.cell(row=r,column=1).value
+        cval=ws0.cell(row=r,column=3).value
+        if a in statuses:                       # status table: Domains/Backlinks #,##0, Share 0.0%
+            ws0.cell(row=r,column=2).number_format="#,##0"
+            ws0.cell(row=r,column=3).number_format="#,##0"
+            ws0.cell(row=r,column=4).number_format="0.0%"
+        elif isinstance(ws0.cell(row=r,column=2).value,(int,float)) and isinstance(cval,float):
+            ws0.cell(row=r,column=2).number_format="#,##0"   # anchor profile: Backlinks
+            ws0.cell(row=r,column=3).number_format="0.0%"    # Share of Backlinks
+            ws0.cell(row=r,column=4).number_format="#,##0"   # Referring Domains
 
     out_xlsx=f"{OUT}/CollinsPool_Backlinks_Audit.xlsx"
     wb.save(out_xlsx)

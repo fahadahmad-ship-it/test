@@ -72,6 +72,13 @@ for t in common:
         cwm = wm.column_dimensions[L].width; cws = ws.column_dimensions[L].width
         if cwm and cws and abs(cwm-cws) > 2:
             d(f"[{t}] col {L} width mine={cwm} sample={cws}")
+    # number formats per column (first data row) - catches % / #,##0 / date mismatches
+    if t != "Summary" and wm.max_row > 1 and ws.max_row > 1:
+        for c in range(1, min(wm.max_column, ws.max_column)+1):
+            nm = wm.cell(row=2, column=c).number_format
+            nsx = ws.cell(row=2, column=c).number_format
+            if nm != nsx:
+                d(f"[{t}] col {openpyxl.utils.get_column_letter(c)} numfmt mine={nm!r} sample={nsx!r}")
 
 # images/logo
 def nimg(ws): return len(getattr(ws, "_images", []))
