@@ -1,0 +1,177 @@
+{
+ "FP_no_visible_evidence": [
+  "newsblogsports.site"
+ ],
+ "disavow_benign_anchor_only": [
+  [
+   "alltopleveldomains.space",
+   "Naked URL",
+   "sales-in-title/url;marketplace-title"
+  ],
+  [
+   "domainwork.space",
+   "Naked URL",
+   "sales-in-title/url;marketplace-title"
+  ],
+  [
+   "a1webdirectory.xyz",
+   "Naked URL",
+   "host:directory;sales-in-title/url;marketplace-title"
+  ],
+  [
+   "australianwebdirectory.shop",
+   "Naked URL",
+   "host:directory;sales-in-title/url;marketplace-title"
+  ],
+  [
+   "directorydaddy.xyz",
+   "Naked URL",
+   "host:directory;sales-in-title/url;marketplace-title"
+  ],
+  [
+   "eachdirectory.xyz",
+   "Naked URL",
+   "host:directory;sales-in-title/url;marketplace-title"
+  ],
+  [
+   "newsblogsports.site",
+   "Contextual or other",
+   "NO-BASIS"
+  ],
+  [
+   "smartwebdirectory.xyz",
+   "Naked URL",
+   "host:directory;sales-in-title/url;marketplace-title"
+  ],
+  [
+   "topleveldomains.space",
+   "Naked URL",
+   "sales-in-title/url;marketplace-title"
+  ],
+  [
+   "yourwebdirectory.xyz",
+   "Naked URL",
+   "host:directory;sales-in-title/url;marketplace-title"
+  ]
+ ],
+ "FN_keep_held_dofollow_spam": [
+  [
+   "webmash.org",
+   "Keep",
+   "Naked URL",
+   "newgarden.com"
+  ],
+  [
+   "fun2game2poker.blogspot.com",
+   "Keep",
+   "Contextual or other",
+   "Scopri le ultime notizie, gli eventi con"
+  ],
+  [
+   "loancenter.com",
+   "Keep",
+   "Contextual or other",
+   "dracena"
+  ],
+  [
+   "obtaincallofduty4fre54635.blogspot.com",
+   "Keep",
+   "Contextual or other",
+   "Martin roe (born 1 april 1992) is a norw"
+  ]
+ ],
+ "top_AS_in_disavow": [
+  [
+   "jazminsbeautysalon.be",
+   18.0
+  ],
+  [
+   "rosih.ru",
+   10.0
+  ],
+  [
+   "chordmp3.net",
+   6.0
+  ],
+  [
+   "mediaboooster.com",
+   6.0
+  ],
+  [
+   "aloysionunes.com",
+   5.0
+  ],
+  [
+   "answebtechs.site",
+   5.0
+  ],
+  [
+   "answebtechs1.site",
+   5.0
+  ],
+  [
+   "archive-hu.com",
+   5.0
+  ],
+  [
+   "areebwebs.site",
+   5.0
+  ],
+  [
+   "asalwebtechs1.site",
+   5.0
+  ],
+  [
+   "bestseoquill.site",
+   5.0
+  ],
+  [
+   "bestwebnews.site",
+   5.0
+  ],
+  [
+   "bestwebs12341.site",
+   5.0
+  ],
+  [
+   "bestwebtechs1234.site",
+   5.0
+  ],
+  [
+   "dapacheckerbulk.space",
+   5.0
+  ]
+ ],
+ "target_hosts": [
+  [
+   "newgarden.com",
+   4998
+  ],
+  [
+   "plants.newgarden.com",
+   2871
+  ],
+  [
+   "www.newgarden.com",
+   215
+  ],
+  [
+   "estimate.newgarden.com",
+   2
+  ]
+ ],
+ "blank_first_seen_count": 0,
+ "blank_first_seen_sample": [],
+ "rda_not_in_allbacklinks": [],
+ "allbacklinks_not_in_rda": [],
+ "rda_not_in_abl_count": 0,
+ "abl_not_in_rda_count": 0,
+ "duplicate_rda_domains": [],
+ "duplicate_rda_count": 0,
+ "ema_missing_example": [],
+ "ema_rows": 133,
+ "held_pending": 120,
+ "held_nofollow": 13,
+ "FP_client_cited_no_salescopy": [],
+ "redundant_subdomain_with_parent": []
+}
