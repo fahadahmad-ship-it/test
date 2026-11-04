@@ -190,8 +190,10 @@ def build(records, out_xlsx, logo_path=None):
             else:
                 c.alignment = A_LEFT
         r += 1
-    for cc, val in enumerate(records["summary_total"], 1):
-        c = ws.cell(10, cc, val); c.font = Font(**F_TOTAL); c.fill = fill_white; c.border = FULL_BORDER
+    total = list(records["summary_total"]) + [None]   # E10 empty but styled
+    for cc in range(1, 6):
+        c = ws.cell(10, cc, total[cc - 1]); c.font = Font(**F_TOTAL)
+        c.fill = fill_white; c.border = FULL_BORDER
         if cc in (2, 3):
             c.number_format = NUM; c.alignment = A_CEN
         elif cc == 4:
@@ -199,16 +201,17 @@ def build(records, out_xlsx, logo_path=None):
         else:
             c.alignment = A_LEFT
 
-    ws.cell(11, 1, "Key findings").font = Font(**F_KEYHEAD)
+    kh = ws.cell(11, 1, "Key findings"); kh.font = Font(**F_KEYHEAD); kh.alignment = A_LEFT
     fr = 12
     for kf in records["key_findings"]:
         ws.merge_cells(start_row=fr, start_column=1, end_row=fr, end_column=5)
-        c = ws.cell(fr, 1, kf); c.font = Font(**F_DATA); c.alignment = A_LEFT_WRAP
+        c = ws.cell(fr, 1, kf); c.font = Font(name="Geist", size=9); c.alignment = A_LEFT_WRAP
         fr += 1
 
-    ws.cell(fr, 1, "Anchor text profile (all backlinks)").font = Font(**F_SECTION)
+    sc = ws.cell(fr, 1, "Anchor text profile (all backlinks)")
+    sc.font = Font(**F_SECTION); sc.alignment = A_LEFT
     hdr = fr + 1
-    for i, h in enumerate(["Anchor type", "Backlinks", "Share of Backlinks", "Referring Domains"], 1):
+    for i, h in enumerate(["Anchor type", "Backlinks", "Share of Backlinks", "Referring Domains", None], 1):
         c = ws.cell(hdr, i, h); c.font = Font(**F_HDR); c.fill = fill_accent
         c.alignment = A_HDR; c.border = FULL_BORDER
     rr = hdr + 1

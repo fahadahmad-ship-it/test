@@ -277,6 +277,18 @@ def classify_domain(d):
         if ("erth" in tl or "erthproducts" in tl) and not is_pbn(a, t, u) \
                 and not any(x in tl for x in SPAM_TITLE_TOKENS):
             names_client_clean = True
+    # commercial-category directory placement: the linking page TITLE carries the
+    # client's product term + geography (e.g. "Compost Supplier GA - <site>") while
+    # the anchor is naked/branded. A coordinated directory network, commissioned-
+    # looking -> Held for the partner, not treated as a genuine citation.
+    has_title_commercial_geo = False
+    for r in links:
+        t = _l(_t(r))
+        if not t or "erth" in t or is_pbn(_a(r), _t(r), _u(r)):
+            continue
+        if any(term in t for term in PRODUCT_TERMS) and any(g in t for g in GEO_TERMS):
+            has_title_commercial_geo = True
+
     host_spam = any(spam_host(h) for h in d["hosts"])
     title_spam = any(any(x in _l(_t(r)) for x in SPAM_TITLE_TOKENS) for r in links)
     url_spam = any(any(x in _l(_u(r)) for x in SPAM_URL_TOKENS) for r in links)
@@ -291,13 +303,15 @@ def classify_domain(d):
     # 3. exact-match AND pbn on same domain -> held (review-level)
     if has_exact and has_pbn:
         return "Held", "exact-match commercial + PBN anchor on same domain (review)"
-    # 4. exact-match OR deep money-page link -> held
-    if has_exact or has_deep:
+    # 4. exact-match OR deep money-page link OR commercial-category directory -> held
+    if has_exact or has_deep or has_title_commercial_geo:
         why = []
         if has_exact:
             why.append("exact-match commercial anchor")
         if has_deep:
             why.append("link to deep product page")
+        if has_title_commercial_geo:
+            why.append("commercial-category directory listing (product + geo in page title)")
         return "Held", " / ".join(why)
     # 6. title names client cleanly -> keep (genuine citation) -- checked before spam-copy
     if names_client_clean and not (has_pbn or host_spam or title_spam or url_spam):
