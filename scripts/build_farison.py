@@ -244,56 +244,64 @@ n_fa=write_disavow(f"{OUTDIR}/disavow_farison.com.txt", farison_union, hdr_fa)
 n_lc=write_disavow(f"{OUTDIR}/disavow_lawncare-louisvilleky.com.txt", lc_set, hdr_lc)
 print(f"\ndisavow_farison.com.txt: {n_fa} | disavow_lawncare: {n_lc}")
 
-# ---- workbook ----
+# ---- workbook (match the signed NewGarden sample exactly) ----
 wb=openpyxl.Workbook(); wb.remove(wb.active)
-thin=Side(style="thin",color="FFBFBFBF"); border_all=Border(left=thin,right=thin,top=thin,bottom=thin)
+sthin=Side(style="thin"); box=Border(left=sthin,right=sthin,top=sthin,bottom=sthin)
 def F(size=9,bold=False,color=BLACK): return Font(name="Geist",size=size,bold=bold,color=color)
 fill_accent=PatternFill("solid",fgColor=ACCENT); fill_white=PatternFill("solid",fgColor=WHITE)
-hdr_al=Alignment(horizontal="center",vertical="center",wrap_text=True); data_al=Alignment(vertical="center")
-WIDTHS={'Referring Domain Audit':{'A':30,'B':24.71,'C':7,'D':10,'E':7,'F':8,'G':10,'H':22,'I':9,'J':9,'K':12,'L':40,'M':42,'N':40,'O':9,'P':15,'Q':24},
- 'All Backlinks':{'A':24,'B':24.71,'C':9,'D':50,'E':30,'F':10,'G':52,'H':50,'I':40},
- 'Anchor Analysis':{'A':55,'B':30,'C':11,'D':15,'E':15,'F':18},
- 'Exact Match Anchors':{'A':26,'B':55,'C':50,'D':16,'E':30,'F':16,'G':16},
- 'Pending Disavow Lines':{'A':26,'B':34,'C':80},
- 'Disavow List':{'A':34,'B':7,'C':10,'D':8,'E':8,'F':14,'G':70}}
-def write_tab(name,header,rows,rowh,input_cols=()):
-    ws=wb.create_sheet(name)
-    for c,h in enumerate(header,1): ws.cell(1,c,h)
-    for ri,row in enumerate(rows,2):
-        for c,v in enumerate(row,1): ws.cell(ri,c,v)
-    ncol=len(header); nrow=len(rows)+1
-    for c in range(1,ncol+1):
-        cell=ws.cell(1,c); cell.font=F(9,True,WHITE); cell.fill=fill_accent; cell.alignment=hdr_al; cell.border=border_all
+hdr_al=Alignment(horizontal="center",vertical="center",wrap_text=True)
+WIDTHS={'Referring Domain Audit':{'A':36,'B':24.71,'C':9.57,'D':13,'E':9.43,'F':9.71,'G':12.43,'H':21.29,'I':14,'J':8.71,'K':12,'L':45,'M':8.71,'N':40,'O':14,'P':15,'Q':14},
+ 'All Backlinks':{'A':25.43,'B':27.14,'C':14.71,'D':55,'E':32,'F':10,'G':55,'H':53.14,'I':30.57},
+ 'Anchor Analysis':{'A':115.86,'B':37.71,'C':14,'D':8.71,'E':13,'F':20.29},
+ 'Exact Match Anchors':{'A':25.43,'B':59,'C':53.14,'D':16,'E':24.57,'F':15.43,'G':15},
+ 'Pending Disavow Lines':{'A':32,'B':44,'C':48},
+ 'Disavow List':{'A':44,'B':14,'C':15.57,'D':14,'E':11.14,'F':14.86,'G':98.86}}
+LEFT={"Domain","Referring Domain","Referring domain","Anchor Text","Anchor Type","Top Anchor Text","Example Linking Page",
+ "Linking Page Title","Linking Page URL","Target URL","Disavow Line","Links Point To","Recommendation",
+ "Exact-match commercial anchor","Example backlink (linking page)","Site type (indicative)",
+ "Disavow line (append to disavow_farison.com.txt once confirmed)"}
+NUMCOMMA={"Backlinks","RD's","Traffic","Dofollow Links","Nofollow Links","Referring Domains","Spam Domains Using It","Organic Keywords"}
+def col_fmt(h): return "#,##0" if h in NUMCOMMA else ("0.00%" if h=="Share of Backlinks" else None)
+def col_align(h): return Alignment(horizontal=(None if h in LEFT else "center"), vertical="center")
+def write_tab(name,header,rows):
+    ws=wb.create_sheet(name); ws.sheet_format.defaultRowHeight=15.75
+    for c,h in enumerate(header,1):
+        cell=ws.cell(1,c,h); cell.font=F(9,True,WHITE); cell.fill=fill_accent; cell.alignment=hdr_al; cell.border=box
     ws.row_dimensions[1].height=31.5
-    for rr in range(2,nrow+1):
-        ws.row_dimensions[rr].height=rowh
-        for c in range(1,ncol+1):
-            cell=ws.cell(rr,c); cell.font=F(9); cell.fill=fill_white; cell.alignment=data_al; cell.border=border_all
-    for icx in input_cols:
-        for rr in range(2,nrow+1):
-            cell=ws.cell(rr,icx); cell.fill=fill_accent; cell.font=F(9,False,WHITE)
+    aligns=[col_align(h) for h in header]; fmts=[col_fmt(h) for h in header]
+    for ri,row in enumerate(rows,2):
+        for c,v in enumerate(row,1):
+            cell=ws.cell(ri,c,v); cell.font=F(9); cell.fill=fill_white; cell.alignment=aligns[c-1]
+            if fmts[c-1]: cell.number_format=fmts[c-1]
+    ncol=len(header); nrow=len(rows)+1
     for col,w in WIDTHS.get(name,{}).items(): ws.column_dimensions[col].width=w
     ws.freeze_panes="B2"; ws.auto_filter.ref=f"A1:{get_column_letter(ncol)}{nrow}"
     return ws
-# Summary
-ws=wb.create_sheet("Summary"); ws.sheet_view.showGridLines=False
+# Summary (own small tables are bordered; gridlines off; title 21pt unmerged; source note 8pt gray)
+ws=wb.create_sheet("Summary"); ws.sheet_view.showGridLines=False; ws.sheet_format.defaultRowHeight=15.0
 for col,w in {'A':38.86,'B':16.29,'C':17.57,'D':18.71,'E':120}.items(): ws.column_dimensions[col].width=w
 try:
     img=XLImage(LOGO); img.width=196; img.height=58; ws.add_image(img,"A1")
 except Exception as e: print("logo warn:",e)
-ws.merge_cells("B1:E2"); t=ws.cell(1,2,"Farison Lawn Care"); t.font=F(9,True,ACCENT); t.alignment=Alignment(horizontal="left",vertical="center")
+t=ws.cell(1,2,"Farison Lawn Care"); t.font=F(21,True,ACCENT); t.alignment=Alignment(horizontal="left",vertical="center")
 ws.row_dimensions[1].height=22.5; ws.row_dimensions[2].height=22.5
 for c,h in enumerate(["Status","Domains","Backlinks","Share of Domains","What it means"],1):
-    cell=ws.cell(3,c,h); cell.font=F(10,True,WHITE); cell.fill=fill_accent; cell.alignment=hdr_al; cell.border=border_all
+    cell=ws.cell(3,c,h); cell.font=F(10,True,WHITE); cell.fill=fill_accent; cell.alignment=hdr_al; cell.border=box
 rr=4
+def sumcell(cell,c,total=False):
+    cell.font=F(9,total); cell.fill=fill_white; cell.border=box
+    if c in (2,3): cell.number_format="#,##0"; cell.alignment=Alignment(horizontal="center",vertical="center")
+    elif c==4: cell.number_format="0.0%"; cell.alignment=Alignment(horizontal="center",vertical="center")
+    elif c==5: cell.alignment=Alignment(vertical="center",wrap_text=True)
+    else: cell.alignment=Alignment(vertical="center")
 for st in STATUS_ORDER:
     for c,v in enumerate([st,dom_by.get(st,0),bl_by.get(st,0),(dom_by.get(st,0)/TOTAL_DOM if TOTAL_DOM else 0),MEANS[st]],1):
-        cell=ws.cell(rr,c,v); cell.font=F(9); cell.fill=fill_white; cell.alignment=Alignment(vertical="center",wrap_text=(c==5)); cell.border=border_all
+        sumcell(ws.cell(rr,c,v),c)
     rr+=1
 for c,v in enumerate(["Total",TOTAL_DOM,TOTAL_BL,1,""],1):
-    cell=ws.cell(rr,c,v); cell.font=F(9,True); cell.fill=fill_white; cell.alignment=Alignment(vertical="center"); cell.border=border_all
+    sumcell(ws.cell(rr,c,v),c,total=True)
 for r_ in range(3,rr+1): ws.row_dimensions[r_].height=22.5
-kf=rr+2; ws.cell(kf,1,"Key findings").font=F(10,True,ACCENT)
+kf=rr+2; ws.cell(kf,1,"Key findings").font=F(9,True,ACCENT); ws.row_dimensions[kf].height=22.5
 spam_dom=dom_by["Spam (Disavow)"]+dom_by["Spam (Nofollow, No Action)"]
 findings=[
  f"{spam_dom:,} of {TOTAL_DOM:,} referring domains are spam. {dom_by['Spam (Disavow)']:,} have a dofollow link and go in the disavow file; {dom_by['Spam (Nofollow, No Action)']} are nofollow and pass nothing.",
@@ -306,13 +314,18 @@ findings=[
 r_=kf+1
 for fnd in findings:
     ws.merge_cells(f"A{r_}:E{r_}"); cell=ws.cell(r_,1,fnd); cell.font=F(9); cell.alignment=Alignment(vertical="center",wrap_text=True); ws.row_dimensions[r_].height=22.5; r_+=1
-ap=r_+1; ws.cell(ap,1,"Anchor text profile (all backlinks)").font=F(10,True,ACCENT)
+ap=r_+1; hh=ws.cell(ap,1,"Anchor text profile (all backlinks)"); hh.font=F(9,True,ACCENT); ws.row_dimensions[ap].height=22.5
 for c,h in enumerate(["Anchor type","Backlinks","Share of Backlinks","Referring Domains"],1):
-    cell=ws.cell(ap+1,c,h); cell.font=F(9,True,WHITE); cell.fill=fill_accent; cell.alignment=hdr_al; cell.border=border_all
+    cell=ws.cell(ap+1,c,h); cell.font=F(10,True,WHITE); cell.fill=fill_accent; cell.alignment=hdr_al; cell.border=box
+ws.row_dimensions[ap+1].height=22.5
 rr2=ap+2
-for atype,c in anchor_profile:
-    for cc,v in enumerate([atype,c,c/TOTAL_BL,len(type_rd[atype])],1):
-        cell=ws.cell(rr2,cc,v); cell.font=F(9); cell.fill=fill_white; cell.alignment=Alignment(vertical="center"); cell.border=border_all
+for atype,cnt in anchor_profile:
+    for cc,v in enumerate([atype,cnt,cnt/TOTAL_BL,len(type_rd[atype])],1):
+        cell=ws.cell(rr2,cc,v); cell.font=F(9); cell.fill=fill_white; cell.border=box
+        if cc==2: cell.number_format="#,##0"; cell.alignment=Alignment(horizontal="center",vertical="center")
+        elif cc==3: cell.number_format="0.00%"; cell.alignment=Alignment(horizontal="center",vertical="center")
+        elif cc==4: cell.number_format="#,##0"; cell.alignment=Alignment(horizontal="center",vertical="center")
+        else: cell.alignment=Alignment(vertical="center")
     ws.row_dimensions[rr2].height=22.5; rr2+=1
 srow=rr2+1; ws.merge_cells(f"A{srow}:E{srow}")
 note=(f"Source: Semrush Backlink Analytics, {TODAY} ({TOTAL_BL:,} backlinks / {TOTAL_DOM:,} referring domains), cross-checked "
@@ -320,14 +333,14 @@ note=(f"Source: Semrush Backlink Analytics, {TODAY} ({TOTAL_BL:,} backlinks / {T
  "referring-domains export omits them). Two properties: farison.com + the owned redirect lawncare-louisvilleky.com; "
  "see the two disavow files. Tab 05: fill F (Y/N) and G (Keep/Disavow). The brief's '345-domain profile' does not match "
  "either tool (Ahrefs ~1,296 live / Semrush 3,667).")
-cell=ws.cell(srow,1,note); cell.font=F(9); cell.alignment=Alignment(vertical="center",wrap_text=True); ws.row_dimensions[srow].height=72
+cell=ws.cell(srow,1,note); cell.font=F(8,False,"FF666666"); cell.alignment=Alignment(vertical="center",wrap_text=True); ws.row_dimensions[srow].height=72
 # data tabs
-write_tab('Referring Domain Audit',RDA_H,rda_rows,15.75)
-write_tab('All Backlinks',["Referring Domain","Status","Tool","Anchor Text","Anchor Type","Link Type","Linking Page URL","Linking Page Title","Target URL"],abl_rows,22.5)
-write_tab('Anchor Analysis',["Anchor Text","Anchor Type","Backlinks","Share of Backlinks","Referring Domains","Spam Domains Using It"],anchor_rows,22.5)
-write_tab('Exact Match Anchors',["Referring domain","Example backlink (linking page)","Exact-match commercial anchor","Market","Site type (indicative)","Partner confirmed? (Y/N)","Final decision"],ema_rows,22.5,input_cols=(6,7))
-write_tab('Pending Disavow Lines',["Referring domain","Disavow line (append to disavow_farison.com.txt once confirmed)","Recommendation"],pend_rows,22.5)
-write_tab('Disavow List',["Disavow Line","AS","Backlinks","RD's","Traffic","Organic Keywords","Top Anchor Text"],dis_rows,22.5)
+write_tab('Referring Domain Audit',RDA_H,rda_rows)
+write_tab('All Backlinks',["Referring Domain","Status","Tool","Anchor Text","Anchor Type","Link Type","Linking Page URL","Linking Page Title","Target URL"],abl_rows)
+write_tab('Anchor Analysis',["Anchor Text","Anchor Type","Backlinks","Share of Backlinks","Referring Domains","Spam Domains Using It"],anchor_rows)
+write_tab('Exact Match Anchors',["Referring domain","Example backlink (linking page)","Exact-match commercial anchor","Market","Site type (indicative)","Partner confirmed? (Y/N)","Final decision"],ema_rows)
+write_tab('Pending Disavow Lines',["Referring domain","Disavow line (append to disavow_farison.com.txt once confirmed)","Recommendation"],pend_rows)
+write_tab('Disavow List',["Disavow Line","AS","Backlinks","RD's","Traffic","Organic Keywords","Top Anchor Text"],dis_rows)
 wb.move_sheet("Summary",-(len(wb.sheetnames)-1))
 OUT=f"{OUTDIR}/Farison_Backlinks_Audit.xlsx"; wb.save(OUT)
 print("saved",OUT,"| sheets:",wb.sheetnames)
