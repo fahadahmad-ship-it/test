@@ -30,14 +30,27 @@ Semrush 2,003 / Ahrefs 1,054 live / 1,702 all-time — none equal 592. Most like
   principle 2). Recommendation to the team: manually append `daechul.co.com` to the
   disavow and hold `articles4all.org` if the original Tab-08 source still shows them.
 
-## Format verified cell-for-cell against the signed sample
+## Format verified cell-for-cell against the signed sample (incl. XML level)
 `check/compare.py` compares this workbook's formatting against the signed sample
 (the uploaded `NewGarden_Backlinks_Audit.xlsx`) across tabs, order, headers, column
-widths, row heights, fonts, sizes, fills, borders, alignment, freeze panes, filters,
-gridlines and the logo. **Result: identical, except the two values that are meant to be
-client-specific** — the Summary title ("Collins Pool Management") and the Pending Disavow
-Lines header, which names this client's file (`disavow_collinspool.txt`). Everything else
-matches to the cell.
+widths, row heights, **default row height (sheetFormatPr)**, fonts (name/size/bold/italic/
+**colour**), **fills**, borders, alignment (per column), **number formats (per column)**,
+date types, freeze panes, filters, gridlines, merges and the logo (drawing XML is
+byte-identical). A full per-column sweep of every data tab (header + data cell, all
+columns) reports **0** differences.
+
+Earlier openpyxl-only checks gave false passes (the playbook §9 warns of this). The
+XML/colour/fill-level review then found and fixed real gaps: the Summary status and
+anchor-profile **mini-tables** (accent-fill white-bold headers, white-fill bordered
+bodies), **accent-coloured** section headings, the **grey italic** source line, 21pt
+title, per-column alignment, `#,##0` / `%` number formats, First Seen as a real date,
+and default data-row height 15.75.
+
+**Result: identical to the sample except the values that are meant to be client-specific**
+— the Summary title ("Collins Pool Management") and the Pending Disavow header, which
+names this client's own file (`disavow_collinspool.txt`). (The workbook also has 7 key
+findings vs the sample's 6, per the playbook's "seven findings" rule — content, not
+format.)
 
 - **Logo:** the Harbinger logo is the *agency* logo (same for every client), so it was
   extracted from the signed sample (`audit/collinspool/ref/harbinger_logo.png`) and

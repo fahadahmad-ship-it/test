@@ -226,6 +226,9 @@ def style_workbook(wb, data_tabs):
                 cl.alignment = ctr if c in center else lft
         ws.freeze_panes = "B2"
         ws.auto_filter.ref = f"A1:{get_column_letter(ncols)}{max(nrows,1)}"
+        # default data-row height 15.75 (sample sets this on every data tab)
+        ws.sheet_format.defaultRowHeight = 15.75
+        ws.sheet_format.customHeight = True
         # gridlines left at default (sample does not override) -> do not set
         for L, w in SAMPLE_WIDTHS.get(name, {}).items():
             ws.column_dimensions[L].width = w
@@ -453,7 +456,7 @@ def main():
     ws0.cell(row=rr,column=1,value="Anchor text profile (all backlinks)"); rr+=1
     at_head=rr
     ws0.cell(row=rr,column=1,value="Anchor type"); ws0.cell(row=rr,column=2,value="Backlinks")
-    ws0.cell(row=rr,column=3,value="Share of Backlinks"); ws0.cell(row=rr,column=4,value="Referring Domains (distinct)"); rr+=1
+    ws0.cell(row=rr,column=3,value="Share of Backlinks"); ws0.cell(row=rr,column=4,value="Referring Domains"); rr+=1
     for at,n in type_bl.most_common():
         ws0.cell(row=rr,column=1,value=at); ws0.cell(row=rr,column=2,value=n)
         ws0.cell(row=rr,column=3,value=(n/total_bl if total_bl else 0))
@@ -462,34 +465,48 @@ def main():
     src_row=rr
     ws0.cell(row=rr,column=1,value=f"Source: Semrush Backlink Analytics + Ahrefs discovery, {TODAY} ({total_bl} backlinks / {total_dom} referring domains). Full Ahrefs merge pending client CSV (Ahrefs API 250-row cap).")
 
-    # --- Summary styling to match the signed sample, element by element ---
-    maxr=ws0.max_row
-    reg=Font(name=FONT,size=9,color="FF000000")
-    reg_b=Font(name=FONT,size=9,bold=True,color="FF000000")
-    hdr10=Font(name=FONT,size=10,bold=True,color="FF000000")
-    for r in range(1,maxr+1):
+    # --- Summary styling to match the signed sample, region by region ---
+    thin=Side(style="thin",color="FFD9D9D9")
+    bd=Border(left=thin,right=thin,top=thin,bottom=thin)
+    accent_fill=PatternFill("solid",fgColor=ACCENT)
+    white_fill=PatternFill("solid",fgColor="FFFFFFFF")
+    f_title=Font(name=FONT,size=21,bold=True,color=ACCENT)
+    f_tblhdr=Font(name=FONT,size=10,bold=True,color="FFFFFFFF")
+    f_body=Font(name=FONT,size=9,color="FF000000")
+    f_bodyb=Font(name=FONT,size=9,bold=True,color="FF000000")
+    f_head=Font(name=FONT,size=9,bold=True,color=ACCENT)
+    f_src=Font(name=FONT,size=8,italic=True,color="FF666666")
+    ctr=Alignment(horizontal="center",vertical="center")
+    lft=Alignment(vertical="center")
+    for r in range(1,ws0.max_row+1):
         ws0.row_dimensions[r].height=22.5                     # every row 22.5
-        for c in range(1,6):
-            cl=ws0.cell(row=r,column=c)
-            if cl.value is not None:
-                cl.font=reg                                   # default Geist 9 (blanks stay Calibri 11)
-    ws0["B1"].font=Font(name=FONT,size=21,bold=True,color=ACCENT)   # title 21
-    for c in range(1,6):
-        ws0.cell(row=3,column=c).font=hdr10                   # status-table header 10 bold
-        ws0.cell(row=at_head,column=c).font=hdr10             # anchor-type header 10 bold
-    ws0.cell(row=total_row,column=1).font=reg_b               # Total bold
-    ws0.cell(row=kf_head,column=1).font=reg_b                 # "Key findings" bold
-    ws0.cell(row=ap_head,column=1).font=reg_b                 # "Anchor text profile" bold
-    ws0.cell(row=src_row,column=1).font=Font(name=FONT,size=8,italic=True,color="FF000000")  # source 8 italic
     ws0.sheet_view.showGridLines=False
     for L,w in SAMPLE_WIDTHS["Summary"].items():
         ws0.column_dimensions[L].width=w
-    # merge long single-column text rows (key findings + source) across A:E, as the sample does
-    for r in range(1,maxr+1):
-        a=ws0.cell(row=r,column=1).value
-        if isinstance(a,str) and len(a)>55 and all(ws0.cell(row=r,column=c).value in (None,"") for c in range(2,6)):
-            try: ws0.merge_cells(start_row=r,start_column=1,end_row=r,end_column=5)
-            except Exception: pass
+    ws0["B1"].font=f_title                                     # title 21 bold accent
+    ws0["B1"].alignment=Alignment(horizontal="left",vertical="center")
+    def style_table(hdr_r, last_r, ncol, bold_last=False):
+        for c in range(1,ncol+1):                             # header: accent fill, white bold 10, border, centred
+            cell=ws0.cell(row=hdr_r,column=c)
+            cell.font=f_tblhdr; cell.fill=accent_fill; cell.border=bd; cell.alignment=ctr
+        for r in range(hdr_r+1,last_r+1):                     # body: white fill, black 9, border
+            for c in range(1,ncol+1):
+                cell=ws0.cell(row=r,column=c)
+                cell.font=f_bodyb if (bold_last and r==last_r) else f_body
+                cell.fill=white_fill; cell.border=bd
+                cell.alignment=ctr if c in (2,3,4) else lft
+    style_table(3, total_row, 5, bold_last=True)              # status table A:E
+    style_table(at_head, at_head+len(type_bl), 4)             # anchor profile A:D
+    for hr in (kf_head, ap_head):                             # section headings: accent bold, vcentre
+        ws0.cell(row=hr,column=1).font=f_head
+        ws0.cell(row=hr,column=1).alignment=lft
+    for r in range(kf_head+1, kf_head+1+len(findings)):       # findings: black 9, vcentre, merged A:E
+        ws0.cell(row=r,column=1).font=f_body
+        ws0.cell(row=r,column=1).alignment=lft
+        ws0.merge_cells(start_row=r,start_column=1,end_row=r,end_column=5)
+    ws0.cell(row=src_row,column=1).font=f_src                 # source: grey italic 8, vcentre, merged A:E
+    ws0.cell(row=src_row,column=1).alignment=lft
+    ws0.merge_cells(start_row=src_row,start_column=1,end_row=src_row,end_column=5)
     # embed the Harbinger agency logo (reused from the signed template; same for every client)
     logo_path=f"{ROOT}/ref/harbinger_logo.png"
     if os.path.exists(logo_path):

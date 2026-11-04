@@ -49,6 +49,9 @@ for t in common:
     # header row height
     if abs((wm.row_dimensions[1].height or 0) - (ws.row_dimensions[1].height or 0)) > 0.1:
         d(f"[{t}] header row height mine={wm.row_dimensions[1].height} sample={ws.row_dimensions[1].height}")
+    # default row height (sheetFormatPr) - affects every unset data row
+    if abs((wm.sheet_format.defaultRowHeight or 0) - (ws.sheet_format.defaultRowHeight or 0)) > 0.01:
+        d(f"[{t}] defaultRowHeight mine={wm.sheet_format.defaultRowHeight} sample={ws.sheet_format.defaultRowHeight}")
     # a data row height (row 2)
     if wm.max_row > 1 and ws.max_row > 1:
         rm = wm.row_dimensions[2].height; rs = ws.row_dimensions[2].height
@@ -82,9 +85,13 @@ for t in common:
             if (am.horizontal, am.vertical) != (asx.horizontal, asx.vertical):
                 d(f"[{t}] col {L2} align mine=({am.horizontal},{am.vertical}) sample=({asx.horizontal},{asx.vertical})")
 
-# Summary semantic-cell fonts (located by text, robust to row offset)
-def _fsig(cell):
-    f = cell.font; return (f.name, f.size, bool(f.bold), bool(f.italic))
+# Summary semantic cells (located by text, robust to row offset) - FULL format incl color+fill
+def _sig(cell):
+    f = cell.font; fl = cell.fill; b = cell.border; a = cell.alignment
+    return (f.name, f.size, bool(f.bold), bool(f.italic), rgb(f.color),
+            fl.patternType, rgb(fl.fgColor) if fl.patternType else None,
+            bool(b.left.style), bool(b.bottom.style),
+            a.horizontal, a.vertical)
 def _findrow(ws, text):
     for r in range(1, ws.max_row+1):
         v = ws.cell(row=r, column=1).value
@@ -92,12 +99,28 @@ def _findrow(ws, text):
             return r
     return None
 sm, ss = m["Summary"], s["Summary"]
-if _fsig(sm["B1"]) != _fsig(ss["B1"]):
-    d(f"[Summary] title B1 font mine={_fsig(sm['B1'])} sample={_fsig(ss['B1'])}")
-for label in ["Status","Total","Key findings","Anchor text profile","Anchor type","Source:"]:
+if _sig(sm["B1"]) != _sig(ss["B1"]):
+    d(f"[Summary] title B1 mine={_sig(sm['B1'])} sample={_sig(ss['B1'])}")
+# single-cell elements located by text
+for label in ["Key findings","Anchor text profile","Source:"]:
     rm, rs = _findrow(sm, label), _findrow(ss, label)
-    if rm and rs and _fsig(sm.cell(row=rm,column=1)) != _fsig(ss.cell(row=rs,column=1)):
-        d(f"[Summary] '{label}' font mine={_fsig(sm.cell(row=rm,column=1))} sample={_fsig(ss.cell(row=rs,column=1))}")
+    if rm and rs and _sig(sm.cell(row=rm,column=1)) != _sig(ss.cell(row=rs,column=1)):
+        d(f"[Summary] '{label}' mine={_sig(sm.cell(row=rm,column=1))} sample={_sig(ss.cell(row=rs,column=1))}")
+# the two mini-tables: header row + first body row, all columns
+for label, ncol in [("Status",5), ("Anchor type",4)]:
+    rm, rs = _findrow(sm, label), _findrow(ss, label)
+    if not (rm and rs): continue
+    for dr in (0,1):  # header then first body row
+        for c in range(1, ncol+1):
+            a=_sig(sm.cell(row=rm+dr,column=c)); b=_sig(ss.cell(row=rs+dr,column=c))
+            if a != b:
+                d(f"[Summary] table '{label}' row+{dr} col{c} mine={a} sample={b}")
+# anchor-profile header texts
+rm, rs = _findrow(sm,"Anchor type"), _findrow(ss,"Anchor type")
+if rm and rs:
+    hm=[sm.cell(row=rm,column=c).value for c in range(1,5)]
+    hs=[ss.cell(row=rs,column=c).value for c in range(1,5)]
+    if hm!=hs: d(f"[Summary] anchor-profile headers mine={hm} sample={hs}")
 
 # images/logo
 def nimg(ws): return len(getattr(ws, "_images", []))
