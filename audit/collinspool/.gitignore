@@ -1,0 +1,4 @@
+# Raw pulled data (reproducible via scripts; large) - not committed
+data/
+__pycache__/
+*.pyc
