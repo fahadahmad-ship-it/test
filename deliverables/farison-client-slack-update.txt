@@ -1,0 +1,16 @@
+Hey — quick status on the backlink cleanup for Farison Lawn Care.
+
+The short version: someone's been aiming a wave of spam links at your site, and it's heavy and recent — about 69% of your entire link profile only appeared in the last two months. We didn't sample it; we went through the full live profile by hand, every domain.
+
+Where it landed:
+• 3,678 domains currently link to you, and 2,679 of them are junk — auto-generated "backlink/SEO-tool" and PBN sites.
+• We've got a disavow file ready for the 2,610 that actually carry ranking risk. The remaining junk is nofollow (passes no value), so it's harmless and we're leaving it alone.
+• Your real listings are kept and untouched — Yellow Pages, Superpages, DexKnows, your Bing and Yahoo business listings, and similar.
+
+Two things we need before anything goes to Google:
+1. About 870 of the links aren't random spam — they're local directory listings with exact-match anchors ("lawn care louisville ky", "mosquito control shelbyville ky", and so on), which is the kind of thing a previous SEO may have set up on purpose. We've pulled these out of the disavow and are holding them until your prior SEO/agency can confirm whether they placed them. We don't want to disavow links you actually paid for.
+2. We also found a second domain of yours, lawncare-louisvilleky.com, redirecting into the site and catching the same spam — it needs its own disavow file. Can you confirm you control it and whether you have Search Console access for it?
+
+And one quick check: has a disavow file ever been uploaded for the site before? A new upload replaces whatever's already there, so we want to know before we submit.
+
+Nothing you need to do about the spam itself — that part's handled. We just need the previous-SEO confirmation and the two answers above, then we'll finalise and send.
