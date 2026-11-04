@@ -218,6 +218,8 @@ src.value=("Source: Semrush Backlink Analytics export, 2026-11-04 ({:,} backlink
            "AS = Semrush Authority Score (0-100). RD/Traffic columns blank (not in Semrush refdomains export). Tab 05: supplier fills columns F (Y/N) and G.").format(tot_b,tot_d)
 src.font=Font(name="Geist",size=8,color="FF666666"); src.alignment=Alignment(horizontal="left",vertical="center",wrap_text=True)
 sm.merge_cells(start_row=srow,start_column=1,end_row=srow,end_column=5)
+for _r in range(1, srow+1):
+    sm.row_dimensions[_r].height=22.5
 sm.merge_cells("B1:E2")
 wb.save(OUT)
 print("SAVED",OUT)
