@@ -87,7 +87,11 @@ def market_of(a):
     for city,label in [("new albany","New Albany IN"),("clarksville","Clarksville IN"),("mt washington","Mt Washington KY"),
         ("mount washington","Mt Washington KY"),("shelbyville","Shelbyville KY"),("louisville","Louisville KY"),
         ("prospect","Prospect KY"),("bardstown","Bardstown KY"),("crestwood","Crestwood KY"),("jeffersontown","Jeffersontown KY"),
-        ("la grange","La Grange KY"),("pewee valley","Pewee Valley KY")]:
+        ("la grange","La Grange KY"),("pewee valley","Pewee Valley KY"),("sellersburg","Sellersburg IN"),
+        ("charlestown","Charlestown IN"),("georgetown","Georgetown IN"),("floyds knobs","Floyds Knobs IN"),
+        ("jeffersonville","Jeffersonville IN"),("new washington","New Washington IN"),("borden","Borden IN"),
+        ("goshen","Goshen KY"),("simpsonville","Simpsonville KY"),("taylorsville","Taylorsville KY"),("fisherville","Fisherville KY"),
+        (" ky","Kentucky (KY)"),(" in","Indiana (IN)")]:
         if city in al: return label
     return "Non-geo"
 
@@ -122,8 +126,10 @@ for d in set(by)|set(rd):
     else: status="Keep"
     if status=="Spam (Disavow)" and allnofollow: status="Spam (Nofollow, No Action)"
     if status=="Held (Pending Partner)" and allnofollow: status="Held (Nofollow, No Action)"
+    if status=="Spam (Disavow)" and nd==0: status="Keep"  # no dofollow evidence in our data -> cannot disavow
     anc_counts=collections.Counter(r.get("anchor","") for r in links)
     top_anchor=anc_counts.most_common(1)[0][0] if links else ""
+    ema_anchor=next((r.get("anchor","") for r in links if anchor_type(r.get("anchor","")).startswith("Exact match")), top_anchor)
     ex=next((r for r in links if r.get("response_code")=="200"), links[0] if links else None)
     in_dis="Yes" if status=="Spam (Disavow)" else ("Held" if status.startswith("Held") else "No")
     lc_attr=any("lawncare-louisvilleky" in (property_of(l) or "") for l in links)
@@ -134,7 +140,7 @@ for d in set(by)|set(rd):
         top_anchor=top_anchor,example=(ex.get("source_url","") if ex else ""),title=(ex.get("source_title","") if ex else ""),
         ip=info.get("ip",""),ahrefs_spam=ahrow.get("is_spam"),dr=ahrow.get("domain_rating"),
         has_exact=has_exact,disavow_line=(f"domain:{d}" if status=="Spam (Disavow)" else ""),
-        lc_attr=lc_attr,fa_attr=fa_attr)
+        lc_attr=lc_attr,fa_attr=fa_attr,ema_anchor=ema_anchor)
 
 sc=collections.Counter(r["status"] for r in records.values())
 print("\nStatus distribution:"); [print(f"  {k}: {v}") for k,v in sc.most_common()]
@@ -188,7 +194,7 @@ for d,r in sorted(records.items(), key=lambda kv:-kv[1]["backlinks"]):
 ema_rows=[]
 for d,r in sorted(records.items()):
     if r["status"].startswith("Held") and r["has_exact"]:
-        ema_rows.append([d,r["example"],r["top_anchor"],market_of(r["top_anchor"]),"Directory / blog (review source quality)","",""])
+        ema_rows.append([d,r["example"],r["ema_anchor"],market_of(r["ema_anchor"]),"Directory / blog (review source quality)","",""])
 # pending tab (held pending partner)
 pend_rows=[[d,f"domain:{d}","Append ONLY if Harbinger and the commissioning partner do not confirm this was a commissioned placement."]
            for d,r in sorted(records.items()) if r["status"]=="Held (Pending Partner)"]
@@ -198,10 +204,12 @@ dis_rows=[[r["disavow_line"],r["as_"],r["backlinks"],None,None,None,r["top_ancho
 
 # ---- disavow files (per property) ----
 def reason(r):
-    t=(r["top_anchor"]+" "+r["title"]).lower()
+    d=r["domain"]; t=(r["top_anchor"]+" "+r["title"]).lower()
     if hit(t,OFF): return "Off-topic (gambling / pharma / adult)"
+    if hit(d,["backlink","dacheck","pacheck","dapa","rankchecker","seochecker","checker","indexer","baclink"]): return "SEO-tool / backlink-checker link-farm host"
+    if hit(d,["buybacklink","buydofollow","buypbn","buyhigh","buycheap","pbn","buylinks","buyingbacklinks"]): return "Buy-backlinks / PBN-for-sale host"
+    if hit(d,["seo","directory","listing","traffic","webtraffic","domainanalysis","linkbuilding"]): return "Spam host name (SEO / directory / traffic)"
     if hit(t,SALES): return "PBN / link-service sales-copy anchor"
-    if hit(r["domain"],HOSTSPAM): return "Spam host name"
     return "Throwaway-TLD / spam page evidence"
 def write_disavow(path, domains, header_lines):
     groups=collections.OrderedDict()
