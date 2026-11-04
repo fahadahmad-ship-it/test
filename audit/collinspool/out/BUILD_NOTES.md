@@ -30,22 +30,34 @@ Semrush 2,003 / Ahrefs 1,054 live / 1,702 all-time — none equal 592. Most like
   principle 2). Recommendation to the team: manually append `daechul.co.com` to the
   disavow and hold `articles4all.org` if the original Tab-08 source still shows them.
 
-## Inputs NOT supplied (same as the sample) and effect
-1. **Signed template `NIC_signed_template.xlsx`, Harbinger logo, `kk/` scripts.** Scripts
-   written from the spec, not the signed code. **`compare.py` could not be run** (no
-   template); structure matches `AUDIT_FORMAT.md`, pixel styling is best-effort and
-   unverified. No logo embedded. Font Geist is set but will substitute if not installed.
+## Format verified cell-for-cell against the signed sample
+`check/compare.py` compares this workbook's formatting against the signed sample
+(the uploaded `NewGarden_Backlinks_Audit.xlsx`) across tabs, order, headers, column
+widths, row heights, fonts, sizes, fills, borders, alignment, freeze panes, filters,
+gridlines and the logo. **Result: identical, except the two values that are meant to be
+client-specific** — the Summary title ("Collins Pool Management") and the Pending Disavow
+Lines header, which names this client's file (`disavow_collinspool.txt`). Everything else
+matches to the cell.
+
+- **Logo:** the Harbinger logo is the *agency* logo (same for every client), so it was
+  extracted from the signed sample (`audit/collinspool/ref/harbinger_logo.png`) and
+  embedded at the same anchor/size. Not a client asset, so reuse is correct.
+- **Title size:** the signed sample uses **21pt** bold accent (not 9pt). The AUDIT_FORMAT
+  text ("shrank to 9") did not match the actual signed file; the file wins — 21pt used.
+- **Borders:** header row bordered, data cells unbordered — matches the sample (and the
+  playbook's "don't box every cell"), gridlines left at default.
+- **Data cells:** Geist 9, black font on white fill — matches the sample.
+- Font Geist is named throughout; it will substitute visually only if the renderer lacks
+  Geist, but the stored format is identical to the sample.
+
+## Inputs NOT supplied and effect
+1. **`NIC_signed_template.xlsx` + `kk/` scripts.** Scripts written from the spec, not the
+   signed code; but the OUTPUT is verified against the signed sample (above).
 2. **Money-page list (§10).** Approximated from the Tab-08 target URLs
    (`/services/`, `/location/`, `/positions/`); exact-match **anchor** is the primary
    Held trigger, so this has little effect here.
 3. **Client's Ahrefs CSV export (§1).** Not supplied + 250-cap ⇒ Ahrefs is a sample. A
    full Semrush∪Ahrefs merge needs the client to pull the full Ahrefs CSV.
-
-## Spec conflicts between the two docs (resolved the same way as the sample)
-| Point | AUDIT_FORMAT.md | Playbook | Used |
-|---|---|---|---|
-| Data-cell borders | thin all round | header-only; "don't box every cell" | header-row borders + gridlines |
-| Summary title size | 9 bold accent | 21 | 9 bold accent |
 
 ## Deliberate methodology choices
 - **AS = Semrush refdomains `domain_ascore`**, not `backlinks_comparison` (cost: the

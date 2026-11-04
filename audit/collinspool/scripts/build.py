@@ -173,28 +173,47 @@ def market_of(anchor):
     return "Non-geo"
 
 # ------------------------------------------------------------------ styling
+# Exact column widths read from the signed sample (NewGarden). Same column
+# structure, so applied by letter to match the template cell-for-cell.
+SAMPLE_WIDTHS = {
+    "Summary": {"A":38.86,"B":16.29,"C":17.57,"D":18.71,"E":120.0},
+    "Referring Domain Audit": {"A":36.0,"B":24.71,"C":9.57,"D":13.0,"E":9.43,"F":9.71,
+        "G":12.43,"H":21.29,"I":14.0,"J":8.71,"K":12.0,"L":45.0,"M":8.71,"N":40.0,
+        "O":14.0,"P":15.0,"Q":14.0},
+    "All Backlinks": {"A":25.43,"B":27.14,"C":14.71,"D":55.0,"E":32.0,"F":10.0,
+        "G":55.0,"H":53.14,"I":30.57},
+    "Anchor Analysis": {"A":115.86,"B":37.71,"C":14.0,"D":8.71,"E":13.0,"F":20.29},
+    "Exact Match Anchors": {"A":25.43,"B":59.0,"C":53.14,"D":16.0,"E":24.57,"F":15.43,"G":15.0},
+    "Pending Disavow Lines": {"A":32.0,"B":44.0,"C":48.0},
+    "Disavow List": {"A":44.0,"B":14.0,"C":15.57,"D":14.0,"E":11.14,"F":14.86,"G":98.86},
+}
+
 def style_workbook(wb, data_tabs):
     thin = Side(style="thin", color="FFD9D9D9")
     hdr_fill = PatternFill("solid", fgColor=ACCENT)
+    white_fill = PatternFill("solid", fgColor="FFFFFFFF")
     hdr_font = Font(name=FONT, size=9, bold=True, color="FFFFFFFF")
-    data_font = Font(name=FONT, size=9)
+    data_font = Font(name=FONT, size=9, color="FF000000")
     hdr_align = Alignment(horizontal="center", vertical="center", wrap_text=True)
     data_align = Alignment(vertical="center")
     for name, nrows, ncols, rowh in data_tabs:
         ws = wb[name]
+        # header row: accent fill, bold white, thin border all round, height 31.5
         for c in range(1, ncols + 1):
             cell = ws.cell(row=1, column=c)
             cell.fill = hdr_fill; cell.font = hdr_font; cell.alignment = hdr_align
             cell.border = Border(left=thin, right=thin, top=thin, bottom=thin)
         ws.row_dimensions[1].height = 31.5
+        # data cells: Geist 9 black on white, vertical centre, NO border, NO row height
         for rr in range(2, nrows + 1):
-            ws.row_dimensions[rr].height = rowh
             for c in range(1, ncols + 1):
                 cl = ws.cell(row=rr, column=c)
-                cl.font = data_font; cl.alignment = data_align
+                cl.font = data_font; cl.alignment = data_align; cl.fill = white_fill
         ws.freeze_panes = "B2"
         ws.auto_filter.ref = f"A1:{get_column_letter(ncols)}{max(nrows,1)}"
-        ws.sheet_view.showGridLines = True
+        # gridlines left at default (sample does not override) -> do not set
+        for L, w in SAMPLE_WIDTHS.get(name, {}).items():
+            ws.column_dimensions[L].width = w
 
 # ------------------------------------------------------------------ main
 def main():
@@ -398,36 +417,45 @@ def main():
         ws0.cell(row=rr,column=3,value=(n/total_bl if total_bl else 0))
         ws0.cell(row=rr,column=4,value=len(type_dom[at])); rr+=1
     rr+=1
-    ws0.cell(row=rr,column=1,value=f"Source: Semrush Backlink Analytics + Ahrefs discovery, {TODAY} ({total_bl} backlinks / {total_dom} referring domains). Logo/template assets not supplied; styling best-effort.")
-    ws0["B1"].font=Font(name=FONT,size=9,bold=True,color=ACCENT)
-    ws0.sheet_view.showGridLines=False
+    src_row=rr
+    ws0.cell(row=rr,column=1,value=f"Source: Semrush Backlink Analytics + Ahrefs discovery, {TODAY} ({total_bl} backlinks / {total_dom} referring domains). Full Ahrefs merge pending client CSV (Ahrefs API 250-row cap).")
 
-    # styling for data tabs
+    # --- Summary styling to match the signed sample ---
+    maxr=ws0.max_row
+    for r in range(1,maxr+1):
+        ws0.row_dimensions[r].height=22.5
+        for c in range(1,6):
+            cl=ws0.cell(row=r,column=c)
+            if cl.value is not None and cl.font is not None and not cl.font.bold:
+                cl.font=Font(name=FONT,size=9,color="FF000000")
+    ws0["B1"].font=Font(name=FONT,size=21,bold=True,color=ACCENT)      # title 21pt
+    for c in range(1,6):                                               # status header 10 bold
+        ws0.cell(row=3,column=c).font=Font(name=FONT,size=10,bold=True,color="FF000000")
+    ws0.sheet_view.showGridLines=False
+    for L,w in SAMPLE_WIDTHS["Summary"].items():
+        ws0.column_dimensions[L].width=w
+    # merge long single-column text rows (key findings + source) across A:E, as the sample does
+    for r in range(1,maxr+1):
+        a=ws0.cell(row=r,column=1).value
+        if isinstance(a,str) and len(a)>55 and all(ws0.cell(row=r,column=c).value in (None,"") for c in range(2,6)):
+            try: ws0.merge_cells(start_row=r,start_column=1,end_row=r,end_column=5)
+            except Exception: pass
+    # embed the Harbinger agency logo (reused from the signed template; same for every client)
+    logo_path=f"{ROOT}/ref/harbinger_logo.png"
+    if os.path.exists(logo_path):
+        from openpyxl.drawing.image import Image as _XLImage
+        _img=_XLImage(logo_path); _img.width=196; _img.height=58
+        ws0.add_image(_img,"A1")
+
+    # styling for data tabs (header/data cells, freeze, filter, widths)
     style_workbook(wb, [
-        ("Referring Domain Audit", ws.max_row, len(RDA_COLS), 15.75),
-        ("All Backlinks", ws2.max_row, len(AB_COLS), 22.5),
-        ("Anchor Analysis", ws3.max_row, 6, 22.5),
-        ("Exact Match Anchors", ws4.max_row, 7, 22.5),
-        ("Pending Disavow Lines", ws5.max_row, 3, 22.5),
-        ("Disavow List", ws6.max_row, 7, 22.5),
+        ("Referring Domain Audit", ws.max_row, len(RDA_COLS), None),
+        ("All Backlinks", ws2.max_row, len(AB_COLS), None),
+        ("Anchor Analysis", ws3.max_row, 6, None),
+        ("Exact Match Anchors", ws4.max_row, 7, None),
+        ("Pending Disavow Lines", ws5.max_row, 3, None),
+        ("Disavow List", ws6.max_row, 7, None),
     ])
-    # column widths (rough, readable)
-    widths={"Referring Domain Audit":[26,22,6,10,7,9,10,20,8,8,12,34,40,40,14,15,26],
-            "All Backlinks":[24,22,12,40,26,10,46,40,34],
-            "Anchor Analysis":[44,26,10,14,12,16],
-            "Exact Match Anchors":[24,46,40,16,30,18,18],
-            "Pending Disavow Lines":[26,46,54],
-            "Disavow List":[30,6,10,7,9,14,34]}
-    for name,ws_ in [("Referring Domain Audit",ws),("All Backlinks",ws2),
-                     ("Anchor Analysis",ws3),("Exact Match Anchors",ws4),
-                     ("Pending Disavow Lines",ws5),("Disavow List",ws6)]:
-        for i,w in enumerate(widths[name],1):
-            ws_.column_dimensions[get_column_letter(i)].width=w
-    # input cells partner fills (Exact Match Anchors cols F,G) -> accent fill
-    inp_fill=PatternFill("solid",fgColor=ACCENT); inp_font=Font(name=FONT,size=9,color="FFFFFFFF")
-    for rr_ in range(2, ws4.max_row+1):
-        for cc in (6,7):
-            cell=ws4.cell(row=rr_,column=cc); cell.fill=inp_fill; cell.font=inp_font
 
     out_xlsx=f"{OUT}/CollinsPool_Backlinks_Audit.xlsx"
     wb.save(out_xlsx)
