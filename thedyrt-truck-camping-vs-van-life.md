@@ -72,13 +72,15 @@ Buying a used truck that somebody already modified can be a steal or a money pit
 
 Buying one built right from the start is the move for people who would rather spend weekends at camp than under the truck. Specialist dealers sell rigs that arrive sorted, with the suspension, tires, and clearance already handled. One such outfit in Kansas lists [lifted trucks for sale](https://ultimaterides.com/kansas/) built and ready to go, and ships them anywhere in the country, which closes the gap for buyers who do not live near a lot that does this well. You trade a little of the satisfaction of building it yourself for a truck that works the first weekend you own it.
 
+One more thing to settle before you spend a dollar. If towing a camper or a boat is part of the plan, size the truck for it now rather than later. The Dyrt's own guide to the [best truck for towing a travel trailer](https://thedyrt.com/magazine/gear/best-truck-for-towing-travel-trailer/) walks through exactly what to look for.
+
 A van rarely offers that middle path. You are usually choosing between an expensive finished build and an empty shell and a year of your life.
 
 ## Where can a truck go that a van cannot?
 
-Everywhere the good stuff hides. High clearance forest roads across the mountain West. Free dispersed camping on public land around Moab, out on the Alvord Desert, down the dirt spurs near the Alabama Hills. The quiet grasslands and gravel country of the plains, from the Flint Hills to the Cimarron National Grassland, where the roads reward a capable rig and punish everything else.
+Everywhere the good stuff hides. High clearance forest roads across the mountain West. [Dispersed camping on public land around Moab](https://thedyrt.com/camping/utah/near/moab/with/dispersed), out on the Alvord Desert, down the dirt spurs near the Alabama Hills. The quiet [grasslands and gravel country of the plains](https://thedyrt.com/camping/kansas/near/wichita), from the Flint Hills to the Cimarron National Grassland, where the roads reward a capable rig and punish everything else. Just know that public land comes with rules, so read the [Forest Service guidance on fire restrictions and closures](https://www.fs.usda.gov/r05/recreation/dispersed-camping) before you roll out.
 
-Try this the next time you plan a trip. Stop filtering for paved sites and hookups. Filter for dispersed and 4x4 access sites instead, and watch a hidden layer of the map switch on. Those are the spots a van cannot touch, and they are almost always the ones with no crowd and the best view you will have all year.
+Try this the next time you plan a trip. Stop filtering for paved sites and hookups. Filter for [free dispersed camping](https://thedyrt.com/camping/montana/dispersed-site-mt) and [4x4 access campgrounds](https://thedyrt.com/camping/california/gold-lake-4x4-campground) instead, and watch a hidden layer of the map switch on. Those are the spots a van cannot touch, and they are almost always the ones with no crowd and the best view you will have all year.
 
 ## So which should you buy?
 
