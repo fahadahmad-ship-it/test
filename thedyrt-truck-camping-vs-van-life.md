@@ -12,7 +12,7 @@ So which one actually earns its keep out there, the van or the truck? Let us set
 
 ## The short answer
 
-A truck gets you farther for less money. A van keeps you more comfortable once you stop. If your goal is reaching remote, free, off grid campsites down rough roads, a capable pickup wins on access, cost, and toughness. If your goal is living on the road full time with a bed, a kitchen, and a place to stand up in the rain, a van wins on comfort and daily living space. Most people who camp to escape, rather than to relocate, are quietly landing on the truck.
+A truck gets you farther for less money. A van keeps you more comfortable once you stop. If your goal is reaching remote, [free, off grid campsites](https://thedyrt.com/camping/montana/dispersed-site-mt) down rough roads, a capable pickup wins on access, cost, and toughness. If your goal is living on the road full time with a bed, a kitchen, and a place to stand up in the rain, a van wins on comfort and daily living space. Most people who camp to escape, rather than to relocate, are quietly landing on the truck.
 
 That is the headline. Now here is why.
 
@@ -41,7 +41,7 @@ The appeal is range. Not fuel range. The range of places you can actually reach 
 
 Honest answer. For a paved campground or a smooth gravel pull in, no. Any truck will do, and plenty of vans will too.
 
-For the campsites that make people fall in love with this, yes, and here is why. The best dispersed sites hide behind three things that wreck an ordinary vehicle. Ruts that scrape a low belly. Loose climbs that spin two driven wheels. Mud and wet clay after a storm that turn a flat road into a trap. Clearance gets you over the first. Four wheel drive gets you up the second. Real tires get you through the third.
+For the campsites that make people fall in love with this, yes, and here is why. The [best dispersed sites](https://thedyrt.com/camping/utah/near/moab/with/dispersed) hide behind three things that wreck an ordinary vehicle. Ruts that scrape a low belly. Loose climbs that spin two driven wheels. Mud and wet clay after a storm that turn a flat road into a trap. Clearance gets you over the first. Four wheel drive gets you up the second. Real tires get you through the third.
 
 A lifted truck is simply a pickup set up with those three in mind. Raised suspension for clearance, bigger tires for grip. Done with restraint it is not a look. It is a tool that quietly doubles the map you can use.
 
@@ -54,7 +54,7 @@ Ignore the forums for a minute. It comes down to four.
 3. **Payload.** Enough capacity to carry a bed platform, water, a fridge, and a week of food without sitting the truck on its bump stops.
 4. **Simplicity.** The fewer fragile systems you add, the fewer things strand you two hundred miles from a mechanic.
 
-Nail those four and you have a camping machine. Chase anything beyond them early and you are mostly spending money to impress a parking lot.
+Nail those four and you have a camping machine. Chase anything beyond them early and you are mostly spending money to impress a parking lot. And if towing a camper or a boat is on your list, size the truck for it from the start. The Dyrt's guide to the [best truck for towing a travel trailer](https://thedyrt.com/magazine/gear/best-truck-for-towing-travel-trailer/) covers that side in detail.
 
 ## How do you sleep in a truck bed?
 
@@ -72,15 +72,13 @@ Buying a used truck that somebody already modified can be a steal or a money pit
 
 Buying one built right from the start is the move for people who would rather spend weekends at camp than under the truck. Specialist dealers sell rigs that arrive sorted, with the suspension, tires, and clearance already handled. One such outfit in Kansas lists [lifted trucks for sale](https://ultimaterides.com/kansas/) built and ready to go, and ships them anywhere in the country, which closes the gap for buyers who do not live near a lot that does this well. You trade a little of the satisfaction of building it yourself for a truck that works the first weekend you own it.
 
-One more thing to settle before you spend a dollar. If towing a camper or a boat is part of the plan, size the truck for it now rather than later. The Dyrt's own guide to the [best truck for towing a travel trailer](https://thedyrt.com/magazine/gear/best-truck-for-towing-travel-trailer/) walks through exactly what to look for.
-
 A van rarely offers that middle path. You are usually choosing between an expensive finished build and an empty shell and a year of your life.
 
 ## Where can a truck go that a van cannot?
 
-Everywhere the good stuff hides. High clearance forest roads across the mountain West. [Dispersed camping on public land around Moab](https://thedyrt.com/camping/utah/near/moab/with/dispersed), out on the Alvord Desert, down the dirt spurs near the Alabama Hills. The quiet [grasslands and gravel country of the plains](https://thedyrt.com/camping/kansas/near/wichita), from the Flint Hills to the Cimarron National Grassland, where the roads reward a capable rig and punish everything else. Just know that public land comes with rules, so read the [Forest Service guidance on fire restrictions and closures](https://www.fs.usda.gov/r05/recreation/dispersed-camping) before you roll out.
+Everywhere the good stuff hides. High clearance forest roads across the mountain West. Free dispersed camping on public land around Moab, out on the Alvord Desert, down the dirt spurs near the Alabama Hills. The quiet [grasslands and gravel country of the plains](https://thedyrt.com/camping/kansas/near/wichita), from the Flint Hills to the Cimarron National Grassland, where the roads reward a capable rig and punish everything else.
 
-Try this the next time you plan a trip. Stop filtering for paved sites and hookups. Filter for [free dispersed camping](https://thedyrt.com/camping/montana/dispersed-site-mt) and [4x4 access campgrounds](https://thedyrt.com/camping/california/gold-lake-4x4-campground) instead, and watch a hidden layer of the map switch on. Those are the spots a van cannot touch, and they are almost always the ones with no crowd and the best view you will have all year.
+Try this the next time you plan a trip. Stop filtering for paved sites and hookups. Filter for dispersed and [4x4 access campgrounds](https://thedyrt.com/camping/california/gold-lake-4x4-campground) instead, and watch a hidden layer of the map switch on. Those are the spots a van cannot touch, and they are almost always the ones with no crowd and the best view you will have all year.
 
 ## So which should you buy?
 
@@ -98,7 +96,7 @@ The van is a house that drives. The truck is a key to the backcountry. Pick the 
 Usually yes. A used pickup with a simple bed setup costs far less than a finished camper van, which often runs fifty thousand dollars or more. Trucks are also cheaper to repair and hold their value well.
 
 **Do you need a lifted truck to camp off grid?**
-No, but it helps a lot. A stock truck handles easy gravel. Clearance, four wheel drive, and proper tires are what unlock the rough roads that protect the best dispersed sites.
+No, but it helps a lot. A stock truck handles easy gravel. Clearance, four wheel drive, and proper tires are what unlock the rough roads that protect the best dispersed sites. Whatever you drive, read the [Forest Service rules on dispersed camping](https://www.fs.usda.gov/r05/recreation/dispersed-camping) before you go, since fire restrictions and closures change by season.
 
 **Can you sleep in a truck bed comfortably?**
 Yes. A flat platform and a good pad make a raised bed that beats most tents. A topper or bed tent keeps the weather out, and the whole thing sets up in minutes.
