@@ -20,6 +20,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.drawing.image import Image as XLImage
 from openpyxl.drawing.spreadsheet_drawing import OneCellAnchor, AnchorMarker
 from openpyxl.drawing.xdr import XDRPositiveSize2D
+from openpyxl.worksheet.datavalidation import DataValidation
 
 BASE = os.path.dirname(HERE)
 DATA = os.path.join(BASE, 'data')
@@ -374,6 +375,16 @@ def render(wd, counts, aggs, rows, doms, an_rows):
         ws = wb.create_sheet(title)
         H,W,AL,NF,R,RH,HL,HNW = wd[key]
         write_data_tab(ws, H, W, AL, NF, R, row_h=RH, header_left=HL, header_nowrap=HNW)
+        if key == 'em':  # partner-input dropdowns on the Exact Match Anchors tab (match template)
+            last = len(R) + 1
+            dvF = DataValidation(type='list', formula1='"Y,N"', allow_blank=True,
+                                 showDropDown=False, showErrorMessage=True, showInputMessage=True,
+                                 prompt='Enter Y or N - Type Y if the previous partner commissioned this placement, or N if not.')
+            dvG = DataValidation(type='list', formula1='"Keep,Disavow"', allow_blank=True,
+                                 showDropDown=False, showErrorMessage=True, showInputMessage=True,
+                                 prompt='Choose Keep or Disavow - Only the domains awaiting confirmation can be set.')
+            ws.add_data_validation(dvF); dvF.add(f'F2:F{last}')
+            ws.add_data_validation(dvG); dvG.add(f'G2:G{last}')
     path = os.path.join(OUT, 'Bolton_Service_WNC_Backlinks_Audit.xlsx')
     wb.save(path)
     print('wrote', path)

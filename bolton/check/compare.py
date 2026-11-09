@@ -103,6 +103,16 @@ def main(tpl_path, out_path):
         tg = t.sheet_view.showGridLines; og = o.sheet_view.showGridLines
         if (tg in (None,True)) != (og in (None,True)):
             diffs.append(f"{name} gridlines {og}!={tg}")
+        # data validations (dropdowns): compare count + (type, formula1, column letter) sets
+        def dv_sig(ws):
+            sig=set()
+            for dv in ws.data_validations.dataValidation:
+                cols = sorted({str(r).split('!')[-1].lstrip('$')[0] for r in str(dv.sqref).split()})
+                sig.add((dv.type, dv.formula1, tuple(cols)))
+            return sig
+        ts, osig = dv_sig(t), dv_sig(o)
+        if ts != osig:
+            diffs.append(f"{name} data-validation mismatch: template={ts} output={osig}")
     if diffs:
         print('STRUCTURAL DIFFERENCES:')
         for d in diffs: print('  -', d)
