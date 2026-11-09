@@ -6,5 +6,5 @@ FINDINGS = [
     'Two patterns, easy to tell apart. 2,972 links hit the home page (the link-scheme flood); 280 hit deep product pages (the commissioned-looking campaign). The home-page flood is the attack; the product-page links may have been commissioned and are held.',
     "The single biggest anchor, on 1,790 referring domains, is SEO sales copy that names the client's own domain: “erthproducts.com Premium SEO Backlinks for Higher Google Rankings and …”.",
     '96 domains are held for the partner who commissioned the links to confirm, in case any were paid placements. 10 non-CDN /24 IP ranges each host 5+ of the referring domains (118 domains in total), a sign of shared link-network hosting rather than independent sites.',
-    'Held does not mean valuable: 96 of the 96 held domains have no Semrush organic traffic at all. None should be treated as a genuine endorsement until the partner confirms it.',
+    'Held does not mean valuable: 75 of the 96 held domains have no Semrush organic traffic at all. None should be treated as a genuine endorsement until the partner confirms it.',
 ]
