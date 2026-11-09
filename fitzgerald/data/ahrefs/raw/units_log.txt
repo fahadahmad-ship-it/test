@@ -1,0 +1,5 @@
+probe limit2: 50
+w1 pre2018 (49 rows): 441
+w2 2018-2020 (216 rows): 1944
+CAPPED >=2020 asc (250, ignored data): 2250
+CAPPED >=2020 desc (250, ignored data): 2250

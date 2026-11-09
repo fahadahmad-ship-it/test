@@ -1,0 +1,11 @@
+# Another client's confidential template (K&K) - never commit
+_tmpl_inspect/
+
+# Subagent scratch dirs at repo root
+/scripts/
+/work/
+/work_scratch/
+
+# Python cruft
+__pycache__/
+*.pyc
