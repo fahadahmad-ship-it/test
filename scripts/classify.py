@@ -159,43 +159,66 @@ def _root(d):
     return d.lower() if len(parts) < 2 else ".".join(parts[-2:])
 
 
-def classify_domain_status(*, is_spam_flag, has_sales_copy_anchor, pbn,
-                           has_commercial_anchor, dofollow_links, as_val=0.0,
-                           traffic=0, domain="", client_owned=False):
-    """Return (status, in_disavow_flag)."""
+COMMERCIAL_TYPES = {"Exact match commercial", "Exact match commercial (geo)"}
+SALES_TYPE = "Spam: keyword stuffed SEO sales copy"
+
+
+def classify_domain_status(*, dominant=None, is_spam_flag=False, pbn=False,
+                           has_commercial_anchor=False, dofollow_links=0,
+                           as_val=0.0, traffic=0, domain="", client_owned=False):
+    """Return (status, in_disavow_flag).
+
+    Driven by the DOMINANT anchor type (the rule the template demonstrates):
+      - dominant commercial anchor  -> Held (candidate commissioned placement)
+      - dominant SEO-sales-copy     -> Spam (the link-spam / negative-SEO attack)
+      - naked URL / branded / etc.  -> Spam only if the domain itself is spammy,
+                                       else Held (if commercial present) or Keep
+    Guards protect major and strong-legit domains from being disavowed.
+    """
     if client_owned:
         return "Own Site", "No"
     d = (domain or "").lower()
     as_val = as_val or 0.0
     traffic = traffic or 0
     has_df = (dofollow_links or 0) > 0
+    spammy_domain = bool(is_spam_flag) or pbn
+
+    def held():
+        return ("Held (Pending Partner)", "Held") if has_df else ("Held (Nofollow, No Action)", "Held")
+
+    def spam():
+        return ("Spam (Disavow)", "Yes") if has_df else ("Spam (Nofollow, No Action)", "No")
+
+    def keep():
+        return "Keep", "No"
 
     # Guard 1: never disavow a major legitimate domain.
     if d in MAJOR_LEGIT or _root(d) in MAJOR_LEGIT:
-        if has_commercial_anchor:
-            return ("Held (Pending Partner)", "Held") if has_df else ("Held (Nofollow, No Action)", "Held")
-        return "Keep", "No"
+        return held() if has_commercial_anchor else keep()
 
-    spam_domain = bool(is_spam_flag) or pbn
-    # A lone SEO-sales-copy anchor condemns a junk site, but on a domain with real
-    # authority/traffic it is more likely a scraper/UGC page -> don't condemn on it alone.
-    if has_sales_copy_anchor and not (as_val >= 20 or traffic >= 50):
-        spam_domain = True
+    # Decide the base category from the dominant anchor type.
+    if dominant in COMMERCIAL_TYPES:
+        cat = "HELD"
+    elif dominant == SALES_TYPE:
+        cat = "SPAM"
+    elif dominant == "Naked URL":
+        cat = "SPAM" if spammy_domain else ("HELD" if has_commercial_anchor else "KEEP")
+    elif dominant in ("Branded", "Generic", "Empty or image", "Contextual or other"):
+        if has_commercial_anchor:
+            cat = "HELD"
+        elif spammy_domain:
+            cat = "SPAM"
+        else:
+            cat = "KEEP"
+    else:  # no backlinks pulled / no dominant anchor -> rely on domain spam signals
+        cat = "SPAM" if spammy_domain else "KEEP"
 
     # Guard 2: never AUTO-disavow a strong-legit domain (high authority + real
-    # organic traffic); flag for manual review via Keep instead.
-    if as_val >= 40 and traffic >= 2000:
-        spam_domain = False
+    # organic traffic); route to Held (if commercial) or Keep for manual review.
+    if cat == "SPAM" and as_val >= 40 and traffic >= 2000:
+        cat = "HELD" if has_commercial_anchor else "KEEP"
 
-    if spam_domain:
-        if has_df:
-            return "Spam (Disavow)", "Yes"
-        return "Spam (Nofollow, No Action)", "No"
-    if has_commercial_anchor:
-        if has_df:
-            return "Held (Pending Partner)", "Held"
-        return "Held (Nofollow, No Action)", "Held"
-    return "Keep", "No"
+    return {"SPAM": spam(), "HELD": held(), "KEEP": keep()}[cat]
 
 
 if __name__ == "__main__":

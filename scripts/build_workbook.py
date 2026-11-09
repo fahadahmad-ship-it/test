@@ -234,6 +234,7 @@ for d in sorted(all_domains):
 
     # anchor-type signals for status
     types = collections.Counter(b['anchor_type'] for b in bls)
+    dominant = types.most_common(1)[0][0] if types else None
     has_sales = types.get("Spam: keyword stuffed SEO sales copy", 0) > 0
     has_commercial = (types.get("Exact match commercial", 0) +
                       types.get("Exact match commercial (geo)", 0)) > 0
@@ -243,7 +244,7 @@ for d in sorted(all_domains):
     client_owned = root_of(d) == CLIENT
 
     status, in_disav = classify_domain_status(
-        is_spam_flag=is_spam_flag, has_sales_copy_anchor=has_sales, pbn=pbn,
+        dominant=dominant, is_spam_flag=is_spam_flag, pbn=pbn,
         has_commercial_anchor=has_commercial,
         dofollow_links=(dofollow_n if in_ah else (1 if has_df else 0)),
         as_val=as_val, traffic=traffic, domain=d, client_owned=client_owned)
@@ -473,8 +474,8 @@ for r in rows_sorted:
                  r['top_anchor'], r['example_page'], r['page_title'], r['source'],
                  r['ip'], r['disavow_line']])
 write_body(ws, 2, body,
-           numfmts={'D':"#,##0",'E':"#,##0",'F':"#,##0",'I':"#,##0",'J':"#,##0",'K':"d mmm yyyy"},
-           datecols=('K',))
+           numfmts={'D':"#,##0",'E':"#,##0",'F':"#,##0",'K':"d mmm yyyy"},
+           datecols=('K',))  # I/J (Dofollow/Nofollow) left General to match template
 
 # ---------------------------------------------------------------- All Backlinks
 ws = wb.create_sheet("All Backlinks")
@@ -496,7 +497,7 @@ print(f"all backlinks rows: {len(body)}")
 
 # ---------------------------------------------------------------- Anchor Analysis
 ws = wb.create_sheet("Anchor Analysis")
-set_widths(ws, {'A':115.86,'B':37.71,'C':14,'D':8.71,'E':20,'F':20.29})
+set_widths(ws, {'A':115.86,'B':37.71,'C':14,'D':8.71,'F':20.29})  # E left default (matches template)
 cols = ["Anchor Text","Anchor Type","Backlinks","Share of Backlinks","Referring Domains","Spam Domains Using It"]
 for c, h in enumerate(cols, 1):
     ws.cell(row=1, column=c, value=h)
