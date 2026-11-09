@@ -1,0 +1,11 @@
+# Client backlink data (large, client-confidential) — delivered to the user directly, not committed
+/data/
+# Uploaded template sample (belongs to another client/agency) and assets extracted from it
+template_sample.xlsx
+/assets/
+# Generated deliverables (binary; delivered to the user via chat, not committed)
+*.xlsx
+disavow_*.txt
+# Python
+__pycache__/
+*.pyc
