@@ -24,9 +24,9 @@ from classify import (classify_anchor, classify_domain_status, is_pbn_domain)
 DATA = "data"
 CLIENT = "frickecpa.com"
 CLIENT_DOMAINS = {"frickecpa.com", "www.frickecpa.com"}
-BRAND_TOKENS = ["fricke cpa", "fricke, ", "frickecpa", "fricke &", "fricke and",
-                "j fricke", "fricke"]
-TITLE = "Fricke CPA"  # refined from data below if a better brand name is found
+BRAND_TOKENS = ["fricke & associates", "fricke and associates", "fricke cpa",
+                "fricke, ", "frickecpa", "fricke &", "wfrickecpa", "fricke"]
+TITLE = "Fricke & Associates, P.C."
 DISAVOW_FILE = "disavow_frickecpa.txt"
 
 TEAL = "0C343D"
@@ -76,6 +76,12 @@ def parse_date(s):
     if not s:
         return None
     s = str(s).strip()
+    # Semrush emits Unix epoch seconds (10-digit integer)
+    if re.fullmatch(r'\d{9,11}', s):
+        try:
+            return datetime.datetime.utcfromtimestamp(int(s))
+        except Exception:
+            return None
     for fmt in ("%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%d %H:%M:%S", "%Y-%m-%d", "%Y-%m-%dT%H:%M:%S"):
         try:
             return datetime.datetime.strptime(s, fmt)
@@ -147,20 +153,44 @@ for r in se_bl:
            'Semrush')
 
 backlinks = list(_bl_map.values())
-for b in backlinks:
-    b['tool'] = 'Both' if b['tool'] == 'Both' else b['tool']
-
-# per-domain backlink aggregates
-dom_bl = collections.defaultdict(list)
-for b in backlinks:
-    dom_bl[b['domain']].append(b)
 
 # -------------------------------------------------- unify referring domains
+# Authoritative universe = the two referring-domain lists. Backlink source hosts
+# (which may be subdomains / www) are mapped ONTO this universe so we count at
+# the referring-domain level, matching the template.
 ah_rd_map = {r['domain'].lower(): r for r in ah_rd if r.get('domain')}
 se_rd_map = {r['domain'].lower(): r for r in se_rd if r.get('domain')}
-all_domains = set(ah_rd_map) | set(se_rd_map) | set(dom_bl)
-# ignore client's own domain as a referring domain
-all_domains = {d for d in all_domains if d and root_of(d) != CLIENT}
+universe = {d for d in (set(ah_rd_map) | set(se_rd_map)) if d and root_of(d) != CLIENT}
+_root_index = {}
+for d in universe:
+    _root_index.setdefault(root_of(d), d)
+
+
+def resolve_domain(host):
+    h = (host or '').lower().strip()
+    if not h:
+        return None
+    if h in universe:
+        return h
+    hw = re.sub(r'^www\.', '', h)
+    if hw in universe:
+        return hw
+    r = root_of(h)
+    if r in universe:
+        return r
+    return _root_index.get(r, r)  # orphan -> registered root as its own refdomain
+
+
+# attach backlinks to referring domains (re-key to the refdomain level)
+dom_bl = collections.defaultdict(list)
+for b in backlinks:
+    rd = resolve_domain(b['domain'])
+    if not rd or root_of(rd) == CLIENT:
+        continue
+    b['domain'] = rd
+    dom_bl[rd].append(b)
+
+all_domains = {d for d in (universe | set(dom_bl)) if d and root_of(d) != CLIENT}
 
 rows = []          # Referring Domain Audit rows (dicts)
 for d in sorted(all_domains):

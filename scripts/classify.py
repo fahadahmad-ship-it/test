@@ -58,10 +58,18 @@ GEO_ABBR = re.compile(r'\b(ga|al|fl|sc|nc|tn|tx|ca|ny|nj|pa|oh|az|co|wa|va|md|mi
 
 URL_RE = re.compile(r'^(https?://|www\.)', re.I)
 DOMAINY_RE = re.compile(r'^[a-z0-9][a-z0-9\-]*(\.[a-z0-9\-]+)+(/.*)?$', re.I)
+# TLDs essentially never used by a legitimate referrer of a US CPA firm; in this
+# profile they are the auto-generated PBN / link-spam networks.
 SPAMMY_TLD = (".shop", ".top", ".icu", ".xyz", ".store", ".online", ".space",
-              ".website", ".site", ".fyi", ".party", ".agency", ".click", ".live")
+              ".website", ".site", ".fyi", ".party", ".agency", ".click", ".live",
+              ".cloud", ".fun", ".sbs", ".lol", ".cfd", ".bond", ".rest", ".quest",
+              ".skin", ".boats", ".autos", ".beauty", ".hair", ".mom", ".pics",
+              ".monster", ".buzz", ".wiki", ".cyou", ".makeup", ".motorcycles")
 SPAMMY_NAME_BITS = ("seo", "rank", "backlink", "link", "index", "crawl", "serp",
-                    "boost", "dofollow", "domainauthority", "trustflow", "dachecker")
+                    "boost", "dofollow", "domainauthority", "trustflow", "dachecker",
+                    "webdirectory", "aged-domain", "agedomain", "toplevel",
+                    "anchorurl", "bestsite", "seodir", "submiturl", "pingmylink",
+                    "indexer", "freedirectory", "linkdir", "bookmark", "ping-")
 
 
 def _words(s):
@@ -124,12 +132,12 @@ def classify_anchor(anchor, brand_tokens, client_domains, link_type=None,
 
 def is_pbn_domain(domain):
     d = (domain or "").lower()
+    # abused TLD alone is a sufficient signal in this attack profile
     if d.endswith(SPAMMY_TLD):
-        if any(bit in d for bit in SPAMMY_NAME_BITS):
-            return True
-        # bare spammy-tld with random-ish short name + no real brand → likely PBN
-        return d.endswith((".shop", ".top", ".icu", ".store", ".space", ".website",
-                           ".site", ".online")) and len(d.split(".")[0]) <= 12
+        return True
+    # SEO/link-spam name signatures on any TLD
+    if any(bit in d for bit in SPAMMY_NAME_BITS):
+        return True
     return False
 
 
