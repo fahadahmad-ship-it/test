@@ -1,0 +1,32 @@
+{
+  "total_domains": 3232,
+  "total_links": 5817,
+  "status_domains": {
+    "Spam (Disavow)": 2294,
+    "Keep": 129,
+    "Held (Pending Partner)": 590,
+    "Spam (Nofollow, No Action)": 185,
+    "Held (Nofollow, No Action)": 31,
+    "Own Site": 3
+  },
+  "status_links": {
+    "Spam (Disavow)": 3601,
+    "Keep": 465,
+    "Held (Pending Partner)": 1127,
+    "Spam (Nofollow, No Action)": 506,
+    "Held (Nofollow, No Action)": 107,
+    "Own Site": 11
+  },
+  "disavow_domains": 2294,
+  "held_pending": 590,
+  "held_nofollow": 31,
+  "spam_nofollow": 185,
+  "keep": 129,
+  "own": 3,
+  "disavow_money": 2294,
+  "disavow_by_property": {
+    "boltonservicewnc.com": 1921,
+    "boltonwnc.com": 222,
+    "webolton.com": 668
+  }
+}
