@@ -1,0 +1,12 @@
+# Transient / tooling
+.batchwork/
+__pycache__/
+*.pyc
+
+# Audit raw pulls and intermediates (large, reproducible from the scripts)
+erthproducts/data/
+erthproducts/ref/
+erthproducts/out/_dryrun.xlsx
+erthproducts/out/merged.json
+erthproducts/out/enriched.json
+erthproducts/out/classified_pre.json
