@@ -1,6 +1,6 @@
 # Disavow file for Google Search Console property: fitzplumb.com
 # Client: Fitzgerald Plumbing   Prepared by: Harbinger Marketing   Date: 09 Nov 2026
-# Domains to disavow: 1880
+# Domains to disavow: 1892
 #
 # This file covers the spam domains whose links point at the redirect property fitzplumb.com. Upload it to the fitzplumb.com Search Console property. (All of these are also included in the fitzgeraldplumbing.com union file.)
 #
@@ -15,9 +15,10 @@
 #
 # Only 'domain:' entries are used (covers all subdomains). Redundant child subdomains omitted.
 
-# --- Domain-marketplace / aged-domain spam page (69) ---
+# --- Domain-marketplace / aged-domain spam page (81) ---
 domain:2x9.co
 domain:a1webdirectory.xyz
+domain:algolinkers.agency
 domain:all-aged-domains.com
 domain:alljobs.info
 domain:allwebsitesdirectory.com
@@ -27,6 +28,7 @@ domain:backlinkon.com
 domain:backlinksbank.com
 domain:backlinkshouse.com
 domain:backlinkstree.com
+domain:best-seo-domains.com
 domain:bestwebstats.com
 domain:booksreadr.org
 domain:carplz.com
@@ -38,6 +40,14 @@ domain:domainanalysis.org
 domain:domains.com.bz
 domain:domainsc.com
 domain:domainwork.space
+domain:domraider.br.com
+domain:domraider.de.com
+domain:domraider.eu.com
+domain:domraider.gb.net
+domain:domraider.it.com
+domain:domraider.uk.com
+domain:domraider.uk.net
+domain:domraider.us.com
 domain:eachdirectory.xyz
 domain:egyptiandirectory.com
 domain:findinfo.in
@@ -50,6 +60,7 @@ domain:homefinance.co.in
 domain:indexaward.com
 domain:indians.cc
 domain:jobsapp.info
+domain:keyrushseo.site
 domain:linksnatcher.art
 domain:linksnatcher.com
 domain:listsofindia.com
@@ -61,6 +72,7 @@ domain:preparation.co.in
 domain:procycling.org
 domain:pudhe.com
 domain:queries.co.in
+domain:rankvanceauthority.info
 domain:read.org.in
 domain:sergechel.info
 domain:smartwebdirectory.xyz

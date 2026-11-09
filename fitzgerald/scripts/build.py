@@ -127,9 +127,14 @@ def set_cell(ws, r, c, val, font=F_DATA, fill=FILL_WHITE, border=None, align=A_V
     if fmt: cell.number_format = fmt
     return cell
 
-def header_row(ws, headers, widths, row=1, height=31.5):
+A_HDR_LEFT   = Alignment(horizontal="left", vertical="center", wrap_text=True)
+A_HDR_NOWRAP = Alignment(horizontal="center", vertical="center")
+
+def header_row(ws, headers, widths, row=1, height=31.5, align_overrides=None):
+    align_overrides = align_overrides or {}
     for i, h in enumerate(headers, start=1):
-        set_cell(ws, row, i, h, font=F_HDR, fill=FILL_ACCENT, border=B_HDR, align=A_CTRW)
+        set_cell(ws, row, i, h, font=F_HDR, fill=FILL_ACCENT, border=B_HDR,
+                 align=align_overrides.get(i, A_CTRW))
     for i, w in enumerate(widths, start=1):
         ws.column_dimensions[get_column_letter(i)].width = w
     ws.row_dimensions[row].height = height
@@ -283,7 +288,7 @@ def build():
     h3 = ["Referring Domain","Status","Tool","Anchor Text","Anchor Type","Link Type",
           "Linking Page URL","Linking Page Title","Target URL"]
     w3 = [25.43,27.14,14.71,55,32,10,55,53.14,30.57]
-    header_row(ws, h3, w3)
+    header_row(ws, h3, w3, align_overrides={3: A_HDR_LEFT})  # 'Tool' header left-aligned (template)
     links_sorted = sorted(links, key=lambda r_: (r_["source_domain"], r_.get("source_url","")))
     r = 2
     for lk in links_sorted:
@@ -305,7 +310,7 @@ def build():
     ws = wb.create_sheet("Anchor Analysis")
     h4 = ["Anchor Text","Anchor Type","Backlinks","Share of Backlinks","Referring Domains","Spam Domains Using It"]
     w4 = [115.86,37.71,14,8.71,8.71,20.29]
-    header_row(ws, h4, w4)
+    header_row(ws, h4, w4, align_overrides={1: A_HDR_NOWRAP})  # 'Anchor Text' header not wrapped (template)
     anchor_rows = collections.defaultdict(lambda: {"bl":0,"doms":set(),"spam":set(),"type":""})
     spam_status = {"Spam (Disavow)","Spam (Nofollow, No Action)"}
     for lk in links:

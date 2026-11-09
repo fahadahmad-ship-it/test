@@ -1,6 +1,6 @@
 # Disavow file for Google Search Console property: fitzgeraldplumbing.com
 # Client: Fitzgerald Plumbing   Prepared by: Harbinger Marketing   Date: 09 Nov 2026
-# Domains to disavow: 3688
+# Domains to disavow: 3696
 #
 # This is the MONEY SITE file. It is the full union of every spam domain across all owned properties, because fitzgeraldandsonsplumbing.com and fitzplumb.com 301-redirect into fitzgeraldplumbing.com and Google forwards disavow signals across a redirect imperfectly. Upload THIS file to the fitzgeraldplumbing.com Search Console property.
 #
@@ -15,9 +15,10 @@
 #
 # Only 'domain:' entries are used (covers all subdomains). Redundant child subdomains omitted.
 
-# --- Domain-marketplace / aged-domain spam page (71) ---
+# --- Domain-marketplace / aged-domain spam page (89) ---
 domain:2x9.co
 domain:a1webdirectory.xyz
+domain:algolinkers.agency
 domain:all-aged-domains.com
 domain:alljobs.info
 domain:allwebsitesdirectory.com
@@ -26,7 +27,9 @@ domain:backlinkhouse.com
 domain:backlinkon.com
 domain:backlinksbank.com
 domain:backlinkshouse.com
+domain:backlinksolutions.info
 domain:backlinkstree.com
+domain:best-seo-domains.com
 domain:bestwebstats.com
 domain:booksreadr.org
 domain:carplz.com
@@ -39,6 +42,14 @@ domain:domaineye.com
 domain:domains.com.bz
 domain:domainsc.com
 domain:domainwork.space
+domain:domraider.br.com
+domain:domraider.de.com
+domain:domraider.eu.com
+domain:domraider.gb.net
+domain:domraider.it.com
+domain:domraider.uk.com
+domain:domraider.uk.net
+domain:domraider.us.com
 domain:eachdirectory.xyz
 domain:egyptiandirectory.com
 domain:findinfo.in
@@ -52,6 +63,7 @@ domain:indexaward.com
 domain:indians.cc
 domain:itsyourgold.com
 domain:jobsapp.info
+domain:keyrushseo.site
 domain:linksnatcher.art
 domain:linksnatcher.com
 domain:listsofindia.com
@@ -63,6 +75,12 @@ domain:preparation.co.in
 domain:procycling.org
 domain:pudhe.com
 domain:queries.co.in
+domain:rankvance.info
+domain:rankvanceauthority.info
+domain:rankvanceboost.info
+domain:rankvancelinks.info
+domain:rankvancelinks.online
+domain:rankvanceseo.info
 domain:read.org.in
 domain:sergechel.info
 domain:smartwebdirectory.xyz
@@ -3692,19 +3710,9 @@ domain:writecart.shop
 domain:youseotools.com
 domain:youseotools.link
 
-# --- Spam / link-directory host (15) ---
-domain:backlinksolutions.info
-domain:exoticlistings.net
-domain:expertdirectorylistings.com
-domain:finddirectory.org
-domain:listinger.net
-domain:listingsspot.com
+# --- Spam / link-directory host (5) ---
 domain:modrndirectory.com
-domain:myreallistings.com
-domain:optimadirectory.com
 domain:ranksdirectory.com
-domain:squaredirectory.com
 domain:submitwebdir.net
-domain:superlistingz.com
 domain:theemiratesdirectory.com
 domain:toparticlesdirectory.com

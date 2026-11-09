@@ -9,11 +9,11 @@ Prepared by Harbinger Marketing | 09 November 2026
 ## Verdict breakdown
 | Status | Domains |
 |---|---:|
-| Spam (Disavow) | 3,688 |
-| Spam (Nofollow, No Action) | 567 |
-| Held (Pending Partner) | 667 |
+| Spam (Disavow) | 3,696 |
+| Spam (Nofollow, No Action) | 570 |
+| Held (Pending Partner) | 681 |
 | Held (Nofollow, No Action) | 5 |
-| Keep | 326 |
+| Keep | 301 |
 | Own Site | 2 |
 | **Total** | **5,255** |
 
@@ -21,12 +21,12 @@ Prepared by Harbinger Marketing | 09 November 2026
 The client owns **three domains**: `fitzgeraldplumbing.com` (money site) plus `fitzgeraldandsonsplumbing.com` and `fitzplumb.com`, which **301-redirect into the money site**. The spam campaign targets all three. One audit of the money site captures them all (Semrush rolls redirected links in via the `redirect_url` column).
 
 We provide **three disavow files** (you told us you can upload to all properties):
-- **`disavow_fitzgeraldplumbing.com.txt`** - 3,688 domains. THE money-site file: the full union of every spam domain across all properties. **Upload this to the fitzgeraldplumbing.com Search Console property.**
-- **`disavow_fitzgeraldandsonsplumbing.com.txt`** - 1,913 domains whose links point at fitzgeraldandsonsplumbing.com. Upload to the fitzgeraldandsonsplumbing.com Search Console property. (All are also in the money-site union.)
-- **`disavow_fitzplumb.com.txt`** - 1,880 domains whose links point at fitzplumb.com. Upload to the fitzplumb.com Search Console property. (All are also in the money-site union.)
+- **`disavow_fitzgeraldplumbing.com.txt`** - 3,696 domains. THE money-site file: the full union of every spam domain across all properties. **Upload this to the fitzgeraldplumbing.com Search Console property.**
+- **`disavow_fitzgeraldandsonsplumbing.com.txt`** - 1,924 domains whose links point at fitzgeraldandsonsplumbing.com. Upload to the fitzgeraldandsonsplumbing.com Search Console property. (All are also in the money-site union.)
+- **`disavow_fitzplumb.com.txt`** - 1,892 domains whose links point at fitzplumb.com. Upload to the fitzplumb.com Search Console property. (All are also in the money-site union.)
 
 ## Before you upload - confirm with the previous supplier
-- **672 domains are HELD**, not in any disavow file. They carry exact-match commercial anchors on deep location/service pages and may be **commissioned placements** by your previous SEO **supplier** (the 'partner' referenced throughout the workbook).
+- **686 domains are HELD**, not in any disavow file. They carry exact-match commercial anchors on deep location/service pages and may be **commissioned placements** by your previous SEO **supplier** (the 'partner' referenced throughout the workbook).
 - Tab 5 (Exact Match Anchors) lists them with blank **Partner confirmed?** / **Final decision** columns for the supplier to fill. Tab 6 (Pending Disavow Lines) has the ready disavow lines to append **only** for the ones they did not build.
 - **Do not upload any file until that conversation has happened.** Also check whether a disavow file already exists on each property in Search Console - if one does, uploading **replaces** it, so merge rather than overwrite.
 
@@ -38,7 +38,7 @@ We provide **three disavow files** (you told us you can upload to all properties
 - **Authority Score** is Semrush for every domain (the audit's required metric). **Backlinks / Dofollow / Nofollow / First Seen / anchors / target pages** are computed directly from the merged Semrush+Ahrefs link data.
 - **Traffic, RD's and Organic Keywords** are per-domain audience metrics. We fetched them from Ahrefs batch metrics for 3,728 domains; our monthly Ahrefs API quota was reached mid-pull (resets 25 Nov 2026). We **backfilled the genuine / held / keep domains from Semrush** so no real site shows a false zero.
 - The remaining ~1,527 un-fetched domains are low-authority throwaway spam (Authority Score < 10). 98.4% of measured low-AS domains have **zero** organic traffic, so these are recorded as zero traffic/keywords; their RD's cell is left blank rather than guessed. They can be completed on the quota reset or from client-supplied Ahrefs CSV exports if you want exact figures - it does not change any disavow decision.
-- Of the held set, **597 of 672** have no organic traffic at all - held does not mean valuable.
+- Of the held set, **611 of 686** have no organic traffic at all - held does not mean valuable.
 
 ## Limits
 - Example-page 'live' status rests on Semrush/Ahrefs last crawl (we did not fetch each linking host live).

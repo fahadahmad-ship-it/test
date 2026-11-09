@@ -42,7 +42,12 @@ SERVICE_TERMS = [
     "hydrojetting", "bathroom plumbing", "kitchen plumbing", "water filtration",
     "water softener", "well pump", "fixture installation", "sewer camera", "trenchless",
     "septic", "drain unclogging", "rooter", "new construction plumbing", "service repair",
+    "hot water tank", "water tank", "hot water tank installation", "water tank installation",
+    "tank installation", "sump pump installation", "water heaters", "tankless water heaters",
 ]
+# single-word service stems (matched plural-tolerant) to catch "toilets", "drains", "sewers" etc.
+SERVICE_STEMS = ["plumber", "plumbing", "drain", "sewer", "toilet", "faucet", "repipe",
+                 "hydrojetting", "rooter", "backflow", "septic"]
 GEO_TERMS = [
     "georgia", "peachtree city", "newnan", "fayetteville", "fayette county", "fayette",
     "tyrone", "senoia", "sharpsburg", "brooks", "moreland", "grantville", "alvaton",
@@ -90,6 +95,12 @@ SPAM_TITLE_PATTERNS = [
     "top domains", "domain list", "domains for sale", "website worth", "website stats",
     "web stats", "websiteworth", "buy backlinks", "aged domains and backlinks",
     "domain marketplace", "sell your domain", "domain appraisal", "estibot",
+    # SEO/backlink-seller page titles (a genuine citation never uses this language)
+    "backlink", "dofollow", "nofollow link", "niche edit", "guest post", "link building",
+    "link-building", "link package", "seo resource", "seo service", "seo package",
+    "powerful backlink", "premium backlink", "authority backlink", "boost organic traffic",
+    "boost your ranking", "boost rankings", "higher da", "da and pa", "da/pa", "link juice",
+    "tiered link", "web 2.0 link", "pbn", "rank higher", "increase your ranking",
 ]
 SPAM_TITLE_REGEX = [re.compile(r"page\s*\d{3,}", re.I), re.compile(r"\bpage\s*\d{2,}\b.*domain", re.I)]
 SPAM_URL_PATTERNS = [
@@ -158,8 +169,18 @@ def anchor_type(anchor):
     # naked url / domain
     if looks_url(a):
         return "Naked URL"
-    # exact-match commercial (service vocabulary)
-    has_service = any(has_word(a, t) if ' ' not in t else (t in a) for t in SERVICE_TERMS)
+    # exact-match commercial (service vocabulary), plural-tolerant
+    def _svc(a):
+        for t in SERVICE_TERMS:
+            if ' ' in t:
+                if t in a: return True
+            elif re.search(r'(?<![a-z])'+re.escape(t)+r's?(?![a-z])', a):
+                return True
+        for stem in SERVICE_STEMS:
+            if re.search(r'(?<![a-z])'+re.escape(stem)+r's?(?![a-z])', a):
+                return True
+        return False
+    has_service = _svc(a)
     has_geo = any(g in a for g in GEO_TERMS)
     if has_service:
         return "Exact match commercial (geo)" if has_geo else "Exact match commercial"
