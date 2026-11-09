@@ -246,7 +246,7 @@ for d in sorted(all_domains):
         is_spam_flag=is_spam_flag, has_sales_copy_anchor=has_sales, pbn=pbn,
         has_commercial_anchor=has_commercial,
         dofollow_links=(dofollow_n if in_ah else (1 if has_df else 0)),
-        client_owned=client_owned)
+        as_val=as_val, traffic=traffic, domain=d, client_owned=client_owned)
 
     # representative backlink: prefer dofollow, then most-informative anchor
     rep = None

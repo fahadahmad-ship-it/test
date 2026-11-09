@@ -141,13 +141,52 @@ def is_pbn_domain(domain):
     return False
 
 
+# Major legitimate domains that must never be disavowed, even if a scraper/UGC
+# page on them happens to carry a spammy anchor.
+MAJOR_LEGIT = {
+    "google.com", "yahoo.com", "bing.com", "facebook.com", "instagram.com",
+    "youtube.com", "linkedin.com", "twitter.com", "x.com", "reddit.com",
+    "pinterest.com", "wikipedia.org", "amazon.com", "apple.com", "microsoft.com",
+    "tiktok.com", "medium.com", "wordpress.com", "blogspot.com", "tumblr.com",
+    "yelp.com", "bbb.org", "glassdoor.com", "yellowpages.com", "manta.com",
+    "chamberofcommerce.com", "indeed.com", "mapquest.com", "foursquare.com",
+    "gscpa.org", "aicpa.org", "sba.gov", "irs.gov",
+}
+
+
+def _root(d):
+    parts = (d or "").lower().split('.')
+    return d.lower() if len(parts) < 2 else ".".join(parts[-2:])
+
+
 def classify_domain_status(*, is_spam_flag, has_sales_copy_anchor, pbn,
-                           has_commercial_anchor, dofollow_links, client_owned=False):
+                           has_commercial_anchor, dofollow_links, as_val=0.0,
+                           traffic=0, domain="", client_owned=False):
     """Return (status, in_disavow_flag)."""
     if client_owned:
         return "Own Site", "No"
-    spam_domain = bool(is_spam_flag) or has_sales_copy_anchor or pbn
+    d = (domain or "").lower()
+    as_val = as_val or 0.0
+    traffic = traffic or 0
     has_df = (dofollow_links or 0) > 0
+
+    # Guard 1: never disavow a major legitimate domain.
+    if d in MAJOR_LEGIT or _root(d) in MAJOR_LEGIT:
+        if has_commercial_anchor:
+            return ("Held (Pending Partner)", "Held") if has_df else ("Held (Nofollow, No Action)", "Held")
+        return "Keep", "No"
+
+    spam_domain = bool(is_spam_flag) or pbn
+    # A lone SEO-sales-copy anchor condemns a junk site, but on a domain with real
+    # authority/traffic it is more likely a scraper/UGC page -> don't condemn on it alone.
+    if has_sales_copy_anchor and not (as_val >= 20 or traffic >= 50):
+        spam_domain = True
+
+    # Guard 2: never AUTO-disavow a strong-legit domain (high authority + real
+    # organic traffic); flag for manual review via Keep instead.
+    if as_val >= 40 and traffic >= 2000:
+        spam_domain = False
+
     if spam_domain:
         if has_df:
             return "Spam (Disavow)", "Yes"
