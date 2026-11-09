@@ -1,12 +1,12 @@
 # Disavow file for erthproducts.com (Google Search Console property: erthproducts.com)
 # Generated 2026-11-09 by Harbinger Marketing backlink audit.
-# 2054 domains to disavow. Confirmed spam with at least one dofollow link.
+# 2063 domains to disavow. Confirmed spam with at least one dofollow link.
 # Held domains (96) are NOT in this file: the SEO partner
 #   who commissioned the links must confirm first. Do NOT upload before that conversation.
 # No redirect/owned domains were detected, so this single file covers the whole property.
 # Check Search Console: if a disavow file already exists, uploading REPLACES it.
 
-# --- PBN / SEO sales-copy link network (1968) ---
+# --- PBN / SEO sales-copy link network (1970) ---
 domain:007eaglegaze.online
 domain:100ranking.info
 domain:100ranking.link
@@ -532,7 +532,6 @@ domain:citationlinks.online
 domain:citationlinks.website
 domain:clifflisting.com
 domain:cmocheatsheets.com
-domain:co.com
 domain:competitionchecker.shop
 domain:competitionchecker.site
 domain:competitionchecker.store
@@ -653,6 +652,7 @@ domain:dadrcheckertool.website
 domain:dadrpachecker.shop
 domain:dadrpachecker.site
 domain:dadrpachecker.website
+domain:daechul.co.com
 domain:dafreechecker.online
 domain:dailyfolknews.com
 domain:dailysitevisitors.shop
@@ -1039,6 +1039,8 @@ domain:getseotips.info
 domain:gettingtraffic.site
 domain:gettraffictomyblog.shop
 domain:getwebsiteviews.store
+domain:ggmap.co.com
+domain:ggmap.us.com
 domain:gladeflowers.com
 domain:go4seo.link
 domain:gofreebacklinks.com
@@ -1436,6 +1438,7 @@ domain:realvisitors.website
 domain:realwinningonlinecasino.online
 domain:reisenweg.com
 domain:rjcentinc.com
+domain:royaldb.us.com
 domain:russellcommission.org
 domain:s-tribe.net
 domain:sahammurah.com
@@ -1832,7 +1835,6 @@ domain:urlseochecker.site
 domain:urlseochecker.website
 domain:urltracker.space
 domain:urltrafficgenerator.shop
-domain:us.com
 domain:usaseobiz.com
 domain:usaseobiz.info
 domain:usaseobiz.link
@@ -1976,10 +1978,11 @@ domain:wiki-park.com
 domain:writecart.shop
 domain:youseotools.com
 
-# --- Spam directories, listings and bookmarking sites (75) ---
+# --- Spam directories, listings and bookmarking sites (86) ---
 domain:1000.co.in
 domain:2x9.co
 domain:a1webdirectory.xyz
+domain:algolinkers.agency
 domain:all-aged-domains.com
 domain:alljobs.info
 domain:alltopleveldomains.space
@@ -1998,8 +2001,17 @@ domain:cheapsmmprovider.online
 domain:directorydaddy.xyz
 domain:domain.com.lc
 domain:domainanalysis.org
+domain:domains.com.bz
 domain:domainsc.com
 domain:domainwork.space
+domain:domraider.br.com
+domain:domraider.de.com
+domain:domraider.eu.com
+domain:domraider.gb.net
+domain:domraider.it.com
+domain:domraider.uk.com
+domain:domraider.uk.net
+domain:domraider.us.com
 domain:eachdirectory.xyz
 domain:egyptiandirectory.com
 domain:findinfo.in
@@ -2016,6 +2028,7 @@ domain:linksnatcher.art
 domain:linksnatcher.com
 domain:marathiladies.com
 domain:mp3fresh.net
+domain:newsblogsports.site
 domain:pagelistingz.com
 domain:pagesearch.net
 domain:prashikshan.in
@@ -2061,9 +2074,3 @@ domain:casinooftheking.com
 domain:casinoonlinecrazytime.online
 domain:casinopopular.online
 domain:livebloggs.com
-
-# --- Other confirmed spam (anchor / page evidence) (4) ---
-domain:algolinkers.agency
-domain:domains.com.bz
-domain:fed360.agency
-domain:newsblogsports.site

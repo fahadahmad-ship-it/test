@@ -23,9 +23,11 @@ WHITE_FILL = PatternFill("solid", fgColor=WHITE)
 thin = Side(style="thin", color="FF000000")
 BORDER_FULL = Border(left=thin, right=thin, top=thin, bottom=thin)
 BORDER_HDR = Border(left=thin, right=thin, top=thin)   # data-tab header: no bottom
-C_CTR = Alignment(horizontal="center", vertical="center", wrap_text=True)
+C_CTR = Alignment(horizontal="center", vertical="center", wrap_text=True)   # Summary table headers (wrap)
+C_CTR_DATA = Alignment(horizontal="center", vertical="center", wrap_text=False)  # data cells (no wrap)
 C_VC = Alignment(vertical="center")
 C_VCW = Alignment(vertical="center", wrap_text=True)
+F_BLACKDEF = lambda sz=9, b=False: Font(name="Geist", size=sz, bold=b)  # inherit default (black) colour
 
 data = json.load(open(CLASSIFIED, encoding="utf-8"))
 by_status = collections.Counter(r["status"] for r in data)
@@ -99,16 +101,16 @@ for i, r in enumerate(sorted(data, key=lambda x: x["domain"]), start=2):
     ex = r.get("example") or {}
     put(ws, i, 1, r["domain"])
     put(ws, i, 2, r["status"])
-    put(ws, i, 3, r.get("as") if r.get("as") is not None else "")
-    put(ws, i, 4, r.get("sem_backlinks") or r["n_links"], nf="#,##0", align=C_CTR)
-    put(ws, i, 5, r.get("rds") if r.get("rds") is not None else "", nf="#,##0", align=C_CTR)
-    put(ws, i, 6, r.get("traffic") if r.get("traffic") is not None else 0, nf="#,##0", align=C_CTR)
-    put(ws, i, 7, in_disavow_val(r), align=C_CTR)
+    put(ws, i, 3, r.get("as") if r.get("as") is not None else "", align=C_CTR_DATA)
+    put(ws, i, 4, r.get("sem_backlinks") or r["n_links"], nf="#,##0", align=C_CTR_DATA)
+    put(ws, i, 5, r.get("rds") if r.get("rds") is not None else "", nf="#,##0", align=C_CTR_DATA)
+    put(ws, i, 6, r.get("traffic") if r.get("traffic") is not None else 0, nf="#,##0", align=C_CTR_DATA)
+    put(ws, i, 7, in_disavow_val(r), align=C_CTR_DATA)
     put(ws, i, 8, r.get("links_point_to", ""))
-    put(ws, i, 9, r["dofollow"], nf="#,##0", align=C_CTR)
-    put(ws, i, 10, r["nofollow"], nf="#,##0", align=C_CTR)
+    put(ws, i, 9, r["dofollow"], nf="#,##0", align=C_CTR_DATA)
+    put(ws, i, 10, r["nofollow"], nf="#,##0", align=C_CTR_DATA)
     d = as_date(r.get("first_seen"))
-    cell = put(ws, i, 11, d, align=C_CTR);
+    cell = put(ws, i, 11, d, align=C_CTR_DATA);
     if d: cell.number_format = "d mmm yyyy"
     put(ws, i, 12, r.get("top_anchor",""))
     put(ws, i, 13, ex.get("source_url",""))
@@ -131,7 +133,7 @@ for r in sorted(data, key=lambda x: x["domain"]):
         put(ws, rowi, 3, l.get("tool",""), align=Alignment(horizontal="left", vertical="center"))
         put(ws, rowi, 4, l.get("anchor",""))
         put(ws, rowi, 5, l.get("anchor_type",""))
-        put(ws, rowi, 6, "Nofollow" if l["nofollow"] else "Dofollow", align=C_CTR)
+        put(ws, rowi, 6, "Nofollow" if l["nofollow"] else "Dofollow", align=C_CTR_DATA)
         put(ws, rowi, 7, l.get("source_url",""))
         put(ws, rowi, 8, l.get("source_title",""))
         put(ws, rowi, 9, l.get("target_url",""))
@@ -156,10 +158,10 @@ rowi=2
 for a,cnt in anchor_bl.most_common():
     put(ws, rowi, 1, a)
     put(ws, rowi, 2, anchor_type_map.get(a,""))
-    put(ws, rowi, 3, cnt, nf="#,##0", align=C_CTR)
-    put(ws, rowi, 4, cnt/total_links if total_links else 0, nf="0.0%", align=C_CTR)
-    put(ws, rowi, 5, len(anchor_rd[a]), nf="#,##0", align=C_CTR)
-    put(ws, rowi, 6, len(anchor_spam[a]), nf="#,##0", align=C_CTR)
+    put(ws, rowi, 3, cnt, nf="#,##0", align=C_CTR_DATA)
+    put(ws, rowi, 4, cnt/total_links if total_links else 0, nf="0.00%", align=C_CTR_DATA)
+    put(ws, rowi, 5, len(anchor_rd[a]), nf="#,##0", align=C_CTR_DATA)
+    put(ws, rowi, 6, len(anchor_spam[a]), nf="#,##0", align=C_CTR_DATA)
     rowi+=1
 finalize(ws, rowi-2)
 
@@ -182,7 +184,7 @@ for r in sorted(data, key=lambda x: x["domain"]):
             put(ws, rowi, 1, r["domain"])
             put(ws, rowi, 2, l.get("source_url",""))
             put(ws, rowi, 3, a)
-            put(ws, rowi, 4, "Georgia" if l["anchor_type"].endswith("(geo)") else "Non-geo", align=C_CTR)
+            put(ws, rowi, 4, "Georgia" if l["anchor_type"].endswith("(geo)") else "Non-geo", align=C_CTR_DATA)
             put(ws, rowi, 5, r.get("site_type",""))
             put(ws, rowi, 6, None, fill=ACC_FILL, font=F(9,False,WHITE))   # partner input
             put(ws, rowi, 7, None, fill=ACC_FILL, font=F(9,False,WHITE))   # partner input
@@ -210,11 +212,11 @@ rowi=2
 disav = [r for r in data if r["status"]=="Spam (Disavow)"]
 for r in sorted(disav, key=lambda x:x["domain"]):
     put(ws, rowi,1, disavow_line(r))
-    put(ws, rowi,2, r.get("as") if r.get("as") is not None else "", align=C_CTR)
-    put(ws, rowi,3, r.get("sem_backlinks") or r["n_links"], nf="#,##0", align=C_CTR)
-    put(ws, rowi,4, r.get("rds") if r.get("rds") is not None else "", nf="#,##0", align=C_CTR)
-    put(ws, rowi,5, r.get("traffic") if r.get("traffic") is not None else 0, nf="#,##0", align=C_CTR)
-    put(ws, rowi,6, r.get("organic_keywords") if r.get("organic_keywords") is not None else 0, nf="#,##0", align=C_CTR)
+    put(ws, rowi,2, r.get("as") if r.get("as") is not None else "", align=C_CTR_DATA)
+    put(ws, rowi,3, r.get("sem_backlinks") or r["n_links"], nf="#,##0", align=C_CTR_DATA)
+    put(ws, rowi,4, r.get("rds") if r.get("rds") is not None else "", nf="#,##0", align=C_CTR_DATA)
+    put(ws, rowi,5, r.get("traffic") if r.get("traffic") is not None else 0, nf="#,##0", align=C_CTR_DATA)
+    put(ws, rowi,6, r.get("organic_keywords") if r.get("organic_keywords") is not None else 0, nf="#,##0", align=C_CTR_DATA)
     put(ws, rowi,7, r.get("top_anchor",""))
     rowi+=1
 finalize(ws, rowi-2)
@@ -265,7 +267,7 @@ for s in order:
 # total row 10
 tot=["Total", total_dom, total_bl, 1.0, None]
 for i,v in enumerate(tot,1):
-    c=ws.cell(row=10,column=i,value=v); c.font=F(9,True); c.fill=WHITE_FILL; c.border=BORDER_FULL
+    c=ws.cell(row=10,column=i,value=v); c.font=F_BLACKDEF(9,True); c.fill=WHITE_FILL; c.border=BORDER_FULL
     c.alignment = C_VC if i==1 else Alignment(horizontal="center",vertical="center")
     if i==4: c.number_format="0.0%"
     if i in (2,3): c.number_format="#,##0"
@@ -273,15 +275,15 @@ for r in range(1,11):
     ws.row_dimensions[r].height=22.5
 
 # Key findings (row 11 heading, 12-18 seven findings)
-ws.cell(row=11,column=1,value="Key findings").font=F(10,True,BLACK)
+c11=ws.cell(row=11,column=1,value="Key findings"); c11.font=F(10,True,BLACK); c11.alignment=C_VC
 from findings_text import FINDINGS   # generated by compute_findings.py
 for idx,txt in enumerate(FINDINGS):
     rr=12+idx
     ws.merge_cells(start_row=rr,start_column=1,end_row=rr,end_column=5)
-    c=ws.cell(row=rr,column=1,value=txt); c.font=F(9); c.alignment=Alignment(vertical="center",wrap_text=True)
+    c=ws.cell(row=rr,column=1,value=txt); c.font=F_BLACKDEF(9); c.alignment=Alignment(vertical="center",wrap_text=True)
     ws.row_dimensions[rr].height=22.5
 # Anchor profile (row 19 heading, 20 header, 21+ rows)
-ws.cell(row=19,column=1,value="Anchor text profile (all backlinks)").font=F(11,True,ACCENT)
+c19=ws.cell(row=19,column=1,value="Anchor text profile (all backlinks)"); c19.font=F(11,True,ACCENT); c19.alignment=C_VC
 ap_hdr=["Anchor type","Backlinks","Share of Backlinks","Referring Domains"]
 for i,h in enumerate(ap_hdr,1):
     c=ws.cell(row=20,column=i,value=h); c.font=F(9,True,WHITE); c.fill=ACC_FILL; c.border=BORDER_FULL; c.alignment=C_CTR
@@ -298,7 +300,7 @@ for t in C.ANCHOR_TYPES:
         c=ws.cell(row=rr,column=i,value=v); c.font=F(9); c.fill=WHITE_FILL; c.border=BORDER_FULL
         c.alignment=C_VC if i==1 else Alignment(horizontal="center",vertical="center")
         if i==3: c.number_format="0.0%"
-        if i==2: c.number_format="#,##0"
+        else: c.number_format="#,##0"   # template applies #,##0 to the type (text) col too
     rr+=1
 for r in range(11,rr):
     if ws.row_dimensions[r].height is None:

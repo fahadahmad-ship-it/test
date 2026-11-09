@@ -77,10 +77,10 @@ def classify_domain(rec):
     low_auth = (as_ is None) or (as_ < 20)
     naked_type = {"Naked URL", "Empty or image", "Generic", "Contextual or other"}
     top_naked = all((l.get("anchor_type") in naked_type) for l in links) if links else False
-    # Throwaway domain on a known link-network host (numeric label, non-CDN /24 cluster,
-    # or throwaway TLD) with no genuine signal and only naked/empty anchors -> spam.
-    # Composite evidence, never TLD alone.
-    throwaway_spam = ((numeric_host or network_host or spam_tld)
+    # Throwaway domain on a known link-network host -> spam. Requires NUMERIC-label host or
+    # a non-CDN /24 cluster (5+ of this client's refdomains). A throwaway TLD alone is NOT
+    # enough (playbook: never disavow on TLD/IP alone), it only supports other evidence.
+    throwaway_spam = ((numeric_host or network_host)
                       and not genuine_signal and low_auth and top_naked)
 
     # ---- verdict (first match) ----

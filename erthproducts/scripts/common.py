@@ -54,8 +54,13 @@ SPAM_HOST_RE = re.compile(
 # Spam page title / URL templates (domain marketplace etc.).
 SPAM_TITLE_RE = re.compile(
     r"(where to buy aged domain|domain list page|buy backlinks|aged domains and backlinks|"
-    r"expired domains? for sale|domain marketplace|buy expired domain)", re.I)
-SPAM_URL_RE = re.compile(r"(/domain/domain/|/domain-list|/buy-backlink|/aged-domain)", re.I)
+    r"expired domains? for sale|domain marketplace|buy expired domain|"
+    r"backlink package|backlink service|powerful backlink|outrank anyone|"
+    r"top domains|seo resource|no resellers|boost your google ranking|"
+    r"high da backlink|seo authority backlink|niche edit)", re.I)
+SPAM_URL_RE = re.compile(
+    r"(/domain/domain/|/domain-list|/buy-backlink|/aged-domain|/all/\d+/\d+|"
+    r"/page/\d{4,}|backlink-service|white-hat-directory|backlink-audit-hub)", re.I)
 PRESS_HOST_RE = re.compile(
     r"(pressrelease|prnewswire|einnews|openpr|issuewire|newswire|pr\.com|prlog|"
     r"abnewswire|pressat|pr-?urgent)", re.I)
@@ -105,18 +110,34 @@ def canon_host(u):
         h = h[4:]
     return h.split(":")[0]
 
+# Shared/public multi-label suffixes: each subdomain is an INDEPENDENT site, so the
+# registrable unit (and disavow line) must include one label beyond the suffix. Without
+# this, spam subdomains of co.com/us.com/uk.com collapse into one over-broad domain: line.
+PUBLIC_SUFFIXES = {
+    "co.com", "us.com", "uk.com", "eu.com", "br.com", "de.com", "cn.com", "sa.com",
+    "ru.com", "gb.com", "no.com", "qc.com", "se.com", "jpn.com", "gr.com", "hu.com", "it.com",
+    "gb.net", "uk.net", "se.net", "in.net", "us.org", "ae.org", "com.bz",
+    "co.uk", "org.uk", "me.uk", "com.au", "net.au", "org.au", "co.nz", "co.za",
+    "com.br", "co.in", "net.in", "org.in", "com.de", "com.se",
+}
+
 def reg_domain(host):
-    """Registrable-ish domain: last two labels (good enough for grouping;
-    multi-part TLDs like co.in/co.uk handled for common cases)."""
+    """Registrable domain, respecting shared public suffixes (so x.co.com stays x.co.com)."""
     if not host:
         return ""
     parts = host.split(".")
     if len(parts) <= 2:
         return host
-    two = {"co", "com", "org", "net", "gov", "edu", "ac"}
+    last2 = ".".join(parts[-2:])
+    last3 = ".".join(parts[-3:])
+    if last3 in PUBLIC_SUFFIXES and len(parts) >= 4:
+        return ".".join(parts[-4:])
+    if last2 in PUBLIC_SUFFIXES:
+        return last3
+    two = {"co", "com", "org", "net", "gov", "edu", "ac", "gob", "go", "or"}
     if parts[-2] in two and len(parts[-1]) == 2:
-        return ".".join(parts[-3:])
-    return ".".join(parts[-2:])
+        return last3
+    return last2
 
 def path_of(u):
     if not u:
