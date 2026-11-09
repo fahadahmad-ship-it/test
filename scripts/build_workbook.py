@@ -51,11 +51,11 @@ def root_of(host):
     return host if len(parts) < 2 else ".".join(parts[-2:])
 
 
-def read_csv(path):
+def read_csv(path, delimiter=','):
     if not os.path.exists(path):
         return []
     with open(path, newline='', encoding='utf-8') as f:
-        return list(csv.DictReader(f))
+        return list(csv.DictReader(f, delimiter=delimiter))
 
 
 def to_int(x, d=0):
@@ -90,8 +90,9 @@ def parse_date(s):
 # ---------------------------------------------------------------- load data
 ah_rd = read_csv(f"{DATA}/ahrefs_refdomains.csv")
 ah_bl = read_csv(f"{DATA}/ahrefs_backlinks.csv")
-se_rd = read_csv(f"{DATA}/semrush_refdomains.csv")
-se_bl = read_csv(f"{DATA}/semrush_backlinks.csv")
+# Semrush CSVs are SEMICOLON-delimited
+se_rd = read_csv(f"{DATA}/semrush_refdomains.csv", delimiter=';')
+se_bl = read_csv(f"{DATA}/semrush_backlinks.csv", delimiter=';')
 rd_extra = {r['domain'].lower(): to_int(r.get('refdomains'))
             for r in read_csv(f"{DATA}/ahrefs_refdomains_rd.csv") if r.get('domain')}
 
@@ -176,9 +177,9 @@ for d in sorted(all_domains):
     source = ("Both" if {'Ahrefs', 'Semrush'} <= tools_seen
               else ('Ahrefs' if 'Ahrefs' in tools_seen else 'Semrush'))
 
-    # AS: prefer Semrush authority score, else Ahrefs DR
-    as_val = s.get('domain_authority_score')
-    as_val = to_float(as_val) if as_val not in (None, '') else to_float(a.get('domain_rating'))
+    # AS: prefer Semrush authority score (column name varies), else Ahrefs DR
+    as_raw = s.get('domain_ascore', s.get('domain_authority_score'))
+    as_val = to_float(as_raw) if as_raw not in (None, '') else to_float(a.get('domain_rating'))
 
     backlinks_n = (to_int(a.get('links_to_target')) if in_ah
                    else to_int(s.get('backlinks_num')))
