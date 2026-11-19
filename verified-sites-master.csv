@@ -32,3 +32,8 @@ sqlservercentral.com,50,44390,1.86,AVOID,'blockman go' game spam; 2.2x inflated
 thepaintedhinge.com,130,412,NA,AVOID,98% traffic collapse from 22553 peak; algorithmically hit
 artdaily.com,30,2086,1.06,AVOID,Traffic heavily inflated
 nextluxury.com,264,12625,NA,AVOID,Offensive keywords; 10.8x inflated
+agdaily.com,175,30253,0.53,CLEAN,Real US agriculture news publication; food/farming adjacency
+e-architect.com,125,33209,0.78,CLEAN,Architecture publication; weak food relevance
+elephantjournal.com,160,31438,0.83,AVOID,Traffic driven by nudity queries
+kymkemp.com,123,128548,1.12,MARGINAL,Redheaded Blackbelt Humboldt CA local news; traffic 2.5x understated in sheet
+emilyluxton.co.uk,276,54327,2.06,AVOID,UK travel blog; poor ratio
