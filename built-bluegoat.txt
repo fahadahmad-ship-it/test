@@ -10,6 +10,7 @@ clinicalgate.com
 clinicspots.com
 codeitbro.com
 coherentmarketinsights.com
+cranfield.ac.uk
 credihealth.com
 cyberkendra.com
 cyberpress.org
@@ -18,6 +19,7 @@ cybersecuritynews.com
 devdiscourse.com
 devopsschool.com
 digitalconnectmag.com
+diseasefix.com
 easyrest.com
 edhat.com
 electronicsforu.com
@@ -44,11 +46,14 @@ iredellfreenews.com
 kentuckycounselingcenter.com
 learnmuscles.com
 linuxsecurity.com
+livingprettyhappy.com
 ltcnews.com
 medicalnewsbulletin.com
 medigy.com
 medindia.net
 missljbeauty.com
+mostlyamelie.com
+mostlyblogging.com
 muddyrivernews.com
 musculoskeletalkey.com
 myhospitalnow.com
@@ -62,8 +67,11 @@ opsmatters.com
 parkmagazineny.com
 plasticsurgerykey.com
 powerofpositivity.com
+psychologs.com
+radiologykey.com
 retail-insider.com
 rightpatient.com
+scalefusion.com
 securitysenses.com
 seniorliving.com
 techimply.com
@@ -76,6 +84,7 @@ thegadgetflow.com
 themindsjournal.com
 thesiliconreview.com
 triad-city-beat.com
+veteriankey.com
 winbuzzer.com
 womeninbalance.org
 womentech.net

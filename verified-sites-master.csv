@@ -37,3 +37,16 @@ e-architect.com,125,33209,0.78,CLEAN,Architecture publication; weak food relevan
 elephantjournal.com,160,31438,0.83,AVOID,Traffic driven by nudity queries
 kymkemp.com,123,128548,1.12,MARGINAL,Redheaded Blackbelt Humboldt CA local news; traffic 2.5x understated in sheet
 emilyluxton.co.uk,276,54327,2.06,AVOID,UK travel blog; poor ratio
+securityboulevard.com,688,15425,2.08,MARGINAL,Real Techstrong security publication but 7484-domain broker anchor; poor value vs cybernews
+ny-engineers.com,284,13867,6.52,AVOID,nearbyengineers.com sister site brokered together
+leaders-in-law.com,100,22060,6.64,AVOID,India-dominant; three Telegram broker networks
+law.blog,72,24358,INF,AVOID,All five top anchors are broker ads for unrelated domains; zero brand anchors
+ucl.ac.uk,260,2677186,0.26,CLEAN,University College London; VERIFY URL PATH as with Cranfield
+bath.ac.uk,260,525309,0.09,CLEAN,University of Bath; cleanest .ac.uk tested; VERIFY URL PATH
+globalbrandsmagazine.com,250,31090,3.22,AVOID,Awards-nomination scheme; India-dominant traffic
+inyourpocket.com,278,147100,1.36,AVOID,Poland-dominant traffic
+natchezdemocrat.com,127,82796,12.90,AVOID,Four sister-site broker anchors; worst ratio measured
+re-thinkingthefuture.com,56,192358,INF,AVOID,Five typo-variant domains blasted as one package; zero brand anchors
+oswegocountynewsnow.com,126,54504,6.31,AVOID,valleynewsonline.com sister site
+mmasucka.com,119,194399,2.60,AVOID,Multiple broker networks
+steelernation.com,112,109467,2.33,AVOID,terribletailgate.com sister site
